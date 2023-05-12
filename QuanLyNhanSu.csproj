@@ -16,7 +16,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>embedded</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -170,6 +171,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Icons\history.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\question_mark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\verify.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\pass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\passchange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\return.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\return_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\info_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\log_out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\log_out1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
