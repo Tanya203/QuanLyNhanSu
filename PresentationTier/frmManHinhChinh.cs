@@ -13,9 +13,16 @@ namespace QuanLyNhanSu.PresentationTier
 {
     public partial class frmManHinhChinh : Form
     {
+        private Form curentChildForm;
         public frmManHinhChinh()
         {   
             InitializeComponent();
+          
+        }
+
+        private void frmManHinhChinh_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
