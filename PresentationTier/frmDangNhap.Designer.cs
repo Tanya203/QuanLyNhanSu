@@ -35,9 +35,9 @@
             this.txtTaiKhoan = new System.Windows.Forms.TextBox();
             this.txtMatKhau = new System.Windows.Forms.TextBox();
             this.pnDangNhap = new System.Windows.Forms.Panel();
+            this.btnDangNhap = new System.Windows.Forms.Button();
             this.lblDangNhap = new System.Windows.Forms.Label();
             this.pbUserIcon = new System.Windows.Forms.PictureBox();
-            this.btnDangNhap = new System.Windows.Forms.Button();
             this.pnDangNhap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserIcon)).BeginInit();
             this.SuspendLayout();
@@ -110,30 +110,10 @@
             this.pnDangNhap.Controls.Add(this.btnDangNhap);
             this.pnDangNhap.Controls.Add(this.lblTaiKhoan);
             this.pnDangNhap.Controls.Add(this.txtTaiKhoan);
-            this.pnDangNhap.Location = new System.Drawing.Point(105, 215);
+            this.pnDangNhap.Location = new System.Drawing.Point(86, 205);
             this.pnDangNhap.Name = "pnDangNhap";
             this.pnDangNhap.Size = new System.Drawing.Size(440, 320);
             this.pnDangNhap.TabIndex = 8;
-            // 
-            // lblDangNhap
-            // 
-            this.lblDangNhap.AutoSize = true;
-            this.lblDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDangNhap.Location = new System.Drawing.Point(228, 163);
-            this.lblDangNhap.Name = "lblDangNhap";
-            this.lblDangNhap.Size = new System.Drawing.Size(193, 39);
-            this.lblDangNhap.TabIndex = 9;
-            this.lblDangNhap.Text = "Đăng nhập";
-            // 
-            // pbUserIcon
-            // 
-            this.pbUserIcon.Enabled = false;
-            this.pbUserIcon.Image = global::QuanLyNhanSu.Properties.Resources.user;
-            this.pbUserIcon.Location = new System.Drawing.Point(275, 40);
-            this.pbUserIcon.Name = "pbUserIcon";
-            this.pbUserIcon.Size = new System.Drawing.Size(120, 120);
-            this.pbUserIcon.TabIndex = 10;
-            this.pbUserIcon.TabStop = false;
             // 
             // btnDangNhap
             // 
@@ -151,6 +131,26 @@
             this.btnDangNhap.UseCompatibleTextRendering = true;
             this.btnDangNhap.UseVisualStyleBackColor = true;
             // 
+            // lblDangNhap
+            // 
+            this.lblDangNhap.AutoSize = true;
+            this.lblDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDangNhap.Location = new System.Drawing.Point(209, 153);
+            this.lblDangNhap.Name = "lblDangNhap";
+            this.lblDangNhap.Size = new System.Drawing.Size(185, 38);
+            this.lblDangNhap.TabIndex = 9;
+            this.lblDangNhap.Text = "Đăng nhập";
+            // 
+            // pbUserIcon
+            // 
+            this.pbUserIcon.Enabled = false;
+            this.pbUserIcon.Image = global::QuanLyNhanSu.Properties.Resources.user;
+            this.pbUserIcon.Location = new System.Drawing.Point(242, 30);
+            this.pbUserIcon.Name = "pbUserIcon";
+            this.pbUserIcon.Size = new System.Drawing.Size(120, 120);
+            this.pbUserIcon.TabIndex = 10;
+            this.pbUserIcon.TabStop = false;
+            // 
             // frmDangNhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -161,7 +161,6 @@
             this.Controls.Add(this.lblDangNhap);
             this.Controls.Add(this.pnDangNhap);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(650, 650);
             this.MinimumSize = new System.Drawing.Size(650, 650);
             this.Name = "frmDangNhap";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
