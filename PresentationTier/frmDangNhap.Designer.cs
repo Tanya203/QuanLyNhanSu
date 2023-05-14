@@ -45,20 +45,20 @@
             // lblTaiKhoan
             // 
             this.lblTaiKhoan.AutoSize = true;
-            this.lblTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTaiKhoan.Location = new System.Drawing.Point(3, 43);
             this.lblTaiKhoan.Name = "lblTaiKhoan";
-            this.lblTaiKhoan.Size = new System.Drawing.Size(147, 32);
+            this.lblTaiKhoan.Size = new System.Drawing.Size(157, 32);
             this.lblTaiKhoan.TabIndex = 1;
             this.lblTaiKhoan.Text = "Tài khoản:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 129);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 32);
+            this.label1.Size = new System.Drawing.Size(147, 32);
             this.label1.TabIndex = 2;
             this.label1.Text = "Mật khẩu:";
             // 
@@ -77,7 +77,7 @@
             // 
             this.llblQuenMatKhau.AutoSize = true;
             this.llblQuenMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.llblQuenMatKhau.Location = new System.Drawing.Point(286, 190);
+            this.llblQuenMatKhau.Location = new System.Drawing.Point(333, 190);
             this.llblQuenMatKhau.Name = "llblQuenMatKhau";
             this.llblQuenMatKhau.Size = new System.Drawing.Size(122, 20);
             this.llblQuenMatKhau.TabIndex = 5;
@@ -86,23 +86,24 @@
             // 
             // txtTaiKhoan
             // 
-            this.txtTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTaiKhoan.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtTaiKhoan.Location = new System.Drawing.Point(156, 43);
+            this.txtTaiKhoan.Location = new System.Drawing.Point(166, 46);
             this.txtTaiKhoan.Name = "txtTaiKhoan";
-            this.txtTaiKhoan.Size = new System.Drawing.Size(267, 38);
+            this.txtTaiKhoan.Size = new System.Drawing.Size(310, 30);
             this.txtTaiKhoan.TabIndex = 6;
             // 
             // txtMatKhau
             // 
-            this.txtMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMatKhau.Location = new System.Drawing.Point(156, 123);
+            this.txtMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMatKhau.Location = new System.Drawing.Point(166, 132);
             this.txtMatKhau.Name = "txtMatKhau";
-            this.txtMatKhau.Size = new System.Drawing.Size(267, 38);
+            this.txtMatKhau.Size = new System.Drawing.Size(310, 30);
             this.txtMatKhau.TabIndex = 7;
             // 
             // pnDangNhap
             // 
+            this.pnDangNhap.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.pnDangNhap.Controls.Add(this.cbHienThiMatKhau);
             this.pnDangNhap.Controls.Add(this.txtMatKhau);
             this.pnDangNhap.Controls.Add(this.label1);
@@ -110,9 +111,9 @@
             this.pnDangNhap.Controls.Add(this.btnDangNhap);
             this.pnDangNhap.Controls.Add(this.lblTaiKhoan);
             this.pnDangNhap.Controls.Add(this.txtTaiKhoan);
-            this.pnDangNhap.Location = new System.Drawing.Point(86, 205);
+            this.pnDangNhap.Location = new System.Drawing.Point(75, 205);
             this.pnDangNhap.Name = "pnDangNhap";
-            this.pnDangNhap.Size = new System.Drawing.Size(440, 320);
+            this.pnDangNhap.Size = new System.Drawing.Size(500, 335);
             this.pnDangNhap.TabIndex = 8;
             // 
             // btnDangNhap
@@ -121,7 +122,7 @@
             this.btnDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDangNhap.Image = global::QuanLyNhanSu.Properties.Resources.login;
             this.btnDangNhap.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDangNhap.Location = new System.Drawing.Point(100, 240);
+            this.btnDangNhap.Location = new System.Drawing.Point(125, 240);
             this.btnDangNhap.Name = "btnDangNhap";
             this.btnDangNhap.Size = new System.Drawing.Size(250, 75);
             this.btnDangNhap.TabIndex = 4;
@@ -135,7 +136,7 @@
             // 
             this.lblDangNhap.AutoSize = true;
             this.lblDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDangNhap.Location = new System.Drawing.Point(209, 153);
+            this.lblDangNhap.Location = new System.Drawing.Point(232, 153);
             this.lblDangNhap.Name = "lblDangNhap";
             this.lblDangNhap.Size = new System.Drawing.Size(185, 38);
             this.lblDangNhap.TabIndex = 9;
@@ -145,7 +146,7 @@
             // 
             this.pbUserIcon.Enabled = false;
             this.pbUserIcon.Image = global::QuanLyNhanSu.Properties.Resources.user;
-            this.pbUserIcon.Location = new System.Drawing.Point(242, 30);
+            this.pbUserIcon.Location = new System.Drawing.Point(275, 30);
             this.pbUserIcon.Name = "pbUserIcon";
             this.pbUserIcon.Size = new System.Drawing.Size(120, 120);
             this.pbUserIcon.TabIndex = 10;

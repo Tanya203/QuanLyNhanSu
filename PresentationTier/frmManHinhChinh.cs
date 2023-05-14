@@ -24,5 +24,10 @@ namespace QuanLyNhanSu.PresentationTier
         {
 
         }
+
+        private void lblMaNV_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
