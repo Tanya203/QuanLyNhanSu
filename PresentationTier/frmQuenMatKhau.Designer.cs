@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.grpXacThucThongTin = new System.Windows.Forms.GroupBox();
+            this.btnXacThucThongTin = new System.Windows.Forms.Button();
             this.txtMaNhanVien = new System.Windows.Forms.TextBox();
             this.lblTaiKhoan = new System.Windows.Forms.Label();
             this.txtSDT = new System.Windows.Forms.TextBox();
@@ -43,6 +44,7 @@
             this.grpDoiMatKhau = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnDoiMatKhau = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.lblNhapLaiMatKhauMoi = new System.Windows.Forms.Label();
             this.lblNhapMatKhauMoi = new System.Windows.Forms.Label();
@@ -50,8 +52,6 @@
             this.pbInfo = new System.Windows.Forms.PictureBox();
             this.pbQuestionIcon = new System.Windows.Forms.PictureBox();
             this.btnTroVe = new System.Windows.Forms.Button();
-            this.btnDoiMatKhau = new System.Windows.Forms.Button();
-            this.btnXacThucThongTin = new System.Windows.Forms.Button();
             this.grpXacThucThongTin.SuspendLayout();
             this.grpDoiMatKhau.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPassIcon)).BeginInit();
@@ -72,13 +72,28 @@
             this.grpXacThucThongTin.Controls.Add(this.lblEmail);
             this.grpXacThucThongTin.Controls.Add(this.txtTaiKhoan);
             this.grpXacThucThongTin.Controls.Add(this.txtCCCD_CMND);
-            this.grpXacThucThongTin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpXacThucThongTin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpXacThucThongTin.Location = new System.Drawing.Point(50, 140);
             this.grpXacThucThongTin.Name = "grpXacThucThongTin";
             this.grpXacThucThongTin.Size = new System.Drawing.Size(550, 372);
             this.grpXacThucThongTin.TabIndex = 0;
             this.grpXacThucThongTin.TabStop = false;
             this.grpXacThucThongTin.Text = "Xác thực thông tin";
+            // 
+            // btnXacThucThongTin
+            // 
+            this.btnXacThucThongTin.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnXacThucThongTin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnXacThucThongTin.Image = global::QuanLyNhanSu.Properties.Resources.verify;
+            this.btnXacThucThongTin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnXacThucThongTin.Location = new System.Drawing.Point(225, 281);
+            this.btnXacThucThongTin.Name = "btnXacThucThongTin";
+            this.btnXacThucThongTin.Size = new System.Drawing.Size(311, 73);
+            this.btnXacThucThongTin.TabIndex = 5;
+            this.btnXacThucThongTin.Text = "Xác thực thông tin";
+            this.btnXacThucThongTin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnXacThucThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnXacThucThongTin.UseVisualStyleBackColor = false;
             // 
             // txtMaNhanVien
             // 
@@ -92,7 +107,7 @@
             this.lblTaiKhoan.AutoSize = true;
             this.lblTaiKhoan.Location = new System.Drawing.Point(37, 95);
             this.lblTaiKhoan.Name = "lblTaiKhoan";
-            this.lblTaiKhoan.Size = new System.Drawing.Size(105, 25);
+            this.lblTaiKhoan.Size = new System.Drawing.Size(115, 25);
             this.lblTaiKhoan.TabIndex = 1;
             this.lblTaiKhoan.Text = "Tài khoản:";
             // 
@@ -108,7 +123,7 @@
             this.lblCMND_CCCD.AutoSize = true;
             this.lblCMND_CCCD.Location = new System.Drawing.Point(37, 145);
             this.lblCMND_CCCD.Name = "lblCMND_CCCD";
-            this.lblCMND_CCCD.Size = new System.Drawing.Size(143, 25);
+            this.lblCMND_CCCD.Size = new System.Drawing.Size(153, 25);
             this.lblCMND_CCCD.TabIndex = 2;
             this.lblCMND_CCCD.Text = "CCCD/CMND:";
             // 
@@ -117,7 +132,7 @@
             this.lblMaNhanVien.AutoSize = true;
             this.lblMaNhanVien.Location = new System.Drawing.Point(37, 50);
             this.lblMaNhanVien.Name = "lblMaNhanVien";
-            this.lblMaNhanVien.Size = new System.Drawing.Size(136, 25);
+            this.lblMaNhanVien.Size = new System.Drawing.Size(149, 25);
             this.lblMaNhanVien.TabIndex = 0;
             this.lblMaNhanVien.Text = "Mã nhân viên:";
             // 
@@ -133,7 +148,7 @@
             this.lblSoDienThoai.AutoSize = true;
             this.lblSoDienThoai.Location = new System.Drawing.Point(37, 195);
             this.lblSoDienThoai.Name = "lblSoDienThoai";
-            this.lblSoDienThoai.Size = new System.Drawing.Size(132, 25);
+            this.lblSoDienThoai.Size = new System.Drawing.Size(146, 25);
             this.lblSoDienThoai.TabIndex = 3;
             this.lblSoDienThoai.Text = "Số điện thoại:";
             // 
@@ -142,7 +157,7 @@
             this.lblEmail.AutoSize = true;
             this.lblEmail.Location = new System.Drawing.Point(37, 245);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(66, 25);
+            this.lblEmail.Size = new System.Drawing.Size(72, 25);
             this.lblEmail.TabIndex = 4;
             this.lblEmail.Text = "Email:";
             // 
@@ -178,7 +193,7 @@
             this.grpDoiMatKhau.Controls.Add(this.checkBox1);
             this.grpDoiMatKhau.Controls.Add(this.lblNhapLaiMatKhauMoi);
             this.grpDoiMatKhau.Controls.Add(this.lblNhapMatKhauMoi);
-            this.grpDoiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpDoiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpDoiMatKhau.Location = new System.Drawing.Point(50, 599);
             this.grpDoiMatKhau.Name = "grpDoiMatKhau";
             this.grpDoiMatKhau.Size = new System.Drawing.Size(550, 231);
@@ -200,11 +215,26 @@
             this.textBox1.Size = new System.Drawing.Size(263, 30);
             this.textBox1.TabIndex = 7;
             // 
+            // btnDoiMatKhau
+            // 
+            this.btnDoiMatKhau.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnDoiMatKhau.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDoiMatKhau.Image = global::QuanLyNhanSu.Properties.Resources.passchange;
+            this.btnDoiMatKhau.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDoiMatKhau.Location = new System.Drawing.Point(273, 152);
+            this.btnDoiMatKhau.Name = "btnDoiMatKhau";
+            this.btnDoiMatKhau.Size = new System.Drawing.Size(247, 73);
+            this.btnDoiMatKhau.TabIndex = 9;
+            this.btnDoiMatKhau.Text = "Đổi mật khẩu";
+            this.btnDoiMatKhau.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDoiMatKhau.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDoiMatKhau.UseVisualStyleBackColor = false;
+            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(42, 170);
+            this.checkBox1.Location = new System.Drawing.Point(20, 179);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(162, 24);
             this.checkBox1.TabIndex = 8;
@@ -214,18 +244,18 @@
             // lblNhapLaiMatKhauMoi
             // 
             this.lblNhapLaiMatKhauMoi.AutoSize = true;
-            this.lblNhapLaiMatKhauMoi.Location = new System.Drawing.Point(37, 112);
+            this.lblNhapLaiMatKhauMoi.Location = new System.Drawing.Point(15, 112);
             this.lblNhapLaiMatKhauMoi.Name = "lblNhapLaiMatKhauMoi";
-            this.lblNhapLaiMatKhauMoi.Size = new System.Drawing.Size(210, 25);
+            this.lblNhapLaiMatKhauMoi.Size = new System.Drawing.Size(232, 25);
             this.lblNhapLaiMatKhauMoi.TabIndex = 1;
             this.lblNhapLaiMatKhauMoi.Text = "Nhập lại mật khẩu mới:";
             // 
             // lblNhapMatKhauMoi
             // 
             this.lblNhapMatKhauMoi.AutoSize = true;
-            this.lblNhapMatKhauMoi.Location = new System.Drawing.Point(37, 55);
+            this.lblNhapMatKhauMoi.Location = new System.Drawing.Point(15, 55);
             this.lblNhapMatKhauMoi.Name = "lblNhapMatKhauMoi";
-            this.lblNhapMatKhauMoi.Size = new System.Drawing.Size(186, 25);
+            this.lblNhapMatKhauMoi.Size = new System.Drawing.Size(204, 25);
             this.lblNhapMatKhauMoi.TabIndex = 0;
             this.lblNhapMatKhauMoi.Text = "Nhập mật khẩu mới:";
             // 
@@ -261,6 +291,7 @@
             // 
             // btnTroVe
             // 
+            this.btnTroVe.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.btnTroVe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTroVe.Image = global::QuanLyNhanSu.Properties.Resources.return_small;
@@ -272,35 +303,7 @@
             this.btnTroVe.Text = "Trở về";
             this.btnTroVe.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTroVe.UseVisualStyleBackColor = true;
-            // 
-            // btnDoiMatKhau
-            // 
-            this.btnDoiMatKhau.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDoiMatKhau.Image = global::QuanLyNhanSu.Properties.Resources.passchange;
-            this.btnDoiMatKhau.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDoiMatKhau.Location = new System.Drawing.Point(294, 152);
-            this.btnDoiMatKhau.Name = "btnDoiMatKhau";
-            this.btnDoiMatKhau.Size = new System.Drawing.Size(223, 73);
-            this.btnDoiMatKhau.TabIndex = 9;
-            this.btnDoiMatKhau.Text = "Đổi mật khẩu";
-            this.btnDoiMatKhau.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDoiMatKhau.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDoiMatKhau.UseVisualStyleBackColor = true;
-            // 
-            // btnXacThucThongTin
-            // 
-            this.btnXacThucThongTin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnXacThucThongTin.Image = global::QuanLyNhanSu.Properties.Resources.verify;
-            this.btnXacThucThongTin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXacThucThongTin.Location = new System.Drawing.Point(251, 281);
-            this.btnXacThucThongTin.Name = "btnXacThucThongTin";
-            this.btnXacThucThongTin.Size = new System.Drawing.Size(266, 73);
-            this.btnXacThucThongTin.TabIndex = 5;
-            this.btnXacThucThongTin.Text = "Xác thực thông tin";
-            this.btnXacThucThongTin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXacThucThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnXacThucThongTin.UseVisualStyleBackColor = true;
+            this.btnTroVe.UseVisualStyleBackColor = false;
             // 
             // frmQuenMatKhau
             // 
