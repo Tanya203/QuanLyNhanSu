@@ -90,7 +90,7 @@
             this.btnXacThucThongTin.Location = new System.Drawing.Point(225, 281);
             this.btnXacThucThongTin.Name = "btnXacThucThongTin";
             this.btnXacThucThongTin.Size = new System.Drawing.Size(311, 73);
-            this.btnXacThucThongTin.TabIndex = 5;
+            this.btnXacThucThongTin.TabIndex = 7;
             this.btnXacThucThongTin.Text = "Xác thực thông tin";
             this.btnXacThucThongTin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnXacThucThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -102,7 +102,7 @@
             this.txtMaNhanVien.Location = new System.Drawing.Point(207, 45);
             this.txtMaNhanVien.Name = "txtMaNhanVien";
             this.txtMaNhanVien.Size = new System.Drawing.Size(329, 27);
-            this.txtMaNhanVien.TabIndex = 0;
+            this.txtMaNhanVien.TabIndex = 2;
             // 
             // lblTaiKhoan
             // 
@@ -119,7 +119,7 @@
             this.txtSDT.Location = new System.Drawing.Point(207, 195);
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(329, 27);
-            this.txtSDT.TabIndex = 3;
+            this.txtSDT.TabIndex = 5;
             // 
             // lblCMND_CCCD
             // 
@@ -145,7 +145,7 @@
             this.txtEmail.Location = new System.Drawing.Point(207, 245);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(329, 27);
-            this.txtEmail.TabIndex = 4;
+            this.txtEmail.TabIndex = 6;
             // 
             // lblSoDienThoai
             // 
@@ -171,7 +171,8 @@
             this.txtTaiKhoan.Location = new System.Drawing.Point(207, 95);
             this.txtTaiKhoan.Name = "txtTaiKhoan";
             this.txtTaiKhoan.Size = new System.Drawing.Size(329, 27);
-            this.txtTaiKhoan.TabIndex = 1;
+            this.txtTaiKhoan.TabIndex = 3;
+            this.txtTaiKhoan.TextChanged += new System.EventHandler(this.txtTaiKhoan_TextChanged);
             // 
             // txtCCCD_CMND
             // 
@@ -179,7 +180,7 @@
             this.txtCCCD_CMND.Location = new System.Drawing.Point(207, 145);
             this.txtCCCD_CMND.Name = "txtCCCD_CMND";
             this.txtCCCD_CMND.Size = new System.Drawing.Size(329, 27);
-            this.txtCCCD_CMND.TabIndex = 2;
+            this.txtCCCD_CMND.TabIndex = 4;
             // 
             // lblQuenMatKhau
             // 
@@ -213,7 +214,7 @@
             this.textBox2.Location = new System.Drawing.Point(273, 52);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(263, 27);
-            this.textBox2.TabIndex = 6;
+            this.textBox2.TabIndex = 8;
             // 
             // textBox1
             // 
@@ -221,7 +222,7 @@
             this.textBox1.Location = new System.Drawing.Point(273, 107);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(263, 27);
-            this.textBox1.TabIndex = 7;
+            this.textBox1.TabIndex = 9;
             // 
             // btnDoiMatKhau
             // 
@@ -233,7 +234,7 @@
             this.btnDoiMatKhau.Location = new System.Drawing.Point(273, 152);
             this.btnDoiMatKhau.Name = "btnDoiMatKhau";
             this.btnDoiMatKhau.Size = new System.Drawing.Size(247, 73);
-            this.btnDoiMatKhau.TabIndex = 9;
+            this.btnDoiMatKhau.TabIndex = 11;
             this.btnDoiMatKhau.Text = "Đổi mật khẩu";
             this.btnDoiMatKhau.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDoiMatKhau.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -247,7 +248,7 @@
             this.checkBox1.Location = new System.Drawing.Point(20, 179);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(162, 24);
-            this.checkBox1.TabIndex = 8;
+            this.checkBox1.TabIndex = 10;
             this.checkBox1.Text = "Hiển thị mật khẩu";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
@@ -310,7 +311,7 @@
             this.btnTroVe.Location = new System.Drawing.Point(12, 20);
             this.btnTroVe.Name = "btnTroVe";
             this.btnTroVe.Size = new System.Drawing.Size(123, 53);
-            this.btnTroVe.TabIndex = 3;
+            this.btnTroVe.TabIndex = 1;
             this.btnTroVe.Text = "Trở về";
             this.btnTroVe.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
