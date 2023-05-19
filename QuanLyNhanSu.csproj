@@ -232,5 +232,11 @@
   <ItemGroup>
     <None Include="Icons\add_small.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\chose picture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\image.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -78,6 +78,7 @@
             // 
             this.btnQLNV.AutoSize = true;
             this.btnQLNV.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQLNV.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQLNV.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnQLNV.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnQLNV.FlatAppearance.BorderSize = 2;
@@ -122,6 +123,7 @@
             // 
             this.btnDangXuat.AutoSize = true;
             this.btnDangXuat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDangXuat.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDangXuat.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnDangXuat.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDangXuat.FlatAppearance.BorderSize = 2;
@@ -140,6 +142,7 @@
             // 
             this.btnTTTK.AutoSize = true;
             this.btnTTTK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnTTTK.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTTTK.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnTTTK.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnTTTK.FlatAppearance.BorderSize = 2;
@@ -158,6 +161,7 @@
             // 
             this.btnLSTT.AutoSize = true;
             this.btnLSTT.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLSTT.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLSTT.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnLSTT.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnLSTT.FlatAppearance.BorderSize = 2;
@@ -176,6 +180,7 @@
             // 
             this.btnQLPQ.AutoSize = true;
             this.btnQLPQ.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQLPQ.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQLPQ.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnQLPQ.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnQLPQ.FlatAppearance.BorderSize = 2;
@@ -194,6 +199,7 @@
             // 
             this.btnQLLHD.AutoSize = true;
             this.btnQLLHD.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQLLHD.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQLLHD.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnQLLHD.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnQLLHD.FlatAppearance.BorderSize = 2;
@@ -212,6 +218,7 @@
             // 
             this.btnQLTK.AutoSize = true;
             this.btnQLTK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQLTK.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQLTK.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnQLTK.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnQLTK.FlatAppearance.BorderSize = 2;
@@ -230,6 +237,7 @@
             // 
             this.btnQLPP.AutoSize = true;
             this.btnQLPP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQLPP.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQLPP.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnQLPP.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnQLPP.FlatAppearance.BorderSize = 2;
@@ -248,6 +256,7 @@
             // 
             this.btnQLPT.AutoSize = true;
             this.btnQLPT.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQLPT.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQLPT.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnQLPT.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnQLPT.FlatAppearance.BorderSize = 2;
@@ -266,6 +275,7 @@
             // 
             this.btnQLPC.AutoSize = true;
             this.btnQLPC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQLPC.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQLPC.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnQLPC.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnQLPC.FlatAppearance.BorderSize = 2;
@@ -284,6 +294,7 @@
             // 
             this.btnQLLLV.AutoSize = true;
             this.btnQLLLV.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQLLLV.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQLLLV.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnQLLLV.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnQLLLV.FlatAppearance.BorderSize = 2;
@@ -302,6 +313,7 @@
             // 
             this.btnQLCC.AutoSize = true;
             this.btnQLCC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQLCC.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQLCC.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnQLCC.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnQLCC.FlatAppearance.BorderSize = 2;
@@ -320,6 +332,7 @@
             // 
             this.btnQLC.AutoSize = true;
             this.btnQLC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQLC.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQLC.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnQLC.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnQLC.FlatAppearance.BorderSize = 2;
@@ -338,6 +351,7 @@
             // 
             this.btnQLCV.AutoSize = true;
             this.btnQLCV.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQLCV.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQLCV.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnQLCV.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnQLCV.FlatAppearance.BorderSize = 2;
@@ -356,6 +370,7 @@
             // 
             this.btnQLPB.AutoSize = true;
             this.btnQLPB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQLPB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQLPB.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnQLPB.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnQLPB.FlatAppearance.BorderSize = 2;
