@@ -81,7 +81,7 @@
             this.llblQuenMatKhau.Location = new System.Drawing.Point(333, 190);
             this.llblQuenMatKhau.Name = "llblQuenMatKhau";
             this.llblQuenMatKhau.Size = new System.Drawing.Size(122, 20);
-            this.llblQuenMatKhau.TabIndex = 5;
+            this.llblQuenMatKhau.TabIndex = 4;
             this.llblQuenMatKhau.TabStop = true;
             this.llblQuenMatKhau.Text = "Quên mật khẩu";
             // 
@@ -92,7 +92,7 @@
             this.txtTaiKhoan.Location = new System.Drawing.Point(166, 46);
             this.txtTaiKhoan.Name = "txtTaiKhoan";
             this.txtTaiKhoan.Size = new System.Drawing.Size(310, 30);
-            this.txtTaiKhoan.TabIndex = 6;
+            this.txtTaiKhoan.TabIndex = 1;
             // 
             // txtMatKhau
             // 
@@ -100,7 +100,7 @@
             this.txtMatKhau.Location = new System.Drawing.Point(166, 132);
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.Size = new System.Drawing.Size(310, 30);
-            this.txtMatKhau.TabIndex = 7;
+            this.txtMatKhau.TabIndex = 2;
             // 
             // pnDangNhap
             // 
@@ -116,6 +116,7 @@
             this.pnDangNhap.Name = "pnDangNhap";
             this.pnDangNhap.Size = new System.Drawing.Size(500, 335);
             this.pnDangNhap.TabIndex = 8;
+            this.pnDangNhap.Paint += new System.Windows.Forms.PaintEventHandler(this.pnDangNhap_Paint);
             // 
             // btnDangNhap
             // 
@@ -127,7 +128,7 @@
             this.btnDangNhap.Location = new System.Drawing.Point(125, 240);
             this.btnDangNhap.Name = "btnDangNhap";
             this.btnDangNhap.Size = new System.Drawing.Size(250, 75);
-            this.btnDangNhap.TabIndex = 4;
+            this.btnDangNhap.TabIndex = 5;
             this.btnDangNhap.Text = "Đăng nhập";
             this.btnDangNhap.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDangNhap.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

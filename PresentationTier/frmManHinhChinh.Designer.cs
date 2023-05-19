@@ -88,7 +88,7 @@
             this.btnQLNV.Location = new System.Drawing.Point(0, 0);
             this.btnQLNV.Name = "btnQLNV";
             this.btnQLNV.Size = new System.Drawing.Size(102, 100);
-            this.btnQLNV.TabIndex = 0;
+            this.btnQLNV.TabIndex = 1;
             this.btnQLNV.Text = "Nhân viên";
             this.btnQLNV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLNV.UseVisualStyleBackColor = true;
@@ -133,7 +133,7 @@
             this.btnDangXuat.Location = new System.Drawing.Point(1821, 0);
             this.btnDangXuat.Name = "btnDangXuat";
             this.btnDangXuat.Size = new System.Drawing.Size(103, 100);
-            this.btnDangXuat.TabIndex = 14;
+            this.btnDangXuat.TabIndex = 15;
             this.btnDangXuat.Text = "Đăng xuất";
             this.btnDangXuat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDangXuat.UseVisualStyleBackColor = true;
@@ -152,7 +152,7 @@
             this.btnTTTK.Location = new System.Drawing.Point(1420, 0);
             this.btnTTTK.Name = "btnTTTK";
             this.btnTTTK.Size = new System.Drawing.Size(179, 100);
-            this.btnTTTK.TabIndex = 13;
+            this.btnTTTK.TabIndex = 14;
             this.btnTTTK.Text = "Thông tin tài khoản";
             this.btnTTTK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnTTTK.UseVisualStyleBackColor = true;
@@ -171,7 +171,7 @@
             this.btnLSTT.Location = new System.Drawing.Point(1265, 0);
             this.btnLSTT.Name = "btnLSTT";
             this.btnLSTT.Size = new System.Drawing.Size(155, 100);
-            this.btnLSTT.TabIndex = 12;
+            this.btnLSTT.TabIndex = 13;
             this.btnLSTT.Text = "Lịch sử thao tác";
             this.btnLSTT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnLSTT.UseVisualStyleBackColor = true;
@@ -190,7 +190,7 @@
             this.btnQLPQ.Location = new System.Drawing.Point(1149, 0);
             this.btnQLPQ.Name = "btnQLPQ";
             this.btnQLPQ.Size = new System.Drawing.Size(116, 100);
-            this.btnQLPQ.TabIndex = 11;
+            this.btnQLPQ.TabIndex = 12;
             this.btnQLPQ.Text = "Phân quyền";
             this.btnQLPQ.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLPQ.UseVisualStyleBackColor = true;
@@ -209,7 +209,7 @@
             this.btnQLLHD.Location = new System.Drawing.Point(1012, 0);
             this.btnQLLHD.Name = "btnQLLHD";
             this.btnQLLHD.Size = new System.Drawing.Size(137, 100);
-            this.btnQLLHD.TabIndex = 10;
+            this.btnQLLHD.TabIndex = 11;
             this.btnQLLHD.Text = "Loại hợp đồng";
             this.btnQLLHD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLLHD.UseVisualStyleBackColor = true;
@@ -228,7 +228,7 @@
             this.btnQLTK.Location = new System.Drawing.Point(917, 0);
             this.btnQLTK.Name = "btnQLTK";
             this.btnQLTK.Size = new System.Drawing.Size(95, 100);
-            this.btnQLTK.TabIndex = 9;
+            this.btnQLTK.TabIndex = 10;
             this.btnQLTK.Text = "Thống kê";
             this.btnQLTK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLTK.UseVisualStyleBackColor = true;
@@ -247,7 +247,7 @@
             this.btnQLPP.Location = new System.Drawing.Point(809, 0);
             this.btnQLPP.Name = "btnQLPP";
             this.btnQLPP.Size = new System.Drawing.Size(108, 100);
-            this.btnQLPP.TabIndex = 8;
+            this.btnQLPP.TabIndex = 9;
             this.btnQLPP.Text = "Phiếu phạt";
             this.btnQLPP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLPP.UseVisualStyleBackColor = true;
@@ -266,7 +266,7 @@
             this.btnQLPT.Location = new System.Drawing.Point(681, 0);
             this.btnQLPT.Name = "btnQLPT";
             this.btnQLPT.Size = new System.Drawing.Size(128, 100);
-            this.btnQLPT.TabIndex = 7;
+            this.btnQLPT.TabIndex = 8;
             this.btnQLPT.Text = "Phiếu thưởng";
             this.btnQLPT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLPT.UseVisualStyleBackColor = true;
@@ -285,7 +285,7 @@
             this.btnQLPC.Location = new System.Drawing.Point(594, 0);
             this.btnQLPC.Name = "btnQLPC";
             this.btnQLPC.Size = new System.Drawing.Size(87, 100);
-            this.btnQLPC.TabIndex = 6;
+            this.btnQLPC.TabIndex = 7;
             this.btnQLPC.Text = "Phụ cấp";
             this.btnQLPC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLPC.UseVisualStyleBackColor = true;
@@ -304,7 +304,7 @@
             this.btnQLLLV.Location = new System.Drawing.Point(463, 0);
             this.btnQLLLV.Name = "btnQLLLV";
             this.btnQLLLV.Size = new System.Drawing.Size(131, 100);
-            this.btnQLLLV.TabIndex = 5;
+            this.btnQLLLV.TabIndex = 6;
             this.btnQLLLV.Text = "Lịch làm việc";
             this.btnQLLLV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLLLV.UseVisualStyleBackColor = true;
@@ -323,7 +323,7 @@
             this.btnQLCC.Location = new System.Drawing.Point(350, 0);
             this.btnQLCC.Name = "btnQLCC";
             this.btnQLCC.Size = new System.Drawing.Size(113, 100);
-            this.btnQLCC.TabIndex = 4;
+            this.btnQLCC.TabIndex = 5;
             this.btnQLCC.Text = "Chấm công";
             this.btnQLCC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLCC.UseVisualStyleBackColor = true;
@@ -342,7 +342,7 @@
             this.btnQLC.Location = new System.Drawing.Point(296, 0);
             this.btnQLC.Name = "btnQLC";
             this.btnQLC.Size = new System.Drawing.Size(54, 100);
-            this.btnQLC.TabIndex = 3;
+            this.btnQLC.TabIndex = 4;
             this.btnQLC.Text = "Ca";
             this.btnQLC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLC.UseVisualStyleBackColor = true;
@@ -361,7 +361,7 @@
             this.btnQLCV.Location = new System.Drawing.Point(209, 0);
             this.btnQLCV.Name = "btnQLCV";
             this.btnQLCV.Size = new System.Drawing.Size(87, 100);
-            this.btnQLCV.TabIndex = 2;
+            this.btnQLCV.TabIndex = 3;
             this.btnQLCV.Text = "Chức vụ";
             this.btnQLCV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLCV.UseVisualStyleBackColor = true;
@@ -380,7 +380,7 @@
             this.btnQLPB.Location = new System.Drawing.Point(102, 0);
             this.btnQLPB.Name = "btnQLPB";
             this.btnQLPB.Size = new System.Drawing.Size(107, 100);
-            this.btnQLPB.TabIndex = 1;
+            this.btnQLPB.TabIndex = 2;
             this.btnQLPB.Text = "Phòng ban";
             this.btnQLPB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLPB.UseVisualStyleBackColor = true;
@@ -532,7 +532,7 @@
             this.dtpLichLamViec.Location = new System.Drawing.Point(809, 374);
             this.dtpLichLamViec.Name = "dtpLichLamViec";
             this.dtpLichLamViec.Size = new System.Drawing.Size(308, 34);
-            this.dtpLichLamViec.TabIndex = 20;
+            this.dtpLichLamViec.TabIndex = 16;
             // 
             // dgvLichLamViec
             // 
@@ -568,7 +568,7 @@
             this.dgvLichLamViec.RowHeadersWidth = 51;
             this.dgvLichLamViec.RowTemplate.Height = 24;
             this.dgvLichLamViec.Size = new System.Drawing.Size(1893, 526);
-            this.dgvLichLamViec.TabIndex = 21;
+            this.dgvLichLamViec.TabIndex = 17;
             // 
             // colMaNV
             // 

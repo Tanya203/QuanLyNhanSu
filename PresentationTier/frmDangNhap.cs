@@ -21,5 +21,10 @@ namespace QuanLyNhanSu
         {
 
         }
+
+        private void pnDangNhap_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
