@@ -88,6 +88,12 @@
     <Compile Include="PresentationTier\frmManHinhChinh.Designer.cs">
       <DependentUpon>frmManHinhChinh.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationTier\frmQuanLyNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\frmQuanLyNhanVien.Designer.cs">
+      <DependentUpon>frmQuanLyNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationTier\frmQuenMatKhau.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\frmManHinhChinh.resx">
       <DependentUpon>frmManHinhChinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\frmQuanLyNhanVien.resx">
+      <DependentUpon>frmQuanLyNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\frmQuenMatKhau.resx">
       <DependentUpon>frmQuenMatKhau.cs</DependentUpon>
@@ -207,6 +216,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Icons\log_out1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\fix.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\add_small.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -97,9 +97,10 @@
             // 
             // txtMaNhanVien
             // 
-            this.txtMaNhanVien.Location = new System.Drawing.Point(227, 45);
+            this.txtMaNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaNhanVien.Location = new System.Drawing.Point(207, 45);
             this.txtMaNhanVien.Name = "txtMaNhanVien";
-            this.txtMaNhanVien.Size = new System.Drawing.Size(309, 30);
+            this.txtMaNhanVien.Size = new System.Drawing.Size(329, 27);
             this.txtMaNhanVien.TabIndex = 0;
             // 
             // lblTaiKhoan
@@ -113,9 +114,10 @@
             // 
             // txtSDT
             // 
-            this.txtSDT.Location = new System.Drawing.Point(225, 195);
+            this.txtSDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSDT.Location = new System.Drawing.Point(207, 195);
             this.txtSDT.Name = "txtSDT";
-            this.txtSDT.Size = new System.Drawing.Size(311, 30);
+            this.txtSDT.Size = new System.Drawing.Size(329, 27);
             this.txtSDT.TabIndex = 3;
             // 
             // lblCMND_CCCD
@@ -138,9 +140,10 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(225, 245);
+            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmail.Location = new System.Drawing.Point(207, 245);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(311, 30);
+            this.txtEmail.Size = new System.Drawing.Size(329, 27);
             this.txtEmail.TabIndex = 4;
             // 
             // lblSoDienThoai
@@ -163,16 +166,18 @@
             // 
             // txtTaiKhoan
             // 
-            this.txtTaiKhoan.Location = new System.Drawing.Point(227, 95);
+            this.txtTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTaiKhoan.Location = new System.Drawing.Point(207, 95);
             this.txtTaiKhoan.Name = "txtTaiKhoan";
-            this.txtTaiKhoan.Size = new System.Drawing.Size(309, 30);
+            this.txtTaiKhoan.Size = new System.Drawing.Size(329, 27);
             this.txtTaiKhoan.TabIndex = 1;
             // 
             // txtCCCD_CMND
             // 
-            this.txtCCCD_CMND.Location = new System.Drawing.Point(225, 145);
+            this.txtCCCD_CMND.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCCCD_CMND.Location = new System.Drawing.Point(207, 145);
             this.txtCCCD_CMND.Name = "txtCCCD_CMND";
-            this.txtCCCD_CMND.Size = new System.Drawing.Size(311, 30);
+            this.txtCCCD_CMND.Size = new System.Drawing.Size(329, 27);
             this.txtCCCD_CMND.TabIndex = 2;
             // 
             // lblQuenMatKhau
@@ -203,22 +208,24 @@
             // 
             // textBox2
             // 
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(273, 52);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(263, 30);
+            this.textBox2.Size = new System.Drawing.Size(263, 27);
             this.textBox2.TabIndex = 6;
             // 
             // textBox1
             // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(273, 107);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(263, 30);
+            this.textBox1.Size = new System.Drawing.Size(263, 27);
             this.textBox1.TabIndex = 7;
             // 
             // btnDoiMatKhau
             // 
             this.btnDoiMatKhau.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnDoiMatKhau.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDoiMatKhau.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDoiMatKhau.Image = global::QuanLyNhanSu.Properties.Resources.passchange;
             this.btnDoiMatKhau.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDoiMatKhau.Location = new System.Drawing.Point(273, 152);
@@ -320,7 +327,7 @@
             this.Controls.Add(this.grpXacThucThongTin);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(670, 890);
-            this.MinimumSize = new System.Drawing.Size(670, 890);
+            this.MinimumSize = new System.Drawing.Size(670, 824);
             this.Name = "frmQuenMatKhau";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quên mật khẩu";

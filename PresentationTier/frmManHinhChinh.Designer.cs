@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnQLNV = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.btnDangXuat = new System.Windows.Forms.Button();
@@ -86,7 +86,7 @@
             this.btnQLNV.Image = global::QuanLyNhanSu.Properties.Resources.staff;
             this.btnQLNV.Location = new System.Drawing.Point(0, 0);
             this.btnQLNV.Name = "btnQLNV";
-            this.btnQLNV.Size = new System.Drawing.Size(102, 96);
+            this.btnQLNV.Size = new System.Drawing.Size(102, 100);
             this.btnQLNV.TabIndex = 0;
             this.btnQLNV.Text = "Nhân viên";
             this.btnQLNV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -115,7 +115,7 @@
             this.pnlMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlMenu.Location = new System.Drawing.Point(0, 0);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(1924, 96);
+            this.pnlMenu.Size = new System.Drawing.Size(1924, 100);
             this.pnlMenu.TabIndex = 17;
             // 
             // btnDangXuat
@@ -130,7 +130,7 @@
             this.btnDangXuat.Image = global::QuanLyNhanSu.Properties.Resources.log_out;
             this.btnDangXuat.Location = new System.Drawing.Point(1821, 0);
             this.btnDangXuat.Name = "btnDangXuat";
-            this.btnDangXuat.Size = new System.Drawing.Size(103, 96);
+            this.btnDangXuat.Size = new System.Drawing.Size(103, 100);
             this.btnDangXuat.TabIndex = 14;
             this.btnDangXuat.Text = "Đăng xuất";
             this.btnDangXuat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -148,7 +148,7 @@
             this.btnTTTK.Image = global::QuanLyNhanSu.Properties.Resources.info_small;
             this.btnTTTK.Location = new System.Drawing.Point(1420, 0);
             this.btnTTTK.Name = "btnTTTK";
-            this.btnTTTK.Size = new System.Drawing.Size(179, 96);
+            this.btnTTTK.Size = new System.Drawing.Size(179, 100);
             this.btnTTTK.TabIndex = 13;
             this.btnTTTK.Text = "Thông tin tài khoản";
             this.btnTTTK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -166,7 +166,7 @@
             this.btnLSTT.Image = global::QuanLyNhanSu.Properties.Resources.history;
             this.btnLSTT.Location = new System.Drawing.Point(1265, 0);
             this.btnLSTT.Name = "btnLSTT";
-            this.btnLSTT.Size = new System.Drawing.Size(155, 96);
+            this.btnLSTT.Size = new System.Drawing.Size(155, 100);
             this.btnLSTT.TabIndex = 12;
             this.btnLSTT.Text = "Lịch sử thao tác";
             this.btnLSTT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -184,7 +184,7 @@
             this.btnQLPQ.Image = global::QuanLyNhanSu.Properties.Resources.decentralization;
             this.btnQLPQ.Location = new System.Drawing.Point(1149, 0);
             this.btnQLPQ.Name = "btnQLPQ";
-            this.btnQLPQ.Size = new System.Drawing.Size(116, 96);
+            this.btnQLPQ.Size = new System.Drawing.Size(116, 100);
             this.btnQLPQ.TabIndex = 11;
             this.btnQLPQ.Text = "Phân quyền";
             this.btnQLPQ.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -202,7 +202,7 @@
             this.btnQLLHD.Image = global::QuanLyNhanSu.Properties.Resources.contract;
             this.btnQLLHD.Location = new System.Drawing.Point(1012, 0);
             this.btnQLLHD.Name = "btnQLLHD";
-            this.btnQLLHD.Size = new System.Drawing.Size(137, 96);
+            this.btnQLLHD.Size = new System.Drawing.Size(137, 100);
             this.btnQLLHD.TabIndex = 10;
             this.btnQLLHD.Text = "Loại hợp đồng";
             this.btnQLLHD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -220,7 +220,7 @@
             this.btnQLTK.Image = global::QuanLyNhanSu.Properties.Resources.chart;
             this.btnQLTK.Location = new System.Drawing.Point(917, 0);
             this.btnQLTK.Name = "btnQLTK";
-            this.btnQLTK.Size = new System.Drawing.Size(95, 96);
+            this.btnQLTK.Size = new System.Drawing.Size(95, 100);
             this.btnQLTK.TabIndex = 9;
             this.btnQLTK.Text = "Thống kê";
             this.btnQLTK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -238,7 +238,7 @@
             this.btnQLPP.Image = global::QuanLyNhanSu.Properties.Resources.fine;
             this.btnQLPP.Location = new System.Drawing.Point(809, 0);
             this.btnQLPP.Name = "btnQLPP";
-            this.btnQLPP.Size = new System.Drawing.Size(108, 96);
+            this.btnQLPP.Size = new System.Drawing.Size(108, 100);
             this.btnQLPP.TabIndex = 8;
             this.btnQLPP.Text = "Phiếu phạt";
             this.btnQLPP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -256,7 +256,7 @@
             this.btnQLPT.Image = global::QuanLyNhanSu.Properties.Resources.bonus;
             this.btnQLPT.Location = new System.Drawing.Point(681, 0);
             this.btnQLPT.Name = "btnQLPT";
-            this.btnQLPT.Size = new System.Drawing.Size(128, 96);
+            this.btnQLPT.Size = new System.Drawing.Size(128, 100);
             this.btnQLPT.TabIndex = 7;
             this.btnQLPT.Text = "Phiếu thưởng";
             this.btnQLPT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -274,7 +274,7 @@
             this.btnQLPC.Image = global::QuanLyNhanSu.Properties.Resources.allowance;
             this.btnQLPC.Location = new System.Drawing.Point(594, 0);
             this.btnQLPC.Name = "btnQLPC";
-            this.btnQLPC.Size = new System.Drawing.Size(87, 96);
+            this.btnQLPC.Size = new System.Drawing.Size(87, 100);
             this.btnQLPC.TabIndex = 6;
             this.btnQLPC.Text = "Phụ cấp";
             this.btnQLPC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -292,7 +292,7 @@
             this.btnQLLLV.Image = global::QuanLyNhanSu.Properties.Resources.timetable;
             this.btnQLLLV.Location = new System.Drawing.Point(463, 0);
             this.btnQLLLV.Name = "btnQLLLV";
-            this.btnQLLLV.Size = new System.Drawing.Size(131, 96);
+            this.btnQLLLV.Size = new System.Drawing.Size(131, 100);
             this.btnQLLLV.TabIndex = 5;
             this.btnQLLLV.Text = "Lịch làm việc";
             this.btnQLLLV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -310,7 +310,7 @@
             this.btnQLCC.Image = global::QuanLyNhanSu.Properties.Resources.timekeeping;
             this.btnQLCC.Location = new System.Drawing.Point(350, 0);
             this.btnQLCC.Name = "btnQLCC";
-            this.btnQLCC.Size = new System.Drawing.Size(113, 96);
+            this.btnQLCC.Size = new System.Drawing.Size(113, 100);
             this.btnQLCC.TabIndex = 4;
             this.btnQLCC.Text = "Chấm công";
             this.btnQLCC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -328,7 +328,7 @@
             this.btnQLC.Image = global::QuanLyNhanSu.Properties.Resources.shitf1;
             this.btnQLC.Location = new System.Drawing.Point(296, 0);
             this.btnQLC.Name = "btnQLC";
-            this.btnQLC.Size = new System.Drawing.Size(54, 96);
+            this.btnQLC.Size = new System.Drawing.Size(54, 100);
             this.btnQLC.TabIndex = 3;
             this.btnQLC.Text = "Ca";
             this.btnQLC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -346,7 +346,7 @@
             this.btnQLCV.Image = global::QuanLyNhanSu.Properties.Resources.position;
             this.btnQLCV.Location = new System.Drawing.Point(209, 0);
             this.btnQLCV.Name = "btnQLCV";
-            this.btnQLCV.Size = new System.Drawing.Size(87, 96);
+            this.btnQLCV.Size = new System.Drawing.Size(87, 100);
             this.btnQLCV.TabIndex = 2;
             this.btnQLCV.Text = "Chức vụ";
             this.btnQLCV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -364,7 +364,7 @@
             this.btnQLPB.Image = global::QuanLyNhanSu.Properties.Resources.department;
             this.btnQLPB.Location = new System.Drawing.Point(102, 0);
             this.btnQLPB.Name = "btnQLPB";
-            this.btnQLPB.Size = new System.Drawing.Size(107, 96);
+            this.btnQLPB.Size = new System.Drawing.Size(107, 100);
             this.btnQLPB.TabIndex = 1;
             this.btnQLPB.Text = "Phòng ban";
             this.btnQLPB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -385,7 +385,7 @@
             this.panel1.Controls.Add(this.lblMaNhanVien);
             this.panel1.Controls.Add(this.pbAnhNV);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 96);
+            this.panel1.Location = new System.Drawing.Point(0, 100);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1924, 168);
             this.panel1.TabIndex = 18;
@@ -424,7 +424,7 @@
             // 
             this.lblChucVuNV.AutoSize = true;
             this.lblChucVuNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuNV.Location = new System.Drawing.Point(853, 114);
+            this.lblChucVuNV.Location = new System.Drawing.Point(720, 114);
             this.lblChucVuNV.Name = "lblChucVuNV";
             this.lblChucVuNV.Size = new System.Drawing.Size(47, 38);
             this.lblChucVuNV.TabIndex = 22;
@@ -444,7 +444,7 @@
             // 
             this.lblPhongBanNV.AutoSize = true;
             this.lblPhongBanNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanNV.Location = new System.Drawing.Point(853, 17);
+            this.lblPhongBanNV.Location = new System.Drawing.Point(720, 17);
             this.lblPhongBanNV.Name = "lblPhongBanNV";
             this.lblPhongBanNV.Size = new System.Drawing.Size(47, 38);
             this.lblPhongBanNV.TabIndex = 4;
@@ -454,7 +454,7 @@
             // 
             this.lblChucVu.AutoSize = true;
             this.lblChucVu.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVu.Location = new System.Drawing.Point(654, 114);
+            this.lblChucVu.Location = new System.Drawing.Point(521, 114);
             this.lblChucVu.Name = "lblChucVu";
             this.lblChucVu.Size = new System.Drawing.Size(155, 38);
             this.lblChucVu.TabIndex = 21;
@@ -464,7 +464,7 @@
             // 
             this.lblPhongBan.AutoSize = true;
             this.lblPhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBan.Location = new System.Drawing.Point(654, 17);
+            this.lblPhongBan.Location = new System.Drawing.Point(521, 17);
             this.lblPhongBan.Name = "lblPhongBan";
             this.lblPhongBan.Size = new System.Drawing.Size(193, 38);
             this.lblPhongBan.TabIndex = 3;
@@ -493,7 +493,7 @@
             // 
             // pbAnhNV
             // 
-            this.pbAnhNV.Location = new System.Drawing.Point(1666, 3);
+            this.pbAnhNV.Location = new System.Drawing.Point(1681, 3);
             this.pbAnhNV.Name = "pbAnhNV";
             this.pbAnhNV.Size = new System.Drawing.Size(205, 162);
             this.pbAnhNV.TabIndex = 0;
@@ -528,14 +528,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLichLamViec.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvLichLamViec.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLichLamViec.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLichLamViec.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLichLamViec.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLichLamViec.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaNV,
