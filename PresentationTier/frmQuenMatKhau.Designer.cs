@@ -83,6 +83,7 @@
             // btnXacThucThongTin
             // 
             this.btnXacThucThongTin.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnXacThucThongTin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnXacThucThongTin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnXacThucThongTin.Image = global::QuanLyNhanSu.Properties.Resources.verify;
             this.btnXacThucThongTin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -225,6 +226,7 @@
             // btnDoiMatKhau
             // 
             this.btnDoiMatKhau.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnDoiMatKhau.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDoiMatKhau.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDoiMatKhau.Image = global::QuanLyNhanSu.Properties.Resources.passchange;
             this.btnDoiMatKhau.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -240,6 +242,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
+            this.checkBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox1.Location = new System.Drawing.Point(20, 179);
             this.checkBox1.Name = "checkBox1";
@@ -299,6 +302,7 @@
             // btnTroVe
             // 
             this.btnTroVe.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnTroVe.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTroVe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTroVe.Image = global::QuanLyNhanSu.Properties.Resources.return_small;

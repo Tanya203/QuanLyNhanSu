@@ -65,6 +65,7 @@
             // cbHienThiMatKhau
             // 
             this.cbHienThiMatKhau.AutoSize = true;
+            this.cbHienThiMatKhau.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cbHienThiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbHienThiMatKhau.Location = new System.Drawing.Point(9, 190);
             this.cbHienThiMatKhau.Name = "cbHienThiMatKhau";
@@ -118,6 +119,7 @@
             // 
             // btnDangNhap
             // 
+            this.btnDangNhap.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDangNhap.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDangNhap.Image = global::QuanLyNhanSu.Properties.Resources.login;
