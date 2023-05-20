@@ -82,11 +82,41 @@
     <Compile Include="PresentationTier\frmDangNhap.Designer.cs">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationTier\frmLichSuThaoTac.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\frmLichSuThaoTac.Designer.cs">
+      <DependentUpon>frmLichSuThaoTac.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationTier\frmManHinhChinh.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationTier\frmManHinhChinh.Designer.cs">
       <DependentUpon>frmManHinhChinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationTier\frmPhanQuyen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\frmPhanQuyen.Designer.cs">
+      <DependentUpon>frmPhanQuyen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationTier\frmQuanLyCa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\frmQuanLyCa.Designer.cs">
+      <DependentUpon>frmQuanLyCa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationTier\frmQuanLyChucVu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\frmQuanLyChucVu.Designer.cs">
+      <DependentUpon>frmQuanLyChucVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationTier\frmQuanLyLoaiHopDong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\frmQuanLyLoaiHopDong.Designer.cs">
+      <DependentUpon>frmQuanLyLoaiHopDong.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationTier\frmQuanLyNhanVien.cs">
       <SubType>Form</SubType>
@@ -94,25 +124,76 @@
     <Compile Include="PresentationTier\frmQuanLyNhanVien.Designer.cs">
       <DependentUpon>frmQuanLyNhanVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationTier\frmQuanLyPhongBan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\frmQuanLyPhongBan.Designer.cs">
+      <DependentUpon>frmQuanLyPhongBan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationTier\frmQuanLyPhuCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\frmQuanLyPhuCap.Designer.cs">
+      <DependentUpon>frmQuanLyPhuCap.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationTier\frmQuenMatKhau.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationTier\frmQuenMatKhau.Designer.cs">
       <DependentUpon>frmQuenMatKhau.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationTier\frmThongTinTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\frmThongTinTaiKhoan.Designer.cs">
+      <DependentUpon>frmThongTinTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationTier\frmTongPhuCapMotNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\frmTongPhuCapMotNhanVien.Designer.cs">
+      <DependentUpon>frmTongPhuCapMotNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="PresentationTier\frmDangNhap.resx">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\frmLichSuThaoTac.resx">
+      <DependentUpon>frmLichSuThaoTac.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\frmManHinhChinh.resx">
       <DependentUpon>frmManHinhChinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\frmPhanQuyen.resx">
+      <DependentUpon>frmPhanQuyen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\frmQuanLyCa.resx">
+      <DependentUpon>frmQuanLyCa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\frmQuanLyChucVu.resx">
+      <DependentUpon>frmQuanLyChucVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\frmQuanLyLoaiHopDong.resx">
+      <DependentUpon>frmQuanLyLoaiHopDong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\frmQuanLyNhanVien.resx">
       <DependentUpon>frmQuanLyNhanVien.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\frmQuanLyPhongBan.resx">
+      <DependentUpon>frmQuanLyPhongBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\frmQuanLyPhuCap.resx">
+      <DependentUpon>frmQuanLyPhuCap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\frmQuenMatKhau.resx">
       <DependentUpon>frmQuenMatKhau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\frmThongTinTaiKhoan.resx">
+      <DependentUpon>frmThongTinTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\frmTongPhuCapMotNhanVien.resx">
+      <DependentUpon>frmTongPhuCapMotNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -237,6 +318,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Icons\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\pass_small.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

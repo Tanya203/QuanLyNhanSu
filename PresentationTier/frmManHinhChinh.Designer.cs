@@ -508,9 +508,11 @@
             // 
             // pbAnhNV
             // 
-            this.pbAnhNV.Location = new System.Drawing.Point(1681, 3);
+            this.pbAnhNV.Image = global::QuanLyNhanSu.Properties.Resources.image;
+            this.pbAnhNV.Location = new System.Drawing.Point(1726, 0);
             this.pbAnhNV.Name = "pbAnhNV";
-            this.pbAnhNV.Size = new System.Drawing.Size(205, 162);
+            this.pbAnhNV.Size = new System.Drawing.Size(168, 168);
+            this.pbAnhNV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbAnhNV.TabIndex = 0;
             this.pbAnhNV.TabStop = false;
             // 
@@ -518,7 +520,7 @@
             // 
             this.lblLichLamViec.AutoSize = true;
             this.lblLichLamViec.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLichLamViec.Location = new System.Drawing.Point(839, 325);
+            this.lblLichLamViec.Location = new System.Drawing.Point(825, 281);
             this.lblLichLamViec.Name = "lblLichLamViec";
             this.lblLichLamViec.Size = new System.Drawing.Size(264, 46);
             this.lblLichLamViec.TabIndex = 19;
@@ -529,7 +531,7 @@
             this.dtpLichLamViec.CustomFormat = "dddd dd/MM/yyyy";
             this.dtpLichLamViec.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpLichLamViec.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpLichLamViec.Location = new System.Drawing.Point(809, 374);
+            this.dtpLichLamViec.Location = new System.Drawing.Point(810, 330);
             this.dtpLichLamViec.Name = "dtpLichLamViec";
             this.dtpLichLamViec.Size = new System.Drawing.Size(308, 34);
             this.dtpLichLamViec.TabIndex = 16;
@@ -538,9 +540,6 @@
             // 
             this.dgvLichLamViec.AllowUserToAddRows = false;
             this.dgvLichLamViec.AllowUserToDeleteRows = false;
-            this.dgvLichLamViec.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLichLamViec.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvLichLamViec.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -561,13 +560,14 @@
             this.colPhep,
             this.colThoiGianDen,
             this.colThoiGianVe});
-            this.dgvLichLamViec.Location = new System.Drawing.Point(19, 423);
+            this.dgvLichLamViec.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvLichLamViec.Location = new System.Drawing.Point(0, 370);
             this.dgvLichLamViec.Name = "dgvLichLamViec";
             this.dgvLichLamViec.ReadOnly = true;
             this.dgvLichLamViec.RowHeadersVisible = false;
             this.dgvLichLamViec.RowHeadersWidth = 51;
             this.dgvLichLamViec.RowTemplate.Height = 24;
-            this.dgvLichLamViec.Size = new System.Drawing.Size(1893, 526);
+            this.dgvLichLamViec.Size = new System.Drawing.Size(1924, 608);
             this.dgvLichLamViec.TabIndex = 17;
             // 
             // colMaNV

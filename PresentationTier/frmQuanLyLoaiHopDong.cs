@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class frmQuanLyNhanVien : Form
+    public partial class frmQuanLyLoaiHopDong : Form
     {
-        public frmQuanLyNhanVien()
+        public frmQuanLyLoaiHopDong()
         {
             InitializeComponent();
-        }
-
-        private void frmQuanLyNhanVien_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlMenu_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

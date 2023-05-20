@@ -293,6 +293,16 @@ namespace QuanLyNhanSu.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pass_small {
+            get {
+                object obj = ResourceManager.GetObject("pass_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap passchange {
             get {
                 object obj = ResourceManager.GetObject("passchange", resourceCulture);
@@ -326,6 +336,16 @@ namespace QuanLyNhanSu.Properties {
         internal static System.Drawing.Bitmap return_small {
             get {
                 object obj = ResourceManager.GetObject("return_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap save {
+            get {
+                object obj = ResourceManager.GetObject("save", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
