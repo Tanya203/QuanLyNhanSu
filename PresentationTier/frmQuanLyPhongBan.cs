@@ -10,19 +10,14 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class frmQuanLyNhanVien : Form
+    public partial class frmQuanLyPhongBan : Form
     {
-        public frmQuanLyNhanVien()
+        public frmQuanLyPhongBan()
         {
             InitializeComponent();
         }
 
-        private void frmQuanLyNhanVien_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlMenu_Paint(object sender, PaintEventArgs e)
+        private void lblThongTinPhongBan_Click(object sender, EventArgs e)
         {
 
         }
