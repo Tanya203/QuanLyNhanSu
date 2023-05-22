@@ -10,16 +10,13 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class frmChiTietLichLamViec : Form
+    public partial class frmThongKeLuong : Form
     {
-        public frmChiTietLichLamViec()
+        public frmThongKeLuong()
         {
             InitializeComponent();
         }
 
-        private void lblThongTinLichLamViec_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

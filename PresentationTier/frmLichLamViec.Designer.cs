@@ -35,6 +35,8 @@
             this.lblMaLichLamViec = new System.Windows.Forms.Label();
             this.lblThongTinLichLamViec = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.dtpNgayLam = new System.Windows.Forms.DateTimePicker();
+            this.lblNgayLam = new System.Windows.Forms.Label();
             this.dgvThongTinLichLamViec = new System.Windows.Forms.DataGridView();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
             this.lblChucVuDN = new System.Windows.Forms.Label();
@@ -46,14 +48,18 @@
             this.lblMaNhanVienDN = new System.Windows.Forms.Label();
             this.lblTimKiem = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.dtpNgayLam = new System.Windows.Forms.DateTimePicker();
-            this.lblNgayLam = new System.Windows.Forms.Label();
-            this.colMaLLV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNgaylam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colChiTiet = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.btnTroVe = new System.Windows.Forms.Button();
+            this.cmbCa = new System.Windows.Forms.ComboBox();
+            this.lblCa = new System.Windows.Forms.Label();
+            this.cmbLoaiCa = new System.Windows.Forms.ComboBox();
+            this.lblLoaiCa = new System.Windows.Forms.Label();
+            this.colMaLLV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNgaylam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLoaiCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colChiTiet = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinLichLamViec)).BeginInit();
             this.pnlHeader.SuspendLayout();
@@ -98,6 +104,10 @@
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.SystemColors.Info;
+            this.pnlMenu.Controls.Add(this.cmbLoaiCa);
+            this.pnlMenu.Controls.Add(this.lblLoaiCa);
+            this.pnlMenu.Controls.Add(this.cmbCa);
+            this.pnlMenu.Controls.Add(this.lblCa);
             this.pnlMenu.Controls.Add(this.dtpNgayLam);
             this.pnlMenu.Controls.Add(this.lblNgayLam);
             this.pnlMenu.Controls.Add(this.txtMaLLV);
@@ -106,8 +116,28 @@
             this.pnlMenu.Controls.Add(this.lblMaLichLamViec);
             this.pnlMenu.Location = new System.Drawing.Point(40, 419);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(621, 290);
+            this.pnlMenu.Size = new System.Drawing.Size(621, 389);
             this.pnlMenu.TabIndex = 56;
+            // 
+            // dtpNgayLam
+            // 
+            this.dtpNgayLam.CustomFormat = "dd/MM/yyyy ";
+            this.dtpNgayLam.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpNgayLam.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpNgayLam.Location = new System.Drawing.Point(234, 233);
+            this.dtpNgayLam.Name = "dtpNgayLam";
+            this.dtpNgayLam.Size = new System.Drawing.Size(374, 34);
+            this.dtpNgayLam.TabIndex = 51;
+            // 
+            // lblNgayLam
+            // 
+            this.lblNgayLam.AutoSize = true;
+            this.lblNgayLam.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNgayLam.Location = new System.Drawing.Point(15, 238);
+            this.lblNgayLam.Name = "lblNgayLam";
+            this.lblNgayLam.Size = new System.Drawing.Size(129, 29);
+            this.lblNgayLam.TabIndex = 50;
+            this.lblNgayLam.Text = "Ngày làm:";
             // 
             // dgvThongTinLichLamViec
             // 
@@ -126,6 +156,8 @@
             this.dgvThongTinLichLamViec.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaLLV,
             this.colNgaylam,
+            this.colCa,
+            this.colLoaiCa,
             this.colChiTiet});
             this.dgvThongTinLichLamViec.Location = new System.Drawing.Point(694, 266);
             this.dgvThongTinLichLamViec.Name = "dgvThongTinLichLamViec";
@@ -254,49 +286,6 @@
             this.pnlHeader.Size = new System.Drawing.Size(1924, 113);
             this.pnlHeader.TabIndex = 54;
             // 
-            // dtpNgayLam
-            // 
-            this.dtpNgayLam.CustomFormat = "dd/MM/yyyy ";
-            this.dtpNgayLam.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpNgayLam.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgayLam.Location = new System.Drawing.Point(234, 113);
-            this.dtpNgayLam.Name = "dtpNgayLam";
-            this.dtpNgayLam.Size = new System.Drawing.Size(374, 34);
-            this.dtpNgayLam.TabIndex = 51;
-            // 
-            // lblNgayLam
-            // 
-            this.lblNgayLam.AutoSize = true;
-            this.lblNgayLam.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayLam.Location = new System.Drawing.Point(15, 118);
-            this.lblNgayLam.Name = "lblNgayLam";
-            this.lblNgayLam.Size = new System.Drawing.Size(129, 29);
-            this.lblNgayLam.TabIndex = 50;
-            this.lblNgayLam.Text = "Ngày làm:";
-            // 
-            // colMaLLV
-            // 
-            this.colMaLLV.HeaderText = "Mã lịch làm việc";
-            this.colMaLLV.MinimumWidth = 6;
-            this.colMaLLV.Name = "colMaLLV";
-            this.colMaLLV.ReadOnly = true;
-            // 
-            // colNgaylam
-            // 
-            this.colNgaylam.HeaderText = "Ngày làm";
-            this.colNgaylam.MinimumWidth = 6;
-            this.colNgaylam.Name = "colNgaylam";
-            this.colNgaylam.ReadOnly = true;
-            // 
-            // colChiTiet
-            // 
-            this.colChiTiet.HeaderText = "";
-            this.colChiTiet.MinimumWidth = 6;
-            this.colChiTiet.Name = "colChiTiet";
-            this.colChiTiet.ReadOnly = true;
-            this.colChiTiet.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colChiTiet.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
             // btnXoa
             // 
             this.btnXoa.AutoSize = true;
@@ -306,7 +295,7 @@
             this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.Image = global::QuanLyNhanSu.Properties.Resources.delete;
-            this.btnXoa.Location = new System.Drawing.Point(341, 199);
+            this.btnXoa.Location = new System.Drawing.Point(341, 294);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(102, 49);
             this.btnXoa.TabIndex = 43;
@@ -323,7 +312,7 @@
             this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.Image = global::QuanLyNhanSu.Properties.Resources.add;
-            this.btnThem.Location = new System.Drawing.Point(185, 199);
+            this.btnThem.Location = new System.Drawing.Point(185, 294);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(122, 49);
             this.btnThem.TabIndex = 42;
@@ -349,6 +338,81 @@
             this.btnTroVe.Text = "Trở về";
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTroVe.UseVisualStyleBackColor = false;
+            // 
+            // cmbCa
+            // 
+            this.cmbCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCa.FormattingEnabled = true;
+            this.cmbCa.Location = new System.Drawing.Point(234, 96);
+            this.cmbCa.Name = "cmbCa";
+            this.cmbCa.Size = new System.Drawing.Size(374, 37);
+            this.cmbCa.TabIndex = 53;
+            // 
+            // lblCa
+            // 
+            this.lblCa.AutoSize = true;
+            this.lblCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCa.Location = new System.Drawing.Point(15, 99);
+            this.lblCa.Name = "lblCa";
+            this.lblCa.Size = new System.Drawing.Size(45, 29);
+            this.lblCa.TabIndex = 52;
+            this.lblCa.Text = "Ca";
+            // 
+            // cmbLoaiCa
+            // 
+            this.cmbLoaiCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbLoaiCa.FormattingEnabled = true;
+            this.cmbLoaiCa.Location = new System.Drawing.Point(234, 168);
+            this.cmbLoaiCa.Name = "cmbLoaiCa";
+            this.cmbLoaiCa.Size = new System.Drawing.Size(374, 37);
+            this.cmbLoaiCa.TabIndex = 55;
+            // 
+            // lblLoaiCa
+            // 
+            this.lblLoaiCa.AutoSize = true;
+            this.lblLoaiCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoaiCa.Location = new System.Drawing.Point(15, 171);
+            this.lblLoaiCa.Name = "lblLoaiCa";
+            this.lblLoaiCa.Size = new System.Drawing.Size(97, 29);
+            this.lblLoaiCa.TabIndex = 54;
+            this.lblLoaiCa.Text = "Loại ca";
+            // 
+            // colMaLLV
+            // 
+            this.colMaLLV.HeaderText = "Mã lịch làm việc";
+            this.colMaLLV.MinimumWidth = 6;
+            this.colMaLLV.Name = "colMaLLV";
+            this.colMaLLV.ReadOnly = true;
+            // 
+            // colNgaylam
+            // 
+            this.colNgaylam.HeaderText = "Ngày làm";
+            this.colNgaylam.MinimumWidth = 6;
+            this.colNgaylam.Name = "colNgaylam";
+            this.colNgaylam.ReadOnly = true;
+            // 
+            // colCa
+            // 
+            this.colCa.HeaderText = "Ca";
+            this.colCa.MinimumWidth = 6;
+            this.colCa.Name = "colCa";
+            this.colCa.ReadOnly = true;
+            // 
+            // colLoaiCa
+            // 
+            this.colLoaiCa.HeaderText = "Loại ca";
+            this.colLoaiCa.MinimumWidth = 6;
+            this.colLoaiCa.Name = "colLoaiCa";
+            this.colLoaiCa.ReadOnly = true;
+            // 
+            // colChiTiet
+            // 
+            this.colChiTiet.HeaderText = "";
+            this.colChiTiet.MinimumWidth = 6;
+            this.colChiTiet.Name = "colChiTiet";
+            this.colChiTiet.ReadOnly = true;
+            this.colChiTiet.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colChiTiet.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // frmLichLamViec
             // 
@@ -398,8 +462,14 @@
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.DateTimePicker dtpNgayLam;
         private System.Windows.Forms.Label lblNgayLam;
+        private System.Windows.Forms.ComboBox cmbLoaiCa;
+        private System.Windows.Forms.Label lblLoaiCa;
+        private System.Windows.Forms.ComboBox cmbCa;
+        private System.Windows.Forms.Label lblCa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaLLV;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNgaylam;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLoaiCa;
         private System.Windows.Forms.DataGridViewButtonColumn colChiTiet;
     }
 }
