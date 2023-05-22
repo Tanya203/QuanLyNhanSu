@@ -114,26 +114,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTier\Ca.cs" />
-    <Compile Include="DataTier\ChamCong.cs" />
-    <Compile Include="DataTier\ChiTietLuongThang.cs" />
-    <Compile Include="DataTier\ChiTietPhieuPhat.cs" />
-    <Compile Include="DataTier\ChiTietPhieuThuong.cs" />
-    <Compile Include="DataTier\ChiTietPhuCap.cs" />
-    <Compile Include="DataTier\ChucVu.cs" />
-    <Compile Include="DataTier\LichLamViec.cs" />
-    <Compile Include="DataTier\LichSuThaoTac.cs" />
-    <Compile Include="DataTier\LoaiCa.cs" />
-    <Compile Include="DataTier\LoaiHopDong.cs" />
-    <Compile Include="DataTier\LuongThang.cs" />
-    <Compile Include="DataTier\NhanVien.cs" />
-    <Compile Include="DataTier\PhanQuyen.cs" />
-    <Compile Include="DataTier\PhieuPhat.cs" />
-    <Compile Include="DataTier\PhieuThuong.cs" />
-    <Compile Include="DataTier\PhongBan.cs" />
-    <Compile Include="DataTier\PhuCap.cs" />
-    <Compile Include="DataTier\QuanLyNhanSuContextDB.cs" />
-    <Compile Include="DataTier\QuyenHan.cs" />
+    <Compile Include="DataTier\Models\Ca.cs" />
+    <Compile Include="DataTier\Models\ChamCong.cs" />
+    <Compile Include="DataTier\Models\ChiTietLuongThang.cs" />
+    <Compile Include="DataTier\Models\ChiTietPhieuPhat.cs" />
+    <Compile Include="DataTier\Models\ChiTietPhieuThuong.cs" />
+    <Compile Include="DataTier\Models\ChiTietPhuCap.cs" />
+    <Compile Include="DataTier\Models\ChucVu.cs" />
+    <Compile Include="DataTier\Models\LichLamViec.cs" />
+    <Compile Include="DataTier\Models\LichSuThaoTac.cs" />
+    <Compile Include="DataTier\Models\LoaiCa.cs" />
+    <Compile Include="DataTier\Models\LoaiHopDong.cs" />
+    <Compile Include="DataTier\Models\LuongThang.cs" />
+    <Compile Include="DataTier\Models\NhanVien.cs" />
+    <Compile Include="DataTier\Models\PhanQuyen.cs" />
+    <Compile Include="DataTier\Models\PhieuPhat.cs" />
+    <Compile Include="DataTier\Models\PhieuThuong.cs" />
+    <Compile Include="DataTier\Models\PhongBan.cs" />
+    <Compile Include="DataTier\Models\PhuCap.cs" />
+    <Compile Include="DataTier\Models\QuanLyNhanSuContextDB.cs" />
+    <Compile Include="DataTier\Models\QuyenHan.cs" />
     <Compile Include="PresentationTier\frmChiTietLichLamViec.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +206,12 @@
     <Compile Include="PresentationTier\frmQuanLyChucVu.Designer.cs">
       <DependentUpon>frmQuanLyChucVu.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationTier\frmQuanLyLoaiCa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\frmQuanLyLoaiCa.Designer.cs">
+      <DependentUpon>frmQuanLyLoaiCa.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationTier\frmQuanLyLoaiHopDong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,6 +241,12 @@
     </Compile>
     <Compile Include="PresentationTier\frmQuenMatKhau.Designer.cs">
       <DependentUpon>frmQuenMatKhau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationTier\frmThongKeLuong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\frmThongKeLuong.Designer.cs">
+      <DependentUpon>frmThongKeLuong.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationTier\frmThongTinTaiKhoan.cs">
       <SubType>Form</SubType>
@@ -287,6 +299,9 @@
     <EmbeddedResource Include="PresentationTier\frmQuanLyChucVu.resx">
       <DependentUpon>frmQuanLyChucVu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\frmQuanLyLoaiCa.resx">
+      <DependentUpon>frmQuanLyLoaiCa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\frmQuanLyLoaiHopDong.resx">
       <DependentUpon>frmQuanLyLoaiHopDong.cs</DependentUpon>
     </EmbeddedResource>
@@ -301,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\frmQuenMatKhau.resx">
       <DependentUpon>frmQuenMatKhau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\frmThongKeLuong.resx">
+      <DependentUpon>frmThongKeLuong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\frmThongTinTaiKhoan.resx">
       <DependentUpon>frmThongTinTaiKhoan.cs</DependentUpon>
@@ -439,6 +457,16 @@
     <None Include="Icons\pass_small.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Icons\calculate.png" />
+    <None Include="Icons\excel.png" />
+    <None Include="Icons\word.png" />
+    <None Include="Icons\salary big.png" />
+    <None Include="Icons\timekeeping big.png" />
+    <None Include="Icons\timekeeping big 2.png" />
+    <None Include="Icons\bonus big.png" />
+    <None Include="Icons\fine big.png" />
+    <None Include="Icons\bonus big 2.png" />
+    <None Include="Icons\salary.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

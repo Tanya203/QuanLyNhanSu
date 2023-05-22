@@ -30,7 +30,6 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnTroVe = new System.Windows.Forms.Button();
             this.lblThongTinCa = new System.Windows.Forms.Label();
             this.dgvThongTinCa = new System.Windows.Forms.DataGridView();
             this.colMaCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,38 +51,20 @@
             this.dtpThoiGianKetThuc = new System.Windows.Forms.DateTimePicker();
             this.dtpThoiGianBatDau = new System.Windows.Forms.DateTimePicker();
             this.txtMaCa = new System.Windows.Forms.TextBox();
-            this.btnHuy = new System.Windows.Forms.Button();
-            this.btnSua = new System.Windows.Forms.Button();
-            this.btnXoa = new System.Windows.Forms.Button();
-            this.btnThem = new System.Windows.Forms.Button();
             this.lblThoiGianKetThuc = new System.Windows.Forms.Label();
             this.lblThoiGianBatDau = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.lblTimKiem = new System.Windows.Forms.Label();
+            this.btnHuy = new System.Windows.Forms.Button();
+            this.btnSua = new System.Windows.Forms.Button();
+            this.btnXoa = new System.Windows.Forms.Button();
+            this.btnThem = new System.Windows.Forms.Button();
+            this.btnTroVe = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinCa)).BeginInit();
             this.pnlMenu.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnTroVe
-            // 
-            this.btnTroVe.AutoSize = true;
-            this.btnTroVe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnTroVe.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnTroVe.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTroVe.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnTroVe.FlatAppearance.BorderSize = 0;
-            this.btnTroVe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTroVe.Image = global::QuanLyNhanSu.Properties.Resources._return;
-            this.btnTroVe.Location = new System.Drawing.Point(0, 0);
-            this.btnTroVe.Name = "btnTroVe";
-            this.btnTroVe.Size = new System.Drawing.Size(142, 110);
-            this.btnTroVe.TabIndex = 1;
-            this.btnTroVe.Text = "Trở về";
-            this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTroVe.UseVisualStyleBackColor = false;
             // 
             // lblThongTinCa
             // 
@@ -322,6 +303,62 @@
             this.txtMaCa.Size = new System.Drawing.Size(336, 34);
             this.txtMaCa.TabIndex = 46;
             // 
+            // lblThoiGianKetThuc
+            // 
+            this.lblThoiGianKetThuc.AutoSize = true;
+            this.lblThoiGianKetThuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThoiGianKetThuc.Location = new System.Drawing.Point(27, 241);
+            this.lblThoiGianKetThuc.Name = "lblThoiGianKetThuc";
+            this.lblThoiGianKetThuc.Size = new System.Drawing.Size(227, 29);
+            this.lblThoiGianKetThuc.TabIndex = 8;
+            this.lblThoiGianKetThuc.Text = "Thời gian kết thúc:";
+            // 
+            // lblThoiGianBatDau
+            // 
+            this.lblThoiGianBatDau.AutoSize = true;
+            this.lblThoiGianBatDau.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThoiGianBatDau.Location = new System.Drawing.Point(28, 167);
+            this.lblThoiGianBatDau.Name = "lblThoiGianBatDau";
+            this.lblThoiGianBatDau.Size = new System.Drawing.Size(223, 29);
+            this.lblThoiGianBatDau.TabIndex = 6;
+            this.lblThoiGianBatDau.Text = "Thời gian bắt đầu:";
+            // 
+            // pnlHeader
+            // 
+            this.pnlHeader.BackColor = System.Drawing.SystemColors.Info;
+            this.pnlHeader.Controls.Add(this.lblChucVuNV_DN);
+            this.pnlHeader.Controls.Add(this.lblChucVuDN);
+            this.pnlHeader.Controls.Add(this.lblPhongBanNV_DN);
+            this.pnlHeader.Controls.Add(this.lblPhongBanDN);
+            this.pnlHeader.Controls.Add(this.lblHoTenNV_DN);
+            this.pnlHeader.Controls.Add(this.lblHoTenDN);
+            this.pnlHeader.Controls.Add(this.lblMaNV_DN);
+            this.pnlHeader.Controls.Add(this.lblMaNhanVienDN);
+            this.pnlHeader.Controls.Add(this.btnTroVe);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(1262, 110);
+            this.pnlHeader.TabIndex = 10;
+            // 
+            // txtTimKiem
+            // 
+            this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTimKiem.Location = new System.Drawing.Point(816, 144);
+            this.txtTimKiem.Name = "txtTimKiem";
+            this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
+            this.txtTimKiem.TabIndex = 42;
+            // 
+            // lblTimKiem
+            // 
+            this.lblTimKiem.AutoSize = true;
+            this.lblTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimKiem.Location = new System.Drawing.Point(665, 145);
+            this.lblTimKiem.Name = "lblTimKiem";
+            this.lblTimKiem.Size = new System.Drawing.Size(145, 32);
+            this.lblTimKiem.TabIndex = 41;
+            this.lblTimKiem.Text = "Tìm kiếm:";
+            // 
             // btnHuy
             // 
             this.btnHuy.AutoSize = true;
@@ -390,61 +427,24 @@
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
             // 
-            // lblThoiGianKetThuc
+            // btnTroVe
             // 
-            this.lblThoiGianKetThuc.AutoSize = true;
-            this.lblThoiGianKetThuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThoiGianKetThuc.Location = new System.Drawing.Point(27, 241);
-            this.lblThoiGianKetThuc.Name = "lblThoiGianKetThuc";
-            this.lblThoiGianKetThuc.Size = new System.Drawing.Size(227, 29);
-            this.lblThoiGianKetThuc.TabIndex = 8;
-            this.lblThoiGianKetThuc.Text = "Thời gian kết thúc:";
-            // 
-            // lblThoiGianBatDau
-            // 
-            this.lblThoiGianBatDau.AutoSize = true;
-            this.lblThoiGianBatDau.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThoiGianBatDau.Location = new System.Drawing.Point(28, 167);
-            this.lblThoiGianBatDau.Name = "lblThoiGianBatDau";
-            this.lblThoiGianBatDau.Size = new System.Drawing.Size(223, 29);
-            this.lblThoiGianBatDau.TabIndex = 6;
-            this.lblThoiGianBatDau.Text = "Thời gian bắt đầu:";
-            // 
-            // pnlHeader
-            // 
-            this.pnlHeader.BackColor = System.Drawing.SystemColors.Info;
-            this.pnlHeader.Controls.Add(this.lblChucVuNV_DN);
-            this.pnlHeader.Controls.Add(this.lblChucVuDN);
-            this.pnlHeader.Controls.Add(this.lblPhongBanNV_DN);
-            this.pnlHeader.Controls.Add(this.lblPhongBanDN);
-            this.pnlHeader.Controls.Add(this.lblHoTenNV_DN);
-            this.pnlHeader.Controls.Add(this.lblHoTenDN);
-            this.pnlHeader.Controls.Add(this.lblMaNV_DN);
-            this.pnlHeader.Controls.Add(this.lblMaNhanVienDN);
-            this.pnlHeader.Controls.Add(this.btnTroVe);
-            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(1262, 110);
-            this.pnlHeader.TabIndex = 10;
-            // 
-            // txtTimKiem
-            // 
-            this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimKiem.Location = new System.Drawing.Point(816, 144);
-            this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
-            this.txtTimKiem.TabIndex = 42;
-            // 
-            // lblTimKiem
-            // 
-            this.lblTimKiem.AutoSize = true;
-            this.lblTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimKiem.Location = new System.Drawing.Point(665, 145);
-            this.lblTimKiem.Name = "lblTimKiem";
-            this.lblTimKiem.Size = new System.Drawing.Size(145, 32);
-            this.lblTimKiem.TabIndex = 41;
-            this.lblTimKiem.Text = "Tìm kiếm:";
+            this.btnTroVe.AutoSize = true;
+            this.btnTroVe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnTroVe.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnTroVe.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTroVe.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnTroVe.FlatAppearance.BorderSize = 0;
+            this.btnTroVe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTroVe.Image = global::QuanLyNhanSu.Properties.Resources._return;
+            this.btnTroVe.Location = new System.Drawing.Point(0, 0);
+            this.btnTroVe.Name = "btnTroVe";
+            this.btnTroVe.Size = new System.Drawing.Size(142, 110);
+            this.btnTroVe.TabIndex = 1;
+            this.btnTroVe.Text = "Trở về";
+            this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTroVe.UseVisualStyleBackColor = false;
             // 
             // frmQuanLyCa
             // 
