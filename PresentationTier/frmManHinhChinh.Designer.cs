@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnQLNV = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.btnDangXuat = new System.Windows.Forms.Button();
@@ -92,6 +92,7 @@
             this.btnQLNV.Text = "Nhân viên";
             this.btnQLNV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLNV.UseVisualStyleBackColor = true;
+            this.btnQLNV.Click += new System.EventHandler(this.btnQLNV_Click);
             // 
             // pnlMenu
             // 
@@ -155,6 +156,7 @@
             this.btnTTTK.Text = "Tài khoản";
             this.btnTTTK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnTTTK.UseVisualStyleBackColor = true;
+            this.btnTTTK.Click += new System.EventHandler(this.btnTTTK_Click);
             // 
             // btnLSTT
             // 
@@ -174,6 +176,7 @@
             this.btnLSTT.Text = "Lịch sử thao tác";
             this.btnLSTT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnLSTT.UseVisualStyleBackColor = true;
+            this.btnLSTT.Click += new System.EventHandler(this.btnLSTT_Click);
             // 
             // btnQLPQ
             // 
@@ -193,6 +196,7 @@
             this.btnQLPQ.Text = "Phân quyền";
             this.btnQLPQ.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLPQ.UseVisualStyleBackColor = true;
+            this.btnQLPQ.Click += new System.EventHandler(this.btnQLPQ_Click);
             // 
             // btnQLLHD
             // 
@@ -212,6 +216,7 @@
             this.btnQLLHD.Text = "Loại hợp đồng";
             this.btnQLLHD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLLHD.UseVisualStyleBackColor = true;
+            this.btnQLLHD.Click += new System.EventHandler(this.btnQLLHD_Click);
             // 
             // btnQLTK
             // 
@@ -231,6 +236,7 @@
             this.btnQLTK.Text = "Thống kê lương";
             this.btnQLTK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLTK.UseVisualStyleBackColor = true;
+            this.btnQLTK.Click += new System.EventHandler(this.btnQLTK_Click);
             // 
             // btnQLPP
             // 
@@ -250,6 +256,7 @@
             this.btnQLPP.Text = "Phiếu phạt";
             this.btnQLPP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLPP.UseVisualStyleBackColor = true;
+            this.btnQLPP.Click += new System.EventHandler(this.btnQLPP_Click);
             // 
             // btnQLPT
             // 
@@ -269,6 +276,7 @@
             this.btnQLPT.Text = "Phiếu thưởng";
             this.btnQLPT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLPT.UseVisualStyleBackColor = true;
+            this.btnQLPT.Click += new System.EventHandler(this.btnQLPT_Click);
             // 
             // btnQLPC
             // 
@@ -288,6 +296,7 @@
             this.btnQLPC.Text = "Phụ cấp";
             this.btnQLPC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLPC.UseVisualStyleBackColor = true;
+            this.btnQLPC.Click += new System.EventHandler(this.btnQLPC_Click);
             // 
             // btnQLLLV
             // 
@@ -307,6 +316,7 @@
             this.btnQLLLV.Text = "Lịch làm việc";
             this.btnQLLLV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLLLV.UseVisualStyleBackColor = true;
+            this.btnQLLLV.Click += new System.EventHandler(this.btnQLLLV_Click);
             // 
             // btnQLCC
             // 
@@ -326,6 +336,7 @@
             this.btnQLCC.Text = "Chấm công";
             this.btnQLCC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLCC.UseVisualStyleBackColor = true;
+            this.btnQLCC.Click += new System.EventHandler(this.btnQLCC_Click);
             // 
             // btnQLC
             // 
@@ -345,6 +356,7 @@
             this.btnQLC.Text = "Ca";
             this.btnQLC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLC.UseVisualStyleBackColor = true;
+            this.btnQLC.Click += new System.EventHandler(this.btnQLC_Click);
             // 
             // btnQLCV
             // 
@@ -364,6 +376,7 @@
             this.btnQLCV.Text = "Chức vụ";
             this.btnQLCV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLCV.UseVisualStyleBackColor = true;
+            this.btnQLCV.Click += new System.EventHandler(this.btnQLCV_Click);
             // 
             // btnQLPB
             // 
@@ -383,6 +396,7 @@
             this.btnQLPB.Text = "Phòng ban";
             this.btnQLPB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLPB.UseVisualStyleBackColor = true;
+            this.btnQLPB.Click += new System.EventHandler(this.btnQLPB_Click);
             // 
             // panel1
             // 
@@ -493,7 +507,6 @@
             this.lblMaNV.Size = new System.Drawing.Size(47, 38);
             this.lblMaNV.TabIndex = 2;
             this.lblMaNV.Text = "...";
-            this.lblMaNV.Click += new System.EventHandler(this.lblMaNV_Click);
             // 
             // lblMaNhanVien
             // 
@@ -541,14 +554,14 @@
             this.dgvLichLamViec.AllowUserToDeleteRows = false;
             this.dgvLichLamViec.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvLichLamViec.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLichLamViec.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLichLamViec.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvLichLamViec.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLichLamViec.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaNV,

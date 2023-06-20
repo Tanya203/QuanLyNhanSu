@@ -83,7 +83,6 @@
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(1924, 113);
             this.pnlHeader.TabIndex = 1;
-            this.pnlHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlHeader_Paint);
             // 
             // lblChucVuNV_DN
             // 
@@ -185,6 +184,7 @@
             this.btnTroVe.Text = "Trở về";
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTroVe.UseVisualStyleBackColor = false;
+            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
             // txtTimKiem
             // 
@@ -193,7 +193,6 @@
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
             this.txtTimKiem.TabIndex = 34;
-            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
             // lblTimKiem
             // 
@@ -204,7 +203,6 @@
             this.lblTimKiem.Size = new System.Drawing.Size(145, 32);
             this.lblTimKiem.TabIndex = 33;
             this.lblTimKiem.Text = "Tìm kiếm:";
-            this.lblTimKiem.Click += new System.EventHandler(this.lblTimKiem_Click);
             // 
             // dgvThongTinChucVu
             // 
@@ -241,7 +239,6 @@
             this.dgvThongTinChucVu.RowTemplate.Height = 24;
             this.dgvThongTinChucVu.Size = new System.Drawing.Size(1218, 767);
             this.dgvThongTinChucVu.TabIndex = 32;
-            this.dgvThongTinChucVu.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThongTinChucVu_CellContentClick);
             // 
             // colMaCV
             // 

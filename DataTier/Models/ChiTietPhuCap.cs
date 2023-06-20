@@ -1,4 +1,4 @@
-namespace QuanLyNhanSu.LogicTier
+namespace QuanLyNhanSu.DataTier.Models
 {
     using System;
     using System.Collections.Generic;

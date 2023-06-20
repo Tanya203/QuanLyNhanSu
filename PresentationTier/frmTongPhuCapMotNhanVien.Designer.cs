@@ -176,6 +176,7 @@
             this.btnTroVe.Text = "Trở về";
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTroVe.UseVisualStyleBackColor = false;
+            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
             // pnlMenu
             // 
@@ -207,7 +208,6 @@
             this.lblSoTien.Size = new System.Drawing.Size(102, 29);
             this.lblSoTien.TabIndex = 4;
             this.lblSoTien.Text = "Số tiền:";
-            this.lblSoTien.Click += new System.EventHandler(this.lblSoTien_Click);
             // 
             // btnThem
             // 
@@ -243,7 +243,6 @@
             this.lblTenPhuCap.Size = new System.Drawing.Size(114, 29);
             this.lblTenPhuCap.TabIndex = 0;
             this.lblTenPhuCap.Text = "Phụ cấp:";
-            this.lblTenPhuCap.Click += new System.EventHandler(this.lblTenPhuCap_Click);
             // 
             // dgvChiTietPhuCap
             // 
@@ -265,7 +264,6 @@
             this.dgvChiTietPhuCap.RowTemplate.Height = 24;
             this.dgvChiTietPhuCap.Size = new System.Drawing.Size(708, 447);
             this.dgvChiTietPhuCap.TabIndex = 5;
-            this.dgvChiTietPhuCap.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChiTietPhuCap_CellContentClick);
             // 
             // colMaNV
             // 
@@ -352,7 +350,6 @@
             this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "frmTongPhuCapMotNhanVien";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.frmTongPhuCapMotNhanVien_Load);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             this.pnlMenu.ResumeLayout(false);

@@ -172,7 +172,6 @@
             this.txtTaiKhoan.Name = "txtTaiKhoan";
             this.txtTaiKhoan.Size = new System.Drawing.Size(329, 27);
             this.txtTaiKhoan.TabIndex = 3;
-            this.txtTaiKhoan.TextChanged += new System.EventHandler(this.txtTaiKhoan_TextChanged);
             // 
             // txtCCCD_CMND
             // 
@@ -316,6 +315,7 @@
             this.btnTroVe.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTroVe.UseVisualStyleBackColor = false;
+            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
             // frmQuenMatKhau
             // 

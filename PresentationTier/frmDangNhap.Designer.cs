@@ -84,6 +84,7 @@
             this.llblQuenMatKhau.TabIndex = 4;
             this.llblQuenMatKhau.TabStop = true;
             this.llblQuenMatKhau.Text = "Quên mật khẩu";
+            this.llblQuenMatKhau.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llblQuenMatKhau_LinkClicked);
             // 
             // txtTaiKhoan
             // 
@@ -116,7 +117,6 @@
             this.pnDangNhap.Name = "pnDangNhap";
             this.pnDangNhap.Size = new System.Drawing.Size(500, 335);
             this.pnDangNhap.TabIndex = 8;
-            this.pnDangNhap.Paint += new System.Windows.Forms.PaintEventHandler(this.pnDangNhap_Paint);
             // 
             // btnDangNhap
             // 
@@ -169,7 +169,6 @@
             this.Name = "frmDangNhap";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng nhập";
-            this.Load += new System.EventHandler(this.frmDangNhap_Load);
             this.pnDangNhap.ResumeLayout(false);
             this.pnDangNhap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserIcon)).EndInit();

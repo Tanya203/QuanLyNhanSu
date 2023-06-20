@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 
-namespace QuanLyNhanSu.LogicTier
+namespace QuanLyNhanSu.DataTier.Models
 {
     public partial class QuanLyNhanSuContextDB : DbContext
     {

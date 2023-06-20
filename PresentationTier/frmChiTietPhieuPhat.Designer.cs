@@ -37,6 +37,11 @@
             this.lblMaNV_DN = new System.Windows.Forms.Label();
             this.lblMaNhanVienDN = new System.Windows.Forms.Label();
             this.dgvThongTinPhieuPhat = new System.Windows.Forms.DataGridView();
+            this.colMaPP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTienPhat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGhiChu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtHoTenNV = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -69,11 +74,6 @@
             this.dtpNgayLapPhieu = new System.Windows.Forms.DateTimePicker();
             this.lblThoiGianBatDau = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.colMaPP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTienPhat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGhiChu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhieuPhat)).BeginInit();
             this.panel1.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -177,6 +177,41 @@
             this.dgvThongTinPhieuPhat.RowTemplate.Height = 24;
             this.dgvThongTinPhieuPhat.Size = new System.Drawing.Size(1236, 730);
             this.dgvThongTinPhieuPhat.TabIndex = 70;
+            // 
+            // colMaPP
+            // 
+            this.colMaPP.HeaderText = "Mã phiếu phạt";
+            this.colMaPP.MinimumWidth = 6;
+            this.colMaPP.Name = "colMaPP";
+            this.colMaPP.ReadOnly = true;
+            // 
+            // colMaNV
+            // 
+            this.colMaNV.HeaderText = "Mã nhân viên";
+            this.colMaNV.MinimumWidth = 6;
+            this.colMaNV.Name = "colMaNV";
+            this.colMaNV.ReadOnly = true;
+            // 
+            // colPhongBan
+            // 
+            this.colPhongBan.HeaderText = "Phòng ban";
+            this.colPhongBan.MinimumWidth = 6;
+            this.colPhongBan.Name = "colPhongBan";
+            this.colPhongBan.ReadOnly = true;
+            // 
+            // colTienPhat
+            // 
+            this.colTienPhat.HeaderText = "Tiền phạt";
+            this.colTienPhat.MinimumWidth = 6;
+            this.colTienPhat.Name = "colTienPhat";
+            this.colTienPhat.ReadOnly = true;
+            // 
+            // colGhiChu
+            // 
+            this.colGhiChu.HeaderText = "Ghi chú";
+            this.colGhiChu.MinimumWidth = 6;
+            this.colGhiChu.Name = "colGhiChu";
+            this.colGhiChu.ReadOnly = true;
             // 
             // txtHoTenNV
             // 
@@ -440,6 +475,7 @@
             this.btnTroVe.Text = "Trở về";
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTroVe.UseVisualStyleBackColor = false;
+            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
             // lblTimKiem
             // 
@@ -546,41 +582,6 @@
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(1924, 113);
             this.pnlHeader.TabIndex = 69;
-            // 
-            // colMaPP
-            // 
-            this.colMaPP.HeaderText = "Mã phiếu phạt";
-            this.colMaPP.MinimumWidth = 6;
-            this.colMaPP.Name = "colMaPP";
-            this.colMaPP.ReadOnly = true;
-            // 
-            // colMaNV
-            // 
-            this.colMaNV.HeaderText = "Mã nhân viên";
-            this.colMaNV.MinimumWidth = 6;
-            this.colMaNV.Name = "colMaNV";
-            this.colMaNV.ReadOnly = true;
-            // 
-            // colPhongBan
-            // 
-            this.colPhongBan.HeaderText = "Phòng ban";
-            this.colPhongBan.MinimumWidth = 6;
-            this.colPhongBan.Name = "colPhongBan";
-            this.colPhongBan.ReadOnly = true;
-            // 
-            // colTienPhat
-            // 
-            this.colTienPhat.HeaderText = "Tiền phạt";
-            this.colTienPhat.MinimumWidth = 6;
-            this.colTienPhat.Name = "colTienPhat";
-            this.colTienPhat.ReadOnly = true;
-            // 
-            // colGhiChu
-            // 
-            this.colGhiChu.HeaderText = "Ghi chú";
-            this.colGhiChu.MinimumWidth = 6;
-            this.colGhiChu.Name = "colGhiChu";
-            this.colGhiChu.ReadOnly = true;
             // 
             // frmChiTietPhieuPhat
             // 

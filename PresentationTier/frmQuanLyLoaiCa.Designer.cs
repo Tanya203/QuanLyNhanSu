@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTimKiem = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
@@ -47,17 +47,17 @@
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.txtHeSoLuong = new System.Windows.Forms.TextBox();
+            this.lblHeSoLuong = new System.Windows.Forms.Label();
             this.txtTenLoaiCa = new System.Windows.Forms.TextBox();
             this.lblTenLoaiCa = new System.Windows.Forms.Label();
             this.lblMaLoaiCa = new System.Windows.Forms.Label();
             this.lblThongTinLoaiCa = new System.Windows.Forms.Label();
             this.dgvThongTinCa = new System.Windows.Forms.DataGridView();
-            this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.colMaLC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTenLoaiCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHeSoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtHeSoLuong = new System.Windows.Forms.TextBox();
-            this.lblHeSoLuong = new System.Windows.Forms.Label();
+            this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.pnlHeader.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinCa)).BeginInit();
@@ -191,6 +191,7 @@
             this.btnTroVe.Text = "Trở về";
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTroVe.UseVisualStyleBackColor = false;
+            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
             // txtMaLoaiCa
             // 
@@ -286,6 +287,24 @@
             this.pnlMenu.Size = new System.Drawing.Size(512, 306);
             this.pnlMenu.TabIndex = 45;
             // 
+            // txtHeSoLuong
+            // 
+            this.txtHeSoLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHeSoLuong.Location = new System.Drawing.Point(179, 166);
+            this.txtHeSoLuong.Name = "txtHeSoLuong";
+            this.txtHeSoLuong.Size = new System.Drawing.Size(321, 34);
+            this.txtHeSoLuong.TabIndex = 47;
+            // 
+            // lblHeSoLuong
+            // 
+            this.lblHeSoLuong.AutoSize = true;
+            this.lblHeSoLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeSoLuong.Location = new System.Drawing.Point(3, 169);
+            this.lblHeSoLuong.Name = "lblHeSoLuong";
+            this.lblHeSoLuong.Size = new System.Drawing.Size(160, 29);
+            this.lblHeSoLuong.TabIndex = 48;
+            this.lblHeSoLuong.Text = "Hệ số lương:";
+            // 
             // txtTenLoaiCa
             // 
             this.txtTenLoaiCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -330,14 +349,14 @@
             this.dgvThongTinCa.AllowUserToDeleteRows = false;
             this.dgvThongTinCa.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvThongTinCa.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongTinCa.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvThongTinCa.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvThongTinCa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvThongTinCa.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaLC,
@@ -346,27 +365,19 @@
             this.dgvThongTinCa.Location = new System.Drawing.Point(542, 186);
             this.dgvThongTinCa.Name = "dgvThongTinCa";
             this.dgvThongTinCa.ReadOnly = true;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongTinCa.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvThongTinCa.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvThongTinCa.RowHeadersVisible = false;
             this.dgvThongTinCa.RowHeadersWidth = 51;
             this.dgvThongTinCa.RowTemplate.Height = 24;
             this.dgvThongTinCa.Size = new System.Drawing.Size(708, 481);
             this.dgvThongTinCa.TabIndex = 44;
-            // 
-            // txtTimKiem
-            // 
-            this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimKiem.Location = new System.Drawing.Point(816, 150);
-            this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
-            this.txtTimKiem.TabIndex = 48;
             // 
             // colMaLC
             // 
@@ -389,23 +400,13 @@
             this.colHeSoLuong.Name = "colHeSoLuong";
             this.colHeSoLuong.ReadOnly = true;
             // 
-            // txtHeSoLuong
+            // txtTimKiem
             // 
-            this.txtHeSoLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHeSoLuong.Location = new System.Drawing.Point(179, 166);
-            this.txtHeSoLuong.Name = "txtHeSoLuong";
-            this.txtHeSoLuong.Size = new System.Drawing.Size(321, 34);
-            this.txtHeSoLuong.TabIndex = 47;
-            // 
-            // lblHeSoLuong
-            // 
-            this.lblHeSoLuong.AutoSize = true;
-            this.lblHeSoLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeSoLuong.Location = new System.Drawing.Point(3, 169);
-            this.lblHeSoLuong.Name = "lblHeSoLuong";
-            this.lblHeSoLuong.Size = new System.Drawing.Size(160, 29);
-            this.lblHeSoLuong.TabIndex = 48;
-            this.lblHeSoLuong.Text = "Hệ số lương:";
+            this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTimKiem.Location = new System.Drawing.Point(816, 150);
+            this.txtTimKiem.Name = "txtTimKiem";
+            this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
+            this.txtTimKiem.TabIndex = 48;
             // 
             // frmQuanLyLoaiCa
             // 
