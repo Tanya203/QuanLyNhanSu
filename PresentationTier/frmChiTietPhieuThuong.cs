@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,34 +13,22 @@ namespace QuanLyNhanSu.PresentationTier
 {
     public partial class frmChiTietPhieuThuong : Form
     {
+        Thread currentForm;
         public frmChiTietPhieuThuong()
         {
             InitializeComponent();
         }
-
-        private void label3_Click(object sender, EventArgs e)
+        public void ReturnQLPT()
         {
-
+            this.Close();
+            Application.Run(new frmPhieuThuong());
         }
-
-        private void frmChiTietPhieuThuong_Load(object sender, EventArgs e)
+        private void btnTroVe_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void cmbNhanVien_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
+            this.Close();
+            currentForm = new Thread(ReturnQLPT);
+            currentForm.SetApartmentState(ApartmentState.STA);
+            currentForm.Start();
         }
     }
 }

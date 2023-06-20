@@ -179,6 +179,7 @@
             this.btnTroVe.Text = "Trở về";
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTroVe.UseVisualStyleBackColor = false;
+            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
             // pnlMenu
             // 
@@ -329,7 +330,6 @@
             this.lblThongTinPhongBan.Size = new System.Drawing.Size(294, 32);
             this.lblThongTinPhongBan.TabIndex = 5;
             this.lblThongTinPhongBan.Text = "Thông tin phòng ban";
-            this.lblThongTinPhongBan.Click += new System.EventHandler(this.lblThongTinPhongBan_Click);
             // 
             // txtTimKiem
             // 

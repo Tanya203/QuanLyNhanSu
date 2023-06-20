@@ -42,11 +42,11 @@
             this.lblLichSuThaoTac = new System.Windows.Forms.Label();
             this.lblTimKiem = new System.Windows.Forms.Label();
             this.dgvLichSuThaoTac = new System.Windows.Forms.DataGridView();
-            this.pnlHeader = new System.Windows.Forms.Panel();
-            this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.colNgayio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colThaoTacThucHien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlHeader = new System.Windows.Forms.Panel();
+            this.txtTimKiem = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichSuThaoTac)).BeginInit();
             this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
@@ -151,6 +151,7 @@
             this.btnTroVe.Text = "Trở về";
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTroVe.UseVisualStyleBackColor = false;
+            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
             // lblLichSuThaoTac
             // 
@@ -158,7 +159,7 @@
             this.lblLichSuThaoTac.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLichSuThaoTac.Location = new System.Drawing.Point(798, 125);
             this.lblLichSuThaoTac.Name = "lblLichSuThaoTac";
-            this.lblLichSuThaoTac.Size = new System.Drawing.Size(342, 52);
+            this.lblLichSuThaoTac.Size = new System.Drawing.Size(339, 51);
             this.lblLichSuThaoTac.TabIndex = 54;
             this.lblLichSuThaoTac.Text = "Lịch sử thao tác";
             // 
@@ -208,6 +209,27 @@
             this.dgvLichSuThaoTac.Size = new System.Drawing.Size(1924, 748);
             this.dgvLichSuThaoTac.TabIndex = 49;
             // 
+            // colNgayio
+            // 
+            this.colNgayio.HeaderText = "Ngày giờ";
+            this.colNgayio.MinimumWidth = 6;
+            this.colNgayio.Name = "colNgayio";
+            this.colNgayio.ReadOnly = true;
+            // 
+            // colMaNV
+            // 
+            this.colMaNV.HeaderText = "Mã nhân viên";
+            this.colMaNV.MinimumWidth = 6;
+            this.colMaNV.Name = "colMaNV";
+            this.colMaNV.ReadOnly = true;
+            // 
+            // colThaoTacThucHien
+            // 
+            this.colThaoTacThucHien.HeaderText = "Thao tác thực hiện";
+            this.colThaoTacThucHien.MinimumWidth = 6;
+            this.colThaoTacThucHien.Name = "colThaoTacThucHien";
+            this.colThaoTacThucHien.ReadOnly = true;
+            // 
             // pnlHeader
             // 
             this.pnlHeader.BackColor = System.Drawing.SystemColors.Info;
@@ -233,27 +255,6 @@
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
             this.txtTimKiem.TabIndex = 51;
-            // 
-            // colNgayio
-            // 
-            this.colNgayio.HeaderText = "Ngày giờ";
-            this.colNgayio.MinimumWidth = 6;
-            this.colNgayio.Name = "colNgayio";
-            this.colNgayio.ReadOnly = true;
-            // 
-            // colMaNV
-            // 
-            this.colMaNV.HeaderText = "Mã nhân viên";
-            this.colMaNV.MinimumWidth = 6;
-            this.colMaNV.Name = "colMaNV";
-            this.colMaNV.ReadOnly = true;
-            // 
-            // colThaoTacThucHien
-            // 
-            this.colThaoTacThucHien.HeaderText = "Thao tác thực hiện";
-            this.colThaoTacThucHien.MinimumWidth = 6;
-            this.colThaoTacThucHien.Name = "colThaoTacThucHien";
-            this.colThaoTacThucHien.ReadOnly = true;
             // 
             // frmLichSuThaoTac
             // 

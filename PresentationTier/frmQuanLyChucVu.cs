@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,6 +13,7 @@ namespace QuanLyNhanSu.PresentationTier
 {
     public partial class frmQuanLyChucVu : Form
     {
+        Thread currentForm;
         public frmQuanLyChucVu()
         {
             InitializeComponent();
@@ -21,30 +23,17 @@ namespace QuanLyNhanSu.PresentationTier
         {
            
         }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        public void ReturnHome()
         {
-
+            this.Close();
+            Application.Run(new frmManHinhChinh());
         }
-
-        private void dgvThongTinChucVu_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btnTroVe_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void txtTimKiem_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTimKiem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlHeader_Paint(object sender, PaintEventArgs e)
-        {
-
+            this.Close();
+            currentForm = new Thread(ReturnHome);
+            currentForm.SetApartmentState(ApartmentState.STA);
+            currentForm.Start();
         }
     }
 }

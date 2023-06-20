@@ -37,10 +37,20 @@
             this.lblMaPhuCap = new System.Windows.Forms.Label();
             this.lblThongTinPhuCap = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.txtSoLuongNhanVien = new System.Windows.Forms.TextBox();
+            this.lblSoLuongNhanVien = new System.Windows.Forms.Label();
+            this.btnHuy = new System.Windows.Forms.Button();
+            this.btnSua = new System.Windows.Forms.Button();
+            this.btnXoa = new System.Windows.Forms.Button();
+            this.btnThem = new System.Windows.Forms.Button();
             this.txtMaCV = new System.Windows.Forms.TextBox();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.lblTimKiem = new System.Windows.Forms.Label();
             this.dgvThongTinPhuCap = new System.Windows.Forms.DataGridView();
+            this.colMaPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTenPhuCap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSoTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSoLuongNhanVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
             this.lblChucVuDN = new System.Windows.Forms.Label();
             this.lblPhongBanNV_DN = new System.Windows.Forms.Label();
@@ -50,16 +60,6 @@
             this.lblMaNV_DN = new System.Windows.Forms.Label();
             this.lblMaNhanVienDN = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.txtSoLuongNhanVien = new System.Windows.Forms.TextBox();
-            this.lblSoLuongNhanVien = new System.Windows.Forms.Label();
-            this.colMaPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTenPhuCap = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSoTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSoLuongNhanVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnHuy = new System.Windows.Forms.Button();
-            this.btnSua = new System.Windows.Forms.Button();
-            this.btnXoa = new System.Windows.Forms.Button();
-            this.btnThem = new System.Windows.Forms.Button();
             this.btnTroVe = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhuCap)).BeginInit();
@@ -143,6 +143,92 @@
             this.pnlMenu.Size = new System.Drawing.Size(588, 371);
             this.pnlMenu.TabIndex = 36;
             // 
+            // txtSoLuongNhanVien
+            // 
+            this.txtSoLuongNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSoLuongNhanVien.Location = new System.Drawing.Point(252, 226);
+            this.txtSoLuongNhanVien.Name = "txtSoLuongNhanVien";
+            this.txtSoLuongNhanVien.Size = new System.Drawing.Size(315, 34);
+            this.txtSoLuongNhanVien.TabIndex = 42;
+            // 
+            // lblSoLuongNhanVien
+            // 
+            this.lblSoLuongNhanVien.AutoSize = true;
+            this.lblSoLuongNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSoLuongNhanVien.Location = new System.Drawing.Point(3, 231);
+            this.lblSoLuongNhanVien.Name = "lblSoLuongNhanVien";
+            this.lblSoLuongNhanVien.Size = new System.Drawing.Size(242, 29);
+            this.lblSoLuongNhanVien.TabIndex = 43;
+            this.lblSoLuongNhanVien.Text = "Số lượng nhân viên:";
+            // 
+            // btnHuy
+            // 
+            this.btnHuy.AutoSize = true;
+            this.btnHuy.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnHuy.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHuy.FlatAppearance.BorderSize = 0;
+            this.btnHuy.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnHuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHuy.Image = global::QuanLyNhanSu.Properties.Resources.cancel;
+            this.btnHuy.Location = new System.Drawing.Point(468, 298);
+            this.btnHuy.Name = "btnHuy";
+            this.btnHuy.Size = new System.Drawing.Size(99, 49);
+            this.btnHuy.TabIndex = 41;
+            this.btnHuy.Text = "Huỷ";
+            this.btnHuy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnHuy.UseVisualStyleBackColor = false;
+            // 
+            // btnSua
+            // 
+            this.btnSua.AutoSize = true;
+            this.btnSua.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnSua.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSua.FlatAppearance.BorderSize = 0;
+            this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSua.Image = global::QuanLyNhanSu.Properties.Resources.fix;
+            this.btnSua.Location = new System.Drawing.Point(316, 298);
+            this.btnSua.Name = "btnSua";
+            this.btnSua.Size = new System.Drawing.Size(100, 49);
+            this.btnSua.TabIndex = 40;
+            this.btnSua.Text = "Sửa";
+            this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSua.UseVisualStyleBackColor = false;
+            // 
+            // btnXoa
+            // 
+            this.btnXoa.AutoSize = true;
+            this.btnXoa.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnXoa.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnXoa.FlatAppearance.BorderSize = 0;
+            this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoa.Image = global::QuanLyNhanSu.Properties.Resources.delete;
+            this.btnXoa.Location = new System.Drawing.Point(164, 298);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(102, 49);
+            this.btnXoa.TabIndex = 39;
+            this.btnXoa.Text = "Xoá";
+            this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnXoa.UseVisualStyleBackColor = false;
+            // 
+            // btnThem
+            // 
+            this.btnThem.AutoSize = true;
+            this.btnThem.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnThem.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnThem.FlatAppearance.BorderSize = 0;
+            this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThem.Image = global::QuanLyNhanSu.Properties.Resources.add;
+            this.btnThem.Location = new System.Drawing.Point(8, 298);
+            this.btnThem.Name = "btnThem";
+            this.btnThem.Size = new System.Drawing.Size(122, 49);
+            this.btnThem.TabIndex = 38;
+            this.btnThem.Text = "Thêm";
+            this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnThem.UseVisualStyleBackColor = false;
+            // 
             // txtMaCV
             // 
             this.txtMaCV.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -204,6 +290,34 @@
             this.dgvThongTinPhuCap.RowTemplate.Height = 24;
             this.dgvThongTinPhuCap.Size = new System.Drawing.Size(1218, 740);
             this.dgvThongTinPhuCap.TabIndex = 38;
+            // 
+            // colMaPC
+            // 
+            this.colMaPC.HeaderText = "Mã phụ cấp";
+            this.colMaPC.MinimumWidth = 6;
+            this.colMaPC.Name = "colMaPC";
+            this.colMaPC.ReadOnly = true;
+            // 
+            // colTenPhuCap
+            // 
+            this.colTenPhuCap.HeaderText = "Tên phụ cấp";
+            this.colTenPhuCap.MinimumWidth = 6;
+            this.colTenPhuCap.Name = "colTenPhuCap";
+            this.colTenPhuCap.ReadOnly = true;
+            // 
+            // colSoTien
+            // 
+            this.colSoTien.HeaderText = "Số tiền";
+            this.colSoTien.MinimumWidth = 6;
+            this.colSoTien.Name = "colSoTien";
+            this.colSoTien.ReadOnly = true;
+            // 
+            // colSoLuongNhanVien
+            // 
+            this.colSoLuongNhanVien.HeaderText = "Số lượng nhân viên";
+            this.colSoLuongNhanVien.MinimumWidth = 6;
+            this.colSoLuongNhanVien.Name = "colSoLuongNhanVien";
+            this.colSoLuongNhanVien.ReadOnly = true;
             // 
             // lblChucVuNV_DN
             // 
@@ -305,120 +419,6 @@
             this.pnlHeader.Size = new System.Drawing.Size(1924, 113);
             this.pnlHeader.TabIndex = 35;
             // 
-            // txtSoLuongNhanVien
-            // 
-            this.txtSoLuongNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSoLuongNhanVien.Location = new System.Drawing.Point(252, 226);
-            this.txtSoLuongNhanVien.Name = "txtSoLuongNhanVien";
-            this.txtSoLuongNhanVien.Size = new System.Drawing.Size(315, 34);
-            this.txtSoLuongNhanVien.TabIndex = 42;
-            // 
-            // lblSoLuongNhanVien
-            // 
-            this.lblSoLuongNhanVien.AutoSize = true;
-            this.lblSoLuongNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSoLuongNhanVien.Location = new System.Drawing.Point(3, 231);
-            this.lblSoLuongNhanVien.Name = "lblSoLuongNhanVien";
-            this.lblSoLuongNhanVien.Size = new System.Drawing.Size(242, 29);
-            this.lblSoLuongNhanVien.TabIndex = 43;
-            this.lblSoLuongNhanVien.Text = "Số lượng nhân viên:";
-            // 
-            // colMaPC
-            // 
-            this.colMaPC.HeaderText = "Mã phụ cấp";
-            this.colMaPC.MinimumWidth = 6;
-            this.colMaPC.Name = "colMaPC";
-            this.colMaPC.ReadOnly = true;
-            // 
-            // colTenPhuCap
-            // 
-            this.colTenPhuCap.HeaderText = "Tên phụ cấp";
-            this.colTenPhuCap.MinimumWidth = 6;
-            this.colTenPhuCap.Name = "colTenPhuCap";
-            this.colTenPhuCap.ReadOnly = true;
-            // 
-            // colSoTien
-            // 
-            this.colSoTien.HeaderText = "Số tiền";
-            this.colSoTien.MinimumWidth = 6;
-            this.colSoTien.Name = "colSoTien";
-            this.colSoTien.ReadOnly = true;
-            // 
-            // colSoLuongNhanVien
-            // 
-            this.colSoLuongNhanVien.HeaderText = "Số lượng nhân viên";
-            this.colSoLuongNhanVien.MinimumWidth = 6;
-            this.colSoLuongNhanVien.Name = "colSoLuongNhanVien";
-            this.colSoLuongNhanVien.ReadOnly = true;
-            // 
-            // btnHuy
-            // 
-            this.btnHuy.AutoSize = true;
-            this.btnHuy.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnHuy.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHuy.FlatAppearance.BorderSize = 0;
-            this.btnHuy.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnHuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHuy.Image = global::QuanLyNhanSu.Properties.Resources.cancel;
-            this.btnHuy.Location = new System.Drawing.Point(468, 298);
-            this.btnHuy.Name = "btnHuy";
-            this.btnHuy.Size = new System.Drawing.Size(99, 49);
-            this.btnHuy.TabIndex = 41;
-            this.btnHuy.Text = "Huỷ";
-            this.btnHuy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnHuy.UseVisualStyleBackColor = false;
-            // 
-            // btnSua
-            // 
-            this.btnSua.AutoSize = true;
-            this.btnSua.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnSua.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSua.FlatAppearance.BorderSize = 0;
-            this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSua.Image = global::QuanLyNhanSu.Properties.Resources.fix;
-            this.btnSua.Location = new System.Drawing.Point(316, 298);
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(100, 49);
-            this.btnSua.TabIndex = 40;
-            this.btnSua.Text = "Sửa";
-            this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSua.UseVisualStyleBackColor = false;
-            // 
-            // btnXoa
-            // 
-            this.btnXoa.AutoSize = true;
-            this.btnXoa.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnXoa.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnXoa.FlatAppearance.BorderSize = 0;
-            this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoa.Image = global::QuanLyNhanSu.Properties.Resources.delete;
-            this.btnXoa.Location = new System.Drawing.Point(164, 298);
-            this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(102, 49);
-            this.btnXoa.TabIndex = 39;
-            this.btnXoa.Text = "Xoá";
-            this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnXoa.UseVisualStyleBackColor = false;
-            // 
-            // btnThem
-            // 
-            this.btnThem.AutoSize = true;
-            this.btnThem.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnThem.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnThem.FlatAppearance.BorderSize = 0;
-            this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThem.Image = global::QuanLyNhanSu.Properties.Resources.add;
-            this.btnThem.Location = new System.Drawing.Point(8, 298);
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(122, 49);
-            this.btnThem.TabIndex = 38;
-            this.btnThem.Text = "Thêm";
-            this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnThem.UseVisualStyleBackColor = false;
-            // 
             // btnTroVe
             // 
             this.btnTroVe.AutoSize = true;
@@ -437,6 +437,7 @@
             this.btnTroVe.Text = "Trở về";
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTroVe.UseVisualStyleBackColor = false;
+            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
             // frmQuanLyPhuCap
             // 
