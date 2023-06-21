@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Data.Entity.Migrations;
+using System.Windows.Forms;
 
 namespace QuanLyNhanSu.DataTier
 {
@@ -18,35 +20,35 @@ namespace QuanLyNhanSu.DataTier
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();       
         }
-        public IEnumerable<NhanVienViewModel> GetAll()
+        public IEnumerable<NhanVienViewModel> GetAllNhanVien()
         {
             var danhSachNhanVien = quanLyNhanSu.NhanViens.Select(x => new NhanVienViewModel
-                                                                {
-                                                                    MaNV = x.MaNV,
-                                                                    MaCV = x.MaCV,
-                                                                    MaLHD = x.MaLHD,
-                                                                    TaiKhoan = x.TaiKhoan,
-                                                                    MatKhau = x.MatKhau,
-                                                                    CCCD_CMND = x.CCCD_CMND,
-                                                                    Ho = x.Ho,
-                                                                    TenLot = x.TenLot,
-                                                                    Ten = x.Ten,
-                                                                    NTNS = x.NTNS,
-                                                                    SoNha = x.SoNha,
-                                                                    TenDuong = x.TenDuong,
-                                                                    Phuong_Xa = x.Phuong_Xa,
-                                                                    Quan_Huyen = x.Quan_Huyen,
-                                                                    Tinh_ThanhPho = x.Tinh_ThanhPho,
-                                                                    GioiTinh = x.GioiTinh,
-                                                                    SDT = x.SDT,
-                                                                    Email = x.Email,
-                                                                    TrinhDoHocVan = x.TrinhDoHocVan,
-                                                                    NgayVaoLam = x.NgayVaoLam,
-                                                                    ThoiHanHopDong = x.ThoiHanHopDong,
-                                                                    SoNgayPhep = x.SoNgayPhep,
-                                                                    LuongCoBan = x.LuongCoBan,
-                                                                    Hinh = x.Hinh,
-                                                                }).ToList();
+            {
+                MaNV = x.MaNV,
+                MaCV = x.MaCV,
+                MaLHD = x.MaLHD,
+                TaiKhoan = x.TaiKhoan,
+                MatKhau = x.MatKhau,
+                CCCD_CMND = x.CCCD_CMND,
+                Ho = x.Ho,
+                TenLot = x.TenLot,
+                Ten = x.Ten,
+                NTNS = x.NTNS,
+                SoNha = x.SoNha,
+                TenDuong = x.TenDuong,
+                Phuong_Xa = x.Phuong_Xa,
+                Quan_Huyen = x.Quan_Huyen,
+                Tinh_ThanhPho = x.Tinh_ThanhPho,
+                GioiTinh = x.GioiTinh,
+                SDT = x.SDT,
+                Email = x.Email,
+                TrinhDoHocVan = x.TrinhDoHocVan,
+                NgayVaoLam = x.NgayVaoLam,
+                ThoiHanHopDong = x.ThoiHanHopDong,
+                SoNgayPhep = x.SoNgayPhep,
+                LuongCoBan = x.LuongCoBan,
+                Hinh = x.Hinh,
+            }).ToList();
             return danhSachNhanVien;
         }
         public bool Save(NhanVien nhanVien)
@@ -54,9 +56,8 @@ namespace QuanLyNhanSu.DataTier
             try
             {
                 NhanVien newNhanVien = quanLyNhanSu.NhanViens.Where(nv => nv.MaNV == nhanVien.MaNV).FirstOrDefault();
-                if (newNhanVien != null)
-                {
-                    newNhanVien.MaNV = "1";
+                if (newNhanVien != null)// cập nhật
+                {                    
                     newNhanVien.MaCV = nhanVien.MaNV;
                     newNhanVien.MaLHD = nhanVien.MaLHD;
                     newNhanVien.TaiKhoan = nhanVien.TaiKhoan;
@@ -80,9 +81,10 @@ namespace QuanLyNhanSu.DataTier
                     newNhanVien.TinhTrang = nhanVien.TinhTrang;
                     newNhanVien.SoNgayPhep = nhanVien.SoNgayPhep;
                     newNhanVien.LuongCoBan = nhanVien.LuongCoBan;
-                    newNhanVien.Hinh = nhanVien.Hinh;
-                }                              
-                quanLyNhanSu.NhanViens.Add(newNhanVien);
+                    newNhanVien.Hinh = nhanVien.Hinh;                    
+                }
+                else//thêm mới           
+                    quanLyNhanSu.NhanViens.Add(newNhanVien);                              
                 quanLyNhanSu.SaveChanges();
                 return true;                
             }
@@ -166,6 +168,21 @@ namespace QuanLyNhanSu.DataTier
             {
                 throw ex;
             }
+        }
+
+        public NhanVien GetNhanVien(string maNV)
+        {
+            return quanLyNhanSu.NhanViens.Where(nv =>nv.MaNV == maNV).FirstOrDefault();
+        }
+        public int LoginVerify(string taiKhoan, string matKhau, out NhanVienViewModel nv)
+        {
+            var nhanVien = quanLyNhanSu.NhanViens.Where(x => x.TaiKhoan == taiKhoan).FirstOrDefault();
+            nv = new NhanVienViewModel();
+            if (nhanVien == null)
+                return -1;
+            if(BCrypt.Net.BCrypt.Verify(matKhau, nhanVien.MatKhau))                          
+                return 1;            
+            return 0;
         }
     }
 }

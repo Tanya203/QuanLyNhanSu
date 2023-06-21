@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyNhanSu.DataTier.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,6 +37,21 @@ namespace QuanLyNhanSu.PresentationTier
             currentForm = new Thread(ReturnHome);
             currentForm.SetApartmentState(ApartmentState.STA);
             currentForm.Start();
+        }
+
+        private void dgvThongTinNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+        }
+
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            NhanVien newNhanVien = new NhanVien
+            {
+                MaNV = "1",
+                
+            };
+
         }
     }
 }
