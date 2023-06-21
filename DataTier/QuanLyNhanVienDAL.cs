@@ -3,9 +3,11 @@ using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace QuanLyNhanSu.DataTier
 {
@@ -16,7 +18,6 @@ namespace QuanLyNhanSu.DataTier
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();       
         }
-
         public IEnumerable<NhanVienViewModel> GetAll()
         {
             var danhSachNhanVien = quanLyNhanSu.NhanViens.Select(x => new NhanVienViewModel
@@ -48,46 +49,120 @@ namespace QuanLyNhanSu.DataTier
                                                                 }).ToList();
             return danhSachNhanVien;
         }
-
-        public bool Add(NhanVien nhanVien)
+        public bool Save(NhanVien nhanVien)
         {
             try
             {
-                NhanVien newNhanVien = new NhanVien();
-                newNhanVien.MaNV = "1";
-                newNhanVien.MaCV = nhanVien.MaNV;
-                newNhanVien.MaLHD = nhanVien.MaLHD;
-                newNhanVien.TaiKhoan = nhanVien.TaiKhoan;
-                newNhanVien.MatKhau = BCrypt.Net.BCrypt.HashPassword(nhanVien.MatKhau);
-                newNhanVien.CCCD_CMND = nhanVien.CCCD_CMND;
-                newNhanVien.Ho = nhanVien.Ho;
-                newNhanVien.TenLot = nhanVien.TenLot;
-                newNhanVien.Ten = nhanVien.Ten;
-                newNhanVien.NTNS = nhanVien.NTNS;
-                newNhanVien.SoNha = nhanVien.SoNha;
-                newNhanVien.TenDuong = nhanVien.TenDuong;
-                newNhanVien.Phuong_Xa = nhanVien.Phuong_Xa;
-                newNhanVien.Quan_Huyen = nhanVien.Quan_Huyen;
-                newNhanVien.Tinh_ThanhPho = nhanVien.Tinh_ThanhPho;
-                newNhanVien.GioiTinh = nhanVien.GioiTinh;
-                newNhanVien.SDT = nhanVien.SDT;
-                newNhanVien.Email = nhanVien.Email;
-                newNhanVien.TrinhDoHocVan = nhanVien.TrinhDoHocVan;
-                newNhanVien.NgayVaoLam = nhanVien.ThoiHanHopDong;
-                newNhanVien.ThoiHanHopDong = nhanVien.ThoiHanHopDong;
-                newNhanVien.TinhTrang = nhanVien.TinhTrang;
-                newNhanVien.SoNgayPhep = nhanVien.SoNgayPhep;
-                newNhanVien.LuongCoBan = nhanVien.LuongCoBan;
-                newNhanVien.Hinh = nhanVien.Hinh;
+                NhanVien newNhanVien = quanLyNhanSu.NhanViens.Where(nv => nv.MaNV == nhanVien.MaNV).FirstOrDefault();
+                if (newNhanVien != null)
+                {
+                    newNhanVien.MaNV = "1";
+                    newNhanVien.MaCV = nhanVien.MaNV;
+                    newNhanVien.MaLHD = nhanVien.MaLHD;
+                    newNhanVien.TaiKhoan = nhanVien.TaiKhoan;
+                    newNhanVien.MatKhau = BCrypt.Net.BCrypt.HashPassword(nhanVien.MatKhau);
+                    newNhanVien.CCCD_CMND = nhanVien.CCCD_CMND;
+                    newNhanVien.Ho = nhanVien.Ho;
+                    newNhanVien.TenLot = nhanVien.TenLot;
+                    newNhanVien.Ten = nhanVien.Ten;
+                    newNhanVien.NTNS = nhanVien.NTNS;
+                    newNhanVien.SoNha = nhanVien.SoNha;
+                    newNhanVien.TenDuong = nhanVien.TenDuong;
+                    newNhanVien.Phuong_Xa = nhanVien.Phuong_Xa;
+                    newNhanVien.Quan_Huyen = nhanVien.Quan_Huyen;
+                    newNhanVien.Tinh_ThanhPho = nhanVien.Tinh_ThanhPho;
+                    newNhanVien.GioiTinh = nhanVien.GioiTinh;
+                    newNhanVien.SDT = nhanVien.SDT;
+                    newNhanVien.Email = nhanVien.Email;
+                    newNhanVien.TrinhDoHocVan = nhanVien.TrinhDoHocVan;
+                    newNhanVien.NgayVaoLam = nhanVien.ThoiHanHopDong;
+                    newNhanVien.ThoiHanHopDong = nhanVien.ThoiHanHopDong;
+                    newNhanVien.TinhTrang = nhanVien.TinhTrang;
+                    newNhanVien.SoNgayPhep = nhanVien.SoNgayPhep;
+                    newNhanVien.LuongCoBan = nhanVien.LuongCoBan;
+                    newNhanVien.Hinh = nhanVien.Hinh;
+                }                              
                 quanLyNhanSu.NhanViens.Add(newNhanVien);
                 quanLyNhanSu.SaveChanges();
-                return true;
+                return true;                
             }
-            catch(SqlException ex)
+            catch(SqlException sqlEx)
+            {
+                /*var errorMessages = new Dictionary<string, string>
+                {
+                    { "UQ_CCCD_CMND", "CCCD/CMND đã tồn tại" },
+                    { "UQ_Email", "Email đã tồn tại" },
+                    { "UQ_SDT", "Số điện thoại đã tồn tại" },
+                    { "UQ_TaiKhoan", "Tài khoản đã tồn tại" },
+                    { "CHECK_CCCD_CMND", "Độ dài CCCD/CMND phải = 9 hoặc 12" },
+                    { "CHECK_GioiTinh", "Giới tính phải là Nam, Nữ hoặc Khác" },
+                    { "CHECK_LuongCoBan", "Lương cơ bản phải >= 0" },
+                    { "CHECK_NgayVaoLam", "Ngày vào làm phải >= ngày hiện tại" },
+                    { "CHECK_NTNS", "Tuổi phải >= 18" },
+                    { "CHECK_SDT", "Độ dài số điện thoại phải = 10" },
+                    { "CHECK_SoNgayPhep", "Số ngày phép phải >= 0" },
+                    { "CHECK_TaiKhoan", "Độ dài tại khoản phải >= 5 và =<15 ký tự" },
+                    { "CHECK_ThoiHanHopDong", "Thời hạn hợp đồng phải lơn hơn ngày vào làm" }
+                };
+                if (sqlEx != null)
+                {
+                    foreach(KeyValuePair<string, string> error in errorMessages)
+                    {
+                        if(sqlEx.Message.Contains(error.Key))
+                            throw new Exception(error.Value);
+                    }
+                }
+                // If the error message doesn't match any of the known error messages, rethrow the exception
+                throw sqlEx;*/
+                //-------------------
+                string errorMessage = sqlEx.Message;
+                if (errorMessage.Contains("UQ_CCCD_CMND"))
+                    throw new Exception("CCCD/CMND đã tồn tại");
+                else if (errorMessage.Contains("UQ_Email"))
+                    throw new Exception("Email đã tồn tại");
+                else if (errorMessage.Contains("UQ_SDT"))
+                    throw new Exception("Số điện thoại đã tồn tại");
+                else if (errorMessage.Contains("UQ_TaiKhoan"))
+                    throw new Exception("Tài khoản đã tồn tại");
+                else if (errorMessage.Contains("CHECK_CCCD_CMND"))
+                    throw new Exception("Độ dài CCCD/CMND phải = 9 hoặc 12");
+                else if (errorMessage.Contains("CHECK_GioiTinh"))
+                    throw new Exception("Giới tính phải là Nam, Nữ hoặc Khác");
+                else if (errorMessage.Contains("CHECK_LuongCoBan"))
+                    throw new Exception("Lương cơ bản phải >= 0");
+                else if (errorMessage.Contains("CHECK_NgayVaoLam"))
+                    throw new Exception("Ngày vào làm phải >= ngày hiện tại");
+                else if (errorMessage.Contains("CHECK_NTNS"))
+                    throw new Exception("Tuổi phải >= 18");
+                else if (errorMessage.Contains("CHECK_SDT"))
+                    throw new Exception("Độ dài số điện thoại phải = 10");
+                else if (errorMessage.Contains("CHECK_SoNgayPhep"))
+                    throw new Exception("Số ngày phép phải >= 0");
+                else if (errorMessage.Contains("CHECK_TaiKhoan"))
+                    throw new Exception("Độ dài tại khoản phải >= 5 và =<15 ký tự");
+                else if (errorMessage.Contains("CHECK_ThoiHanHopDong"))
+                    throw new Exception("Thời hạn hợp đồng phải lơn hơn ngày vào làm");
+                throw sqlEx;
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }
-            catch(Exception ex)
+        }
+        public bool Delete(string maNV)
+        {
+            try
+            {
+                var nhanVien = quanLyNhanSu.NhanViens.Where(nv => nv.MaNV == maNV).FirstOrDefault();
+                if(nhanVien != null)
+                {
+                    quanLyNhanSu.NhanViens.Remove(nhanVien);
+                    quanLyNhanSu.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
