@@ -388,6 +388,7 @@
             this.dgvThongTinPhongBan.RowTemplate.Height = 24;
             this.dgvThongTinPhongBan.Size = new System.Drawing.Size(1218, 715);
             this.dgvThongTinPhongBan.TabIndex = 6;
+            this.dgvThongTinPhongBan.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThongTinPhongBan_CellClick);
             // 
             // frmQuanLyPhongBan
             // 
@@ -405,6 +406,7 @@
             this.Name = "frmQuanLyPhongBan";
             this.Text = "frmQuanLyPhongBan";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmQuanLyPhongBan_Load);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             this.pnlMenu.ResumeLayout(false);
