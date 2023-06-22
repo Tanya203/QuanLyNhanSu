@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace QuanLyNhanSu.PresentationTier
 {
     public partial class frmQuanLyPhongBan : Form
@@ -24,6 +24,11 @@ namespace QuanLyNhanSu.PresentationTier
             InitializeComponent();
             this.Load += frmQuanLyPhongBan_Load;
             phongBanBUS = new QuanLyPhongBanBUS();
+            txtMaPB.ReadOnly = true;
+            txtTongSoNhanVien.ReadOnly = true;
+            btnThem.Enabled = false;
+            btnSua.Enabled = false;
+            btnXoa.Enabled = false;
         }
         private void frmQuanLyPhongBan_Load(object sender, EventArgs e)
         {
@@ -32,18 +37,23 @@ namespace QuanLyNhanSu.PresentationTier
         private void LoadPhongBan()
         {
             dgvThongTinPhongBan.Rows.Clear();
-            danhSachPhongBan = phongBanBUS.GetAllPhongBan();
-            dgvThongTinPhongBan.Rows.Clear();
+            danhSachPhongBan = phongBanBUS.GetAllPhongBan();           
             int rowAdd;
-            foreach (var pb in phongBanBUS.GetAllPhongBan())
+            foreach (var pb in danhSachPhongBan)
             {
                 rowAdd = dgvThongTinPhongBan.Rows.Add();
                 dgvThongTinPhongBan.Rows[rowAdd].Cells[0].Value = pb.MaPB;
                 dgvThongTinPhongBan.Rows[rowAdd].Cells[1].Value = pb.TenPhongBan;
-            }           
-            
-        }
+                dgvThongTinPhongBan.Rows[rowAdd].Cells[2].Value = phongBanBUS.TongSoLuongNhanVienTrongPhongBan(pb.MaPB).ToString();
+            }
 
+        }
+        public void ClearAllText()
+        {
+            txtMaPB.Text = string.Empty;
+            txtTenPB.Text = string.Empty;
+            txtTongSoNhanVien.Text = string.Empty;
+        }
         public void ReturnHome()
         {
             this.Close();
@@ -59,9 +69,80 @@ namespace QuanLyNhanSu.PresentationTier
 
         private void dgvThongTinPhongBan_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            int rowIndex = e.RowIndex;
+            if (rowIndex < 0)
+                return;
+            txtMaPB.Text = dgvThongTinPhongBan.Rows[rowIndex].Cells[0].Value.ToString();
+            txtTenPB.Text = dgvThongTinPhongBan.Rows[rowIndex].Cells[1].Value.ToString();
+            txtTongSoNhanVien.Text = dgvThongTinPhongBan.Rows[rowIndex].Cells[2].Value.ToString();
         }
 
-        
-    }
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            PhongBan newPhongBan = new PhongBan();
+            newPhongBan.MaPB = "1";
+            newPhongBan.TenPhongBan = txtTenPB.Text;
+            phongBanBUS.Save(newPhongBan);
+            ClearAllText();
+            LoadPhongBan();
+
+        }
+        private void btnHuy_Click(object sender, EventArgs e)
+        {
+            ClearAllText();
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            PhongBan newPhongBan = new PhongBan();
+            newPhongBan.MaPB = txtMaPB.Text;
+            newPhongBan.TenPhongBan = txtTenPB.Text;
+            phongBanBUS.Save(newPhongBan);
+            ClearAllText();
+            LoadPhongBan();
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            PhongBan phongBan = new PhongBan();
+            phongBan.MaPB = txtMaPB.Text;
+            phongBanBUS.Delete(phongBan);
+            ClearAllText();
+            LoadPhongBan();
+        }       
+        private void EnableButtons(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMaPB.Text) && string.IsNullOrEmpty(txtTenPB.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+            }
+            else if(string.IsNullOrEmpty(txtMaPB.Text) && !string.IsNullOrEmpty(txtTenPB.Text))
+            {
+                btnThem.Enabled = true;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+            } 
+            else if(!string.IsNullOrEmpty(txtMaPB.Text) && !string.IsNullOrEmpty(txtTenPB.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = true;
+                btnXoa.Enabled = true;
+            }
+        }
+        private void TimKiem(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtTimKiem.Text))
+            {
+                LoadPhongBan();
+                return;
+            }                
+            foreach(var pb in danhSachPhongBan)
+            {
+                if(pb.TenPhongBan.Contains(txtTimKiem.Text))
+            }
+
+        }
+    } 
 }

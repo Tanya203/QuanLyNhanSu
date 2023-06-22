@@ -215,6 +215,7 @@
             this.btnHuy.Text = "Huỷ";
             this.btnHuy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHuy.UseVisualStyleBackColor = false;
+            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
             // btnSua
             // 
@@ -232,6 +233,7 @@
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = false;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
@@ -249,6 +251,7 @@
             this.btnXoa.Text = "Xoá";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnThem
             // 
@@ -266,6 +269,7 @@
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // txtTongSoNhanVien
             // 
@@ -274,6 +278,7 @@
             this.txtTongSoNhanVien.Name = "txtTongSoNhanVien";
             this.txtTongSoNhanVien.Size = new System.Drawing.Size(336, 34);
             this.txtTongSoNhanVien.TabIndex = 10;
+            this.txtTongSoNhanVien.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblTongSoNhanVien
             // 
@@ -292,6 +297,7 @@
             this.txtTenPB.Name = "txtTenPB";
             this.txtTenPB.Size = new System.Drawing.Size(336, 34);
             this.txtTenPB.TabIndex = 8;
+            this.txtTenPB.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblTenPB
             // 
@@ -310,6 +316,7 @@
             this.txtMaPB.Name = "txtMaPB";
             this.txtMaPB.Size = new System.Drawing.Size(336, 34);
             this.txtMaPB.TabIndex = 5;
+            this.txtMaPB.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblMaPhongBan
             // 
@@ -338,6 +345,7 @@
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
             this.txtTimKiem.TabIndex = 28;
+            this.txtTimKiem.TextChanged += new System.EventHandler(this.TimKiem);
             // 
             // lblTimKiem
             // 
@@ -407,6 +415,7 @@
             this.Text = "frmQuanLyPhongBan";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmQuanLyPhongBan_Load);
+            this.TextChanged += new System.EventHandler(this.EnableButtons);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             this.pnlMenu.ResumeLayout(false);

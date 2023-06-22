@@ -5,12 +5,15 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using WECPOFLogic;
+
 
 namespace QuanLyNhanSu.DataTier.Models
 {
     internal class QuanLyPhongBanDAL
     {
-        private QuanLyNhanSuContextDB quanLyNhanSu;
+        private readonly QuanLyNhanSuContextDB quanLyNhanSu;
         public QuanLyPhongBanDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
@@ -35,17 +38,18 @@ namespace QuanLyNhanSu.DataTier.Models
                     newPhongBan.TenPhongBan = phongBan.TenPhongBan;
                 }
                 else
-                    quanLyNhanSu.PhongBans.Add(newPhongBan);
+                    quanLyNhanSu.PhongBans.Add(phongBan);
+                quanLyNhanSu.SaveChanges();
+                MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
-            }
-            catch (SqlException sqlEx)
-            {
-                if (sqlEx.Message.Contains("UQ_TenPhongBan"))
-                    throw new Exception("Tên phòng ban đã tồn tại");
-                throw sqlEx;
-            }
+            }            
             catch(Exception ex)
             {
+                if (ex.InnerException.ToString().Contains("UQ_TenPhongBan"))
+                {
+                    MessageBox.Show("Tên phòng ban đã tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }                       
                 throw ex;
             }
         }
@@ -56,9 +60,17 @@ namespace QuanLyNhanSu.DataTier.Models
                 var phongBan = quanLyNhanSu.PhongBans.Where(PB => PB.MaPB == maPB).FirstOrDefault();
                 if(phongBan != null)
                 {
-                    quanLyNhanSu.PhongBans.Remove(phongBan);
-                    quanLyNhanSu.SaveChanges();
-                    return true;
+                    MessageBoxManager.Yes = "Có";
+                    MessageBoxManager.No = "Không";
+                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá phòng ban " + phongBan.TenPhongBan + "?","Thông báo",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+                    if(ketQua == DialogResult.Yes)
+                    {
+                        quanLyNhanSu.PhongBans.Remove(phongBan);
+                        quanLyNhanSu.SaveChanges();
+                        MessageBox.Show("Đã xoá phòng ban " + phongBan.TenPhongBan, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
+                    }
+                    
                 }
                 return false;
             }
@@ -71,6 +83,15 @@ namespace QuanLyNhanSu.DataTier.Models
         {
             return quanLyNhanSu.PhongBans.Where(pb => pb.MaPB == maPB).FirstOrDefault();
         }
+        public int TongSoNhanVienTrongPhongBan(string maPB)
+        {
+            int sl = 0;
+            var listCV = quanLyNhanSu.ChucVus.Where(cv => cv.MaPB == maPB).ToList();
+            foreach(var cv in listCV)            
+                sl += quanLyNhanSu.NhanViens.Count(nv => nv.MaCV == cv.MaCV);                          
+            return sl;
+        }
+
 
 
     }

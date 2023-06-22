@@ -11,7 +11,7 @@ namespace QuanLyNhanSu.LogicTier
 {
     internal class QuanLyPhongBanBUS
     {
-        private QuanLyPhongBanDAL phongBanDAL;
+        private readonly QuanLyPhongBanDAL phongBanDAL;
         public QuanLyPhongBanBUS()
         {
             phongBanDAL = new QuanLyPhongBanDAL();
@@ -22,26 +22,17 @@ namespace QuanLyNhanSu.LogicTier
         }
         public bool Save(PhongBan phongBan)
         {
-            try
-            {
-                return phongBanDAL.Save(phongBan);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return phongBanDAL.Save(phongBan);           
         }
 
         public bool Delete(PhongBan phongBan)
         {
-            try
-            {
-                return phongBanDAL.Delete(phongBan.MaPB);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+           return phongBanDAL.Delete(phongBan.MaPB);            
+        }
+
+        public int TongSoLuongNhanVienTrongPhongBan(string maPB)
+        {
+            return phongBanDAL.TongSoNhanVienTrongPhongBan(maPB);
         }
 
     }
