@@ -57,7 +57,7 @@ namespace QuanLyNhanSu.DataTier
             {
                 NhanVien newNhanVien = quanLyNhanSu.NhanViens.Where(nv => nv.MaNV == nhanVien.MaNV).FirstOrDefault();
                 if (newNhanVien != null)// cập nhật
-                {                    
+                {
                     newNhanVien.MaCV = nhanVien.MaNV;
                     newNhanVien.MaLHD = nhanVien.MaLHD;
                     newNhanVien.TaiKhoan = nhanVien.TaiKhoan;
@@ -81,16 +81,16 @@ namespace QuanLyNhanSu.DataTier
                     newNhanVien.TinhTrang = nhanVien.TinhTrang;
                     newNhanVien.SoNgayPhep = nhanVien.SoNgayPhep;
                     newNhanVien.LuongCoBan = nhanVien.LuongCoBan;
-                    newNhanVien.Hinh = nhanVien.Hinh;                    
+                    newNhanVien.Hinh = nhanVien.Hinh;
                 }
                 else//thêm mới           
-                    quanLyNhanSu.NhanViens.Add(newNhanVien);                              
+                    quanLyNhanSu.NhanViens.Add(nhanVien);
                 quanLyNhanSu.SaveChanges();
-                return true;                
+                return true;
             }
-            catch(SqlException sqlEx)
+           /* catch (Exception ex)
             {
-                /*var errorMessages = new Dictionary<string, string>
+                var errorMessages = new Dictionary<string, string>
                 {
                     { "UQ_CCCD_CMND", "CCCD/CMND đã tồn tại" },
                     { "UQ_Email", "Email đã tồn tại" },
@@ -106,22 +106,33 @@ namespace QuanLyNhanSu.DataTier
                     { "CHECK_TaiKhoan", "Độ dài tại khoản phải >= 5 và =<15 ký tự" },
                     { "CHECK_ThoiHanHopDong", "Thời hạn hợp đồng phải lơn hơn ngày vào làm" }
                 };
-                if (sqlEx != null)
+                if (ex != null)
                 {
-                    foreach(KeyValuePair<string, string> error in errorMessages)
+                    foreach (KeyValuePair<string, string> error in errorMessages)
                     {
-                        if(sqlEx.Message.Contains(error.Key))
-                            throw new Exception(error.Value);
+                        if (ex.InnerException.ToString().Contains(error.Key))
+                        {
+                            MessageBox.Show(error.Value, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
                     }
                 }
                 // If the error message doesn't match any of the known error messages, rethrow the exception
-                throw sqlEx;*/
-                //-------------------
-                string errorMessage = sqlEx.Message;
-                if (errorMessage.Contains("UQ_CCCD_CMND"))
-                    throw new Exception("CCCD/CMND đã tồn tại");
-                else if (errorMessage.Contains("UQ_Email"))
-                    throw new Exception("Email đã tồn tại");
+                throw ex; 
+            }*/
+            catch(Exception ex)
+            {
+                string errorMessage = ex.Message;
+                if (ex.InnerException.ToString().Contains("UQ_CCCD_CMND"))
+                {
+                    MessageBox.Show("CCCD/CMND đã tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                else if (ex.InnerException.ToString().Contains("UQ_Email"))
+                {
+                    MessageBox.Show("Email đã tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }                    
                 else if (errorMessage.Contains("UQ_SDT"))
                     throw new Exception("Số điện thoại đã tồn tại");
                 else if (errorMessage.Contains("UQ_TaiKhoan"))
@@ -144,13 +155,13 @@ namespace QuanLyNhanSu.DataTier
                     throw new Exception("Độ dài tại khoản phải >= 5 và =<15 ký tự");
                 else if (errorMessage.Contains("CHECK_ThoiHanHopDong"))
                     throw new Exception("Thời hạn hợp đồng phải lơn hơn ngày vào làm");
-                throw sqlEx;
-            }
-            catch(Exception ex)
-            {
                 throw ex;
             }
         }
+                //-------------------
+               
+            
+        
         public bool Delete(string maNV)
         {
             try
