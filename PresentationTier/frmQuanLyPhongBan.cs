@@ -46,7 +46,19 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhongBan.Rows[rowAdd].Cells[1].Value = pb.TenPhongBan;
                 dgvThongTinPhongBan.Rows[rowAdd].Cells[2].Value = phongBanBUS.TongSoLuongNhanVienTrongPhongBan(pb.MaPB).ToString();
             }
-
+        }
+        private void LoadPhongBanTimKiem(string timKiem)
+        {
+            dgvThongTinPhongBan.Rows.Clear();
+            danhSachPhongBan = phongBanBUS.SearchPhongBan(timKiem);
+            int rowAdd;
+            foreach (var pb in danhSachPhongBan)
+            {
+                rowAdd = dgvThongTinPhongBan.Rows.Add();
+                dgvThongTinPhongBan.Rows[rowAdd].Cells[0].Value = pb.MaPB;
+                dgvThongTinPhongBan.Rows[rowAdd].Cells[1].Value = pb.TenPhongBan;
+                dgvThongTinPhongBan.Rows[rowAdd].Cells[2].Value = phongBanBUS.TongSoLuongNhanVienTrongPhongBan(pb.MaPB).ToString();
+            }
         }
         public void ClearAllText()
         {
@@ -112,7 +124,7 @@ namespace QuanLyNhanSu.PresentationTier
         }       
         private void EnableButtons(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaPB.Text) && string.IsNullOrEmpty(txtTenPB.Text))
+            if (string.IsNullOrEmpty(txtMaPB.Text) && string.IsNullOrEmpty(txtTenPB.Text) || string.IsNullOrEmpty(txtTenPB.Text))
             {
                 btnThem.Enabled = false;
                 btnSua.Enabled = false;
@@ -137,12 +149,8 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LoadPhongBan();
                 return;
-            }                
-            foreach(var pb in danhSachPhongBan)
-            {
-                if(pb.TenPhongBan.Contains(txtTimKiem.Text))
             }
-
+            LoadPhongBanTimKiem(txtTimKiem.Text);
         }
     } 
 }
