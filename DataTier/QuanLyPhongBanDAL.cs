@@ -27,7 +27,16 @@ namespace QuanLyNhanSu.DataTier.Models
             }).ToList();
             return danhSachPhongBan;
         }
-
+        public IEnumerable<PhongBanViewModel> SearchPhongBan(string timKiem)
+        {
+            var danhSachPhongBan = quanLyNhanSu.PhongBans.Select(x => new PhongBanViewModel
+            {
+                MaPB = x.MaPB,
+                TenPhongBan = x.TenPhongBan,
+            }).Where(pb => pb.TenPhongBan.ToString().Contains(timKiem)|| 
+                     pb.MaPB.ToString().Contains(timKiem)).ToList();
+            return danhSachPhongBan;
+        }
         public bool Save(PhongBan phongBan)
         {
             try
@@ -37,7 +46,7 @@ namespace QuanLyNhanSu.DataTier.Models
                 {
                     newPhongBan.TenPhongBan = phongBan.TenPhongBan;
                 }
-                else
+                else//thêm mới
                     quanLyNhanSu.PhongBans.Add(phongBan);
                 quanLyNhanSu.SaveChanges();
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
