@@ -88,7 +88,7 @@ namespace QuanLyNhanSu.DataTier
                 quanLyNhanSu.SaveChanges();
                 return true;
             }
-           /* catch (Exception ex)
+            catch (Exception ex)
             {
                 var errorMessages = new Dictionary<string, string>
                 {
@@ -118,45 +118,8 @@ namespace QuanLyNhanSu.DataTier
                     }
                 }
                 // If the error message doesn't match any of the known error messages, rethrow the exception
-                throw ex; 
-            }*/
-            catch(Exception ex)
-            {
-                string errorMessage = ex.Message;
-                if (ex.InnerException.ToString().Contains("UQ_CCCD_CMND"))
-                {
-                    MessageBox.Show("CCCD/CMND đã tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
-                else if (ex.InnerException.ToString().Contains("UQ_Email"))
-                {
-                    MessageBox.Show("Email đã tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }                    
-                else if (errorMessage.Contains("UQ_SDT"))
-                    throw new Exception("Số điện thoại đã tồn tại");
-                else if (errorMessage.Contains("UQ_TaiKhoan"))
-                    throw new Exception("Tài khoản đã tồn tại");
-                else if (errorMessage.Contains("CHECK_CCCD_CMND"))
-                    throw new Exception("Độ dài CCCD/CMND phải = 9 hoặc 12");
-                else if (errorMessage.Contains("CHECK_GioiTinh"))
-                    throw new Exception("Giới tính phải là Nam, Nữ hoặc Khác");
-                else if (errorMessage.Contains("CHECK_LuongCoBan"))
-                    throw new Exception("Lương cơ bản phải >= 0");
-                else if (errorMessage.Contains("CHECK_NgayVaoLam"))
-                    throw new Exception("Ngày vào làm phải >= ngày hiện tại");
-                else if (errorMessage.Contains("CHECK_NTNS"))
-                    throw new Exception("Tuổi phải >= 18");
-                else if (errorMessage.Contains("CHECK_SDT"))
-                    throw new Exception("Độ dài số điện thoại phải = 10");
-                else if (errorMessage.Contains("CHECK_SoNgayPhep"))
-                    throw new Exception("Số ngày phép phải >= 0");
-                else if (errorMessage.Contains("CHECK_TaiKhoan"))
-                    throw new Exception("Độ dài tại khoản phải >= 5 và =<15 ký tự");
-                else if (errorMessage.Contains("CHECK_ThoiHanHopDong"))
-                    throw new Exception("Thời hạn hợp đồng phải lơn hơn ngày vào làm");
                 throw ex;
-            }
+            }            
         }
                 //-------------------
                

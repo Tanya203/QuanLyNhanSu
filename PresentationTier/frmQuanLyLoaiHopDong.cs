@@ -141,8 +141,7 @@ namespace QuanLyNhanSu.PresentationTier
                 btnSua.Enabled = true;
                 btnXoa.Enabled = true;
             }
-        }       
-
+        }     
         private void TimKiem(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTimKiem.Text))

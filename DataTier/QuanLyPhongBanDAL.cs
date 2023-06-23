@@ -67,7 +67,7 @@ namespace QuanLyNhanSu.DataTier.Models
         {
             try
             {
-                var phongBan = quanLyNhanSu.PhongBans.Where(PB => PB.MaPB == maPB).FirstOrDefault();
+                var phongBan = quanLyNhanSu.PhongBans.Where(pc => pc.MaPB == maPB).FirstOrDefault();
                 if(phongBan != null)
                 {
                     MessageBoxManager.Yes = "Có";

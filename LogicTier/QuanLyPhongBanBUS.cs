@@ -28,12 +28,10 @@ namespace QuanLyNhanSu.LogicTier
         {
             return phongBanDAL.Save(phongBan);           
         }
-
         public bool Delete(PhongBan phongBan)
         {
            return phongBanDAL.Delete(phongBan.MaPB);            
         }
-
         public int TongSoLuongNhanVienTrongPhongBan(string maPB)
         {
             return phongBanDAL.TongSoNhanVienTrongPhongBan(maPB);
