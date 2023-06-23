@@ -91,13 +91,14 @@ namespace QuanLyNhanSu.PresentationTier
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            PhongBan newPhongBan = new PhongBan();
-            newPhongBan.MaPB = "1";
-            newPhongBan.TenPhongBan = txtTenPB.Text;
+            PhongBan newPhongBan = new PhongBan
+            {
+                MaPB = "1",
+                TenPhongBan = txtTenPB.Text
+            };
             phongBanBUS.Save(newPhongBan);
             ClearAllText();
             LoadPhongBan();
-
         }
         private void btnHuy_Click(object sender, EventArgs e)
         {
@@ -106,9 +107,11 @@ namespace QuanLyNhanSu.PresentationTier
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            PhongBan newPhongBan = new PhongBan();
-            newPhongBan.MaPB = txtMaPB.Text;
-            newPhongBan.TenPhongBan = txtTenPB.Text;
+            PhongBan newPhongBan = new PhongBan
+            {
+                MaPB = txtMaPB.Text,
+                TenPhongBan = txtTenPB.Text
+            };
             phongBanBUS.Save(newPhongBan);
             ClearAllText();
             LoadPhongBan();
@@ -116,8 +119,10 @@ namespace QuanLyNhanSu.PresentationTier
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            PhongBan phongBan = new PhongBan();
-            phongBan.MaPB = txtMaPB.Text;
+            PhongBan phongBan = new PhongBan
+            {
+                MaPB = txtMaPB.Text
+            };
             phongBanBUS.Delete(phongBan);
             ClearAllText();
             LoadPhongBan();

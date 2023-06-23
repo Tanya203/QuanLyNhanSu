@@ -94,20 +94,24 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            PhuCap newPhuCap = new PhuCap();
-            newPhuCap.MaPC = "1";
-            newPhuCap.TenPhuCap = txtTenPC.Text;
-            newPhuCap.TienPhuCap = decimal.Parse(txtSoTien.Text);
+            PhuCap newPhuCap = new PhuCap
+            {
+                MaPC = "1",
+                TenPhuCap = txtTenPC.Text,
+                TienPhuCap = decimal.Parse(txtSoTien.Text)
+            };
             phuCapBUS.Save(newPhuCap);
             ClearAllText();
             LoadPhuCap();
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
-            PhuCap newPhuCap = new PhuCap();
-            newPhuCap.MaPC = txtMaPC.Text;
-            newPhuCap.TenPhuCap = txtTenPC.Text;
-            newPhuCap.TienPhuCap = decimal.Parse(txtSoTien.Text);
+            PhuCap newPhuCap = new PhuCap
+            {
+                MaPC = txtMaPC.Text,
+                TenPhuCap = txtTenPC.Text,
+                TienPhuCap = decimal.Parse(txtSoTien.Text)
+            };
             phuCapBUS.Save(newPhuCap);
             ClearAllText();
             LoadPhuCap();

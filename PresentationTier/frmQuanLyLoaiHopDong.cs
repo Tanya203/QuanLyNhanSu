@@ -91,9 +91,11 @@ namespace QuanLyNhanSu.PresentationTier
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            LoaiHopDong newLoaiHopDong = new LoaiHopDong();
-            newLoaiHopDong.MaLHD = "1";
-            newLoaiHopDong.TenLoaiHopDong = txtTenLHD.Text;
+            LoaiHopDong newLoaiHopDong = new LoaiHopDong
+            {
+                MaLHD = "1",
+                TenLoaiHopDong = txtTenLHD.Text
+            };
             loaiHopDongBUS.Save(newLoaiHopDong);
             ClearAllText();
             LoadLoaiHopDong();
@@ -104,9 +106,11 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
-            LoaiHopDong newLoaiHopDong = new LoaiHopDong();
-            newLoaiHopDong.MaLHD = txtMaLHD.Text;
-            newLoaiHopDong.TenLoaiHopDong = txtTenLHD.Text;
+            LoaiHopDong newLoaiHopDong = new LoaiHopDong
+            {
+                MaLHD = txtMaLHD.Text,
+                TenLoaiHopDong = txtTenLHD.Text
+            };
             loaiHopDongBUS.Save(newLoaiHopDong);
             ClearAllText();
             LoadLoaiHopDong();
