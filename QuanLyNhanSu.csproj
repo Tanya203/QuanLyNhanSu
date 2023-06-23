@@ -146,6 +146,7 @@
     <Compile Include="DataTier\Models\PhongBan.cs" />
     <Compile Include="DataTier\Models\PhuCap.cs" />
     <Compile Include="DataTier\Models\QuanLyNhanSuContextDB.cs" />
+    <Compile Include="DataTier\QuanLyPhuCapDAL.cs" />
     <Compile Include="DataTier\Models\QuyenHan.cs" />
     <Compile Include="DataTier\QuanLyLoaiHopDongDAL.cs" />
     <Compile Include="DataTier\QuanLyPhongBanDAL.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="LogicTier\QuanLyLoaiHopDongBUS.cs" />
     <Compile Include="LogicTier\QuanLyNhanVienBUS.cs" />
     <Compile Include="LogicTier\QuanLyPhongBanBUS.cs" />
+    <Compile Include="LogicTier\QuanLyPhuCapBUS.cs" />
     <Compile Include="PresentationTier\frmChamCong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,6 +292,7 @@
     <Compile Include="ViewModels\LoaiHopDongViewModels.cs" />
     <Compile Include="ViewModels\NhanVienViewModel.cs" />
     <Compile Include="ViewModels\PhongBanViewModels.cs" />
+    <Compile Include="ViewModels\PhuCapViewMModels.cs" />
     <EmbeddedResource Include="PresentationTier\frmChamCong.resx">
       <DependentUpon>frmChamCong.cs</DependentUpon>
     </EmbeddedResource>

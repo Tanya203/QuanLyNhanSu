@@ -1,4 +1,7 @@
-﻿using System;
+﻿using QuanLyNhanSu.DataTier.Models;
+using QuanLyNhanSu.LogicTier;
+using QuanLyNhanSu.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,9 +17,58 @@ namespace QuanLyNhanSu.PresentationTier
     public partial class frmQuanLyPhuCap : Form
     {
         Thread currentForm;
+        private readonly QuanLyPhuCapBUS phuCapBUS;
+        private IEnumerable<PhuCapViewMModels> danhSachPhuCap;
         public frmQuanLyPhuCap()
+
         {
             InitializeComponent();
+            this.Load += frmQuanLyPhuCap_Load;
+            phuCapBUS = new QuanLyPhuCapBUS();
+            txtMaPC.ReadOnly = true;
+            txtSoLuongNhanVien.ReadOnly = true;
+            btnThem.Enabled = false;
+            btnSua.Enabled = false;
+            btnXoa.Enabled = false;            
+        }
+        private void frmQuanLyPhuCap_Load(object sender, EventArgs e)
+        {
+            LoadPhuCap();
+        }
+        private void LoadPhuCap()
+        {
+            dgvThongTinPhuCap.Rows.Clear();
+            danhSachPhuCap = phuCapBUS.GetAllPhuCap();
+            int rowAdd;
+            foreach (var pc in danhSachPhuCap)
+            {
+                rowAdd = dgvThongTinPhuCap.Rows.Add();
+                dgvThongTinPhuCap.Rows[rowAdd].Cells[0].Value = pc.MaPC;
+                dgvThongTinPhuCap.Rows[rowAdd].Cells[1].Value = pc.TenPhuCap;
+                dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = pc.TienPhuCap;
+                dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = phuCapBUS.TongSoLuongNhanVienTrongPhongBan(pc.MaPC).ToString();
+            }
+        }
+        private void LoadPhuCapTimKiem(string timKiem)
+        {
+            dgvThongTinPhuCap.Rows.Clear();
+            danhSachPhuCap = phuCapBUS.SearchPhuCap(timKiem);
+            int rowAdd;
+            foreach (var pc in danhSachPhuCap)
+            {
+                rowAdd = dgvThongTinPhuCap.Rows.Add();
+                dgvThongTinPhuCap.Rows[rowAdd].Cells[0].Value = pc.MaPC;
+                dgvThongTinPhuCap.Rows[rowAdd].Cells[1].Value = pc.TenPhuCap;
+                dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = pc.TienPhuCap;
+                dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = phuCapBUS.TongSoLuongNhanVienTrongPhongBan(pc.MaPC).ToString();
+            }
+        }
+        public void ClearAllText()
+        {
+            txtMaPC.Text = string.Empty;
+            txtTenPC.Text = string.Empty;
+            txtSoTien.Text = string.Empty;
+            txtSoLuongNhanVien.Text = string.Empty;
         }
         public void ReturnHome()
         {
@@ -30,5 +82,85 @@ namespace QuanLyNhanSu.PresentationTier
             currentForm.SetApartmentState(ApartmentState.STA);
             currentForm.Start();
         }
+        private void dgvThongTinPhuCap_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex < 0)
+                return;
+            txtMaPC.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[0].Value.ToString();
+            txtTenPC.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[1].Value.ToString();
+            txtSoTien.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[2].Value.ToString();
+            txtSoLuongNhanVien.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[3].Value.ToString();
+        }
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            PhuCap newPhuCap = new PhuCap();
+            newPhuCap.MaPC = "1";
+            newPhuCap.TenPhuCap = txtTenPC.Text;
+            newPhuCap.TienPhuCap = decimal.Parse(txtSoTien.Text);
+            phuCapBUS.Save(newPhuCap);
+            ClearAllText();
+            LoadPhuCap();
+        }
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            PhuCap newPhuCap = new PhuCap();
+            newPhuCap.MaPC = txtMaPC.Text;
+            newPhuCap.TenPhuCap = txtTenPC.Text;
+            newPhuCap.TienPhuCap = decimal.Parse(txtSoTien.Text);
+            phuCapBUS.Save(newPhuCap);
+            ClearAllText();
+            LoadPhuCap();
+        }
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            PhuCap phuCap = new PhuCap();
+            phuCap.MaPC = txtMaPC.Text;
+            phuCapBUS.Delete(phuCap);
+            ClearAllText();
+            LoadPhuCap();
+        }
+        private void btnHuy_Click(object sender, EventArgs e)
+        {
+            ClearAllText();
+        }
+        private void EnableButtons(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMaPC.Text) && string.IsNullOrEmpty(txtTenPC.Text) && string.IsNullOrEmpty(txtSoTien.Text) ||
+               string.IsNullOrEmpty(txtTenPC.Text) && string.IsNullOrEmpty(txtSoTien.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+            }
+            else if (string.IsNullOrEmpty(txtMaPC.Text) && !string.IsNullOrEmpty(txtTenPC.Text) && !string.IsNullOrEmpty(txtSoTien.Text))
+            {
+                btnThem.Enabled = true;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+            }
+            else if (!string.IsNullOrEmpty(txtMaPC.Text) && !string.IsNullOrEmpty(txtTenPC.Text) && !string.IsNullOrEmpty(txtSoTien.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = true;
+                btnXoa.Enabled = true;
+            }
+        }
+        private void TimKiem(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtTimKiem.Text))
+            {
+                LoadPhuCap();
+                return;
+            }
+            LoadPhuCapTimKiem(txtTimKiem.Text);                
+        }
+        private void txtSoTien_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }        
     }
 }
