@@ -59,20 +59,16 @@ namespace QuanLyNhanSu.DataTier.Models
                 var errorMessages = new Dictionary<string, string>
                 {
                     { "UQ_TenPhuCap", "Tên phụ cấp đã tồn tại" },
-                    { "Check_TienPhuCap", "Số tiền phụ cấp phải > 0" },                    
+                    { "CHECK_TienPhuCap", "Số tiền phụ cấp phải > 0" },                    
                 };
-                if (ex != null)
+                foreach (var error in errorMessages)
                 {
-                    foreach (var error in errorMessages)
+                    if (ex.InnerException.ToString().Contains(error.Key))
                     {
-                        if (ex.InnerException.ToString().Contains(error.Key))
-                        {
-                            MessageBox.Show(error.Value, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return false;
-                        }
+                        MessageBox.Show(error.Value, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
                     }
-                    return false;
-                }                
+                }                                             
                 throw ex;
             }
         }
