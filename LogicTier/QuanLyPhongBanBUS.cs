@@ -38,6 +38,5 @@ namespace QuanLyNhanSu.LogicTier
         {
             return phongBanDAL.TongSoNhanVienTrongPhongBan(maPB);
         }
-
     }
 }
