@@ -58,9 +58,10 @@ namespace QuanLyNhanSu.DataTier.Models
                 {
                     MessageBox.Show("Tên phòng ban đã tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
-                }                       
-                throw ex;
-            }
+                }
+                else
+                    throw ex;
+            }            
         }
         public bool Delete(string maPB)
         {
@@ -87,11 +88,7 @@ namespace QuanLyNhanSu.DataTier.Models
             {
                 throw ex;
             }
-        }
-        public PhongBan GetPhongBan(string maPB)
-        {
-            return quanLyNhanSu.PhongBans.Where(pb => pb.MaPB == maPB).FirstOrDefault();
-        }
+        }   
         public int TongSoNhanVienTrongPhongBan(string maPB)
         {
             int sl = 0;
@@ -100,8 +97,5 @@ namespace QuanLyNhanSu.DataTier.Models
                 sl += quanLyNhanSu.NhanViens.Count(nv => nv.MaCV == cv.MaCV);                          
             return sl;
         }
-
-
-
     }
 }
