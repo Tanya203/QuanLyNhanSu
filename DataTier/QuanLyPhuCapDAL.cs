@@ -26,7 +26,7 @@ namespace QuanLyNhanSu.DataTier.Models
             }).ToList();
             return danhSachPhuCap;
         }
-        public IEnumerable<PhuCapViewMModels> SearcPhuCap(string timKiem)
+        public IEnumerable<PhuCapViewMModels> SearchPhuCap(string timKiem)
         {
             var danhSachPhuCap = quanLyNhanSu.PhuCaps.Select(x => new PhuCapViewMModels
             {

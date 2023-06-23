@@ -21,9 +21,8 @@ namespace QuanLyNhanSu.LogicTier
         }
         public IEnumerable<PhuCapViewMModels> SearchPhuCap(string timKiem)
         {
-            return phuCapDAL.SearcPhuCap(timKiem);
+            return phuCapDAL.SearchPhuCap(timKiem);
         }
-
         public bool Save(PhuCap phuCap)
         {
             return phuCapDAL.Save(phuCap);
