@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,12 +15,12 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class frmQuanLyCa : Form
+    public partial class FrmQuanLyCa : Form
     {
         Thread currentForm;
         private readonly QuanLyCaBUS caBUS;
-        private IEnumerable<CaViewModels> danhSachCa;
-        public frmQuanLyCa()
+        private IEnumerable<CaViewModels> danhSachCa;        
+        public FrmQuanLyCa()
         {
             InitializeComponent();
             this.Load += frmQuanLyCa_Load;
@@ -70,29 +71,31 @@ namespace QuanLyNhanSu.PresentationTier
             dtpThoiGianBatDau.Text = "00:00";
             dtpThoiGianKetThuc.Text = "00:00";
         }
-        public void ReturnHome()
+        public void CloseCurrentForm()
         {
             this.Close();
-            Application.Run(new frmManHinhChinh());
+            Application.Run(new FrmQuanLyCa());
         }
-        public void OpenQuanLyLoaiCa()
+        public void Reload()
         {
             this.Close();
-            Application.Run(new frmQuanLyLoaiCa());
-        }
-        private void btnTroVe_Click(object sender, EventArgs e)
-        {            
-            this.Close();
-            currentForm = new Thread(ReturnHome);
+            currentForm = new Thread(CloseCurrentForm);
             currentForm.SetApartmentState(ApartmentState.STA);
             currentForm.Start();
+        }
+        private void btnTroVe_Click(object sender, EventArgs e)
+        {
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;            
         }
         private void btnQuanLyLoaiCa_Click(object sender, EventArgs e)
         {
-            this.Close();
-            currentForm = new Thread(OpenQuanLyLoaiCa);
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
+            FrmQuanLyLoaiCa frm = new FrmQuanLyLoaiCa();
+            frm.Show();
+            this.Hide();
+            frm.FormClosed += CloseForm;
         }
         private void dgvThongTinCa_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -114,10 +117,7 @@ namespace QuanLyNhanSu.PresentationTier
                 GioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text),
             };
             caBUS.Save(newCa);
-            this.Refresh();
-            ClearAllText();
-            LoadCa();
-            //ReLoadForm();
+            Reload();            
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
@@ -130,8 +130,7 @@ namespace QuanLyNhanSu.PresentationTier
             };
             caBUS.Save(newCa);            
             ClearAllText();
-            LoadCa();
-            //ReLoadForm();
+            LoadCa();            
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -142,8 +141,7 @@ namespace QuanLyNhanSu.PresentationTier
             caBUS.Delete(ca);
             this.Refresh();
             ClearAllText();
-            LoadCa();
-           //ReLoadForm();
+            LoadCa();          
         }
         private void btnHuy_Click(object sender, EventArgs e)
         {
@@ -181,6 +179,10 @@ namespace QuanLyNhanSu.PresentationTier
                 return;
             }
             LoadCaTimKiem(txtTimKiem.Text);
-        }       
+        }
+        private void CloseForm(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

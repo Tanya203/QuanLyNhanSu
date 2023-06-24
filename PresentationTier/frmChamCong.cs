@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class frmChamCong : Form
+    public partial class FrmChamCong : Form
     {
-        public frmChamCong()
+        public FrmChamCong()
         {
             InitializeComponent();
         }

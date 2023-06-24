@@ -1,6 +1,6 @@
 ﻿namespace QuanLyNhanSu.PresentationTier
 {
-    partial class frmQuanLyLoaiHopDong
+    partial class FrmQuanLyLoaiHopDong
     {
         /// <summary>
         /// Required designer variable.

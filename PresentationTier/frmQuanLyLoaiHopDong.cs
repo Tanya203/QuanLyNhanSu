@@ -14,12 +14,12 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class frmQuanLyLoaiHopDong : Form
+    public partial class FrmQuanLyLoaiHopDong : Form
     {
         private Thread currentForm;
         private readonly QuanLyLoaiHopDongBUS loaiHopDongBUS;
         private IEnumerable<LoaiHopDongViewModels> danhSachLoaiHopDong;
-        public frmQuanLyLoaiHopDong()
+        public FrmQuanLyLoaiHopDong()
         {
             InitializeComponent();
             this.Load += frmQuanLyLoaiHopDong_Load;
@@ -66,18 +66,24 @@ namespace QuanLyNhanSu.PresentationTier
             txtTenLHD.Text = string.Empty;
             txtSoLuongNhanVien.Text = string.Empty;
         }
-        public void ReturnHome()
+        public void CloseCurrentForm()
         {
             this.Close();
-            Application.Run(new frmManHinhChinh());
+            Application.Run(new FrmQuanLyLoaiHopDong());
         }
-
-        private void btnTroVe_Click(object sender, EventArgs e)
+        public void Reload()
         {
             this.Close();
-            currentForm = new Thread(ReturnHome);
+            currentForm = new Thread(CloseCurrentForm);
             currentForm.SetApartmentState(ApartmentState.STA);
             currentForm.Start();
+        }
+        private void btnTroVe_Click(object sender, EventArgs e)
+        {
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
         private void dgvThongTinLoaiHopDong_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -97,8 +103,7 @@ namespace QuanLyNhanSu.PresentationTier
                 TenLoaiHopDong = txtTenLHD.Text
             };
             loaiHopDongBUS.Save(newLoaiHopDong);
-            ClearAllText();
-            LoadLoaiHopDong();
+            Reload();
         }
         private void btnHuy_Click(object sender, EventArgs e)
         {
@@ -157,6 +162,10 @@ namespace QuanLyNhanSu.PresentationTier
                 return;
             }
             LoadLoaiHopDongTimKiem(txtTimKiem.Text);
+        }
+        private void CloseForm(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

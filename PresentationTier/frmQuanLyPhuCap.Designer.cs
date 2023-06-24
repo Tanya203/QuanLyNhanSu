@@ -1,6 +1,6 @@
 ﻿namespace QuanLyNhanSu.PresentationTier
 {
-    partial class frmQuanLyPhuCap
+    partial class FrmQuanLyPhuCap
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,6 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblSoTien = new System.Windows.Forms.Label();
             this.txtTenPC = new System.Windows.Forms.TextBox();
             this.lblTenPhuCap = new System.Windows.Forms.Label();
@@ -47,11 +46,6 @@
             this.txtMaPC = new System.Windows.Forms.TextBox();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.lblTimKiem = new System.Windows.Forms.Label();
-            this.dgvThongTinPhuCap = new System.Windows.Forms.DataGridView();
-            this.colMaPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTenPhuCap = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSoTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSoLuongNhanVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
             this.lblChucVuDN = new System.Windows.Forms.Label();
             this.lblPhongBanNV_DN = new System.Windows.Forms.Label();
@@ -62,9 +56,14 @@
             this.lblMaNhanVienDN = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnTroVe = new System.Windows.Forms.Button();
+            this.colSoLuongNhanVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSoTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTenPhuCap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvThongTinPhuCap = new System.Windows.Forms.DataGridView();
             this.pnlMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhuCap)).BeginInit();
             this.pnlHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhuCap)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSoTien
@@ -266,73 +265,6 @@
             this.lblTimKiem.TabIndex = 39;
             this.lblTimKiem.Text = "Tìm kiếm:";
             // 
-            // dgvThongTinPhuCap
-            // 
-            this.dgvThongTinPhuCap.AllowUserToAddRows = false;
-            this.dgvThongTinPhuCap.AllowUserToDeleteRows = false;
-            this.dgvThongTinPhuCap.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongTinPhuCap.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvThongTinPhuCap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvThongTinPhuCap.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colMaPC,
-            this.colTenPhuCap,
-            this.colSoTien,
-            this.colSoLuongNhanVien});
-            this.dgvThongTinPhuCap.Location = new System.Drawing.Point(694, 226);
-            this.dgvThongTinPhuCap.Name = "dgvThongTinPhuCap";
-            this.dgvThongTinPhuCap.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongTinPhuCap.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvThongTinPhuCap.RowHeadersVisible = false;
-            this.dgvThongTinPhuCap.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvThongTinPhuCap.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvThongTinPhuCap.RowTemplate.Height = 24;
-            this.dgvThongTinPhuCap.Size = new System.Drawing.Size(1218, 740);
-            this.dgvThongTinPhuCap.TabIndex = 38;
-            this.dgvThongTinPhuCap.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThongTinPhuCap_CellClick);
-            // 
-            // colMaPC
-            // 
-            this.colMaPC.HeaderText = "Mã phụ cấp";
-            this.colMaPC.MinimumWidth = 6;
-            this.colMaPC.Name = "colMaPC";
-            this.colMaPC.ReadOnly = true;
-            // 
-            // colTenPhuCap
-            // 
-            this.colTenPhuCap.HeaderText = "Tên phụ cấp";
-            this.colTenPhuCap.MinimumWidth = 6;
-            this.colTenPhuCap.Name = "colTenPhuCap";
-            this.colTenPhuCap.ReadOnly = true;
-            // 
-            // colSoTien
-            // 
-            this.colSoTien.HeaderText = "Số tiền";
-            this.colSoTien.MinimumWidth = 6;
-            this.colSoTien.Name = "colSoTien";
-            this.colSoTien.ReadOnly = true;
-            // 
-            // colSoLuongNhanVien
-            // 
-            this.colSoLuongNhanVien.HeaderText = "Số lượng nhân viên";
-            this.colSoLuongNhanVien.MinimumWidth = 6;
-            this.colSoLuongNhanVien.Name = "colSoLuongNhanVien";
-            this.colSoLuongNhanVien.ReadOnly = true;
-            // 
             // lblChucVuNV_DN
             // 
             this.lblChucVuNV_DN.AutoSize = true;
@@ -453,7 +385,60 @@
             this.btnTroVe.UseVisualStyleBackColor = false;
             this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
-            // frmQuanLyPhuCap
+            // colSoLuongNhanVien
+            // 
+            this.colSoLuongNhanVien.HeaderText = "Số lượng nhân viên";
+            this.colSoLuongNhanVien.MinimumWidth = 6;
+            this.colSoLuongNhanVien.Name = "colSoLuongNhanVien";
+            this.colSoLuongNhanVien.ReadOnly = true;
+            // 
+            // colSoTien
+            // 
+            this.colSoTien.HeaderText = "Số tiền";
+            this.colSoTien.MinimumWidth = 6;
+            this.colSoTien.Name = "colSoTien";
+            this.colSoTien.ReadOnly = true;
+            // 
+            // colTenPhuCap
+            // 
+            this.colTenPhuCap.HeaderText = "Tên phụ cấp";
+            this.colTenPhuCap.MinimumWidth = 6;
+            this.colTenPhuCap.Name = "colTenPhuCap";
+            this.colTenPhuCap.ReadOnly = true;
+            // 
+            // colMaPC
+            // 
+            this.colMaPC.HeaderText = "Mã phụ cấp";
+            this.colMaPC.MinimumWidth = 6;
+            this.colMaPC.Name = "colMaPC";
+            this.colMaPC.ReadOnly = true;
+            // 
+            // dgvThongTinPhuCap
+            // 
+            this.dgvThongTinPhuCap.AllowUserToAddRows = false;
+            this.dgvThongTinPhuCap.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvThongTinPhuCap.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvThongTinPhuCap.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvThongTinPhuCap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvThongTinPhuCap.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colMaPC,
+            this.colTenPhuCap,
+            this.colSoTien,
+            this.colSoLuongNhanVien});
+            this.dgvThongTinPhuCap.Location = new System.Drawing.Point(694, 226);
+            this.dgvThongTinPhuCap.Name = "dgvThongTinPhuCap";
+            this.dgvThongTinPhuCap.ReadOnly = true;
+            this.dgvThongTinPhuCap.RowHeadersVisible = false;
+            this.dgvThongTinPhuCap.RowHeadersWidth = 51;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvThongTinPhuCap.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvThongTinPhuCap.RowTemplate.Height = 24;
+            this.dgvThongTinPhuCap.Size = new System.Drawing.Size(1218, 740);
+            this.dgvThongTinPhuCap.TabIndex = 38;
+            this.dgvThongTinPhuCap.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThongTinPhuCap_CellClick);
+            // 
+            // FrmQuanLyPhuCap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -465,16 +450,16 @@
             this.Controls.Add(this.lblTimKiem);
             this.Controls.Add(this.dgvThongTinPhuCap);
             this.Controls.Add(this.pnlHeader);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "frmQuanLyPhuCap";
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Name = "FrmQuanLyPhuCap";
             this.Text = "frmQuanLyPhuCap";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmQuanLyPhuCap_Load);
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhuCap)).EndInit();
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhuCap)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -495,7 +480,6 @@
         private System.Windows.Forms.TextBox txtMaPC;
         private System.Windows.Forms.TextBox txtTimKiem;
         private System.Windows.Forms.Label lblTimKiem;
-        private System.Windows.Forms.DataGridView dgvThongTinPhuCap;
         private System.Windows.Forms.Label lblChucVuNV_DN;
         private System.Windows.Forms.Label lblChucVuDN;
         private System.Windows.Forms.Label lblPhongBanNV_DN;
@@ -508,10 +492,11 @@
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.TextBox txtSoLuongNhanVien;
         private System.Windows.Forms.Label lblSoLuongNhanVien;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaPC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTenPhuCap;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSoTien;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSoLuongNhanVien;
         private System.Windows.Forms.TextBox txtSoTien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSoLuongNhanVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSoTien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTenPhuCap;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaPC;
+        private System.Windows.Forms.DataGridView dgvThongTinPhuCap;
     }
 }
