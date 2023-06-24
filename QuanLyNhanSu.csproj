@@ -146,12 +146,14 @@
     <Compile Include="DataTier\Models\PhongBan.cs" />
     <Compile Include="DataTier\Models\PhuCap.cs" />
     <Compile Include="DataTier\Models\QuanLyNhanSuContextDB.cs" />
+    <Compile Include="DataTier\QuanLyCaDAL.cs" />
     <Compile Include="DataTier\QuanLyLoaiCaDAL.cs" />
     <Compile Include="DataTier\QuanLyPhuCapDAL.cs" />
     <Compile Include="DataTier\Models\QuyenHan.cs" />
     <Compile Include="DataTier\QuanLyLoaiHopDongDAL.cs" />
     <Compile Include="DataTier\QuanLyPhongBanDAL.cs" />
     <Compile Include="DataTier\QuanLyNhanVienDAL.cs" />
+    <Compile Include="LogicTier\QuanLyCaBUS.cs" />
     <Compile Include="LogicTier\QuanLyLoaiCaBUS.cs" />
     <Compile Include="LogicTier\QuanLyLoaiHopDongBUS.cs" />
     <Compile Include="LogicTier\QuanLyNhanVienBUS.cs" />
@@ -291,6 +293,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CaViewModels.cs" />
     <Compile Include="ViewModels\LoaiCaViewModels.cs" />
     <Compile Include="ViewModels\LoaiHopDongViewModels.cs" />
     <Compile Include="ViewModels\NhanVienViewModel.cs" />

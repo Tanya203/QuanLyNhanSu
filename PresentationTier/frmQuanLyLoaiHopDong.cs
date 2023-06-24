@@ -132,18 +132,21 @@ namespace QuanLyNhanSu.PresentationTier
                 btnThem.Enabled = false;
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
+                return;
             }
             else if (string.IsNullOrEmpty(txtMaLHD.Text) && !string.IsNullOrEmpty(txtTenLHD.Text))
             {
                 btnThem.Enabled = true;
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
+                return;
             }
             else if (!string.IsNullOrEmpty(txtMaLHD.Text) && !string.IsNullOrEmpty(txtTenLHD.Text))
             {
                 btnThem.Enabled = false;
                 btnSua.Enabled = true;
                 btnXoa.Enabled = true;
+                return;
             }
         }     
         private void TimKiem(object sender, EventArgs e)

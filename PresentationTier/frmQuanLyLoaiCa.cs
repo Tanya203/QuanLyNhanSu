@@ -98,7 +98,7 @@ namespace QuanLyNhanSu.PresentationTier
             };
             loaiCaBUS.Save(newLoaiCa);
             ClearAllText();
-            LoadLoaiCa();
+            LoadLoaiCa();            
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
@@ -112,7 +112,6 @@ namespace QuanLyNhanSu.PresentationTier
             ClearAllText();
             LoadLoaiCa();
         }
-
         private void btnXoa_Click(object sender, EventArgs e)
         {
             LoaiCa loaiCa = new LoaiCa
@@ -137,18 +136,21 @@ namespace QuanLyNhanSu.PresentationTier
                 btnThem.Enabled = false;
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
+                return;
             }
             else if(string.IsNullOrEmpty(txtMaLC.Text) && !string.IsNullOrEmpty(txtTenLC.Text) && !string.IsNullOrEmpty(txtHeSoLuong.Text))
             {
                 btnThem.Enabled = true;
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
+                return;
             }
             else if(!string.IsNullOrEmpty(txtMaLC.Text) && !string.IsNullOrEmpty(txtTenLC.Text) && !string.IsNullOrEmpty(txtHeSoLuong.Text))
             {
                 btnThem.Enabled = false;
                 btnSua.Enabled = true;
                 btnXoa.Enabled = true;
+                return;
             }
         }
 

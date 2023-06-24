@@ -12,27 +12,27 @@ namespace QuanLyNhanSu.LogicTier
 {
     internal class QuanLyLoaiCaBUS
     {
-        private readonly QuanLyLoaiCaDAL quanLyLoaiCaDAL;
+        private readonly QuanLyLoaiCaDAL loaiCaDAL;
         public QuanLyLoaiCaBUS()
         {
-            quanLyLoaiCaDAL = new QuanLyLoaiCaDAL();
+            loaiCaDAL = new QuanLyLoaiCaDAL();
         }
         public IEnumerable<LoaiCaViewModels> GetAllLoaiCa()
         {
-            return quanLyLoaiCaDAL.GetAllLoaiCa();
+            return loaiCaDAL.GetAllLoaiCa();
         }
         public IEnumerable<LoaiCaViewModels> SearchLoaiCa(string timKiem)
         {
-            return quanLyLoaiCaDAL.SearchLoaiCa(timKiem);
+            return loaiCaDAL.SearchLoaiCa(timKiem);
         }
 
         public bool Save(LoaiCa loaiCa)
         {
-            return quanLyLoaiCaDAL.Save(loaiCa);
+            return loaiCaDAL.Save(loaiCa);
         }
         public bool Delete(LoaiCa loaiCa)
         {
-            return quanLyLoaiCaDAL.Delete(loaiCa.MaLC);
+            return loaiCaDAL.Delete(loaiCa.MaLC);
         }
     }
 }
