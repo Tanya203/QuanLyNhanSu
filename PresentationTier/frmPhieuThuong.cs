@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class frmPhieuThuong : Form
+    public partial class FrmPhieuThuong : Form
     {
         Thread currentForm;
-        public frmPhieuThuong()
+        public FrmPhieuThuong()
         {
             InitializeComponent();
         }
@@ -22,19 +22,18 @@ namespace QuanLyNhanSu.PresentationTier
         private void pnlMenu_Paint(object sender, PaintEventArgs e)
         {
 
-        }
-        public void ReturnHome()
-        {
-            this.Close();
-            Application.Run(new frmManHinhChinh());
-        }
-
+        }       
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            this.Close();
-            currentForm = new Thread(ReturnHome);
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
+        private void CloseForm(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

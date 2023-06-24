@@ -1,6 +1,6 @@
 ﻿namespace QuanLyNhanSu
 {
-    partial class frmDangNhap
+    partial class FrmDangNhap
     {
         /// <summary>
         /// Required designer variable.
@@ -134,6 +134,7 @@
             this.btnDangNhap.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDangNhap.UseCompatibleTextRendering = true;
             this.btnDangNhap.UseVisualStyleBackColor = true;
+            this.btnDangNhap.Click += new System.EventHandler(this.btnDangNhap_Click);
             // 
             // lblDangNhap
             // 
@@ -155,7 +156,7 @@
             this.pbUserIcon.TabIndex = 10;
             this.pbUserIcon.TabStop = false;
             // 
-            // frmDangNhap
+            // FrmDangNhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -166,7 +167,7 @@
             this.Controls.Add(this.pnDangNhap);
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(650, 650);
-            this.Name = "frmDangNhap";
+            this.Name = "FrmDangNhap";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng nhập";
             this.pnDangNhap.ResumeLayout(false);

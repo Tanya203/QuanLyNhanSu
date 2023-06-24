@@ -14,12 +14,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class frmQuanLyPhongBan : Form
+    public partial class FrmQuanLyPhongBan : Form
     {
         Thread currentForm;
         private readonly QuanLyPhongBanBUS phongBanBUS;
         private IEnumerable<PhongBanViewModel> danhSachPhongBan;
-        public frmQuanLyPhongBan()
+        public FrmQuanLyPhongBan()
         {
             InitializeComponent();
             this.Load += frmQuanLyPhongBan_Load;
@@ -66,17 +66,24 @@ namespace QuanLyNhanSu.PresentationTier
             txtTenPB.Text = string.Empty;
             txtTongSoNhanVien.Text = string.Empty;
         }
-        public void ReturnHome()
+        public void CloseCurrentForm()
         {
             this.Close();
-            Application.Run(new frmManHinhChinh());
+            Application.Run(new FrmQuanLyPhongBan());
+        }
+        public void Reload()
+        {
+            this.Close();
+            currentForm = new Thread(CloseCurrentForm);
+            currentForm.SetApartmentState(ApartmentState.STA);
+            currentForm.Start();
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            this.Close();
-            currentForm = new Thread(ReturnHome);
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
 
         private void dgvThongTinPhongBan_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -97,8 +104,7 @@ namespace QuanLyNhanSu.PresentationTier
                 TenPhongBan = txtTenPB.Text
             };
             phongBanBUS.Save(newPhongBan);
-            ClearAllText();
-            LoadPhongBan();
+            Reload();
         }
         private void btnHuy_Click(object sender, EventArgs e)
         {
@@ -159,6 +165,10 @@ namespace QuanLyNhanSu.PresentationTier
                 return;
             }
             LoadPhongBanTimKiem(txtTimKiem.Text);
+        }
+        private void CloseForm(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
         }
     } 
 }

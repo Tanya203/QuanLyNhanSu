@@ -12,24 +12,30 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu
 {
-    public partial class frmDangNhap : Form
+    public partial class FrmDangNhap : Form
     {
         Thread currentForm;
-        public frmDangNhap()
+        public FrmDangNhap()
         {
             InitializeComponent();
-        }
-        public void OpenQMK()
-        {
-            this.Close();
-            Application.Run(new frmQuenMatKhau());
-        }
+        }       
         private void llblQuenMatKhau_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            FrmQuenMatKhau frmOpen = new FrmQuenMatKhau();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
+        }
+        private void btnDangNhap_Click(object sender, EventArgs e)
+        {
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
+        }
+        private void CloseForm(object sender, FormClosedEventArgs e)
+        {
             this.Close();
-            currentForm = new Thread(OpenQMK);
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
         }
     }
 }

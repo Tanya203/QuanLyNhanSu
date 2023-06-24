@@ -11,24 +11,23 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class frmQuenMatKhau : Form
+    public partial class FrmQuenMatKhau : Form
     {
         Thread currentForm;
-        public frmQuenMatKhau()
+        public FrmQuenMatKhau()
         {
             InitializeComponent();
         }
-        public void ReturnLogin()
-        {
-            this.Close();
-            Application.Run(new frmDangNhap());
-        }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
+            FrmDangNhap frmOpen = new FrmDangNhap();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
+        }
+        private void CloseForm(object sender, FormClosedEventArgs e)
+        {
             this.Close();
-            currentForm = new Thread(ReturnLogin);
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
         }
     }
 }

@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class frmQuanLyNhanVien : Form
+    public partial class FrmQuanLyNhanVien : Form
     {
         Thread currentForm;
-        public frmQuanLyNhanVien()
+        public FrmQuanLyNhanVien()
         {
             InitializeComponent();
         }
@@ -24,19 +24,12 @@ namespace QuanLyNhanSu.PresentationTier
         {
 
         }
-
-        public void ReturnHome()
-        {
-            this.Close();
-            Application.Run(new frmManHinhChinh());
-        }
-
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            this.Close();
-            currentForm = new Thread(ReturnHome);
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
 
         private void dgvThongTinNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -52,6 +45,10 @@ namespace QuanLyNhanSu.PresentationTier
                 
             };
 
+        }
+        private void CloseForm(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

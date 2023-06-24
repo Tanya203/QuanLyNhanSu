@@ -1,6 +1,6 @@
 ﻿namespace QuanLyNhanSu.PresentationTier
 {
-    partial class frmThongTinTaiKhoan
+    partial class FrmThongTinTaiKhoan
     {
         /// <summary>
         /// Required designer variable.

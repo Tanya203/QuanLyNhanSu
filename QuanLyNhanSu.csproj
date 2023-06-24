@@ -159,137 +159,137 @@
     <Compile Include="LogicTier\QuanLyNhanVienBUS.cs" />
     <Compile Include="LogicTier\QuanLyPhongBanBUS.cs" />
     <Compile Include="LogicTier\QuanLyPhuCapBUS.cs" />
-    <Compile Include="PresentationTier\frmChamCong.cs">
+    <Compile Include="PresentationTier\FrmChamCong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmChamCong.Designer.cs">
-      <DependentUpon>frmChamCong.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmChamCong.Designer.cs">
+      <DependentUpon>FrmChamCong.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmChiTietLichLamViec.cs">
+    <Compile Include="PresentationTier\FrmChiTietLichLamViec.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmChiTietLichLamViec.Designer.cs">
-      <DependentUpon>frmChiTietLichLamViec.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmChiTietLichLamViec.Designer.cs">
+      <DependentUpon>FrmChiTietLichLamViec.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmChiTietPhieuPhat.cs">
+    <Compile Include="PresentationTier\FrmChiTietPhieuPhat.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmChiTietPhieuPhat.Designer.cs">
-      <DependentUpon>frmChiTietPhieuPhat.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmChiTietPhieuPhat.Designer.cs">
+      <DependentUpon>FrmChiTietPhieuPhat.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmChiTietPhieuThuong.cs">
+    <Compile Include="PresentationTier\FrmChiTietPhieuThuong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmChiTietPhieuThuong.Designer.cs">
-      <DependentUpon>frmChiTietPhieuThuong.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmChiTietPhieuThuong.Designer.cs">
+      <DependentUpon>FrmChiTietPhieuThuong.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmDangNhap.cs">
+    <Compile Include="PresentationTier\FrmDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmDangNhap.Designer.cs">
-      <DependentUpon>frmDangNhap.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmDangNhap.Designer.cs">
+      <DependentUpon>FrmDangNhap.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmLichLamViec.cs">
+    <Compile Include="PresentationTier\FrmLichLamViec.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmLichLamViec.Designer.cs">
-      <DependentUpon>frmLichLamViec.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmLichLamViec.Designer.cs">
+      <DependentUpon>FrmLichLamViec.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmLichSuThaoTac.cs">
+    <Compile Include="PresentationTier\FrmLichSuThaoTac.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmLichSuThaoTac.Designer.cs">
-      <DependentUpon>frmLichSuThaoTac.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmLichSuThaoTac.Designer.cs">
+      <DependentUpon>FrmLichSuThaoTac.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmManHinhChinh.cs">
+    <Compile Include="PresentationTier\FrmManHinhChinh.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmManHinhChinh.Designer.cs">
-      <DependentUpon>frmManHinhChinh.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmManHinhChinh.Designer.cs">
+      <DependentUpon>FrmManHinhChinh.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmPhanQuyen.cs">
+    <Compile Include="PresentationTier\FrmPhanQuyen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmPhanQuyen.Designer.cs">
-      <DependentUpon>frmPhanQuyen.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmPhanQuyen.Designer.cs">
+      <DependentUpon>FrmPhanQuyen.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmPhieuPhat.cs">
+    <Compile Include="PresentationTier\FrmPhieuPhat.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmPhieuPhat.Designer.cs">
-      <DependentUpon>frmPhieuPhat.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmPhieuPhat.Designer.cs">
+      <DependentUpon>FrmPhieuPhat.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmPhieuThuong.cs">
+    <Compile Include="PresentationTier\FrmPhieuThuong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmPhieuThuong.Designer.cs">
-      <DependentUpon>frmPhieuThuong.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmPhieuThuong.Designer.cs">
+      <DependentUpon>FrmPhieuThuong.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyCa.cs">
+    <Compile Include="PresentationTier\FrmQuanLyCa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyCa.Designer.cs">
-      <DependentUpon>frmQuanLyCa.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmQuanLyCa.Designer.cs">
+      <DependentUpon>FrmQuanLyCa.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyChucVu.cs">
+    <Compile Include="PresentationTier\FrmQuanLyChucVu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyChucVu.Designer.cs">
-      <DependentUpon>frmQuanLyChucVu.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmQuanLyChucVu.Designer.cs">
+      <DependentUpon>FrmQuanLyChucVu.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyLoaiCa.cs">
+    <Compile Include="PresentationTier\FrmQuanLyLoaiCa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyLoaiCa.Designer.cs">
-      <DependentUpon>frmQuanLyLoaiCa.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmQuanLyLoaiCa.Designer.cs">
+      <DependentUpon>FrmQuanLyLoaiCa.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyLoaiHopDong.cs">
+    <Compile Include="PresentationTier\FrmQuanLyLoaiHopDong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyLoaiHopDong.Designer.cs">
-      <DependentUpon>frmQuanLyLoaiHopDong.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmQuanLyLoaiHopDong.Designer.cs">
+      <DependentUpon>FrmQuanLyLoaiHopDong.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyNhanVien.cs">
+    <Compile Include="PresentationTier\FrmQuanLyNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyNhanVien.Designer.cs">
-      <DependentUpon>frmQuanLyNhanVien.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmQuanLyNhanVien.Designer.cs">
+      <DependentUpon>FrmQuanLyNhanVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyPhongBan.cs">
+    <Compile Include="PresentationTier\FrmQuanLyPhongBan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyPhongBan.Designer.cs">
-      <DependentUpon>frmQuanLyPhongBan.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmQuanLyPhongBan.Designer.cs">
+      <DependentUpon>FrmQuanLyPhongBan.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyPhuCap.cs">
+    <Compile Include="PresentationTier\FrmQuanLyPhuCap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmQuanLyPhuCap.Designer.cs">
-      <DependentUpon>frmQuanLyPhuCap.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmQuanLyPhuCap.Designer.cs">
+      <DependentUpon>FrmQuanLyPhuCap.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmQuenMatKhau.cs">
+    <Compile Include="PresentationTier\FrmQuenMatKhau.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmQuenMatKhau.Designer.cs">
-      <DependentUpon>frmQuenMatKhau.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmQuenMatKhau.Designer.cs">
+      <DependentUpon>FrmQuenMatKhau.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmThongKeLuong.cs">
+    <Compile Include="PresentationTier\FrmThongKeLuong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmThongKeLuong.Designer.cs">
-      <DependentUpon>frmThongKeLuong.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmThongKeLuong.Designer.cs">
+      <DependentUpon>FrmThongKeLuong.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmThongTinTaiKhoan.cs">
+    <Compile Include="PresentationTier\FrmThongTinTaiKhoan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmThongTinTaiKhoan.Designer.cs">
-      <DependentUpon>frmThongTinTaiKhoan.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmThongTinTaiKhoan.Designer.cs">
+      <DependentUpon>FrmThongTinTaiKhoan.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\frmTongPhuCapMotNhanVien.cs">
+    <Compile Include="PresentationTier\FrmTongPhuCapMotNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\frmTongPhuCapMotNhanVien.Designer.cs">
-      <DependentUpon>frmTongPhuCapMotNhanVien.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmTongPhuCapMotNhanVien.Designer.cs">
+      <DependentUpon>FrmTongPhuCapMotNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -299,71 +299,71 @@
     <Compile Include="ViewModels\NhanVienViewModel.cs" />
     <Compile Include="ViewModels\PhongBanViewModels.cs" />
     <Compile Include="ViewModels\PhuCapViewMModels.cs" />
-    <EmbeddedResource Include="PresentationTier\frmChamCong.resx">
-      <DependentUpon>frmChamCong.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmChamCong.resx">
+      <DependentUpon>FrmChamCong.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmChiTietLichLamViec.resx">
-      <DependentUpon>frmChiTietLichLamViec.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmChiTietLichLamViec.resx">
+      <DependentUpon>FrmChiTietLichLamViec.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmChiTietPhieuPhat.resx">
-      <DependentUpon>frmChiTietPhieuPhat.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmChiTietPhieuPhat.resx">
+      <DependentUpon>FrmChiTietPhieuPhat.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmChiTietPhieuThuong.resx">
-      <DependentUpon>frmChiTietPhieuThuong.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmChiTietPhieuThuong.resx">
+      <DependentUpon>FrmChiTietPhieuThuong.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmDangNhap.resx">
-      <DependentUpon>frmDangNhap.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmDangNhap.resx">
+      <DependentUpon>FrmDangNhap.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmLichLamViec.resx">
-      <DependentUpon>frmLichLamViec.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmLichLamViec.resx">
+      <DependentUpon>FrmLichLamViec.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmLichSuThaoTac.resx">
-      <DependentUpon>frmLichSuThaoTac.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmLichSuThaoTac.resx">
+      <DependentUpon>FrmLichSuThaoTac.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmManHinhChinh.resx">
-      <DependentUpon>frmManHinhChinh.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmManHinhChinh.resx">
+      <DependentUpon>FrmManHinhChinh.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmPhanQuyen.resx">
-      <DependentUpon>frmPhanQuyen.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmPhanQuyen.resx">
+      <DependentUpon>FrmPhanQuyen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmPhieuPhat.resx">
-      <DependentUpon>frmPhieuPhat.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmPhieuPhat.resx">
+      <DependentUpon>FrmPhieuPhat.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmPhieuThuong.resx">
-      <DependentUpon>frmPhieuThuong.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmPhieuThuong.resx">
+      <DependentUpon>FrmPhieuThuong.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmQuanLyCa.resx">
-      <DependentUpon>frmQuanLyCa.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmQuanLyCa.resx">
+      <DependentUpon>FrmQuanLyCa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmQuanLyChucVu.resx">
-      <DependentUpon>frmQuanLyChucVu.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmQuanLyChucVu.resx">
+      <DependentUpon>FrmQuanLyChucVu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmQuanLyLoaiCa.resx">
-      <DependentUpon>frmQuanLyLoaiCa.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmQuanLyLoaiCa.resx">
+      <DependentUpon>FrmQuanLyLoaiCa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmQuanLyLoaiHopDong.resx">
-      <DependentUpon>frmQuanLyLoaiHopDong.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmQuanLyLoaiHopDong.resx">
+      <DependentUpon>FrmQuanLyLoaiHopDong.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmQuanLyNhanVien.resx">
-      <DependentUpon>frmQuanLyNhanVien.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmQuanLyNhanVien.resx">
+      <DependentUpon>FrmQuanLyNhanVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmQuanLyPhongBan.resx">
-      <DependentUpon>frmQuanLyPhongBan.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmQuanLyPhongBan.resx">
+      <DependentUpon>FrmQuanLyPhongBan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmQuanLyPhuCap.resx">
-      <DependentUpon>frmQuanLyPhuCap.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmQuanLyPhuCap.resx">
+      <DependentUpon>FrmQuanLyPhuCap.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmQuenMatKhau.resx">
-      <DependentUpon>frmQuenMatKhau.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmQuenMatKhau.resx">
+      <DependentUpon>FrmQuenMatKhau.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmThongKeLuong.resx">
-      <DependentUpon>frmThongKeLuong.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmThongKeLuong.resx">
+      <DependentUpon>FrmThongKeLuong.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmThongTinTaiKhoan.resx">
-      <DependentUpon>frmThongTinTaiKhoan.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmThongTinTaiKhoan.resx">
+      <DependentUpon>FrmThongTinTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\frmTongPhuCapMotNhanVien.resx">
-      <DependentUpon>frmTongPhuCapMotNhanVien.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmTongPhuCapMotNhanVien.resx">
+      <DependentUpon>FrmTongPhuCapMotNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

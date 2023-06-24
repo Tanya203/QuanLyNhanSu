@@ -14,12 +14,12 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class frmQuanLyPhuCap : Form
+    public partial class FrmQuanLyPhuCap : Form
     {
         Thread currentForm;
         private readonly QuanLyPhuCapBUS phuCapBUS;
         private IEnumerable<PhuCapViewMModels> danhSachPhuCap;
-        public frmQuanLyPhuCap()
+        public FrmQuanLyPhuCap()
 
         {
             InitializeComponent();
@@ -70,17 +70,24 @@ namespace QuanLyNhanSu.PresentationTier
             txtSoTien.Text = string.Empty;
             txtSoLuongNhanVien.Text = string.Empty;
         }
-        public void ReturnHome()
+        public void CloseCurrentForm()
         {
             this.Close();
-            Application.Run(new frmManHinhChinh());
+            Application.Run(new FrmQuanLyPhuCap());
+        }
+        public void Reload()
+        {
+            this.Close();
+            currentForm = new Thread(CloseCurrentForm);
+            currentForm.SetApartmentState(ApartmentState.STA);
+            currentForm.Start();
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            this.Close();
-            currentForm = new Thread(ReturnHome);
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
         private void dgvThongTinPhuCap_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -101,8 +108,7 @@ namespace QuanLyNhanSu.PresentationTier
                 TienPhuCap = decimal.Parse(txtSoTien.Text)
             };
             phuCapBUS.Save(newPhuCap);
-            ClearAllText();
-            LoadPhuCap();
+            Reload();
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
@@ -168,6 +174,11 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 e.Handled = true;
             }
-        }        
+        }
+        private void CloseForm(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }
