@@ -2,7 +2,9 @@
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -51,8 +53,8 @@ namespace QuanLyNhanSu.DataTier
                 }
                 else//thêm mới
                     quanLyNhanSu.LoaiCas.Add(loaiCa);
-                quanLyNhanSu.SaveChanges();
-                MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                quanLyNhanSu.SaveChanges();                
+                MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);                
                 return true;
             }
             catch (Exception ex)
