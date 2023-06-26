@@ -76,6 +76,9 @@
             // 
             this.dgvPhanQuyen.AllowUserToAddRows = false;
             this.dgvPhanQuyen.AllowUserToDeleteRows = false;
+            this.dgvPhanQuyen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPhanQuyen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -91,7 +94,6 @@
             this.colTenQuyenHan,
             this.colChucVu,
             this.colCapQuyen});
-            this.dgvPhanQuyen.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvPhanQuyen.Location = new System.Drawing.Point(0, 249);
             this.dgvPhanQuyen.Name = "dgvPhanQuyen";
             this.dgvPhanQuyen.ReadOnly = true;
@@ -106,7 +108,7 @@
             this.dgvPhanQuyen.RowHeadersVisible = false;
             this.dgvPhanQuyen.RowHeadersWidth = 51;
             this.dgvPhanQuyen.RowTemplate.Height = 24;
-            this.dgvPhanQuyen.Size = new System.Drawing.Size(1924, 729);
+            this.dgvPhanQuyen.Size = new System.Drawing.Size(1924, 784);
             this.dgvPhanQuyen.TabIndex = 36;
             // 
             // colMaQH
@@ -289,12 +291,12 @@
             this.lblPhanQuyen.TabIndex = 47;
             this.lblPhanQuyen.Text = "Phân quyền";
             // 
-            // frmPhanQuyen
+            // FrmPhanQuyen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1924, 978);
+            this.ClientSize = new System.Drawing.Size(1924, 1033);
             this.Controls.Add(this.lblPhanQuyen);
             this.Controls.Add(this.cmbChucVu);
             this.Controls.Add(this.lblChucVu);
@@ -302,7 +304,8 @@
             this.Controls.Add(this.lblTimKiem);
             this.Controls.Add(this.dgvPhanQuyen);
             this.Controls.Add(this.pnlHeader);
-            this.Name = "frmPhanQuyen";
+            this.MinimumSize = new System.Drawing.Size(1918, 1018);
+            this.Name = "FrmPhanQuyen";
             this.Text = "frmPhanQuyen";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhanQuyen)).EndInit();

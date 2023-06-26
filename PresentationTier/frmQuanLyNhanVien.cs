@@ -50,5 +50,10 @@ namespace QuanLyNhanSu.PresentationTier
         {
             this.Close();
         }
+
+        private void pnlMenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

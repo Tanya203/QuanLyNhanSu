@@ -112,7 +112,6 @@
             this.pnlMenu.Controls.Add(this.btnQLCV);
             this.pnlMenu.Controls.Add(this.btnQLPB);
             this.pnlMenu.Controls.Add(this.btnQLNV);
-            this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlMenu.Location = new System.Drawing.Point(0, 0);
             this.pnlMenu.Name = "pnlMenu";
@@ -412,7 +411,6 @@
             this.panel1.Controls.Add(this.lblMaNV);
             this.panel1.Controls.Add(this.lblMaNhanVien);
             this.panel1.Controls.Add(this.pbAnhNV);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 100);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1924, 168);
@@ -532,26 +530,31 @@
             // 
             this.lblLichLamViec.AutoSize = true;
             this.lblLichLamViec.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLichLamViec.Location = new System.Drawing.Point(825, 281);
+            this.lblLichLamViec.Location = new System.Drawing.Point(838, 271);
             this.lblLichLamViec.Name = "lblLichLamViec";
             this.lblLichLamViec.Size = new System.Drawing.Size(264, 46);
             this.lblLichLamViec.TabIndex = 19;
             this.lblLichLamViec.Text = "Lịch làm việc";
+            this.lblLichLamViec.Click += new System.EventHandler(this.lblLichLamViec_Click);
             // 
             // dtpLichLamViec
             // 
             this.dtpLichLamViec.CustomFormat = "dddd dd/MM/yyyy";
             this.dtpLichLamViec.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpLichLamViec.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpLichLamViec.Location = new System.Drawing.Point(810, 330);
+            this.dtpLichLamViec.Location = new System.Drawing.Point(823, 320);
             this.dtpLichLamViec.Name = "dtpLichLamViec";
             this.dtpLichLamViec.Size = new System.Drawing.Size(308, 34);
             this.dtpLichLamViec.TabIndex = 16;
+            this.dtpLichLamViec.ValueChanged += new System.EventHandler(this.dtpLichLamViec_ValueChanged);
             // 
             // dgvLichLamViec
             // 
             this.dgvLichLamViec.AllowUserToAddRows = false;
             this.dgvLichLamViec.AllowUserToDeleteRows = false;
+            this.dgvLichLamViec.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLichLamViec.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvLichLamViec.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -572,14 +575,13 @@
             this.colPhep,
             this.colThoiGianDen,
             this.colThoiGianVe});
-            this.dgvLichLamViec.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvLichLamViec.Location = new System.Drawing.Point(0, 370);
+            this.dgvLichLamViec.Location = new System.Drawing.Point(0, 360);
             this.dgvLichLamViec.Name = "dgvLichLamViec";
             this.dgvLichLamViec.ReadOnly = true;
             this.dgvLichLamViec.RowHeadersVisible = false;
             this.dgvLichLamViec.RowHeadersWidth = 51;
             this.dgvLichLamViec.RowTemplate.Height = 24;
-            this.dgvLichLamViec.Size = new System.Drawing.Size(1924, 608);
+            this.dgvLichLamViec.Size = new System.Drawing.Size(1924, 673);
             this.dgvLichLamViec.TabIndex = 17;
             // 
             // colMaNV
@@ -638,18 +640,19 @@
             this.colThoiGianVe.Name = "colThoiGianVe";
             this.colThoiGianVe.ReadOnly = true;
             // 
-            // frmManHinhChinh
+            // FrmManHinhChinh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1924, 978);
+            this.ClientSize = new System.Drawing.Size(1924, 1033);
             this.Controls.Add(this.dgvLichLamViec);
             this.Controls.Add(this.dtpLichLamViec);
             this.Controls.Add(this.lblLichLamViec);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlMenu);
-            this.Name = "frmManHinhChinh";
+            this.MinimumSize = new System.Drawing.Size(1918, 1018);
+            this.Name = "FrmManHinhChinh";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

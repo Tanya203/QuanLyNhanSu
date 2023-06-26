@@ -177,6 +177,9 @@
             // 
             this.dgvLichSuThaoTac.AllowUserToAddRows = false;
             this.dgvLichSuThaoTac.AllowUserToDeleteRows = false;
+            this.dgvLichSuThaoTac.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLichSuThaoTac.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -191,7 +194,6 @@
             this.colNgayio,
             this.colMaNV,
             this.colThaoTacThucHien});
-            this.dgvLichSuThaoTac.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvLichSuThaoTac.Location = new System.Drawing.Point(0, 230);
             this.dgvLichSuThaoTac.Name = "dgvLichSuThaoTac";
             this.dgvLichSuThaoTac.ReadOnly = true;
@@ -206,7 +208,7 @@
             this.dgvLichSuThaoTac.RowHeadersVisible = false;
             this.dgvLichSuThaoTac.RowHeadersWidth = 51;
             this.dgvLichSuThaoTac.RowTemplate.Height = 24;
-            this.dgvLichSuThaoTac.Size = new System.Drawing.Size(1924, 748);
+            this.dgvLichSuThaoTac.Size = new System.Drawing.Size(1924, 803);
             this.dgvLichSuThaoTac.TabIndex = 49;
             // 
             // colNgayio
@@ -256,18 +258,20 @@
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
             this.txtTimKiem.TabIndex = 51;
             // 
-            // frmLichSuThaoTac
+            // FrmLichSuThaoTac
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1924, 978);
+            this.ClientSize = new System.Drawing.Size(1924, 1033);
             this.Controls.Add(this.lblLichSuThaoTac);
             this.Controls.Add(this.lblTimKiem);
             this.Controls.Add(this.dgvLichSuThaoTac);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.txtTimKiem);
-            this.Name = "frmLichSuThaoTac";
+            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1918, 1018);
+            this.Name = "FrmLichSuThaoTac";
             this.Text = "frmLichSuThaoTac";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmLichSuThaoTac_Load);

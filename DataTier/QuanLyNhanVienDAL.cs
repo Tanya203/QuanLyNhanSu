@@ -116,14 +116,10 @@ namespace QuanLyNhanSu.DataTier
                             return false;
                         }
                     }
-                }
-                // If the error message doesn't match any of the known error messages, rethrow the exception
+                }               
                 throw ex;
             }            
-        }
-                //-------------------
-               
-            
+        }                        
         
         public bool Delete(string maNV)
         {

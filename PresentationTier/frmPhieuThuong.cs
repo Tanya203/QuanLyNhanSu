@@ -35,5 +35,9 @@ namespace QuanLyNhanSu.PresentationTier
             this.Close();
         }
 
+        private void lblThongTinPhieuThuong_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

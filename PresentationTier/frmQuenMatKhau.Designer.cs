@@ -317,7 +317,7 @@
             this.btnTroVe.UseVisualStyleBackColor = false;
             this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
-            // frmQuenMatKhau
+            // FrmQuenMatKhau
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -332,8 +332,8 @@
             this.Controls.Add(this.grpXacThucThongTin);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(670, 890);
-            this.MinimumSize = new System.Drawing.Size(670, 824);
-            this.Name = "frmQuenMatKhau";
+            this.MinimumSize = new System.Drawing.Size(670, 890);
+            this.Name = "FrmQuenMatKhau";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quên mật khẩu";
             this.grpXacThucThongTin.ResumeLayout(false);

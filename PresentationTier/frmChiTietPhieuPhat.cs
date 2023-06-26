@@ -29,5 +29,30 @@ namespace QuanLyNhanSu.PresentationTier
         {
             this.Close();
         }
+
+        private void FrmChiTietPhieuPhat_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPhongBan_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblNhanVien_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblGhiChu_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlDetail_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

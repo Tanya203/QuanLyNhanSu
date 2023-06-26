@@ -132,5 +132,15 @@ namespace QuanLyNhanSu.PresentationTier
         {
             this.Close();
         }
+
+        private void dtpLichLamViec_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblLichLamViec_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

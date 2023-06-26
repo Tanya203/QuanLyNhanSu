@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
-            this.a = new System.Windows.Forms.TextBox();
+            this.txtTongTien = new System.Windows.Forms.TextBox();
             this.lblTongTien = new System.Windows.Forms.Label();
             this.dtpNgayLapPhieu = new System.Windows.Forms.DateTimePicker();
             this.txtMaPP = new System.Windows.Forms.TextBox();
@@ -68,82 +68,83 @@
             // txtTimKiem
             // 
             this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimKiem.Location = new System.Drawing.Point(1258, 230);
+            this.txtTimKiem.Location = new System.Drawing.Point(910, 358);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
             this.txtTimKiem.TabIndex = 59;
+            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
-            // a
+            // txtTongTien
             // 
-            this.a.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.a.Location = new System.Drawing.Point(272, 246);
-            this.a.Name = "a";
-            this.a.Size = new System.Drawing.Size(336, 34);
-            this.a.TabIndex = 48;
+            this.txtTongTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTongTien.Location = new System.Drawing.Point(668, 74);
+            this.txtTongTien.Name = "txtTongTien";
+            this.txtTongTien.Size = new System.Drawing.Size(226, 30);
+            this.txtTongTien.TabIndex = 48;
             // 
             // lblTongTien
             // 
             this.lblTongTien.AutoSize = true;
-            this.lblTongTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTongTien.Location = new System.Drawing.Point(15, 251);
+            this.lblTongTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTongTien.Location = new System.Drawing.Point(499, 79);
             this.lblTongTien.Name = "lblTongTien";
-            this.lblTongTien.Size = new System.Drawing.Size(131, 29);
+            this.lblTongTien.Size = new System.Drawing.Size(110, 25);
             this.lblTongTien.TabIndex = 49;
             this.lblTongTien.Text = "Tổng tiền:";
             // 
             // dtpNgayLapPhieu
             // 
             this.dtpNgayLapPhieu.CustomFormat = "HH:mm dd/MM/yyyy ";
-            this.dtpNgayLapPhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpNgayLapPhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNgayLapPhieu.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgayLapPhieu.Location = new System.Drawing.Point(272, 172);
+            this.dtpNgayLapPhieu.Location = new System.Drawing.Point(668, 27);
             this.dtpNgayLapPhieu.Name = "dtpNgayLapPhieu";
-            this.dtpNgayLapPhieu.Size = new System.Drawing.Size(336, 34);
+            this.dtpNgayLapPhieu.Size = new System.Drawing.Size(226, 30);
             this.dtpNgayLapPhieu.TabIndex = 47;
             // 
             // txtMaPP
             // 
-            this.txtMaPP.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaPP.Location = new System.Drawing.Point(272, 29);
+            this.txtMaPP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaPP.Location = new System.Drawing.Point(236, 27);
             this.txtMaPP.Name = "txtMaPP";
-            this.txtMaPP.Size = new System.Drawing.Size(336, 34);
+            this.txtMaPP.Size = new System.Drawing.Size(234, 30);
             this.txtMaPP.TabIndex = 46;
             // 
             // lblThoiGianBatDau
             // 
             this.lblThoiGianBatDau.AutoSize = true;
-            this.lblThoiGianBatDau.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThoiGianBatDau.Location = new System.Drawing.Point(15, 177);
+            this.lblThoiGianBatDau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThoiGianBatDau.Location = new System.Drawing.Point(499, 32);
             this.lblThoiGianBatDau.Name = "lblThoiGianBatDau";
-            this.lblThoiGianBatDau.Size = new System.Drawing.Size(195, 29);
+            this.lblThoiGianBatDau.Size = new System.Drawing.Size(163, 25);
             this.lblThoiGianBatDau.TabIndex = 6;
             this.lblThoiGianBatDau.Text = "Ngày lập phiếu:";
             // 
             // txtMaNV
             // 
-            this.txtMaNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaNV.Location = new System.Drawing.Point(272, 98);
+            this.txtMaNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaNV.Location = new System.Drawing.Point(236, 74);
             this.txtMaNV.Name = "txtMaNV";
-            this.txtMaNV.Size = new System.Drawing.Size(336, 34);
+            this.txtMaNV.Size = new System.Drawing.Size(234, 30);
             this.txtMaNV.TabIndex = 3;
             // 
             // lblNhanVienLapPhieu
             // 
             this.lblNhanVienLapPhieu.AutoSize = true;
-            this.lblNhanVienLapPhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNhanVienLapPhieu.Location = new System.Drawing.Point(15, 103);
+            this.lblNhanVienLapPhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNhanVienLapPhieu.Location = new System.Drawing.Point(15, 79);
             this.lblNhanVienLapPhieu.Name = "lblNhanVienLapPhieu";
-            this.lblNhanVienLapPhieu.Size = new System.Drawing.Size(251, 29);
+            this.lblNhanVienLapPhieu.Size = new System.Drawing.Size(210, 25);
             this.lblNhanVienLapPhieu.TabIndex = 4;
             this.lblNhanVienLapPhieu.Text = "Nhân viên lập phiếu:";
             // 
             // lblMaPhieuPhat
             // 
             this.lblMaPhieuPhat.AutoSize = true;
-            this.lblMaPhieuPhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaPhieuPhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaPhieuPhat.Location = new System.Drawing.Point(15, 32);
             this.lblMaPhieuPhat.Name = "lblMaPhieuPhat";
-            this.lblMaPhieuPhat.Size = new System.Drawing.Size(184, 29);
+            this.lblMaPhieuPhat.Size = new System.Drawing.Size(156, 25);
             this.lblMaPhieuPhat.TabIndex = 0;
             this.lblMaPhieuPhat.Text = "Mã phiếu phạt:";
             // 
@@ -151,7 +152,7 @@
             // 
             this.lblThongTinPhieuPhat.AutoSize = true;
             this.lblThongTinPhieuPhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThongTinPhieuPhat.Location = new System.Drawing.Point(195, 374);
+            this.lblThongTinPhieuPhat.Location = new System.Drawing.Point(833, 116);
             this.lblThongTinPhieuPhat.Name = "lblThongTinPhieuPhat";
             this.lblThongTinPhieuPhat.Size = new System.Drawing.Size(294, 32);
             this.lblThongTinPhieuPhat.TabIndex = 57;
@@ -160,7 +161,7 @@
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.SystemColors.Info;
-            this.pnlMenu.Controls.Add(this.a);
+            this.pnlMenu.Controls.Add(this.txtTongTien);
             this.pnlMenu.Controls.Add(this.lblTongTien);
             this.pnlMenu.Controls.Add(this.dtpNgayLapPhieu);
             this.pnlMenu.Controls.Add(this.txtMaPP);
@@ -170,9 +171,9 @@
             this.pnlMenu.Controls.Add(this.txtMaNV);
             this.pnlMenu.Controls.Add(this.lblNhanVienLapPhieu);
             this.pnlMenu.Controls.Add(this.lblMaPhieuPhat);
-            this.pnlMenu.Location = new System.Drawing.Point(40, 419);
+            this.pnlMenu.Location = new System.Drawing.Point(528, 151);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(621, 390);
+            this.pnlMenu.Size = new System.Drawing.Size(911, 185);
             this.pnlMenu.TabIndex = 56;
             // 
             // btnXoa
@@ -182,11 +183,11 @@
             this.btnXoa.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnXoa.FlatAppearance.BorderSize = 0;
             this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.Image = global::QuanLyNhanSu.Properties.Resources.delete;
-            this.btnXoa.Location = new System.Drawing.Point(326, 302);
+            this.btnXoa.Location = new System.Drawing.Point(497, 119);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(102, 49);
+            this.btnXoa.Size = new System.Drawing.Size(102, 51);
             this.btnXoa.TabIndex = 43;
             this.btnXoa.Text = "Xoá";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -199,11 +200,11 @@
             this.btnThem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnThem.FlatAppearance.BorderSize = 0;
             this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.Image = global::QuanLyNhanSu.Properties.Resources.add;
-            this.btnThem.Location = new System.Drawing.Point(170, 302);
+            this.btnThem.Location = new System.Drawing.Point(343, 119);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(122, 49);
+            this.btnThem.Size = new System.Drawing.Size(122, 51);
             this.btnThem.TabIndex = 42;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -214,14 +215,14 @@
             this.dgvThongTinPhieuPhat.AllowUserToAddRows = false;
             this.dgvThongTinPhieuPhat.AllowUserToDeleteRows = false;
             this.dgvThongTinPhieuPhat.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongTinPhieuPhat.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvThongTinPhieuPhat.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvThongTinPhieuPhat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvThongTinPhieuPhat.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaPP,
@@ -229,21 +230,22 @@
             this.colNgayLap,
             this.colTongTien,
             this.colChiTiet});
-            this.dgvThongTinPhieuPhat.Location = new System.Drawing.Point(694, 266);
+            this.dgvThongTinPhieuPhat.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvThongTinPhieuPhat.Location = new System.Drawing.Point(0, 394);
             this.dgvThongTinPhieuPhat.Name = "dgvThongTinPhieuPhat";
             this.dgvThongTinPhieuPhat.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongTinPhieuPhat.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvThongTinPhieuPhat.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvThongTinPhieuPhat.RowHeadersVisible = false;
             this.dgvThongTinPhieuPhat.RowHeadersWidth = 51;
             this.dgvThongTinPhieuPhat.RowTemplate.Height = 24;
-            this.dgvThongTinPhieuPhat.Size = new System.Drawing.Size(1218, 706);
+            this.dgvThongTinPhieuPhat.Size = new System.Drawing.Size(1924, 589);
             this.dgvThongTinPhieuPhat.TabIndex = 55;
             // 
             // colMaPP
@@ -369,11 +371,12 @@
             // 
             this.lblTimKiem.AutoSize = true;
             this.lblTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimKiem.Location = new System.Drawing.Point(1107, 227);
+            this.lblTimKiem.Location = new System.Drawing.Point(759, 355);
             this.lblTimKiem.Name = "lblTimKiem";
             this.lblTimKiem.Size = new System.Drawing.Size(145, 32);
             this.lblTimKiem.TabIndex = 58;
             this.lblTimKiem.Text = "Tìm kiếm:";
+            this.lblTimKiem.Click += new System.EventHandler(this.lblTimKiem_Click);
             // 
             // pnlHeader
             // 
@@ -413,19 +416,20 @@
             this.btnTroVe.UseVisualStyleBackColor = false;
             this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
-            // frmPhieuPhat
+            // FrmPhieuPhat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1924, 978);
+            this.ClientSize = new System.Drawing.Size(1924, 983);
             this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.lblThongTinPhieuPhat);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.dgvThongTinPhieuPhat);
             this.Controls.Add(this.lblTimKiem);
             this.Controls.Add(this.pnlHeader);
-            this.Name = "frmPhieuPhat";
+            this.MinimumSize = new System.Drawing.Size(1918, 1018);
+            this.Name = "FrmPhieuPhat";
             this.Text = "frmPhieuPhat";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlMenu.ResumeLayout(false);
@@ -441,7 +445,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtTimKiem;
-        private System.Windows.Forms.TextBox a;
+        private System.Windows.Forms.TextBox txtTongTien;
         private System.Windows.Forms.Label lblTongTien;
         private System.Windows.Forms.DateTimePicker dtpNgayLapPhieu;
         private System.Windows.Forms.TextBox txtMaPP;
