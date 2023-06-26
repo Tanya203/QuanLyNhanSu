@@ -77,7 +77,7 @@ namespace QuanLyNhanSu.DataTier
                     if (ketQua == DialogResult.Yes)
                     {
                         quanLyNhanSu.LoaiHopDongs.Remove(loaiHopDong);
-                        quanLyNhanSu.SaveChanges();
+                        quanLyNhanSu.SaveChanges();                       
                         MessageBox.Show("Đã xoá loại hợp đồng " + loaiHopDong.TenLoaiHopDong, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
@@ -86,7 +86,13 @@ namespace QuanLyNhanSu.DataTier
             }
             catch (Exception ex)
             {
-                throw ex;
+                if (ex.InnerException.ToString().Contains("FK_NhanVien_LoaiHopDong"))
+                {
+                    MessageBox.Show("Loại hợp đồng vẫn còn nhân viên. Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                else
+                    throw ex;
             }
         }
         public int TongSoNhanVienTrongLoaiHopDong(string maLHD)

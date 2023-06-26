@@ -79,8 +79,7 @@ namespace QuanLyNhanSu.DataTier.Models
                         quanLyNhanSu.SaveChanges();
                         MessageBox.Show("Đã xoá phòng ban " + phongBan.TenPhongBan, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
-                    }
-                    
+                    }                    
                 }
                 return false;
             }

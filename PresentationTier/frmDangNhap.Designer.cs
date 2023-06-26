@@ -166,6 +166,7 @@
             this.Controls.Add(this.lblDangNhap);
             this.Controls.Add(this.pnDangNhap);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(650, 650);
             this.MinimumSize = new System.Drawing.Size(650, 650);
             this.Name = "FrmDangNhap";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

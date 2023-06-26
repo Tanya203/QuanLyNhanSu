@@ -29,5 +29,15 @@ namespace QuanLyNhanSu.PresentationTier
         {
             this.Close();
         }
+
+        private void lblTimKiem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

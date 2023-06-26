@@ -18,6 +18,10 @@ namespace QuanLyNhanSu.PresentationTier
         {
             InitializeComponent();
         }
+        private void FrmChiTietPhieuThuong_Load(object sender, EventArgs e)
+        {
+
+        }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
             FrmPhieuThuong frmOpen = new FrmPhieuThuong();
@@ -28,6 +32,11 @@ namespace QuanLyNhanSu.PresentationTier
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
             this.Close();
+        }
+
+        private void cmbNhanVien_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

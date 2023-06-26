@@ -167,5 +167,15 @@ namespace QuanLyNhanSu.PresentationTier
         {
             this.Close();
         }
+
+        private void lblThongTinLoaiHopDong_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlMenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

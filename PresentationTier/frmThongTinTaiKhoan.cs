@@ -34,5 +34,30 @@ namespace QuanLyNhanSu.PresentationTier
         {
             this.Close();
         }
+
+        private void pnlMenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblNgayVaoLam_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpNgayVaoLam_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblThongTinTaiKhoan_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
