@@ -33,8 +33,8 @@ namespace QuanLyNhanSu.DataTier.Models
                 MaPC = x.MaPC,
                 TenPhuCap = x.TenPhuCap,
                 TienPhuCap = x.TienPhuCap,
-            }).Where(pc => pc.MaPC.ToString().Contains(timKiem) ||
-                     pc.TenPhuCap.ToString().Contains(timKiem) ||
+            }).Where(pc => pc.MaPC.Contains(timKiem) ||
+                     pc.TenPhuCap.Contains(timKiem) ||
                      pc.TienPhuCap.ToString().Contains(timKiem)).ToList();
             return danhSachPhuCap;
         }
@@ -72,7 +72,7 @@ namespace QuanLyNhanSu.DataTier.Models
                 throw ex;
             }
         }
-        public bool Delete(string maPC  )
+        public bool Delete(string maPC)
         {
             try
             {

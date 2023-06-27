@@ -17,6 +17,7 @@ namespace QuanLyNhanSu.DataTier
         public QuanLyLoaiHopDongDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
+            MessageBoxManager.Register();
         }
         public IEnumerable<LoaiHopDongViewModels> GetAllLoaiHopDong()
         {
@@ -33,8 +34,8 @@ namespace QuanLyNhanSu.DataTier
             {
                 MaLHD = x.MaLHD,
                 TenLoaiHopDong = x.TenLoaiHopDong,
-            }).Where(pb => pb.TenLoaiHopDong.ToString().Contains(timKiem) ||
-                     pb.MaLHD.ToString().Contains(timKiem)).ToList();
+            }).Where(pb => pb.TenLoaiHopDong.Contains(timKiem) ||
+                     pb.MaLHD.Contains(timKiem)).ToList();
             return danhSachLoaiHopDong;
         }
         public bool Save(LoaiHopDong loaiHopDong)
@@ -61,7 +62,7 @@ namespace QuanLyNhanSu.DataTier
                     return false;
                 }
                 else
-                    throw ex;
+                    throw new Exception("Unknow Error!!!");
             }
         }
         public bool Delete(string maLHD)
@@ -92,8 +93,18 @@ namespace QuanLyNhanSu.DataTier
                     return false;
                 }
                 else
-                    throw ex;
+                {
+                    MessageBoxManager.Yes = "OK";
+                    MessageBoxManager.No = "Chi tiết lỗi";
+                    DialogResult ketQua = MessageBox.Show("UNKNOWN ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                    if (ketQua == DialogResult.No)
+                    {
+                        MessageBox.Show(ex.InnerException.ToString(),"Chi tiết lỗi", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    }
+                    return false;
+                }
             }
+                    
         }
         public int TongSoNhanVienTrongLoaiHopDong(string maLHD)
         {
