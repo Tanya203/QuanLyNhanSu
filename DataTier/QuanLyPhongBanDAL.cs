@@ -33,8 +33,8 @@ namespace QuanLyNhanSu.DataTier.Models
             {
                 MaPB = x.MaPB,
                 TenPhongBan = x.TenPhongBan,
-            }).Where(pb => pb.TenPhongBan.ToString().Contains(timKiem)|| 
-                     pb.MaPB.ToString().Contains(timKiem)).ToList();
+            }).Where(pb => pb.TenPhongBan.Contains(timKiem)|| 
+                     pb.MaPB.Contains(timKiem)).ToList();
             return danhSachPhongBan;
         }
         public bool Save(PhongBan phongBan)

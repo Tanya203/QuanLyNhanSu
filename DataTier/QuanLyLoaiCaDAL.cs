@@ -18,6 +18,7 @@ namespace QuanLyNhanSu.DataTier
         public QuanLyLoaiCaDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
+            MessageBoxManager.Register();
         }
         public IEnumerable<LoaiCaViewModels> GetAllLoaiCa()
         {
@@ -36,8 +37,8 @@ namespace QuanLyNhanSu.DataTier
                 MaLoaiCa = x.MaLC,
                 TenLoaiCa = x.TenLoaiCa,
                 HeSoLuong = x.HeSoLuong,
-            }).Where(lc => lc.MaLoaiCa.ToString().Contains(timKiem) ||
-                     lc.TenLoaiCa.ToString().Contains(timKiem) ||
+            }).Where(lc => lc.MaLoaiCa.Contains(timKiem) ||
+                     lc.TenLoaiCa.Contains(timKiem) ||
                      lc.HeSoLuong.ToString().Contains(timKiem)).ToList();
             return danhSachLoaiCa;
         }
