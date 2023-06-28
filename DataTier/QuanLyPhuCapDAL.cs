@@ -68,15 +68,22 @@ namespace QuanLyNhanSu.DataTier.Models
                         MessageBox.Show(error.Value, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
-                }                                             
-                throw ex;
+                }
+                MessageBoxManager.Yes = "OK";
+                MessageBoxManager.No = "Chi tiết lỗi";
+                DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (ketQua == DialogResult.No)
+                {
+                    MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return false;
             }
         }
         public bool Delete(string maPC)
         {
+            var phuCap = quanLyNhanSu.PhuCaps.Where(pc => pc.MaPC == maPC).FirstOrDefault();
             try
-            {
-                var phuCap = quanLyNhanSu.PhuCaps.Where(pc => pc.MaPC == maPC).FirstOrDefault();
+            {                
                 if (phuCap != null)
                 {
                     MessageBoxManager.Yes = "Có";
@@ -94,7 +101,14 @@ namespace QuanLyNhanSu.DataTier.Models
             }
             catch (Exception ex)
             {
-                throw ex;
+                MessageBoxManager.Yes = "OK";
+                MessageBoxManager.No = "Chi tiết lỗi";
+                DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (ketQua == DialogResult.No)
+                {
+                    MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return false;
             }
         }
         public int TongSoNhanVienTrongPhuCap(string maPC)

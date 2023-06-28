@@ -17,7 +17,7 @@ namespace QuanLyNhanSu.DataTier
         public QuanLyCaDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
-            MessageBoxManager.Register();                     
+            MessageBoxManager.Register_OnceOnly();
         }
         public IEnumerable<CaViewModels> GetAllCa()
         {
@@ -78,17 +78,25 @@ namespace QuanLyNhanSu.DataTier
                         return false;
                     }
                 }
-                throw ex;
+                MessageBoxManager.Yes = "OK";
+                MessageBoxManager.No = "Chi tiết lỗi";
+                DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (ketQua == DialogResult.No)
+                {
+                    MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return false;
             }
         }
         public bool Delete(string maCa)
         {
+            Ca ca = quanLyNhanSu.Cas.Where(c => c.MaCa == maCa).FirstOrDefault();
             try
-            {
-                Ca ca = quanLyNhanSu.Cas.Where(c => c.MaCa == maCa).FirstOrDefault();
+            {                
                 if (ca != null)
-                {                    
-                    
+                {
+                    MessageBoxManager.Yes = "Có";
+                    MessageBoxManager.No = "Không";
                     DialogResult ketQua = MessageBox.Show("Xác nhận xoá ca " + ca.TenCa + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (ketQua == DialogResult.Yes)
                     {
@@ -103,15 +111,15 @@ namespace QuanLyNhanSu.DataTier
                 return false;
             }
             catch (Exception ex)
-            {                         
+            {
                 MessageBoxManager.Yes = "OK";
                 MessageBoxManager.No = "Chi tiết lỗi";
-                DialogResult ketQua = MessageBox.Show("UNKNOWN ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if (ketQua == DialogResult.No)
                 {
                     MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                return false;                
+                return false;
             }
         }
     }

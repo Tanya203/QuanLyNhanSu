@@ -17,7 +17,7 @@ namespace QuanLyNhanSu.DataTier
         public QuanLyLoaiHopDongDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
-            MessageBoxManager.Register();
+            MessageBoxManager.Register_OnceOnly();
         }
         public IEnumerable<LoaiHopDongViewModels> GetAllLoaiHopDong()
         {
@@ -67,9 +67,9 @@ namespace QuanLyNhanSu.DataTier
         }
         public bool Delete(string maLHD)
         {
+            var loaiHopDong = quanLyNhanSu.LoaiHopDongs.Where(lhd => lhd.MaLHD == maLHD).FirstOrDefault();
             try
-            {
-                var loaiHopDong = quanLyNhanSu.LoaiHopDongs.Where(lhd => lhd.MaLHD == maLHD).FirstOrDefault();
+            {                
                 if (loaiHopDong != null)
                 {
                     MessageBoxManager.Yes = "Có";
@@ -96,7 +96,7 @@ namespace QuanLyNhanSu.DataTier
                 {
                     MessageBoxManager.Yes = "OK";
                     MessageBoxManager.No = "Chi tiết lỗi";
-                    DialogResult ketQua = MessageBox.Show("UNKNOWN ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                    DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                     if (ketQua == DialogResult.No)
                     {
                         MessageBox.Show(ex.InnerException.ToString(),"Chi tiết lỗi", MessageBoxButtons.OK,MessageBoxIcon.Error);

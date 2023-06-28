@@ -60,14 +60,24 @@ namespace QuanLyNhanSu.DataTier.Models
                     return false;
                 }
                 else
-                    throw ex;
+                {
+                    MessageBoxManager.Yes = "OK";
+                    MessageBoxManager.No = "Chi tiết lỗi";
+                    DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                    if (ketQua == DialogResult.No)
+                    {
+                        MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return false;
+                }
+                    
             }            
         }
         public bool Delete(string maPB)
         {
+            var phongBan = quanLyNhanSu.PhongBans.Where(pc => pc.MaPB == maPB).FirstOrDefault();
             try
-            {
-                var phongBan = quanLyNhanSu.PhongBans.Where(pc => pc.MaPB == maPB).FirstOrDefault();
+            {                
                 if(phongBan != null)
                 {
                     MessageBoxManager.Yes = "Có";
@@ -85,7 +95,19 @@ namespace QuanLyNhanSu.DataTier.Models
             }
             catch(Exception ex)
             {
-                throw ex;
+                if (ex.InnerException.ToString().Contains("FK_NhanVien_ChucVu"))
+                {
+                    MessageBox.Show("Chức vụ thuộc phòng ban " + phongBan.TenPhongBan + " vẫn còn nhân viên. Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                MessageBoxManager.Yes = "OK";
+                MessageBoxManager.No = "Chi tiết lỗi";
+                DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (ketQua == DialogResult.No)
+                {
+                    MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return false;
             }
         }   
         public int TongSoNhanVienTrongPhongBan(string maPB)
