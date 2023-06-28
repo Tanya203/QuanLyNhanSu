@@ -49,7 +49,7 @@ namespace QuanLyNhanSu.DataTier
                 SoNgayPhep = x.SoNgayPhep,
                 LuongCoBan = x.LuongCoBan,
                 Hinh = x.Hinh,
-            }).ToList();
+            }).OrderBy(nv => nv.MaNV).ToList();
             return danhSachNhanVien;
         }
         public bool Save(NhanVien nhanVien)

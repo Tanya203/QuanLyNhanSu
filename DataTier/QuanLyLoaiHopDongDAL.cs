@@ -25,7 +25,7 @@ namespace QuanLyNhanSu.DataTier
             {
                 MaLHD = x.MaLHD,
                 TenLoaiHopDong = x.TenLoaiHopDong,
-            }).ToList();
+            }).OrderBy(lhd => lhd.MaLHD).ToList();
             return danhSachLoaiHopDong;
         }
         public IEnumerable<LoaiHopDongViewModels> SearchLoaiHopDong(string timKiem)

@@ -23,7 +23,7 @@ namespace QuanLyNhanSu.DataTier.Models
                 MaPC = x.MaPC,
                 TenPhuCap = x.TenPhuCap,
                 TienPhuCap = x.TienPhuCap,
-            }).ToList();
+            }).OrderBy(pc => pc.MaPC).ToList();
             return danhSachPhuCap;
         }
         public IEnumerable<PhuCapViewMModels> SearchPhuCap(string timKiem)
