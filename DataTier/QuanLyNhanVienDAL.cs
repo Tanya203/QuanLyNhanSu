@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Data.Entity.Migrations;
 using System.Windows.Forms;
+using WECPOFLogic;
 
 namespace QuanLyNhanSu.DataTier
 {
@@ -106,18 +107,23 @@ namespace QuanLyNhanSu.DataTier
                     { "CHECK_TaiKhoan", "Độ dài tại khoản phải >= 5 và =<15 ký tự" },
                     { "CHECK_ThoiHanHopDong", "Thời hạn hợp đồng phải lơn hơn ngày vào làm" }
                 };
-                if (ex != null)
+                
+                foreach (KeyValuePair<string, string> error in errorMessages)
                 {
-                    foreach (KeyValuePair<string, string> error in errorMessages)
+                    if (ex.InnerException.ToString().Contains(error.Key))
                     {
-                        if (ex.InnerException.ToString().Contains(error.Key))
-                        {
-                            MessageBox.Show(error.Value, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return false;
-                        }
+                        MessageBox.Show(error.Value, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
                     }
-                }               
-                throw ex;
+                }
+                MessageBoxManager.Yes = "OK";
+                MessageBoxManager.No = "Chi tiết lỗi";
+                DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (ketQua == DialogResult.No)
+                {
+                    MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return false;
             }            
         }                        
         
@@ -136,7 +142,14 @@ namespace QuanLyNhanSu.DataTier
             }
             catch (Exception ex)
             {
-                throw ex;
+                MessageBoxManager.Yes = "OK";
+                MessageBoxManager.No = "Chi tiết lỗi";
+                DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (ketQua == DialogResult.No)
+                {
+                    MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return false;
             }
         }
 

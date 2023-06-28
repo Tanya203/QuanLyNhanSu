@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WECPOFLogic;
 
 namespace QuanLyNhanSu.DataTier
 {
@@ -15,6 +16,7 @@ namespace QuanLyNhanSu.DataTier
         public QuanLyChucVuDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
+            MessageBoxManager.Register_OnceOnly();
         }
         public IEnumerable<ChucVuViewModels> GetAllChucVu()
         {
@@ -85,8 +87,15 @@ namespace QuanLyNhanSu.DataTier
                         MessageBox.Show(error.Value, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
-                }                
-                throw new Exception("Unknow Error!!!");
+                }
+                MessageBoxManager.Yes = "OK";
+                MessageBoxManager.No = "Chi tiết lỗi";
+                DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (ketQua == DialogResult.No)
+                {
+                    MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return false;
             }
         }
 
