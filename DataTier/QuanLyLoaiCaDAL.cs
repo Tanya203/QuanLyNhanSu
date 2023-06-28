@@ -27,7 +27,7 @@ namespace QuanLyNhanSu.DataTier
                 MaLoaiCa = x.MaLC,
                 TenLoaiCa = x.TenLoaiCa,
                 HeSoLuong = x.HeSoLuong,
-            }).ToList();
+            }).OrderBy(lc => lc.MaLoaiCa).ToList();
             return danhSachLoaiCa;
         }
         public IEnumerable<LoaiCaViewModels> SearchLoaiCa(string timKiem)

@@ -27,7 +27,7 @@ namespace QuanLyNhanSu.DataTier
                 TenCa = x.TenCa,
                 GioBatDau = x.GioBatDau,
                 GioKetThuc = x.GioKetThuc,
-            }).ToList();
+            }).OrderBy(pb => pb.MaCa).ToList();
             return danhSachCa;
         }
         public IEnumerable<CaViewModels> SearchCa(string timKiem)

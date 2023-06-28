@@ -20,7 +20,7 @@ namespace QuanLyNhanSu.DataTier.Models
         }
         public IEnumerable<PhongBan> GetPhongBan()
         {
-            return quanLyNhanSu.PhongBans.ToList();
+            return quanLyNhanSu.PhongBans.OrderBy(pb => pb.MaPB).ToList();
         }
         public IEnumerable<PhongBanViewModel> GetAllPhongBan()
         {
@@ -28,7 +28,7 @@ namespace QuanLyNhanSu.DataTier.Models
             {
                 MaPB = x.MaPB,
                 TenPhongBan = x.TenPhongBan,
-            }).ToList();
+            }).OrderBy(pb => pb.MaPB).ToList();
             return danhSachPhongBan;
         }
         public IEnumerable<PhongBanViewModel> SearchPhongBan(string timKiem)

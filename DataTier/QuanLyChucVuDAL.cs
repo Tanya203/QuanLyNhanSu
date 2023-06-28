@@ -29,8 +29,10 @@ namespace QuanLyNhanSu.DataTier
                                         TenChucVu = chucVu.TenChucVu,
                                         LuongKhoiDiem = chucVu.LuongKhoiDiem,
                                         TenPhongBan = phongBan.TenPhongBan
-                                    } into chucVu
-                                    select chucVu;
+                                    } 
+                                    into chucVu
+                                 orderby chucVu.MaCV
+                                 select chucVu;
             return danhSachChucVu;                                   
         }
         public IEnumerable<ChucVuViewModels> LoadChucVuTheoPhongBan(string maPB)
