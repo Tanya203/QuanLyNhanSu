@@ -33,9 +33,21 @@ namespace QuanLyNhanSu.DataTier
                                     select chucVu;
             return danhSachChucVu;                                   
         }
-        public IEnumerable<ChucVu> LoadChucVuTheoPhongBan(string maPB)
+        public IEnumerable<ChucVuViewModels> LoadChucVuTheoPhongBan(string maPB)
         {
-            return quanLyNhanSu.ChucVus.Where(cv => cv.MaPB == maPB).ToList();
+            var danhSachChucVu = from chucVu in quanLyNhanSu.ChucVus
+                                 join phongBan in quanLyNhanSu.PhongBans on chucVu.MaPB equals phongBan.MaPB
+                                 select new ChucVuViewModels
+                                 {
+                                     MaCV = chucVu.MaCV,
+                                     MaPB = chucVu.MaPB,
+                                     TenChucVu = chucVu.TenChucVu,
+                                     LuongKhoiDiem = chucVu.LuongKhoiDiem,
+                                     TenPhongBan = phongBan.TenPhongBan
+                                 } into chucVu
+                                 where chucVu.MaPB == maPB
+                                 select chucVu;
+            return danhSachChucVu;
         }
 
         public IEnumerable<ChucVuViewModels> SearchChucVu(string timKiem)
@@ -97,6 +109,48 @@ namespace QuanLyNhanSu.DataTier
                 }
                 return false;
             }
+        }
+        public bool Delete(string maCV)
+        {
+            var chucVu = quanLyNhanSu.ChucVus.Where(cv => cv.MaCV == maCV).FirstOrDefault();
+            try
+            {
+                if (chucVu != null)
+                {
+                    MessageBoxManager.Yes = "Có";
+                    MessageBoxManager.No = "Không";
+                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá chức vụ " + chucVu.TenChucVu + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (ketQua == DialogResult.Yes)
+                    {
+                        quanLyNhanSu.ChucVus.Remove(chucVu);
+                        quanLyNhanSu.SaveChanges();
+                        MessageBox.Show("Đã xoá chức vụ " + chucVu.TenChucVu, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException.ToString().Contains("FK_NhanVien_ChucVu"))
+                {
+                    MessageBox.Show("Vẫn còn nhân viên thuộc chức vụ " + chucVu.TenChucVu + ". Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                MessageBoxManager.Yes = "OK";
+                MessageBoxManager.No = "Chi tiết lỗi";
+                DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (ketQua == DialogResult.No)
+                {
+                    MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return false;
+            }
+        }
+        public int TongSoNhanVienThuocChucVu(string maCV)
+        {
+            int sl = quanLyNhanSu.NhanViens.Count(nv => nv.MaCV == maCV);            
+            return sl;
         }
 
     }

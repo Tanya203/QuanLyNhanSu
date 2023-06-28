@@ -18,6 +18,10 @@ namespace QuanLyNhanSu.DataTier.Models
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
         }
+        public IEnumerable<PhongBan> GetPhongBan()
+        {
+            return quanLyNhanSu.PhongBans.ToList();
+        }
         public IEnumerable<PhongBanViewModel> GetAllPhongBan()
         {
             var danhSachPhongBan = quanLyNhanSu.PhongBans.Select(x => new PhongBanViewModel
