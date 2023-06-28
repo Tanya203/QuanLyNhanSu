@@ -167,6 +167,7 @@
     <Compile Include="DataTier\QuanLyPhongBanDAL.cs" />
     <Compile Include="DataTier\QuanLyNhanVienDAL.cs" />
     <Compile Include="LogicTier\QuanLyCaBUS.cs" />
+    <Compile Include="LogicTier\QuanLyChucVuBUS.cs" />
     <Compile Include="LogicTier\QuanLyLoaiCaBUS.cs" />
     <Compile Include="LogicTier\QuanLyLoaiHopDongBUS.cs" />
     <Compile Include="LogicTier\QuanLyNhanVienBUS.cs" />

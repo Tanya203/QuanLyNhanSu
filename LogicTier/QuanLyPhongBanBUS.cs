@@ -22,8 +22,8 @@ namespace QuanLyNhanSu.LogicTier
         }
         public IEnumerable<PhongBanViewModel> SearchPhongBan(string timKiem)
         {
-            return phongBanDAL.SearchPhongBan(timKiem);        }
-
+            return phongBanDAL.SearchPhongBan(timKiem);        
+        }
         public bool Save(PhongBan phongBan)
         {
             return phongBanDAL.Save(phongBan);           
@@ -31,6 +31,10 @@ namespace QuanLyNhanSu.LogicTier
         public bool Delete(PhongBan phongBan)
         {
            return phongBanDAL.Delete(phongBan.MaPB);            
+        }
+        public IEnumerable<PhongBan> GetPhongBan()
+        {
+            return phongBanDAL.GetPhongBan();   
         }
         public int TongSoLuongNhanVienTrongPhongBan(string maPB)
         {
