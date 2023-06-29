@@ -196,9 +196,8 @@ namespace QuanLyNhanSu.DataTier
                     { "CHECK_SoNgayPhep", "Số ngày phép phải >= 0" },
                     { "CHECK_TaiKhoan", "Độ dài tại khoản phải >= 5 và =<15 ký tự" },
                     { "CHECK_ThoiHanHopDong", "Thời hạn hợp đồng phải lớn hơn ngày vào làm" }
-                };
-                
-                foreach (KeyValuePair<string, string> error in errorMessages)
+                };                
+                foreach (var error in errorMessages)
                 {
                     if (ex.InnerException.ToString().Contains(error.Key))
                     {

@@ -58,8 +58,6 @@
             this.rbKhac = new System.Windows.Forms.RadioButton();
             this.rbNu = new System.Windows.Forms.RadioButton();
             this.rbNam = new System.Windows.Forms.RadioButton();
-            this.dtpThoiHanHopDong = new System.Windows.Forms.DateTimePicker();
-            this.dtpNgayVaoLam = new System.Windows.Forms.DateTimePicker();
             this.txtPhuCap = new System.Windows.Forms.TextBox();
             this.txtLuongCoBan = new System.Windows.Forms.TextBox();
             this.txtSoNgayPhep = new System.Windows.Forms.TextBox();
@@ -77,9 +75,6 @@
             this.txtHo = new System.Windows.Forms.TextBox();
             this.txtCCCD_CMND = new System.Windows.Forms.TextBox();
             this.txtTaiKhoan = new System.Windows.Forms.TextBox();
-            this.cmbLoaiHopDong = new System.Windows.Forms.ComboBox();
-            this.cmbChucVu = new System.Windows.Forms.ComboBox();
-            this.cmbPhongBan = new System.Windows.Forms.ComboBox();
             this.txtMaNV = new System.Windows.Forms.TextBox();
             this.lblHinh = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -108,6 +103,11 @@
             this.lblMaNhanVien = new System.Windows.Forms.Label();
             this.lblPhongBan = new System.Windows.Forms.Label();
             this.lblChucVu = new System.Windows.Forms.Label();
+            this.txtPhongBan = new System.Windows.Forms.TextBox();
+            this.txtChucVu = new System.Windows.Forms.TextBox();
+            this.txtLoaiHopDong = new System.Windows.Forms.TextBox();
+            this.txtNgayVaoLam = new System.Windows.Forms.TextBox();
+            this.txtThoiHanHopDong = new System.Windows.Forms.TextBox();
             this.pnlHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -309,16 +309,17 @@
             // txtMatKhauMoi
             // 
             this.txtMatKhauMoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMatKhauMoi.Location = new System.Drawing.Point(274, 126);
+            this.txtMatKhauMoi.Location = new System.Drawing.Point(274, 130);
             this.txtMatKhauMoi.Name = "txtMatKhauMoi";
             this.txtMatKhauMoi.Size = new System.Drawing.Size(289, 27);
             this.txtMatKhauMoi.TabIndex = 29;
+            this.txtMatKhauMoi.UseSystemPasswordChar = true;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(18, 126);
+            this.label3.Location = new System.Drawing.Point(18, 132);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(204, 25);
             this.label3.TabIndex = 30;
@@ -331,6 +332,7 @@
             this.txtNhapLaiMatKhau.Name = "txtNhapLaiMatKhau";
             this.txtNhapLaiMatKhau.Size = new System.Drawing.Size(289, 27);
             this.txtNhapLaiMatKhau.TabIndex = 32;
+            this.txtNhapLaiMatKhau.UseSystemPasswordChar = true;
             // 
             // lblNhapLaiMatKhau
             // 
@@ -379,6 +381,7 @@
             this.txtMatKhauCu.Name = "txtMatKhauCu";
             this.txtMatKhauCu.Size = new System.Drawing.Size(289, 27);
             this.txtMatKhauCu.TabIndex = 39;
+            this.txtMatKhauCu.UseSystemPasswordChar = true;
             // 
             // lblNhapmatKhauCu
             // 
@@ -396,6 +399,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlMenu.BackColor = System.Drawing.SystemColors.Info;
+            this.pnlMenu.Controls.Add(this.txtThoiHanHopDong);
+            this.pnlMenu.Controls.Add(this.txtNgayVaoLam);
+            this.pnlMenu.Controls.Add(this.txtLoaiHopDong);
+            this.pnlMenu.Controls.Add(this.txtChucVu);
+            this.pnlMenu.Controls.Add(this.txtPhongBan);
             this.pnlMenu.Controls.Add(this.button1);
             this.pnlMenu.Controls.Add(this.btnLuu);
             this.pnlMenu.Controls.Add(this.dtpNTNS);
@@ -405,8 +413,6 @@
             this.pnlMenu.Controls.Add(this.rbKhac);
             this.pnlMenu.Controls.Add(this.rbNu);
             this.pnlMenu.Controls.Add(this.rbNam);
-            this.pnlMenu.Controls.Add(this.dtpThoiHanHopDong);
-            this.pnlMenu.Controls.Add(this.dtpNgayVaoLam);
             this.pnlMenu.Controls.Add(this.txtPhuCap);
             this.pnlMenu.Controls.Add(this.txtLuongCoBan);
             this.pnlMenu.Controls.Add(this.txtSoNgayPhep);
@@ -424,9 +430,6 @@
             this.pnlMenu.Controls.Add(this.txtHo);
             this.pnlMenu.Controls.Add(this.txtCCCD_CMND);
             this.pnlMenu.Controls.Add(this.txtTaiKhoan);
-            this.pnlMenu.Controls.Add(this.cmbLoaiHopDong);
-            this.pnlMenu.Controls.Add(this.cmbChucVu);
-            this.pnlMenu.Controls.Add(this.cmbPhongBan);
             this.pnlMenu.Controls.Add(this.txtMaNV);
             this.pnlMenu.Controls.Add(this.lblHinh);
             this.pnlMenu.Controls.Add(this.label2);
@@ -542,31 +545,6 @@
             this.rbNam.TabStop = true;
             this.rbNam.Text = "Nam";
             this.rbNam.UseVisualStyleBackColor = true;
-            // 
-            // dtpThoiHanHopDong
-            // 
-            this.dtpThoiHanHopDong.AllowDrop = true;
-            this.dtpThoiHanHopDong.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtpThoiHanHopDong.CustomFormat = "dd/MM/yyyy";
-            this.dtpThoiHanHopDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpThoiHanHopDong.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpThoiHanHopDong.Location = new System.Drawing.Point(647, 13);
-            this.dtpThoiHanHopDong.Name = "dtpThoiHanHopDong";
-            this.dtpThoiHanHopDong.Size = new System.Drawing.Size(215, 27);
-            this.dtpThoiHanHopDong.TabIndex = 27;
-            // 
-            // dtpNgayVaoLam
-            // 
-            this.dtpNgayVaoLam.AllowDrop = true;
-            this.dtpNgayVaoLam.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtpNgayVaoLam.CustomFormat = "dd/MM/yyyy";
-            this.dtpNgayVaoLam.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpNgayVaoLam.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgayVaoLam.Location = new System.Drawing.Point(217, 699);
-            this.dtpNgayVaoLam.Name = "dtpNgayVaoLam";
-            this.dtpNgayVaoLam.Size = new System.Drawing.Size(211, 27);
-            this.dtpNgayVaoLam.TabIndex = 26;
-            this.dtpNgayVaoLam.ValueChanged += new System.EventHandler(this.dtpNgayVaoLam_ValueChanged);
             // 
             // txtPhuCap
             // 
@@ -703,39 +681,6 @@
             this.txtTaiKhoan.Name = "txtTaiKhoan";
             this.txtTaiKhoan.Size = new System.Drawing.Size(212, 27);
             this.txtTaiKhoan.TabIndex = 6;
-            // 
-            // cmbLoaiHopDong
-            // 
-            this.cmbLoaiHopDong.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbLoaiHopDong.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLoaiHopDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbLoaiHopDong.FormattingEnabled = true;
-            this.cmbLoaiHopDong.Location = new System.Drawing.Point(216, 118);
-            this.cmbLoaiHopDong.Name = "cmbLoaiHopDong";
-            this.cmbLoaiHopDong.Size = new System.Drawing.Size(212, 28);
-            this.cmbLoaiHopDong.TabIndex = 5;
-            // 
-            // cmbChucVu
-            // 
-            this.cmbChucVu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbChucVu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbChucVu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbChucVu.FormattingEnabled = true;
-            this.cmbChucVu.Location = new System.Drawing.Point(216, 82);
-            this.cmbChucVu.Name = "cmbChucVu";
-            this.cmbChucVu.Size = new System.Drawing.Size(212, 28);
-            this.cmbChucVu.TabIndex = 4;
-            // 
-            // cmbPhongBan
-            // 
-            this.cmbPhongBan.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbPhongBan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbPhongBan.FormattingEnabled = true;
-            this.cmbPhongBan.Location = new System.Drawing.Point(216, 46);
-            this.cmbPhongBan.Name = "cmbPhongBan";
-            this.cmbPhongBan.Size = new System.Drawing.Size(212, 28);
-            this.cmbPhongBan.TabIndex = 3;
             // 
             // txtMaNV
             // 
@@ -1016,6 +961,46 @@
             this.lblChucVu.TabIndex = 2;
             this.lblChucVu.Text = "Chức vụ:";
             // 
+            // txtPhongBan
+            // 
+            this.txtPhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPhongBan.Location = new System.Drawing.Point(216, 50);
+            this.txtPhongBan.Name = "txtPhongBan";
+            this.txtPhongBan.Size = new System.Drawing.Size(212, 27);
+            this.txtPhongBan.TabIndex = 38;
+            // 
+            // txtChucVu
+            // 
+            this.txtChucVu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtChucVu.Location = new System.Drawing.Point(216, 86);
+            this.txtChucVu.Name = "txtChucVu";
+            this.txtChucVu.Size = new System.Drawing.Size(212, 27);
+            this.txtChucVu.TabIndex = 39;
+            // 
+            // txtLoaiHopDong
+            // 
+            this.txtLoaiHopDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoaiHopDong.Location = new System.Drawing.Point(216, 121);
+            this.txtLoaiHopDong.Name = "txtLoaiHopDong";
+            this.txtLoaiHopDong.Size = new System.Drawing.Size(212, 27);
+            this.txtLoaiHopDong.TabIndex = 40;
+            // 
+            // txtNgayVaoLam
+            // 
+            this.txtNgayVaoLam.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNgayVaoLam.Location = new System.Drawing.Point(216, 697);
+            this.txtNgayVaoLam.Name = "txtNgayVaoLam";
+            this.txtNgayVaoLam.Size = new System.Drawing.Size(211, 27);
+            this.txtNgayVaoLam.TabIndex = 41;
+            // 
+            // txtThoiHanHopDong
+            // 
+            this.txtThoiHanHopDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtThoiHanHopDong.Location = new System.Drawing.Point(647, 11);
+            this.txtThoiHanHopDong.Name = "txtThoiHanHopDong";
+            this.txtThoiHanHopDong.Size = new System.Drawing.Size(211, 27);
+            this.txtThoiHanHopDong.TabIndex = 42;
+            // 
             // FrmThongTinTaiKhoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -1073,8 +1058,6 @@
         private System.Windows.Forms.RadioButton rbKhac;
         private System.Windows.Forms.RadioButton rbNu;
         private System.Windows.Forms.RadioButton rbNam;
-        private System.Windows.Forms.DateTimePicker dtpThoiHanHopDong;
-        private System.Windows.Forms.DateTimePicker dtpNgayVaoLam;
         private System.Windows.Forms.TextBox txtPhuCap;
         private System.Windows.Forms.TextBox txtLuongCoBan;
         private System.Windows.Forms.TextBox txtSoNgayPhep;
@@ -1092,9 +1075,6 @@
         private System.Windows.Forms.TextBox txtHo;
         private System.Windows.Forms.TextBox txtCCCD_CMND;
         private System.Windows.Forms.TextBox txtTaiKhoan;
-        private System.Windows.Forms.ComboBox cmbLoaiHopDong;
-        private System.Windows.Forms.ComboBox cmbChucVu;
-        private System.Windows.Forms.ComboBox cmbPhongBan;
         private System.Windows.Forms.TextBox txtMaNV;
         private System.Windows.Forms.Label lblHinh;
         private System.Windows.Forms.Label label2;
@@ -1123,5 +1103,10 @@
         private System.Windows.Forms.Label lblMaNhanVien;
         private System.Windows.Forms.Label lblPhongBan;
         private System.Windows.Forms.Label lblChucVu;
+        private System.Windows.Forms.TextBox txtLoaiHopDong;
+        private System.Windows.Forms.TextBox txtChucVu;
+        private System.Windows.Forms.TextBox txtPhongBan;
+        private System.Windows.Forms.TextBox txtThoiHanHopDong;
+        private System.Windows.Forms.TextBox txtNgayVaoLam;
     }
 }
