@@ -40,5 +40,9 @@ namespace QuanLyNhanSu.LogicTier
         {
             return chucVuDAL.TongSoNhanVienThuocChucVu(maCV);
         }
+        public decimal GetLuongCoBanCuaChucVu(string maCV)
+        {
+            return chucVuDAL.GetLuongCoBanCuaChucVu(maCV);
+        }
     }
 }

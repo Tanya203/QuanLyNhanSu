@@ -39,6 +39,10 @@ namespace QuanLyNhanSu.DataTier
         {
             return quanLyNhanSu.ChucVus.Where(cv => cv.MaPB == maPB).OrderBy(cv => cv.MaCV).ToList();
         }
+        public decimal GetLuongCoBanCuaChucVu(string maCV)
+        {
+            return quanLyNhanSu.ChucVus.Where(cv => cv.MaCV == maCV).Sum(cv => cv.LuongKhoiDiem);
+        }
         public IEnumerable<ChucVuViewModels> SearchChucVu(string timKiem)
         {
             var danhSachPhongBan = from chucVu in quanLyNhanSu.ChucVus join phongBan in quanLyNhanSu.PhongBans on chucVu.MaPB equals phongBan.MaPB

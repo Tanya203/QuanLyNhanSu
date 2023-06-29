@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
             this.lblChucVuDN = new System.Windows.Forms.Label();
@@ -266,14 +266,14 @@
             this.dgvThongTinNhanVien.AllowUserToAddRows = false;
             this.dgvThongTinNhanVien.AllowUserToDeleteRows = false;
             this.dgvThongTinNhanVien.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongTinNhanVien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvThongTinNhanVien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvThongTinNhanVien.ColumnHeadersHeight = 29;
             this.dgvThongTinNhanVien.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaNV,
@@ -307,8 +307,8 @@
             this.dgvThongTinNhanVien.ReadOnly = true;
             this.dgvThongTinNhanVien.RowHeadersVisible = false;
             this.dgvThongTinNhanVien.RowHeadersWidth = 51;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvThongTinNhanVien.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvThongTinNhanVien.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvThongTinNhanVien.RowTemplate.Height = 24;
             this.dgvThongTinNhanVien.Size = new System.Drawing.Size(1924, 450);
             this.dgvThongTinNhanVien.TabIndex = 22;
@@ -648,13 +648,14 @@
             this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSua.Image = global::QuanLyNhanSu.Properties.Resources.fix;
-            this.btnSua.Location = new System.Drawing.Point(912, 276);
+            this.btnSua.Location = new System.Drawing.Point(772, 276);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(100, 49);
             this.btnSua.TabIndex = 36;
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = false;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
@@ -665,13 +666,14 @@
             this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.Image = global::QuanLyNhanSu.Properties.Resources.delete;
-            this.btnXoa.Location = new System.Drawing.Point(770, 276);
+            this.btnXoa.Location = new System.Drawing.Point(906, 276);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(102, 49);
             this.btnXoa.TabIndex = 35;
             this.btnXoa.Text = "Xoá";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // cbHienThiMatKhau
             // 
@@ -693,6 +695,7 @@
             this.txtNhapLaiMatKhau.Size = new System.Drawing.Size(181, 27);
             this.txtNhapLaiMatKhau.TabIndex = 8;
             this.txtNhapLaiMatKhau.UseSystemPasswordChar = true;
+            this.txtNhapLaiMatKhau.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblNhapLaiMatKhau
             // 
@@ -713,9 +716,10 @@
             this.btnThemPhuCap.Image = global::QuanLyNhanSu.Properties.Resources.add_small;
             this.btnThemPhuCap.Location = new System.Drawing.Point(1257, 195);
             this.btnThemPhuCap.Name = "btnThemPhuCap";
-            this.btnThemPhuCap.Size = new System.Drawing.Size(39, 33);
+            this.btnThemPhuCap.Size = new System.Drawing.Size(39, 38);
             this.btnThemPhuCap.TabIndex = 31;
             this.btnThemPhuCap.UseVisualStyleBackColor = false;
+            this.btnThemPhuCap.Click += new System.EventHandler(this.btnThemPhuCap_Click);
             // 
             // btnThem
             // 
@@ -813,6 +817,8 @@
             this.txtLuongCoBan.Name = "txtLuongCoBan";
             this.txtLuongCoBan.Size = new System.Drawing.Size(172, 27);
             this.txtLuongCoBan.TabIndex = 30;
+            this.txtLuongCoBan.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtLuongCoBan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLuongCoBan_KeyPress);
             // 
             // txtSoNgayPhep
             // 
@@ -821,6 +827,8 @@
             this.txtSoNgayPhep.Name = "txtSoNgayPhep";
             this.txtSoNgayPhep.Size = new System.Drawing.Size(172, 27);
             this.txtSoNgayPhep.TabIndex = 29;
+            this.txtSoNgayPhep.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtSoNgayPhep.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSoNgayPhep_KeyPress);
             // 
             // txtTinhTrang
             // 
@@ -829,6 +837,7 @@
             this.txtTinhTrang.Name = "txtTinhTrang";
             this.txtTinhTrang.Size = new System.Drawing.Size(172, 27);
             this.txtTinhTrang.TabIndex = 28;
+            this.txtTinhTrang.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtTrinhDoHocVan
             // 
@@ -837,6 +846,7 @@
             this.txtTrinhDoHocVan.Name = "txtTrinhDoHocVan";
             this.txtTrinhDoHocVan.Size = new System.Drawing.Size(181, 27);
             this.txtTrinhDoHocVan.TabIndex = 25;
+            this.txtTrinhDoHocVan.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtEmail
             // 
@@ -845,6 +855,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(179, 27);
             this.txtEmail.TabIndex = 24;
+            this.txtEmail.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtSDT
             // 
@@ -853,6 +864,7 @@
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(179, 27);
             this.txtSDT.TabIndex = 23;
+            this.txtSDT.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtTinh_ThanhPho
             // 
@@ -861,6 +873,7 @@
             this.txtTinh_ThanhPho.Name = "txtTinh_ThanhPho";
             this.txtTinh_ThanhPho.Size = new System.Drawing.Size(181, 27);
             this.txtTinh_ThanhPho.TabIndex = 19;
+            this.txtTinh_ThanhPho.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtQuan_Huyen
             // 
@@ -869,6 +882,7 @@
             this.txtQuan_Huyen.Name = "txtQuan_Huyen";
             this.txtQuan_Huyen.Size = new System.Drawing.Size(181, 27);
             this.txtQuan_Huyen.TabIndex = 18;
+            this.txtQuan_Huyen.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtPhuong_Xa
             // 
@@ -877,6 +891,7 @@
             this.txtPhuong_Xa.Name = "txtPhuong_Xa";
             this.txtPhuong_Xa.Size = new System.Drawing.Size(181, 27);
             this.txtPhuong_Xa.TabIndex = 17;
+            this.txtPhuong_Xa.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtDuong
             // 
@@ -885,6 +900,7 @@
             this.txtDuong.Name = "txtDuong";
             this.txtDuong.Size = new System.Drawing.Size(183, 27);
             this.txtDuong.TabIndex = 16;
+            this.txtDuong.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtSoNha
             // 
@@ -893,6 +909,7 @@
             this.txtSoNha.Name = "txtSoNha";
             this.txtSoNha.Size = new System.Drawing.Size(183, 27);
             this.txtSoNha.TabIndex = 15;
+            this.txtSoNha.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtTen
             // 
@@ -901,6 +918,7 @@
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(183, 27);
             this.txtTen.TabIndex = 13;
+            this.txtTen.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtTenLot
             // 
@@ -917,6 +935,7 @@
             this.txtHo.Name = "txtHo";
             this.txtHo.Size = new System.Drawing.Size(183, 27);
             this.txtHo.TabIndex = 11;
+            this.txtHo.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtCCCD_CMND
             // 
@@ -925,6 +944,8 @@
             this.txtCCCD_CMND.Name = "txtCCCD_CMND";
             this.txtCCCD_CMND.Size = new System.Drawing.Size(183, 27);
             this.txtCCCD_CMND.TabIndex = 10;
+            this.txtCCCD_CMND.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtCCCD_CMND.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_CMND_KeyPress);
             // 
             // txtMatKhau
             // 
@@ -934,6 +955,7 @@
             this.txtMatKhau.Size = new System.Drawing.Size(181, 27);
             this.txtMatKhau.TabIndex = 7;
             this.txtMatKhau.UseSystemPasswordChar = true;
+            this.txtMatKhau.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtTaiKhoan
             // 
@@ -942,6 +964,7 @@
             this.txtTaiKhoan.Name = "txtTaiKhoan";
             this.txtTaiKhoan.Size = new System.Drawing.Size(181, 27);
             this.txtTaiKhoan.TabIndex = 6;
+            this.txtTaiKhoan.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // cmbLoaiHopDong
             // 
@@ -964,6 +987,7 @@
             this.cmbChucVu.Name = "cmbChucVu";
             this.cmbChucVu.Size = new System.Drawing.Size(181, 28);
             this.cmbChucVu.TabIndex = 4;
+            this.cmbChucVu.SelectedIndexChanged += new System.EventHandler(this.LoadLuongKhoiDiem);
             // 
             // cmbPhongBan
             // 
@@ -984,6 +1008,7 @@
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(181, 27);
             this.txtMaNV.TabIndex = 2;
+            this.txtMaNV.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblHinh
             // 
