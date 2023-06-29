@@ -12,7 +12,6 @@ namespace QuanLyNhanSu.ViewModels
         public string MaCV { get; set; }
         public string MaLHD { get; set; }
         public string TaiKhoan { get; set; }
-        public string MatKhau { get; set; }
         public string CCCD_CMND { get; set; }
         public string Ho { get; set; }
         public string TenLot { get; set; }
@@ -29,8 +28,12 @@ namespace QuanLyNhanSu.ViewModels
         public string TrinhDoHocVan { get; set;}
         public DateTime NgayVaoLam { get; set; }
         public DateTime ThoiHanHopDong { get; set; }
+        public string TinhTrang { get; set; }
         public int SoNgayPhep { get; set; }
         public decimal LuongCoBan { get; set; }
         public string Hinh { get; set; }
+        public string TenPhongBan { get; set; }
+        public string TenChucVu { get; set; }
+        public string TenLoaiHopDong { get; set; }
     }
 }

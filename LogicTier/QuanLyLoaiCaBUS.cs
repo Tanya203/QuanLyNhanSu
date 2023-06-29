@@ -25,7 +25,6 @@ namespace QuanLyNhanSu.LogicTier
         {
             return loaiCaDAL.SearchLoaiCa(timKiem);
         }
-
         public bool Save(LoaiCa loaiCa)
         {
             return loaiCaDAL.Save(loaiCa);

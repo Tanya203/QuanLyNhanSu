@@ -12,19 +12,17 @@ namespace QuanLyNhanSu.LogicTier
     internal class QuanLyChucVuBUS
     {
         private readonly QuanLyChucVuDAL chucVuDAL;
-        private readonly QuanLyPhongBanDAL phongBanDAL;
         public QuanLyChucVuBUS()
         {
             chucVuDAL = new QuanLyChucVuDAL();
-            phongBanDAL = new QuanLyPhongBanDAL();
         }
         public IEnumerable<ChucVuViewModels> GetAllChucVu()
         {
             return chucVuDAL.GetAllChucVu();
         }
-        public IEnumerable<ChucVuViewModels> LoadChucVuTheoPhongBan(string maPB)
+        public IEnumerable<ChucVu> GetChucVuTheoPhongBan(string maPB)
         {
-            return chucVuDAL.LoadChucVuTheoPhongBan(maPB);
+            return chucVuDAL.GetChucVuTheoPhongBan(maPB);
         }
         public IEnumerable<ChucVuViewModels> SearchChucVu(string timKiem)
         {

@@ -38,6 +38,10 @@ namespace QuanLyNhanSu.DataTier.Models
                      pc.TienPhuCap.ToString().Contains(timKiem)).ToList();
             return danhSachPhuCap;
         }
+        public IEnumerable<PhuCap> GetPhuCap()
+        {
+            return quanLyNhanSu.PhuCaps.OrderBy(pc => pc.MaPC).ToList();
+        }
         public bool Save(PhuCap phuCap)
         {
             try
