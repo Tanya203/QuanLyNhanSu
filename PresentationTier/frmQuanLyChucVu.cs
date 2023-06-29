@@ -75,7 +75,7 @@ namespace QuanLyNhanSu.PresentationTier
         public void ClearAllText()
         {
             txtMaCV.Text = string.Empty;
-           // cmbPhongBan.SelectedIndex = 0;
+            cmbPhongBan.SelectedIndex = 0;
             txtTenCV.Text = string.Empty;
             txtTongSoNhanVien.Text = string.Empty;
             txtLuongKhoiDiem.Text = string.Empty;

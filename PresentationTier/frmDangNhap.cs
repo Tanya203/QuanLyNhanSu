@@ -55,11 +55,11 @@ namespace QuanLyNhanSu
         {
             if (cbHienThiMatKhau.Checked == true)
             {
-                txtMatKhau.PasswordChar = '\0';
+                txtMatKhau.UseSystemPasswordChar = true;
             }
             else
             {
-                txtMatKhau.PasswordChar = '*';
+                txtMatKhau.UseSystemPasswordChar = false;
             }
 
         }

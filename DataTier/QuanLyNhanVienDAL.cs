@@ -195,7 +195,7 @@ namespace QuanLyNhanSu.DataTier
                     { "CHECK_SDT", "Độ dài số điện thoại phải = 10" },
                     { "CHECK_SoNgayPhep", "Số ngày phép phải >= 0" },
                     { "CHECK_TaiKhoan", "Độ dài tại khoản phải >= 5 và =<15 ký tự" },
-                    { "CHECK_ThoiHanHopDong", "Thời hạn hợp đồng phải lơn hơn ngày vào làm" }
+                    { "CHECK_ThoiHanHopDong", "Thời hạn hợp đồng phải lớn hơn ngày vào làm" }
                 };
                 
                 foreach (KeyValuePair<string, string> error in errorMessages)
@@ -211,7 +211,10 @@ namespace QuanLyNhanSu.DataTier
                 DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if (ketQua == DialogResult.No)
                 {
-                    MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (string.IsNullOrEmpty(ex.Message))
+                        MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                        MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return false;
             }            
@@ -236,7 +239,10 @@ namespace QuanLyNhanSu.DataTier
                 DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if (ketQua == DialogResult.No)
                 {
-                    MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (string.IsNullOrEmpty(ex.Message))
+                        MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                        MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return false;
             }

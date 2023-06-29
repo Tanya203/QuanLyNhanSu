@@ -65,8 +65,17 @@ namespace QuanLyNhanSu.DataTier
                     MessageBox.Show("Tên loại hợp đồng đã tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
-                else
-                    throw new Exception("Unknow Error!!!");
+                MessageBoxManager.Yes = "OK";
+                MessageBoxManager.No = "Chi tiết lỗi";
+                DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (ketQua == DialogResult.No)
+                {
+                    if (string.IsNullOrEmpty(ex.Message))
+                        MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                        MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return false;
             }
         }
         public bool Delete(string maLHD)
@@ -103,7 +112,10 @@ namespace QuanLyNhanSu.DataTier
                     DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                     if (ketQua == DialogResult.No)
                     {
-                        MessageBox.Show(ex.InnerException.ToString(),"Chi tiết lỗi", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        if (string.IsNullOrEmpty(ex.Message))
+                            MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        else
+                            MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     return false;
                 }
