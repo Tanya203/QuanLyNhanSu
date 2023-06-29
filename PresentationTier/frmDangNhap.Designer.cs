@@ -73,6 +73,7 @@
             this.cbHienThiMatKhau.TabIndex = 3;
             this.cbHienThiMatKhau.Text = "Hiển thị mật khẩu";
             this.cbHienThiMatKhau.UseVisualStyleBackColor = true;
+            this.cbHienThiMatKhau.CheckedChanged += new System.EventHandler(this.cbHienThiMatKhau_CheckedChanged);
             // 
             // llblQuenMatKhau
             // 
@@ -94,14 +95,17 @@
             this.txtTaiKhoan.Name = "txtTaiKhoan";
             this.txtTaiKhoan.Size = new System.Drawing.Size(310, 30);
             this.txtTaiKhoan.TabIndex = 1;
+            this.txtTaiKhoan.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtMatKhau
             // 
             this.txtMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMatKhau.Location = new System.Drawing.Point(166, 132);
             this.txtMatKhau.Name = "txtMatKhau";
+            this.txtMatKhau.PasswordChar = '*';
             this.txtMatKhau.Size = new System.Drawing.Size(310, 30);
             this.txtMatKhau.TabIndex = 2;
+            this.txtMatKhau.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // pnDangNhap
             // 
@@ -171,6 +175,7 @@
             this.Name = "FrmDangNhap";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng nhập";
+            this.Load += new System.EventHandler(this.FrmDangNhap_Load);
             this.pnDangNhap.ResumeLayout(false);
             this.pnDangNhap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserIcon)).EndInit();

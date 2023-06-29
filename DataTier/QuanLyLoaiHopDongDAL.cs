@@ -28,6 +28,10 @@ namespace QuanLyNhanSu.DataTier
             }).OrderBy(lhd => lhd.MaLHD).ToList();
             return danhSachLoaiHopDong;
         }
+        public IEnumerable<LoaiHopDong> GetLoaiHopDong()
+        {
+            return quanLyNhanSu.LoaiHopDongs.OrderBy(lhd => lhd.MaLHD).ToList();
+        }
         public IEnumerable<LoaiHopDongViewModels> SearchLoaiHopDong(string timKiem)
         {
             var danhSachLoaiHopDong = quanLyNhanSu.LoaiHopDongs.Select(x => new LoaiHopDongViewModels

@@ -42,6 +42,10 @@ namespace QuanLyNhanSu.DataTier
                      lc.HeSoLuong.ToString().Contains(timKiem)).ToList();
             return danhSachLoaiCa;
         }
+        public IEnumerable<LoaiCa> GetLoaiCa()
+        {
+            return quanLyNhanSu.LoaiCas.OrderBy(lc => lc.MaLC).ToList();
+        }
         public bool Save(LoaiCa loaiCa)
         {
             try

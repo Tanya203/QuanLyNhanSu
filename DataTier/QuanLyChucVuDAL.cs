@@ -35,23 +35,10 @@ namespace QuanLyNhanSu.DataTier
                                  select chucVu;
             return danhSachChucVu;                                   
         }
-        public IEnumerable<ChucVuViewModels> LoadChucVuTheoPhongBan(string maPB)
+        public IEnumerable<ChucVu> GetChucVuTheoPhongBan(string maPB)
         {
-            var danhSachChucVu = from chucVu in quanLyNhanSu.ChucVus
-                                 join phongBan in quanLyNhanSu.PhongBans on chucVu.MaPB equals phongBan.MaPB
-                                 select new ChucVuViewModels
-                                 {
-                                     MaCV = chucVu.MaCV,
-                                     MaPB = chucVu.MaPB,
-                                     TenChucVu = chucVu.TenChucVu,
-                                     LuongKhoiDiem = chucVu.LuongKhoiDiem,
-                                     TenPhongBan = phongBan.TenPhongBan
-                                 } into chucVu
-                                 where chucVu.MaPB == maPB
-                                 select chucVu;
-            return danhSachChucVu;
+            return quanLyNhanSu.ChucVus.Where(cv => cv.MaPB == maPB).OrderBy(cv => cv.MaCV).ToList();
         }
-
         public IEnumerable<ChucVuViewModels> SearchChucVu(string timKiem)
         {
             var danhSachPhongBan = from chucVu in quanLyNhanSu.ChucVus join phongBan in quanLyNhanSu.PhongBans on chucVu.MaPB equals phongBan.MaPB

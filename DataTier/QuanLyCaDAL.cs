@@ -44,6 +44,10 @@ namespace QuanLyNhanSu.DataTier
                      ca.GioKetThuc.ToString().Contains(timKiem));
             return danhSachCa;
         }
+        public IEnumerable<Ca> GetCa()
+        {
+            return quanLyNhanSu.Cas.OrderBy(cv => cv.MaCa).ToList();
+        }
         public bool Save(Ca ca)
         {
             try
