@@ -149,7 +149,7 @@ namespace QuanLyNhanSu.DataTier
                 NhanVien newNhanVien = quanLyNhanSu.NhanViens.Where(nv => nv.MaNV == nhanVien.MaNV).FirstOrDefault();
                 if (newNhanVien != null)// cập nhật
                 {
-                    newNhanVien.MaCV = nhanVien.MaNV;
+                    newNhanVien.MaCV = nhanVien.MaCV;
                     newNhanVien.MaLHD = nhanVien.MaLHD;
                     newNhanVien.TaiKhoan = nhanVien.TaiKhoan;
                     newNhanVien.MatKhau = nhanVien.MatKhau;
@@ -167,7 +167,7 @@ namespace QuanLyNhanSu.DataTier
                     newNhanVien.SDT = nhanVien.SDT;
                     newNhanVien.Email = nhanVien.Email;
                     newNhanVien.TrinhDoHocVan = nhanVien.TrinhDoHocVan;
-                    newNhanVien.NgayVaoLam = nhanVien.ThoiHanHopDong;
+                    newNhanVien.NgayVaoLam = nhanVien.NgayVaoLam;
                     newNhanVien.ThoiHanHopDong = nhanVien.ThoiHanHopDong;
                     newNhanVien.TinhTrang = nhanVien.TinhTrang;
                     newNhanVien.SoNgayPhep = nhanVien.SoNgayPhep;
@@ -177,6 +177,7 @@ namespace QuanLyNhanSu.DataTier
                 else//thêm mới           
                     quanLyNhanSu.NhanViens.Add(nhanVien);
                 quanLyNhanSu.SaveChanges();
+                MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
             }
             catch (Exception ex)
@@ -210,7 +211,7 @@ namespace QuanLyNhanSu.DataTier
                 DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if (ketQua == DialogResult.No)
                 {
-                    if (string.IsNullOrEmpty(ex.Message))
+                    if (!string.IsNullOrEmpty(ex.InnerException.ToString()))
                         MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else
                         MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -225,9 +226,18 @@ namespace QuanLyNhanSu.DataTier
                 var nhanVien = quanLyNhanSu.NhanViens.Where(nv => nv.MaNV == maNV).FirstOrDefault();
                 if(nhanVien != null)
                 {
-                    quanLyNhanSu.NhanViens.Remove(nhanVien);
-                    quanLyNhanSu.SaveChanges();
-                    return true;
+                    MessageBoxManager.Yes = "Có";
+                    MessageBoxManager.No = "Không";
+                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá ca " + nhanVien.MaNV + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (ketQua == DialogResult.Yes)
+                    {
+                        MessageBoxManager.Yes = "Có";
+                        MessageBoxManager.No = "Không";
+                        quanLyNhanSu.NhanViens.Remove(nhanVien);
+                        quanLyNhanSu.SaveChanges();
+                        MessageBox.Show("Đã xoá ca " + nhanVien.MaNV, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
+                    }
                 }
                 return false;
             }
