@@ -238,7 +238,7 @@ namespace QuanLyNhanSu.PresentationTier
         public string CheckMatKhau(string matKhau)
         {
             Regex passCheck = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");            
-            if (!passCheck.IsMatch(matKhau) && matKhau.Length > 20)
+            if (!passCheck.IsMatch(matKhau) || matKhau.Length > 20)
             {
                 MessageBox.Show("Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!", "Lỗi", MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 return null;
@@ -261,7 +261,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public string CheckSDT(string sdt)
         {
-            Regex sdtCheck = new Regex("(84|0[3|5|7|8|9])+([0-9]{8})\b");
+            Regex sdtCheck = new Regex(@"(84|0[3|5|7|8|9])+([0-9]{8})\b");
             if (!sdtCheck.IsMatch(sdt))
             {
                 MessageBox.Show("Định dạng số điện thoại không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -271,7 +271,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public string CheckEmail(string email)
         {
-            Regex emailCheck = new Regex("[a - z0 - 9] +@[a-z]+\\.[a-z]{ 2,3}");
+            Regex emailCheck = new Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
             if (!emailCheck.IsMatch(email))
             {
                 MessageBox.Show("Định dạng email không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -283,14 +283,17 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnThem_Click(object sender, EventArgs e)
         {
             string matKhau = CheckMatKhau(txtMatKhau.Text);
-            string gioiTinh = ChonGioiTinh();
-            string email = CheckEmail(txtEmail.Text);
             if (string.IsNullOrEmpty(matKhau))
                 return;
-            if (string.IsNullOrEmpty(gioiTinh))
+            string sdt = CheckSDT(txtSDT.Text);
+            if (string.IsNullOrEmpty(sdt))
                 return;
+            string email = CheckEmail(txtEmail.Text);
             if (string.IsNullOrEmpty(email))
                 return;
+            string gioiTinh = ChonGioiTinh();
+            if (string.IsNullOrEmpty(gioiTinh))
+                return;                                     
             NhanVien newNhanVien = new NhanVien
             {
                 MaNV = "",
@@ -309,7 +312,7 @@ namespace QuanLyNhanSu.PresentationTier
                 Quan_Huyen = txtQuan_Huyen.Text,
                 Tinh_ThanhPho = txtTinh_ThanhPho.Text,
                 GioiTinh = gioiTinh,
-                SDT = txtSDT.Text,
+                SDT = sdt,
                 Email = email,
                 TrinhDoHocVan = txtTrinhDoHocVan.Text,
                 NgayVaoLam = dtpNgayVaoLam.Value,
@@ -319,16 +322,25 @@ namespace QuanLyNhanSu.PresentationTier
                 LuongCoBan = decimal.Parse(txtLuongCoBan.Text),
                 //hinh
             };
-            nhanVienBUS.Save(newNhanVien);
+            nhanVienBUS.Save(newNhanVien);                
             Reload();
         }
         private void btnSua_Click(object sender, EventArgs e)
-        {            
+        {
             string matKhau = CheckMatKhau(txtMatKhau.Text);
+            if (string.IsNullOrEmpty(matKhau))
+                return;
+            string sdt = CheckSDT(txtSDT.Text);
+            if (string.IsNullOrEmpty(sdt))
+                return;
+            string email = CheckEmail(txtEmail.Text);
+            if (string.IsNullOrEmpty(email))
+                return;
             string gioiTinh = ChonGioiTinh();
-            string email = CheckEmail(txtEmail.Text);            
+            if (string.IsNullOrEmpty(gioiTinh))
+                return;
             NhanVien newNhanVien = new NhanVien
-            {                
+            {
                 MaNV = txtMaNV.Text,
                 MaCV = cmbChucVu.SelectedValue.ToString(),
                 MaLHD = cmbLoaiHopDong.SelectedValue.ToString(),
@@ -345,7 +357,7 @@ namespace QuanLyNhanSu.PresentationTier
                 Quan_Huyen = txtQuan_Huyen.Text,
                 Tinh_ThanhPho = txtTinh_ThanhPho.Text,
                 GioiTinh = gioiTinh,
-                SDT = txtSDT.Text,
+                SDT = sdt,
                 Email = email,
                 TrinhDoHocVan = txtTrinhDoHocVan.Text,
                 NgayVaoLam = dtpNgayVaoLam.Value,
@@ -355,7 +367,8 @@ namespace QuanLyNhanSu.PresentationTier
                 LuongCoBan = decimal.Parse(txtLuongCoBan.Text),
                 //hinh
             };
-            nhanVienBUS.Save(newNhanVien);
+            if (!nhanVienBUS.Save(newNhanVien))
+                return;
             ClearAllText();
             LoadNhanVien();
         }      
@@ -461,6 +474,48 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 e.Handled = true;
             }
+        }
+        private void cbHienThiMatKhau_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbHienThiMatKhau.Checked)            
+                txtMatKhau.UseSystemPasswordChar = txtNhapLaiMatKhau.UseSystemPasswordChar = false;
+            else
+                txtMatKhau.UseSystemPasswordChar = txtNhapLaiMatKhau.UseSystemPasswordChar = true;
+        }
+        private void CheckChonGioiTinh(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMaNV.Text) && !CheckEmptyText() && !CheckChonGioiTinh() ||
+              string.IsNullOrEmpty(txtMaNV.Text) && !CheckEmptyText() ||
+              string.IsNullOrEmpty(txtMaNV.Text) && !CheckChonGioiTinh())
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                return;
+            }
+            if (string.IsNullOrEmpty(txtMaNV.Text) && CheckEmptyText() && CheckChonGioiTinh())
+            {
+                btnThem.Enabled = true;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                return;
+            }
+            if (!string.IsNullOrEmpty(txtMaNV.Text) && CheckEmptyText() && CheckChonGioiTinh())
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = true;
+                btnXoa.Enabled = true;
+                return;
+            }
+        }
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtTimKiem.Text))
+            {
+                LoadNhanVien();
+                return;
+            }
+            LoadNhanVienTimKiem(txtTimKiem.Text);
         }
     }
 }

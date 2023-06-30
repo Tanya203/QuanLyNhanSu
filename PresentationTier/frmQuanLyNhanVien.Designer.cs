@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
             this.lblChucVuDN = new System.Windows.Forms.Label();
@@ -266,14 +266,14 @@
             this.dgvThongTinNhanVien.AllowUserToAddRows = false;
             this.dgvThongTinNhanVien.AllowUserToDeleteRows = false;
             this.dgvThongTinNhanVien.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongTinNhanVien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvThongTinNhanVien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvThongTinNhanVien.ColumnHeadersHeight = 29;
             this.dgvThongTinNhanVien.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaNV,
@@ -307,8 +307,8 @@
             this.dgvThongTinNhanVien.ReadOnly = true;
             this.dgvThongTinNhanVien.RowHeadersVisible = false;
             this.dgvThongTinNhanVien.RowHeadersWidth = 51;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvThongTinNhanVien.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvThongTinNhanVien.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvThongTinNhanVien.RowTemplate.Height = 24;
             this.dgvThongTinNhanVien.Size = new System.Drawing.Size(1924, 450);
             this.dgvThongTinNhanVien.TabIndex = 22;
@@ -686,6 +686,7 @@
             this.cbHienThiMatKhau.TabIndex = 9;
             this.cbHienThiMatKhau.Text = "Hiển thị mật khẩu";
             this.cbHienThiMatKhau.UseVisualStyleBackColor = true;
+            this.cbHienThiMatKhau.CheckedChanged += new System.EventHandler(this.cbHienThiMatKhau_CheckedChanged);
             // 
             // txtNhapLaiMatKhau
             // 
@@ -751,6 +752,7 @@
             this.rbKhac.TabStop = true;
             this.rbKhac.Text = "Khác";
             this.rbKhac.UseVisualStyleBackColor = true;
+            this.rbKhac.CheckedChanged += new System.EventHandler(this.CheckChonGioiTinh);
             // 
             // rbNu
             // 
@@ -764,6 +766,7 @@
             this.rbNu.TabStop = true;
             this.rbNu.Text = "Nữ";
             this.rbNu.UseVisualStyleBackColor = true;
+            this.rbNu.CheckedChanged += new System.EventHandler(this.CheckChonGioiTinh);
             // 
             // rbNam
             // 
@@ -777,6 +780,7 @@
             this.rbNam.TabStop = true;
             this.rbNam.Text = "Nam";
             this.rbNam.UseVisualStyleBackColor = true;
+            this.rbNam.CheckedChanged += new System.EventHandler(this.CheckChonGioiTinh);
             // 
             // dtpThoiHanHopDong
             // 
@@ -1317,6 +1321,7 @@
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
             this.txtTimKiem.TabIndex = 26;
+            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
             // FrmQuanLyNhanVien
             // 
