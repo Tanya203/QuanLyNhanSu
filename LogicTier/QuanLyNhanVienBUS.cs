@@ -20,10 +20,6 @@ namespace QuanLyNhanSu.LogicTier
         {
             return nhanVienDAL.GetAllNhanVien();
         }
-        public IEnumerable<NhanVienViewModel> SearchNhanVien(string timKiem)
-        {
-            return nhanVienDAL.SearchNhanVien(timKiem);
-        }
         public IEnumerable<NhanVien> GetNhanVienTheoPhongBan(string maPB)
         {
             return nhanVienDAL.GetNhanVienTheoPhongBan(maPB);
@@ -42,7 +38,7 @@ namespace QuanLyNhanSu.LogicTier
             return nhanVienDAL.TongPhuCap1NhanVien(maNV);
         }
         public bool LoginVerify(string taiKhoan, string matKhau)
-        {
+        {            
             return nhanVienDAL.LoginVerify(taiKhoan, matKhau);
         }
     }

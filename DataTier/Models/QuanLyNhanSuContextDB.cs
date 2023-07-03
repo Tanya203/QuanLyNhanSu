@@ -175,7 +175,7 @@ namespace QuanLyNhanSu.DataTier.Models
 
             modelBuilder.Entity<LichSuThaoTac>()
                 .Property(e => e.ThaoTacThucHien)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<LoaiCa>()
                 .Property(e => e.MaLC)

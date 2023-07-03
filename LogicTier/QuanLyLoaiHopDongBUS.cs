@@ -24,10 +24,6 @@ namespace QuanLyNhanSu.LogicTier
         {
             return loaiHopDongDAL.GetLoaiHopDong();
         }
-        public IEnumerable<LoaiHopDongViewModels> SearchLoaiHopDong(string timKiem)
-        {
-            return loaiHopDongDAL.SearchLoaiHopDong(timKiem);
-        }
         public bool Save(LoaiHopDong loaiHopDong)
         {
             return loaiHopDongDAL.Save(loaiHopDong);

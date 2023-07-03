@@ -143,11 +143,11 @@
     <Compile Include="DataTier\Models\PhongBan.cs" />
     <Compile Include="DataTier\Models\PhuCap.cs" />
     <Compile Include="DataTier\Models\QuanLyNhanSuContextDB.cs" />
+    <Compile Include="DataTier\Models\QuyenHan.cs" />
     <Compile Include="DataTier\QuanLyCaDAL.cs" />
     <Compile Include="DataTier\QuanLyChucVuDAL.cs" />
     <Compile Include="DataTier\QuanLyLoaiCaDAL.cs" />
     <Compile Include="DataTier\QuanLyPhuCapDAL.cs" />
-    <Compile Include="DataTier\Models\QuyenHan.cs" />
     <Compile Include="DataTier\QuanLyLoaiHopDongDAL.cs" />
     <Compile Include="DataTier\QuanLyPhongBanDAL.cs" />
     <Compile Include="DataTier\QuanLyNhanVienDAL.cs" />

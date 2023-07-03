@@ -26,18 +26,6 @@ namespace QuanLyNhanSu.DataTier.Models
             }).OrderBy(pc => pc.MaPC).ToList();
             return danhSachPhuCap;
         }
-        public IEnumerable<PhuCapViewMModels> SearchPhuCap(string timKiem)
-        {
-            var danhSachPhuCap = quanLyNhanSu.PhuCaps.Select(x => new PhuCapViewMModels
-            {
-                MaPC = x.MaPC,
-                TenPhuCap = x.TenPhuCap,
-                TienPhuCap = x.TienPhuCap,
-            }).Where(pc => pc.MaPC.Contains(timKiem) ||
-                     pc.TenPhuCap.Contains(timKiem) ||
-                     pc.TienPhuCap.ToString().Contains(timKiem)).ToList();
-            return danhSachPhuCap;
-        }
         public IEnumerable<PhuCap> GetPhuCap()
         {
             return quanLyNhanSu.PhuCaps.OrderBy(pc => pc.MaPC).ToList();

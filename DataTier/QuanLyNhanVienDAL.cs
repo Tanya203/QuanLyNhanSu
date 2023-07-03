@@ -25,117 +25,41 @@ namespace QuanLyNhanSu.DataTier
         }
         public IEnumerable<NhanVienViewModel> GetAllNhanVien()
         {
-            var danhSachNhanVien = from nhanVien in quanLyNhanSu.NhanViens
-                                   join chucVu in quanLyNhanSu.ChucVus on nhanVien.MaCV equals chucVu.MaCV
-                                   join phongBan in quanLyNhanSu.PhongBans on chucVu.MaPB equals phongBan.MaPB
-                                   join loaiHopDong in quanLyNhanSu.LoaiHopDongs on nhanVien.MaLHD equals loaiHopDong.MaLHD
-                                   select new NhanVienViewModel
-                                   {
-                                       MaNV = nhanVien.MaNV,
-                                       MaCV = nhanVien.MaCV,
-                                       MaLHD = nhanVien.MaLHD,
-                                       TaiKhoan = nhanVien.TaiKhoan,
-                                       CCCD_CMND = nhanVien.CCCD_CMND,
-                                       Ho = nhanVien.Ho,
-                                       TenLot = nhanVien.TenLot,
-                                       Ten = nhanVien.Ten,
-                                       NTNS = nhanVien.NTNS,
-                                       SoNha = nhanVien.SoNha,
-                                       TenDuong = nhanVien.TenDuong,
-                                       Phuong_Xa = nhanVien.Phuong_Xa,
-                                       Quan_Huyen = nhanVien.Quan_Huyen,
-                                       Tinh_ThanhPho = nhanVien.Tinh_ThanhPho,
-                                       GioiTinh = nhanVien.GioiTinh,
-                                       SDT = nhanVien.SDT,
-                                       Email = nhanVien.Email,
-                                       TrinhDoHocVan = nhanVien.TrinhDoHocVan,
-                                       NgayVaoLam = nhanVien.NgayVaoLam,
-                                       ThoiHanHopDong = nhanVien.ThoiHanHopDong,
-                                       TinhTrang = nhanVien.TinhTrang,
-                                       SoNgayPhep = nhanVien.SoNgayPhep,
-                                       LuongCoBan = nhanVien.LuongCoBan,
-                                       Hinh = nhanVien.Hinh,
-                                       TenPhongBan = phongBan.TenPhongBan,
-                                       TenChucVu = chucVu.TenChucVu,
-                                       TenLoaiHopDong= loaiHopDong.TenLoaiHopDong,
-                                   }
-                                   into nhanVien
-                                   orderby nhanVien.MaNV
-                                   select nhanVien;
+            var danhSachNhanVien = quanLyNhanSu.NhanViens.Select(nv => new NhanVienViewModel
+            {
+                MaNV = nv.MaNV,
+                MaCV = nv.MaCV,
+                MaLHD = nv.MaLHD,
+                TaiKhoan = nv.TaiKhoan,
+                CCCD_CMND = nv.CCCD_CMND,
+                Ho = nv.Ho,
+                TenLot = nv.TenLot,
+                Ten = nv.Ten,
+                NTNS = nv.NTNS,
+                SoNha = nv.SoNha,
+                TenDuong = nv.TenDuong,
+                Phuong_Xa = nv.Phuong_Xa,
+                Quan_Huyen = nv.Quan_Huyen,
+                Tinh_ThanhPho = nv.Tinh_ThanhPho,
+                GioiTinh = nv.GioiTinh,
+                SDT = nv.SDT,
+                Email = nv.Email,
+                TrinhDoHocVan = nv.TrinhDoHocVan,
+                NgayVaoLam = nv.NgayVaoLam,
+                ThoiHanHopDong = nv.ThoiHanHopDong,
+                TinhTrang = nv.TinhTrang,
+                SoNgayPhep = nv.SoNgayPhep,
+                LuongCoBan = nv.LuongCoBan,
+                Hinh = nv.Hinh,
+                TenPhongBan = nv.ChucVu.PhongBan.TenPhongBan,
+                TenChucVu = nv.ChucVu.TenChucVu,
+                TenLoaiHopDong = nv.LoaiHopDong.TenLoaiHopDong,
+            }).OrderBy(nv=>nv.MaNV);                                   
             return danhSachNhanVien;
-        }
-        public IEnumerable<NhanVienViewModel> SearchNhanVien(string timKiem)
-        {
-            var danhSachNhanVien = from nhanVien in quanLyNhanSu.NhanViens
-                                   join chucVu in quanLyNhanSu.ChucVus on nhanVien.MaCV equals chucVu.MaCV
-                                   join phongBan in quanLyNhanSu.PhongBans on chucVu.MaPB equals phongBan.MaPB
-                                   join loaiHopDong in quanLyNhanSu.LoaiHopDongs on nhanVien.MaLHD equals loaiHopDong.MaLHD
-                                   select new NhanVienViewModel
-                                   {
-                                       MaNV = nhanVien.MaNV,
-                                       MaCV = nhanVien.MaCV,
-                                       MaLHD = nhanVien.MaLHD,
-                                       TaiKhoan = nhanVien.TaiKhoan,
-                                       CCCD_CMND = nhanVien.CCCD_CMND,
-                                       Ho = nhanVien.Ho,
-                                       TenLot = nhanVien.TenLot,
-                                       Ten = nhanVien.Ten,
-                                       NTNS = nhanVien.NTNS,
-                                       SoNha = nhanVien.SoNha,
-                                       TenDuong = nhanVien.TenDuong,
-                                       Phuong_Xa = nhanVien.Phuong_Xa,
-                                       Quan_Huyen = nhanVien.Quan_Huyen,
-                                       Tinh_ThanhPho = nhanVien.Tinh_ThanhPho,
-                                       GioiTinh = nhanVien.GioiTinh,
-                                       SDT = nhanVien.SDT,
-                                       Email = nhanVien.Email,
-                                       TrinhDoHocVan = nhanVien.TrinhDoHocVan,
-                                       NgayVaoLam = nhanVien.NgayVaoLam,
-                                       ThoiHanHopDong = nhanVien.ThoiHanHopDong,
-                                       TinhTrang = nhanVien.TinhTrang,
-                                       SoNgayPhep = nhanVien.SoNgayPhep,
-                                       LuongCoBan = nhanVien.LuongCoBan,
-                                       Hinh = nhanVien.Hinh,
-                                       TenPhongBan = phongBan.TenPhongBan,
-                                       TenChucVu = chucVu.TenChucVu,
-                                       TenLoaiHopDong = loaiHopDong.TenLoaiHopDong,
-                                   }
-                                   into nhanVien
-                                   where (nhanVien.MaNV.Contains(timKiem) ||
-                                          nhanVien.TenPhongBan.Contains(timKiem) ||
-                                          nhanVien.TenChucVu.Contains(timKiem) ||
-                                          nhanVien.TaiKhoan.Contains(timKiem) ||
-                                          nhanVien.CCCD_CMND.Contains(timKiem) ||
-                                          nhanVien.Ho.Contains(timKiem) ||
-                                          nhanVien.TenLot.Contains(timKiem) ||
-                                          nhanVien.Ten.Contains(timKiem) ||
-                                          nhanVien.NTNS.ToString().Contains(timKiem) ||
-                                          nhanVien.SoNha.Contains(timKiem) ||
-                                          nhanVien.TenDuong.Contains(timKiem) ||
-                                          nhanVien.Phuong_Xa.Contains(timKiem) ||
-                                          nhanVien.Quan_Huyen.Contains(timKiem) ||
-                                          nhanVien.Tinh_ThanhPho.Contains(timKiem) ||
-                                          nhanVien.GioiTinh.Contains(timKiem) ||
-                                          nhanVien.SDT.Contains(timKiem) ||
-                                          nhanVien.Email.Contains(timKiem) ||
-                                          nhanVien.TrinhDoHocVan.Contains(timKiem) ||
-                                          nhanVien.NgayVaoLam.ToString().Contains(timKiem) ||
-                                          nhanVien.ThoiHanHopDong.ToString().Contains(timKiem) ||
-                                          nhanVien.TinhTrang.Contains(timKiem) ||
-                                          nhanVien.SoNgayPhep.ToString().Contains(timKiem) ||
-                                          nhanVien.LuongCoBan.ToString().Contains(timKiem))
-                                   orderby nhanVien.MaNV
-                                   select nhanVien;
-            return danhSachNhanVien;
-        }
+        }       
         public IEnumerable<NhanVien> GetNhanVienTheoPhongBan(string maPB)
         {
-            var listNV = from nhanVien in quanLyNhanSu.NhanViens
-                         join chucVu in quanLyNhanSu.ChucVus on nhanVien.MaCV equals chucVu.MaCV
-                         join phongBan in quanLyNhanSu.PhongBans on chucVu.MaPB equals phongBan.MaPB
-                         where chucVu.MaPB == maPB
-                         orderby nhanVien.MaNV
-                         select nhanVien;
+            var listNV = quanLyNhanSu.NhanViens.Where(nv => nv.ChucVu.PhongBan.MaPB == maPB).ToList();
             return listNV;
         }
         public IEnumerable<NhanVien> GetNhanVien()
@@ -280,12 +204,12 @@ namespace QuanLyNhanSu.DataTier
             var nhanVien = quanLyNhanSu.NhanViens.Where(x => x.TaiKhoan == taiKhoan).FirstOrDefault();
             try
             {                
-                if (nhanVien == null || nhanVien.MatKhau != matKhau/*!BCrypt.Net.BCrypt.Verify(matKhau, nhanVien.MatKhau)*/)
+                if (nhanVien == null || !BCrypt.Net.BCrypt.Verify(matKhau, nhanVien.MatKhau))
                 {
                     MessageBox.Show("Tài khoản hoặc mật khẩu không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
-                else if(nhanVien != null || nhanVien.MatKhau == matKhau/*BCrypt.Net.BCrypt.Verify(matKhau, nhanVien.MatKhau)*/)
+                else if(nhanVien != null  && BCrypt.Net.BCrypt.Verify(matKhau, nhanVien.MatKhau))
                 {
                     MessageBox.Show("Đăng nhập thành công! - "+nhanVien.MaNV+"","Thông báo", MessageBoxButtons.OK,MessageBoxIcon.Information);
                     return true;

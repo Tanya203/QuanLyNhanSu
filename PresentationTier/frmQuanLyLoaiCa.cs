@@ -19,6 +19,7 @@ namespace QuanLyNhanSu.PresentationTier
         Thread currentForm;
         private readonly QuanLyLoaiCaBUS loaiCaBUS;
         private IEnumerable<LoaiCaViewModels> danhSachLoaiCa;
+        private IEnumerable<LoaiCaViewModels> danhSachLoaiCaTimKiem;
         public FrmQuanLyLoaiCa()
         {
             InitializeComponent();
@@ -48,10 +49,13 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadLoaiCaTimKiem(string timKiem)
         {
+            timKiem.ToLower();
             dgvThongTinLoaiCa.Rows.Clear();
-            danhSachLoaiCa = loaiCaBUS.SearchLoaiCa(timKiem);
+            danhSachLoaiCaTimKiem = danhSachLoaiCa.Where(lc => lc.MaLoaiCa.ToLower().Contains(timKiem) ||
+                                                         lc.TenLoaiCa.ToLower().Contains(timKiem) ||
+                                                         lc.HeSoLuong.ToString().Contains(timKiem));
             int rowAdd;
-            foreach (var lc in danhSachLoaiCa)
+            foreach (var lc in danhSachLoaiCaTimKiem)
             {
                 rowAdd = dgvThongTinLoaiCa.Rows.Add();
                 dgvThongTinLoaiCa.Rows[rowAdd].Cells[0].Value = lc.MaLoaiCa;
@@ -59,12 +63,14 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLoaiCa.Rows[rowAdd].Cells[2].Value = lc.HeSoLuong;
             }
         }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
             txtMaLC.Text = string.Empty;
             txtTenLC.Text = string.Empty;
             txtHeSoLuong.Text = string.Empty;
         }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void CloseCurrentForm()
         {
             this.Close();
@@ -77,23 +83,48 @@ namespace QuanLyNhanSu.PresentationTier
             currentForm.SetApartmentState(ApartmentState.STA);
             currentForm.Start();
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void CloseForm(object sender, FormClosedEventArgs e)
         {
-            FrmQuanLyCa frmOpen = new FrmQuanLyCa();
-            frmOpen.Show();
-            this.Hide();
-            frmOpen.FormClosed += CloseForm;
+            this.Close();
         }
-        private void dgvThongTinLoaiCa_CellClick(object sender, DataGridViewCellEventArgs e)
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void EnableButtons(object sender, EventArgs e)
         {
-            int rowIndex = e.RowIndex;
-            if (rowIndex < 0)
+            if (string.IsNullOrEmpty(txtMaLC.Text) && string.IsNullOrEmpty(txtTenLC.Text) && string.IsNullOrEmpty(txtHeSoLuong.Text) ||
+                string.IsNullOrEmpty(txtTenLC.Text) && string.IsNullOrEmpty(txtHeSoLuong.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
                 return;
-            txtMaLC.Text = dgvThongTinLoaiCa.Rows[rowIndex].Cells[0].Value.ToString();
-            txtTenLC.Text = dgvThongTinLoaiCa.Rows[rowIndex].Cells[1].Value.ToString();
-            txtHeSoLuong.Text = dgvThongTinLoaiCa.Rows[rowIndex].Cells[2].Value.ToString();
+            }
+            else if (string.IsNullOrEmpty(txtMaLC.Text) && !string.IsNullOrEmpty(txtTenLC.Text) && !string.IsNullOrEmpty(txtHeSoLuong.Text))
+            {
+                btnThem.Enabled = true;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                return;
+            }
+            else if (!string.IsNullOrEmpty(txtMaLC.Text) && !string.IsNullOrEmpty(txtTenLC.Text) && !string.IsNullOrEmpty(txtHeSoLuong.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = true;
+                btnXoa.Enabled = true;
+                return;
+            }
         }
-
+        private void txtHeSoLuong_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void btnThem_Click(object sender, EventArgs e)
         {
             LoaiCa newLoaiCa = new LoaiCa
@@ -127,38 +158,26 @@ namespace QuanLyNhanSu.PresentationTier
             ClearAllText();
             LoadLoaiCa();
         }
-
+        private void btnTroVe_Click(object sender, EventArgs e)
+        {
+            FrmQuanLyCa frmOpen = new FrmQuanLyCa();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
+        }
+        private void dgvThongTinLoaiCa_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex < 0)
+                return;
+            txtMaLC.Text = dgvThongTinLoaiCa.Rows[rowIndex].Cells[0].Value.ToString();
+            txtTenLC.Text = dgvThongTinLoaiCa.Rows[rowIndex].Cells[1].Value.ToString();
+            txtHeSoLuong.Text = dgvThongTinLoaiCa.Rows[rowIndex].Cells[2].Value.ToString();
+        }
         private void btnHuy_Click(object sender, EventArgs e)
         {
             ClearAllText();
-        }
-
-        private void EnableButtons(object sender, EventArgs e)
-        {
-            if(string.IsNullOrEmpty(txtMaLC.Text) && string.IsNullOrEmpty(txtTenLC.Text) && string.IsNullOrEmpty(txtHeSoLuong.Text)||
-                string.IsNullOrEmpty(txtTenLC.Text) && string.IsNullOrEmpty(txtHeSoLuong.Text))
-            {
-                btnThem.Enabled = false;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                return;
-            }
-            else if(string.IsNullOrEmpty(txtMaLC.Text) && !string.IsNullOrEmpty(txtTenLC.Text) && !string.IsNullOrEmpty(txtHeSoLuong.Text))
-            {
-                btnThem.Enabled = true;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                return;
-            }
-            else if(!string.IsNullOrEmpty(txtMaLC.Text) && !string.IsNullOrEmpty(txtTenLC.Text) && !string.IsNullOrEmpty(txtHeSoLuong.Text))
-            {
-                btnThem.Enabled = false;
-                btnSua.Enabled = true;
-                btnXoa.Enabled = true;
-                return;
-            }
-        }
-
+        }       
         private void TimKiem(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTimKiem.Text))
@@ -168,20 +187,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             LoadLoaiCaTimKiem(txtTimKiem.Text);
         }
-        private void txtHeSoLuong_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
-            {
-                e.Handled = true;
-            }            
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
-            {
-                e.Handled = true;
-            }
-        }
-        private void CloseForm(object sender, FormClosedEventArgs e)
-        {
-            this.Close();
-        }
+        
+        
     }
 }
