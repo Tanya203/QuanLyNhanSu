@@ -80,6 +80,7 @@
             // 
             this.txtTenPC.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTenPC.Location = new System.Drawing.Point(645, 38);
+            this.txtTenPC.MaxLength = 50;
             this.txtTenPC.Name = "txtTenPC";
             this.txtTenPC.Size = new System.Drawing.Size(263, 30);
             this.txtTenPC.TabIndex = 8;
@@ -140,6 +141,7 @@
             // 
             this.txtSoTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSoTien.Location = new System.Drawing.Point(164, 88);
+            this.txtSoTien.MaxLength = 50;
             this.txtSoTien.Name = "txtSoTien";
             this.txtSoTien.Size = new System.Drawing.Size(252, 30);
             this.txtSoTien.TabIndex = 44;

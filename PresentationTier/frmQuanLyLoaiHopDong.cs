@@ -19,6 +19,7 @@ namespace QuanLyNhanSu.PresentationTier
         private Thread currentForm;
         private readonly QuanLyLoaiHopDongBUS loaiHopDongBUS;
         private IEnumerable<LoaiHopDongViewModels> danhSachLoaiHopDong;
+        private IEnumerable<LoaiHopDongViewModels> danhSachLoaiHopDongTimKiem;
         public FrmQuanLyLoaiHopDong()
         {
             InitializeComponent();
@@ -49,10 +50,12 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadLoaiHopDongTimKiem(string timKiem)
         {
+            timKiem.ToLower();
             dgvThongTinLoaiHopDong.Rows.Clear();
-            danhSachLoaiHopDong = loaiHopDongBUS.SearchLoaiHopDong(timKiem);
+            danhSachLoaiHopDongTimKiem = danhSachLoaiHopDong.Where(pb => pb.TenLoaiHopDong.ToLower().Contains(timKiem) ||
+                                                                   pb.MaLHD.ToLower().Contains(timKiem)).OrderBy(lhd => lhd.MaLHD);           
             int rowAdd;
-            foreach (var lhd in danhSachLoaiHopDong)
+            foreach (var lhd in danhSachLoaiHopDongTimKiem)
             {
                 rowAdd = dgvThongTinLoaiHopDong.Rows.Add();
                 dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[0].Value = lhd.MaLHD;
@@ -60,12 +63,14 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[2].Value = loaiHopDongBUS.TongSoNhanVienTrongLoaiHopDong(lhd.MaLHD).ToString();
             }
         }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
             txtMaLHD.Text = string.Empty;
             txtTenLHD.Text = string.Empty;
             txtSoLuongNhanVien.Text = string.Empty;
         }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
         public void CloseCurrentForm()
         {
             this.Close();
@@ -78,23 +83,36 @@ namespace QuanLyNhanSu.PresentationTier
             currentForm.SetApartmentState(ApartmentState.STA);
             currentForm.Start();
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void CloseForm(object sender, FormClosedEventArgs e)
         {
-            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
-            frmOpen.Show();
-            this.Hide();
-            frmOpen.FormClosed += CloseForm;
+            this.Close();
         }
-        private void dgvThongTinLoaiHopDong_CellClick(object sender, DataGridViewCellEventArgs e)
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void EnableButtons(object sender, EventArgs e)
         {
-            int rowIndex = e.RowIndex;
-            if (rowIndex < 0)
+            if (string.IsNullOrEmpty(txtMaLHD.Text) && string.IsNullOrEmpty(txtTenLHD.Text) || string.IsNullOrEmpty(txtTenLHD.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
                 return;
-            txtMaLHD.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[0].Value.ToString();
-            txtTenLHD.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[1].Value.ToString();
-            txtSoLuongNhanVien.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[2].Value.ToString();
+            }
+            else if (string.IsNullOrEmpty(txtMaLHD.Text) && !string.IsNullOrEmpty(txtTenLHD.Text))
+            {
+                btnThem.Enabled = true;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                return;
+            }
+            else if (!string.IsNullOrEmpty(txtMaLHD.Text) && !string.IsNullOrEmpty(txtTenLHD.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = true;
+                btnXoa.Enabled = true;
+                return;
+            }
         }
-
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
         private void btnThem_Click(object sender, EventArgs e)
         {
             LoaiHopDong newLoaiHopDong = new LoaiHopDong
@@ -128,32 +146,22 @@ namespace QuanLyNhanSu.PresentationTier
             ClearAllText();
             LoadLoaiHopDong();
         }
-
-        
-        private void EnableButtons(object sender, EventArgs e)
+        private void btnTroVe_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaLHD.Text) && string.IsNullOrEmpty(txtTenLHD.Text) || string.IsNullOrEmpty(txtTenLHD.Text))
-            {
-                btnThem.Enabled = false;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
+        }
+        private void dgvThongTinLoaiHopDong_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex < 0)
                 return;
-            }
-            else if (string.IsNullOrEmpty(txtMaLHD.Text) && !string.IsNullOrEmpty(txtTenLHD.Text))
-            {
-                btnThem.Enabled = true;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                return;
-            }
-            else if (!string.IsNullOrEmpty(txtMaLHD.Text) && !string.IsNullOrEmpty(txtTenLHD.Text))
-            {
-                btnThem.Enabled = false;
-                btnSua.Enabled = true;
-                btnXoa.Enabled = true;
-                return;
-            }
-        }     
+            txtMaLHD.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[0].Value.ToString();
+            txtTenLHD.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[1].Value.ToString();
+            txtSoLuongNhanVien.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[2].Value.ToString();
+        }           
         private void TimKiem(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTimKiem.Text))
@@ -163,19 +171,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             LoadLoaiHopDongTimKiem(txtTimKiem.Text);
         }
-        private void CloseForm(object sender, FormClosedEventArgs e)
-        {
-            this.Close();
-        }
+        
 
-        private void lblThongTinLoaiHopDong_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlMenu_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

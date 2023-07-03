@@ -20,19 +20,14 @@ namespace QuanLyNhanSu.DataTier
         }
         public IEnumerable<ChucVuViewModels> GetAllChucVu()
         {
-            var danhSachChucVu = from chucVu in quanLyNhanSu.ChucVus
-                                    join phongBan in quanLyNhanSu.PhongBans on chucVu.MaPB equals phongBan.MaPB
-                                    select new ChucVuViewModels
-                                    {
-                                        MaCV = chucVu.MaCV,
-                                        MaPB = chucVu.MaPB,
-                                        TenChucVu = chucVu.TenChucVu,
-                                        LuongKhoiDiem = chucVu.LuongKhoiDiem,
-                                        TenPhongBan = phongBan.TenPhongBan
-                                    } 
-                                    into chucVu
-                                 orderby chucVu.MaCV
-                                 select chucVu;
+            var danhSachChucVu = quanLyNhanSu.ChucVus.Select(cv => new ChucVuViewModels
+                 {
+                     MaCV = cv.MaCV,
+                     MaPB = cv.MaPB,
+                     TenChucVu = cv.TenChucVu,
+                     LuongKhoiDiem = cv.LuongKhoiDiem,
+                     TenPhongBan = cv.PhongBan.TenPhongBan
+                 }).OrderBy(cv => cv.MaCV);    
             return danhSachChucVu;                                   
         }
         public IEnumerable<ChucVu> GetChucVuTheoPhongBan(string maPB)
@@ -42,24 +37,6 @@ namespace QuanLyNhanSu.DataTier
         public decimal GetLuongCoBanCuaChucVu(string maCV)
         {
             return quanLyNhanSu.ChucVus.Where(cv => cv.MaCV == maCV).Sum(cv => cv.LuongKhoiDiem);
-        }
-        public IEnumerable<ChucVuViewModels> SearchChucVu(string timKiem)
-        {
-            var danhSachPhongBan = from chucVu in quanLyNhanSu.ChucVus join phongBan in quanLyNhanSu.PhongBans on chucVu.MaPB equals phongBan.MaPB
-            select new ChucVuViewModels
-            {
-                MaCV = chucVu.MaCV,
-                MaPB = chucVu.MaPB,
-                TenChucVu = chucVu.TenChucVu,
-                LuongKhoiDiem = chucVu.LuongKhoiDiem,
-                TenPhongBan = phongBan.TenPhongBan
-            }
-            into chucVu where chucVu.MaCV.Contains(timKiem) ||
-                              chucVu.TenPhongBan.Contains(timKiem) ||
-                              chucVu.TenChucVu.Contains(timKiem) ||
-                              chucVu.LuongKhoiDiem.ToString().Contains(timKiem)
-                              select chucVu;                              
-            return danhSachPhongBan;
         }
         public bool Save(ChucVu chucVu)
         {

@@ -27,19 +27,7 @@ namespace QuanLyNhanSu.DataTier
                 MaLoaiCa = x.MaLC,
                 TenLoaiCa = x.TenLoaiCa,
                 HeSoLuong = x.HeSoLuong,
-            }).OrderBy(lc => lc.MaLoaiCa).ToList();
-            return danhSachLoaiCa;
-        }
-        public IEnumerable<LoaiCaViewModels> SearchLoaiCa(string timKiem)
-        {
-            var danhSachLoaiCa = quanLyNhanSu.LoaiCas.Select(x => new LoaiCaViewModels
-            {
-                MaLoaiCa = x.MaLC,
-                TenLoaiCa = x.TenLoaiCa,
-                HeSoLuong = x.HeSoLuong,
-            }).Where(lc => lc.MaLoaiCa.Contains(timKiem) ||
-                     lc.TenLoaiCa.Contains(timKiem) ||
-                     lc.HeSoLuong.ToString().Contains(timKiem)).ToList();
+            }).OrderBy(lc => lc.MaLoaiCa);
             return danhSachLoaiCa;
         }
         public IEnumerable<LoaiCa> GetLoaiCa()

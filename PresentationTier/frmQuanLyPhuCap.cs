@@ -19,6 +19,7 @@ namespace QuanLyNhanSu.PresentationTier
         Thread currentForm;
         private readonly QuanLyPhuCapBUS phuCapBUS;
         private IEnumerable<PhuCapViewMModels> danhSachPhuCap;
+        private IEnumerable<PhuCapViewMModels> danhSachPhuCapTimKiem;
         public FrmQuanLyPhuCap()
 
         {
@@ -51,10 +52,13 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadPhuCapTimKiem(string timKiem)
         {
+            timKiem.ToLower();
             dgvThongTinPhuCap.Rows.Clear();
-            danhSachPhuCap = phuCapBUS.SearchPhuCap(timKiem);
+            danhSachPhuCapTimKiem = danhSachPhuCap.Where(pc => pc.MaPC.ToLower().Contains(timKiem) ||
+                                                         pc.TenPhuCap.ToLower().Contains(timKiem) ||
+                                                         pc.TienPhuCap.ToString().Contains(timKiem));
             int rowAdd;
-            foreach (var pc in danhSachPhuCap)
+            foreach (var pc in danhSachPhuCapTimKiem)
             {
                 rowAdd = dgvThongTinPhuCap.Rows.Add();
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[0].Value = pc.MaPC;
@@ -63,6 +67,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = phuCapBUS.TongSoLuongNhanVienTrongPhongBan(pc.MaPC).ToString();
             }
         }
+        ////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
             txtMaPC.Text = string.Empty;
@@ -70,6 +75,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtSoTien.Text = string.Empty;
             txtSoLuongNhanVien.Text = string.Empty;
         }
+        ////////////////////////////////////////////////////////////////////////////////////////
         public void CloseCurrentForm()
         {
             this.Close();
@@ -82,23 +88,44 @@ namespace QuanLyNhanSu.PresentationTier
             currentForm.SetApartmentState(ApartmentState.STA);
             currentForm.Start();
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void CloseForm(object sender, FormClosedEventArgs e)
         {
-            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
-            frmOpen.Show();
-            this.Hide();
-            frmOpen.FormClosed += CloseForm;
+            this.Close();
         }
-        private void dgvThongTinPhuCap_CellClick(object sender, DataGridViewCellEventArgs e)
+        ////////////////////////////////////////////////////////////////////////////////////////
+        private void EnableButtons(object sender, EventArgs e)
         {
-            int rowIndex = e.RowIndex;
-            if (rowIndex < 0)
+            if (string.IsNullOrEmpty(txtMaPC.Text) && string.IsNullOrEmpty(txtTenPC.Text) && string.IsNullOrEmpty(txtSoTien.Text) ||
+               string.IsNullOrEmpty(txtTenPC.Text) && string.IsNullOrEmpty(txtSoTien.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
                 return;
-            txtMaPC.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[0].Value.ToString();
-            txtTenPC.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[1].Value.ToString();
-            txtSoTien.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[2].Value.ToString();
-            txtSoLuongNhanVien.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[3].Value.ToString();
+            }
+            else if (string.IsNullOrEmpty(txtMaPC.Text) && !string.IsNullOrEmpty(txtTenPC.Text) && !string.IsNullOrEmpty(txtSoTien.Text))
+            {
+                btnThem.Enabled = true;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                return;
+            }
+            else if (!string.IsNullOrEmpty(txtMaPC.Text) && !string.IsNullOrEmpty(txtTenPC.Text) && !string.IsNullOrEmpty(txtSoTien.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = true;
+                btnXoa.Enabled = true;
+                return;
+            }
         }
+        private void txtSoTien_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////
         private void btnThem_Click(object sender, EventArgs e)
         {
             PhuCap newPhuCap = new PhuCap
@@ -134,31 +161,24 @@ namespace QuanLyNhanSu.PresentationTier
         {
             ClearAllText();
         }
-        private void EnableButtons(object sender, EventArgs e)
+        private void btnTroVe_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaPC.Text) && string.IsNullOrEmpty(txtTenPC.Text) && string.IsNullOrEmpty(txtSoTien.Text) ||
-               string.IsNullOrEmpty(txtTenPC.Text) && string.IsNullOrEmpty(txtSoTien.Text))
-            {
-                btnThem.Enabled = false;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                return;
-            }
-            else if (string.IsNullOrEmpty(txtMaPC.Text) && !string.IsNullOrEmpty(txtTenPC.Text) && !string.IsNullOrEmpty(txtSoTien.Text))
-            {
-                btnThem.Enabled = true;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                return;
-            }
-            else if (!string.IsNullOrEmpty(txtMaPC.Text) && !string.IsNullOrEmpty(txtTenPC.Text) && !string.IsNullOrEmpty(txtSoTien.Text))
-            {
-                btnThem.Enabled = false;
-                btnSua.Enabled = true;
-                btnXoa.Enabled = true;
-                return;
-            }
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
+        private void dgvThongTinPhuCap_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex < 0)
+                return;
+            txtMaPC.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[0].Value.ToString();
+            txtTenPC.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[1].Value.ToString();
+            txtSoTien.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[2].Value.ToString();
+            txtSoLuongNhanVien.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[3].Value.ToString();
+        }
+       
         private void TimKiem(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTimKiem.Text))
@@ -167,18 +187,6 @@ namespace QuanLyNhanSu.PresentationTier
                 return;
             }
             LoadPhuCapTimKiem(txtTimKiem.Text);                
-        }
-        private void txtSoTien_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-        private void CloseForm(object sender, FormClosedEventArgs e)
-        {
-            this.Close();
-        }
-
+        }               
     }
 }

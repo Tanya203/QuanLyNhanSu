@@ -20,6 +20,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyChucVuBUS chucVuBUS;
         private readonly QuanLyPhongBanBUS phongBanBUS;
         private IEnumerable<ChucVuViewModels> danhSachChucVu;
+        private IEnumerable<ChucVuViewModels> danhSachChucVuTimKiem;
         public FrmQuanLyChucVu()
         {
             InitializeComponent();            
@@ -55,10 +56,14 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadChucVuTimKiem(string timKiem)
         {
+            timKiem.ToLower();
             dgvThongTinChucVu.Rows.Clear();
-            danhSachChucVu = chucVuBUS.SearchChucVu(timKiem);
+            danhSachChucVuTimKiem = danhSachChucVu.Where(chucVu => chucVu.MaCV.ToLower().Contains(timKiem) ||
+                              chucVu.TenPhongBan.ToLower().Contains(timKiem) ||
+                              chucVu.TenChucVu.ToLower().Contains(timKiem) ||
+                              chucVu.LuongKhoiDiem.ToString().Contains(timKiem));
             int rowAdd;
-            foreach (var cv in danhSachChucVu)
+            foreach (var cv in danhSachChucVuTimKiem)
             {
                 rowAdd = dgvThongTinChucVu.Rows.Add();
                 dgvThongTinChucVu.Rows[rowAdd].Cells[0].Value = cv.MaCV;
@@ -72,6 +77,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             cmbPhongBan.DataSource = phongBanBUS.GetPhongBan();
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
             txtMaCV.Text = string.Empty;
@@ -80,6 +86,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtTongSoNhanVien.Text = string.Empty;
             txtLuongKhoiDiem.Text = string.Empty;
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////
         public void CloseCurrentForm()
         {
             this.Close();
@@ -92,29 +99,49 @@ namespace QuanLyNhanSu.PresentationTier
             currentForm.SetApartmentState(ApartmentState.STA);
             currentForm.Start();
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
-        {
-            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
-            frmOpen.Show();
-            this.Hide();
-            frmOpen.FormClosed += CloseForm;
-        }
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
             this.Close();
         }
-        private void dgvThongTinChucVu_CellClick(object sender, DataGridViewCellEventArgs e)
+        /////////////////////////////////////////////////////////////////////////////////////////////
+        private void EnableButtons(object sender, EventArgs e)
         {
-            int rowIndex = e.RowIndex;
-            if (rowIndex < 0)
+            if (string.IsNullOrEmpty(txtMaCV.Text) && string.IsNullOrEmpty(txtTenCV.Text) && string.IsNullOrEmpty(txtLuongKhoiDiem.Text) ||
+                string.IsNullOrEmpty(txtTenCV.Text) && string.IsNullOrEmpty(txtLuongKhoiDiem.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
                 return;
-            txtMaCV.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[0].Value.ToString();
-            cmbPhongBan.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[1].Value.ToString();
-            txtTenCV.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[2].Value.ToString();
-            txtLuongKhoiDiem.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[3].Value.ToString();
-            txtTongSoNhanVien.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[4].Value.ToString();
-
+            }
+            if (string.IsNullOrEmpty(txtMaCV.Text) && !string.IsNullOrEmpty(txtTenCV.Text) && !string.IsNullOrEmpty(txtLuongKhoiDiem.Text))
+            {
+                btnThem.Enabled = true;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                return;
+            }
+            if (!string.IsNullOrEmpty(txtMaCV.Text) && !string.IsNullOrEmpty(txtTenCV.Text) && !string.IsNullOrEmpty(txtLuongKhoiDiem.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = true;
+                btnXoa.Enabled = true;
+                return;
+            }
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////
+        private void txtLuongKhoiDiem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+        }
+        /////////////////////////////////////////////////////////////////////////////////////////////
         private void btnThem_Click(object sender, EventArgs e)
         {
             ChucVu chucVu = new ChucVu
@@ -150,36 +177,29 @@ namespace QuanLyNhanSu.PresentationTier
             ClearAllText();
             LoadChucVu();
         }
-
+        private void btnTroVe_Click(object sender, EventArgs e)
+        {
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
+        }      
         private void btnHuy_Click(object sender, EventArgs e)
         {
             ClearAllText();
         }
-        private void EnableButtons(object sender, EventArgs e)
+        private void dgvThongTinChucVu_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaCV.Text) && string.IsNullOrEmpty(txtTenCV.Text) && string.IsNullOrEmpty(txtLuongKhoiDiem.Text) || 
-                string.IsNullOrEmpty(txtTenCV.Text) && string.IsNullOrEmpty(txtLuongKhoiDiem.Text))
-            {
-                btnThem.Enabled = false;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
+            int rowIndex = e.RowIndex;
+            if (rowIndex < 0)
                 return;
-            }
-            if (string.IsNullOrEmpty(txtMaCV.Text) && !string.IsNullOrEmpty(txtTenCV.Text) && !string.IsNullOrEmpty(txtLuongKhoiDiem.Text))
-            {
-                btnThem.Enabled = true;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                return;
-            }
-            if (!string.IsNullOrEmpty(txtMaCV.Text) && !string.IsNullOrEmpty(txtTenCV.Text) && !string.IsNullOrEmpty(txtLuongKhoiDiem.Text))
-            {
-                btnThem.Enabled = false;
-                btnSua.Enabled = true;
-                btnXoa.Enabled = true;
-                return;
-            }
-        }
+            txtMaCV.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[0].Value.ToString();
+            cmbPhongBan.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[1].Value.ToString();
+            txtTenCV.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[2].Value.ToString();
+            txtLuongKhoiDiem.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[3].Value.ToString();
+            txtTongSoNhanVien.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[4].Value.ToString();
+
+        }       
         private void TimKiem(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTimKiem.Text))
@@ -188,18 +208,6 @@ namespace QuanLyNhanSu.PresentationTier
                 return;
             }
             LoadChucVuTimKiem(txtTimKiem.Text);
-        }
-
-        private void txtLuongKhoiDiem_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
-            {
-                e.Handled = true;
-            }
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
-            {
-                e.Handled = true;
-            }
-        }
+        }       
     }
 }

@@ -132,6 +132,7 @@
             // 
             this.txtTenCa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTenCa.Location = new System.Drawing.Point(160, 63);
+            this.txtTenCa.MaxLength = 50;
             this.txtTenCa.Name = "txtTenCa";
             this.txtTenCa.Size = new System.Drawing.Size(259, 30);
             this.txtTenCa.TabIndex = 3;

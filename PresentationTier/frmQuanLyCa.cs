@@ -19,7 +19,9 @@ namespace QuanLyNhanSu.PresentationTier
     {
         Thread currentForm;
         private readonly QuanLyCaBUS caBUS;
-        private IEnumerable<CaViewModels> danhSachCa;        
+        private IEnumerable<CaViewModels> danhSachCa;
+        private IEnumerable<CaViewModels> danhSachCaTimKiem;
+        string formatTime = "HH:mm";
         public FrmQuanLyCa()
         {
             InitializeComponent();
@@ -52,10 +54,14 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadCaTimKiem(string timKiem)
         {
+            timKiem.ToLower();
             dgvThongTinCa.Rows.Clear();
-            danhSachCa = caBUS.SearchLoaiCa(timKiem);
+            danhSachCaTimKiem = danhSachCa.Where(ca => ca.MaCa.ToLower().Contains(timKiem) ||
+                     ca.TenCa.ToLower().Contains(timKiem) ||
+                     ca.GioBatDau.ToString().Contains(timKiem) ||
+                     ca.GioKetThuc.ToString().Contains(timKiem)); 
             int rowAdd;
-            foreach (var ca in danhSachCa)
+            foreach (var ca in danhSachCaTimKiem)
             {
                 rowAdd = dgvThongTinCa.Rows.Add();
                 dgvThongTinCa.Rows[rowAdd].Cells[0].Value = ca.MaCa;
@@ -63,7 +69,8 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinCa.Rows[rowAdd].Cells[2].Value = ca.GioBatDau;
                 dgvThongTinCa.Rows[rowAdd].Cells[3].Value = ca.GioKetThuc;
             }
-        }        
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
             txtMaCa.Text = string.Empty;
@@ -71,6 +78,7 @@ namespace QuanLyNhanSu.PresentationTier
             dtpThoiGianBatDau.Text = "00:00";
             dtpThoiGianKetThuc.Text = "00:00";
         }
+        ///////////////////////////////////////////////////////////////////////////////////////
         public void CloseCurrentForm()
         {
             this.Close();
@@ -82,31 +90,36 @@ namespace QuanLyNhanSu.PresentationTier
             currentForm = new Thread(CloseCurrentForm);
             currentForm.SetApartmentState(ApartmentState.STA);
             currentForm.Start();
-        }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        }                     
+        private void CloseForm(object sender, FormClosedEventArgs e)
         {
-            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
-            frmOpen.Show();
-            this.Hide();
-            frmOpen.FormClosed += CloseForm;            
+            this.Close();
         }
-        private void btnQuanLyLoaiCa_Click(object sender, EventArgs e)
+        private void EnableButtons(object sender, EventArgs e)
         {
-            FrmQuanLyLoaiCa frm = new FrmQuanLyLoaiCa();
-            frm.Show();
-            this.Hide();
-            frm.FormClosed += CloseForm;
-        }
-        private void dgvThongTinCa_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int rowIndex = e.RowIndex;
-            if (rowIndex < 0)
+            if (string.IsNullOrWhiteSpace(txtMaCa.Text) && string.IsNullOrEmpty(txtTenCa.Text) || string.IsNullOrEmpty(txtTenCa.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
                 return;
-            txtMaCa.Text = dgvThongTinCa.Rows[rowIndex].Cells[0].Value.ToString();
-            txtTenCa.Text = dgvThongTinCa.Rows[rowIndex].Cells[1].Value.ToString();
-            dtpThoiGianBatDau.Text = dgvThongTinCa.Rows[rowIndex].Cells[2].Value.ToString();
-            dtpThoiGianKetThuc.Text = dgvThongTinCa.Rows[rowIndex].Cells[3].Value.ToString();
+            }
+            else if (string.IsNullOrWhiteSpace(txtMaCa.Text) && !string.IsNullOrEmpty(txtTenCa.Text))
+            {
+                btnThem.Enabled = true;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                return;
+            }
+            else if (!string.IsNullOrWhiteSpace(txtMaCa.Text) && !string.IsNullOrEmpty(txtTenCa.Text))
+            {
+                btnThem.Enabled = false;
+                btnSua.Enabled = true;
+                btnXoa.Enabled = true;
+                return;
+            }
         }
+        ///////////////////////////////////////////////////////////////////////////////////////
         private void btnThem_Click(object sender, EventArgs e)
         {
             Ca newCa = new Ca
@@ -147,30 +160,20 @@ namespace QuanLyNhanSu.PresentationTier
         {
             ClearAllText();
         }
-        private void EnableButtons(object sender, EventArgs e)
+        private void btnQuanLyLoaiCa_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(txtMaCa.Text) && string.IsNullOrEmpty(txtTenCa.Text) || string.IsNullOrEmpty(txtTenCa.Text))
-            {
-                btnThem.Enabled = false;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                return;
-            }
-            else if(string.IsNullOrWhiteSpace(txtMaCa.Text) && !string.IsNullOrEmpty(txtTenCa.Text))
-            {
-                btnThem.Enabled = true;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                return;
-            }
-            else if(!string.IsNullOrWhiteSpace(txtMaCa.Text) && !string.IsNullOrEmpty(txtTenCa.Text))
-            {
-                btnThem.Enabled = false;
-                btnSua.Enabled = true;
-                btnXoa.Enabled = true;
-                return;
-            }
+            FrmQuanLyLoaiCa frm = new FrmQuanLyLoaiCa();
+            frm.Show();
+            this.Hide();
+            frm.FormClosed += CloseForm;
         }
+        private void btnTroVe_Click(object sender, EventArgs e)
+        {
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
+        }       
         private void TimKiem(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTimKiem.Text))
@@ -180,9 +183,15 @@ namespace QuanLyNhanSu.PresentationTier
             }
             LoadCaTimKiem(txtTimKiem.Text);
         }
-        private void CloseForm(object sender, FormClosedEventArgs e)
+        private void dgvThongTinCa_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.Close();
+            int rowIndex = e.RowIndex;
+            if (rowIndex < 0)
+                return;
+            txtMaCa.Text = dgvThongTinCa.Rows[rowIndex].Cells[0].Value.ToString();
+            txtTenCa.Text = dgvThongTinCa.Rows[rowIndex].Cells[1].Value.ToString();
+            dtpThoiGianBatDau.Text = dgvThongTinCa.Rows[rowIndex].Cells[2].Value.ToString();
+            dtpThoiGianKetThuc.Text = dgvThongTinCa.Rows[rowIndex].Cells[3].Value.ToString();
         }
     }
 }
