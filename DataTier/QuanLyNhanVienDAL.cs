@@ -18,6 +18,7 @@ namespace QuanLyNhanSu.DataTier
     internal class QuanLyNhanVienDAL
     {
         private QuanLyNhanSuContextDB quanLyNhanSu;
+        string formatDateTime = "";
         public QuanLyNhanVienDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
@@ -56,7 +57,64 @@ namespace QuanLyNhanSu.DataTier
                 TenLoaiHopDong = nv.LoaiHopDong.TenLoaiHopDong,
             }).OrderBy(nv=>nv.MaNV);                                   
             return danhSachNhanVien;
-        }       
+        }
+        public IEnumerable<NhanVienViewModel> SearchNhanVien(string timKiem)
+        {
+            var danhSachNhanVien = quanLyNhanSu.NhanViens.Select(nv => new NhanVienViewModel
+            {
+                MaNV = nv.MaNV,
+                MaCV = nv.MaCV,
+                MaLHD = nv.MaLHD,
+                TaiKhoan = nv.TaiKhoan,
+                CCCD_CMND = nv.CCCD_CMND,
+                Ho = nv.Ho,
+                TenLot = nv.TenLot,
+                Ten = nv.Ten,
+                NTNS = nv.NTNS,
+                SoNha = nv.SoNha,
+                TenDuong = nv.TenDuong,
+                Phuong_Xa = nv.Phuong_Xa,
+                Quan_Huyen = nv.Quan_Huyen,
+                Tinh_ThanhPho = nv.Tinh_ThanhPho,
+                GioiTinh = nv.GioiTinh,
+                SDT = nv.SDT,
+                Email = nv.Email,
+                TrinhDoHocVan = nv.TrinhDoHocVan,
+                NgayVaoLam = nv.NgayVaoLam,
+                ThoiHanHopDong = nv.ThoiHanHopDong,
+                TinhTrang = nv.TinhTrang,
+                SoNgayPhep = nv.SoNgayPhep,
+                LuongCoBan = nv.LuongCoBan,
+                Hinh = nv.Hinh,
+                TenPhongBan = nv.ChucVu.PhongBan.TenPhongBan,
+                TenChucVu = nv.ChucVu.TenChucVu,
+                TenLoaiHopDong = nv.LoaiHopDong.TenLoaiHopDong,
+            }).Where(nhanVien => nhanVien.MaNV.Contains(timKiem) ||
+                                          nhanVien.TenPhongBan.Contains(timKiem) ||
+                                          nhanVien.TenChucVu.Contains(timKiem) ||
+                                          nhanVien.TenLoaiHopDong.Contains(timKiem) ||
+                                          nhanVien.TaiKhoan.Contains(timKiem) ||
+                                          nhanVien.CCCD_CMND.Contains(timKiem) ||
+                                          nhanVien.Ho.Contains(timKiem) ||
+                                          nhanVien.TenLot.Contains(timKiem) ||
+                                          nhanVien.Ten.Contains(timKiem) ||
+                                          nhanVien.NTNS.ToString().Contains(timKiem) ||
+                                          nhanVien.SoNha.Contains(timKiem) ||
+                                          nhanVien.TenDuong.Contains(timKiem) ||
+                                          nhanVien.Phuong_Xa.Contains(timKiem) ||
+                                          nhanVien.Quan_Huyen.Contains(timKiem) ||
+                                          nhanVien.Tinh_ThanhPho.Contains(timKiem) ||
+                                          nhanVien.GioiTinh.Contains(timKiem) ||
+                                          nhanVien.SDT.Contains(timKiem) ||
+                                          nhanVien.Email.Contains(timKiem) ||
+                                          nhanVien.TrinhDoHocVan.Contains(timKiem) ||
+                                          nhanVien.NgayVaoLam.ToString().Contains(timKiem) ||
+                                          nhanVien.ThoiHanHopDong.ToString().Contains(timKiem) ||
+                                          nhanVien.TinhTrang.Contains(timKiem) ||
+                                          nhanVien.SoNgayPhep.ToString().Contains(timKiem) ||
+                                          nhanVien.LuongCoBan.ToString().Contains(timKiem)).OrderBy(nhanVien => nhanVien.MaNV).OrderBy(nv => nv.MaNV);
+            return danhSachNhanVien;
+        }
         public IEnumerable<NhanVien> GetNhanVienTheoPhongBan(string maPB)
         {
             var listNV = quanLyNhanSu.NhanViens.Where(nv => nv.ChucVu.PhongBan.MaPB == maPB).ToList();

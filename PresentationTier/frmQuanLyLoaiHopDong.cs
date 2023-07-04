@@ -49,11 +49,9 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         private void LoadLoaiHopDongTimKiem(string timKiem)
-        {
-            timKiem.ToLower();
+        {            
             dgvThongTinLoaiHopDong.Rows.Clear();
-            danhSachLoaiHopDongTimKiem = danhSachLoaiHopDong.Where(pb => pb.TenLoaiHopDong.ToLower().Contains(timKiem) ||
-                                                                   pb.MaLHD.ToLower().Contains(timKiem)).OrderBy(lhd => lhd.MaLHD);           
+            danhSachLoaiHopDongTimKiem = loaiHopDongBUS.SearchLoaiHopDong(timKiem);           
             int rowAdd;
             foreach (var lhd in danhSachLoaiHopDongTimKiem)
             {

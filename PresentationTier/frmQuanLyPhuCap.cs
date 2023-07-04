@@ -51,12 +51,9 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         private void LoadPhuCapTimKiem(string timKiem)
-        {
-            timKiem.ToLower();
+        {            
             dgvThongTinPhuCap.Rows.Clear();
-            danhSachPhuCapTimKiem = danhSachPhuCap.Where(pc => pc.MaPC.ToLower().Contains(timKiem) ||
-                                                         pc.TenPhuCap.ToLower().Contains(timKiem) ||
-                                                         pc.TienPhuCap.ToString().Contains(timKiem));
+            danhSachPhuCapTimKiem = phuCapBUS.SearchPhuCap(timKiem);
             int rowAdd;
             foreach (var pc in danhSachPhuCapTimKiem)
             {

@@ -21,6 +21,10 @@ namespace QuanLyNhanSu.LogicTier
         {
             return loaiCaDAL.GetAllLoaiCa();
         }
+        public IEnumerable<LoaiCaViewModels> SearchLoaiCa(string timKiem)
+        {
+            return loaiCaDAL.SearchLoaiCa(timKiem);
+        }
         public bool Save(LoaiCa loaiCa)
         {
             return loaiCaDAL.Save(loaiCa);

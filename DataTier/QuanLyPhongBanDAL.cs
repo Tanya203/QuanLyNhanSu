@@ -31,7 +31,16 @@ namespace QuanLyNhanSu.DataTier.Models
             }).OrderBy(pb => pb.MaPB);
             return danhSachPhongBan;
         }
-
+        public IEnumerable<PhongBanViewModel> SearchPhongBan(string timKiem)
+        {
+            var danhSachPhongBan = quanLyNhanSu.PhongBans.Select(x => new PhongBanViewModel
+            {
+                MaPB = x.MaPB,
+                TenPhongBan = x.TenPhongBan,
+            }).Where(pb => pb.TenPhongBan.Contains(timKiem) ||
+                     pb.MaPB.Contains(timKiem)).OrderBy(pb => pb.MaPB);
+            return danhSachPhongBan;
+        }
         public bool Save(PhongBan phongBan)
         {
             try

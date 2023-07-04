@@ -20,6 +20,10 @@ namespace QuanLyNhanSu.LogicTier
         {
             return caDAL.GetAllCa();
         }
+        public IEnumerable<CaViewModels> SearchCa(string timKiem)
+        {
+            return caDAL.SearchCa(timKiem);
+        }
         public bool Save(Ca ca)
         {
             return caDAL.Save(ca);

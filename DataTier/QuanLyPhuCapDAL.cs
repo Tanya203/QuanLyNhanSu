@@ -26,6 +26,18 @@ namespace QuanLyNhanSu.DataTier.Models
             }).OrderBy(pc => pc.MaPC).ToList();
             return danhSachPhuCap;
         }
+        public IEnumerable<PhuCapViewMModels>SearchPhuCap(string timKiem)
+        {
+            var danhSachPhuCap = quanLyNhanSu.PhuCaps.Select(x => new PhuCapViewMModels
+            {
+                MaPC = x.MaPC,
+                TenPhuCap = x.TenPhuCap,
+                TienPhuCap = x.TienPhuCap,
+            }).Where(pc => pc.MaPC.ToLower().Contains(timKiem) ||
+                     pc.TenPhuCap.ToLower().Contains(timKiem) ||
+                     pc.TienPhuCap.ToString().Contains(timKiem)).OrderBy(pc => pc.MaPC);
+            return danhSachPhuCap;
+        }
         public IEnumerable<PhuCap> GetPhuCap()
         {
             return quanLyNhanSu.PhuCaps.OrderBy(pc => pc.MaPC).ToList();
