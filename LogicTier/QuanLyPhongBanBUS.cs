@@ -20,6 +20,10 @@ namespace QuanLyNhanSu.LogicTier
         {
             return phongBanDAL.GetAllPhongBan();
         }
+        public IEnumerable<PhongBanViewModel> SearchPhongBan(string timKiem)
+        {
+            return phongBanDAL.SearchPhongBan(timKiem);
+        }
         public bool Save(PhongBan phongBan)
         {
             return phongBanDAL.Save(phongBan);           

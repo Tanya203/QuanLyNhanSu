@@ -55,13 +55,9 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         private void LoadChucVuTimKiem(string timKiem)
-        {
-            timKiem.ToLower();
+        {            
             dgvThongTinChucVu.Rows.Clear();
-            danhSachChucVuTimKiem = danhSachChucVu.Where(chucVu => chucVu.MaCV.ToLower().Contains(timKiem) ||
-                              chucVu.TenPhongBan.ToLower().Contains(timKiem) ||
-                              chucVu.TenChucVu.ToLower().Contains(timKiem) ||
-                              chucVu.LuongKhoiDiem.ToString().Contains(timKiem));
+            danhSachChucVuTimKiem = chucVuBUS.SearchChucVu(timKiem);
             int rowAdd;
             foreach (var cv in danhSachChucVuTimKiem)
             {

@@ -93,33 +93,9 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         private void LoadNhanVienTimKiem(string timKiem)
-        {
-            timKiem.ToLower();
+        {            
             dgvThongTinNhanVien.Rows.Clear();
-            danhSachNhanVienTimKiem = danhSachNhanVien.Where(nhanVien => nhanVien.MaNV.Contains(timKiem) ||
-                                          nhanVien.TenPhongBan.ToLower().Contains(timKiem) ||
-                                          nhanVien.TenChucVu.ToLower().Contains(timKiem) ||
-                                          nhanVien.TenLoaiHopDong.ToLower().Contains(timKiem) ||
-                                          nhanVien.TaiKhoan.ToLower().Contains(timKiem) ||
-                                          nhanVien.CCCD_CMND.Contains(timKiem) ||
-                                          nhanVien.Ho.ToLower().Contains(timKiem) ||
-                                          nhanVien.TenLot.ToLower().Contains(timKiem) ||
-                                          nhanVien.Ten.ToLower().Contains(timKiem) ||
-                                          nhanVien.NTNS.ToString(formatDateTime).Contains(timKiem) ||
-                                          nhanVien.SoNha.ToLower().Contains(timKiem) ||
-                                          nhanVien.TenDuong.ToLower().Contains(timKiem) ||
-                                          nhanVien.Phuong_Xa.ToLower().Contains(timKiem) ||
-                                          nhanVien.Quan_Huyen.ToLower().Contains(timKiem) ||
-                                          nhanVien.Tinh_ThanhPho.ToLower().Contains(timKiem) ||
-                                          nhanVien.GioiTinh.ToLower().Contains(timKiem) ||
-                                          nhanVien.SDT.Contains(timKiem) ||
-                                          nhanVien.Email.ToLower().Contains(timKiem) ||
-                                          nhanVien.TrinhDoHocVan.ToLower().Contains(timKiem) ||
-                                          nhanVien.NgayVaoLam.ToString(formatDateTime).Contains(timKiem) ||
-                                          nhanVien.ThoiHanHopDong.ToString(formatDateTime).Contains(timKiem) ||
-                                          nhanVien.TinhTrang.ToLower().Contains(timKiem) ||
-                                          nhanVien.SoNgayPhep.ToString().Contains(timKiem) ||
-                                          nhanVien.LuongCoBan.ToString().Contains(timKiem)).OrderBy(nhanVien=>nhanVien.MaNV);
+            danhSachNhanVienTimKiem = nhanVienBUS.SearchNhanVien(timKiem);
             int rowAdd;
             foreach (var nv in danhSachNhanVienTimKiem)
             {

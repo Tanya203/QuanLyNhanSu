@@ -49,11 +49,9 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         private void LoadPhongBanTimKiem(string timKiem)
-        {
-            timKiem.ToLower();
+        {           
             dgvThongTinPhongBan.Rows.Clear();
-            danhSachPhongBanTimKiem = danhSachPhongBan.Where(pb => pb.TenPhongBan.ToLower().Contains(timKiem) ||
-                                                             pb.MaPB.ToLower().Contains(timKiem)).OrderBy(pb => pb.MaPB);
+            danhSachPhongBanTimKiem = phongBanBUS.SearchPhongBan(timKiem);
             int rowAdd;
             foreach (var pb in danhSachPhongBanTimKiem)
             {

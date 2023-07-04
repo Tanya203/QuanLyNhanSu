@@ -53,13 +53,9 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         private void LoadCaTimKiem(string timKiem)
-        {
-            timKiem.ToLower();
+        {            
             dgvThongTinCa.Rows.Clear();
-            danhSachCaTimKiem = danhSachCa.Where(ca => ca.MaCa.ToLower().Contains(timKiem) ||
-                     ca.TenCa.ToLower().Contains(timKiem) ||
-                     ca.GioBatDau.ToString().Contains(timKiem) ||
-                     ca.GioKetThuc.ToString().Contains(timKiem)); 
+            danhSachCaTimKiem = caBUS.SearchCa(timKiem);
             int rowAdd;
             foreach (var ca in danhSachCaTimKiem)
             {

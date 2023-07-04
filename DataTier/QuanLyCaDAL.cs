@@ -30,6 +30,20 @@ namespace QuanLyNhanSu.DataTier
             }).OrderBy(pb => pb.MaCa);
             return danhSachCa;
         }
+        public IEnumerable<CaViewModels> SearchCa(string timKiem)
+        {            
+            var danhSachCa = quanLyNhanSu.Cas.Select(x => new CaViewModels
+            {
+                MaCa = x.MaCa,
+                TenCa = x.TenCa,
+                GioBatDau = x.GioBatDau,
+                GioKetThuc = x.GioKetThuc,
+            }).Where(ca => ca.MaCa.Contains(timKiem) ||
+                     ca.TenCa.Contains(timKiem) ||
+                     ca.GioBatDau.ToString().Contains(timKiem) ||
+                     ca.GioKetThuc.ToString().Contains(timKiem)).OrderBy(pb => pb.MaCa);
+            return danhSachCa;
+        }
         public IEnumerable<Ca> GetCa()
         {
             return quanLyNhanSu.Cas.OrderBy(cv => cv.MaCa).ToList();
