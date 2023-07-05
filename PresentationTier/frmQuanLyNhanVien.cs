@@ -26,14 +26,16 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<NhanVienViewModel> danhSachNhanVien;
         private IEnumerable<NhanVienViewModel> danhSachNhanVienTimKiem;
         string formatDateTime = "dd/MM/yyyy";
+        private readonly string maNV;
 
-        public FrmQuanLyNhanVien()
+        public FrmQuanLyNhanVien(string maNV)
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
             phongBanBus = new QuanLyPhongBanBUS();
             chucVuBUS = new QuanLyChucVuBUS();
             loaiHopDongBUS = new QuanLyLoaiHopDongBUS();
+            this.maNV = maNV;
         }
 
         private void frmQuanLyNhanVien_Load(object sender, EventArgs e)
@@ -48,15 +50,28 @@ namespace QuanLyNhanSu.PresentationTier
             LoadPhongBan();
             LoadChucVuTheoPhongBan(cmbPhongBan.SelectedValue.ToString());
             LoadLoaiHopDong();
+            LoadThongTinDangNhap();
             txtMaNV.ReadOnly = true;
             txtPhuCap.ReadOnly = true;
             btnThem.Enabled = false;
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
             btnThemPhuCap.Enabled = false;
-            dtpNTNS.Text = "01/01/1990";            
+            dtpNTNS.Text = "01/01/1990";          
+            
         }
         ///////////////////////////////////////////////////////////////////////////////////////
+        public void LoadThongTinDangNhap()
+        {
+            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
+            lblMaNV_DN.Text = nv.MaNV;
+            if (string.IsNullOrEmpty(nv.TenLot))
+                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+            else
+                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+        }
         private void LoadNhanVien()
         {
             dgvThongTinNhanVien.Rows.Clear();
@@ -186,15 +201,15 @@ namespace QuanLyNhanSu.PresentationTier
         {
             this.Close();
         }
-        public void CloseCurrentForm()
+        public void CloseCurrentForm(string maNV)
         {
             this.Close();
-            Application.Run(new FrmQuanLyNhanVien());
+            Application.Run(new FrmQuanLyNhanVien(maNV));
         }
         public void Reload()
-        {
+        {            
             this.Close();
-            currentForm = new Thread(CloseCurrentForm);
+            currentForm = new Thread(new ThreadStart(() => CloseCurrentForm(maNV)));
             currentForm.SetApartmentState(ApartmentState.STA);
             currentForm.Start();
         }
@@ -394,8 +409,13 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (!nhanVienBUS.Save(newNhanVien))
                 return;
-            ClearAllText();
-            LoadNhanVien();
+            if(lblMaNV_DN.Text == txtMaNV.Text)
+                frmQuanLyNhanVien_Load(sender, e);
+            else
+            {
+                ClearAllText();
+                LoadNhanVien();
+            }            
         }      
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -409,7 +429,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh(lblMaNV_DN.Text);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;

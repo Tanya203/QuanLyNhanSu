@@ -18,21 +18,37 @@ namespace QuanLyNhanSu.PresentationTier
     {
         Thread currentForm;
         private readonly QuanLyLoaiCaBUS loaiCaBUS;
+        private readonly QuanLyNhanVienBUS nhanVienBUS;
         private IEnumerable<LoaiCaViewModels> danhSachLoaiCa;
         private IEnumerable<LoaiCaViewModels> danhSachLoaiCaTimKiem;
-        public FrmQuanLyLoaiCa()
+        private readonly string maNV;
+        public FrmQuanLyLoaiCa(string maNV)
         {
             InitializeComponent();
             this.Load += frmQuanLyLoaiCa_Load;
             loaiCaBUS = new QuanLyLoaiCaBUS();
+            nhanVienBUS = new QuanLyNhanVienBUS();
             txtMaLC.ReadOnly = true;           
             btnThem.Enabled = false;
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
+            this.maNV = maNV;
         }
         private void frmQuanLyLoaiCa_Load(object sender, EventArgs e)
         {
             LoadLoaiCa();
+            LoadThongTinDangNhap();
+        }
+        public void LoadThongTinDangNhap()
+        {
+            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
+            lblMaNV_DN.Text = nv.MaNV;
+            if (string.IsNullOrEmpty(nv.TenLot))
+                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+            else
+                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
         private void LoadLoaiCa()
         {
@@ -68,15 +84,15 @@ namespace QuanLyNhanSu.PresentationTier
             txtHeSoLuong.Text = string.Empty;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void CloseCurrentForm()
+        public void CloseCurrentForm(string maNV)
         {
             this.Close();
-            Application.Run(new FrmQuanLyLoaiCa());
+            Application.Run(new FrmQuanLyLoaiCa(maNV));
         }
         public void Reload()
         {
             this.Close();
-            currentForm = new Thread(CloseCurrentForm);
+            currentForm = new Thread(new ThreadStart(() => CloseCurrentForm(maNV)));
             currentForm.SetApartmentState(ApartmentState.STA);
             currentForm.Start();
         }
@@ -157,7 +173,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            FrmQuanLyCa frmOpen = new FrmQuanLyCa();
+            FrmQuanLyCa frmOpen = new FrmQuanLyCa(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;

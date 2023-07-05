@@ -124,6 +124,10 @@ namespace QuanLyNhanSu.DataTier
         {
             return quanLyNhanSu.NhanViens.OrderBy(nv => nv.MaNV).ToList();
         }
+        public NhanVien ThongTinNhanVienDangNhap(string maNV)
+        {
+            return quanLyNhanSu.NhanViens.Where(nv => nv.MaNV == maNV).FirstOrDefault();
+        }
         public bool Save(NhanVien nhanVien)
         {
             try
