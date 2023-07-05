@@ -1,4 +1,5 @@
-﻿using QuanLyNhanSu.LogicTier;
+﻿using QuanLyNhanSu.DataTier.Models;
+using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.PresentationTier;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace QuanLyNhanSu
     {
         Thread currentForm;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
+
         public FrmDangNhap()
         {
             InitializeComponent();
@@ -39,8 +41,9 @@ namespace QuanLyNhanSu
         private void btnDangNhap_Click(object sender, EventArgs e)
         {            
             if(nhanVienBUS.LoginVerify(txtTaiKhoan.Text, txtMatKhau.Text))
-            {
-                FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            {                    
+                NhanVien nv = nhanVienBUS.GetNhanVien().Where(nhanVien => nhanVien.TaiKhoan == txtTaiKhoan.Text).FirstOrDefault();
+                FrmManHinhChinh frmOpen = new FrmManHinhChinh(nv.MaNV);
                 frmOpen.Show();
                 this.Hide();
                 frmOpen.FormClosed += CloseForm;

@@ -20,6 +20,14 @@ namespace QuanLyNhanSu.LogicTier
         {
             return nhanVienDAL.GetAllNhanVien();
         }
+        public IEnumerable<NhanVien> GetNhanVien()
+        {
+            return nhanVienDAL.GetNhanVien();
+        }
+        public NhanVien ThongTinNhanVienDangNhap(string taiKhoan)
+        {
+            return nhanVienDAL.ThongTinNhanVienDangNhap(taiKhoan);
+        }
         public IEnumerable<NhanVienViewModel> SearchNhanVien(string timKiem)
         {
             return nhanVienDAL.SearchNhanVien(timKiem);

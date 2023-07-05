@@ -18,22 +18,38 @@ namespace QuanLyNhanSu.PresentationTier
     {
         Thread currentForm;
         private readonly QuanLyPhongBanBUS phongBanBUS;
+        private readonly QuanLyNhanVienBUS nhanVienBUS;
         private IEnumerable<PhongBanViewModel> danhSachPhongBan;
         private IEnumerable<PhongBanViewModel> danhSachPhongBanTimKiem;
-        public FrmQuanLyPhongBan()
+        private readonly string maNV;
+        public FrmQuanLyPhongBan(string maNV)
         {
             InitializeComponent();
             this.Load += frmQuanLyPhongBan_Load;
             phongBanBUS = new QuanLyPhongBanBUS();
+            nhanVienBUS = new QuanLyNhanVienBUS();
             txtMaPB.ReadOnly = true;
             txtTongSoNhanVien.ReadOnly = true;
             btnThem.Enabled = false;
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
+            this.maNV = maNV;
         }
         private void frmQuanLyPhongBan_Load(object sender, EventArgs e)
         {
             LoadPhongBan();
+            LoadThongTinDangNhap();
+        }
+        public void LoadThongTinDangNhap()
+        {
+            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
+            lblMaNV_DN.Text = nv.MaNV;
+            if (string.IsNullOrEmpty(nv.TenLot))
+                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+            else
+                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
         private void LoadPhongBan()
         {
@@ -69,15 +85,15 @@ namespace QuanLyNhanSu.PresentationTier
             txtTongSoNhanVien.Text = string.Empty;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////
-        public void CloseCurrentForm()
-        {
+        public void CloseCurrentForm(string maNV)
+        {            
             this.Close();
-            Application.Run(new FrmQuanLyPhongBan());
+            Application.Run(new FrmQuanLyPhongBan(maNV));
         }
         public void Reload()
-        {
+        {            
             this.Close();
-            currentForm = new Thread(CloseCurrentForm);
+            currentForm = new Thread(new ThreadStart(() => CloseCurrentForm(maNV)));
             currentForm.SetApartmentState(ApartmentState.STA);
             currentForm.Start();
         }
@@ -132,7 +148,7 @@ namespace QuanLyNhanSu.PresentationTier
                 MaPB = txtMaPB.Text,
                 TenPhongBan = txtTenPB.Text
             };
-            phongBanBUS.Save(newPhongBan);
+            phongBanBUS.Save(newPhongBan);            
             ClearAllText();
             LoadPhongBan();
         }
@@ -148,7 +164,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            FrmManHinhChinh frmOpen = new FrmManHinhChinh();
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh(lblMaNV_DN.Text);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;

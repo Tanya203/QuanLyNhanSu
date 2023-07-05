@@ -20,10 +20,10 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            FrmQuanLyNhanVien frmOpen = new FrmQuanLyNhanVien();
+            /*FrmQuanLyNhanVien frmOpen = new FrmQuanLyNhanVien();
             frmOpen.Show();
             this.Hide();
-            frmOpen.FormClosed += CloseForm;
+            frmOpen.FormClosed += CloseForm;*/
         }
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
