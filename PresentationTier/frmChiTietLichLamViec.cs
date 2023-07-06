@@ -14,13 +14,15 @@ namespace QuanLyNhanSu.PresentationTier
     public partial class FrmChiTietLichLamViec : Form
     {
         Thread currentForm;
+        private readonly string maNV;
         public FrmChiTietLichLamViec()
         {
             InitializeComponent();
+
         }        
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            FrmLichLamViec frmOpen = new FrmLichLamViec();
+            FrmLichLamViec frmOpen = new FrmLichLamViec(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
@@ -36,6 +38,11 @@ namespace QuanLyNhanSu.PresentationTier
         }
 
         private void lblTimKiem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FrmChiTietLichLamViec_Load(object sender, EventArgs e)
         {
 
         }

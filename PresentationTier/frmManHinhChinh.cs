@@ -77,7 +77,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnQLLLV_Click(object sender, EventArgs e)
         {
-            FrmLichLamViec frmOpen = new FrmLichLamViec();
+            FrmLichLamViec frmOpen = new FrmLichLamViec(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
@@ -91,21 +91,21 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnQLPT_Click(object sender, EventArgs e)
         {
-            FrmPhieuThuong frmOpen = new FrmPhieuThuong();
+            FrmPhieuThuong frmOpen = new FrmPhieuThuong(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
         private void btnQLPP_Click(object sender, EventArgs e)
         {
-            FrmPhieuPhat frmOpen = new FrmPhieuPhat();
+            FrmPhieuPhat frmOpen = new FrmPhieuPhat(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
         private void btnQLTK_Click(object sender, EventArgs e)
         {
-            FrmThongKeLuong frmOpen = new FrmThongKeLuong();
+            FrmThongKeLuong frmOpen = new FrmThongKeLuong(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
@@ -119,21 +119,21 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnQLPQ_Click(object sender, EventArgs e)
         {
-            FrmPhanQuyen frmOpen = new FrmPhanQuyen();
+            FrmPhanQuyen frmOpen = new FrmPhanQuyen(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
         private void btnLSTT_Click(object sender, EventArgs e)
         {
-            FrmLichSuThaoTac frmOpen = new FrmLichSuThaoTac();
+            FrmLichSuThaoTac frmOpen = new FrmLichSuThaoTac(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
         private void btnTTTK_Click(object sender, EventArgs e)
         {
-            FrmThongTinTaiKhoan frmOpen = new FrmThongTinTaiKhoan();
+            FrmThongTinTaiKhoan frmOpen = new FrmThongTinTaiKhoan(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
@@ -141,21 +141,6 @@ namespace QuanLyNhanSu.PresentationTier
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
             this.Close();
-        }
-
-        private void dtpLichLamViec_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblLichLamViec_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblMaNV_Click(object sender, EventArgs e)
-        {
-
-        }
+        }           
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QuanLyNhanSu.DataTier.Models;
+using QuanLyNhanSu.LogicTier;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,50 +16,43 @@ namespace QuanLyNhanSu.PresentationTier
     public partial class FrmThongTinTaiKhoan : Form
     {
         Thread currentForm;
-        public FrmThongTinTaiKhoan()
+        private readonly QuanLyNhanVienBUS nhanVienBUS;
+        private readonly string maNV;
+        public FrmThongTinTaiKhoan(string maNV)
         {
             InitializeComponent();
+            nhanVienBUS = new QuanLyNhanVienBUS();
+            this.maNV = maNV;
         }
-        public void ReturnHome()
+        private void FrmThongTinTaiKhoan_Load(object sender, EventArgs e)
         {
-            /*this.Close();
-            Application.Run(new FrmManHinhChinh());*/
+            LoadThongTinDangNhap();
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        public void LoadThongTinDangNhap()
         {
-            /*FrmManHinhChinh frmOpen = new FrmManHinhChinh();
-            frmOpen.Show();
-            this.Hide();
-            frmOpen.FormClosed += CloseForm;*/
+            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
+            lblMaNV_DN.Text = nv.MaNV;
+            if (string.IsNullOrEmpty(nv.TenLot))
+                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+            else
+                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
+        //////////////////////////////////////////////////////////////////////////////
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
             this.Close();
         }
-
-        private void pnlMenu_Paint(object sender, PaintEventArgs e)
+        //////////////////////////////////////////////////////////////////////////////
+        private void btnTroVe_Click(object sender, EventArgs e)
         {
-
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
-
-        private void lblNgayVaoLam_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtpNgayVaoLam_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblThongTinTaiKhoan_Click(object sender, EventArgs e)
-        {
-
-        }
+         
+        
     }
 }
