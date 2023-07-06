@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyNhanSu.LogicTier;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,13 +15,17 @@ namespace QuanLyNhanSu.PresentationTier
     public partial class FrmChiTietPhieuPhat : Form
     {
         Thread currentForm;
-        public FrmChiTietPhieuPhat()
+        private readonly QuanLyNhanVienBUS nhanVienBUS;
+        private readonly string maNV;
+        public FrmChiTietPhieuPhat(string maNV)
         {
             InitializeComponent();
+            nhanVienBUS = new QuanLyNhanVienBUS();
+            this.maNV = maNV;
         }       
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            FrmPhieuPhat frmOpen = new FrmPhieuPhat();
+            FrmPhieuPhat frmOpen = new FrmPhieuPhat(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;

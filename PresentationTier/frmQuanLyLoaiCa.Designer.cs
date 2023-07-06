@@ -91,14 +91,15 @@
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(1924, 110);
             this.pnlHeader.TabIndex = 43;
+            this.pnlHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlHeader_Paint);
             // 
             // lblChucVuNV_DN
             // 
             this.lblChucVuNV_DN.AutoSize = true;
-            this.lblChucVuNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuNV_DN.Location = new System.Drawing.Point(947, 72);
+            this.lblChucVuNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChucVuNV_DN.Location = new System.Drawing.Point(1243, 72);
             this.lblChucVuNV_DN.Name = "lblChucVuNV_DN";
-            this.lblChucVuNV_DN.Size = new System.Drawing.Size(41, 32);
+            this.lblChucVuNV_DN.Size = new System.Drawing.Size(38, 32);
             this.lblChucVuNV_DN.TabIndex = 8;
             this.lblChucVuNV_DN.Text = "...";
             // 
@@ -106,7 +107,7 @@
             // 
             this.lblChucVuDN.AutoSize = true;
             this.lblChucVuDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuDN.Location = new System.Drawing.Point(771, 72);
+            this.lblChucVuDN.Location = new System.Drawing.Point(1067, 72);
             this.lblChucVuDN.Name = "lblChucVuDN";
             this.lblChucVuDN.Size = new System.Drawing.Size(133, 32);
             this.lblChucVuDN.TabIndex = 7;
@@ -115,10 +116,10 @@
             // lblPhongBanNV_DN
             // 
             this.lblPhongBanNV_DN.AutoSize = true;
-            this.lblPhongBanNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanNV_DN.Location = new System.Drawing.Point(947, 9);
+            this.lblPhongBanNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPhongBanNV_DN.Location = new System.Drawing.Point(1243, 9);
             this.lblPhongBanNV_DN.Name = "lblPhongBanNV_DN";
-            this.lblPhongBanNV_DN.Size = new System.Drawing.Size(41, 32);
+            this.lblPhongBanNV_DN.Size = new System.Drawing.Size(38, 32);
             this.lblPhongBanNV_DN.TabIndex = 6;
             this.lblPhongBanNV_DN.Text = "...";
             // 
@@ -126,7 +127,7 @@
             // 
             this.lblPhongBanDN.AutoSize = true;
             this.lblPhongBanDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanDN.Location = new System.Drawing.Point(771, 9);
+            this.lblPhongBanDN.Location = new System.Drawing.Point(1067, 9);
             this.lblPhongBanDN.Name = "lblPhongBanDN";
             this.lblPhongBanDN.Size = new System.Drawing.Size(170, 32);
             this.lblPhongBanDN.TabIndex = 5;
@@ -135,10 +136,10 @@
             // lblHoTenNV_DN
             // 
             this.lblHoTenNV_DN.AutoSize = true;
-            this.lblHoTenNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHoTenNV_DN.Location = new System.Drawing.Point(393, 72);
+            this.lblHoTenNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHoTenNV_DN.Location = new System.Drawing.Point(469, 72);
             this.lblHoTenNV_DN.Name = "lblHoTenNV_DN";
-            this.lblHoTenNV_DN.Size = new System.Drawing.Size(41, 32);
+            this.lblHoTenNV_DN.Size = new System.Drawing.Size(38, 32);
             this.lblHoTenNV_DN.TabIndex = 4;
             this.lblHoTenNV_DN.Text = "...";
             this.lblHoTenNV_DN.UseMnemonic = false;
@@ -147,7 +148,7 @@
             // 
             this.lblHoTenDN.AutoSize = true;
             this.lblHoTenDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHoTenDN.Location = new System.Drawing.Point(182, 72);
+            this.lblHoTenDN.Location = new System.Drawing.Point(258, 72);
             this.lblHoTenDN.Name = "lblHoTenDN";
             this.lblHoTenDN.Size = new System.Drawing.Size(112, 32);
             this.lblHoTenDN.TabIndex = 3;
@@ -156,10 +157,10 @@
             // lblMaNV_DN
             // 
             this.lblMaNV_DN.AutoSize = true;
-            this.lblMaNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaNV_DN.Location = new System.Drawing.Point(393, 9);
+            this.lblMaNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaNV_DN.Location = new System.Drawing.Point(469, 9);
             this.lblMaNV_DN.Name = "lblMaNV_DN";
-            this.lblMaNV_DN.Size = new System.Drawing.Size(41, 32);
+            this.lblMaNV_DN.Size = new System.Drawing.Size(38, 32);
             this.lblMaNV_DN.TabIndex = 2;
             this.lblMaNV_DN.Text = "...";
             this.lblMaNV_DN.UseMnemonic = false;
@@ -168,7 +169,7 @@
             // 
             this.lblMaNhanVienDN.AutoSize = true;
             this.lblMaNhanVienDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaNhanVienDN.Location = new System.Drawing.Point(182, 9);
+            this.lblMaNhanVienDN.Location = new System.Drawing.Point(258, 9);
             this.lblMaNhanVienDN.Name = "lblMaNhanVienDN";
             this.lblMaNhanVienDN.Size = new System.Drawing.Size(205, 32);
             this.lblMaNhanVienDN.TabIndex = 1;

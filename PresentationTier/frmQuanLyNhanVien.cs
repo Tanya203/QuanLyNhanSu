@@ -312,6 +312,7 @@ namespace QuanLyNhanSu.PresentationTier
                 btnThem.Enabled = false;
                 btnSua.Enabled = true;
                 btnXoa.Enabled = true;
+                btnThemPhuCap.Enabled = true;
                 return;
             }
         }
