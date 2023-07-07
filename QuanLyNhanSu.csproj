@@ -206,6 +206,12 @@
     <Compile Include="PresentationTier\FrmManHinhChinh.Designer.cs">
       <DependentUpon>FrmManHinhChinh.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationTier\FrmNhapMatKhauXacNhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\FrmNhapMatKhauXacNhan.Designer.cs">
+      <DependentUpon>FrmNhapMatKhauXacNhan.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationTier\FrmPhanQuyen.cs">
       <SubType>Form</SubType>
     </Compile>

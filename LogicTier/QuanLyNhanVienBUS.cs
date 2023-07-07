@@ -38,6 +38,9 @@ namespace QuanLyNhanSu.LogicTier
         }        
         public bool Save(NhanVien nhanVien)
         {
+            NhanVien nv = nhanVienDAL.ThongTinNhanVienDangNhap(nhanVien.MaNV);
+            if (nv != null)
+                return nhanVienDAL.Save(nhanVien);
             nhanVien.MatKhau = BCrypt.Net.BCrypt.HashPassword(nhanVien.MatKhau);
             return nhanVienDAL.Save(nhanVien);
         }

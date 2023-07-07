@@ -179,13 +179,12 @@ namespace QuanLyNhanSu.PresentationTier
         private void TimKiem(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTimKiem.Text))
-            {
                 LoadLoaiHopDong();
-                return;
-            }
-            LoadLoaiHopDongTimKiem(txtTimKiem.Text);
         }
-        
-
+        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                LoadLoaiHopDongTimKiem(txtTimKiem.Text);
+        }
     }
 }

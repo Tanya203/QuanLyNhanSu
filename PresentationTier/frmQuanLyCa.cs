@@ -188,12 +188,8 @@ namespace QuanLyNhanSu.PresentationTier
         }       
         private void TimKiem(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTimKiem.Text))
-            {
-                LoadCa();
-                return;
-            }
-            LoadCaTimKiem(txtTimKiem.Text);
+            if (string.IsNullOrEmpty(txtTimKiem.Text))            
+                LoadCa();                      
         }
         private void dgvThongTinCa_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -204,6 +200,14 @@ namespace QuanLyNhanSu.PresentationTier
             txtTenCa.Text = dgvThongTinCa.Rows[rowIndex].Cells[1].Value.ToString();
             dtpThoiGianBatDau.Text = dgvThongTinCa.Rows[rowIndex].Cells[2].Value.ToString();
             dtpThoiGianKetThuc.Text = dgvThongTinCa.Rows[rowIndex].Cells[3].Value.ToString();
+        }
+
+        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                LoadCaTimKiem(txtTimKiem.Text);
+            }
         }
     }
 }

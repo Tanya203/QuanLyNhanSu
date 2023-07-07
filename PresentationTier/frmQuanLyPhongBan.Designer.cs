@@ -350,6 +350,7 @@
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
             this.txtTimKiem.TabIndex = 28;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.TimKiem);
+            this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 
             // lblTimKiem
             // 

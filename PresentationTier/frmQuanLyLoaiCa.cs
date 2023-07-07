@@ -193,17 +193,13 @@ namespace QuanLyNhanSu.PresentationTier
         }       
         private void TimKiem(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTimKiem.Text))
-            {
+            if (string.IsNullOrEmpty(txtTimKiem.Text))            
                 LoadLoaiCa();
-                return;
-            }
-            LoadLoaiCaTimKiem(txtTimKiem.Text);
         }
-
-        private void pnlHeader_Paint(object sender, PaintEventArgs e)
+        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (e.KeyChar == (char)Keys.Enter)
+                LoadLoaiCaTimKiem(txtTimKiem.Text);
         }
     }
 }

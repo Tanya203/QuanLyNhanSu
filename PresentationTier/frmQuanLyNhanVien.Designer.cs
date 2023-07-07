@@ -876,6 +876,7 @@
             this.txtSDT.Size = new System.Drawing.Size(179, 27);
             this.txtSDT.TabIndex = 23;
             this.txtSDT.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSDT_KeyPress);
             // 
             // txtTinh_ThanhPho
             // 
@@ -1340,6 +1341,7 @@
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
             this.txtTimKiem.TabIndex = 26;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
+            this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 
             // FrmQuanLyNhanVien
             // 
