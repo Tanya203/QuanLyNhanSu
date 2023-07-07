@@ -214,12 +214,13 @@ namespace QuanLyNhanSu.PresentationTier
         }       
         private void TimKiem(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTimKiem.Text))
-            {
-                LoadChucVu();
-                return;
-            }
-            LoadChucVuTimKiem(txtTimKiem.Text);
-        }       
+            if (string.IsNullOrEmpty(txtTimKiem.Text))            
+                LoadChucVu();       
+        }
+        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                LoadChucVuTimKiem(txtTimKiem.Text);
+        }
     }
 }

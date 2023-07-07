@@ -195,11 +195,12 @@ namespace QuanLyNhanSu.PresentationTier
         private void TimKiem(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTimKiem.Text))
-            {
-                LoadPhuCap();
-                return;
-            }
-            LoadPhuCapTimKiem(txtTimKiem.Text);                
-        }               
+                LoadPhuCap();      
+        }
+        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                LoadPhuCapTimKiem(txtTimKiem.Text);
+        }
     }
 }

@@ -159,6 +159,7 @@ namespace QuanLyNhanSu.DataTier
                     newNhanVien.SoNgayPhep = nhanVien.SoNgayPhep;
                     newNhanVien.LuongCoBan = nhanVien.LuongCoBan;
                     newNhanVien.Hinh = nhanVien.Hinh;
+                    quanLyNhanSu.NhanViens.AddOrUpdate(newNhanVien);
                 }
                 else//thêm mới           
                     quanLyNhanSu.NhanViens.Add(nhanVien);

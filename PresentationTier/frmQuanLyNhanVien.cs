@@ -257,14 +257,7 @@ namespace QuanLyNhanSu.PresentationTier
                 return null;
             }
             return email;
-        }        
-        private void txtSoNgayPhep_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
+        }               
         private void CheckChonGioiTinh(object sender, EventArgs e)
         {
             BatTatNut();
@@ -319,6 +312,43 @@ namespace QuanLyNhanSu.PresentationTier
         private void EnableButtons(object sender, EventArgs e)
         {
             BatTatNut();
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////
+        private void txtSoNgayPhep_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtSDT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtLuongCoBan_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '-' && (sender as TextBox).Text.Length > 0)
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtCCCD_CMND_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         private void btnThem_Click(object sender, EventArgs e)
@@ -446,28 +476,7 @@ namespace QuanLyNhanSu.PresentationTier
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void txtLuongCoBan_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
-            {
-                e.Handled = true;
-            }
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
-            {
-                e.Handled = true;
-            }
-            if (e.KeyChar == '-' && (sender as TextBox).Text.Length > 0)
-            {
-                e.Handled = true;
-            }
-        }
-        private void txtCCCD_CMND_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
+       
         private void cbHienThiMatKhau_CheckedChanged(object sender, EventArgs e)
         {
             if (cbHienThiMatKhau.Checked)            
@@ -479,11 +488,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void txtTimKiem_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTimKiem.Text))
-            {
                 LoadNhanVien();
-                return;
-            }
-            LoadNhanVienTimKiem(txtTimKiem.Text);
         }
         private void dgvThongTinNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -528,5 +533,12 @@ namespace QuanLyNhanSu.PresentationTier
             txtLuongCoBan.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[23].Value.ToString();
             txtPhuCap.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[24].Value.ToString();
         }
+        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                LoadNhanVienTimKiem(txtTimKiem.Text);
+        }
+
+        
     }
 }
