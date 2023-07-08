@@ -62,7 +62,7 @@ namespace QuanLyNhanSu.DataTier
                 else//thêm mới
                     quanLyNhanSu.Cas.Add(ca);
                 quanLyNhanSu.SaveChanges();
-                MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);                
+                MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
             }
             catch (Exception ex)

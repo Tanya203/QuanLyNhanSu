@@ -19,16 +19,17 @@ namespace QuanLyNhanSu.PresentationTier
         Thread currentForm;
         private readonly QuanLyPhuCapBUS phuCapBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
+        private readonly NhanVien nv;
         private IEnumerable<PhuCapViewMModels> danhSachPhuCap;
         private IEnumerable<PhuCapViewMModels> danhSachPhuCapTimKiem;
         private readonly string maNV;
         public FrmQuanLyPhuCap(string maNV)
-
         {
             InitializeComponent();
             this.Load += frmQuanLyPhuCap_Load;
             phuCapBUS = new QuanLyPhuCapBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
+            nv = nhanVienBUS.ThongTinNhanVien(maNV);
             txtMaPC.ReadOnly = true;
             txtSoLuongNhanVien.ReadOnly = true;
             btnThem.Enabled = false;
@@ -42,8 +43,7 @@ namespace QuanLyNhanSu.PresentationTier
             LoadThongTinDangNhap();
         }
         public void LoadThongTinDangNhap()
-        {
-            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
+        {            
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
                 lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
