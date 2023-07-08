@@ -87,7 +87,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[2].Value = nv.TenChucVu;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[3].Value = nv.TenLoaiHopDong;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[4].Value = nv.TaiKhoan;
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[5].Value = nv.CCCD_CMND;
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[5].Value = nv.CCCD;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[6].Value = nv.Ho;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[7].Value = nv.TenLot;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[8].Value = nv.Ten;
@@ -122,7 +122,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[2].Value = nv.TenChucVu;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[3].Value = nv.TenLoaiHopDong;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[4].Value = nv.TaiKhoan;
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[5].Value = nv.CCCD_CMND;
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[5].Value = nv.CCCD;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[6].Value = nv.Ho;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[7].Value = nv.TenLot;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[8].Value = nv.Ten;
@@ -264,7 +264,9 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public string CheckCCCD(string cccd)
         {
-            Regex cccdCheck = new Regex(@"^(001|002|004|006|008|010|011|012|014|015|017|019|020|022|024|025|026|027|030|031|033|034|035|036|037|038|040|042|044|045|046|048|049|051|052|054|056|058|060|062|064|066|067|068|070|072|074|075|077|079|080|082|083|084|086|087|089|091|092|093|094|095|096)[02-3][0-9]{2}[0-9]{6}$");
+            Regex cccdCheck = new Regex(@"^(001|002|004|006|008|010|011|012|014|015|017|019|020|022|024|025|026|027|030|031|033|034|035|036|037|
+                                        038|040|042|044|045|046|048|049|051|052|054|056|058|060|062|064|066|067|068|070|072|074|075|077|079|080|
+                                        082|083|084|086|087|089|091|092|093|094|095|096)[02-3][0-9]{2}[0-9]{6}$");
             if (!cccdCheck.IsMatch(cccd))
             {
                 MessageBox.Show("Định dạng CCCD/CMND không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -375,7 +377,7 @@ namespace QuanLyNhanSu.PresentationTier
                 e.Handled = true;
             }
         }
-        private void txtCCCD_CMND_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtCCCD_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
@@ -384,18 +386,14 @@ namespace QuanLyNhanSu.PresentationTier
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         private void btnThem_Click(object sender, EventArgs e)
-        {
-            string matKhau = CheckMatKhau(txtMatKhau.Text);
-            if (string.IsNullOrEmpty(matKhau))
-                return;
-            string sdt = CheckSDT(txtSDT.Text);
-            if (string.IsNullOrEmpty(sdt))
-                return;
-            string email = CheckEmail(txtEmail.Text);
-            if (string.IsNullOrEmpty(email))
-                return;
-            string cccd = CheckCCCD(txtCCCD.Text);
-            if(string.IsNullOrEmpty(cccd))
+        {            
+            if (string.IsNullOrEmpty(CheckMatKhau(txtMatKhau.Text)))
+                return;            
+            if (string.IsNullOrEmpty(CheckSDT(txtSDT.Text)))
+                return;            
+            if (string.IsNullOrEmpty(CheckEmail(txtEmail.Text)))
+                return;            
+            if(string.IsNullOrEmpty(CheckCCCD(txtCCCD.Text)))
                 return;
             string gioiTinh = ChonGioiTinh();
             if (string.IsNullOrEmpty(gioiTinh))
@@ -406,8 +404,8 @@ namespace QuanLyNhanSu.PresentationTier
                 MaCV = cmbChucVu.SelectedValue.ToString(),
                 MaLHD = cmbLoaiHopDong.SelectedValue.ToString(),
                 TaiKhoan = txtTaiKhoan.Text,
-                MatKhau = matKhau,
-                CCCD_CMND = txtCCCD.Text,
+                MatKhau = txtMatKhau.Text,
+                CCCD = txtCCCD.Text,
                 Ho = txtHo.Text,
                 TenLot = txtTenLot.Text,
                 Ten = txtTen.Text,
@@ -418,8 +416,8 @@ namespace QuanLyNhanSu.PresentationTier
                 Quan_Huyen = txtQuan_Huyen.Text,
                 Tinh_ThanhPho = txtTinh_ThanhPho.Text,
                 GioiTinh = gioiTinh,
-                SDT = sdt,
-                Email = email,
+                SDT = txtSDT.Text,
+                Email = txtEmail.Text,
                 TrinhDoHocVan = txtTrinhDoHocVan.Text,
                 NgayVaoLam = dtpNgayVaoLam.Value,
                 ThoiHanHopDong = dtpThoiHanHopDong.Value,
@@ -436,14 +434,11 @@ namespace QuanLyNhanSu.PresentationTier
             /*string matKhau = CheckMatKhau(txtMatKhau.Text);//
             if (string.IsNullOrEmpty(matKhau))//
                 return;//*/
-            string sdt = CheckSDT(txtSDT.Text);
-            if (string.IsNullOrEmpty(sdt))
+            if (string.IsNullOrEmpty(CheckSDT(txtSDT.Text)))
                 return;
-            string email = CheckEmail(txtEmail.Text);
-            if (string.IsNullOrEmpty(email))
+            if (string.IsNullOrEmpty(CheckEmail(txtEmail.Text)))
                 return;
-            string cccd = CheckCCCD(txtCCCD.Text);
-            if (string.IsNullOrEmpty(cccd))
+            if (string.IsNullOrEmpty(CheckCCCD(txtCCCD.Text)))
                 return;
             string gioiTinh = ChonGioiTinh();
             if (string.IsNullOrEmpty(gioiTinh))
@@ -452,7 +447,7 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVien.MaCV = cmbChucVu.SelectedValue.ToString();
             nhanVien.MaLHD = cmbLoaiHopDong.SelectedValue.ToString();
             /*nhanVien.MatKhau = matKhau;//*/
-            nhanVien.CCCD_CMND = cccd;
+            nhanVien.CCCD = txtCCCD.Text;
             nhanVien.Ho = txtHo.Text;
             nhanVien.TenLot = txtTenLot.Text;
             nhanVien.Ten = txtTen.Text;
@@ -463,8 +458,8 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVien.Quan_Huyen = txtQuan_Huyen.Text;
             nhanVien.Tinh_ThanhPho = txtTinh_ThanhPho.Text;
             nhanVien.GioiTinh = gioiTinh;
-            nhanVien.SDT = sdt;
-            nhanVien.Email = email;
+            nhanVien.SDT = txtSDT.Text;
+            nhanVien.Email = txtEmail.Text;
             nhanVien.TrinhDoHocVan = txtTrinhDoHocVan.Text;
             nhanVien.NgayVaoLam = dtpNgayVaoLam.Value;
             nhanVien.ThoiHanHopDong = dtpThoiHanHopDong.Value;

@@ -78,7 +78,7 @@
             this.txtTen = new System.Windows.Forms.TextBox();
             this.txtTenLot = new System.Windows.Forms.TextBox();
             this.txtHo = new System.Windows.Forms.TextBox();
-            this.txtCCCD_CMND = new System.Windows.Forms.TextBox();
+            this.txtCCCD = new System.Windows.Forms.TextBox();
             this.txtTaiKhoan = new System.Windows.Forms.TextBox();
             this.txtMaNV = new System.Windows.Forms.TextBox();
             this.lblHinh = new System.Windows.Forms.Label();
@@ -93,7 +93,7 @@
             this.lblTinh_ThanhPho = new System.Windows.Forms.Label();
             this.lblGioiTinh = new System.Windows.Forms.Label();
             this.lblSoDienThoai = new System.Windows.Forms.Label();
-            this.lblCCCD_CMND = new System.Windows.Forms.Label();
+            this.lblCCCD = new System.Windows.Forms.Label();
             this.lblHo = new System.Windows.Forms.Label();
             this.lblTenLot = new System.Windows.Forms.Label();
             this.lblTen = new System.Windows.Forms.Label();
@@ -433,7 +433,7 @@
             this.pnlMenu.Controls.Add(this.txtTen);
             this.pnlMenu.Controls.Add(this.txtTenLot);
             this.pnlMenu.Controls.Add(this.txtHo);
-            this.pnlMenu.Controls.Add(this.txtCCCD_CMND);
+            this.pnlMenu.Controls.Add(this.txtCCCD);
             this.pnlMenu.Controls.Add(this.txtTaiKhoan);
             this.pnlMenu.Controls.Add(this.txtMaNV);
             this.pnlMenu.Controls.Add(this.lblHinh);
@@ -448,7 +448,7 @@
             this.pnlMenu.Controls.Add(this.lblTinh_ThanhPho);
             this.pnlMenu.Controls.Add(this.lblGioiTinh);
             this.pnlMenu.Controls.Add(this.lblSoDienThoai);
-            this.pnlMenu.Controls.Add(this.lblCCCD_CMND);
+            this.pnlMenu.Controls.Add(this.lblCCCD);
             this.pnlMenu.Controls.Add(this.lblHo);
             this.pnlMenu.Controls.Add(this.lblTenLot);
             this.pnlMenu.Controls.Add(this.lblTen);
@@ -722,16 +722,16 @@
             this.txtHo.TabIndex = 11;
             this.txtHo.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
             // 
-            // txtCCCD_CMND
+            // txtCCCD
             // 
-            this.txtCCCD_CMND.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCCCD_CMND.Location = new System.Drawing.Point(216, 194);
-            this.txtCCCD_CMND.MaxLength = 12;
-            this.txtCCCD_CMND.Name = "txtCCCD_CMND";
-            this.txtCCCD_CMND.Size = new System.Drawing.Size(213, 27);
-            this.txtCCCD_CMND.TabIndex = 10;
-            this.txtCCCD_CMND.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
-            this.txtCCCD_CMND.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_CMND_KeyPress);
+            this.txtCCCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCCCD.Location = new System.Drawing.Point(216, 194);
+            this.txtCCCD.MaxLength = 12;
+            this.txtCCCD.Name = "txtCCCD";
+            this.txtCCCD.Size = new System.Drawing.Size(213, 27);
+            this.txtCCCD.TabIndex = 10;
+            this.txtCCCD.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
+            this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_CMND_KeyPress);
             // 
             // txtTaiKhoan
             // 
@@ -869,15 +869,15 @@
             this.lblSoDienThoai.TabIndex = 17;
             this.lblSoDienThoai.Text = "Số điện thoại:";
             // 
-            // lblCCCD_CMND
+            // lblCCCD
             // 
-            this.lblCCCD_CMND.AutoSize = true;
-            this.lblCCCD_CMND.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCCCD_CMND.Location = new System.Drawing.Point(13, 196);
-            this.lblCCCD_CMND.Name = "lblCCCD_CMND";
-            this.lblCCCD_CMND.Size = new System.Drawing.Size(153, 25);
-            this.lblCCCD_CMND.TabIndex = 12;
-            this.lblCCCD_CMND.Text = "CCCD/CMND:";
+            this.lblCCCD.AutoSize = true;
+            this.lblCCCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCCCD.Location = new System.Drawing.Point(13, 196);
+            this.lblCCCD.Name = "lblCCCD";
+            this.lblCCCD.Size = new System.Drawing.Size(82, 25);
+            this.lblCCCD.TabIndex = 12;
+            this.lblCCCD.Text = "CCCD:";
             // 
             // lblHo
             // 
@@ -1096,7 +1096,7 @@
         private System.Windows.Forms.Label lblTinh_ThanhPho;
         private System.Windows.Forms.Label lblGioiTinh;
         private System.Windows.Forms.Label lblSoDienThoai;
-        private System.Windows.Forms.Label lblCCCD_CMND;
+        private System.Windows.Forms.Label lblCCCD;
         private System.Windows.Forms.Label lblHo;
         private System.Windows.Forms.Label lblTenLot;
         private System.Windows.Forms.Label lblTen;
@@ -1126,6 +1126,6 @@
         private System.Windows.Forms.TextBox txtTen;
         private System.Windows.Forms.TextBox txtTenLot;
         private System.Windows.Forms.TextBox txtHo;
-        private System.Windows.Forms.TextBox txtCCCD_CMND;
+        private System.Windows.Forms.TextBox txtCCCD;
     }
 }

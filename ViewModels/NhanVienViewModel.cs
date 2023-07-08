@@ -12,7 +12,7 @@ namespace QuanLyNhanSu.ViewModels
         public string MaCV { get; set; }
         public string MaLHD { get; set; }
         public string TaiKhoan { get; set; }
-        public string CCCD_CMND { get; set; }
+        public string CCCD { get; set; }
         public string Ho { get; set; }
         public string TenLot { get; set; }
         public string Ten { get; set; }

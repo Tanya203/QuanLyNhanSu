@@ -44,8 +44,8 @@ namespace QuanLyNhanSu.DataTier.Models
         public string MatKhau { get; set; }
 
         [Required]
-        [StringLength(13)]
-        public string CCCD_CMND { get; set; }
+        [StringLength(12)]
+        public string CCCD { get; set; }
 
         [StringLength(20)]
         public string Ho { get; set; }
@@ -79,7 +79,7 @@ namespace QuanLyNhanSu.DataTier.Models
         public string GioiTinh { get; set; }
 
         [Required]
-        [StringLength(11)]
+        [StringLength(10)]
         public string SDT { get; set; }
 
         [Required]
