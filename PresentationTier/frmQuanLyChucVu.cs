@@ -20,6 +20,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyChucVuBUS chucVuBUS;
         private readonly QuanLyPhongBanBUS phongBanBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
+        private readonly NhanVien nv;
         private IEnumerable<ChucVuViewModels> danhSachChucVu;
         private IEnumerable<ChucVuViewModels> danhSachChucVuTimKiem;
         private readonly string maNV;
@@ -29,6 +30,7 @@ namespace QuanLyNhanSu.PresentationTier
             chucVuBUS = new QuanLyChucVuBUS();
             phongBanBUS = new QuanLyPhongBanBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
+            nv = nhanVienBUS.ThongTinNhanVien(maNV);
             txtMaCV.ReadOnly = true;
             txtTongSoNhanVien.ReadOnly = true;
             btnThem.Enabled = false;
@@ -46,7 +48,6 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void LoadThongTinDangNhap()
         {
-            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
                 lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;

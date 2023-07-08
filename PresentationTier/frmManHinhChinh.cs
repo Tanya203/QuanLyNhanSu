@@ -17,11 +17,13 @@ namespace QuanLyNhanSu.PresentationTier
     public partial class FrmManHinhChinh : Form
     {
         private readonly QuanLyNhanVienBUS nhanVienBUS;
+        private readonly NhanVien nv;
         private readonly string maNV;
         public FrmManHinhChinh(string maNV)
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
+            nv = nhanVienBUS.ThongTinNhanVien(maNV);
             this.maNV = maNV;
         }
         private void frmManHinhChinh_Load(object sender, EventArgs e)
@@ -30,7 +32,6 @@ namespace QuanLyNhanSu.PresentationTier
         }       
         public void LoadThongTinDangNhap()
         {
-            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
             lblMaNV.Text = nv.MaNV;
             if(string.IsNullOrEmpty(nv.TenLot))
                 lblHoTenNV.Text = nv.Ho + " " + nv.Ten;

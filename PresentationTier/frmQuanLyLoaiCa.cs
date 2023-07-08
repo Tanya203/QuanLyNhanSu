@@ -19,6 +19,7 @@ namespace QuanLyNhanSu.PresentationTier
         Thread currentForm;
         private readonly QuanLyLoaiCaBUS loaiCaBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
+        private readonly NhanVien nv;
         private IEnumerable<LoaiCaViewModels> danhSachLoaiCa;
         private IEnumerable<LoaiCaViewModels> danhSachLoaiCaTimKiem;
         private readonly string maNV;
@@ -28,6 +29,7 @@ namespace QuanLyNhanSu.PresentationTier
             this.Load += frmQuanLyLoaiCa_Load;
             loaiCaBUS = new QuanLyLoaiCaBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
+            nv = nhanVienBUS.ThongTinNhanVien(maNV);
             txtMaLC.ReadOnly = true;           
             btnThem.Enabled = false;
             btnSua.Enabled = false;
@@ -40,8 +42,7 @@ namespace QuanLyNhanSu.PresentationTier
             LoadThongTinDangNhap();
         }
         public void LoadThongTinDangNhap()
-        {
-            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
+        {           
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
                 lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;

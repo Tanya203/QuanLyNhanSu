@@ -23,6 +23,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyPhongBanBUS phongBanBus;
         private readonly QuanLyChucVuBUS chucVuBUS;
         private readonly QuanLyLoaiHopDongBUS loaiHopDongBUS;
+        private readonly NhanVien nv;
         private IEnumerable<NhanVienViewModel> danhSachNhanVien;
         private IEnumerable<NhanVienViewModel> danhSachNhanVienTimKiem;
         string formatDateTime = "dd/MM/yyyy";
@@ -35,6 +36,7 @@ namespace QuanLyNhanSu.PresentationTier
             phongBanBus = new QuanLyPhongBanBUS();
             chucVuBUS = new QuanLyChucVuBUS();
             loaiHopDongBUS = new QuanLyLoaiHopDongBUS();
+            nv = nhanVienBUS.ThongTinNhanVien(maNV);
             this.maNV = maNV;
         }
 
@@ -62,8 +64,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         public void LoadThongTinDangNhap()
-        {
-            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
+        {            
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
                 lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace QuanLyNhanSu.LogicTier
@@ -24,9 +25,9 @@ namespace QuanLyNhanSu.LogicTier
         {
             return nhanVienDAL.GetNhanVien();
         }
-        public NhanVien ThongTinNhanVienDangNhap(string taiKhoan)
+        public NhanVien ThongTinNhanVien(string taiKhoan)
         {
-            return nhanVienDAL.ThongTinNhanVienDangNhap(taiKhoan);
+            return nhanVienDAL.ThongTinNhanVien(taiKhoan);
         }
         public IEnumerable<NhanVienViewModel> SearchNhanVien(string timKiem)
         {
@@ -38,8 +39,9 @@ namespace QuanLyNhanSu.LogicTier
         }        
         public bool Save(NhanVien nhanVien)
         {
-            NhanVien nv = nhanVienDAL.ThongTinNhanVienDangNhap(nhanVien.MaNV);
-            if (nv != null)
+            NhanVien nv = nhanVienDAL.ThongTinNhanVien(nhanVien.MaNV);
+            Regex bcryptCheck = new Regex(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$");                      
+            if (nv != null && !bcryptCheck.IsMatch(nhanVien.MatKhau))
                 return nhanVienDAL.Save(nhanVien);
             nhanVien.MatKhau = BCrypt.Net.BCrypt.HashPassword(nhanVien.MatKhau);
             return nhanVienDAL.Save(nhanVien);
