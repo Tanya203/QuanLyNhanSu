@@ -152,6 +152,7 @@ namespace QuanLyNhanSu.PresentationTier
             phongBanBUS.Save(newPhongBan);            
             ClearAllText();
             LoadPhongBan();
+            LoadThongTinDangNhap();
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {

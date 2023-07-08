@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -157,7 +158,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadLuongKhoiDiem(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaNV.Text))
+            if (string.IsNullOrEmpty(txtMaNV.Text) || string.IsNullOrEmpty(txtLuongCoBan.Text))
                 txtLuongCoBan.Text = chucVuBUS.GetLuongCoBanCuaChucVu(cmbChucVu.SelectedValue.ToString()).ToString();
         }
         private void LoadChucVu(object sender, EventArgs e)
@@ -174,7 +175,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtTaiKhoan.Text = string.Empty;
             txtMatKhau.Text = string.Empty;
             txtNhapLaiMatKhau.Text= string.Empty;
-            txtCCCD_CMND.Text = string.Empty;
+            txtCCCD.Text = string.Empty;
             txtHo.Text = string.Empty;
             txtTenLot.Text = string.Empty;
             txtTen.Text = string.Empty;
@@ -196,6 +197,8 @@ namespace QuanLyNhanSu.PresentationTier
             txtSoNgayPhep.Text = string.Empty;
             txtLuongCoBan.Text = string.Empty;
             txtPhuCap.Text = string.Empty;
+            txtTaiKhoan.ReadOnly = false;
+            txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = true;
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         private void CloseForm(object sender, FormClosedEventArgs e)
@@ -217,22 +220,22 @@ namespace QuanLyNhanSu.PresentationTier
         ///////////////////////////////////////////////////////////////////////////////////////
         public string CheckMatKhau(string matKhau)
         {
-            Regex passCheck = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");            
+            Regex passCheck = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
             if (!passCheck.IsMatch(matKhau) || matKhau.Length > 20)
             {
-                MessageBox.Show("Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!", "Lỗi", MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show("Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return null;
             }
             if (txtNhapLaiMatKhau.Text != matKhau)
             {
                 MessageBox.Show("Mật khẩu nhập lại không khớp", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return null;
-            }                    
+            }
             return matKhau;
         }
         public string ChonGioiTinh()
         {
-            if(rbNam.Checked)
+            if (rbNam.Checked)
                 return rbNam.Text;
             if (rbNu.Checked)
                 return rbNu.Text;
@@ -258,7 +261,17 @@ namespace QuanLyNhanSu.PresentationTier
                 return null;
             }
             return email;
-        }               
+        }
+        public string CheckCCCD(string cccd)
+        {
+            Regex cccdCheck = new Regex(@"^[0-9]{3}[02-3][0-9]{2}[0-9]{6}$");
+            if (!cccdCheck.IsMatch(cccd))
+            {
+                MessageBox.Show("Định dạng CCCD/CMND không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+            return cccd;
+        }
         private void CheckChonGioiTinh(object sender, EventArgs e)
         {
             BatTatNut();
@@ -266,7 +279,20 @@ namespace QuanLyNhanSu.PresentationTier
         public bool CheckEmptyText()
         {
             if (string.IsNullOrEmpty(txtTaiKhoan.Text) || string.IsNullOrEmpty(txtMatKhau.Text) ||
-                string.IsNullOrEmpty(txtNhapLaiMatKhau.Text) || string.IsNullOrEmpty(txtCCCD_CMND.Text) ||
+                string.IsNullOrEmpty(txtNhapLaiMatKhau.Text) || string.IsNullOrEmpty(txtCCCD.Text) ||
+                string.IsNullOrEmpty(txtHo.Text) || string.IsNullOrEmpty(txtTen.Text) ||
+                string.IsNullOrEmpty(txtSoNha.Text) || string.IsNullOrEmpty(txtDuong.Text) ||
+                string.IsNullOrEmpty(txtPhuong_Xa.Text) || string.IsNullOrEmpty(txtQuan_Huyen.Text) ||
+                string.IsNullOrEmpty(txtTinh_ThanhPho.Text) || string.IsNullOrEmpty(txtSDT.Text) ||
+                string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtTrinhDoHocVan.Text) ||
+                string.IsNullOrEmpty(txtTinhTrang.Text) || string.IsNullOrEmpty(txtSoNgayPhep.Text) ||
+                string.IsNullOrEmpty(txtLuongCoBan.Text))
+                return false;
+            return true;
+        }
+        public bool CheckEmptyTextSua()
+        {
+            if (string.IsNullOrEmpty(txtCCCD.Text) ||
                 string.IsNullOrEmpty(txtHo.Text) || string.IsNullOrEmpty(txtTen.Text) ||
                 string.IsNullOrEmpty(txtSoNha.Text) || string.IsNullOrEmpty(txtDuong.Text) ||
                 string.IsNullOrEmpty(txtPhuong_Xa.Text) || string.IsNullOrEmpty(txtQuan_Huyen.Text) ||
@@ -287,11 +313,12 @@ namespace QuanLyNhanSu.PresentationTier
         {
             if (string.IsNullOrEmpty(txtMaNV.Text) && !CheckEmptyText() && !CheckChonGioiTinh() ||
              string.IsNullOrEmpty(txtMaNV.Text) && !CheckEmptyText() ||
-             string.IsNullOrEmpty(txtMaNV.Text) && !CheckChonGioiTinh())
+             string.IsNullOrEmpty(txtMaNV.Text) && !CheckChonGioiTinh() || !CheckEmptyTextSua())
             {
                 btnThem.Enabled = false;
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
+                btnThemPhuCap.Enabled = false;
                 return;
             }
             if (string.IsNullOrEmpty(txtMaNV.Text) && CheckEmptyText() && CheckChonGioiTinh())
@@ -299,14 +326,18 @@ namespace QuanLyNhanSu.PresentationTier
                 btnThem.Enabled = true;
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
+                txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = true;
+                txtTaiKhoan.ReadOnly = false;
                 return;
             }
-            if (!string.IsNullOrEmpty(txtMaNV.Text) && CheckEmptyText() && CheckChonGioiTinh())
+            if (!string.IsNullOrEmpty(txtMaNV.Text) && CheckEmptyTextSua() && CheckChonGioiTinh())
             {
                 btnThem.Enabled = false;
                 btnSua.Enabled = true;
                 btnXoa.Enabled = true;
                 btnThemPhuCap.Enabled = true;
+                txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = false;
+                txtTaiKhoan.ReadOnly= true;
                 return;
             }
         }
@@ -363,9 +394,12 @@ namespace QuanLyNhanSu.PresentationTier
             string email = CheckEmail(txtEmail.Text);
             if (string.IsNullOrEmpty(email))
                 return;
+            string cccd = CheckCCCD(txtCCCD.Text);
+            if(string.IsNullOrEmpty(cccd))
+                return;
             string gioiTinh = ChonGioiTinh();
             if (string.IsNullOrEmpty(gioiTinh))
-                return;                                     
+                return;
             NhanVien newNhanVien = new NhanVien
             {
                 MaNV = "",
@@ -373,7 +407,7 @@ namespace QuanLyNhanSu.PresentationTier
                 MaLHD = cmbLoaiHopDong.SelectedValue.ToString(),
                 TaiKhoan = txtTaiKhoan.Text,
                 MatKhau = matKhau,
-                CCCD_CMND = txtCCCD_CMND.Text,
+                CCCD_CMND = txtCCCD.Text,
                 Ho = txtHo.Text,
                 TenLot = txtTenLot.Text,
                 Ten = txtTen.Text,
@@ -394,52 +428,51 @@ namespace QuanLyNhanSu.PresentationTier
                 LuongCoBan = decimal.Parse(txtLuongCoBan.Text),
                 //hinh
             };
-            nhanVienBUS.Save(newNhanVien);                
+            nhanVienBUS.Save(newNhanVien);
             Reload();
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
-            string matKhau = CheckMatKhau(txtMatKhau.Text);
-            if (string.IsNullOrEmpty(matKhau))
-                return;
+            /*string matKhau = CheckMatKhau(txtMatKhau.Text);//
+            if (string.IsNullOrEmpty(matKhau))//
+                return;//*/
             string sdt = CheckSDT(txtSDT.Text);
             if (string.IsNullOrEmpty(sdt))
                 return;
             string email = CheckEmail(txtEmail.Text);
             if (string.IsNullOrEmpty(email))
                 return;
+            string cccd = CheckCCCD(txtCCCD.Text);
+            if (string.IsNullOrEmpty(cccd))
+                return;
             string gioiTinh = ChonGioiTinh();
             if (string.IsNullOrEmpty(gioiTinh))
                 return;
-            NhanVien newNhanVien = new NhanVien
-            {
-                MaNV = txtMaNV.Text,
-                MaCV = cmbChucVu.SelectedValue.ToString(),
-                MaLHD = cmbLoaiHopDong.SelectedValue.ToString(),
-                TaiKhoan = txtTaiKhoan.Text,
-                MatKhau = matKhau,
-                CCCD_CMND = txtCCCD_CMND.Text,
-                Ho = txtHo.Text,
-                TenLot = txtTenLot.Text,
-                Ten = txtTen.Text,
-                NTNS = dtpNTNS.Value,
-                SoNha = txtSoNha.Text,
-                TenDuong = txtDuong.Text,
-                Phuong_Xa = txtPhuong_Xa.Text,
-                Quan_Huyen = txtQuan_Huyen.Text,
-                Tinh_ThanhPho = txtTinh_ThanhPho.Text,
-                GioiTinh = gioiTinh,
-                SDT = sdt,
-                Email = email,
-                TrinhDoHocVan = txtTrinhDoHocVan.Text,
-                NgayVaoLam = dtpNgayVaoLam.Value,
-                ThoiHanHopDong = dtpThoiHanHopDong.Value,
-                TinhTrang = txtTinhTrang.Text,
-                SoNgayPhep = int.Parse(txtSoNgayPhep.Text),
-                LuongCoBan = decimal.Parse(txtLuongCoBan.Text),
+            NhanVien nhanVien = nhanVienBUS.ThongTinNhanVien(txtMaNV.Text);                     
+            nhanVien.MaCV = cmbChucVu.SelectedValue.ToString();
+            nhanVien.MaLHD = cmbLoaiHopDong.SelectedValue.ToString();
+            /*nhanVien.MatKhau = matKhau;//*/
+            nhanVien.CCCD_CMND = cccd;
+            nhanVien.Ho = txtHo.Text;
+            nhanVien.TenLot = txtTenLot.Text;
+            nhanVien.Ten = txtTen.Text;
+            nhanVien.NTNS = dtpNTNS.Value;
+            nhanVien.SoNha = txtSoNha.Text;
+            nhanVien.TenDuong = txtDuong.Text;
+            nhanVien.Phuong_Xa = txtPhuong_Xa.Text;
+            nhanVien.Quan_Huyen = txtQuan_Huyen.Text;
+            nhanVien.Tinh_ThanhPho = txtTinh_ThanhPho.Text;
+            nhanVien.GioiTinh = gioiTinh;
+            nhanVien.SDT = sdt;
+            nhanVien.Email = email;
+            nhanVien.TrinhDoHocVan = txtTrinhDoHocVan.Text;
+            nhanVien.NgayVaoLam = dtpNgayVaoLam.Value;
+            nhanVien.ThoiHanHopDong = dtpThoiHanHopDong.Value;
+            nhanVien.TinhTrang = txtTinhTrang.Text;
+            nhanVien.SoNgayPhep = int.Parse(txtSoNgayPhep.Text);
+            nhanVien.LuongCoBan = decimal.Parse(txtLuongCoBan.Text);
                 //hinh
-            };
-            if (!nhanVienBUS.Save(newNhanVien))
+            if (!nhanVienBUS.Save(nhanVien))
                 return;
             if(lblMaNV_DN.Text == txtMaNV.Text)
                 frmQuanLyNhanVien_Load(sender, e);
@@ -469,6 +502,8 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnHuy_Click(object sender, EventArgs e)
         {
             ClearAllText();
+            txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = true;
+            txtTaiKhoan.ReadOnly = false;
         }              
         private void btnThemPhuCap_Click(object sender, EventArgs e)
         {
@@ -501,7 +536,7 @@ namespace QuanLyNhanSu.PresentationTier
             cmbChucVu.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[2].Value.ToString();
             cmbLoaiHopDong.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[3].Value.ToString();
             txtTaiKhoan.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[4].Value.ToString();
-            txtCCCD_CMND.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[5].Value.ToString();
+            txtCCCD.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[5].Value.ToString();
             txtHo.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[6].Value.ToString();
             txtTenLot.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[7].Value.ToString();
             txtTen.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[8].Value.ToString();

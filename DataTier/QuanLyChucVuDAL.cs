@@ -60,10 +60,9 @@ namespace QuanLyNhanSu.DataTier
             {
                 ChucVu newChucVu = quanLyNhanSu.ChucVus.Where(cv => cv.MaCV == chucVu.MaCV).FirstOrDefault();
                 if (newChucVu != null)//cập nhật
-                {
-                    newChucVu.MaPB = newChucVu.MaPB;
-                    newChucVu.TenChucVu = newChucVu.TenChucVu;
-                    newChucVu.LuongKhoiDiem = newChucVu.LuongKhoiDiem;
+                {                    
+                    newChucVu.TenChucVu = chucVu.TenChucVu;
+                    newChucVu.LuongKhoiDiem = chucVu.LuongKhoiDiem;
                 }
                 else//thêm mới
                     quanLyNhanSu.ChucVus.Add(chucVu);

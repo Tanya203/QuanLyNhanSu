@@ -135,7 +135,31 @@ namespace QuanLyNhanSu.DataTier
                 NhanVien newNhanVien = quanLyNhanSu.NhanViens.Where(nv => nv.MaNV == nhanVien.MaNV).FirstOrDefault();
                 if (newNhanVien != null)// cập nhật
                 {
-                    newNhanVien = nhanVien;                    
+                    newNhanVien.MaCV = nhanVien.MaCV;
+                    newNhanVien.MaLHD = nhanVien.MaLHD;
+                    newNhanVien.TaiKhoan = nhanVien.TaiKhoan;
+                    newNhanVien.MatKhau = nhanVien.MatKhau;
+                    newNhanVien.CCCD_CMND = nhanVien.CCCD_CMND;
+                    newNhanVien.Ho = nhanVien.Ho;
+                    newNhanVien.TenLot = nhanVien.TenLot;
+                    newNhanVien.Ten = nhanVien.Ten;
+                    newNhanVien.NTNS = nhanVien.NTNS;
+                    newNhanVien.SoNha = nhanVien.SoNha;
+                    newNhanVien.TenDuong = nhanVien.TenDuong;
+                    newNhanVien.Phuong_Xa = nhanVien.Phuong_Xa;
+                    newNhanVien.Quan_Huyen = nhanVien.Quan_Huyen;
+                    newNhanVien.Tinh_ThanhPho = nhanVien.Tinh_ThanhPho;
+                    newNhanVien.GioiTinh = nhanVien.GioiTinh;
+                    newNhanVien.SDT = nhanVien.SDT;
+                    newNhanVien.Email = nhanVien.Email;
+                    newNhanVien.TrinhDoHocVan = nhanVien.TrinhDoHocVan;
+                    newNhanVien.NgayVaoLam = nhanVien.NgayVaoLam;
+                    newNhanVien.ThoiHanHopDong = nhanVien.ThoiHanHopDong;
+                    newNhanVien.TinhTrang = nhanVien.TinhTrang;
+                    newNhanVien.SoNgayPhep = nhanVien.SoNgayPhep;
+                    newNhanVien.LuongCoBan = nhanVien.LuongCoBan;
+                    newNhanVien.Hinh = nhanVien.Hinh;
+                    quanLyNhanSu.NhanViens.AddOrUpdate(newNhanVien);
                 }
                 else//thêm mới           
                     quanLyNhanSu.NhanViens.Add(nhanVien);
@@ -191,14 +215,14 @@ namespace QuanLyNhanSu.DataTier
                 {
                     MessageBoxManager.Yes = "Có";
                     MessageBoxManager.No = "Không";
-                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá ca " + nhanVien.MaNV + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá nhân viên " + nhanVien.MaNV + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (ketQua == DialogResult.Yes)
                     {
                         MessageBoxManager.Yes = "Có";
                         MessageBoxManager.No = "Không";
                         quanLyNhanSu.NhanViens.Remove(nhanVien);
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Đã xoá ca " + nhanVien.MaNV, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Đã xoá nhân viên " + nhanVien.MaNV, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
                 }
@@ -231,12 +255,7 @@ namespace QuanLyNhanSu.DataTier
             {
                 tongPhuCap += quanLyNhanSu.PhuCaps.Where(x => x.MaPC == pc.MaPC).Sum(p => p.TienPhuCap);
             }
-            return tongPhuCap;
-            /*decimal tongPhuCap = quanLyNhanSu.ChiTietPhuCaps
-            .Join(quanLyNhanSu.PhuCaps, ctpc => ctpc.MaPC, pc => pc.MaPC, (ctpc, pc) => new { ctpc, pc })
-            .Where(x => x.ctpc.MaNV == maNV)
-            .Sum(x => x.pc.TienPhuCap);
-            return tongPhuCap;*/
+            return tongPhuCap;            
         }
         public bool LoginVerify(string taiKhoan, string matKhau)
         {

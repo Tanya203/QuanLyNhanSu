@@ -39,9 +39,8 @@ namespace QuanLyNhanSu.LogicTier
         }        
         public bool Save(NhanVien nhanVien)
         {
-            NhanVien nv = nhanVienDAL.ThongTinNhanVien(nhanVien.MaNV);
-            Regex bcryptCheck = new Regex(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$");                      
-            if (nv != null && !bcryptCheck.IsMatch(nhanVien.MatKhau))
+            NhanVien nv = nhanVienDAL.ThongTinNhanVien(nhanVien.MaNV);            
+            if (nv != null && nhanVien.MatKhau == nv.MatKhau)
                 return nhanVienDAL.Save(nhanVien);
             nhanVien.MatKhau = BCrypt.Net.BCrypt.HashPassword(nhanVien.MatKhau);
             return nhanVienDAL.Save(nhanVien);

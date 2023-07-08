@@ -178,7 +178,7 @@ namespace QuanLyNhanSu.PresentationTier
             };
             chucVuBUS.Save(chucVu);
             ClearAllText();
-            LoadChucVu();
+            LoadChucVu();            
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
