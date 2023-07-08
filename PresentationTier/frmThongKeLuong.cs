@@ -30,7 +30,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void LoadThongTinDangNhap()
         {
-            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
+            NhanVien nv = nhanVienBUS.ThongTinNhanVien(maNV);
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
                 lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;

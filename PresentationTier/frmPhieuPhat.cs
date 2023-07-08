@@ -17,11 +17,13 @@ namespace QuanLyNhanSu.PresentationTier
     {
         Thread currentForm;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
+        private readonly NhanVien nv;
         private readonly string maNV;
         public FrmPhieuPhat(string maNV)
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
+            nv = nhanVienBUS.ThongTinNhanVien(maNV);
             this.maNV = maNV;
         }
         private void FrmPhieuPhat_Load(object sender, EventArgs e)
@@ -30,7 +32,6 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void LoadThongTinDangNhap()
         {
-            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
                 lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;

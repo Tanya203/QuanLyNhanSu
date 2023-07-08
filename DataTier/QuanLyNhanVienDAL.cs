@@ -124,7 +124,7 @@ namespace QuanLyNhanSu.DataTier
         {
             return quanLyNhanSu.NhanViens.OrderBy(nv => nv.MaNV).ToList();
         }
-        public NhanVien ThongTinNhanVienDangNhap(string maNV)
+        public NhanVien ThongTinNhanVien(string maNV)
         {
             return quanLyNhanSu.NhanViens.Where(nv => nv.MaNV == maNV).FirstOrDefault();
         }
@@ -135,31 +135,7 @@ namespace QuanLyNhanSu.DataTier
                 NhanVien newNhanVien = quanLyNhanSu.NhanViens.Where(nv => nv.MaNV == nhanVien.MaNV).FirstOrDefault();
                 if (newNhanVien != null)// cập nhật
                 {
-                    newNhanVien.MaCV = nhanVien.MaCV;
-                    newNhanVien.MaLHD = nhanVien.MaLHD;
-                    newNhanVien.TaiKhoan = nhanVien.TaiKhoan;
-                    newNhanVien.MatKhau = nhanVien.MatKhau;
-                    newNhanVien.CCCD_CMND = nhanVien.CCCD_CMND;
-                    newNhanVien.Ho = nhanVien.Ho;
-                    newNhanVien.TenLot = nhanVien.TenLot;
-                    newNhanVien.Ten = nhanVien.Ten;
-                    newNhanVien.NTNS = nhanVien.NTNS;
-                    newNhanVien.SoNha = nhanVien.SoNha;
-                    newNhanVien.TenDuong = nhanVien.TenDuong;
-                    newNhanVien.Phuong_Xa = nhanVien.Phuong_Xa;
-                    newNhanVien.Quan_Huyen = nhanVien.Quan_Huyen;
-                    newNhanVien.Tinh_ThanhPho = nhanVien.Tinh_ThanhPho;
-                    newNhanVien.GioiTinh = nhanVien.GioiTinh;
-                    newNhanVien.SDT = nhanVien.SDT;
-                    newNhanVien.Email = nhanVien.Email;
-                    newNhanVien.TrinhDoHocVan = nhanVien.TrinhDoHocVan;
-                    newNhanVien.NgayVaoLam = nhanVien.NgayVaoLam;
-                    newNhanVien.ThoiHanHopDong = nhanVien.ThoiHanHopDong;
-                    newNhanVien.TinhTrang = nhanVien.TinhTrang;
-                    newNhanVien.SoNgayPhep = nhanVien.SoNgayPhep;
-                    newNhanVien.LuongCoBan = nhanVien.LuongCoBan;
-                    newNhanVien.Hinh = nhanVien.Hinh;
-                    quanLyNhanSu.NhanViens.AddOrUpdate(newNhanVien);
+                    newNhanVien = nhanVien;                    
                 }
                 else//thêm mới           
                     quanLyNhanSu.NhanViens.Add(nhanVien);

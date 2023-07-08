@@ -20,12 +20,14 @@ namespace QuanLyNhanSu.PresentationTier
         Thread currentForm;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly string maNV;
+        private readonly NhanVien nv;
         string formatDateTime = "dd/MM/yyyy";
         public FrmThongTinTaiKhoan(string maNV)
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
             this.maNV = maNV;
+            nv = nhanVienBUS.ThongTinNhanVien(maNV);
             txtMaNV.ReadOnly = true;
             txtPhongBan.ReadOnly = true;
             txtChucVu.ReadOnly = true;
@@ -37,7 +39,8 @@ namespace QuanLyNhanSu.PresentationTier
             txtTinhTrang.ReadOnly = true;
             txtSoNgayPhep.ReadOnly = true;
             txtLuongCoBan.ReadOnly = true;
-            txtPhuCap.ReadOnly = true;           
+            txtPhuCap.ReadOnly = true;
+            btnDoiMatKhau.Enabled = false;
         }
         private void FrmThongTinTaiKhoan_Load(object sender, EventArgs e)
         {
@@ -45,8 +48,7 @@ namespace QuanLyNhanSu.PresentationTier
             LoadThongTinDangNhap();
         }
         public void LoadThongTinDangNhap()
-        {
-            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
+        {            
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
                 lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
@@ -56,8 +58,7 @@ namespace QuanLyNhanSu.PresentationTier
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
         private void LoadThongTinTaiKhoan()
-        {
-            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
+        {            
             txtMaNV.Text = nv.MaNV;
             txtPhongBan.Text = nv.ChucVu.PhongBan.TenPhongBan;
             txtChucVu.Text = nv.ChucVu.TenChucVu;
@@ -102,6 +103,13 @@ namespace QuanLyNhanSu.PresentationTier
             this.Close();
         }
         //////////////////////////////////////////////////////////////////////////////
+        private void ClearMatKhauText()
+        {
+            txtMatKhauCu.Text = string.Empty;
+            txtMatKhauMoi.Text = string.Empty;
+            txtNhapLaiMatKhau.Text = string.Empty;
+        }
+        //////////////////////////////////////////////////////////////////////////////
         public string CheckMatKhau(string matKhau)
         {
             Regex passCheck = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
@@ -137,6 +145,24 @@ namespace QuanLyNhanSu.PresentationTier
             }
             return email;
         }
+        private void CheckTextMatKhau(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtMatKhauMoi.Text) || string.IsNullOrEmpty(txtMatKhauMoi.Text) || string.IsNullOrEmpty(txtNhapLaiMatKhau.Text))
+                btnDoiMatKhau.Enabled = false;
+            else
+                btnDoiMatKhau.Enabled = true;
+        }
+        private bool XacNhanMatKhau(string matKhau)
+        {
+            if (!BCrypt.Net.BCrypt.Verify(matKhau, nv.MatKhau))
+            {
+                MessageBox.Show("Mật khẩu cũ không khớp", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else
+                return true;               
+        }
+        //////////////////////////////////////////////////////////////////////////////
         private void txtCCCD_CMND_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -193,8 +219,7 @@ namespace QuanLyNhanSu.PresentationTier
                 return;
             string email = CheckEmail(txtEmail.Text);
             if (string.IsNullOrEmpty(email))
-                return;
-            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
+                return;            
             nv.CCCD_CMND = txtCCCD_CMND.Text;
             nv.Ho = txtHo.Text;
             nv.TenLot = txtTenLot.Text;
@@ -209,6 +234,34 @@ namespace QuanLyNhanSu.PresentationTier
             nv.SDT = txtSDT.Text;
             nv.Email = txtEmail.Text;
             nhanVienBUS.Save(nv);
+            LoadThongTinTaiKhoan();
         }
+        private void cbHienThiMatKhau_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cbHienThiMatKhau.Checked)
+            {
+                txtMatKhauCu.UseSystemPasswordChar = false;
+                txtMatKhauMoi.UseSystemPasswordChar = false;
+                txtNhapLaiMatKhau.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                txtMatKhauCu.UseSystemPasswordChar = true;
+                txtMatKhauMoi.UseSystemPasswordChar = true;
+                txtNhapLaiMatKhau.UseSystemPasswordChar = true;
+            }
+        }        
+        private void btnDoiMatKhau_Click(object sender, EventArgs e)
+        {
+            if (!XacNhanMatKhau(txtMatKhauCu.Text))
+                return;
+            string matKhau = CheckMatKhau(txtMatKhauMoi.Text);
+            if (matKhau == null)
+                return;
+            nv.MatKhau = txtMatKhauMoi.Text;
+            nhanVienBUS.Save(nv);
+            ClearMatKhauText();
+            LoadThongTinTaiKhoan();
+        }        
     }
 }

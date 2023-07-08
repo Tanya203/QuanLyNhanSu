@@ -20,6 +20,7 @@ namespace QuanLyNhanSu.PresentationTier
         Thread currentForm;
         private readonly QuanLyCaBUS caBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
+        private readonly NhanVien nv;
         private IEnumerable<CaViewModels> danhSachCa;
         private IEnumerable<CaViewModels> danhSachCaTimKiem;
         string formatTime = "HH:mm";
@@ -30,6 +31,7 @@ namespace QuanLyNhanSu.PresentationTier
             this.Load += frmQuanLyCa_Load;
             caBUS = new QuanLyCaBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
+            nv = nhanVienBUS.ThongTinNhanVien(maNV);
             txtMaCa.ReadOnly = true;
             dtpThoiGianBatDau.Text = "00:00";
             dtpThoiGianKetThuc.Text = "00:00";
@@ -45,7 +47,6 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void LoadThongTinDangNhap()
         {
-            NhanVien nv = nhanVienBUS.ThongTinNhanVienDangNhap(maNV);
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
                 lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
