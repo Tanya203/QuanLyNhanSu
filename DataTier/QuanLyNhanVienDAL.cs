@@ -32,7 +32,7 @@ namespace QuanLyNhanSu.DataTier
                 MaCV = nv.MaCV,
                 MaLHD = nv.MaLHD,
                 TaiKhoan = nv.TaiKhoan,
-                CCCD_CMND = nv.CCCD_CMND,
+                CCCD = nv.CCCD,
                 Ho = nv.Ho,
                 TenLot = nv.TenLot,
                 Ten = nv.Ten,
@@ -66,7 +66,7 @@ namespace QuanLyNhanSu.DataTier
                 MaCV = nv.MaCV,
                 MaLHD = nv.MaLHD,
                 TaiKhoan = nv.TaiKhoan,
-                CCCD_CMND = nv.CCCD_CMND,
+                CCCD = nv.CCCD,
                 Ho = nv.Ho,
                 TenLot = nv.TenLot,
                 Ten = nv.Ten,
@@ -94,7 +94,7 @@ namespace QuanLyNhanSu.DataTier
                                           nhanVien.TenChucVu.Contains(timKiem) ||
                                           nhanVien.TenLoaiHopDong.Contains(timKiem) ||
                                           nhanVien.TaiKhoan.Contains(timKiem) ||
-                                          nhanVien.CCCD_CMND.Contains(timKiem) ||
+                                          nhanVien.CCCD.Contains(timKiem) ||
                                           nhanVien.Ho.Contains(timKiem) ||
                                           nhanVien.TenLot.Contains(timKiem) ||
                                           nhanVien.Ten.Contains(timKiem) ||
@@ -139,7 +139,7 @@ namespace QuanLyNhanSu.DataTier
                     newNhanVien.MaLHD = nhanVien.MaLHD;
                     newNhanVien.TaiKhoan = nhanVien.TaiKhoan;
                     newNhanVien.MatKhau = nhanVien.MatKhau;
-                    newNhanVien.CCCD_CMND = nhanVien.CCCD_CMND;
+                    newNhanVien.CCCD = nhanVien.CCCD;
                     newNhanVien.Ho = nhanVien.Ho;
                     newNhanVien.TenLot = nhanVien.TenLot;
                     newNhanVien.Ten = nhanVien.Ten;
@@ -175,7 +175,7 @@ namespace QuanLyNhanSu.DataTier
                     { "UQ_Email", "Email đã tồn tại" },
                     { "UQ_SDT", "Số điện thoại đã tồn tại" },
                     { "UQ_TaiKhoan", "Tài khoản đã tồn tại" },
-                    { "CHECK_CCCD_CMND", "Độ dài CCCD/CMND phải = 9 hoặc 12" },
+                    { "CHECK_CCCD", "Độ dài CCCD phải = 12" },
                     { "CHECK_GioiTinh", "Giới tính phải là Nam, Nữ hoặc Khác" },
                     { "CHECK_LuongCoBan", "Lương cơ bản phải >= 0" },
                     { "CHECK_NgayVaoLam", "Ngày vào làm phải >= ngày hiện tại" },

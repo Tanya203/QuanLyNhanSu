@@ -966,7 +966,7 @@
             this.txtCCCD.Size = new System.Drawing.Size(183, 27);
             this.txtCCCD.TabIndex = 10;
             this.txtCCCD.TextChanged += new System.EventHandler(this.EnableButtons);
-            this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_CMND_KeyPress);
+            this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_KeyPress);
             // 
             // txtMatKhau
             // 

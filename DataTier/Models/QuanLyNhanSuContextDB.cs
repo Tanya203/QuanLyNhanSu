@@ -183,7 +183,7 @@ namespace QuanLyNhanSu.DataTier.Models
 
             modelBuilder.Entity<LoaiCa>()
                 .Property(e => e.HeSoLuong)
-                .HasPrecision(19, 4);
+                .HasPrecision(38, 4);
 
             modelBuilder.Entity<LoaiCa>()
                 .HasMany(e => e.LichLamViecs)
@@ -229,7 +229,7 @@ namespace QuanLyNhanSu.DataTier.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<NhanVien>()
-                .Property(e => e.CCCD_CMND)
+                .Property(e => e.CCCD)
                 .IsUnicode(false);
 
             modelBuilder.Entity<NhanVien>()
