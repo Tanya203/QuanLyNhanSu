@@ -173,10 +173,6 @@ namespace QuanLyNhanSu.DataTier.Models
                 .Property(e => e.MaNV)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<LichSuThaoTac>()
-                .Property(e => e.ThaoTacThucHien)
-                .IsUnicode(false);
-
             modelBuilder.Entity<LoaiCa>()
                 .Property(e => e.MaLC)
                 .IsUnicode(false);

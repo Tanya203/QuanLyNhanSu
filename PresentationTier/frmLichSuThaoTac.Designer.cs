@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblHoTenDN = new System.Windows.Forms.Label();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
             this.lblChucVuDN = new System.Windows.Forms.Label();
@@ -44,6 +45,8 @@
             this.dgvLichSuThaoTac = new System.Windows.Forms.DataGridView();
             this.colNgayio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colThaoTacThucHien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
@@ -193,6 +196,8 @@
             this.dgvLichSuThaoTac.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNgayio,
             this.colMaNV,
+            this.colPhongBan,
+            this.colChucVu,
             this.colThaoTacThucHien});
             this.dgvLichSuThaoTac.Location = new System.Drawing.Point(0, 230);
             this.dgvLichSuThaoTac.Name = "dgvLichSuThaoTac";
@@ -207,6 +212,8 @@
             this.dgvLichSuThaoTac.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvLichSuThaoTac.RowHeadersVisible = false;
             this.dgvLichSuThaoTac.RowHeadersWidth = 51;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvLichSuThaoTac.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvLichSuThaoTac.RowTemplate.Height = 24;
             this.dgvLichSuThaoTac.Size = new System.Drawing.Size(1924, 803);
             this.dgvLichSuThaoTac.TabIndex = 49;
@@ -224,6 +231,20 @@
             this.colMaNV.MinimumWidth = 6;
             this.colMaNV.Name = "colMaNV";
             this.colMaNV.ReadOnly = true;
+            // 
+            // colPhongBan
+            // 
+            this.colPhongBan.HeaderText = "Phòng ban";
+            this.colPhongBan.MinimumWidth = 6;
+            this.colPhongBan.Name = "colPhongBan";
+            this.colPhongBan.ReadOnly = true;
+            // 
+            // colChucVu
+            // 
+            this.colChucVu.HeaderText = "Chức vụ";
+            this.colChucVu.MinimumWidth = 6;
+            this.colChucVu.Name = "colChucVu";
+            this.colChucVu.ReadOnly = true;
             // 
             // colThaoTacThucHien
             // 
@@ -257,6 +278,8 @@
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
             this.txtTimKiem.TabIndex = 51;
+            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
+            this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 
             // FrmLichSuThaoTac
             // 
@@ -297,10 +320,12 @@
         private System.Windows.Forms.Label lblLichSuThaoTac;
         private System.Windows.Forms.Label lblTimKiem;
         private System.Windows.Forms.DataGridView dgvLichSuThaoTac;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNgayio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaNV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colThaoTacThucHien;
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.TextBox txtTimKiem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNgayio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaNV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPhongBan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colChucVu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colThaoTacThucHien;
     }
 }
