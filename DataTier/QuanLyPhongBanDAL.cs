@@ -70,7 +70,7 @@ namespace QuanLyNhanSu.DataTier.Models
                     DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                     if (ketQua == DialogResult.No)
                     {
-                        if (string.IsNullOrEmpty(ex.Message))
+                        if (!string.IsNullOrEmpty(ex.InnerException.ToString()))
                             MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         else
                             MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -112,7 +112,7 @@ namespace QuanLyNhanSu.DataTier.Models
                 DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if (ketQua == DialogResult.No)
                 {
-                    if (string.IsNullOrEmpty(ex.Message))
+                    if (!string.IsNullOrEmpty(ex.InnerException.ToString()))
                         MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else
                         MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);

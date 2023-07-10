@@ -20,9 +20,10 @@ namespace QuanLyNhanSu.PresentationTier
         Thread currentForm;
         private readonly QuanLyCaBUS caBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
-        private readonly NhanVien nv;
+        private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private IEnumerable<CaViewModels> danhSachCa;
-        private IEnumerable<CaViewModels> danhSachCaTimKiem;
+        private IEnumerable<CaViewModels> danhSachCaTimKiem;        
+        private readonly NhanVien nv;
         string formatTime = "HH:mm";
         private readonly string maNV;
         public FrmQuanLyCa(string maNV)
@@ -31,6 +32,7 @@ namespace QuanLyNhanSu.PresentationTier
             this.Load += frmQuanLyCa_Load;
             caBUS = new QuanLyCaBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
+            lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             txtMaCa.ReadOnly = true;
             dtpThoiGianBatDau.Text = "00:00";
@@ -108,6 +110,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             this.Close();
         }
+        ///////////////////////////////////////////////////////////////////////////////////////
         private void EnableButtons(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtMaCa.Text) && string.IsNullOrEmpty(txtTenCa.Text) || string.IsNullOrEmpty(txtTenCa.Text))
@@ -136,13 +139,22 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnThem_Click(object sender, EventArgs e)
         {
             Ca newCa = new Ca
-            {
+            {                
                 MaCa = "",
                 TenCa = txtTenCa.Text,
                 GioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text),
                 GioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text),
             };
-            caBUS.Save(newCa);
+            if (caBUS.Save(newCa))
+            {                
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {                                    
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên "+ maNV +" thêm ca "+ txtTenCa.Text,                    
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             Reload();            
         }
         private void btnSua_Click(object sender, EventArgs e)
@@ -154,7 +166,16 @@ namespace QuanLyNhanSu.PresentationTier
                 GioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text),
                 GioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text),
             };
-            caBUS.Save(newCa);            
+            if (caBUS.Save(newCa))
+            {                
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa ca '" + txtMaCa.Text+"'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             ClearAllText();
             LoadCa();            
         }
@@ -164,8 +185,17 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 MaCa = txtMaCa.Text,
             };
-            caBUS.Delete(ca);
-            this.Refresh();
+            if (caBUS.Delete(ca))
+            {
+               
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá ca '" + txtTenCa.Text + "'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }            
             ClearAllText();
             LoadCa();          
         }

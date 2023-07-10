@@ -19,6 +19,7 @@ namespace QuanLyNhanSu.PresentationTier
     {
         Thread currentForm;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
+        private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly string maNV;
         private readonly NhanVien nv;
         string formatDateTime = "dd/MM/yyyy";
@@ -26,6 +27,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
+            lichSuThaoTacBUS = new LichSuThaoTacBUS();
             this.maNV = maNV;
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             txtMaNV.ReadOnly = true;
@@ -248,7 +250,16 @@ namespace QuanLyNhanSu.PresentationTier
             nv.GioiTinh = gioiTinh;
             nv.SDT = txtSDT.Text;
             nv.Email = txtEmail.Text;
-            nhanVienBUS.Save(nv);
+            if (nhanVienBUS.Save(nv))
+            {
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa thông tin cá nhân",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             LoadThongTinTaiKhoan();
         }
         private void cbHienThiMatKhau_CheckedChanged(object sender, EventArgs e)
@@ -274,7 +285,16 @@ namespace QuanLyNhanSu.PresentationTier
             if (matKhau == null)
                 return;
             nv.MatKhau = txtMatKhauMoi.Text;
-            nhanVienBUS.Save(nv);
+            if (nhanVienBUS.Save(nv))
+            {
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " đổi mật khẩu",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             ClearMatKhauText();
             LoadThongTinTaiKhoan();
         }        

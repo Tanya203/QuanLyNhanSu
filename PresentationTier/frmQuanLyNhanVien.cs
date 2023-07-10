@@ -24,11 +24,12 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyPhongBanBUS phongBanBus;
         private readonly QuanLyChucVuBUS chucVuBUS;
         private readonly QuanLyLoaiHopDongBUS loaiHopDongBUS;
-        private readonly NhanVien nv;
+        private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private IEnumerable<NhanVienViewModel> danhSachNhanVien;
         private IEnumerable<NhanVienViewModel> danhSachNhanVienTimKiem;
         string formatDateTime = "dd/MM/yyyy";
         private readonly string maNV;
+        private readonly NhanVien nv;
 
         public FrmQuanLyNhanVien(string maNV)
         {
@@ -37,6 +38,7 @@ namespace QuanLyNhanSu.PresentationTier
             phongBanBus = new QuanLyPhongBanBUS();
             chucVuBUS = new QuanLyChucVuBUS();
             loaiHopDongBUS = new QuanLyLoaiHopDongBUS();
+            lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             this.maNV = maNV;
         }
@@ -426,7 +428,21 @@ namespace QuanLyNhanSu.PresentationTier
                 LuongCoBan = decimal.Parse(txtLuongCoBan.Text),
                 //hinh
             };
-            nhanVienBUS.Save(newNhanVien);
+            if (nhanVienBUS.Save(newNhanVien))
+            {
+                string hoTen;
+                if (string.IsNullOrEmpty(txtTenLot.Text))
+                    hoTen = txtHo + txtTen.Text;
+                else
+                    hoTen = txtHo + txtTenLot.Text + txtTen.Text;
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm nhân viên '" + hoTen + "'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             Reload();
         }
         private void btnSua_Click(object sender, EventArgs e)
@@ -466,16 +482,19 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVien.TinhTrang = txtTinhTrang.Text;
             nhanVien.SoNgayPhep = int.Parse(txtSoNgayPhep.Text);
             nhanVien.LuongCoBan = decimal.Parse(txtLuongCoBan.Text);
-                //hinh
-            if (!nhanVienBUS.Save(nhanVien))
-                return;
-            if(lblMaNV_DN.Text == txtMaNV.Text)
-                frmQuanLyNhanVien_Load(sender, e);
-            else
+            //hinh
+            if (nhanVienBUS.Save(nhanVien))
             {
-                ClearAllText();
-                LoadNhanVien();
-            }            
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa nhân viên '" + txtMaNV.Text + "'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
+            ClearAllText();
+            LoadNhanVien();                        
         }      
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -483,7 +502,16 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 MaNV = txtMaNV.Text,                
             };
-            nhanVienBUS.Delete(newNhanVien.MaNV);
+            if (nhanVienBUS.Delete(newNhanVien.MaNV))
+            {
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá nhân viên '" + txtMaNV.Text + "'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             ClearAllText();
             LoadNhanVien();
         }

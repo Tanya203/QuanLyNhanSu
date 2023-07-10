@@ -19,9 +19,10 @@ namespace QuanLyNhanSu.PresentationTier
         Thread currentForm;
         private readonly QuanLyLoaiCaBUS loaiCaBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
-        private readonly NhanVien nv;
+        private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private IEnumerable<LoaiCaViewModels> danhSachLoaiCa;
         private IEnumerable<LoaiCaViewModels> danhSachLoaiCaTimKiem;
+        private readonly NhanVien nv;
         private readonly string maNV;
         public FrmQuanLyLoaiCa(string maNV)
         {
@@ -29,6 +30,7 @@ namespace QuanLyNhanSu.PresentationTier
             this.Load += frmQuanLyLoaiCa_Load;
             loaiCaBUS = new QuanLyLoaiCaBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
+            lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             txtMaLC.ReadOnly = true;           
             btnThem.Enabled = false;
@@ -143,11 +145,20 @@ namespace QuanLyNhanSu.PresentationTier
         {
             LoaiCa newLoaiCa = new LoaiCa
             {
-                MaLC = "1",
+                MaLC = "",
                 TenLoaiCa = txtTenLC.Text,
                 HeSoLuong = decimal.Parse(txtHeSoLuong.Text)
             };
-            loaiCaBUS.Save(newLoaiCa);
+            if (loaiCaBUS.Save(newLoaiCa))
+            {
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm loại ca '" + txtTenLC.Text + "'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             Reload();          
         }
         private void btnSua_Click(object sender, EventArgs e)
@@ -158,7 +169,16 @@ namespace QuanLyNhanSu.PresentationTier
                 TenLoaiCa = txtTenLC.Text,
                 HeSoLuong = decimal.Parse(txtHeSoLuong.Text)
             };
-            loaiCaBUS.Save(newLoaiCa);
+            if (loaiCaBUS.Save(newLoaiCa))
+            {
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " sửa loại ca '" + txtMaLC.Text + "'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             ClearAllText();
             LoadLoaiCa();
         }
@@ -168,7 +188,16 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 MaLC = txtMaLC.Text                
             };
-            loaiCaBUS.Delete(loaiCa);
+            if (loaiCaBUS.Delete(loaiCa))
+            {
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá loại ca '" + txtMaLC.Text + "'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             ClearAllText();
             LoadLoaiCa();
         }

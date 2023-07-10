@@ -19,16 +19,18 @@ namespace QuanLyNhanSu.PresentationTier
         Thread currentForm;
         private readonly QuanLyPhuCapBUS phuCapBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
-        private readonly NhanVien nv;
+        private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private IEnumerable<PhuCapViewMModels> danhSachPhuCap;
         private IEnumerable<PhuCapViewMModels> danhSachPhuCapTimKiem;
         private readonly string maNV;
+        private readonly NhanVien nv;
         public FrmQuanLyPhuCap(string maNV)
         {
             InitializeComponent();
             this.Load += frmQuanLyPhuCap_Load;
             phuCapBUS = new QuanLyPhuCapBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
+            lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             txtMaPC.ReadOnly = true;
             txtSoLuongNhanVien.ReadOnly = true;
@@ -147,7 +149,16 @@ namespace QuanLyNhanSu.PresentationTier
                 TenPhuCap = txtTenPC.Text,
                 TienPhuCap = decimal.Parse(txtSoTien.Text)
             };
-            phuCapBUS.Save(newPhuCap);
+            if (phuCapBUS.Save(newPhuCap))
+            {
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm phụ cấp '" + txtTenPC.Text + "'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             Reload();
         }
         private void btnSua_Click(object sender, EventArgs e)
@@ -158,7 +169,16 @@ namespace QuanLyNhanSu.PresentationTier
                 TenPhuCap = txtTenPC.Text,
                 TienPhuCap = decimal.Parse(txtSoTien.Text)
             };
-            phuCapBUS.Save(newPhuCap);
+            if (phuCapBUS.Save(newPhuCap))
+            {
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa phòng ban '" + txtMaPC.Text + "'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             ClearAllText();
             LoadPhuCap();
         }
@@ -166,7 +186,16 @@ namespace QuanLyNhanSu.PresentationTier
         {
             PhuCap phuCap = new PhuCap();
             phuCap.MaPC = txtMaPC.Text;
-            phuCapBUS.Delete(phuCap);
+            if (phuCapBUS.Delete(phuCap))
+            {
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá phụ cấp '" + txtMaPC.Text + "'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             ClearAllText();
             LoadPhuCap();
         }

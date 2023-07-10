@@ -18,10 +18,11 @@ namespace QuanLyNhanSu.PresentationTier
     {
         private Thread currentForm;
         private readonly QuanLyLoaiHopDongBUS loaiHopDongBUS;
-        private readonly QuanLyNhanVienBUS nhanVienBUS;
-        private readonly NhanVien nv;
+        private readonly QuanLyNhanVienBUS nhanVienBUS;  
+        private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private IEnumerable<LoaiHopDongViewModels> danhSachLoaiHopDong;
         private IEnumerable<LoaiHopDongViewModels> danhSachLoaiHopDongTimKiem;
+        private readonly NhanVien nv;
         private readonly string maNV;
         public FrmQuanLyLoaiHopDong(string maNV)
         {
@@ -29,7 +30,8 @@ namespace QuanLyNhanSu.PresentationTier
             this.Load += frmQuanLyLoaiHopDong_Load;
             loaiHopDongBUS = new QuanLyLoaiHopDongBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
-            nv =nhanVienBUS.ThongTinNhanVien(maNV);
+            lichSuThaoTacBUS = new LichSuThaoTacBUS();
+            nv = nhanVienBUS.ThongTinNhanVien(maNV);
             txtMaLHD.ReadOnly = true;
             txtSoLuongNhanVien.ReadOnly = true;
             btnThem.Enabled = false;
@@ -132,10 +134,19 @@ namespace QuanLyNhanSu.PresentationTier
         {
             LoaiHopDong newLoaiHopDong = new LoaiHopDong
             {
-                MaLHD = "1",
+                MaLHD = "",
                 TenLoaiHopDong = txtTenLHD.Text
             };
-            loaiHopDongBUS.Save(newLoaiHopDong);
+            if (loaiHopDongBUS.Save(newLoaiHopDong))
+            {
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm loại hợp đồng '" + txtTenLHD.Text + "'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             Reload();
         }
         private void btnHuy_Click(object sender, EventArgs e)
@@ -149,15 +160,35 @@ namespace QuanLyNhanSu.PresentationTier
                 MaLHD = txtMaLHD.Text,
                 TenLoaiHopDong = txtTenLHD.Text
             };
-            loaiHopDongBUS.Save(newLoaiHopDong);
+            if (loaiHopDongBUS.Save(newLoaiHopDong))
+            {
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa loại hợp đồng '" + txtMaLHD.Text + "'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             ClearAllText();
             LoadLoaiHopDong();
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            LoaiHopDong loaiHopDong = new LoaiHopDong();
-            loaiHopDong.MaLHD = txtMaLHD.Text;
-            loaiHopDongBUS.Delete(loaiHopDong);
+            LoaiHopDong loaiHopDong = new LoaiHopDong
+            {
+                MaLHD = txtMaLHD.Text
+            };
+            if (loaiHopDongBUS.Delete(loaiHopDong))
+            {
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now,
+                    MaNV = maNV,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm chức vụ '" + txtMaLHD.Text + "'",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
+            }
             ClearAllText();
             LoadLoaiHopDong();
         }
