@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace QuanLyNhanSu.ViewModels
 {
-    public class LichSuThaoTacViewModels
+    public class PhieuThuongViewModels
     {
-        public DateTime NgayGio { get; set; }
+        public string MaPT { get; set; }
         public string MaNV { get; set; }
         public string HoTen { get; set; }
-        public string PhongBan { get; set; }
         public string ChucVu { get; set; }
-        public string ThaoTacThucHien { get; set; }        
+        public string PhongBan { get; set;}
+        public DateTime ? NgayLap { get; set; }
     }
 }

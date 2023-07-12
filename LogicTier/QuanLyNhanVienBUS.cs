@@ -33,9 +33,9 @@ namespace QuanLyNhanSu.LogicTier
         {
             return nhanVienDAL.SearchNhanVien(timKiem);
         }
-        public IEnumerable<NhanVien> GetNhanVienTheoPhongBan(string maPB)
+        public IEnumerable<NhanVien> GetNhanVienChucVu(string maPB)
         {
-            return nhanVienDAL.GetNhanVienTheoPhongBan(maPB);
+            return nhanVienDAL.GetNhanVienChucVu(maPB);
         }        
         public bool Save(NhanVien nhanVien)
         {

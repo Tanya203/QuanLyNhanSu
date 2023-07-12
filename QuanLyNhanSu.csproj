@@ -35,6 +35,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
       <HintPath>packages\BCrypt.Net-Next.4.0.3\lib\net48\BCrypt.Net-Next.dll</HintPath>
@@ -124,6 +128,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTier\ChiTietPhieuThuongDAL.cs" />
     <Compile Include="DataTier\LichSuThaoTacDAL.cs" />
     <Compile Include="DataTier\Models\Ca.cs" />
     <Compile Include="DataTier\Models\ChamCong.cs" />
@@ -145,6 +150,7 @@
     <Compile Include="DataTier\Models\PhuCap.cs" />
     <Compile Include="DataTier\Models\QuanLyNhanSuContextDB.cs" />
     <Compile Include="DataTier\Models\QuyenHan.cs" />
+    <Compile Include="DataTier\PhieuThuongDAL.cs" />
     <Compile Include="DataTier\QuanLyCaDAL.cs" />
     <Compile Include="DataTier\QuanLyChucVuDAL.cs" />
     <Compile Include="DataTier\QuanLyLoaiCaDAL.cs" />
@@ -152,7 +158,9 @@
     <Compile Include="DataTier\QuanLyLoaiHopDongDAL.cs" />
     <Compile Include="DataTier\QuanLyPhongBanDAL.cs" />
     <Compile Include="DataTier\QuanLyNhanVienDAL.cs" />
+    <Compile Include="LogicTier\ChiTietPhieuThuongBUS.cs" />
     <Compile Include="LogicTier\LichSuThaoTacBUS.cs" />
+    <Compile Include="LogicTier\PhieuThuongBus.cs" />
     <Compile Include="LogicTier\QuanLyCaBUS.cs" />
     <Compile Include="LogicTier\QuanLyChucVuBUS.cs" />
     <Compile Include="LogicTier\QuanLyLoaiCaBUS.cs" />
@@ -295,11 +303,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CaViewModels.cs" />
+    <Compile Include="ViewModels\ChiTietPhieuThuongViewModels.cs" />
     <Compile Include="ViewModels\ChucVuViewModels.cs" />
     <Compile Include="ViewModels\LichSuThaoTacViewModels.cs" />
     <Compile Include="ViewModels\LoaiCaViewModels.cs" />
     <Compile Include="ViewModels\LoaiHopDongViewModels.cs" />
     <Compile Include="ViewModels\NhanVienViewModel.cs" />
+    <Compile Include="ViewModels\PhieuThuongViewModels.cs" />
     <Compile Include="ViewModels\PhongBanViewModels.cs" />
     <Compile Include="ViewModels\PhuCapViewMModels.cs" />
     <EmbeddedResource Include="PresentationTier\FrmChamCong.resx">
