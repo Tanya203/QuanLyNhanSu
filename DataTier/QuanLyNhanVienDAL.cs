@@ -17,8 +17,7 @@ namespace QuanLyNhanSu.DataTier
 {
     internal class QuanLyNhanVienDAL
     {
-        private QuanLyNhanSuContextDB quanLyNhanSu;
-        string formatDateTime = "";
+        private readonly QuanLyNhanSuContextDB quanLyNhanSu;
         public QuanLyNhanVienDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
@@ -115,9 +114,9 @@ namespace QuanLyNhanSu.DataTier
                                           nhanVien.LuongCoBan.ToString().Contains(timKiem)).OrderBy(nhanVien => nhanVien.MaNV).OrderBy(nv => nv.MaNV);
             return danhSachNhanVien;
         }
-        public IEnumerable<NhanVien> GetNhanVienTheoPhongBan(string maPB)
+        public IEnumerable<NhanVien> GetNhanVienChucVu(string maCV)
         {
-            var listNV = quanLyNhanSu.NhanViens.Where(nv => nv.ChucVu.PhongBan.MaPB == maPB).ToList();
+            var listNV = quanLyNhanSu.NhanViens.Where(nv => nv.ChucVu.MaCV == maCV).ToList();
             return listNV;
         }
         public IEnumerable<NhanVien> GetNhanVien()

@@ -23,7 +23,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<LichSuThaoTacViewModels> lichSuThaoTacTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
-        private string formatDateTime = "HH:mm:ss dd/MM/yyyy";
+        //private string formatDateTime = "HH:mm:ss dd/MM/yyyy";
 
         public FrmLichSuThaoTac(string maNV)
         {
@@ -56,11 +56,12 @@ namespace QuanLyNhanSu.PresentationTier
             foreach(var tt in lichSuThaoTac)
             {
                 rowAdd = dgvLichSuThaoTac.Rows.Add();
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[0].Value = tt.NgayGio.ToString(formatDateTime);
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[0].Value = tt.NgayGio.ToString();
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[1].Value = tt.MaNV;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[2].Value = tt.PhongBan;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[3].Value = tt.ChucVu;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[4].Value = tt.ThaoTacThucHien;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[2].Value = tt.HoTen;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[3].Value = tt.PhongBan;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[4].Value = tt.ChucVu;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[5].Value = tt.ThaoTacThucHien;
             }
         }
         public void LoadLichSuThaoTacTimKiem(string timKiem)
@@ -71,11 +72,12 @@ namespace QuanLyNhanSu.PresentationTier
             foreach (var tt in lichSuThaoTacTimKiem)
             {
                 rowAdd = dgvLichSuThaoTac.Rows.Add();
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[0].Value = tt.NgayGio.ToString(formatDateTime);
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[0].Value = tt.NgayGio.ToString();
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[1].Value = tt.MaNV;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[2].Value = tt.PhongBan;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[3].Value = tt.ChucVu;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[4].Value = tt.ThaoTacThucHien;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[2].Value = tt.HoTen;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[3].Value = tt.PhongBan;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[4].Value = tt.ChucVu;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[5].Value = tt.ThaoTacThucHien;
             }
         }
         /////////////////////////////////////////////////////////////////////////////////////////

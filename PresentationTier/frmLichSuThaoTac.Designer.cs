@@ -43,13 +43,14 @@
             this.lblLichSuThaoTac = new System.Windows.Forms.Label();
             this.lblTimKiem = new System.Windows.Forms.Label();
             this.dgvLichSuThaoTac = new System.Windows.Forms.DataGridView();
+            this.pnlHeader = new System.Windows.Forms.Panel();
+            this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.colNgayio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colThaoTacThucHien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pnlHeader = new System.Windows.Forms.Panel();
-            this.txtTimKiem = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichSuThaoTac)).BeginInit();
             this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
@@ -160,7 +161,7 @@
             // 
             this.lblLichSuThaoTac.AutoSize = true;
             this.lblLichSuThaoTac.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLichSuThaoTac.Location = new System.Drawing.Point(798, 125);
+            this.lblLichSuThaoTac.Location = new System.Drawing.Point(797, 116);
             this.lblLichSuThaoTac.Name = "lblLichSuThaoTac";
             this.lblLichSuThaoTac.Size = new System.Drawing.Size(339, 51);
             this.lblLichSuThaoTac.TabIndex = 54;
@@ -170,7 +171,7 @@
             // 
             this.lblTimKiem.AutoSize = true;
             this.lblTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimKiem.Location = new System.Drawing.Point(738, 191);
+            this.lblTimKiem.Location = new System.Drawing.Point(736, 167);
             this.lblTimKiem.Name = "lblTimKiem";
             this.lblTimKiem.Size = new System.Drawing.Size(145, 32);
             this.lblTimKiem.TabIndex = 50;
@@ -196,10 +197,11 @@
             this.dgvLichSuThaoTac.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNgayio,
             this.colMaNV,
+            this.colHoTen,
             this.colPhongBan,
             this.colChucVu,
             this.colThaoTacThucHien});
-            this.dgvLichSuThaoTac.Location = new System.Drawing.Point(0, 230);
+            this.dgvLichSuThaoTac.Location = new System.Drawing.Point(0, 206);
             this.dgvLichSuThaoTac.Name = "dgvLichSuThaoTac";
             this.dgvLichSuThaoTac.ReadOnly = true;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -215,43 +217,8 @@
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvLichSuThaoTac.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvLichSuThaoTac.RowTemplate.Height = 24;
-            this.dgvLichSuThaoTac.Size = new System.Drawing.Size(1924, 803);
+            this.dgvLichSuThaoTac.Size = new System.Drawing.Size(1924, 827);
             this.dgvLichSuThaoTac.TabIndex = 49;
-            // 
-            // colNgayio
-            // 
-            this.colNgayio.HeaderText = "Ngày giờ";
-            this.colNgayio.MinimumWidth = 6;
-            this.colNgayio.Name = "colNgayio";
-            this.colNgayio.ReadOnly = true;
-            // 
-            // colMaNV
-            // 
-            this.colMaNV.HeaderText = "Mã nhân viên";
-            this.colMaNV.MinimumWidth = 6;
-            this.colMaNV.Name = "colMaNV";
-            this.colMaNV.ReadOnly = true;
-            // 
-            // colPhongBan
-            // 
-            this.colPhongBan.HeaderText = "Phòng ban";
-            this.colPhongBan.MinimumWidth = 6;
-            this.colPhongBan.Name = "colPhongBan";
-            this.colPhongBan.ReadOnly = true;
-            // 
-            // colChucVu
-            // 
-            this.colChucVu.HeaderText = "Chức vụ";
-            this.colChucVu.MinimumWidth = 6;
-            this.colChucVu.Name = "colChucVu";
-            this.colChucVu.ReadOnly = true;
-            // 
-            // colThaoTacThucHien
-            // 
-            this.colThaoTacThucHien.HeaderText = "Thao tác thực hiện";
-            this.colThaoTacThucHien.MinimumWidth = 6;
-            this.colThaoTacThucHien.Name = "colThaoTacThucHien";
-            this.colThaoTacThucHien.ReadOnly = true;
             // 
             // pnlHeader
             // 
@@ -274,12 +241,54 @@
             // txtTimKiem
             // 
             this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimKiem.Location = new System.Drawing.Point(889, 194);
+            this.txtTimKiem.Location = new System.Drawing.Point(887, 170);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
             this.txtTimKiem.TabIndex = 51;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
+            // 
+            // colNgayio
+            // 
+            this.colNgayio.HeaderText = "Ngày giờ";
+            this.colNgayio.MinimumWidth = 6;
+            this.colNgayio.Name = "colNgayio";
+            this.colNgayio.ReadOnly = true;
+            // 
+            // colMaNV
+            // 
+            this.colMaNV.HeaderText = "Mã nhân viên";
+            this.colMaNV.MinimumWidth = 6;
+            this.colMaNV.Name = "colMaNV";
+            this.colMaNV.ReadOnly = true;
+            // 
+            // colHoTen
+            // 
+            this.colHoTen.HeaderText = "Họ tên";
+            this.colHoTen.MinimumWidth = 6;
+            this.colHoTen.Name = "colHoTen";
+            this.colHoTen.ReadOnly = true;
+            // 
+            // colPhongBan
+            // 
+            this.colPhongBan.HeaderText = "Phòng ban";
+            this.colPhongBan.MinimumWidth = 6;
+            this.colPhongBan.Name = "colPhongBan";
+            this.colPhongBan.ReadOnly = true;
+            // 
+            // colChucVu
+            // 
+            this.colChucVu.HeaderText = "Chức vụ";
+            this.colChucVu.MinimumWidth = 6;
+            this.colChucVu.Name = "colChucVu";
+            this.colChucVu.ReadOnly = true;
+            // 
+            // colThaoTacThucHien
+            // 
+            this.colThaoTacThucHien.HeaderText = "Thao tác thực hiện";
+            this.colThaoTacThucHien.MinimumWidth = 6;
+            this.colThaoTacThucHien.Name = "colThaoTacThucHien";
+            this.colThaoTacThucHien.ReadOnly = true;
             // 
             // FrmLichSuThaoTac
             // 
@@ -292,7 +301,6 @@
             this.Controls.Add(this.dgvLichSuThaoTac);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.txtTimKiem);
-            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1918, 1018);
             this.Name = "FrmLichSuThaoTac";
             this.Text = "frmLichSuThaoTac";
@@ -324,6 +332,7 @@
         private System.Windows.Forms.TextBox txtTimKiem;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNgayio;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaNV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHoTen;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhongBan;
         private System.Windows.Forms.DataGridViewTextBoxColumn colChucVu;
         private System.Windows.Forms.DataGridViewTextBoxColumn colThaoTacThucHien;

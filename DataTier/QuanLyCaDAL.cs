@@ -1,4 +1,4 @@
-﻿using QuanLyNhanSu.DataTier.Models;
+﻿    using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;

@@ -40,7 +40,7 @@ namespace QuanLyNhanSu.DataTier.Models
             }).Where(pb => pb.TenPhongBan.Contains(timKiem) ||
                      pb.MaPB.Contains(timKiem)).OrderBy(pb => pb.MaPB);
             return danhSachPhongBan;
-        }
+        }        
         public bool Save(PhongBan phongBan)
         {
             try
@@ -123,7 +123,7 @@ namespace QuanLyNhanSu.DataTier.Models
         public int TongSoNhanVienTrongPhongBan(string maPB)
         {
             int sl = 0;
-            var listCV = quanLyNhanSu.ChucVus.Where(cv => cv.MaPB == maPB).ToList();
+            var listCV = quanLyNhanSu.ChucVus.Where(cv => cv.MaPB == maPB);
             foreach(var cv in listCV)            
                 sl += quanLyNhanSu.NhanViens.Count(nv => nv.MaCV == cv.MaCV);                          
             return sl;

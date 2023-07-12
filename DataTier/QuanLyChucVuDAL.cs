@@ -139,9 +139,8 @@ namespace QuanLyNhanSu.DataTier
             }
         }
         public int TongSoNhanVienThuocChucVu(string maCV)
-        {
-            int sl = quanLyNhanSu.NhanViens.Count(nv => nv.MaCV == maCV);            
-            return sl;
+        {                          
+            return quanLyNhanSu.NhanViens.Count(nv => nv.MaCV == maCV);
         }
 
     }

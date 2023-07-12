@@ -1,4 +1,5 @@
-﻿using QuanLyNhanSu.DataTier.Models;
+﻿using Eco.FrameworkImpl.Ocl;
+using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace QuanLyNhanSu.DataTier
 {
     internal class LichSuThaoTacDAL
     {
-        private readonly QuanLyNhanSuContextDB quanLyNhanSu;
+        private readonly QuanLyNhanSuContextDB quanLyNhanSu;        
         public LichSuThaoTacDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
@@ -24,6 +25,7 @@ namespace QuanLyNhanSu.DataTier
             {
                 NgayGio = x.NgayGio,
                 MaNV = x.MaNV,
+                HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 ThaoTacThucHien = x.ThaoTacThucHien
@@ -36,14 +38,16 @@ namespace QuanLyNhanSu.DataTier
             {
                 NgayGio = x.NgayGio,
                 MaNV = x.MaNV,
+                HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 ThaoTacThucHien = x.ThaoTacThucHien
             }).Where(lstc => lstc.NgayGio.ToString().Contains(timKiem) ||
                      lstc.MaNV.Contains(timKiem) || 
+                     lstc.HoTen.Contains(timKiem) ||
                      lstc.ThaoTacThucHien.Contains(timKiem) ||
                      lstc.PhongBan.Contains(timKiem) ||
-                     lstc.ChucVu.Contains(timKiem)).OrderBy(lstt => lstt.NgayGio);
+                     lstc.ChucVu.Contains(timKiem)).OrderBy(lstt => lstt.NgayGio);            
             return lichSuThaoTac;
         }
         public bool Save(LichSuThaoTac lstt)
