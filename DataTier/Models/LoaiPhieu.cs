@@ -6,27 +6,23 @@ namespace QuanLyNhanSu.DataTier.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("PhieuPhat")]
-    public partial class PhieuPhat
+    [Table("LoaiPhieu")]
+    public partial class LoaiPhieu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PhieuPhat()
+        public LoaiPhieu()
         {
-            ChiTietPhieuPhats = new HashSet<ChiTietPhieuPhat>();
+            Phieux = new HashSet<Phieu>();
         }
 
         [Key]
         [StringLength(15)]
-        public string MaPP { get; set; }
+        public string MaLP { get; set; }
 
-        [StringLength(15)]
-        public string MaNV { get; set; }
-
-        public DateTime? NgayLap { get; set; }
+        [StringLength(100)]
+        public string TenLoaiPhieu { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietPhieuPhat> ChiTietPhieuPhats { get; set; }
-
-        public virtual NhanVien NhanVien { get; set; }
+        public virtual ICollection<Phieu> Phieux { get; set; }
     }
 }

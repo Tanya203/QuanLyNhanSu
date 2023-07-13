@@ -1,4 +1,5 @@
-﻿using QuanLyNhanSu.DataTier.Models;
+﻿using Eco.Persistence;
+using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
@@ -14,33 +15,38 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class FrmPhieuThuong : Form
+    public partial class FrmPhieu : Form
     {
         Thread currentForm;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
-        private readonly PhieuThuongBus phieuThuongBus;
-        private readonly ChiTietPhieuThuongBUS chiTietPhieuThuongBUS;
+        private readonly PhieuBUS phieuBus;
+        private readonly ChiTietPhieuBUS chiTietPhieuBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
-        private IEnumerable<PhieuThuongViewModels> danhSachPhieuThuong;
-        private IEnumerable<PhieuThuongViewModels> danhSachPhieuThuongTimKiem;
+        private readonly QuanLyLoaiPhieuBUS quanLyLoaiPhieuBUS;
+        private IEnumerable<PhieuViewModels> danhSachPhieuThuong;
+        private IEnumerable<PhieuViewModels> danhSachPhieuThuongTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
-        public FrmPhieuThuong(string maNV)
+        public FrmPhieu(string maNV)
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
-            phieuThuongBus = new PhieuThuongBus();
-            chiTietPhieuThuongBUS = new ChiTietPhieuThuongBUS();
+            phieuBus = new PhieuBUS();
+            chiTietPhieuBUS = new ChiTietPhieuBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
+            quanLyLoaiPhieuBUS = new QuanLyLoaiPhieuBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             this.maNV = maNV;
         }
         private void FrmPhieuThuong_Load(object sender, EventArgs e)
         {
+            cmbLoaiPhieu.DisplayMember = "TenLoaiPhieu";
+            cmbLoaiPhieu.ValueMember = "MaLP";
             LoadThongTinDangNhap();
             LoadPhieuThuong();
             ChiTietPhieuThuongButton();
-            txtMaNV.ReadOnly = txtMaPT.ReadOnly = txtTongTien.ReadOnly = true;
+            LoadLoaiPhieu();
+            txtMaNV.ReadOnly = txtMaP.ReadOnly = txtTongTien.ReadOnly = true;
             dtpNgayLapPhieu.Enabled = false;
             btnXoa.Enabled = false;
         }
@@ -56,36 +62,42 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void LoadPhieuThuong()
         {
-            dgvThongTinPhieuThuong.Rows.Clear();
-            danhSachPhieuThuong = phieuThuongBus.GetAllPhieuThuong();
+            dgvThongTinPhieu.Rows.Clear();
+            danhSachPhieuThuong = phieuBus.GetAllPhieu();
             int rowAdd;
             foreach(var pt in danhSachPhieuThuong)
             {
-                rowAdd = dgvThongTinPhieuThuong.Rows.Add();
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[0].Value = pt.MaPT;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[1].Value = pt.MaNV;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[2].Value = pt.HoTen;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[3].Value = pt.PhongBan;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[4].Value = pt.ChucVu;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[5].Value = pt.NgayLap;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[6].Value = chiTietPhieuThuongBUS.TongTienPhieuThuong(pt.MaPT);
+                rowAdd = dgvThongTinPhieu.Rows.Add();
+                dgvThongTinPhieu.Rows[rowAdd].Cells[0].Value = pt.MaP;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[1].Value = pt.TenLoaiPhieu;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[2].Value = pt.MaNV;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[3].Value = pt.HoTen;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[4].Value = pt.PhongBan;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = chiTietPhieuBUS.TongTienPhieu(pt.MaP);
             }
+        }
+        public void LoadLoaiPhieu()
+        {
+            cmbLoaiPhieu.DataSource = quanLyLoaiPhieuBUS.GetLoaiPhieu();
         }
         public void LoadPhieuThuongTimKiem(string timKiem)
         {
-            dgvThongTinPhieuThuong.Rows.Clear();
-            danhSachPhieuThuongTimKiem = phieuThuongBus.SearchPhieuThuongPhieuThuong(timKiem);
+            dgvThongTinPhieu.Rows.Clear();
+            danhSachPhieuThuongTimKiem = phieuBus.SearchPhieu(timKiem);
             int rowAdd;
             foreach (var pt in danhSachPhieuThuongTimKiem)
             {
-                rowAdd = dgvThongTinPhieuThuong.Rows.Add();
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[0].Value = pt.MaPT;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[1].Value = pt.MaNV;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[2].Value = pt.HoTen;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[3].Value = pt.PhongBan;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[4].Value = pt.ChucVu;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[5].Value = pt.NgayLap;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[6].Value = chiTietPhieuThuongBUS.TongTienPhieuThuong(pt.MaPT);
+                rowAdd = dgvThongTinPhieu.Rows.Add();
+                dgvThongTinPhieu.Rows[rowAdd].Cells[0].Value = pt.MaP;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[1].Value = pt.TenLoaiPhieu;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[2].Value = pt.MaNV;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[3].Value = pt.HoTen;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[4].Value = pt.PhongBan;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap;
+                //dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = chiTietPhieuThuongBUS.TongTienPhieuThuong(pt.MaPT);
             }
         }
         //////////////////////////////////////////////////////////////////////////////
@@ -103,19 +115,19 @@ namespace QuanLyNhanSu.PresentationTier
                     Alignment = DataGridViewContentAlignment.MiddleCenter
                 };
                 btnChiTiet.DefaultCellStyle = buttonCellStyle;
-                dgvThongTinPhieuThuong.Columns.Add(btnChiTiet);                 
+                dgvThongTinPhieu.Columns.Add(btnChiTiet);                 
             }
         }
         private void OpenChiTietPhieuThuong(string maNV, string maPT)
         {
-            FrmChiTietPhieuThuong frmOpen = new FrmChiTietPhieuThuong(maNV,maPT);
+            FrmChiTietPhieu frmOpen = new FrmChiTietPhieu(maNV,maPT);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
         public void ClearAllText()
         {
-            txtMaPT.Text = string.Empty;
+            txtMaP.Text = string.Empty;
             txtMaNV.Text = string.Empty;
             txtTongTien.Text = string.Empty;
         }
@@ -123,7 +135,7 @@ namespace QuanLyNhanSu.PresentationTier
         public void CloseCurrentForm(string maNV)
         {
             this.Close();
-            Application.Run(new FrmPhieuThuong(maNV));
+            Application.Run(new FrmPhieu(maNV));
         }
         public void Reload()
         {
@@ -144,7 +156,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void txtMaPT_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaPT.Text))
+            if (string.IsNullOrEmpty(txtMaP.Text))
                 btnXoa.Enabled = false;
             else
                 btnXoa.Enabled = true;
@@ -152,13 +164,14 @@ namespace QuanLyNhanSu.PresentationTier
         //////////////////////////////////////////////////////////////////////////////
         private void btnThem_Click(object sender, EventArgs e)
         {
-            PhieuThuong newPhieuThuong = new PhieuThuong
+            Phieu newPhieu = new Phieu
             {
-                MaPT = "",
+                MaP = "",
+                MaLP = cmbLoaiPhieu.SelectedValue.ToString(),
                 MaNV = maNV,
                 NgayLap = DateTime.Now,
             };
-            if (phieuThuongBus.Save(newPhieuThuong))
+            if (phieuBus.Save(newPhieu))
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
@@ -168,8 +181,7 @@ namespace QuanLyNhanSu.PresentationTier
                 };
                 lichSuThaoTacBUS.Save(newLstt);               
             }
-            ClearAllText();
-            LoadPhieuThuong();            
+            Reload();            
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
@@ -184,12 +196,13 @@ namespace QuanLyNhanSu.PresentationTier
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
-            txtMaPT.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[0].Value.ToString();
-            txtMaNV.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[1].Value.ToString();
-            dtpNgayLapPhieu.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[5].Value.ToString();
-            txtTongTien.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[6].Value.ToString();
-            if (e.ColumnIndex == 7)
-                OpenChiTietPhieuThuong(maNV,dgvThongTinPhieuThuong.Rows[rowIndex].Cells[0].Value.ToString());
+            txtMaP.Text = dgvThongTinPhieu.Rows[rowIndex].Cells[0].Value.ToString();
+            cmbLoaiPhieu.Text = txtMaNV.Text = dgvThongTinPhieu.Rows[rowIndex].Cells[1].Value.ToString();
+            txtMaNV.Text = dgvThongTinPhieu.Rows[rowIndex].Cells[2].Value.ToString();
+            dtpNgayLapPhieu.Text = dgvThongTinPhieu.Rows[rowIndex].Cells[6].Value.ToString();
+            txtTongTien.Text = dgvThongTinPhieu.Rows[rowIndex].Cells[7].Value.ToString();
+            if (e.ColumnIndex == 8)
+                OpenChiTietPhieuThuong(maNV,dgvThongTinPhieu.Rows[rowIndex].Cells[0].Value.ToString());
         }
         private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -200,17 +213,17 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            PhieuThuong phieuThuong = new PhieuThuong()
+            Phieu phieu = new Phieu()
             {
-                MaPT = txtMaPT.Text,
+                MaP = txtMaP.Text,
             };
-            if (phieuThuongBus.Delete(phieuThuong))
+            if (phieuBus.Delete(phieu))
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now,
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá phiếu thưởng '" + txtMaPT.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá phiếu thưởng '" + txtMaP.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }

@@ -92,14 +92,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnQLPT_Click(object sender, EventArgs e)
         {
-            FrmPhieuThuong frmOpen = new FrmPhieuThuong(maNV);
-            frmOpen.Show();
-            this.Hide();
-            frmOpen.FormClosed += CloseForm;
-        }
-        private void btnQLPP_Click(object sender, EventArgs e)
-        {
-            FrmPhieuPhat frmOpen = new FrmPhieuPhat(maNV);
+            FrmPhieu frmOpen = new FrmPhieu(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;

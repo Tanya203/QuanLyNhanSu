@@ -17,6 +17,7 @@ namespace QuanLyNhanSu.DataTier.Models
         public QuanLyPhongBanDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
+            MessageBoxManager.Register_OnceOnly();
         }
         public IEnumerable<PhongBan> GetPhongBan()
         {

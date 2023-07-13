@@ -6,26 +6,26 @@ namespace QuanLyNhanSu.DataTier.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("ChiTietPhieuThuong")]
-    public partial class ChiTietPhieuThuong
+    [Table("ChiTietPhieu")]
+    public partial class ChiTietPhieu
     {
         [Key]
         [Column(Order = 0)]
         [StringLength(15)]
-        public string MaPT { get; set; }
+        public string MaP { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [StringLength(15)]
         public string MaNV { get; set; }
 
-        public decimal TienThuong { get; set; }
+        public decimal SoTien { get; set; }
 
         [StringLength(500)]
         public string GhiChu { get; set; }
 
         public virtual NhanVien NhanVien { get; set; }
 
-        public virtual PhieuThuong PhieuThuong { get; set; }
+        public virtual Phieu Phieu { get; set; }
     }
 }

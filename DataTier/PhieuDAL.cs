@@ -12,54 +12,59 @@ using WECPOFLogic;
 
 namespace QuanLyNhanSu.DataTier
 {
-    internal class PhieuThuongDAL
+    internal class PhieuDAL
     {
         private readonly QuanLyNhanSuContextDB quanLyNhanSu;
-        public PhieuThuongDAL()
+        public PhieuDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
             MessageBoxManager.Register_OnceOnly();
         }
-        public IEnumerable<PhieuThuongViewModels> GetAllPhieuThuong()
+        public IEnumerable<PhieuViewModels> GetAllPhieu()
         {
-            var danhSachPhieuThuong = quanLyNhanSu.PhieuThuongs.Select(x => new PhieuThuongViewModels
+            var danhSachPhieuThuong = quanLyNhanSu.Phieux.Select(x => new PhieuViewModels
             {
-                MaPT = x.MaPT,
+                MaP = x.MaP,
+                MaLP = x.MaLP,
+                TenLoaiPhieu = x.LoaiPhieu.TenLoaiPhieu,
                 MaNV = x.MaNV,               
                 HoTen = x.NhanVien.Ho + " " +x.NhanVien.TenLot + " " + x.NhanVien.Ten,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 NgayLap = x.NgayLap,
-            }).OrderBy(x=>x.MaPT);
+            }).OrderBy(x=>x.MaLP);
             return danhSachPhieuThuong;
         }
-        public IEnumerable<PhieuThuongViewModels> SearchPhieuThuong(string timKiem)
+        public IEnumerable<PhieuViewModels> SearchPhieu(string timKiem)
         {
-            var danhSachPhieuThuong = quanLyNhanSu.PhieuThuongs.Select(x => new PhieuThuongViewModels
+            var danhSachPhieuThuong = quanLyNhanSu.Phieux.Select(x => new PhieuViewModels
             {
-                MaPT = x.MaPT,
+                MaP = x.MaP,
+                MaLP = x.MaLP,
+                TenLoaiPhieu = x.LoaiPhieu.TenLoaiPhieu,
                 MaNV = x.MaNV,
                 HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 NgayLap = x.NgayLap,
-            }).Where(pt => pt.MaPT.Contains(timKiem) ||
+            }).Where(pt => pt.MaP.Contains(timKiem) ||
+               pt.TenLoaiPhieu.Contains(timKiem) ||
                pt.MaNV.Contains(timKiem) ||
                pt.HoTen.Contains(timKiem) ||
                pt.ChucVu.Contains(timKiem) || 
                pt.PhongBan.Contains(timKiem) ||
-               pt.NgayLap.ToString().Contains(timKiem)).OrderBy(x => x.MaPT);
+               pt.NgayLap.ToString().Contains(timKiem)).OrderBy(x => x.MaP);
             return danhSachPhieuThuong;
         }
-        public PhieuThuong ThongTinPhieuThuong(string maPT)
+        public Phieu ThongTinPhieu(string maP)
         {
-            return quanLyNhanSu.PhieuThuongs.Where(pt => pt.MaPT == maPT).FirstOrDefault();
+            return quanLyNhanSu.Phieux.Where(pt => pt.MaP == maP).FirstOrDefault();
         }
-        public bool Save(PhieuThuong phieuThuong)
+        public bool Save(Phieu phieu)
         {
             try
             {
-                quanLyNhanSu.PhieuThuongs.AddOrUpdate(phieuThuong);
+                quanLyNhanSu.Phieux.Add(phieu);
                 quanLyNhanSu.SaveChanges();
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);                             
                 return true;
@@ -79,23 +84,24 @@ namespace QuanLyNhanSu.DataTier
                 return false;
             }
         }
-        public bool Delete(string maPhieuThuong)
+        public bool Delete(string maPhieu)
         {
             try
             {
-                PhieuThuong phieuThuong = quanLyNhanSu.PhieuThuongs.Where(pt => pt.MaPT == maPhieuThuong).FirstOrDefault();
-                if(phieuThuong != null)
+                Phieu phieu = quanLyNhanSu.Phieux.Where(pt => pt.MaP == maPhieu).FirstOrDefault();
+                string loaiPhieu = phieu.LoaiPhieu.TenLoaiPhieu.ToLower();
+                if(phieu != null)
                 {
                     MessageBoxManager.Yes = "Có";
                     MessageBoxManager.No = "Không";
-                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá phiếu thưởng " + phieuThuong.MaPT + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá " + phieu.LoaiPhieu.TenLoaiPhieu.ToLower() + " " + phieu.MaP + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (ketQua == DialogResult.Yes)
                     {
                         MessageBoxManager.Yes = "Có";
                         MessageBoxManager.No = "Không";
-                        quanLyNhanSu.PhieuThuongs.Remove(phieuThuong);
+                        quanLyNhanSu.Phieux.Remove(phieu);
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Đã xoá phiếu thưởng " + phieuThuong.MaPT, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Đã xoá " + loaiPhieu + " " + phieu.MaP, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
                 }

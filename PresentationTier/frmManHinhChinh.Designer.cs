@@ -37,8 +37,7 @@
             this.btnQLPQ = new System.Windows.Forms.Button();
             this.btnQLLHD = new System.Windows.Forms.Button();
             this.btnQLTK = new System.Windows.Forms.Button();
-            this.btnQLPP = new System.Windows.Forms.Button();
-            this.btnQLPT = new System.Windows.Forms.Button();
+            this.btnQLP = new System.Windows.Forms.Button();
             this.btnQLPC = new System.Windows.Forms.Button();
             this.btnQLLLV = new System.Windows.Forms.Button();
             this.btnQLCC = new System.Windows.Forms.Button();
@@ -103,8 +102,7 @@
             this.pnlMenu.Controls.Add(this.btnQLPQ);
             this.pnlMenu.Controls.Add(this.btnQLLHD);
             this.pnlMenu.Controls.Add(this.btnQLTK);
-            this.pnlMenu.Controls.Add(this.btnQLPP);
-            this.pnlMenu.Controls.Add(this.btnQLPT);
+            this.pnlMenu.Controls.Add(this.btnQLP);
             this.pnlMenu.Controls.Add(this.btnQLPC);
             this.pnlMenu.Controls.Add(this.btnQLLLV);
             this.pnlMenu.Controls.Add(this.btnQLCC);
@@ -148,7 +146,7 @@
             this.btnTTTK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnTTTK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTTTK.Image = global::QuanLyNhanSu.Properties.Resources.info_small;
-            this.btnTTTK.Location = new System.Drawing.Point(1471, 0);
+            this.btnTTTK.Location = new System.Drawing.Point(1301, 0);
             this.btnTTTK.Name = "btnTTTK";
             this.btnTTTK.Size = new System.Drawing.Size(100, 100);
             this.btnTTTK.TabIndex = 14;
@@ -168,7 +166,7 @@
             this.btnLSTT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLSTT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLSTT.Image = global::QuanLyNhanSu.Properties.Resources.history;
-            this.btnLSTT.Location = new System.Drawing.Point(1316, 0);
+            this.btnLSTT.Location = new System.Drawing.Point(1146, 0);
             this.btnLSTT.Name = "btnLSTT";
             this.btnLSTT.Size = new System.Drawing.Size(155, 100);
             this.btnLSTT.TabIndex = 13;
@@ -188,7 +186,7 @@
             this.btnQLPQ.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnQLPQ.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQLPQ.Image = global::QuanLyNhanSu.Properties.Resources.decentralization;
-            this.btnQLPQ.Location = new System.Drawing.Point(1200, 0);
+            this.btnQLPQ.Location = new System.Drawing.Point(1030, 0);
             this.btnQLPQ.Name = "btnQLPQ";
             this.btnQLPQ.Size = new System.Drawing.Size(116, 100);
             this.btnQLPQ.TabIndex = 12;
@@ -208,7 +206,7 @@
             this.btnQLLHD.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnQLLHD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQLLHD.Image = global::QuanLyNhanSu.Properties.Resources.contract;
-            this.btnQLLHD.Location = new System.Drawing.Point(1063, 0);
+            this.btnQLLHD.Location = new System.Drawing.Point(893, 0);
             this.btnQLLHD.Name = "btnQLLHD";
             this.btnQLLHD.Size = new System.Drawing.Size(137, 100);
             this.btnQLLHD.TabIndex = 11;
@@ -228,7 +226,7 @@
             this.btnQLTK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnQLTK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQLTK.Image = global::QuanLyNhanSu.Properties.Resources.salary;
-            this.btnQLTK.Location = new System.Drawing.Point(917, 0);
+            this.btnQLTK.Location = new System.Drawing.Point(747, 0);
             this.btnQLTK.Name = "btnQLTK";
             this.btnQLTK.Size = new System.Drawing.Size(146, 100);
             this.btnQLTK.TabIndex = 10;
@@ -237,45 +235,25 @@
             this.btnQLTK.UseVisualStyleBackColor = true;
             this.btnQLTK.Click += new System.EventHandler(this.btnQLTK_Click);
             // 
-            // btnQLPP
+            // btnQLP
             // 
-            this.btnQLPP.AutoSize = true;
-            this.btnQLPP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnQLPP.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnQLPP.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnQLPP.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnQLPP.FlatAppearance.BorderSize = 2;
-            this.btnQLPP.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnQLPP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQLPP.Image = global::QuanLyNhanSu.Properties.Resources.fine;
-            this.btnQLPP.Location = new System.Drawing.Point(809, 0);
-            this.btnQLPP.Name = "btnQLPP";
-            this.btnQLPP.Size = new System.Drawing.Size(108, 100);
-            this.btnQLPP.TabIndex = 9;
-            this.btnQLPP.Text = "Phiếu phạt";
-            this.btnQLPP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnQLPP.UseVisualStyleBackColor = true;
-            this.btnQLPP.Click += new System.EventHandler(this.btnQLPP_Click);
-            // 
-            // btnQLPT
-            // 
-            this.btnQLPT.AutoSize = true;
-            this.btnQLPT.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnQLPT.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnQLPT.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnQLPT.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnQLPT.FlatAppearance.BorderSize = 2;
-            this.btnQLPT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnQLPT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQLPT.Image = global::QuanLyNhanSu.Properties.Resources.bonus;
-            this.btnQLPT.Location = new System.Drawing.Point(681, 0);
-            this.btnQLPT.Name = "btnQLPT";
-            this.btnQLPT.Size = new System.Drawing.Size(128, 100);
-            this.btnQLPT.TabIndex = 8;
-            this.btnQLPT.Text = "Phiếu thưởng";
-            this.btnQLPT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnQLPT.UseVisualStyleBackColor = true;
-            this.btnQLPT.Click += new System.EventHandler(this.btnQLPT_Click);
+            this.btnQLP.AutoSize = true;
+            this.btnQLP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQLP.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnQLP.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnQLP.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnQLP.FlatAppearance.BorderSize = 2;
+            this.btnQLP.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnQLP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQLP.Image = global::QuanLyNhanSu.Properties.Resources.bonus;
+            this.btnQLP.Location = new System.Drawing.Point(681, 0);
+            this.btnQLP.Name = "btnQLP";
+            this.btnQLP.Size = new System.Drawing.Size(66, 100);
+            this.btnQLP.TabIndex = 8;
+            this.btnQLP.Text = "Phiếu";
+            this.btnQLP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnQLP.UseVisualStyleBackColor = true;
+            this.btnQLP.Click += new System.EventHandler(this.btnQLPT_Click);
             // 
             // btnQLPC
             // 
@@ -442,7 +420,7 @@
             this.lblHoTenNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHoTenNV.Location = new System.Drawing.Point(249, 116);
             this.lblHoTenNV.Name = "lblHoTenNV";
-            this.lblHoTenNV.Size = new System.Drawing.Size(44, 39);
+            this.lblHoTenNV.Size = new System.Drawing.Size(44, 38);
             this.lblHoTenNV.TabIndex = 20;
             this.lblHoTenNV.Text = "...";
             // 
@@ -452,7 +430,7 @@
             this.lblChucVuNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblChucVuNV.Location = new System.Drawing.Point(827, 116);
             this.lblChucVuNV.Name = "lblChucVuNV";
-            this.lblChucVuNV.Size = new System.Drawing.Size(44, 39);
+            this.lblChucVuNV.Size = new System.Drawing.Size(44, 38);
             this.lblChucVuNV.TabIndex = 22;
             this.lblChucVuNV.Text = "...";
             // 
@@ -472,7 +450,7 @@
             this.lblPhongBanNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPhongBanNV.Location = new System.Drawing.Point(827, 19);
             this.lblPhongBanNV.Name = "lblPhongBanNV";
-            this.lblPhongBanNV.Size = new System.Drawing.Size(44, 39);
+            this.lblPhongBanNV.Size = new System.Drawing.Size(44, 38);
             this.lblPhongBanNV.TabIndex = 4;
             this.lblPhongBanNV.Text = "...";
             // 
@@ -502,7 +480,7 @@
             this.lblMaNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaNV.Location = new System.Drawing.Point(249, 19);
             this.lblMaNV.Name = "lblMaNV";
-            this.lblMaNV.Size = new System.Drawing.Size(44, 39);
+            this.lblMaNV.Size = new System.Drawing.Size(44, 38);
             this.lblMaNV.TabIndex = 2;
             this.lblMaNV.Text = "...";
             // 
@@ -672,8 +650,7 @@
         private System.Windows.Forms.Panel pnlMenu;
         private System.Windows.Forms.Button btnQLLHD;
         private System.Windows.Forms.Button btnQLTK;
-        private System.Windows.Forms.Button btnQLPP;
-        private System.Windows.Forms.Button btnQLPT;
+        private System.Windows.Forms.Button btnQLP;
         private System.Windows.Forms.Button btnQLPC;
         private System.Windows.Forms.Button btnQLLLV;
         private System.Windows.Forms.Button btnQLCC;

@@ -14,13 +14,11 @@ namespace QuanLyNhanSu.DataTier.Models
         {
             ChamCongs = new HashSet<ChamCong>();
             ChiTietLuongThangs = new HashSet<ChiTietLuongThang>();
-            ChiTietPhieuPhats = new HashSet<ChiTietPhieuPhat>();
-            ChiTietPhieuThuongs = new HashSet<ChiTietPhieuThuong>();
+            ChiTietPhieux = new HashSet<ChiTietPhieu>();
             ChiTietPhuCaps = new HashSet<ChiTietPhuCap>();
             LichLamViecs = new HashSet<LichLamViec>();
             LichSuThaoTacs = new HashSet<LichSuThaoTac>();
-            PhieuPhats = new HashSet<PhieuPhat>();
-            PhieuThuongs = new HashSet<PhieuThuong>();
+            Phieux = new HashSet<Phieu>();
         }
 
         [Key]
@@ -112,10 +110,7 @@ namespace QuanLyNhanSu.DataTier.Models
         public virtual ICollection<ChiTietLuongThang> ChiTietLuongThangs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietPhieuPhat> ChiTietPhieuPhats { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietPhieuThuong> ChiTietPhieuThuongs { get; set; }
+        public virtual ICollection<ChiTietPhieu> ChiTietPhieux { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPhuCap> ChiTietPhuCaps { get; set; }
@@ -131,9 +126,6 @@ namespace QuanLyNhanSu.DataTier.Models
         public virtual LoaiHopDong LoaiHopDong { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhieuPhat> PhieuPhats { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhieuThuong> PhieuThuongs { get; set; }
+        public virtual ICollection<Phieu> Phieux { get; set; }
     }
 }
