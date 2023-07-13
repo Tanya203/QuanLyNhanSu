@@ -1,7 +1,9 @@
 ﻿using QuanLyNhanSu.DataTier.Models;
+using QuanLyNhanSu.PresentationTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,9 +59,9 @@ namespace QuanLyNhanSu.DataTier
         {
             try
             {
-                quanLyNhanSu.PhieuThuongs.Add(phieuThuong);
+                quanLyNhanSu.PhieuThuongs.AddOrUpdate(phieuThuong);
                 quanLyNhanSu.SaveChanges();
-                MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);                             
                 return true;
             }
             catch (Exception ex)
@@ -93,7 +95,7 @@ namespace QuanLyNhanSu.DataTier
                         MessageBoxManager.No = "Không";
                         quanLyNhanSu.PhieuThuongs.Remove(phieuThuong);
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Đã xoá ca " + phieuThuong.MaPT, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Đã xoá phiếu thưởng " + phieuThuong.MaPT, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
                 }
@@ -114,12 +116,6 @@ namespace QuanLyNhanSu.DataTier
                 return false;
             }
         }
-        public decimal TongTienPhieuThuong(string maPhieuThuong)
-        {
-            ChiTietPhieuThuong ctpt = quanLyNhanSu.ChiTietPhieuThuongs.Where(pt => pt.MaPT == maPhieuThuong).FirstOrDefault();
-            if(ctpt != null)
-                return quanLyNhanSu.ChiTietPhieuThuongs.Where(pt => pt.MaPT == maPhieuThuong).Sum(cptp => cptp.TienThuong);      
-            return 0;
-        }
+        
     }
 }

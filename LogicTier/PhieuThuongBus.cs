@@ -32,10 +32,6 @@ namespace QuanLyNhanSu.LogicTier
         {
             return phieuThuongDAL.Delete(phieuThuong.MaPT);
         }
-        public decimal TongTienPhieuThuong(string maPhieuThuong)
-        {
-            return phieuThuongDAL.TongTienPhieuThuong(maPhieuThuong);
-        }
         public PhieuThuong ThongTinPhieuThuong(string maPT)
         {
             return phieuThuongDAL.ThongTinPhieuThuong(maPT);

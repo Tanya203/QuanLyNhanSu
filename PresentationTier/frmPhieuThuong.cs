@@ -19,6 +19,7 @@ namespace QuanLyNhanSu.PresentationTier
         Thread currentForm;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly PhieuThuongBus phieuThuongBus;
+        private readonly ChiTietPhieuThuongBUS chiTietPhieuThuongBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private IEnumerable<PhieuThuongViewModels> danhSachPhieuThuong;
         private IEnumerable<PhieuThuongViewModels> danhSachPhieuThuongTimKiem;
@@ -29,6 +30,7 @@ namespace QuanLyNhanSu.PresentationTier
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
             phieuThuongBus = new PhieuThuongBus();
+            chiTietPhieuThuongBUS = new ChiTietPhieuThuongBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             this.maNV = maNV;
@@ -66,7 +68,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[3].Value = pt.PhongBan;
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[4].Value = pt.ChucVu;
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[5].Value = pt.NgayLap;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[6].Value = phieuThuongBus.TongTienPhieuThuong(pt.MaPT);
+                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[6].Value = chiTietPhieuThuongBUS.TongTienPhieuThuong(pt.MaPT);
             }
         }
         public void LoadPhieuThuongTimKiem(string timKiem)
@@ -83,7 +85,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[3].Value = pt.PhongBan;
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[4].Value = pt.ChucVu;
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[5].Value = pt.NgayLap;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[6].Value = phieuThuongBus.TongTienPhieuThuong(pt.MaPT);
+                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[6].Value = chiTietPhieuThuongBUS.TongTienPhieuThuong(pt.MaPT);
             }
         }
         //////////////////////////////////////////////////////////////////////////////
@@ -164,11 +166,10 @@ namespace QuanLyNhanSu.PresentationTier
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + "thêm phiếu thưởng",
                 };
-                lichSuThaoTacBUS.Save(newLstt);
+                lichSuThaoTacBUS.Save(newLstt);               
             }
-
             ClearAllText();
-
+            LoadPhieuThuong();            
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {

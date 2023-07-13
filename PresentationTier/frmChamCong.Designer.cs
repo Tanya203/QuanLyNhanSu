@@ -43,7 +43,7 @@
             this.lblChamCong.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblChamCong.Location = new System.Drawing.Point(97, 59);
             this.lblChamCong.Name = "lblChamCong";
-            this.lblChamCong.Size = new System.Drawing.Size(305, 52);
+            this.lblChamCong.Size = new System.Drawing.Size(297, 51);
             this.lblChamCong.TabIndex = 0;
             this.lblChamCong.Text = "CHẤM CÔNG";
             // 
@@ -61,6 +61,7 @@
             // 
             this.txtMaNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaNV.Location = new System.Drawing.Point(30, 75);
+            this.txtMaNV.MaxLength = 12;
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(280, 30);
             this.txtMaNV.TabIndex = 2;
@@ -94,7 +95,7 @@
             this.pnlMenu.Size = new System.Drawing.Size(340, 220);
             this.pnlMenu.TabIndex = 35;
             // 
-            // frmChamCong
+            // FrmChamCong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -105,7 +106,7 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(500, 500);
             this.MinimumSize = new System.Drawing.Size(500, 500);
-            this.Name = "frmChamCong";
+            this.Name = "FrmChamCong";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmChamCong";
             this.pnlMenu.ResumeLayout(false);
