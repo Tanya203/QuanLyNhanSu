@@ -16,13 +16,13 @@ namespace QuanLyNhanSu.LogicTier
         {
             chiTietPhieuThuongDAL = new ChiTietPhieuThuongDAL();
         }
-        public IEnumerable<ChiTietPhieuThuongViewModels> GetAllChiTietPhieuThuong()
+        public IEnumerable<ChiTietPhieuThuongViewModels> GetAllChiTietPhieuThuong(string maPT)
         {
-            return chiTietPhieuThuongDAL.GetAllChiTietPhieuThuong();
+            return chiTietPhieuThuongDAL.GetAllChiTietPhieuThuong(maPT);
         }
-        public IEnumerable<ChiTietPhieuThuongViewModels> SearchChiTietPhieuThuong(string timKiem)
+        public IEnumerable<ChiTietPhieuThuongViewModels> SearchChiTietPhieuThuong(string maPT, string timKiem)
         {
-            return chiTietPhieuThuongDAL.SearchChiTietPhieuThuong(timKiem);
+            return chiTietPhieuThuongDAL.SearchChiTietPhieuThuong(maPT,timKiem);
         }
         public bool Save(ChiTietPhieuThuong chiTietPhieuThuong)
         {
@@ -32,5 +32,14 @@ namespace QuanLyNhanSu.LogicTier
         {
             return chiTietPhieuThuongDAL.Delete(chiTietPhieuThuong.MaNV);
         }
+        public decimal TongTienPhieuThuong(string maPhieuThuong)
+        {
+            return chiTietPhieuThuongDAL.TongTienPhieuThuong(maPhieuThuong);
+        }
+        public IEnumerable<ChiTietPhieuThuong> ThongTinChiTietPhieuThuong(string maPT)
+        {
+            return chiTietPhieuThuongDAL.ThongTinChiTietPhieuThuong(maPT);
+        }
+
     }
 }

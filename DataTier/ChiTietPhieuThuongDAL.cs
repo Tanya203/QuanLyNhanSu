@@ -18,7 +18,7 @@ namespace QuanLyNhanSu.DataTier
             quanLyNhanSu = new QuanLyNhanSuContextDB();
             MessageBoxManager.Register_OnceOnly();
         }
-        public IEnumerable<ChiTietPhieuThuongViewModels> GetAllChiTietPhieuThuong()
+        public IEnumerable<ChiTietPhieuThuongViewModels> GetAllChiTietPhieuThuong(string maPT)
         {
             var danhSachChiTietPhieuThuong = quanLyNhanSu.ChiTietPhieuThuongs.Select(x => new ChiTietPhieuThuongViewModels
             {
@@ -29,10 +29,10 @@ namespace QuanLyNhanSu.DataTier
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 TienThuong = x.TienThuong,
                 GhiChu = x.GhiChu,
-            }).OrderBy(pt=>pt.MaPT);
+            }).Where(pt=>pt.MaPT == maPT).OrderBy(pt=>pt.MaNV);
             return danhSachChiTietPhieuThuong;
         }
-        public IEnumerable<ChiTietPhieuThuongViewModels> SearchChiTietPhieuThuong(string timKiem)
+        public IEnumerable<ChiTietPhieuThuongViewModels> SearchChiTietPhieuThuong(string maPT,string timKiem)
         {
             var danhSachChiTietPhieuThuong = quanLyNhanSu.ChiTietPhieuThuongs.Select(x => new ChiTietPhieuThuongViewModels
             {
@@ -43,14 +43,18 @@ namespace QuanLyNhanSu.DataTier
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 TienThuong = x.TienThuong,
                 GhiChu = x.GhiChu,
-            }).Where(pt => pt.MaPT.Contains(timKiem) ||
+            }).Where(pt => pt.MaPT == maPT &&(
                      pt.MaNV.Contains(timKiem) ||
                      pt.HoTen.Contains(timKiem) ||
                      pt.ChucVu.Contains(timKiem) ||
                      pt.PhongBan.Contains(timKiem) ||
                      pt.TienThuong.ToString().Contains(timKiem) ||
-                     pt.GhiChu.Contains(timKiem)).OrderBy(pt => pt.MaPT);
+                     pt.GhiChu.Contains(timKiem))).OrderBy(pt => pt.MaNV);
             return danhSachChiTietPhieuThuong;
+        }
+        public IEnumerable<ChiTietPhieuThuong> ThongTinChiTietPhieuThuong(string maPT)
+        {
+            return quanLyNhanSu.ChiTietPhieuThuongs.Where(pt =>pt.MaPT == maPT).ToList();
         }
         public bool Save(ChiTietPhieuThuong chiTietPhieuThuong)
         {
@@ -65,6 +69,7 @@ namespace QuanLyNhanSu.DataTier
                 else
                     quanLyNhanSu.ChiTietPhieuThuongs.Add(chiTietPhieuThuong);
                 quanLyNhanSu.SaveChanges();
+                MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
             }
             catch (Exception ex)
@@ -118,6 +123,13 @@ namespace QuanLyNhanSu.DataTier
                 }
                 return false;
             }
+        }
+        public decimal TongTienPhieuThuong(string maPhieuThuong)
+        {
+            ChiTietPhieuThuong ctpt = quanLyNhanSu.ChiTietPhieuThuongs.Where(pt => pt.MaPT == maPhieuThuong).FirstOrDefault();
+            if (ctpt != null)
+                return quanLyNhanSu.ChiTietPhieuThuongs.Where(pt => pt.MaPT == maPhieuThuong).Sum(cptp => cptp.TienThuong);
+            return 0;
         }
     }
 }
