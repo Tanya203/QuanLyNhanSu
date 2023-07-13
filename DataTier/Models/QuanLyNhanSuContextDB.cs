@@ -15,19 +15,18 @@ namespace QuanLyNhanSu.DataTier.Models
         public virtual DbSet<Ca> Cas { get; set; }
         public virtual DbSet<ChamCong> ChamCongs { get; set; }
         public virtual DbSet<ChiTietLuongThang> ChiTietLuongThangs { get; set; }
-        public virtual DbSet<ChiTietPhieuPhat> ChiTietPhieuPhats { get; set; }
-        public virtual DbSet<ChiTietPhieuThuong> ChiTietPhieuThuongs { get; set; }
+        public virtual DbSet<ChiTietPhieu> ChiTietPhieux { get; set; }
         public virtual DbSet<ChiTietPhuCap> ChiTietPhuCaps { get; set; }
         public virtual DbSet<ChucVu> ChucVus { get; set; }
         public virtual DbSet<LichLamViec> LichLamViecs { get; set; }
         public virtual DbSet<LichSuThaoTac> LichSuThaoTacs { get; set; }
         public virtual DbSet<LoaiCa> LoaiCas { get; set; }
         public virtual DbSet<LoaiHopDong> LoaiHopDongs { get; set; }
+        public virtual DbSet<LoaiPhieu> LoaiPhieux { get; set; }
         public virtual DbSet<LuongThang> LuongThangs { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<PhanQuyen> PhanQuyens { get; set; }
-        public virtual DbSet<PhieuPhat> PhieuPhats { get; set; }
-        public virtual DbSet<PhieuThuong> PhieuThuongs { get; set; }
+        public virtual DbSet<Phieu> Phieux { get; set; }
         public virtual DbSet<PhongBan> PhongBans { get; set; }
         public virtual DbSet<PhuCap> PhuCaps { get; set; }
         public virtual DbSet<QuyenHan> QuyenHans { get; set; }
@@ -95,32 +94,16 @@ namespace QuanLyNhanSu.DataTier.Models
                 .Property(e => e.TongPhuCap)
                 .HasPrecision(38, 3);
 
-            modelBuilder.Entity<ChiTietPhieuPhat>()
-                .Property(e => e.MaPP)
+            modelBuilder.Entity<ChiTietPhieu>()
+                .Property(e => e.MaP)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<ChiTietPhieuPhat>()
+            modelBuilder.Entity<ChiTietPhieu>()
                 .Property(e => e.MaNV)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<ChiTietPhieuPhat>()
-                .Property(e => e.TienPhat)
-                .HasPrecision(38, 3);
-
-            modelBuilder.Entity<ChiTietPhieuPhat>()
-                .Property(e => e.GhiChu)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ChiTietPhieuThuong>()
-                .Property(e => e.MaPT)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ChiTietPhieuThuong>()
-                .Property(e => e.MaNV)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ChiTietPhieuThuong>()
-                .Property(e => e.TienThuong)
+            modelBuilder.Entity<ChiTietPhieu>()
+                .Property(e => e.SoTien)
                 .HasPrecision(38, 3);
 
             modelBuilder.Entity<ChiTietPhuCap>()
@@ -195,6 +178,15 @@ namespace QuanLyNhanSu.DataTier.Models
                 .WithRequired(e => e.LoaiHopDong)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<LoaiPhieu>()
+                .Property(e => e.MaLP)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LoaiPhieu>()
+                .HasMany(e => e.Phieux)
+                .WithRequired(e => e.LoaiPhieu)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<LuongThang>()
                 .Property(e => e.ThangNam)
                 .IsUnicode(false);
@@ -259,12 +251,7 @@ namespace QuanLyNhanSu.DataTier.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<NhanVien>()
-                .HasMany(e => e.ChiTietPhieuPhats)
-                .WithRequired(e => e.NhanVien)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<NhanVien>()
-                .HasMany(e => e.ChiTietPhieuThuongs)
+                .HasMany(e => e.ChiTietPhieux)
                 .WithRequired(e => e.NhanVien)
                 .WillCascadeOnDelete(false);
 
@@ -274,7 +261,7 @@ namespace QuanLyNhanSu.DataTier.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<NhanVien>()
-                .HasMany(e => e.PhieuThuongs)
+                .HasMany(e => e.Phieux)
                 .WithOptional(e => e.NhanVien)
                 .WillCascadeOnDelete();
 
@@ -286,31 +273,17 @@ namespace QuanLyNhanSu.DataTier.Models
                 .Property(e => e.MaQH)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<PhieuPhat>()
-                .Property(e => e.MaPP)
+            modelBuilder.Entity<Phieu>()
+                .Property(e => e.MaP)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<PhieuPhat>()
+            modelBuilder.Entity<Phieu>()
+                .Property(e => e.MaLP)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Phieu>()
                 .Property(e => e.MaNV)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<PhieuPhat>()
-                .HasMany(e => e.ChiTietPhieuPhats)
-                .WithRequired(e => e.PhieuPhat)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<PhieuThuong>()
-                .Property(e => e.MaPT)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PhieuThuong>()
-                .Property(e => e.MaNV)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PhieuThuong>()
-                .HasMany(e => e.ChiTietPhieuThuongs)
-                .WithRequired(e => e.PhieuThuong)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<PhongBan>()
                 .Property(e => e.MaPB)
