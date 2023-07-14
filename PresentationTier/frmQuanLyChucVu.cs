@@ -252,5 +252,9 @@ namespace QuanLyNhanSu.PresentationTier
             if (e.KeyChar == (char)Keys.Enter)
                 LoadChucVuTimKiem(txtTimKiem.Text);
         }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reload();
+        }
     }
 }

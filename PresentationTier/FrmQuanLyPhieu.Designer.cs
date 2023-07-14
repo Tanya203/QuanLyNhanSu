@@ -1,6 +1,6 @@
 ﻿namespace QuanLyNhanSu.PresentationTier
 {
-    partial class FrmPhieu
+    partial class FrmQuanLyPhieu
     {
         /// <summary>
         /// Required designer variable.
@@ -52,6 +52,9 @@
             this.colTongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblThongTinPhieuThuong = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.btnQuanLyLoaiPhieu = new System.Windows.Forms.Button();
+            this.cmbLoaiPhieu = new System.Windows.Forms.ComboBox();
+            this.lblLoaiPhieu = new System.Windows.Forms.Label();
             this.txtTongTien = new System.Windows.Forms.TextBox();
             this.lblTongTien = new System.Windows.Forms.Label();
             this.dtpNgayLapPhieu = new System.Windows.Forms.DateTimePicker();
@@ -64,8 +67,7 @@
             this.lblMaPhieu = new System.Windows.Forms.Label();
             this.lblTimKiem = new System.Windows.Forms.Label();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
-            this.lblLoaiPhieu = new System.Windows.Forms.Label();
-            this.cmbLoaiPhieu = new System.Windows.Forms.ComboBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhieu)).BeginInit();
             this.pnlMenu.SuspendLayout();
@@ -74,6 +76,7 @@
             // pnlHeader
             // 
             this.pnlHeader.BackColor = System.Drawing.SystemColors.Info;
+            this.pnlHeader.Controls.Add(this.btnRefresh);
             this.pnlHeader.Controls.Add(this.lblChucVuNV_DN);
             this.pnlHeader.Controls.Add(this.lblChucVuDN);
             this.pnlHeader.Controls.Add(this.lblPhongBanNV_DN);
@@ -93,7 +96,7 @@
             // 
             this.lblChucVuNV_DN.AutoSize = true;
             this.lblChucVuNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuNV_DN.Location = new System.Drawing.Point(1377, 72);
+            this.lblChucVuNV_DN.Location = new System.Drawing.Point(1207, 72);
             this.lblChucVuNV_DN.Name = "lblChucVuNV_DN";
             this.lblChucVuNV_DN.Size = new System.Drawing.Size(38, 32);
             this.lblChucVuNV_DN.TabIndex = 8;
@@ -103,7 +106,7 @@
             // 
             this.lblChucVuDN.AutoSize = true;
             this.lblChucVuDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuDN.Location = new System.Drawing.Point(1201, 72);
+            this.lblChucVuDN.Location = new System.Drawing.Point(1031, 72);
             this.lblChucVuDN.Name = "lblChucVuDN";
             this.lblChucVuDN.Size = new System.Drawing.Size(133, 32);
             this.lblChucVuDN.TabIndex = 7;
@@ -113,7 +116,7 @@
             // 
             this.lblPhongBanNV_DN.AutoSize = true;
             this.lblPhongBanNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanNV_DN.Location = new System.Drawing.Point(1377, 9);
+            this.lblPhongBanNV_DN.Location = new System.Drawing.Point(1207, 9);
             this.lblPhongBanNV_DN.Name = "lblPhongBanNV_DN";
             this.lblPhongBanNV_DN.Size = new System.Drawing.Size(38, 32);
             this.lblPhongBanNV_DN.TabIndex = 6;
@@ -123,7 +126,7 @@
             // 
             this.lblPhongBanDN.AutoSize = true;
             this.lblPhongBanDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanDN.Location = new System.Drawing.Point(1201, 9);
+            this.lblPhongBanDN.Location = new System.Drawing.Point(1031, 9);
             this.lblPhongBanDN.Name = "lblPhongBanDN";
             this.lblPhongBanDN.Size = new System.Drawing.Size(170, 32);
             this.lblPhongBanDN.TabIndex = 5;
@@ -304,6 +307,7 @@
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.SystemColors.Info;
+            this.pnlMenu.Controls.Add(this.btnQuanLyLoaiPhieu);
             this.pnlMenu.Controls.Add(this.cmbLoaiPhieu);
             this.pnlMenu.Controls.Add(this.lblLoaiPhieu);
             this.pnlMenu.Controls.Add(this.txtTongTien);
@@ -319,8 +323,46 @@
             this.pnlMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlMenu.Location = new System.Drawing.Point(495, 151);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(939, 229);
+            this.pnlMenu.Size = new System.Drawing.Size(939, 216);
             this.pnlMenu.TabIndex = 34;
+            // 
+            // btnQuanLyLoaiPhieu
+            // 
+            this.btnQuanLyLoaiPhieu.AutoSize = true;
+            this.btnQuanLyLoaiPhieu.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnQuanLyLoaiPhieu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnQuanLyLoaiPhieu.FlatAppearance.BorderSize = 0;
+            this.btnQuanLyLoaiPhieu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnQuanLyLoaiPhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanLyLoaiPhieu.Image = global::QuanLyNhanSu.Properties.Resources.card;
+            this.btnQuanLyLoaiPhieu.Location = new System.Drawing.Point(610, 118);
+            this.btnQuanLyLoaiPhieu.Name = "btnQuanLyLoaiPhieu";
+            this.btnQuanLyLoaiPhieu.Size = new System.Drawing.Size(246, 59);
+            this.btnQuanLyLoaiPhieu.TabIndex = 63;
+            this.btnQuanLyLoaiPhieu.Text = "Quản lý loại phiếu";
+            this.btnQuanLyLoaiPhieu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnQuanLyLoaiPhieu.UseVisualStyleBackColor = false;
+            this.btnQuanLyLoaiPhieu.Click += new System.EventHandler(this.btnQuanLyLoaiPhieu_Click);
+            // 
+            // cmbLoaiPhieu
+            // 
+            this.cmbLoaiPhieu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLoaiPhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbLoaiPhieu.FormattingEnabled = true;
+            this.cmbLoaiPhieu.Location = new System.Drawing.Point(237, 106);
+            this.cmbLoaiPhieu.Name = "cmbLoaiPhieu";
+            this.cmbLoaiPhieu.Size = new System.Drawing.Size(243, 33);
+            this.cmbLoaiPhieu.TabIndex = 62;
+            // 
+            // lblLoaiPhieu
+            // 
+            this.lblLoaiPhieu.AutoSize = true;
+            this.lblLoaiPhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoaiPhieu.Location = new System.Drawing.Point(12, 106);
+            this.lblLoaiPhieu.Name = "lblLoaiPhieu";
+            this.lblLoaiPhieu.Size = new System.Drawing.Size(119, 25);
+            this.lblLoaiPhieu.TabIndex = 50;
+            this.lblLoaiPhieu.Text = "Loại phiếu:";
             // 
             // txtTongTien
             // 
@@ -368,7 +410,7 @@
             this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.Image = global::QuanLyNhanSu.Properties.Resources.delete;
-            this.btnXoa.Location = new System.Drawing.Point(378, 156);
+            this.btnXoa.Location = new System.Drawing.Point(396, 156);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(102, 49);
             this.btnXoa.TabIndex = 43;
@@ -386,7 +428,7 @@
             this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.Image = global::QuanLyNhanSu.Properties.Resources.add;
-            this.btnThem.Location = new System.Drawing.Point(225, 156);
+            this.btnThem.Location = new System.Drawing.Point(223, 156);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(122, 49);
             this.btnThem.TabIndex = 42;
@@ -453,27 +495,25 @@
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 
-            // lblLoaiPhieu
+            // btnRefresh
             // 
-            this.lblLoaiPhieu.AutoSize = true;
-            this.lblLoaiPhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLoaiPhieu.Location = new System.Drawing.Point(12, 106);
-            this.lblLoaiPhieu.Name = "lblLoaiPhieu";
-            this.lblLoaiPhieu.Size = new System.Drawing.Size(119, 25);
-            this.lblLoaiPhieu.TabIndex = 50;
-            this.lblLoaiPhieu.Text = "Loại phiếu:";
+            this.btnRefresh.AutoSize = true;
+            this.btnRefresh.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.Image = global::QuanLyNhanSu.Properties.Resources.refresh;
+            this.btnRefresh.Location = new System.Drawing.Point(1636, 30);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(144, 54);
+            this.btnRefresh.TabIndex = 68;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // cmbLoaiPhieu
-            // 
-            this.cmbLoaiPhieu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLoaiPhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbLoaiPhieu.FormattingEnabled = true;
-            this.cmbLoaiPhieu.Location = new System.Drawing.Point(237, 106);
-            this.cmbLoaiPhieu.Name = "cmbLoaiPhieu";
-            this.cmbLoaiPhieu.Size = new System.Drawing.Size(243, 33);
-            this.cmbLoaiPhieu.TabIndex = 62;
-            // 
-            // FrmPhieu
+            // FrmQuanLyPhieu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -486,7 +526,7 @@
             this.Controls.Add(this.dgvThongTinPhieu);
             this.Controls.Add(this.pnlHeader);
             this.MinimumSize = new System.Drawing.Size(1918, 1018);
-            this.Name = "FrmPhieu";
+            this.Name = "FrmQuanLyPhieu";
             this.Text = "frmPhieuThuong";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmPhieuThuong_Load);
@@ -537,5 +577,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTongTien;
         private System.Windows.Forms.Label lblLoaiPhieu;
         private System.Windows.Forms.ComboBox cmbLoaiPhieu;
+        private System.Windows.Forms.Button btnQuanLyLoaiPhieu;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

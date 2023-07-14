@@ -224,6 +224,22 @@ namespace QuanLyNhanSu.PresentationTier
             this.Close();
         }
         ///////////////////////////////////////////////////////////////////////////////////////////
+        private void txtTienThuong_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '-' && (sender as TextBox).Text.Length > 0)
+            {
+                e.Handled = true;
+            }
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////////
         private void btnThem_Click(object sender, EventArgs e)
         {
             ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
@@ -239,7 +255,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now,
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm nhân viên " + cmbNhanVien.SelectedValue.ToString() + " vào " + txtLoaiPhieu.Text + " "  + maP,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm nhân viên " + cmbNhanVien.SelectedValue.ToString() + " vào " + txtLoaiPhieu.Text.ToLower() + " "  + maP,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -260,7 +276,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now,
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " sửa nhân viên " + maNV_Chon + " trong " + txtLoaiPhieu.Text + " " + maP,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " sửa nhân viên " + maNV_Chon + " trong " + txtLoaiPhieu.Text.ToLower() + " " + maP,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -279,7 +295,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now,
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá nhân viên " + maNV_Chon + " trong " + txtLoaiPhieu.Text + " " + maP,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá nhân viên " + maNV_Chon + " trong " + txtLoaiPhieu.Text.ToLower() + " " + maP,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -288,7 +304,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            FrmPhieu frmOpen = new FrmPhieu(maNV);
+            FrmQuanLyPhieu frmOpen = new FrmQuanLyPhieu(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
@@ -310,6 +326,10 @@ namespace QuanLyNhanSu.PresentationTier
                 LoadChiTietPhieuThuongTimKiem(txtTimKiem.Text);
             }
 
+        }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reload();
         }
     }
 }

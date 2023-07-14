@@ -51,7 +51,7 @@ namespace QuanLyNhanSu.DataTier
                 if (newLoaiHopDong != null)//cập nhật
                 {
                     newLoaiHopDong.TenLoaiHopDong = loaiHopDong.TenLoaiHopDong;
-                    quanLyNhanSu.LoaiHopDongs.AddOrUpdate(newLoaiHopDong);
+                    quanLyNhanSu.LoaiHopDongs.Add(newLoaiHopDong);
                 }
                 else//thêm mới
                     quanLyNhanSu.LoaiHopDongs.Add(loaiHopDong);
