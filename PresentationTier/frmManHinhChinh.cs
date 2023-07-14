@@ -92,7 +92,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnQLPT_Click(object sender, EventArgs e)
         {
-            FrmPhieu frmOpen = new FrmPhieu(maNV);
+            FrmQuanLyPhieu frmOpen = new FrmQuanLyPhieu(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;

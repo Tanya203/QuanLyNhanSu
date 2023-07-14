@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
             this.lblChucVuDN = new System.Windows.Forms.Label();
@@ -54,6 +54,7 @@
             this.txtTongPhuCap = new System.Windows.Forms.TextBox();
             this.lblTongPhuCap = new System.Windows.Forms.Label();
             this.lblTongPhuCapCuaNhanVien = new System.Windows.Forms.Label();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChiTietPhuCap)).BeginInit();
@@ -62,6 +63,7 @@
             // pnlHeader
             // 
             this.pnlHeader.BackColor = System.Drawing.SystemColors.Info;
+            this.pnlHeader.Controls.Add(this.btnRefresh);
             this.pnlHeader.Controls.Add(this.lblChucVuNV_DN);
             this.pnlHeader.Controls.Add(this.lblChucVuDN);
             this.pnlHeader.Controls.Add(this.lblPhongBanNV_DN);
@@ -81,7 +83,7 @@
             // 
             this.lblChucVuNV_DN.AutoSize = true;
             this.lblChucVuNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuNV_DN.Location = new System.Drawing.Point(1292, 72);
+            this.lblChucVuNV_DN.Location = new System.Drawing.Point(1134, 72);
             this.lblChucVuNV_DN.Name = "lblChucVuNV_DN";
             this.lblChucVuNV_DN.Size = new System.Drawing.Size(38, 32);
             this.lblChucVuNV_DN.TabIndex = 8;
@@ -91,7 +93,7 @@
             // 
             this.lblChucVuDN.AutoSize = true;
             this.lblChucVuDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuDN.Location = new System.Drawing.Point(1116, 72);
+            this.lblChucVuDN.Location = new System.Drawing.Point(958, 72);
             this.lblChucVuDN.Name = "lblChucVuDN";
             this.lblChucVuDN.Size = new System.Drawing.Size(133, 32);
             this.lblChucVuDN.TabIndex = 7;
@@ -101,7 +103,7 @@
             // 
             this.lblPhongBanNV_DN.AutoSize = true;
             this.lblPhongBanNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanNV_DN.Location = new System.Drawing.Point(1292, 9);
+            this.lblPhongBanNV_DN.Location = new System.Drawing.Point(1134, 9);
             this.lblPhongBanNV_DN.Name = "lblPhongBanNV_DN";
             this.lblPhongBanNV_DN.Size = new System.Drawing.Size(38, 32);
             this.lblPhongBanNV_DN.TabIndex = 6;
@@ -111,7 +113,7 @@
             // 
             this.lblPhongBanDN.AutoSize = true;
             this.lblPhongBanDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanDN.Location = new System.Drawing.Point(1116, 9);
+            this.lblPhongBanDN.Location = new System.Drawing.Point(958, 9);
             this.lblPhongBanDN.Name = "lblPhongBanDN";
             this.lblPhongBanDN.Size = new System.Drawing.Size(170, 32);
             this.lblPhongBanDN.TabIndex = 5;
@@ -263,8 +265,8 @@
             this.dgvChiTietPhuCap.ReadOnly = true;
             this.dgvChiTietPhuCap.RowHeadersVisible = false;
             this.dgvChiTietPhuCap.RowHeadersWidth = 51;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvChiTietPhuCap.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvChiTietPhuCap.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvChiTietPhuCap.RowTemplate.Height = 24;
             this.dgvChiTietPhuCap.Size = new System.Drawing.Size(1924, 634);
             this.dgvChiTietPhuCap.TabIndex = 5;
@@ -336,6 +338,23 @@
             this.lblTongPhuCapCuaNhanVien.Text = "Tổng phụ cấp của nhân viên";
             this.lblTongPhuCapCuaNhanVien.Click += new System.EventHandler(this.lblTongPhuCapCuaNhanVien_Click);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.AutoSize = true;
+            this.btnRefresh.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.Image = global::QuanLyNhanSu.Properties.Resources.refresh;
+            this.btnRefresh.Location = new System.Drawing.Point(1618, 29);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(144, 54);
+            this.btnRefresh.TabIndex = 69;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            // 
             // FrmTongPhuCapMotNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -391,5 +410,6 @@
         private System.Windows.Forms.Label lblTongPhuCap;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Label lblTongPhuCapCuaNhanVien;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

@@ -597,7 +597,9 @@ namespace QuanLyNhanSu.PresentationTier
             if (e.KeyChar == (char)Keys.Enter)
                 LoadNhanVienTimKiem(txtTimKiem.Text);
         }
-
-        
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reload();
+        }
     }
 }

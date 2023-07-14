@@ -117,5 +117,9 @@ namespace QuanLyNhanSu.PresentationTier
                 LoadLichSuThaoTacTimKiem(txtTimKiem.Text);
             }
         }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reload();
+        }
     }
 }

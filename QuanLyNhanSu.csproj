@@ -217,11 +217,11 @@
     <Compile Include="PresentationTier\FrmPhanQuyen.Designer.cs">
       <DependentUpon>FrmPhanQuyen.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmPhieu.cs">
+    <Compile Include="PresentationTier\FrmQuanLyPhieu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmPhieu.Designer.cs">
-      <DependentUpon>FrmPhieu.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmQuanLyPhieu.Designer.cs">
+      <DependentUpon>FrmQuanLyPhieu.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationTier\FrmQuanLyCa.cs">
       <SubType>Form</SubType>
@@ -246,6 +246,12 @@
     </Compile>
     <Compile Include="PresentationTier\FrmQuanLyLoaiHopDong.Designer.cs">
       <DependentUpon>FrmQuanLyLoaiHopDong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationTier\FrmQuanLyLoaiPhieu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\FrmQuanLyLoaiPhieu.Designer.cs">
+      <DependentUpon>FrmQuanLyLoaiPhieu.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationTier\FrmQuanLyNhanVien.cs">
       <SubType>Form</SubType>
@@ -297,6 +303,7 @@
     <Compile Include="ViewModels\LichSuThaoTacViewModels.cs" />
     <Compile Include="ViewModels\LoaiCaViewModels.cs" />
     <Compile Include="ViewModels\LoaiHopDongViewModels.cs" />
+    <Compile Include="ViewModels\LoaiPhieuViewModels.cs" />
     <Compile Include="ViewModels\NhanVienViewModel.cs" />
     <Compile Include="ViewModels\PhieuViewModels.cs" />
     <Compile Include="ViewModels\PhongBanViewModels.cs" />
@@ -325,8 +332,8 @@
     <EmbeddedResource Include="PresentationTier\FrmPhanQuyen.resx">
       <DependentUpon>FrmPhanQuyen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmPhieu.resx">
-      <DependentUpon>FrmPhieu.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmQuanLyPhieu.resx">
+      <DependentUpon>FrmQuanLyPhieu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\FrmQuanLyCa.resx">
       <DependentUpon>FrmQuanLyCa.cs</DependentUpon>
@@ -339,6 +346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\FrmQuanLyLoaiHopDong.resx">
       <DependentUpon>FrmQuanLyLoaiHopDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\FrmQuanLyLoaiPhieu.resx">
+      <DependentUpon>FrmQuanLyLoaiPhieu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\FrmQuanLyNhanVien.resx">
       <DependentUpon>FrmQuanLyNhanVien.cs</DependentUpon>
@@ -501,6 +511,12 @@
     <None Include="Icons\fine big.png" />
     <None Include="Icons\bonus big 2.png" />
     <None Include="Icons\salary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.Text.Json.6.0.6\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')" />

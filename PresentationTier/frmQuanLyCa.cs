@@ -240,5 +240,9 @@ namespace QuanLyNhanSu.PresentationTier
                 LoadCaTimKiem(txtTimKiem.Text);
             }
         }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reload();
+        }
     }
 }

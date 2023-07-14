@@ -99,7 +99,19 @@ namespace QuanLyNhanSu.PresentationTier
             txtLuongCoBan.Text = nv.LuongCoBan.ToString();
             txtPhuCap.Text = nhanVienBUS.TongPhuCap1NhanVien(maNV).ToString();
         }
-        //////////////////////////////////////////////////////////////////////////////        
+        //////////////////////////////////////////////////////////////////////////////   
+        public void CloseCurrentForm(string maNV)
+        {
+            this.Close();
+            Application.Run(new FrmQuanLyPhuCap(maNV));
+        }
+        public void Reload()
+        {
+            this.Close();
+            currentForm = new Thread(new ThreadStart(() => CloseCurrentForm(maNV)));
+            currentForm.SetApartmentState(ApartmentState.STA);
+            currentForm.Start();
+        }
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
             this.Close();
@@ -297,6 +309,11 @@ namespace QuanLyNhanSu.PresentationTier
             }
             ClearMatKhauText();
             LoadThongTinTaiKhoan();
-        }        
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reload();
+        }
     }
 }

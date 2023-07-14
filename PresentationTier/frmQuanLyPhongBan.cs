@@ -220,5 +220,9 @@ namespace QuanLyNhanSu.PresentationTier
             if (e.KeyChar == (char)Keys.Enter)
                 LoadPhongBanTimKiem(txtTimKiem.Text);
         }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reload();
+        }
     } 
 }

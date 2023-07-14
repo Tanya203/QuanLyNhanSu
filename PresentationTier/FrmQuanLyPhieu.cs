@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class FrmPhieu : Form
+    public partial class FrmQuanLyPhieu : Form
     {
         Thread currentForm;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
@@ -27,7 +27,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<PhieuViewModels> danhSachPhieuThuongTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
-        public FrmPhieu(string maNV)
+        public FrmQuanLyPhieu(string maNV)
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
@@ -135,7 +135,7 @@ namespace QuanLyNhanSu.PresentationTier
         public void CloseCurrentForm(string maNV)
         {
             this.Close();
-            Application.Run(new FrmPhieu(maNV));
+            Application.Run(new FrmQuanLyPhieu(maNV));
         }
         public void Reload()
         {
@@ -177,20 +177,12 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now,
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + "thêm phiếu thưởng",
+                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm phiếu thưởng",
                 };
                 lichSuThaoTacBUS.Save(newLstt);               
             }
             Reload();            
-        }
-        private void btnTroVe_Click(object sender, EventArgs e)
-        {
-            FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
-            frmOpen.Show();
-            this.Hide();
-            frmOpen.FormClosed += CloseForm;
-        }
-
+        }       
         private void dgvThongTinPhieuThuong_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
@@ -229,6 +221,24 @@ namespace QuanLyNhanSu.PresentationTier
             }
             ClearAllText();
             LoadPhieuThuong();
+        }
+        private void btnTroVe_Click(object sender, EventArgs e)
+        {
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
+        }
+        private void btnQuanLyLoaiPhieu_Click(object sender, EventArgs e)
+        {
+            FrmQuanLyLoaiPhieu frmOpen = new FrmQuanLyLoaiPhieu(maNV);
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
+        }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reload();
         }
     }
 }
