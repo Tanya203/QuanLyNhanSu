@@ -22,7 +22,8 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly string maNV;
         private readonly NhanVien nv;
-        string formatDateTime = "dd/MM/yyyy";
+        private readonly string formatDate = "dd/MM/yyyy";
+        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmThongTinTaiKhoan(string maNV)
         {
             InitializeComponent();
@@ -70,7 +71,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtHo.Text = nv.Ho;
             txtTenLot.Text = nv.TenLot;
             txtTen.Text = nv.Ten;
-            dtpNTNS.Text = nv.NTNS.ToString(formatDateTime);
+            dtpNTNS.Text = nv.NTNS.ToString(formatDate);
             txtSoNha.Text = nv.SoNha;
             txtDuong.Text = nv.TenDuong;
             txtPhuong_Xa.Text = nv.Phuong_Xa;
@@ -92,8 +93,8 @@ namespace QuanLyNhanSu.PresentationTier
             txtSDT.Text = nv.SDT;
             txtEmail.Text = nv.Email;
             txtTrinhDoHocVan.Text = nv.TrinhDoHocVan;
-            txtNgayVaoLam.Text = nv.NgayVaoLam.ToString(formatDateTime);
-            txtThoiHanHopDong.Text = nv.ThoiHanHopDong.ToString(formatDateTime);
+            txtNgayVaoLam.Text = nv.NgayVaoLam.ToString(formatDate);
+            txtThoiHanHopDong.Text = nv.ThoiHanHopDong.ToString(formatDate);
             txtTinhTrang.Text = nv.TinhTrang;
             txtSoNgayPhep.Text = nv.SoNgayPhep.ToString();
             txtLuongCoBan.Text = nv.LuongCoBan.ToString();
@@ -266,7 +267,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa thông tin cá nhân",
                 };
@@ -301,7 +302,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " đổi mật khẩu",
                 };

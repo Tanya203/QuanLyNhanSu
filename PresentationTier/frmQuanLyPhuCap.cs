@@ -24,6 +24,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<PhuCapViewMModels> danhSachPhuCapTimKiem;
         private readonly string maNV;
         private readonly NhanVien nv;
+        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhuCap(string maNV)
         {
             InitializeComponent();
@@ -153,7 +154,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " thêm phụ cấp '" + txtTenPC.Text + "'",
                 };
@@ -173,7 +174,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa phòng ban '" + txtMaPC.Text + "'",
                 };
@@ -190,7 +191,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá phụ cấp '" + txtMaPC.Text + "'",
                 };
@@ -230,6 +231,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             if (e.KeyChar == (char)Keys.Enter)
                 LoadPhuCapTimKiem(txtTimKiem.Text);
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reload();
         }
     }
 }

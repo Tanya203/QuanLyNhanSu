@@ -26,6 +26,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly NhanVien nv;
         string formatTime = "HH:mm";
         private readonly string maNV;
+        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyCa(string maNV)
         {
             InitializeComponent();
@@ -149,7 +150,7 @@ namespace QuanLyNhanSu.PresentationTier
             {                
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {                                    
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên "+ maNV +" thêm ca "+ txtTenCa.Text,                    
                 };
@@ -170,7 +171,7 @@ namespace QuanLyNhanSu.PresentationTier
             {                
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa ca '" + txtMaCa.Text+"'",
                 };
@@ -190,7 +191,7 @@ namespace QuanLyNhanSu.PresentationTier
                
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá ca '" + txtTenCa.Text + "'",
                 };

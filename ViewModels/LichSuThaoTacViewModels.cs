@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Eco.Xaml;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace QuanLyNhanSu.ViewModels
 {
     public class LichSuThaoTacViewModels
     {
-        public DateTime NgayGio { get; set; }
+        public string NgayGio { get; set; }
         public string MaNV { get; set; }
         public string HoTen { get; set; }
         public string PhongBan { get; set; }

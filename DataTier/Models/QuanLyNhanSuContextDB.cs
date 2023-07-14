@@ -153,6 +153,10 @@ namespace QuanLyNhanSu.DataTier.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<LichSuThaoTac>()
+                .Property(e => e.NgayGio)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LichSuThaoTac>()
                 .Property(e => e.MaNV)
                 .IsUnicode(false);
 

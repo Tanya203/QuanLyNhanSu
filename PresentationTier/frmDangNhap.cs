@@ -18,11 +18,13 @@ namespace QuanLyNhanSu
     {
         Thread currentForm;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
-
+        private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
+        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmDangNhap()
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
+            lichSuThaoTacBUS = new LichSuThaoTacBUS();
             btnDangNhap.Enabled = false;
             txtTaiKhoan.Text = "TK001";
             txtMatKhau.Text = "Aa@12345";
@@ -41,8 +43,15 @@ namespace QuanLyNhanSu
         private void btnDangNhap_Click(object sender, EventArgs e)
         {            
             if(nhanVienBUS.LoginVerify(txtTaiKhoan.Text, txtMatKhau.Text))
-            {                    
+            {                                 
                 NhanVien nv = nhanVienBUS.GetNhanVien().Where(nhanVien => nhanVien.TaiKhoan == txtTaiKhoan.Text).FirstOrDefault();
+                LichSuThaoTac newLstt = new LichSuThaoTac
+                {
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
+                    MaNV = nv.MaNV,
+                    ThaoTacThucHien = "Nhân viên " + nv.MaNV + " đăng nhập",
+                };
+                lichSuThaoTacBUS.Save(newLstt);
                 FrmManHinhChinh frmOpen = new FrmManHinhChinh(nv.MaNV);
                 frmOpen.Show();
                 this.Hide();

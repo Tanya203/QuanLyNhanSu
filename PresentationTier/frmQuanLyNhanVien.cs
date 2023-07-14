@@ -27,9 +27,11 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private IEnumerable<NhanVienViewModel> danhSachNhanVien;
         private IEnumerable<NhanVienViewModel> danhSachNhanVienTimKiem;
-        string formatDateTime = "dd/MM/yyyy";
+        private readonly string formatDate = "dd/MM/yyyy";
+        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         private readonly string maNV;
         private readonly NhanVien nv;
+
 
         public FrmQuanLyNhanVien(string maNV)
         {
@@ -93,7 +95,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[6].Value = nv.Ho;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[7].Value = nv.TenLot;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[8].Value = nv.Ten;
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[9].Value = nv.NTNS.ToString(formatDateTime);
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[9].Value = nv.NTNS.ToString(formatDate);
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[10].Value = nv.SoNha;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[11].Value = nv.TenDuong;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[12].Value = nv.Phuong_Xa;
@@ -103,8 +105,8 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[16].Value = nv.SDT;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[17].Value = nv.Email;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[18].Value = nv.TrinhDoHocVan;
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[19].Value = nv.NgayVaoLam.ToString(formatDateTime);
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[20].Value = nv.ThoiHanHopDong.ToString(formatDateTime);
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[19].Value = nv.NgayVaoLam.ToString(formatDate);
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[20].Value = nv.ThoiHanHopDong.ToString(formatDate);
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[21].Value = nv.TinhTrang;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[22].Value = nv.SoNgayPhep;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = nv.LuongCoBan;
@@ -128,7 +130,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[6].Value = nv.Ho;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[7].Value = nv.TenLot;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[8].Value = nv.Ten;
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[9].Value = nv.NTNS.ToString(formatDateTime);
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[9].Value = nv.NTNS.ToString(formatDate);
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[10].Value = nv.SoNha;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[11].Value = nv.TenDuong;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[12].Value = nv.Phuong_Xa;
@@ -138,8 +140,8 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[16].Value = nv.SDT;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[17].Value = nv.Email;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[18].Value = nv.TrinhDoHocVan;
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[19].Value = nv.NgayVaoLam.ToString(formatDateTime);
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[20].Value = nv.ThoiHanHopDong.ToString(formatDateTime);
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[19].Value = nv.NgayVaoLam.ToString(formatDate);
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[20].Value = nv.ThoiHanHopDong.ToString(formatDate);
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[21].Value = nv.TinhTrang;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[22].Value = nv.SoNgayPhep;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = nv.LuongCoBan;
@@ -193,8 +195,8 @@ namespace QuanLyNhanSu.PresentationTier
             txtSDT.Text = string.Empty;
             txtEmail.Text = string.Empty;
             txtTrinhDoHocVan.Text = string.Empty;
-            dtpNgayVaoLam.Text = DateTime.Now.ToString(formatDateTime);
-            dtpThoiHanHopDong.Text = DateTime.Now.ToString(formatDateTime);
+            dtpNgayVaoLam.Text = DateTime.Now.ToString(formatDate);
+            dtpThoiHanHopDong.Text = DateTime.Now.ToString(formatDate);
             txtTinhTrang.Text = string.Empty;
             txtSoNgayPhep.Text = string.Empty;
             txtLuongCoBan.Text = string.Empty;
@@ -437,7 +439,7 @@ namespace QuanLyNhanSu.PresentationTier
                     hoTen = txtHo + txtTenLot.Text + txtTen.Text;
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " thêm nhân viên '" + hoTen + "'",
                 };
@@ -487,7 +489,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa nhân viên '" + txtMaNV.Text + "'",
                 };
@@ -506,7 +508,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá nhân viên '" + txtMaNV.Text + "'",
                 };
