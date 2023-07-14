@@ -24,6 +24,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<LoaiPhieuViewModels> danhSachLoaiPhieuTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiPhieu(string maNV)
         {
             InitializeComponent();
@@ -142,7 +143,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " thêm loại phiếu '" + txtTenLoaiPhieu.Text + "'",
                 };
@@ -161,7 +162,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa loại phiếu '" + txtTenLoaiPhieu.Text + "'",
                 };
@@ -180,7 +181,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá loại phiếu '" + txtTenLoaiPhieu.Text + "'",
                 };

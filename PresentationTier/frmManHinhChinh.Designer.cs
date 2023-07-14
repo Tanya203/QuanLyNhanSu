@@ -30,29 +30,6 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlMenu = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lblSoNgayPhepConNV = new System.Windows.Forms.Label();
-            this.lblSoNgayPhepCon = new System.Windows.Forms.Label();
-            this.lblHoTenNV = new System.Windows.Forms.Label();
-            this.lblChucVuNV = new System.Windows.Forms.Label();
-            this.lblHoTen = new System.Windows.Forms.Label();
-            this.lblPhongBanNV = new System.Windows.Forms.Label();
-            this.lblChucVu = new System.Windows.Forms.Label();
-            this.lblPhongBan = new System.Windows.Forms.Label();
-            this.lblMaNV = new System.Windows.Forms.Label();
-            this.lblMaNhanVien = new System.Windows.Forms.Label();
-            this.lblLichLamViec = new System.Windows.Forms.Label();
-            this.dtpLichLamViec = new System.Windows.Forms.DateTimePicker();
-            this.dgvLichLamViec = new System.Windows.Forms.DataGridView();
-            this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLoaiCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNgayLam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhep = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colThoiGianDen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colThoiGianVe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pbAnhNV = new System.Windows.Forms.PictureBox();
             this.btnDangXuat = new System.Windows.Forms.Button();
             this.btnTTTK = new System.Windows.Forms.Button();
             this.btnLSTT = new System.Windows.Forms.Button();
@@ -67,10 +44,33 @@
             this.btnQLCV = new System.Windows.Forms.Button();
             this.btnQLPB = new System.Windows.Forms.Button();
             this.btnQLNV = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblSoNgayPhepConNV = new System.Windows.Forms.Label();
+            this.lblSoNgayPhepCon = new System.Windows.Forms.Label();
+            this.lblHoTenNV = new System.Windows.Forms.Label();
+            this.lblChucVuNV = new System.Windows.Forms.Label();
+            this.lblHoTen = new System.Windows.Forms.Label();
+            this.lblPhongBanNV = new System.Windows.Forms.Label();
+            this.lblChucVu = new System.Windows.Forms.Label();
+            this.lblPhongBan = new System.Windows.Forms.Label();
+            this.lblMaNV = new System.Windows.Forms.Label();
+            this.lblMaNhanVien = new System.Windows.Forms.Label();
+            this.pbAnhNV = new System.Windows.Forms.PictureBox();
+            this.lblLichLamViec = new System.Windows.Forms.Label();
+            this.dtpLichLamViec = new System.Windows.Forms.DateTimePicker();
+            this.dgvLichLamViec = new System.Windows.Forms.DataGridView();
+            this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLoaiCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNgayLam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhep = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colThoiGianDen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colThoiGianVe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlMenu.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLichLamViec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAnhNV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLichLamViec)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenu
@@ -96,247 +96,6 @@
             this.pnlMenu.Size = new System.Drawing.Size(1924, 100);
             this.pnlMenu.TabIndex = 17;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Info;
-            this.panel1.Controls.Add(this.lblSoNgayPhepConNV);
-            this.panel1.Controls.Add(this.lblSoNgayPhepCon);
-            this.panel1.Controls.Add(this.lblHoTenNV);
-            this.panel1.Controls.Add(this.lblChucVuNV);
-            this.panel1.Controls.Add(this.lblHoTen);
-            this.panel1.Controls.Add(this.lblPhongBanNV);
-            this.panel1.Controls.Add(this.lblChucVu);
-            this.panel1.Controls.Add(this.lblPhongBan);
-            this.panel1.Controls.Add(this.lblMaNV);
-            this.panel1.Controls.Add(this.lblMaNhanVien);
-            this.panel1.Controls.Add(this.pbAnhNV);
-            this.panel1.Location = new System.Drawing.Point(0, 100);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1924, 168);
-            this.panel1.TabIndex = 18;
-            // 
-            // lblSoNgayPhepConNV
-            // 
-            this.lblSoNgayPhepConNV.AutoSize = true;
-            this.lblSoNgayPhepConNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSoNgayPhepConNV.Location = new System.Drawing.Point(1589, 72);
-            this.lblSoNgayPhepConNV.Name = "lblSoNgayPhepConNV";
-            this.lblSoNgayPhepConNV.Size = new System.Drawing.Size(39, 36);
-            this.lblSoNgayPhepConNV.TabIndex = 24;
-            this.lblSoNgayPhepConNV.Text = "...";
-            // 
-            // lblSoNgayPhepCon
-            // 
-            this.lblSoNgayPhepCon.AutoSize = true;
-            this.lblSoNgayPhepCon.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSoNgayPhepCon.Location = new System.Drawing.Point(1277, 70);
-            this.lblSoNgayPhepCon.Name = "lblSoNgayPhepCon";
-            this.lblSoNgayPhepCon.Size = new System.Drawing.Size(306, 38);
-            this.lblSoNgayPhepCon.TabIndex = 23;
-            this.lblSoNgayPhepCon.Text = "Số ngày phép còn:";
-            // 
-            // lblHoTenNV
-            // 
-            this.lblHoTenNV.AutoSize = true;
-            this.lblHoTenNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHoTenNV.Location = new System.Drawing.Point(249, 116);
-            this.lblHoTenNV.Name = "lblHoTenNV";
-            this.lblHoTenNV.Size = new System.Drawing.Size(44, 38);
-            this.lblHoTenNV.TabIndex = 20;
-            this.lblHoTenNV.Text = "...";
-            // 
-            // lblChucVuNV
-            // 
-            this.lblChucVuNV.AutoSize = true;
-            this.lblChucVuNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuNV.Location = new System.Drawing.Point(827, 116);
-            this.lblChucVuNV.Name = "lblChucVuNV";
-            this.lblChucVuNV.Size = new System.Drawing.Size(44, 38);
-            this.lblChucVuNV.TabIndex = 22;
-            this.lblChucVuNV.Text = "...";
-            // 
-            // lblHoTen
-            // 
-            this.lblHoTen.AutoSize = true;
-            this.lblHoTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHoTen.Location = new System.Drawing.Point(12, 114);
-            this.lblHoTen.Name = "lblHoTen";
-            this.lblHoTen.Size = new System.Drawing.Size(129, 38);
-            this.lblHoTen.TabIndex = 19;
-            this.lblHoTen.Text = "Họ tên:";
-            // 
-            // lblPhongBanNV
-            // 
-            this.lblPhongBanNV.AutoSize = true;
-            this.lblPhongBanNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanNV.Location = new System.Drawing.Point(827, 19);
-            this.lblPhongBanNV.Name = "lblPhongBanNV";
-            this.lblPhongBanNV.Size = new System.Drawing.Size(44, 38);
-            this.lblPhongBanNV.TabIndex = 4;
-            this.lblPhongBanNV.Text = "...";
-            // 
-            // lblChucVu
-            // 
-            this.lblChucVu.AutoSize = true;
-            this.lblChucVu.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVu.Location = new System.Drawing.Point(628, 114);
-            this.lblChucVu.Name = "lblChucVu";
-            this.lblChucVu.Size = new System.Drawing.Size(155, 38);
-            this.lblChucVu.TabIndex = 21;
-            this.lblChucVu.Text = "Chức vụ:";
-            // 
-            // lblPhongBan
-            // 
-            this.lblPhongBan.AutoSize = true;
-            this.lblPhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBan.Location = new System.Drawing.Point(628, 17);
-            this.lblPhongBan.Name = "lblPhongBan";
-            this.lblPhongBan.Size = new System.Drawing.Size(193, 38);
-            this.lblPhongBan.TabIndex = 3;
-            this.lblPhongBan.Text = "Phòng ban:";
-            // 
-            // lblMaNV
-            // 
-            this.lblMaNV.AutoSize = true;
-            this.lblMaNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaNV.Location = new System.Drawing.Point(249, 19);
-            this.lblMaNV.Name = "lblMaNV";
-            this.lblMaNV.Size = new System.Drawing.Size(44, 38);
-            this.lblMaNV.TabIndex = 2;
-            this.lblMaNV.Text = "...";
-            // 
-            // lblMaNhanVien
-            // 
-            this.lblMaNhanVien.AutoSize = true;
-            this.lblMaNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaNhanVien.Location = new System.Drawing.Point(12, 17);
-            this.lblMaNhanVien.Name = "lblMaNhanVien";
-            this.lblMaNhanVien.Size = new System.Drawing.Size(234, 38);
-            this.lblMaNhanVien.TabIndex = 1;
-            this.lblMaNhanVien.Text = "Mã nhân viên:";
-            // 
-            // lblLichLamViec
-            // 
-            this.lblLichLamViec.AutoSize = true;
-            this.lblLichLamViec.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLichLamViec.Location = new System.Drawing.Point(838, 271);
-            this.lblLichLamViec.Name = "lblLichLamViec";
-            this.lblLichLamViec.Size = new System.Drawing.Size(264, 46);
-            this.lblLichLamViec.TabIndex = 19;
-            this.lblLichLamViec.Text = "Lịch làm việc";
-            // 
-            // dtpLichLamViec
-            // 
-            this.dtpLichLamViec.CustomFormat = "dddd dd/MM/yyyy";
-            this.dtpLichLamViec.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpLichLamViec.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpLichLamViec.Location = new System.Drawing.Point(823, 320);
-            this.dtpLichLamViec.Name = "dtpLichLamViec";
-            this.dtpLichLamViec.Size = new System.Drawing.Size(308, 34);
-            this.dtpLichLamViec.TabIndex = 16;
-            // 
-            // dgvLichLamViec
-            // 
-            this.dgvLichLamViec.AllowUserToAddRows = false;
-            this.dgvLichLamViec.AllowUserToDeleteRows = false;
-            this.dgvLichLamViec.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvLichLamViec.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvLichLamViec.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLichLamViec.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvLichLamViec.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLichLamViec.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colMaNV,
-            this.colHoTen,
-            this.colLoaiCa,
-            this.colCa,
-            this.colNgayLam,
-            this.colPhep,
-            this.colThoiGianDen,
-            this.colThoiGianVe});
-            this.dgvLichLamViec.Location = new System.Drawing.Point(0, 360);
-            this.dgvLichLamViec.Name = "dgvLichLamViec";
-            this.dgvLichLamViec.ReadOnly = true;
-            this.dgvLichLamViec.RowHeadersVisible = false;
-            this.dgvLichLamViec.RowHeadersWidth = 51;
-            this.dgvLichLamViec.RowTemplate.Height = 24;
-            this.dgvLichLamViec.Size = new System.Drawing.Size(1924, 673);
-            this.dgvLichLamViec.TabIndex = 17;
-            // 
-            // colMaNV
-            // 
-            this.colMaNV.HeaderText = "Mã nhân viên";
-            this.colMaNV.MinimumWidth = 6;
-            this.colMaNV.Name = "colMaNV";
-            this.colMaNV.ReadOnly = true;
-            // 
-            // colHoTen
-            // 
-            this.colHoTen.HeaderText = "Họ tên";
-            this.colHoTen.MinimumWidth = 6;
-            this.colHoTen.Name = "colHoTen";
-            this.colHoTen.ReadOnly = true;
-            // 
-            // colLoaiCa
-            // 
-            this.colLoaiCa.HeaderText = "Loại ca";
-            this.colLoaiCa.MinimumWidth = 6;
-            this.colLoaiCa.Name = "colLoaiCa";
-            this.colLoaiCa.ReadOnly = true;
-            // 
-            // colCa
-            // 
-            this.colCa.HeaderText = "Ca";
-            this.colCa.MinimumWidth = 6;
-            this.colCa.Name = "colCa";
-            this.colCa.ReadOnly = true;
-            // 
-            // colNgayLam
-            // 
-            this.colNgayLam.HeaderText = "Ngày làm";
-            this.colNgayLam.MinimumWidth = 6;
-            this.colNgayLam.Name = "colNgayLam";
-            this.colNgayLam.ReadOnly = true;
-            // 
-            // colPhep
-            // 
-            this.colPhep.HeaderText = "Phép";
-            this.colPhep.MinimumWidth = 6;
-            this.colPhep.Name = "colPhep";
-            this.colPhep.ReadOnly = true;
-            // 
-            // colThoiGianDen
-            // 
-            this.colThoiGianDen.HeaderText = "Thời gian đến";
-            this.colThoiGianDen.MinimumWidth = 6;
-            this.colThoiGianDen.Name = "colThoiGianDen";
-            this.colThoiGianDen.ReadOnly = true;
-            // 
-            // colThoiGianVe
-            // 
-            this.colThoiGianVe.HeaderText = "Thời gian về";
-            this.colThoiGianVe.MinimumWidth = 6;
-            this.colThoiGianVe.Name = "colThoiGianVe";
-            this.colThoiGianVe.ReadOnly = true;
-            // 
-            // pbAnhNV
-            // 
-            this.pbAnhNV.Image = global::QuanLyNhanSu.Properties.Resources.image;
-            this.pbAnhNV.Location = new System.Drawing.Point(1726, 0);
-            this.pbAnhNV.Name = "pbAnhNV";
-            this.pbAnhNV.Size = new System.Drawing.Size(168, 168);
-            this.pbAnhNV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbAnhNV.TabIndex = 0;
-            this.pbAnhNV.TabStop = false;
-            // 
             // btnDangXuat
             // 
             this.btnDangXuat.AutoSize = true;
@@ -355,6 +114,7 @@
             this.btnDangXuat.Text = "Đăng xuất";
             this.btnDangXuat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDangXuat.UseVisualStyleBackColor = true;
+            this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
             // 
             // btnTTTK
             // 
@@ -616,6 +376,247 @@
             this.btnQLNV.UseVisualStyleBackColor = true;
             this.btnQLNV.Click += new System.EventHandler(this.btnQLNV_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Info;
+            this.panel1.Controls.Add(this.lblSoNgayPhepConNV);
+            this.panel1.Controls.Add(this.lblSoNgayPhepCon);
+            this.panel1.Controls.Add(this.lblHoTenNV);
+            this.panel1.Controls.Add(this.lblChucVuNV);
+            this.panel1.Controls.Add(this.lblHoTen);
+            this.panel1.Controls.Add(this.lblPhongBanNV);
+            this.panel1.Controls.Add(this.lblChucVu);
+            this.panel1.Controls.Add(this.lblPhongBan);
+            this.panel1.Controls.Add(this.lblMaNV);
+            this.panel1.Controls.Add(this.lblMaNhanVien);
+            this.panel1.Controls.Add(this.pbAnhNV);
+            this.panel1.Location = new System.Drawing.Point(0, 100);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1924, 168);
+            this.panel1.TabIndex = 18;
+            // 
+            // lblSoNgayPhepConNV
+            // 
+            this.lblSoNgayPhepConNV.AutoSize = true;
+            this.lblSoNgayPhepConNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSoNgayPhepConNV.Location = new System.Drawing.Point(1589, 72);
+            this.lblSoNgayPhepConNV.Name = "lblSoNgayPhepConNV";
+            this.lblSoNgayPhepConNV.Size = new System.Drawing.Size(39, 36);
+            this.lblSoNgayPhepConNV.TabIndex = 24;
+            this.lblSoNgayPhepConNV.Text = "...";
+            // 
+            // lblSoNgayPhepCon
+            // 
+            this.lblSoNgayPhepCon.AutoSize = true;
+            this.lblSoNgayPhepCon.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSoNgayPhepCon.Location = new System.Drawing.Point(1277, 70);
+            this.lblSoNgayPhepCon.Name = "lblSoNgayPhepCon";
+            this.lblSoNgayPhepCon.Size = new System.Drawing.Size(306, 38);
+            this.lblSoNgayPhepCon.TabIndex = 23;
+            this.lblSoNgayPhepCon.Text = "Số ngày phép còn:";
+            // 
+            // lblHoTenNV
+            // 
+            this.lblHoTenNV.AutoSize = true;
+            this.lblHoTenNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHoTenNV.Location = new System.Drawing.Point(249, 116);
+            this.lblHoTenNV.Name = "lblHoTenNV";
+            this.lblHoTenNV.Size = new System.Drawing.Size(44, 38);
+            this.lblHoTenNV.TabIndex = 20;
+            this.lblHoTenNV.Text = "...";
+            // 
+            // lblChucVuNV
+            // 
+            this.lblChucVuNV.AutoSize = true;
+            this.lblChucVuNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChucVuNV.Location = new System.Drawing.Point(827, 116);
+            this.lblChucVuNV.Name = "lblChucVuNV";
+            this.lblChucVuNV.Size = new System.Drawing.Size(44, 38);
+            this.lblChucVuNV.TabIndex = 22;
+            this.lblChucVuNV.Text = "...";
+            // 
+            // lblHoTen
+            // 
+            this.lblHoTen.AutoSize = true;
+            this.lblHoTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHoTen.Location = new System.Drawing.Point(12, 114);
+            this.lblHoTen.Name = "lblHoTen";
+            this.lblHoTen.Size = new System.Drawing.Size(129, 38);
+            this.lblHoTen.TabIndex = 19;
+            this.lblHoTen.Text = "Họ tên:";
+            // 
+            // lblPhongBanNV
+            // 
+            this.lblPhongBanNV.AutoSize = true;
+            this.lblPhongBanNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPhongBanNV.Location = new System.Drawing.Point(827, 19);
+            this.lblPhongBanNV.Name = "lblPhongBanNV";
+            this.lblPhongBanNV.Size = new System.Drawing.Size(44, 38);
+            this.lblPhongBanNV.TabIndex = 4;
+            this.lblPhongBanNV.Text = "...";
+            // 
+            // lblChucVu
+            // 
+            this.lblChucVu.AutoSize = true;
+            this.lblChucVu.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChucVu.Location = new System.Drawing.Point(628, 114);
+            this.lblChucVu.Name = "lblChucVu";
+            this.lblChucVu.Size = new System.Drawing.Size(155, 38);
+            this.lblChucVu.TabIndex = 21;
+            this.lblChucVu.Text = "Chức vụ:";
+            // 
+            // lblPhongBan
+            // 
+            this.lblPhongBan.AutoSize = true;
+            this.lblPhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPhongBan.Location = new System.Drawing.Point(628, 17);
+            this.lblPhongBan.Name = "lblPhongBan";
+            this.lblPhongBan.Size = new System.Drawing.Size(193, 38);
+            this.lblPhongBan.TabIndex = 3;
+            this.lblPhongBan.Text = "Phòng ban:";
+            // 
+            // lblMaNV
+            // 
+            this.lblMaNV.AutoSize = true;
+            this.lblMaNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaNV.Location = new System.Drawing.Point(249, 19);
+            this.lblMaNV.Name = "lblMaNV";
+            this.lblMaNV.Size = new System.Drawing.Size(44, 38);
+            this.lblMaNV.TabIndex = 2;
+            this.lblMaNV.Text = "...";
+            // 
+            // lblMaNhanVien
+            // 
+            this.lblMaNhanVien.AutoSize = true;
+            this.lblMaNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaNhanVien.Location = new System.Drawing.Point(12, 17);
+            this.lblMaNhanVien.Name = "lblMaNhanVien";
+            this.lblMaNhanVien.Size = new System.Drawing.Size(234, 38);
+            this.lblMaNhanVien.TabIndex = 1;
+            this.lblMaNhanVien.Text = "Mã nhân viên:";
+            // 
+            // pbAnhNV
+            // 
+            this.pbAnhNV.Image = global::QuanLyNhanSu.Properties.Resources.image;
+            this.pbAnhNV.Location = new System.Drawing.Point(1726, 0);
+            this.pbAnhNV.Name = "pbAnhNV";
+            this.pbAnhNV.Size = new System.Drawing.Size(168, 168);
+            this.pbAnhNV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbAnhNV.TabIndex = 0;
+            this.pbAnhNV.TabStop = false;
+            // 
+            // lblLichLamViec
+            // 
+            this.lblLichLamViec.AutoSize = true;
+            this.lblLichLamViec.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLichLamViec.Location = new System.Drawing.Point(838, 271);
+            this.lblLichLamViec.Name = "lblLichLamViec";
+            this.lblLichLamViec.Size = new System.Drawing.Size(264, 46);
+            this.lblLichLamViec.TabIndex = 19;
+            this.lblLichLamViec.Text = "Lịch làm việc";
+            // 
+            // dtpLichLamViec
+            // 
+            this.dtpLichLamViec.CustomFormat = "dddd dd/MM/yyyy";
+            this.dtpLichLamViec.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpLichLamViec.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpLichLamViec.Location = new System.Drawing.Point(823, 320);
+            this.dtpLichLamViec.Name = "dtpLichLamViec";
+            this.dtpLichLamViec.Size = new System.Drawing.Size(308, 34);
+            this.dtpLichLamViec.TabIndex = 16;
+            // 
+            // dgvLichLamViec
+            // 
+            this.dgvLichLamViec.AllowUserToAddRows = false;
+            this.dgvLichLamViec.AllowUserToDeleteRows = false;
+            this.dgvLichLamViec.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvLichLamViec.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvLichLamViec.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLichLamViec.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvLichLamViec.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLichLamViec.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colMaNV,
+            this.colHoTen,
+            this.colLoaiCa,
+            this.colCa,
+            this.colNgayLam,
+            this.colPhep,
+            this.colThoiGianDen,
+            this.colThoiGianVe});
+            this.dgvLichLamViec.Location = new System.Drawing.Point(0, 360);
+            this.dgvLichLamViec.Name = "dgvLichLamViec";
+            this.dgvLichLamViec.ReadOnly = true;
+            this.dgvLichLamViec.RowHeadersVisible = false;
+            this.dgvLichLamViec.RowHeadersWidth = 51;
+            this.dgvLichLamViec.RowTemplate.Height = 24;
+            this.dgvLichLamViec.Size = new System.Drawing.Size(1924, 673);
+            this.dgvLichLamViec.TabIndex = 17;
+            // 
+            // colMaNV
+            // 
+            this.colMaNV.HeaderText = "Mã nhân viên";
+            this.colMaNV.MinimumWidth = 6;
+            this.colMaNV.Name = "colMaNV";
+            this.colMaNV.ReadOnly = true;
+            // 
+            // colHoTen
+            // 
+            this.colHoTen.HeaderText = "Họ tên";
+            this.colHoTen.MinimumWidth = 6;
+            this.colHoTen.Name = "colHoTen";
+            this.colHoTen.ReadOnly = true;
+            // 
+            // colLoaiCa
+            // 
+            this.colLoaiCa.HeaderText = "Loại ca";
+            this.colLoaiCa.MinimumWidth = 6;
+            this.colLoaiCa.Name = "colLoaiCa";
+            this.colLoaiCa.ReadOnly = true;
+            // 
+            // colCa
+            // 
+            this.colCa.HeaderText = "Ca";
+            this.colCa.MinimumWidth = 6;
+            this.colCa.Name = "colCa";
+            this.colCa.ReadOnly = true;
+            // 
+            // colNgayLam
+            // 
+            this.colNgayLam.HeaderText = "Ngày làm";
+            this.colNgayLam.MinimumWidth = 6;
+            this.colNgayLam.Name = "colNgayLam";
+            this.colNgayLam.ReadOnly = true;
+            // 
+            // colPhep
+            // 
+            this.colPhep.HeaderText = "Phép";
+            this.colPhep.MinimumWidth = 6;
+            this.colPhep.Name = "colPhep";
+            this.colPhep.ReadOnly = true;
+            // 
+            // colThoiGianDen
+            // 
+            this.colThoiGianDen.HeaderText = "Thời gian đến";
+            this.colThoiGianDen.MinimumWidth = 6;
+            this.colThoiGianDen.Name = "colThoiGianDen";
+            this.colThoiGianDen.ReadOnly = true;
+            // 
+            // colThoiGianVe
+            // 
+            this.colThoiGianVe.HeaderText = "Thời gian về";
+            this.colThoiGianVe.MinimumWidth = 6;
+            this.colThoiGianVe.Name = "colThoiGianVe";
+            this.colThoiGianVe.ReadOnly = true;
+            // 
             // FrmManHinhChinh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -637,8 +638,8 @@
             this.pnlMenu.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLichLamViec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAnhNV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLichLamViec)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

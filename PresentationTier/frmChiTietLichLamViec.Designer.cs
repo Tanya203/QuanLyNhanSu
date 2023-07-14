@@ -68,6 +68,7 @@
             this.lblNgayLam = new System.Windows.Forms.Label();
             this.txtMaLLV = new System.Windows.Forms.TextBox();
             this.lblMaLichLamViec = new System.Windows.Forms.Label();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.pnlDetail.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhieuThuong)).BeginInit();
@@ -277,6 +278,7 @@
             // pnlHeader
             // 
             this.pnlHeader.BackColor = System.Drawing.SystemColors.Info;
+            this.pnlHeader.Controls.Add(this.btnRefresh);
             this.pnlHeader.Controls.Add(this.lblChucVuNV_DN);
             this.pnlHeader.Controls.Add(this.lblChucVuDN);
             this.pnlHeader.Controls.Add(this.lblPhongBanNV_DN);
@@ -501,6 +503,24 @@
             this.lblMaLichLamViec.TabIndex = 0;
             this.lblMaLichLamViec.Text = "Mã lịch làm việc:";
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.AutoSize = true;
+            this.btnRefresh.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.Image = global::QuanLyNhanSu.Properties.Resources.refresh;
+            this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(144, 113);
+            this.btnRefresh.TabIndex = 68;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            // 
             // FrmChiTietLichLamViec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -574,5 +594,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn colXoa;
         private System.Windows.Forms.TextBox txtCa;
         private System.Windows.Forms.TextBox txtLoaiCa;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

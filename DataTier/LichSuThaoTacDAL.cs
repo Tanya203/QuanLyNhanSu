@@ -3,6 +3,7 @@ using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace QuanLyNhanSu.DataTier
 {
     internal class LichSuThaoTacDAL
     {
-        private readonly QuanLyNhanSuContextDB quanLyNhanSu;        
+        private readonly QuanLyNhanSuContextDB quanLyNhanSu;
         public LichSuThaoTacDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
@@ -42,7 +43,7 @@ namespace QuanLyNhanSu.DataTier
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 ThaoTacThucHien = x.ThaoTacThucHien
-            }).Where(lstc => lstc.NgayGio.ToString().Contains(timKiem) ||
+            }).Where(lstc => lstc.NgayGio.Contains(timKiem) ||
                      lstc.MaNV.Contains(timKiem) || 
                      lstc.HoTen.Contains(timKiem) ||
                      lstc.ThaoTacThucHien.Contains(timKiem) ||

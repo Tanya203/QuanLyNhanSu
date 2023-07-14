@@ -31,6 +31,7 @@ namespace QuanLyNhanSu.PresentationTier
         private string maNV_Chon;
         private readonly string maNV;
         private readonly string maP;
+        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmChiTietPhieu(string maNV, string maP)
         {
             InitializeComponent();
@@ -253,7 +254,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " thêm nhân viên " + cmbNhanVien.SelectedValue.ToString() + " vào " + txtLoaiPhieu.Text.ToLower() + " "  + maP,
                 };
@@ -274,7 +275,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " sửa nhân viên " + maNV_Chon + " trong " + txtLoaiPhieu.Text.ToLower() + " " + maP,
                 };
@@ -293,7 +294,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá nhân viên " + maNV_Chon + " trong " + txtLoaiPhieu.Text.ToLower() + " " + maP,
                 };

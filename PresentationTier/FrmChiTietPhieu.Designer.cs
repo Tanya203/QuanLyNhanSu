@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTimKiem = new System.Windows.Forms.Label();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.pnlMenu = new System.Windows.Forms.Panel();
@@ -56,6 +56,7 @@
             this.lblPhongBan = new System.Windows.Forms.Label();
             this.lblNhanVien = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
             this.lblChucVuDN = new System.Windows.Forms.Label();
             this.lblPhongBanNV_DN = new System.Windows.Forms.Label();
@@ -64,6 +65,7 @@
             this.lblHoTenDN = new System.Windows.Forms.Label();
             this.lblMaNV_DN = new System.Windows.Forms.Label();
             this.lblMaNhanVienDN = new System.Windows.Forms.Label();
+            this.btnTroVe = new System.Windows.Forms.Button();
             this.dgvThongTinPhieuThuong = new System.Windows.Forms.DataGridView();
             this.colMaP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLoaiPhieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,17 +78,15 @@
             this.txtHoTenNV = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSua = new System.Windows.Forms.Button();
             this.cmbChucVu = new System.Windows.Forms.ComboBox();
             this.lblChucVu = new System.Windows.Forms.Label();
             this.rtxtGhiChu = new System.Windows.Forms.RichTextBox();
-            this.lblThemNhanVien = new System.Windows.Forms.Label();
-            this.lblThongTinPhieuThuong = new System.Windows.Forms.Label();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.btnHuy = new System.Windows.Forms.Button();
-            this.btnTroVe = new System.Windows.Forms.Button();
+            this.lblThemNhanVien = new System.Windows.Forms.Label();
+            this.lblThongTinPhieuThuong = new System.Windows.Forms.Label();
             this.pnlMenu.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhieuThuong)).BeginInit();
@@ -376,6 +376,25 @@
             this.pnlHeader.Size = new System.Drawing.Size(1924, 113);
             this.pnlHeader.TabIndex = 54;
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.AutoSize = true;
+            this.btnRefresh.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.Image = global::QuanLyNhanSu.Properties.Resources.refresh;
+            this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(144, 113);
+            this.btnRefresh.TabIndex = 67;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // lblChucVuNV_DN
             // 
             this.lblChucVuNV_DN.AutoSize = true;
@@ -458,6 +477,26 @@
             this.lblMaNhanVienDN.TabIndex = 1;
             this.lblMaNhanVienDN.Text = "Mã nhân viên:";
             // 
+            // btnTroVe
+            // 
+            this.btnTroVe.AutoSize = true;
+            this.btnTroVe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnTroVe.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnTroVe.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTroVe.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnTroVe.FlatAppearance.BorderSize = 0;
+            this.btnTroVe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTroVe.Image = global::QuanLyNhanSu.Properties.Resources._return;
+            this.btnTroVe.Location = new System.Drawing.Point(0, 0);
+            this.btnTroVe.Name = "btnTroVe";
+            this.btnTroVe.Size = new System.Drawing.Size(142, 113);
+            this.btnTroVe.TabIndex = 1;
+            this.btnTroVe.Text = "Trở về";
+            this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTroVe.UseVisualStyleBackColor = false;
+            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
+            // 
             // dgvThongTinPhieuThuong
             // 
             this.dgvThongTinPhieuThuong.AllowUserToAddRows = false;
@@ -479,8 +518,8 @@
             this.dgvThongTinPhieuThuong.ReadOnly = true;
             this.dgvThongTinPhieuThuong.RowHeadersVisible = false;
             this.dgvThongTinPhieuThuong.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvThongTinPhieuThuong.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvThongTinPhieuThuong.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvThongTinPhieuThuong.RowTemplate.Height = 24;
             this.dgvThongTinPhieuThuong.Size = new System.Drawing.Size(1924, 513);
             this.dgvThongTinPhieuThuong.TabIndex = 55;
@@ -584,6 +623,24 @@
             this.panel1.Size = new System.Drawing.Size(938, 248);
             this.panel1.TabIndex = 64;
             // 
+            // btnSua
+            // 
+            this.btnSua.AutoSize = true;
+            this.btnSua.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnSua.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSua.FlatAppearance.BorderSize = 0;
+            this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSua.Image = global::QuanLyNhanSu.Properties.Resources.fix;
+            this.btnSua.Location = new System.Drawing.Point(587, 179);
+            this.btnSua.Name = "btnSua";
+            this.btnSua.Size = new System.Drawing.Size(100, 49);
+            this.btnSua.TabIndex = 69;
+            this.btnSua.Text = "Sửa";
+            this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSua.UseVisualStyleBackColor = false;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
+            // 
             // cmbChucVu
             // 
             this.cmbChucVu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -614,62 +671,6 @@
             this.rtxtGhiChu.Size = new System.Drawing.Size(263, 99);
             this.rtxtGhiChu.TabIndex = 67;
             this.rtxtGhiChu.Text = "";
-            // 
-            // lblThemNhanVien
-            // 
-            this.lblThemNhanVien.AutoSize = true;
-            this.lblThemNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThemNhanVien.Location = new System.Drawing.Point(1210, 116);
-            this.lblThemNhanVien.Name = "lblThemNhanVien";
-            this.lblThemNhanVien.Size = new System.Drawing.Size(231, 32);
-            this.lblThemNhanVien.TabIndex = 65;
-            this.lblThemNhanVien.Text = "Thêm nhân viên";
-            // 
-            // lblThongTinPhieuThuong
-            // 
-            this.lblThongTinPhieuThuong.AutoSize = true;
-            this.lblThongTinPhieuThuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThongTinPhieuThuong.Location = new System.Drawing.Point(301, 116);
-            this.lblThongTinPhieuThuong.Name = "lblThongTinPhieuThuong";
-            this.lblThongTinPhieuThuong.Size = new System.Drawing.Size(328, 32);
-            this.lblThongTinPhieuThuong.TabIndex = 66;
-            this.lblThongTinPhieuThuong.Text = "Thông tin phiếu thưởng";
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.AutoSize = true;
-            this.btnRefresh.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefresh.FlatAppearance.BorderSize = 0;
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Image = global::QuanLyNhanSu.Properties.Resources.refresh;
-            this.btnRefresh.Location = new System.Drawing.Point(1650, 30);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(144, 54);
-            this.btnRefresh.TabIndex = 67;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRefresh.UseVisualStyleBackColor = false;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // btnSua
-            // 
-            this.btnSua.AutoSize = true;
-            this.btnSua.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnSua.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSua.FlatAppearance.BorderSize = 0;
-            this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSua.Image = global::QuanLyNhanSu.Properties.Resources.fix;
-            this.btnSua.Location = new System.Drawing.Point(587, 179);
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(100, 49);
-            this.btnSua.TabIndex = 69;
-            this.btnSua.Text = "Sửa";
-            this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSua.UseVisualStyleBackColor = false;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
@@ -725,25 +726,25 @@
             this.btnHuy.UseVisualStyleBackColor = false;
             this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
-            // btnTroVe
+            // lblThemNhanVien
             // 
-            this.btnTroVe.AutoSize = true;
-            this.btnTroVe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnTroVe.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnTroVe.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTroVe.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnTroVe.FlatAppearance.BorderSize = 0;
-            this.btnTroVe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTroVe.Image = global::QuanLyNhanSu.Properties.Resources._return;
-            this.btnTroVe.Location = new System.Drawing.Point(0, 0);
-            this.btnTroVe.Name = "btnTroVe";
-            this.btnTroVe.Size = new System.Drawing.Size(142, 113);
-            this.btnTroVe.TabIndex = 1;
-            this.btnTroVe.Text = "Trở về";
-            this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTroVe.UseVisualStyleBackColor = false;
-            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
+            this.lblThemNhanVien.AutoSize = true;
+            this.lblThemNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThemNhanVien.Location = new System.Drawing.Point(1210, 116);
+            this.lblThemNhanVien.Name = "lblThemNhanVien";
+            this.lblThemNhanVien.Size = new System.Drawing.Size(231, 32);
+            this.lblThemNhanVien.TabIndex = 65;
+            this.lblThemNhanVien.Text = "Thêm nhân viên";
+            // 
+            // lblThongTinPhieuThuong
+            // 
+            this.lblThongTinPhieuThuong.AutoSize = true;
+            this.lblThongTinPhieuThuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThongTinPhieuThuong.Location = new System.Drawing.Point(301, 116);
+            this.lblThongTinPhieuThuong.Name = "lblThongTinPhieuThuong";
+            this.lblThongTinPhieuThuong.Size = new System.Drawing.Size(328, 32);
+            this.lblThongTinPhieuThuong.TabIndex = 66;
+            this.lblThongTinPhieuThuong.Text = "Thông tin phiếu thưởng";
             // 
             // FrmChiTietPhieu
             // 

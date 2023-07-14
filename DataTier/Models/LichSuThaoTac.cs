@@ -10,7 +10,8 @@ namespace QuanLyNhanSu.DataTier.Models
     public partial class LichSuThaoTac
     {
         [Key]
-        public DateTime NgayGio { get; set; }
+        [StringLength(100)]
+        public string NgayGio { get; set; }
 
         [StringLength(15)]
         public string MaNV { get; set; }

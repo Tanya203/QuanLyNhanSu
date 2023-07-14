@@ -27,6 +27,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<PhieuViewModels> danhSachPhieuThuongTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhieu(string maNV)
         {
             InitializeComponent();
@@ -175,7 +176,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " thêm phiếu thưởng",
                 };
@@ -213,7 +214,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now,
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá phiếu thưởng '" + txtMaP.Text + "'",
                 };

@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WECPOFLogic;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -25,6 +26,7 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             this.maNV = maNV;
+            MessageBoxManager.Register_OnceOnly();
         }
         private void frmManHinhChinh_Load(object sender, EventArgs e)
         {            
@@ -135,6 +137,19 @@ namespace QuanLyNhanSu.PresentationTier
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
             this.Close();
-        }           
+        }
+        private void btnDangXuat_Click(object sender, EventArgs e)
+        {
+            MessageBoxManager.Yes = "Có";
+            MessageBoxManager.No = "Không";
+            DialogResult ketQua = MessageBox.Show("Xác nhận đăng xuất", "Đăng xuất", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (ketQua == DialogResult.Yes)
+            {
+                FrmDangNhap frmOpen = new FrmDangNhap();
+                frmOpen.Show();
+                this.Hide();
+                frmOpen.FormClosed += CloseForm;
+            }           
+        }
     }
 }
