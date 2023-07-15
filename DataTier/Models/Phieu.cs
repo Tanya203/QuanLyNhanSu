@@ -26,7 +26,8 @@ namespace QuanLyNhanSu.DataTier.Models
         [StringLength(15)]
         public string MaNV { get; set; }
 
-        public DateTime? NgayLap { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime NgayLap { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPhieu> ChiTietPhieux { get; set; }

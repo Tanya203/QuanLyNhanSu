@@ -80,18 +80,13 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[5].Value = tt.ThaoTacThucHien;
             }
         }
-        /////////////////////////////////////////////////////////////////////////////////////////
-        public void CloseCurrentForm(string maNV)
-        {
-            this.Close();
-            Application.Run(new FrmLichSuThaoTac(maNV));
-        }
+        /////////////////////////////////////////////////////////////////////////////////////////        
         public void Reload()
         {
-            this.Close();
-            currentForm = new Thread(new ThreadStart(() => CloseCurrentForm(maNV)));
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
+            FrmLichSuThaoTac frmOpen = new FrmLichSuThaoTac(maNV);
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
         private void CloseForm(object sender, FormClosedEventArgs e)
         {

@@ -27,7 +27,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private IEnumerable<NhanVienViewModel> danhSachNhanVien;
         private IEnumerable<NhanVienViewModel> danhSachNhanVienTimKiem;
-        private readonly string formatDate = "dd/MM/yyyy";
+        private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         private readonly string maNV;
         private readonly NhanVien nv;
@@ -195,8 +195,8 @@ namespace QuanLyNhanSu.PresentationTier
             txtSDT.Text = string.Empty;
             txtEmail.Text = string.Empty;
             txtTrinhDoHocVan.Text = string.Empty;
-            dtpNgayVaoLam.Text = DateTime.Now.ToString(formatDate);
-            dtpThoiHanHopDong.Text = DateTime.Now.ToString(formatDate);
+            dtpNgayVaoLam.Text = DateTime.Now.ToString();
+            dtpThoiHanHopDong.Text = DateTime.Now.ToString();
             txtTinhTrang.Text = string.Empty;
             txtSoNgayPhep.Text = string.Empty;
             txtLuongCoBan.Text = string.Empty;
@@ -209,17 +209,12 @@ namespace QuanLyNhanSu.PresentationTier
         {
             this.Close();
         }
-        public void CloseCurrentForm(string maNV)
-        {
-            this.Close();
-            Application.Run(new FrmQuanLyNhanVien(maNV));
-        }
         public void Reload()
-        {            
-            this.Close();
-            currentForm = new Thread(new ThreadStart(() => CloseCurrentForm(maNV)));
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
+        {
+            FrmQuanLyNhanVien frmOpen = new FrmQuanLyNhanVien(maNV);
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         public string CheckMatKhau(string matKhau)
@@ -494,9 +489,8 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa nhân viên '" + txtMaNV.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
-            }
-            ClearAllText();
-            LoadNhanVien();                        
+                Reload();
+            }                      
         }      
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -513,9 +507,8 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá nhân viên '" + txtMaNV.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
+                Reload();
             }
-            ClearAllText();
-            LoadNhanVien();
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
@@ -532,7 +525,7 @@ namespace QuanLyNhanSu.PresentationTier
         }              
         private void btnThemPhuCap_Click(object sender, EventArgs e)
         {
-            FrmTongPhuCapMotNhanVien frmOpen = new FrmTongPhuCapMotNhanVien();
+            FrmChiTietPhuCapMotNhanVien frmOpen = new FrmChiTietPhuCapMotNhanVien();
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;

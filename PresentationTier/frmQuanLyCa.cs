@@ -94,18 +94,13 @@ namespace QuanLyNhanSu.PresentationTier
             dtpThoiGianBatDau.Text = "00:00";
             dtpThoiGianKetThuc.Text = "00:00";
         }
-        ///////////////////////////////////////////////////////////////////////////////////////
-        public void CloseCurrentForm(string maNV)
-        {
-            this.Close();
-            Application.Run(new FrmQuanLyCa(maNV));
-        }
+        ///////////////////////////////////////////////////////////////////////////////////////       
         public void Reload()
         {
-            this.Close();
-            currentForm = new Thread(new ThreadStart(() => CloseCurrentForm(maNV)));
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
+            FrmQuanLyCa frmOpen = new FrmQuanLyCa(maNV);
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
@@ -176,9 +171,8 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa ca '" + txtMaCa.Text+"'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
-            }
-            ClearAllText();
-            LoadCa();            
+                Reload();
+            }                      
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -196,9 +190,8 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá ca '" + txtTenCa.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
-            }            
-            ClearAllText();
-            LoadCa();          
+                Reload();
+            }                    
         }
         private void btnHuy_Click(object sender, EventArgs e)
         {

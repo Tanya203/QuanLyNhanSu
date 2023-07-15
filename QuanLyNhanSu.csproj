@@ -129,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTier\ChiTietPhieuDAL.cs" />
+    <Compile Include="DataTier\ChiTietPhuCapDAL.cs" />
     <Compile Include="DataTier\LichSuThaoTacDAL.cs" />
     <Compile Include="DataTier\Models\Ca.cs" />
     <Compile Include="DataTier\Models\ChamCong.cs" />
@@ -289,11 +290,11 @@
     <Compile Include="PresentationTier\FrmThongTinTaiKhoan.Designer.cs">
       <DependentUpon>FrmThongTinTaiKhoan.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmTongPhuCapMotNhanVien.cs">
+    <Compile Include="PresentationTier\FrmChiTietPhuCapMotNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmTongPhuCapMotNhanVien.Designer.cs">
-      <DependentUpon>FrmTongPhuCapMotNhanVien.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmChiTietPhuCapMotNhanVien.Designer.cs">
+      <DependentUpon>FrmChiTietPhuCapMotNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -308,6 +309,7 @@
     <Compile Include="ViewModels\PhieuViewModels.cs" />
     <Compile Include="ViewModels\PhongBanViewModels.cs" />
     <Compile Include="ViewModels\PhuCapViewMModels.cs" />
+    <Compile Include="ViewModels\ChiTietPhuCapViewModels.cs" />
     <EmbeddedResource Include="PresentationTier\FrmChamCong.resx">
       <DependentUpon>FrmChamCong.cs</DependentUpon>
     </EmbeddedResource>
@@ -368,8 +370,8 @@
     <EmbeddedResource Include="PresentationTier\FrmThongTinTaiKhoan.resx">
       <DependentUpon>FrmThongTinTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmTongPhuCapMotNhanVien.resx">
-      <DependentUpon>FrmTongPhuCapMotNhanVien.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmChiTietPhuCapMotNhanVien.resx">
+      <DependentUpon>FrmChiTietPhuCapMotNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

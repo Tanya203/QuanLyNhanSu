@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
-    public partial class FrmTongPhuCapMotNhanVien : Form
+    public partial class FrmChiTietPhuCapMotNhanVien : Form
     {
         Thread currentForm;
-        public FrmTongPhuCapMotNhanVien()
+        public FrmChiTietPhuCapMotNhanVien()
         {
             InitializeComponent();
         }
