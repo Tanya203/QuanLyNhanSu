@@ -634,7 +634,7 @@
             // 
             this.dtpNTNS.AllowDrop = true;
             this.dtpNTNS.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtpNTNS.CustomFormat = "dd/MM/yyyy";
+            this.dtpNTNS.CustomFormat = "yyyy-MM-dd";
             this.dtpNTNS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNTNS.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpNTNS.Location = new System.Drawing.Point(481, 157);
@@ -808,7 +808,7 @@
             // 
             this.dtpThoiHanHopDong.AllowDrop = true;
             this.dtpThoiHanHopDong.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtpThoiHanHopDong.CustomFormat = "dd/MM/yyyy";
+            this.dtpThoiHanHopDong.CustomFormat = "yyyy-MM-dd";
             this.dtpThoiHanHopDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpThoiHanHopDong.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpThoiHanHopDong.Location = new System.Drawing.Point(1243, 52);
@@ -820,7 +820,7 @@
             // 
             this.dtpNgayVaoLam.AllowDrop = true;
             this.dtpNgayVaoLam.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtpNgayVaoLam.CustomFormat = "dd/MM/yyyy";
+            this.dtpNgayVaoLam.CustomFormat = "yyyy-MM-dd";
             this.dtpNgayVaoLam.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNgayVaoLam.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpNgayVaoLam.Location = new System.Drawing.Point(1243, 16);

@@ -59,11 +59,13 @@ namespace QuanLyNhanSu.PresentationTier
             LoadThongTinPhieuThuong();
             LoadChiTietPhieuThuong();
             LoadPhongBan();
+            XoaButton();
             LoadChucVuTheoPhongBan(cmbPhongBan.SelectedValue.ToString());
             LoadNhanVienTheoChucVu(cmbChucVu.SelectedValue.ToString());
             txtMaP.ReadOnly = txtMaNV.ReadOnly = txtHoTenTT.ReadOnly = txtPhongBan.ReadOnly = txtChucVu.ReadOnly = txtHoTenNV.ReadOnly = txtTongTien.ReadOnly = txtLoaiPhieu.ReadOnly = true;
             dtpNgayLapPhieu.Enabled = false;
-            btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
+            txtMaNV_Sua.ReadOnly = true;
+            btnThem.Enabled = btnSua.Enabled = false;
         }
         public void LoadPhongBan()
         {
@@ -79,6 +81,13 @@ namespace QuanLyNhanSu.PresentationTier
             foreach (var pt in ctp)
                 nhanVienList = nhanVienList.Where(nv => nv.MaNV != pt.MaNV).ToList();
             cmbNhanVien.DataSource = nhanVienList;
+            if (string.IsNullOrEmpty(cmbNhanVien.Text))
+            {
+                cmbNhanVien.Enabled = false;
+                txtHoTenNV.Text = string.Empty;
+            }                
+            else 
+                cmbNhanVien.Enabled = true;
         }
         private void LoadChucVu(object sender, EventArgs e)
         {
@@ -88,7 +97,7 @@ namespace QuanLyNhanSu.PresentationTier
                 txtHoTenNV.Text = string.Empty;
             }
             else
-                txtTienThuong.Text = string.Empty;
+                txtSoTien.Text = string.Empty;
         }
         private void LoadNhanVien(object sender, EventArgs e)
         {
@@ -156,25 +165,27 @@ namespace QuanLyNhanSu.PresentationTier
         {
             NhanVien nv = nhanVienBUS.ThongTinNhanVien(cmbNhanVien.SelectedValue.ToString());
             txtHoTenNV.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+            maNV_Chon = null;
+            txtMaNV_Sua.Text = string.Empty;
+            txtSoTien.Text = string.Empty;
         }
         private void EnableButton()
         {
-
-            if (string.IsNullOrEmpty(cmbNhanVien.Text) && string.IsNullOrEmpty(txtTienThuong.Text) || string.IsNullOrEmpty(txtTienThuong.Text))
+            if (string.IsNullOrEmpty(cmbNhanVien.Text) && string.IsNullOrEmpty(txtSoTien.Text) || string.IsNullOrEmpty(txtSoTien.Text))
             {
-                btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = false;
+                btnThem.Enabled = btnSua.Enabled = false;
                 return;
             }
-            if (!string.IsNullOrEmpty(cmbNhanVien.Text) && !string.IsNullOrEmpty(txtTienThuong.Text))
+            if (!string.IsNullOrEmpty(cmbNhanVien.Text) && !string.IsNullOrEmpty(txtSoTien.Text) && maNV_Chon == null)
             {
                 btnThem.Enabled = true;
-                btnSua.Enabled = btnXoa.Enabled = false;
+                btnSua.Enabled = false;
                 return;
             }
-            if (string.IsNullOrEmpty(cmbNhanVien.Text) && !string.IsNullOrEmpty(txtTienThuong.Text))
+            if (maNV_Chon != null && !string.IsNullOrEmpty(txtSoTien.Text))
             {
                 btnThem.Enabled = false;
-                btnSua.Enabled = btnXoa.Enabled = true;
+                btnSua.Enabled = true;
                 return;
             }
         }
@@ -189,36 +200,40 @@ namespace QuanLyNhanSu.PresentationTier
             if (rowIndex < 0)
                 return;
             maNV_Chon = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[2].Value.ToString();
-            txtHoTenNV.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[3].Value.ToString();
             cmbPhongBan.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[4].Value.ToString();
             cmbChucVu.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[5].Value.ToString();
-            txtTienThuong.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[6].Value.ToString();
-            if (dgvThongTinPhieuThuong.Rows[rowIndex].Cells[6].Value is null)
+            txtHoTenNV.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[3].Value.ToString();            
+            txtSoTien.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[6].Value.ToString();
+            txtMaNV_Sua.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[2].Value.ToString();
+            if (dgvThongTinPhieuThuong.Rows[rowIndex].Cells[7].Value is null)
                 rtxtGhiChu.Text = string.Empty;
             else
                 rtxtGhiChu.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[7].Value.ToString();
+            if (e.ColumnIndex == 8)
+            {
+                maNV_Chon = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[2].Value.ToString();
+                XoaNhanVien();
+            }
+                
         }
         ///////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
-            cmbPhongBan.SelectedIndex = 0;
-            cmbChucVu.SelectedIndex = 0;
-            txtTienThuong.Text = string.Empty;
+            txtSoTien.Text = string.Empty;
             txtHoTenNV.Text = string.Empty;
             rtxtGhiChu.Text = string.Empty;
+            cmbPhongBan.SelectedIndex = 0;
+            cmbChucVu.SelectedIndex = 0;
+            maNV_Chon = null;
+            txtMaNV_Sua.Text = string.Empty;
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        public void CloseCurrentForm(string maNV)
-        {
-            this.Close();
-            Application.Run(new FrmChiTietPhieu(maNV, maP));
-        }
+        ///////////////////////////////////////////////////////////////////////////////////////////   
         public void Reload()
         {
-            this.Close();
-            currentForm = new Thread(new ThreadStart(() => CloseCurrentForm(maNV)));
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
+            FrmChiTietPhieu frmOpen = new FrmChiTietPhieu(maNV,phieu.MaP);
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
@@ -247,7 +262,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 MaP = maP,                
                 MaNV = cmbNhanVien.SelectedValue.ToString(),
-                SoTien = decimal.Parse(txtTienThuong.Text),
+                SoTien = decimal.Parse(txtSoTien.Text),
                 GhiChu = rtxtGhiChu.Text,
             };
             if (chiTietPhieuBus.Save(newChiTietPhieu))
@@ -268,7 +283,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 MaP = maP,
                 MaNV = maNV_Chon,
-                SoTien = decimal.Parse(txtTienThuong.Text),
+                SoTien = decimal.Parse(txtSoTien.Text),
                 GhiChu = rtxtGhiChu.Text,
             };
             if (chiTietPhieuBus.Save(newChiTietPhieu))
@@ -280,11 +295,28 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " sửa nhân viên " + maNV_Chon + " trong " + txtLoaiPhieu.Text.ToLower() + " " + maP,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
-            }
-            FrmChiTietPhieuThuong_Load(sender, e);
-            ClearAllText();
+                Reload();
+            }          
+            
         }
-        private void btnXoa_Click(object sender, EventArgs e)
+        public void XoaButton()
+        {
+            DataGridViewButtonColumn btnXoa = new DataGridViewButtonColumn();
+            {
+                btnXoa.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                btnXoa.Text = "Xoá";
+                btnXoa.UseColumnTextForButtonValue = true;
+                btnXoa.FlatStyle = FlatStyle.Popup;
+                var buttonCellStyle = new DataGridViewCellStyle
+                {
+                    BackColor = SystemColors.ScrollBar,
+                    Alignment = DataGridViewContentAlignment.MiddleCenter
+                };
+                btnXoa.DefaultCellStyle = buttonCellStyle;                
+                dgvThongTinPhieuThuong.Columns.Add(btnXoa);
+            }            
+        }
+        public void XoaNhanVien()
         {
             ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
             {
@@ -299,9 +331,9 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá nhân viên " + maNV_Chon + " trong " + txtLoaiPhieu.Text.ToLower() + " " + maP,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
-            }
-            FrmChiTietPhieuThuong_Load(sender, e);
-            ClearAllText();
+                Reload();
+            }           
+            
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {

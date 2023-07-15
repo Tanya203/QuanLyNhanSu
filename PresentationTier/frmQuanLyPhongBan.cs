@@ -89,17 +89,12 @@ namespace QuanLyNhanSu.PresentationTier
             txtTongSoNhanVien.Text = string.Empty;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////
-        public void CloseCurrentForm(string maNV)
-        {            
-            this.Close();
-            Application.Run(new FrmQuanLyPhongBan(maNV));
-        }
         public void Reload()
-        {            
-            this.Close();
-            currentForm = new Thread(new ThreadStart(() => CloseCurrentForm(maNV)));
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
+        {
+            FrmQuanLyPhongBan frmOpen = new FrmQuanLyPhongBan(maNV);
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
@@ -170,9 +165,9 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa phòng ban '" + txtMaPB.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
-            }    
-            ClearAllText();
-            LoadPhongBan();            
+                Reload();
+            }
+                      
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -189,13 +184,13 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá phòng ban '" + txtMaPB.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
+                Reload();
             }
-            ClearAllText();
-            LoadPhongBan();
+            
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            FrmManHinhChinh frmOpen = new FrmManHinhChinh(lblMaNV_DN.Text);
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;

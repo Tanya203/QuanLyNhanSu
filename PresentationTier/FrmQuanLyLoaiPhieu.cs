@@ -167,9 +167,8 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa loại phiếu '" + txtTenLoaiPhieu.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
+                Reload();
             }
-            ClearAllText();
-            LoadLoaiPhieu();
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -186,9 +185,8 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá loại phiếu '" + txtTenLoaiPhieu.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
+                Reload();
             }
-            ClearAllText();
-            LoadLoaiPhieu();
         }
         private void btnHuy_Click(object sender, EventArgs e)
         {

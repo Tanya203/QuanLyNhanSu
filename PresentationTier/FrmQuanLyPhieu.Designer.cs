@@ -403,7 +403,7 @@
             // 
             // dtpNgayLapPhieu
             // 
-            this.dtpNgayLapPhieu.CustomFormat = "HH:mm dd/MM/yyyy ";
+            this.dtpNgayLapPhieu.CustomFormat = "yyyy-MM-dd";
             this.dtpNgayLapPhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNgayLapPhieu.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpNgayLapPhieu.Location = new System.Drawing.Point(674, 17);

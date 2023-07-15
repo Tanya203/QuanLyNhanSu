@@ -33,6 +33,7 @@ namespace QuanLyNhanSu.DataTier.Models
         [Column(TypeName = "date")]
         public DateTime NgayLam { get; set; }
 
+        [Column(TypeName = "date")]
         public DateTime? NgayLap { get; set; }
 
         public virtual Ca Ca { get; set; }

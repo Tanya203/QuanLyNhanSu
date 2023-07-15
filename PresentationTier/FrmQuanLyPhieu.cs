@@ -27,6 +27,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<PhieuViewModels> danhSachPhieuThuongTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhieu(string maNV)
         {
@@ -75,7 +76,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieu.Rows[rowAdd].Cells[3].Value = pt.HoTen;
                 dgvThongTinPhieu.Rows[rowAdd].Cells[4].Value = pt.PhongBan;
                 dgvThongTinPhieu.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap;
+                dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap.ToString(formatDate);
                 dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = chiTietPhieuBUS.TongTienPhieu(pt.MaP);
             }
         }
@@ -97,8 +98,8 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieu.Rows[rowAdd].Cells[3].Value = pt.HoTen;
                 dgvThongTinPhieu.Rows[rowAdd].Cells[4].Value = pt.PhongBan;
                 dgvThongTinPhieu.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap;
-                //dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = chiTietPhieuThuongBUS.TongTienPhieuThuong(pt.MaPT);
+                dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap.ToString(formatDate);
+                dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = chiTietPhieuBUS.TongTienPhieu(pt.MaP);
             }
         }
         //////////////////////////////////////////////////////////////////////////////
@@ -133,17 +134,12 @@ namespace QuanLyNhanSu.PresentationTier
             txtTongTien.Text = string.Empty;
         }
         //////////////////////////////////////////////////////////////////////////////
-        public void CloseCurrentForm(string maNV)
-        {
-            this.Close();
-            Application.Run(new FrmQuanLyPhieu(maNV));
-        }
         public void Reload()
         {
-            this.Close();
-            currentForm = new Thread(new ThreadStart(() => CloseCurrentForm(maNV)));
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
+            FrmQuanLyPhieu frmOpen = new FrmQuanLyPhieu(maNV);
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
@@ -219,9 +215,8 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá phiếu thưởng '" + txtMaP.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
+                Reload();
             }
-            ClearAllText();
-            LoadPhieuThuong();
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
