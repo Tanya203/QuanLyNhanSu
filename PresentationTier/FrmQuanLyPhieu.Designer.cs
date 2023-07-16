@@ -51,7 +51,7 @@
             this.colChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNgayLap = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblThongTinPhieuThuong = new System.Windows.Forms.Label();
+            this.lblThongTinPhieu = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.btnQuanLyLoaiPhieu = new System.Windows.Forms.Button();
             this.cmbLoaiPhieu = new System.Windows.Forms.ComboBox();
@@ -218,6 +218,7 @@
             this.dgvThongTinPhieu.AllowUserToAddRows = false;
             this.dgvThongTinPhieu.AllowUserToDeleteRows = false;
             this.dgvThongTinPhieu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvThongTinPhieu.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -313,15 +314,15 @@
             this.colTongTien.Name = "colTongTien";
             this.colTongTien.ReadOnly = true;
             // 
-            // lblThongTinPhieuThuong
+            // lblThongTinPhieu
             // 
-            this.lblThongTinPhieuThuong.AutoSize = true;
-            this.lblThongTinPhieuThuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThongTinPhieuThuong.Location = new System.Drawing.Point(814, 116);
-            this.lblThongTinPhieuThuong.Name = "lblThongTinPhieuThuong";
-            this.lblThongTinPhieuThuong.Size = new System.Drawing.Size(328, 32);
-            this.lblThongTinPhieuThuong.TabIndex = 35;
-            this.lblThongTinPhieuThuong.Text = "Thông tin phiếu thưởng";
+            this.lblThongTinPhieu.AutoSize = true;
+            this.lblThongTinPhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThongTinPhieu.Location = new System.Drawing.Point(846, 116);
+            this.lblThongTinPhieu.Name = "lblThongTinPhieu";
+            this.lblThongTinPhieu.Size = new System.Drawing.Size(226, 32);
+            this.lblThongTinPhieu.TabIndex = 35;
+            this.lblThongTinPhieu.Text = "Thông tin phiếu";
             // 
             // pnlMenu
             // 
@@ -490,9 +491,9 @@
             this.lblMaPhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaPhieu.Location = new System.Drawing.Point(12, 19);
             this.lblMaPhieu.Name = "lblMaPhieu";
-            this.lblMaPhieu.Size = new System.Drawing.Size(180, 25);
+            this.lblMaPhieu.Size = new System.Drawing.Size(108, 25);
             this.lblMaPhieu.TabIndex = 0;
-            this.lblMaPhieu.Text = "Mã phiếu thưởng:";
+            this.lblMaPhieu.Text = "Mã phiếu:";
             // 
             // lblTimKiem
             // 
@@ -522,7 +523,7 @@
             this.ClientSize = new System.Drawing.Size(1924, 983);
             this.Controls.Add(this.lblTimKiem);
             this.Controls.Add(this.txtTimKiem);
-            this.Controls.Add(this.lblThongTinPhieuThuong);
+            this.Controls.Add(this.lblThongTinPhieu);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.dgvThongTinPhieu);
             this.Controls.Add(this.pnlHeader);
@@ -554,7 +555,7 @@
         private System.Windows.Forms.Label lblMaNhanVienDN;
         private System.Windows.Forms.Button btnTroVe;
         private System.Windows.Forms.DataGridView dgvThongTinPhieu;
-        private System.Windows.Forms.Label lblThongTinPhieuThuong;
+        private System.Windows.Forms.Label lblThongTinPhieu;
         private System.Windows.Forms.Panel pnlMenu;
         private System.Windows.Forms.TextBox txtMaP;
         private System.Windows.Forms.Button btnXoa;

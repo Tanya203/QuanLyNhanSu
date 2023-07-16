@@ -344,7 +344,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void EnableButtons(object sender, EventArgs e)
         {
-            BatTatNut();
+            BatTatNut();            
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         private void txtSoNgayPhep_KeyPress(object sender, KeyPressEventArgs e)
@@ -525,7 +525,7 @@ namespace QuanLyNhanSu.PresentationTier
         }              
         private void btnThemPhuCap_Click(object sender, EventArgs e)
         {
-            FrmChiTietPhuCapMotNhanVien frmOpen = new FrmChiTietPhuCapMotNhanVien();
+            FrmChiTietPhuCapMotNhanVien frmOpen = new FrmChiTietPhuCapMotNhanVien(maNV,txtMaNV.Text,"nhanVien");
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;

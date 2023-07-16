@@ -304,10 +304,18 @@ namespace QuanLyNhanSu.PresentationTier
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
             }
+            ClearMatKhauText();
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Reload();
+        }
+        private void btnThemPhuCap_Click(object sender, EventArgs e)
+        {
+            FrmChiTietPhuCapMotNhanVien frmOpen = new FrmChiTietPhuCapMotNhanVien(maNV,maNV,"thongTin");
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
     }
 }

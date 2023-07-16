@@ -160,6 +160,7 @@
     <Compile Include="DataTier\QuanLyPhongBanDAL.cs" />
     <Compile Include="DataTier\QuanLyNhanVienDAL.cs" />
     <Compile Include="LogicTier\ChiTietPhieuBUS.cs" />
+    <Compile Include="LogicTier\ChiTietPhuCapBUS.cs" />
     <Compile Include="LogicTier\LichSuThaoTacBUS.cs" />
     <Compile Include="LogicTier\PhieuBUS.cs" />
     <Compile Include="LogicTier\QuanLyCaBUS.cs" />

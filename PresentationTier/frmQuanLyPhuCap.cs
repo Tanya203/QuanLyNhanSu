@@ -92,17 +92,12 @@ namespace QuanLyNhanSu.PresentationTier
             txtSoLuongNhanVien.Text = string.Empty;
         }
         ////////////////////////////////////////////////////////////////////////////////////////
-        public void CloseCurrentForm(string maNV)
-        {
-            this.Close();
-            Application.Run(new FrmQuanLyPhuCap(maNV));
-        }
         public void Reload()
         {
-            this.Close();
-            currentForm = new Thread(new ThreadStart(() => CloseCurrentForm(maNV)));
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
+            FrmQuanLyPhuCap frmOpen = new FrmQuanLyPhuCap(maNV);
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
@@ -179,9 +174,8 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa phòng ban '" + txtMaPC.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
+                Reload();
             }
-            ClearAllText();
-            LoadPhuCap();
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -196,9 +190,8 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá phụ cấp '" + txtMaPC.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
+                Reload();
             }
-            ClearAllText();
-            LoadPhuCap();
         }
         private void btnHuy_Click(object sender, EventArgs e)
         {
