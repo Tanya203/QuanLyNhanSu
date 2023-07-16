@@ -51,7 +51,7 @@ namespace QuanLyNhanSu.PresentationTier
         public void LoadLichSuThaoTac()
         {
             dgvLichSuThaoTac.Rows.Clear();
-            lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuTThaoTac();
+            lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuTThaoTac(dtpNgay.Text);
             int rowAdd;
             foreach(var tt in lichSuThaoTac)
             {
@@ -67,7 +67,7 @@ namespace QuanLyNhanSu.PresentationTier
         public void LoadLichSuThaoTacTimKiem(string timKiem)
         {
             dgvLichSuThaoTac.Rows.Clear();
-            lichSuThaoTacTimKiem = lichSuThaoTacBUS.LichSuThaoTacTimKiem(timKiem);
+            lichSuThaoTacTimKiem = lichSuThaoTacBUS.LichSuThaoTacTimKiem(dtpNgay.Text,timKiem);
             int rowAdd;
             foreach (var tt in lichSuThaoTacTimKiem)
             {
@@ -79,6 +79,11 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[4].Value = tt.ChucVu;
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[5].Value = tt.ThaoTacThucHien;
             }
+        }
+        private void dtpNgay_ValueChanged(object sender, EventArgs e)
+        {
+            txtTimKiem.Text = txtTimKiem.Text;
+            LoadLichSuThaoTac();
         }
         /////////////////////////////////////////////////////////////////////////////////////////        
         public void Reload()
@@ -116,5 +121,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             Reload();
         }
+
+        
     }
 }

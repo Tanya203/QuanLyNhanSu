@@ -16,13 +16,13 @@ namespace QuanLyNhanSu.LogicTier
         {
             lichSuThaoTacDAL = new LichSuThaoTacDAL();
         }
-        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuTThaoTac()
+        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuTThaoTac(string ngay)
         {
-            return lichSuThaoTacDAL.GetAllLichSuTThaoTac();
+            return lichSuThaoTacDAL.GetAllLichSuTThaoTac(ngay);
         }
-        public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiem(string timKiem)
+        public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiem(string ngay ,string timKiem)
         {
-            return lichSuThaoTacDAL.LichSuThaoTacTimKiem(timKiem);
+            return lichSuThaoTacDAL.LichSuThaoTacTimKiem(ngay, timKiem);
         }
         public bool Save(LichSuThaoTac lstt)
         {
