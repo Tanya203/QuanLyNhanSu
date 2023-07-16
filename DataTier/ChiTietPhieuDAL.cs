@@ -18,7 +18,7 @@ namespace QuanLyNhanSu.DataTier
             quanLyNhanSu = new QuanLyNhanSuContextDB();
             MessageBoxManager.Register_OnceOnly();
         }
-        public IEnumerable<ChiTietPhieuViewModels> GetAllChiTietPhieu(string maPT)
+        public IEnumerable<ChiTietPhieuViewModels> GetAllChiTietPhieu(string maP)
         {
             var danhSachChiTietPhieuThuong = quanLyNhanSu.ChiTietPhieux.Select(x => new ChiTietPhieuViewModels
             {
@@ -30,7 +30,7 @@ namespace QuanLyNhanSu.DataTier
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 SoTien = x.SoTien,
                 GhiChu = x.GhiChu,
-            }).Where(pt => pt.MaP == maPT).OrderBy(pt => pt.MaNV);
+            }).Where(pt => pt.MaP == maP).OrderBy(pt => pt.MaNV);
             return danhSachChiTietPhieuThuong;
         }
         public IEnumerable<ChiTietPhieuViewModels> SearchChiTietPhieu(string maP, string timKiem)
@@ -130,9 +130,9 @@ namespace QuanLyNhanSu.DataTier
         }
         public decimal TongTienPhieu(string maPhieu)
         {
-            ChiTietPhieu ctp = quanLyNhanSu.ChiTietPhieux.Where(pt => pt.MaP == maPhieu).FirstOrDefault();
+            List<ChiTietPhieu> ctp = quanLyNhanSu.ChiTietPhieux.Where(pt => pt.MaP == maPhieu).ToList();
             if (ctp != null)
-                return quanLyNhanSu.ChiTietPhieux.Where(pt => pt.MaP == maPhieu).Sum(cptp => cptp.SoTien);
+                return ctp.Sum(cptp => cptp.SoTien);
             return 0;
         }
     }

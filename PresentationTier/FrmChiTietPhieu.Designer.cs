@@ -78,6 +78,8 @@
             this.txtHoTenNV = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblMaNhanVienSua = new System.Windows.Forms.Label();
+            this.txtMaNV_Sua = new System.Windows.Forms.TextBox();
             this.btnSua = new System.Windows.Forms.Button();
             this.cmbChucVu = new System.Windows.Forms.ComboBox();
             this.lblChucVu = new System.Windows.Forms.Label();
@@ -86,8 +88,6 @@
             this.btnHuy = new System.Windows.Forms.Button();
             this.lblThemNhanVien = new System.Windows.Forms.Label();
             this.lblThongTinPhieuThuong = new System.Windows.Forms.Label();
-            this.lblMaNhanVienSua = new System.Windows.Forms.Label();
-            this.txtMaNV_Sua = new System.Windows.Forms.TextBox();
             this.pnlMenu.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhieuThuong)).BeginInit();
@@ -503,6 +503,7 @@
             this.dgvThongTinPhieuThuong.AllowUserToAddRows = false;
             this.dgvThongTinPhieuThuong.AllowUserToDeleteRows = false;
             this.dgvThongTinPhieuThuong.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvThongTinPhieuThuong.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvThongTinPhieuThuong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvThongTinPhieuThuong.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaP,
@@ -625,6 +626,25 @@
             this.panel1.Size = new System.Drawing.Size(1035, 277);
             this.panel1.TabIndex = 64;
             // 
+            // lblMaNhanVienSua
+            // 
+            this.lblMaNhanVienSua.AutoSize = true;
+            this.lblMaNhanVienSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaNhanVienSua.Location = new System.Drawing.Point(29, 126);
+            this.lblMaNhanVienSua.Name = "lblMaNhanVienSua";
+            this.lblMaNhanVienSua.Size = new System.Drawing.Size(183, 25);
+            this.lblMaNhanVienSua.TabIndex = 71;
+            this.lblMaNhanVienSua.Text = "Mã nhân viên sửa";
+            // 
+            // txtMaNV_Sua
+            // 
+            this.txtMaNV_Sua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaNV_Sua.Location = new System.Drawing.Point(237, 124);
+            this.txtMaNV_Sua.MaxLength = 42;
+            this.txtMaNV_Sua.Name = "txtMaNV_Sua";
+            this.txtMaNV_Sua.Size = new System.Drawing.Size(263, 30);
+            this.txtMaNV_Sua.TabIndex = 70;
+            // 
             // btnSua
             // 
             this.btnSua.AutoSize = true;
@@ -729,25 +749,6 @@
             this.lblThongTinPhieuThuong.Size = new System.Drawing.Size(328, 32);
             this.lblThongTinPhieuThuong.TabIndex = 66;
             this.lblThongTinPhieuThuong.Text = "Thông tin phiếu thưởng";
-            // 
-            // lblMaNhanVienSua
-            // 
-            this.lblMaNhanVienSua.AutoSize = true;
-            this.lblMaNhanVienSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaNhanVienSua.Location = new System.Drawing.Point(29, 126);
-            this.lblMaNhanVienSua.Name = "lblMaNhanVienSua";
-            this.lblMaNhanVienSua.Size = new System.Drawing.Size(183, 25);
-            this.lblMaNhanVienSua.TabIndex = 71;
-            this.lblMaNhanVienSua.Text = "Mã nhân viên sửa";
-            // 
-            // txtMaNV_Sua
-            // 
-            this.txtMaNV_Sua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaNV_Sua.Location = new System.Drawing.Point(237, 124);
-            this.txtMaNV_Sua.MaxLength = 42;
-            this.txtMaNV_Sua.Name = "txtMaNV_Sua";
-            this.txtMaNV_Sua.Size = new System.Drawing.Size(263, 30);
-            this.txtMaNV_Sua.TabIndex = 70;
             // 
             // FrmChiTietPhieu
             // 

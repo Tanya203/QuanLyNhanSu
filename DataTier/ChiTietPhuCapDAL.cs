@@ -20,7 +20,7 @@ namespace QuanLyNhanSu.DataTier
         }
         public IEnumerable<ChiTietPhuCapViewModels> GetAllChiTietPhuCap(string maPC)
         {
-            return quanLyNhanSu.ChiTietPhuCaps.Select(x => new ChiTietPhuCapViewModels
+            var chiTietPhuCap = quanLyNhanSu.ChiTietPhuCaps.Select(x => new ChiTietPhuCapViewModels
             {
 
                 MaPC = x.MaPC,
@@ -29,12 +29,14 @@ namespace QuanLyNhanSu.DataTier
                 TenPhuCap = x.PhuCap.TenPhuCap,
                 TienPhuCap = x.PhuCap.TienPhuCap,
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
+                ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 GhiChu = x.GhiChu
             }).Where(pc => pc.MaPC == maPC).OrderBy(pc => pc.MaNV);
+            return chiTietPhuCap;
         }
         public IEnumerable<ChiTietPhuCapViewModels> GetPhuCapMotNhanVien(string maNV)
         {
-            return quanLyNhanSu.ChiTietPhuCaps.Select(x => new ChiTietPhuCapViewModels
+            var phuCapNhanVien = quanLyNhanSu.ChiTietPhuCaps.Select(x => new ChiTietPhuCapViewModels
             {
                 MaPC = x.MaPC,
                 MaNV = x.MaNV,
@@ -42,12 +44,14 @@ namespace QuanLyNhanSu.DataTier
                 TenPhuCap = x.PhuCap.TenPhuCap,
                 TienPhuCap = x.PhuCap.TienPhuCap,
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
+                ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 GhiChu = x.GhiChu
             }).Where(pc => pc.MaNV == maNV).OrderBy(pc => pc.MaPC);
+            return phuCapNhanVien;
         }
         public IEnumerable<ChiTietPhuCapViewModels> SearchChiTietPhuCap(string maPC, string timKiem)
         {
-            return quanLyNhanSu.ChiTietPhuCaps.Select(x => new ChiTietPhuCapViewModels
+            var phuCapTimKiem = quanLyNhanSu.ChiTietPhuCaps.Select(x => new ChiTietPhuCapViewModels
             {
 
                 MaPC = x.MaPC,
@@ -56,6 +60,7 @@ namespace QuanLyNhanSu.DataTier
                 TenPhuCap = x.PhuCap.TenPhuCap,
                 TienPhuCap = x.PhuCap.TienPhuCap,
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
+                ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 GhiChu = x.GhiChu
             }).Where(pc => pc.MaPC == maPC && (pc.MaNV.Contains(timKiem) ||
                      pc.HoTen.Contains(timKiem) ||
@@ -63,6 +68,11 @@ namespace QuanLyNhanSu.DataTier
                      pc.TienPhuCap.ToString().Contains(timKiem) ||
                      pc.PhongBan.Contains(timKiem) ||
                      pc.ChucVu.Contains(timKiem))).OrderBy(pc => pc.MaNV);
+            return phuCapTimKiem;
+        }
+        public List<ChiTietPhuCap> ThongTinPhuCapNhanVien(string maNV)
+        {
+            return quanLyNhanSu.ChiTietPhuCaps.Where(pc => pc.MaNV == maNV).ToList();   
         }
         public bool Save(ChiTietPhuCap chiTietPhuCap)
         {
@@ -70,6 +80,7 @@ namespace QuanLyNhanSu.DataTier
             {
                 quanLyNhanSu.ChiTietPhuCaps.Add(chiTietPhuCap);
                 quanLyNhanSu.SaveChanges();
+                MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
             }
             catch (Exception ex)
@@ -92,15 +103,23 @@ namespace QuanLyNhanSu.DataTier
         {
             try
             {
-                List<ChiTietPhuCap> newChiTietPhuCap = quanLyNhanSu.ChiTietPhuCaps.Where(pc => pc.MaNV == chiTietPhuCap.MaNV && pc.MaPC == chiTietPhuCap.MaPC).ToList();
+                ChiTietPhuCap newChiTietPhuCap = quanLyNhanSu.ChiTietPhuCaps.Where(pc => pc.MaNV == chiTietPhuCap.MaNV && pc.MaPC == chiTietPhuCap.MaPC).FirstOrDefault();
+                string maNV = newChiTietPhuCap.MaNV;
+                string phuCap = newChiTietPhuCap.PhuCap.TenPhuCap;
                 if(newChiTietPhuCap != null)
                 {
-                    foreach(var pc in newChiTietPhuCap)
+                    MessageBoxManager.Yes = "Có";
+                    MessageBoxManager.No = "Không";
+                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá " + newChiTietPhuCap.PhuCap.TenPhuCap + " của " + newChiTietPhuCap.MaNV + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (ketQua == DialogResult.Yes)
                     {
-                        quanLyNhanSu.ChiTietPhuCaps.Remove(pc);
-                    }
-                    quanLyNhanSu.SaveChanges();
-                    return true;
+                        MessageBoxManager.Yes = "Có";
+                        MessageBoxManager.No = "Không";
+                        quanLyNhanSu.ChiTietPhuCaps.Remove(newChiTietPhuCap);
+                        quanLyNhanSu.SaveChanges();
+                        MessageBox.Show("Đã xoá " + phuCap + " của " + maNV, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;                                            
+                    }                    
                 }
                 return false;
             }
@@ -118,6 +137,13 @@ namespace QuanLyNhanSu.DataTier
                 }
                 return false;
             }
+        }
+        public decimal TongPhuCapMotNhanVien(string maNV)
+        {            
+            List<ChiTietPhuCap> chiTietPhuCap = quanLyNhanSu.ChiTietPhuCaps.Where(pc => pc.MaNV == maNV).ToList();
+            if (chiTietPhuCap != null)
+                return chiTietPhuCap.Sum(pc => pc.PhuCap.TienPhuCap);
+            return 0;
         }
     }
 }

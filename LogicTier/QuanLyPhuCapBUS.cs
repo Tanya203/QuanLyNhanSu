@@ -23,6 +23,10 @@ namespace QuanLyNhanSu.LogicTier
         {
             return phuCapDAL.SearchPhuCap(timKiem);
         }
+        public IEnumerable<PhuCap> GetPhuCap()
+        {
+            return phuCapDAL.GetPhuCap();
+        }
         public bool Save(PhuCap phuCap)
         {
             return phuCapDAL.Save(phuCap);
@@ -30,6 +34,10 @@ namespace QuanLyNhanSu.LogicTier
         public bool Delete(PhuCap phuCap)
         {
             return phuCapDAL.Delete(phuCap.MaPC);
+        }
+        public PhuCap ThongTinPhuCap(string maPC)
+        {
+            return phuCapDAL.ThongTinPhuCap(maPC);
         }
         public int TongSoLuongNhanVienTrongPhongBan(string maPC)
         {

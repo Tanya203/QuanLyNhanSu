@@ -295,7 +295,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvThongTinNhanVien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvThongTinNhanVien.ColumnHeadersHeight = 29;
+            this.dgvThongTinNhanVien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvThongTinNhanVien.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaNV,
             this.colPhongBan,
@@ -337,6 +337,7 @@
             // 
             // colMaNV
             // 
+            this.colMaNV.FillWeight = 222.5403F;
             this.colMaNV.HeaderText = "Mã nhân viên";
             this.colMaNV.MinimumWidth = 6;
             this.colMaNV.Name = "colMaNV";
@@ -345,6 +346,7 @@
             // 
             // colPhongBan
             // 
+            this.colPhongBan.FillWeight = 173.943F;
             this.colPhongBan.HeaderText = "Phòng ban";
             this.colPhongBan.MinimumWidth = 6;
             this.colPhongBan.Name = "colPhongBan";
@@ -353,6 +355,7 @@
             // 
             // colChucVu
             // 
+            this.colChucVu.FillWeight = 135.896F;
             this.colChucVu.HeaderText = "Chức vụ";
             this.colChucVu.MinimumWidth = 6;
             this.colChucVu.Name = "colChucVu";
@@ -361,6 +364,7 @@
             // 
             // colLoaiHopDong
             // 
+            this.colLoaiHopDong.FillWeight = 189.8216F;
             this.colLoaiHopDong.HeaderText = "Loại hợp đồng";
             this.colLoaiHopDong.MinimumWidth = 6;
             this.colLoaiHopDong.Name = "colLoaiHopDong";
@@ -369,6 +373,7 @@
             // 
             // colTaiKhoan
             // 
+            this.colTaiKhoan.FillWeight = 134.4857F;
             this.colTaiKhoan.HeaderText = "Tài khoản";
             this.colTaiKhoan.MinimumWidth = 6;
             this.colTaiKhoan.Name = "colTaiKhoan";
@@ -377,6 +382,7 @@
             // 
             // colCCCD_CMND
             // 
+            this.colCCCD_CMND.FillWeight = 161.9954F;
             this.colCCCD_CMND.HeaderText = "CCCD/CMND";
             this.colCCCD_CMND.MinimumWidth = 6;
             this.colCCCD_CMND.Name = "colCCCD_CMND";
@@ -385,6 +391,7 @@
             // 
             // colHo
             // 
+            this.colHo.FillWeight = 58.16772F;
             this.colHo.HeaderText = "Họ";
             this.colHo.MinimumWidth = 6;
             this.colHo.Name = "colHo";
@@ -393,6 +400,7 @@
             // 
             // colTenLot
             // 
+            this.colTenLot.FillWeight = 90.631F;
             this.colTenLot.HeaderText = "Tên lót";
             this.colTenLot.MinimumWidth = 6;
             this.colTenLot.Name = "colTenLot";
@@ -401,6 +409,7 @@
             // 
             // colTen
             // 
+            this.colTen.FillWeight = 63.67757F;
             this.colTen.HeaderText = "Tên";
             this.colTen.MinimumWidth = 6;
             this.colTen.Name = "colTen";
@@ -409,6 +418,7 @@
             // 
             // colNTNS
             // 
+            this.colNTNS.FillWeight = 78.69454F;
             this.colNTNS.HeaderText = "NTNS";
             this.colNTNS.MinimumWidth = 6;
             this.colNTNS.Name = "colNTNS";
@@ -417,6 +427,7 @@
             // 
             // colSoNha
             // 
+            this.colSoNha.FillWeight = 83.60313F;
             this.colSoNha.HeaderText = "Số nhà";
             this.colSoNha.MinimumWidth = 6;
             this.colSoNha.Name = "colSoNha";
@@ -425,6 +436,7 @@
             // 
             // colDuong
             // 
+            this.colDuong.FillWeight = 75.97781F;
             this.colDuong.HeaderText = "Đường";
             this.colDuong.MinimumWidth = 6;
             this.colDuong.Name = "colDuong";
@@ -433,6 +445,7 @@
             // 
             // colPhuong_Xa
             // 
+            this.colPhuong_Xa.FillWeight = 105.0529F;
             this.colPhuong_Xa.HeaderText = "Phường/Xã";
             this.colPhuong_Xa.MinimumWidth = 6;
             this.colPhuong_Xa.Name = "colPhuong_Xa";
@@ -441,6 +454,7 @@
             // 
             // colQuan_Huyen
             // 
+            this.colQuan_Huyen.FillWeight = 108.2996F;
             this.colQuan_Huyen.HeaderText = "Quận/Huyện";
             this.colQuan_Huyen.MinimumWidth = 6;
             this.colQuan_Huyen.Name = "colQuan_Huyen";
@@ -449,6 +463,7 @@
             // 
             // colTinh_ThanhPho
             // 
+            this.colTinh_ThanhPho.FillWeight = 121.3069F;
             this.colTinh_ThanhPho.HeaderText = "Tỉnh/Thành phố";
             this.colTinh_ThanhPho.MinimumWidth = 6;
             this.colTinh_ThanhPho.Name = "colTinh_ThanhPho";
@@ -457,6 +472,7 @@
             // 
             // colGioiTinh
             // 
+            this.colGioiTinh.FillWeight = 68.75842F;
             this.colGioiTinh.HeaderText = "Giới tính";
             this.colGioiTinh.MinimumWidth = 6;
             this.colGioiTinh.Name = "colGioiTinh";
@@ -465,6 +481,7 @@
             // 
             // colSDT
             // 
+            this.colSDT.FillWeight = 46.85559F;
             this.colSDT.HeaderText = "SĐT";
             this.colSDT.MinimumWidth = 6;
             this.colSDT.Name = "colSDT";
@@ -473,6 +490,7 @@
             // 
             // colEmail
             // 
+            this.colEmail.FillWeight = 50.84455F;
             this.colEmail.HeaderText = "Email";
             this.colEmail.MinimumWidth = 6;
             this.colEmail.Name = "colEmail";
@@ -481,6 +499,7 @@
             // 
             // colTrinhDoHocVan
             // 
+            this.colTrinhDoHocVan.FillWeight = 107.2814F;
             this.colTrinhDoHocVan.HeaderText = "Trình độ học vấn";
             this.colTrinhDoHocVan.MinimumWidth = 6;
             this.colTrinhDoHocVan.Name = "colTrinhDoHocVan";
@@ -489,6 +508,7 @@
             // 
             // colNgayVaoLam
             // 
+            this.colNgayVaoLam.FillWeight = 83.70919F;
             this.colNgayVaoLam.HeaderText = "Ngày vào làm";
             this.colNgayVaoLam.MinimumWidth = 6;
             this.colNgayVaoLam.Name = "colNgayVaoLam";
@@ -497,6 +517,7 @@
             // 
             // colThoiHanHopDong
             // 
+            this.colThoiHanHopDong.FillWeight = 101.4882F;
             this.colThoiHanHopDong.HeaderText = "Thời hạn hợp đồng";
             this.colThoiHanHopDong.MinimumWidth = 6;
             this.colThoiHanHopDong.Name = "colThoiHanHopDong";
@@ -505,6 +526,7 @@
             // 
             // colTinhTrang
             // 
+            this.colTinhTrang.FillWeight = 58.15362F;
             this.colTinhTrang.HeaderText = "Tình trạng";
             this.colTinhTrang.MinimumWidth = 6;
             this.colTinhTrang.Name = "colTinhTrang";
@@ -513,6 +535,7 @@
             // 
             // colSoNgayPhep
             // 
+            this.colSoNgayPhep.FillWeight = 70.37577F;
             this.colSoNgayPhep.HeaderText = "Số ngày phép";
             this.colSoNgayPhep.MinimumWidth = 6;
             this.colSoNgayPhep.Name = "colSoNgayPhep";
@@ -521,6 +544,7 @@
             // 
             // colLuongCoBan
             // 
+            this.colLuongCoBan.FillWeight = 65.28441F;
             this.colLuongCoBan.HeaderText = "Lương cơ bản";
             this.colLuongCoBan.MinimumWidth = 6;
             this.colLuongCoBan.Name = "colLuongCoBan";
@@ -529,6 +553,7 @@
             // 
             // colPhuCap
             // 
+            this.colPhuCap.FillWeight = 43.1549F;
             this.colPhuCap.HeaderText = "Phụ cấp";
             this.colPhuCap.MinimumWidth = 6;
             this.colPhuCap.Name = "colPhuCap";

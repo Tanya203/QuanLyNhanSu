@@ -574,6 +574,7 @@
             this.btnThemPhuCap.Size = new System.Drawing.Size(39, 37);
             this.btnThemPhuCap.TabIndex = 31;
             this.btnThemPhuCap.UseVisualStyleBackColor = false;
+            this.btnThemPhuCap.Click += new System.EventHandler(this.btnThemPhuCap_Click);
             // 
             // rbKhac
             // 
