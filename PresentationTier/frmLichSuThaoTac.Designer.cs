@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblHoTenDN = new System.Windows.Forms.Label();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
             this.lblChucVuDN = new System.Windows.Forms.Label();
@@ -52,6 +52,8 @@
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
+            this.lblNgay = new System.Windows.Forms.Label();
+            this.dtpNgay = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichSuThaoTac)).BeginInit();
             this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
@@ -172,7 +174,7 @@
             // 
             this.lblTimKiem.AutoSize = true;
             this.lblTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimKiem.Location = new System.Drawing.Point(736, 167);
+            this.lblTimKiem.Location = new System.Drawing.Point(575, 168);
             this.lblTimKiem.Name = "lblTimKiem";
             this.lblTimKiem.Size = new System.Drawing.Size(145, 32);
             this.lblTimKiem.TabIndex = 50;
@@ -187,14 +189,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLichSuThaoTac.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvLichSuThaoTac.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLichSuThaoTac.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLichSuThaoTac.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvLichSuThaoTac.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLichSuThaoTac.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNgayio,
@@ -206,18 +208,18 @@
             this.dgvLichSuThaoTac.Location = new System.Drawing.Point(0, 206);
             this.dgvLichSuThaoTac.Name = "dgvLichSuThaoTac";
             this.dgvLichSuThaoTac.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLichSuThaoTac.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLichSuThaoTac.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvLichSuThaoTac.RowHeadersVisible = false;
             this.dgvLichSuThaoTac.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvLichSuThaoTac.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvLichSuThaoTac.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvLichSuThaoTac.RowTemplate.Height = 24;
             this.dgvLichSuThaoTac.Size = new System.Drawing.Size(1924, 827);
             this.dgvLichSuThaoTac.TabIndex = 49;
@@ -305,12 +307,33 @@
             // txtTimKiem
             // 
             this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimKiem.Location = new System.Drawing.Point(887, 170);
+            this.txtTimKiem.Location = new System.Drawing.Point(726, 171);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
             this.txtTimKiem.TabIndex = 51;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
+            // 
+            // lblNgay
+            // 
+            this.lblNgay.AutoSize = true;
+            this.lblNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNgay.Location = new System.Drawing.Point(1035, 169);
+            this.lblNgay.Name = "lblNgay";
+            this.lblNgay.Size = new System.Drawing.Size(93, 32);
+            this.lblNgay.TabIndex = 55;
+            this.lblNgay.Text = "Ngày:";
+            // 
+            // dtpNgay
+            // 
+            this.dtpNgay.CustomFormat = "dd/MM/yyyy";
+            this.dtpNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpNgay.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpNgay.Location = new System.Drawing.Point(1134, 171);
+            this.dtpNgay.Name = "dtpNgay";
+            this.dtpNgay.Size = new System.Drawing.Size(151, 30);
+            this.dtpNgay.TabIndex = 56;
+            this.dtpNgay.ValueChanged += new System.EventHandler(this.dtpNgay_ValueChanged);
             // 
             // FrmLichSuThaoTac
             // 
@@ -318,6 +341,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1924, 1033);
+            this.Controls.Add(this.dtpNgay);
+            this.Controls.Add(this.lblNgay);
             this.Controls.Add(this.lblLichSuThaoTac);
             this.Controls.Add(this.lblTimKiem);
             this.Controls.Add(this.dgvLichSuThaoTac);
@@ -359,5 +384,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colChucVu;
         private System.Windows.Forms.DataGridViewTextBoxColumn colThaoTacThucHien;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Label lblNgay;
+        private System.Windows.Forms.DateTimePicker dtpNgay;
     }
 }

@@ -20,7 +20,7 @@ namespace QuanLyNhanSu.DataTier
             quanLyNhanSu = new QuanLyNhanSuContextDB();
             MessageBoxManager.Register_OnceOnly();
         }
-        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuTThaoTac()
+        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuTThaoTac(string ngay)
         {
             var lichSuThaoTac = quanLyNhanSu.LichSuThaoTacs.Select(x => new LichSuThaoTacViewModels
             {
@@ -30,10 +30,10 @@ namespace QuanLyNhanSu.DataTier
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 ThaoTacThucHien = x.ThaoTacThucHien
-            }).OrderBy(lstt => lstt.NgayGio);
+            }).Where(lstt => lstt.NgayGio.Contains(ngay)).OrderBy(lstt => lstt.NgayGio);
             return lichSuThaoTac;
         }
-        public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiem(string timKiem)
+        public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiem(string ngay ,string timKiem)
         {
             var lichSuThaoTac = quanLyNhanSu.LichSuThaoTacs.Select(x => new LichSuThaoTacViewModels
             {
@@ -43,12 +43,12 @@ namespace QuanLyNhanSu.DataTier
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 ThaoTacThucHien = x.ThaoTacThucHien
-            }).Where(lstc => lstc.NgayGio.Contains(timKiem) ||
+            }).Where(lstc => lstc.NgayGio.Contains(ngay) && (lstc.NgayGio.Contains(timKiem) ||
                      lstc.MaNV.Contains(timKiem) || 
                      lstc.HoTen.Contains(timKiem) ||
                      lstc.ThaoTacThucHien.Contains(timKiem) ||
                      lstc.PhongBan.Contains(timKiem) ||
-                     lstc.ChucVu.Contains(timKiem)).OrderBy(lstt => lstt.NgayGio);            
+                     lstc.ChucVu.Contains(timKiem))).OrderBy(lstt => lstt.NgayGio);            
             return lichSuThaoTac;
         }
         public bool Save(LichSuThaoTac lstt)
