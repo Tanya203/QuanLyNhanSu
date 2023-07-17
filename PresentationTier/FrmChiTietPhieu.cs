@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -16,7 +17,7 @@ namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmChiTietPhieu : Form
     {
-        Thread currentForm;
+        private readonly CultureInfo fVND = CultureInfo.GetCultureInfo("vi-VN");
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly QuanLyPhongBanBUS phongBanBUS;
         private readonly QuanLyChucVuBUS chucVuBUS;
@@ -122,7 +123,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtPhongBan.Text = phieu.NhanVien.ChucVu.PhongBan.TenPhongBan;
             txtChucVu.Text = phieu.NhanVien.ChucVu.TenChucVu;
             dtpNgayLapPhieu.Text = phieu.NgayLap.ToString();
-            txtTongTien.Text = chiTietPhieuBus.TongTienPhieu(maP).ToString();
+            txtTongTien.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBus.TongTienPhieu(maP));
         }
         public void LoadChiTietPhieuThuong()
         {
@@ -138,7 +139,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[3].Value = phieu.HoTen;
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[4].Value = phieu.PhongBan;
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[5].Value = phieu.ChucVu;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[6].Value = phieu.SoTien;
+                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[6].Value = String.Format(fVND, "{0:N3} ₫", phieu.SoTien);
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[7].Value = phieu.GhiChu;
             }
         }
@@ -156,7 +157,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[3].Value = phieu.HoTen;
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[4].Value = phieu.PhongBan;
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[5].Value = phieu.ChucVu;
-                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[6].Value = phieu.SoTien;
+                dgvThongTinPhieuThuong.Rows[rowAdd].Cells[6].Value = String.Format(fVND, "{0:N3} ₫", phieu.SoTien);
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[7].Value = phieu.GhiChu;
             }
         }
@@ -203,7 +204,7 @@ namespace QuanLyNhanSu.PresentationTier
             cmbPhongBan.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[4].Value.ToString();
             cmbChucVu.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[5].Value.ToString();
             txtHoTenNV.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[3].Value.ToString();            
-            txtSoTien.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[6].Value.ToString();
+            txtSoTien.Text = chiTietPhieuBus.SoTienNhanVienTrongPhieu(maNV_Chon,txtMaP.Text).ToString();
             txtMaNV_Sua.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[2].Value.ToString();
             if (dgvThongTinPhieuThuong.Rows[rowIndex].Cells[7].Value is null)
                 rtxtGhiChu.Text = string.Empty;

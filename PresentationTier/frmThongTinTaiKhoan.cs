@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,9 +18,10 @@ namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmThongTinTaiKhoan : Form
     {
-        Thread currentForm;
+        private readonly CultureInfo fVND = CultureInfo.GetCultureInfo("vi-VN");
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
+        private readonly ChiTietPhuCapBUS chiTietPhuCapBUS;
         private readonly string maNV;
         private readonly NhanVien nv;
         private readonly string formatDate = "dd/MM/yyyy";
@@ -29,6 +31,7 @@ namespace QuanLyNhanSu.PresentationTier
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
+            chiTietPhuCapBUS = new ChiTietPhuCapBUS();
             this.maNV = maNV;
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             txtMaNV.ReadOnly = true;
@@ -97,8 +100,8 @@ namespace QuanLyNhanSu.PresentationTier
             txtThoiHanHopDong.Text = nv.ThoiHanHopDong.ToString(formatDate);
             txtTinhTrang.Text = nv.TinhTrang;
             txtSoNgayPhep.Text = nv.SoNgayPhep.ToString();
-            txtLuongCoBan.Text = nv.LuongCoBan.ToString();
-            txtPhuCap.Text = nhanVienBUS.TongPhuCap1NhanVien(maNV).ToString();
+            txtLuongCoBan.Text = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
+            txtPhuCap.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(maNV));
         }
         //////////////////////////////////////////////////////////////////////////////   
         public void Reload()

@@ -246,16 +246,6 @@ namespace QuanLyNhanSu.DataTier
         {
             return quanLyNhanSu.NhanViens.Where(nv =>nv.MaNV == maNV).FirstOrDefault();
         }
-        public decimal TongPhuCap1NhanVien(string maNV)
-        {
-            decimal tongPhuCap = 0;
-            var listCTPC = quanLyNhanSu.ChiTietPhuCaps.Where(nv => nv.MaNV == maNV).ToList();
-            foreach(var pc in listCTPC)
-            {
-                tongPhuCap += quanLyNhanSu.PhuCaps.Where(x => x.MaPC == pc.MaPC).Sum(p => p.TienPhuCap);
-            }
-            return tongPhuCap;            
-        }
         public bool LoginVerify(string taiKhoan, string matKhau)
         {
             var nhanVien = quanLyNhanSu.NhanViens.Where(x => x.TaiKhoan == taiKhoan).FirstOrDefault();

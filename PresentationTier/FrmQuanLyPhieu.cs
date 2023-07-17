@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -17,7 +18,7 @@ namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmQuanLyPhieu : Form
     {
-        Thread currentForm;
+        private readonly CultureInfo fVND = CultureInfo.GetCultureInfo("vi-VN");
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly PhieuBUS phieuBus;
         private readonly ChiTietPhieuBUS chiTietPhieuBUS;
@@ -77,7 +78,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieu.Rows[rowAdd].Cells[4].Value = pt.PhongBan;
                 dgvThongTinPhieu.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
                 dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap.ToString(formatDate);
-                dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = chiTietPhieuBUS.TongTienPhieu(pt.MaP);
+                dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBUS.TongTienPhieu(pt.MaP));
             }
         }
         public void LoadLoaiPhieu()
@@ -99,7 +100,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieu.Rows[rowAdd].Cells[4].Value = pt.PhongBan;
                 dgvThongTinPhieu.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
                 dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap.ToString(formatDate);
-                dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = chiTietPhieuBUS.TongTienPhieu(pt.MaP);
+                dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBUS.TongTienPhieu(pt.MaP));
             }
         }
         //////////////////////////////////////////////////////////////////////////////
@@ -189,7 +190,7 @@ namespace QuanLyNhanSu.PresentationTier
             cmbLoaiPhieu.Text = txtMaNV.Text = dgvThongTinPhieu.Rows[rowIndex].Cells[1].Value.ToString();
             txtMaNV.Text = dgvThongTinPhieu.Rows[rowIndex].Cells[2].Value.ToString();
             dtpNgayLapPhieu.Text = dgvThongTinPhieu.Rows[rowIndex].Cells[6].Value.ToString();
-            txtTongTien.Text = dgvThongTinPhieu.Rows[rowIndex].Cells[7].Value.ToString();
+            txtTongTien.Text = chiTietPhieuBUS.TongTienPhieu(txtMaP.Text).ToString();
             if (e.ColumnIndex == 8)
                 OpenChiTietPhieuThuong(maNV,dgvThongTinPhieu.Rows[rowIndex].Cells[0].Value.ToString());
         }

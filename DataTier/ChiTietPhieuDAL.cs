@@ -55,6 +55,13 @@ namespace QuanLyNhanSu.DataTier
                      pt.GhiChu.Contains(timKiem))).OrderBy(pt => pt.MaNV);
             return danhSachChiTietPhieuThuong;
         }
+        public decimal SoTienNhanVienTrongPhieu(string maNV, string maPhieu)
+        {
+            ChiTietPhieu chiTietPhieu = quanLyNhanSu.ChiTietPhieux.Where(nv => nv.MaNV == maNV && nv.MaP == maPhieu).FirstOrDefault();
+            if(chiTietPhieu != null)
+                return chiTietPhieu.SoTien;
+            return 0;
+        }
         public IEnumerable<ChiTietPhieu> ThongTinChiTietPhieu(string maP)
         {
             return quanLyNhanSu.ChiTietPhieux.Where(pt => pt.MaP == maP).ToList();

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -16,7 +17,7 @@ namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmChiTietPhuCapMotNhanVien : Form
     {
-        Thread currentForm;
+        private readonly CultureInfo fVND = CultureInfo.GetCultureInfo("vi-VN");
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly ChiTietPhuCapBUS chiTietPhuCapBUS;
         private readonly QuanLyPhuCapBUS phuCapBUS;
@@ -91,9 +92,9 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvChiTietPhuCap.Rows[rowAdd].Cells[3].Value = phieu.ChucVu;
                 dgvChiTietPhuCap.Rows[rowAdd].Cells[4].Value = phieu.MaPC;
                 dgvChiTietPhuCap.Rows[rowAdd].Cells[5].Value = phieu.TenPhuCap;
-                dgvChiTietPhuCap.Rows[rowAdd].Cells[6].Value = phieu.TienPhuCap;
+                dgvChiTietPhuCap.Rows[rowAdd].Cells[6].Value = String.Format(fVND, "{0:N3} ₫", phieu.TienPhuCap);
             }
-            txtTongPhuCap.Text = chiTietPhuCapBUS.TongPhuCapMotNhanVien(nhanVienPC).ToString();
+            txtTongPhuCap.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(nhanVienPC));
             txtMaNV.Text = nhanVienPC;
         }
         //////////////////////////////////////////////////////////////////////////////////////        
@@ -117,7 +118,7 @@ namespace QuanLyNhanSu.PresentationTier
             else
             {
                 btnThem.Enabled = true;
-                txtSoTien.Text = phuCap.TienPhuCap.ToString();
+                txtSoTien.Text = String.Format(fVND, "{0:N3} ₫", phuCap.TienPhuCap);
             }              
 
         }
@@ -204,7 +205,6 @@ namespace QuanLyNhanSu.PresentationTier
                 frmOpen.FormClosed += CloseForm;
             }
         }
-
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Reload();

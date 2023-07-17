@@ -73,7 +73,7 @@
             this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTienThuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSoTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGhiChu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtHoTenNV = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -512,7 +512,7 @@
             this.colHoTen,
             this.colPhongBan,
             this.colChucVu,
-            this.colTienThuong,
+            this.colSoTien,
             this.colGhiChu});
             this.dgvThongTinPhieuThuong.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvThongTinPhieuThuong.Location = new System.Drawing.Point(0, 470);
@@ -569,12 +569,12 @@
             this.colChucVu.Name = "colChucVu";
             this.colChucVu.ReadOnly = true;
             // 
-            // colTienThuong
+            // colSoTien
             // 
-            this.colTienThuong.HeaderText = "Tiền thưởng";
-            this.colTienThuong.MinimumWidth = 6;
-            this.colTienThuong.Name = "colTienThuong";
-            this.colTienThuong.ReadOnly = true;
+            this.colSoTien.HeaderText = "Số tiền";
+            this.colSoTien.MinimumWidth = 6;
+            this.colSoTien.Name = "colSoTien";
+            this.colSoTien.ReadOnly = true;
             // 
             // colGhiChu
             // 
@@ -654,7 +654,7 @@
             this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSua.Image = global::QuanLyNhanSu.Properties.Resources.fix;
-            this.btnSua.Location = new System.Drawing.Point(735, 220);
+            this.btnSua.Location = new System.Drawing.Point(735, 194);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(100, 49);
             this.btnSua.TabIndex = 69;
@@ -703,7 +703,7 @@
             this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.Image = global::QuanLyNhanSu.Properties.Resources.add;
-            this.btnThem.Location = new System.Drawing.Point(543, 220);
+            this.btnThem.Location = new System.Drawing.Point(543, 194);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(109, 49);
             this.btnThem.TabIndex = 48;
@@ -721,7 +721,7 @@
             this.btnHuy.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnHuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHuy.Image = global::QuanLyNhanSu.Properties.Resources.cancel;
-            this.btnHuy.Location = new System.Drawing.Point(904, 220);
+            this.btnHuy.Location = new System.Drawing.Point(904, 194);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(99, 49);
             this.btnHuy.TabIndex = 51;
@@ -744,11 +744,11 @@
             // 
             this.lblThongTinPhieuThuong.AutoSize = true;
             this.lblThongTinPhieuThuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThongTinPhieuThuong.Location = new System.Drawing.Point(301, 116);
+            this.lblThongTinPhieuThuong.Location = new System.Drawing.Point(350, 116);
             this.lblThongTinPhieuThuong.Name = "lblThongTinPhieuThuong";
-            this.lblThongTinPhieuThuong.Size = new System.Drawing.Size(328, 32);
+            this.lblThongTinPhieuThuong.Size = new System.Drawing.Size(234, 32);
             this.lblThongTinPhieuThuong.TabIndex = 66;
-            this.lblThongTinPhieuThuong.Text = "Thông tin phiếu thưởng";
+            this.lblThongTinPhieuThuong.Text = "Thông tin phiếu ";
             // 
             // FrmChiTietPhieu
             // 
@@ -831,16 +831,16 @@
         private System.Windows.Forms.Label lblTongTien;
         private System.Windows.Forms.TextBox txtLoaiPhieu;
         private System.Windows.Forms.Label lblLoaiPhieu;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Label lblMaNhanVienSua;
+        private System.Windows.Forms.TextBox txtMaNV_Sua;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaP;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLoaiPhieu;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaNV;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHoTen;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhongBan;
         private System.Windows.Forms.DataGridViewTextBoxColumn colChucVu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTienThuong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSoTien;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGhiChu;
-        private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Label lblMaNhanVienSua;
-        private System.Windows.Forms.TextBox txtMaNV_Sua;
     }
 }
