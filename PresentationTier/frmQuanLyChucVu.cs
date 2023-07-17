@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -16,7 +17,7 @@ namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmQuanLyChucVu : Form
     {
-        Thread currentForm;
+        private readonly CultureInfo fVND = CultureInfo.GetCultureInfo("vi-VN");
         private readonly QuanLyChucVuBUS chucVuBUS;
         private readonly QuanLyPhongBanBUS phongBanBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
@@ -70,7 +71,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinChucVu.Rows[rowAdd].Cells[0].Value = cv.MaCV;
                 dgvThongTinChucVu.Rows[rowAdd].Cells[1].Value = cv.TenPhongBan;
                 dgvThongTinChucVu.Rows[rowAdd].Cells[2].Value = cv.TenChucVu;
-                dgvThongTinChucVu.Rows[rowAdd].Cells[3].Value = cv.LuongKhoiDiem;
+                dgvThongTinChucVu.Rows[rowAdd].Cells[3].Value = String.Format(fVND, "{0:N3} ₫", cv.LuongKhoiDiem);
                 dgvThongTinChucVu.Rows[rowAdd].Cells[4].Value = chucVuBUS.TongSoNhanVienThuocChucVu(cv.MaCV);
             }
         }
@@ -85,7 +86,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinChucVu.Rows[rowAdd].Cells[0].Value = cv.MaCV;
                 dgvThongTinChucVu.Rows[rowAdd].Cells[1].Value = cv.TenPhongBan;
                 dgvThongTinChucVu.Rows[rowAdd].Cells[2].Value = cv.TenChucVu;
-                dgvThongTinChucVu.Rows[rowAdd].Cells[3].Value = cv.LuongKhoiDiem;
+                dgvThongTinChucVu.Rows[rowAdd].Cells[3].Value = String.Format(fVND, "{0:N3} ₫", cv.LuongKhoiDiem);
                 dgvThongTinChucVu.Rows[rowAdd].Cells[4].Value = chucVuBUS.TongSoNhanVienThuocChucVu(cv.MaCV);
             }
         }
@@ -232,7 +233,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtMaCV.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[0].Value.ToString();
             cmbPhongBan.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[1].Value.ToString();
             txtTenCV.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[2].Value.ToString();
-            txtLuongKhoiDiem.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[3].Value.ToString();
+            txtLuongKhoiDiem.Text = chucVuBUS.GetLuongCoBanCuaChucVu(txtMaCV.Text).ToString();
             txtTongSoNhanVien.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[4].Value.ToString();
 
         }       

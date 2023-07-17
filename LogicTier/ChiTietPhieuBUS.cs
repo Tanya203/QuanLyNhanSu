@@ -40,6 +40,9 @@ namespace QuanLyNhanSu.LogicTier
         {
             return chiTietPhieuDAL.ThongTinChiTietPhieu(maP);
         }
-
+        public decimal SoTienNhanVienTrongPhieu(string maNV, string maPhieu)
+        {
+            return chiTietPhieuDAL.SoTienNhanVienTrongPhieu(maNV, maPhieu);
+        }
     }
 }

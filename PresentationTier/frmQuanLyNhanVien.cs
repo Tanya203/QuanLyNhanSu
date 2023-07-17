@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -19,12 +20,13 @@ namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmQuanLyNhanVien : Form
     {
-        Thread currentForm;
+        private readonly CultureInfo fVND = CultureInfo.GetCultureInfo("vi-VN");
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly QuanLyPhongBanBUS phongBanBus;
         private readonly QuanLyChucVuBUS chucVuBUS;
         private readonly QuanLyLoaiHopDongBUS loaiHopDongBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
+        private readonly ChiTietPhuCapBUS chiTietPhuCapBUS;
         private IEnumerable<NhanVienViewModel> danhSachNhanVien;
         private IEnumerable<NhanVienViewModel> danhSachNhanVienTimKiem;
         private readonly string formatDate = "yyyy-MM-dd";
@@ -41,6 +43,7 @@ namespace QuanLyNhanSu.PresentationTier
             chucVuBUS = new QuanLyChucVuBUS();
             loaiHopDongBUS = new QuanLyLoaiHopDongBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
+            chiTietPhuCapBUS = new ChiTietPhuCapBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             this.maNV = maNV;
         }
@@ -109,8 +112,8 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[20].Value = nv.ThoiHanHopDong.ToString(formatDate);
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[21].Value = nv.TinhTrang;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[22].Value = nv.SoNgayPhep;
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = nv.LuongCoBan;
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[24].Value = nhanVienBUS.TongPhuCap1NhanVien(nv.MaNV);
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(nv.MaNV));
             }
         }
         private void LoadNhanVienTimKiem(string timKiem)
@@ -144,8 +147,8 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[20].Value = nv.ThoiHanHopDong.ToString(formatDate);
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[21].Value = nv.TinhTrang;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[22].Value = nv.SoNgayPhep;
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = nv.LuongCoBan;
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[24].Value = nhanVienBUS.TongPhuCap1NhanVien(nv.MaNV);
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(nv.MaNV));
             }
         }
         public void LoadPhongBan()
@@ -429,14 +432,14 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 string hoTen;
                 if (string.IsNullOrEmpty(txtTenLot.Text))
-                    hoTen = txtHo + txtTen.Text;
+                    hoTen = txtHo.Text + txtTen.Text;
                 else
-                    hoTen = txtHo + txtTenLot.Text + txtTen.Text;
+                    hoTen = txtHo.Text + txtTenLot.Text + txtTen.Text;
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm nhân viên '" + hoTen + "'",
+                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm nhân viên " + hoTen + "",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -584,8 +587,8 @@ namespace QuanLyNhanSu.PresentationTier
             dtpThoiHanHopDong.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[20].Value.ToString();
             txtTinhTrang.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[21].Value.ToString();
             txtSoNgayPhep.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[22].Value.ToString();
-            txtLuongCoBan.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[23].Value.ToString();
-            txtPhuCap.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[24].Value.ToString();
+            txtLuongCoBan.Text = nhanVienBUS.ThongTinNhanVien(txtMaNV.Text).LuongCoBan.ToString();
+            txtPhuCap.Text = chiTietPhuCapBUS.TongPhuCapMotNhanVien(txtMaNV.Text).ToString();
         }
         private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
         {

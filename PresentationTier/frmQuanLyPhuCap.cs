@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -16,7 +17,7 @@ namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmQuanLyPhuCap : Form
     {
-        Thread currentForm;
+        private readonly CultureInfo fVND = CultureInfo.GetCultureInfo("vi-VN");
         private readonly QuanLyPhuCapBUS phuCapBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
@@ -65,7 +66,7 @@ namespace QuanLyNhanSu.PresentationTier
                 rowAdd = dgvThongTinPhuCap.Rows.Add();
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[0].Value = pc.MaPC;
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[1].Value = pc.TenPhuCap;
-                dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = pc.TienPhuCap;
+                dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = String.Format(fVND, "{0:N3} ₫", pc.TienPhuCap);
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = phuCapBUS.TongSoLuongNhanVienTrongPhongBan(pc.MaPC).ToString();
             }
         }
@@ -79,7 +80,7 @@ namespace QuanLyNhanSu.PresentationTier
                 rowAdd = dgvThongTinPhuCap.Rows.Add();
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[0].Value = pc.MaPC;
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[1].Value = pc.TenPhuCap;
-                dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = pc.TienPhuCap;
+                dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = String.Format(fVND, "{0:N3} ₫", pc.TienPhuCap);
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = phuCapBUS.TongSoLuongNhanVienTrongPhongBan(pc.MaPC).ToString();
             }
         }
@@ -131,7 +132,11 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void txtSoTien_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
             {
                 e.Handled = true;
             }
@@ -211,7 +216,7 @@ namespace QuanLyNhanSu.PresentationTier
                 return;
             txtMaPC.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[0].Value.ToString();
             txtTenPC.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[1].Value.ToString();
-            txtSoTien.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[2].Value.ToString();
+            txtSoTien.Text = phuCapBUS.ThongTinPhuCap(txtMaPC.Text).TienPhuCap.ToString();
             txtSoLuongNhanVien.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[3].Value.ToString();
         }
        

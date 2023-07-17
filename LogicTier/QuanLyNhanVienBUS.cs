@@ -49,10 +49,6 @@ namespace QuanLyNhanSu.LogicTier
         {
             return nhanVienDAL.Delete(maNV);
         }
-        public decimal TongPhuCap1NhanVien(string maNV)
-        {
-            return nhanVienDAL.TongPhuCap1NhanVien(maNV);
-        }
         public bool LoginVerify(string taiKhoan, string matKhau)
         {            
             return nhanVienDAL.LoginVerify(taiKhoan, matKhau);
