@@ -39,7 +39,6 @@
             this.pnlDetail = new System.Windows.Forms.Panel();
             this.cmbNhanVien = new System.Windows.Forms.ComboBox();
             this.btnThem = new System.Windows.Forms.Button();
-            this.btnHuy = new System.Windows.Forms.Button();
             this.lblNhanVien = new System.Windows.Forms.Label();
             this.lblThongTinLichLamViec = new System.Windows.Forms.Label();
             this.lblThemNhanVien = new System.Windows.Forms.Label();
@@ -51,15 +50,6 @@
             this.lblMaNhanVienDN = new System.Windows.Forms.Label();
             this.btnTroVe = new System.Windows.Forms.Button();
             this.dgvThongTinPhieuThuong = new System.Windows.Forms.DataGridView();
-            this.colMaLLV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNgayLam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLoaiCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colThoiGianDen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colThoiGianVe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhep = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colXoa = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.txtCa = new System.Windows.Forms.TextBox();
             this.txtLoaiCa = new System.Windows.Forms.TextBox();
@@ -69,6 +59,13 @@
             this.lblNgayLam = new System.Windows.Forms.Label();
             this.txtMaLLV = new System.Windows.Forms.TextBox();
             this.lblMaLichLamViec = new System.Windows.Forms.Label();
+            this.colMaLLV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNgayLam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLoaiCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colThoiGianDen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colThoiGianVe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlDetail.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhieuThuong)).BeginInit();
@@ -161,7 +158,6 @@
             this.pnlDetail.Controls.Add(this.label1);
             this.pnlDetail.Controls.Add(this.cmbNhanVien);
             this.pnlDetail.Controls.Add(this.btnThem);
-            this.pnlDetail.Controls.Add(this.btnHuy);
             this.pnlDetail.Controls.Add(this.lblNhanVien);
             this.pnlDetail.Location = new System.Drawing.Point(964, 181);
             this.pnlDetail.Name = "pnlDetail";
@@ -187,30 +183,13 @@
             this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.Image = global::QuanLyNhanSu.Properties.Resources.add;
-            this.btnThem.Location = new System.Drawing.Point(190, 121);
+            this.btnThem.Location = new System.Drawing.Point(267, 121);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(109, 44);
             this.btnThem.TabIndex = 48;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
-            // 
-            // btnHuy
-            // 
-            this.btnHuy.AutoSize = true;
-            this.btnHuy.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnHuy.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHuy.FlatAppearance.BorderSize = 0;
-            this.btnHuy.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnHuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHuy.Image = global::QuanLyNhanSu.Properties.Resources.cancel;
-            this.btnHuy.Location = new System.Drawing.Point(320, 121);
-            this.btnHuy.Name = "btnHuy";
-            this.btnHuy.Size = new System.Drawing.Size(92, 44);
-            this.btnHuy.TabIndex = 51;
-            this.btnHuy.Text = "Huỷ";
-            this.btnHuy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnHuy.UseVisualStyleBackColor = false;
             // 
             // lblNhanVien
             // 
@@ -356,9 +335,7 @@
             this.colLoaiCa,
             this.colMaNV,
             this.colThoiGianDen,
-            this.colThoiGianVe,
-            this.colPhep,
-            this.colXoa});
+            this.colThoiGianVe});
             this.dgvThongTinPhieuThuong.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvThongTinPhieuThuong.Location = new System.Drawing.Point(0, 411);
             this.dgvThongTinPhieuThuong.Name = "dgvThongTinPhieuThuong";
@@ -368,69 +345,6 @@
             this.dgvThongTinPhieuThuong.RowTemplate.Height = 24;
             this.dgvThongTinPhieuThuong.Size = new System.Drawing.Size(1924, 572);
             this.dgvThongTinPhieuThuong.TabIndex = 70;
-            // 
-            // colMaLLV
-            // 
-            this.colMaLLV.HeaderText = "Mã lịch làm việc";
-            this.colMaLLV.MinimumWidth = 6;
-            this.colMaLLV.Name = "colMaLLV";
-            this.colMaLLV.ReadOnly = true;
-            // 
-            // colNgayLam
-            // 
-            this.colNgayLam.HeaderText = "Ngày làm";
-            this.colNgayLam.MinimumWidth = 6;
-            this.colNgayLam.Name = "colNgayLam";
-            this.colNgayLam.ReadOnly = true;
-            // 
-            // colCa
-            // 
-            this.colCa.HeaderText = "Ca";
-            this.colCa.MinimumWidth = 6;
-            this.colCa.Name = "colCa";
-            this.colCa.ReadOnly = true;
-            // 
-            // colLoaiCa
-            // 
-            this.colLoaiCa.HeaderText = "Loại ca";
-            this.colLoaiCa.MinimumWidth = 6;
-            this.colLoaiCa.Name = "colLoaiCa";
-            this.colLoaiCa.ReadOnly = true;
-            // 
-            // colMaNV
-            // 
-            this.colMaNV.HeaderText = "Mã nhân viên";
-            this.colMaNV.MinimumWidth = 6;
-            this.colMaNV.Name = "colMaNV";
-            this.colMaNV.ReadOnly = true;
-            // 
-            // colThoiGianDen
-            // 
-            this.colThoiGianDen.HeaderText = "Thời gian đến";
-            this.colThoiGianDen.MinimumWidth = 6;
-            this.colThoiGianDen.Name = "colThoiGianDen";
-            this.colThoiGianDen.ReadOnly = true;
-            // 
-            // colThoiGianVe
-            // 
-            this.colThoiGianVe.HeaderText = "Thời gian về";
-            this.colThoiGianVe.MinimumWidth = 6;
-            this.colThoiGianVe.Name = "colThoiGianVe";
-            this.colThoiGianVe.ReadOnly = true;
-            // 
-            // colPhep
-            // 
-            this.colPhep.HeaderText = "Phép";
-            this.colPhep.MinimumWidth = 6;
-            this.colPhep.Name = "colPhep";
-            this.colPhep.ReadOnly = true;
-            // 
-            // colXoa
-            // 
-            this.colXoa.HeaderText = "";
-            this.colXoa.MinimumWidth = 6;
-            this.colXoa.Name = "colXoa";
-            this.colXoa.ReadOnly = true;
             // 
             // pnlMenu
             // 
@@ -522,6 +436,55 @@
             this.lblMaLichLamViec.TabIndex = 0;
             this.lblMaLichLamViec.Text = "Mã lịch làm việc:";
             // 
+            // colMaLLV
+            // 
+            this.colMaLLV.HeaderText = "Mã lịch làm việc";
+            this.colMaLLV.MinimumWidth = 6;
+            this.colMaLLV.Name = "colMaLLV";
+            this.colMaLLV.ReadOnly = true;
+            // 
+            // colNgayLam
+            // 
+            this.colNgayLam.HeaderText = "Ngày làm";
+            this.colNgayLam.MinimumWidth = 6;
+            this.colNgayLam.Name = "colNgayLam";
+            this.colNgayLam.ReadOnly = true;
+            // 
+            // colCa
+            // 
+            this.colCa.HeaderText = "Ca";
+            this.colCa.MinimumWidth = 6;
+            this.colCa.Name = "colCa";
+            this.colCa.ReadOnly = true;
+            // 
+            // colLoaiCa
+            // 
+            this.colLoaiCa.HeaderText = "Loại ca";
+            this.colLoaiCa.MinimumWidth = 6;
+            this.colLoaiCa.Name = "colLoaiCa";
+            this.colLoaiCa.ReadOnly = true;
+            // 
+            // colMaNV
+            // 
+            this.colMaNV.HeaderText = "Mã nhân viên";
+            this.colMaNV.MinimumWidth = 6;
+            this.colMaNV.Name = "colMaNV";
+            this.colMaNV.ReadOnly = true;
+            // 
+            // colThoiGianDen
+            // 
+            this.colThoiGianDen.HeaderText = "Thời gian đến";
+            this.colThoiGianDen.MinimumWidth = 6;
+            this.colThoiGianDen.Name = "colThoiGianDen";
+            this.colThoiGianDen.ReadOnly = true;
+            // 
+            // colThoiGianVe
+            // 
+            this.colThoiGianVe.HeaderText = "Thời gian về";
+            this.colThoiGianVe.MinimumWidth = 6;
+            this.colThoiGianVe.Name = "colThoiGianVe";
+            this.colThoiGianVe.ReadOnly = true;
+            // 
             // FrmChiTietLichLamViec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -566,7 +529,6 @@
         private System.Windows.Forms.Panel pnlDetail;
         private System.Windows.Forms.ComboBox cmbNhanVien;
         private System.Windows.Forms.Button btnThem;
-        private System.Windows.Forms.Button btnHuy;
         private System.Windows.Forms.Label lblNhanVien;
         private System.Windows.Forms.Label lblThongTinLichLamViec;
         private System.Windows.Forms.Label lblThemNhanVien;
@@ -584,6 +546,9 @@
         private System.Windows.Forms.Label lblNgayLam;
         private System.Windows.Forms.TextBox txtMaLLV;
         private System.Windows.Forms.Label lblMaLichLamViec;
+        private System.Windows.Forms.TextBox txtCa;
+        private System.Windows.Forms.TextBox txtLoaiCa;
+        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaLLV;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNgayLam;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCa;
@@ -591,10 +556,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaNV;
         private System.Windows.Forms.DataGridViewTextBoxColumn colThoiGianDen;
         private System.Windows.Forms.DataGridViewTextBoxColumn colThoiGianVe;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colPhep;
-        private System.Windows.Forms.DataGridViewButtonColumn colXoa;
-        private System.Windows.Forms.TextBox txtCa;
-        private System.Windows.Forms.TextBox txtLoaiCa;
-        private System.Windows.Forms.Button btnRefresh;
     }
 }
