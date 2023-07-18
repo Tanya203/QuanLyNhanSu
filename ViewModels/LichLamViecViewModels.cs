@@ -10,7 +10,12 @@ namespace QuanLyNhanSu.ViewModels
     {
         public string MaLLV { get; set; }
         public string MaNV { get; set; }
-        public string MaCa { get; set; }
-        public string MaLC { get; set;}
+        public string MaPB { get; set;}
+        public DateTime NgayLam { get; set; }
+        public string HoTen { get; set; }
+        public string ChucVu { get; set; }
+        public string TenCa { get; set; }
+        public string TenLC { get; set;}
+        public string PhongBan { get; set; }
     }
 }

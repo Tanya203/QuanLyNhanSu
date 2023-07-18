@@ -119,6 +119,11 @@ namespace QuanLyNhanSu.DataTier
             var listNV = quanLyNhanSu.NhanViens.Where(nv => nv.ChucVu.MaCV == maCV).ToList();
             return listNV;
         }
+        public IEnumerable<NhanVien> GetNhanVienPhongBan(string maPB)
+        {
+            var listNV = quanLyNhanSu.NhanViens.Where(nv => nv.ChucVu.PhongBan.MaPB == maPB).ToList();
+            return listNV;
+        }
         public IEnumerable<NhanVien> GetNhanVien()
         {
             return quanLyNhanSu.NhanViens.OrderBy(nv => nv.MaNV).ToList();

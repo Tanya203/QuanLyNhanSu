@@ -48,6 +48,10 @@ namespace QuanLyNhanSu.DataTier
         {
             return quanLyNhanSu.Cas.OrderBy(cv => cv.MaCa).ToList();
         }
+        public Ca ThongTinCa(string maCa)
+        {
+            return quanLyNhanSu.Cas.Where(ca => ca.MaCa == maCa).FirstOrDefault(); 
+        }
         public bool Save(Ca ca)
         {
             try
