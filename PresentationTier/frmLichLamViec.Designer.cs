@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.lblThongTinLichLamViec = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
@@ -83,6 +83,8 @@
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
             this.txtTimKiem.TabIndex = 59;
+            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
+            this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 
             // lblThongTinLichLamViec
             // 
@@ -93,7 +95,6 @@
             this.lblThongTinLichLamViec.Size = new System.Drawing.Size(318, 32);
             this.lblThongTinLichLamViec.TabIndex = 57;
             this.lblThongTinLichLamViec.Text = "Thông tin lịch làm việc";
-            this.lblThongTinLichLamViec.Click += new System.EventHandler(this.lblThongTinLichLamViec_Click);
             // 
             // pnlMenu
             // 
@@ -213,11 +214,12 @@
             this.dgvThongTinLichLamViec.ReadOnly = true;
             this.dgvThongTinLichLamViec.RowHeadersVisible = false;
             this.dgvThongTinLichLamViec.RowHeadersWidth = 51;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvThongTinLichLamViec.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvThongTinLichLamViec.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvThongTinLichLamViec.RowTemplate.Height = 24;
             this.dgvThongTinLichLamViec.Size = new System.Drawing.Size(1924, 577);
             this.dgvThongTinLichLamViec.TabIndex = 55;
+            this.dgvThongTinLichLamViec.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThongTinLichLamViec_CellClick);
             // 
             // colMaLLV
             // 
@@ -403,6 +405,7 @@
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // btnTroVe
             // 

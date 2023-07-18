@@ -47,12 +47,13 @@ namespace QuanLyNhanSu.DataTier
                 TenLC = x.LoaiCa.TenLoaiCa,
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
-            }).Where(llv => llv.MaPB == maP && (llv.MaNV.Contains(timKiem) ||
+            }).Where(llv => llv.MaPB == maP && ((llv.MaNV.Contains(timKiem )||
+                     llv.MaLLV.Contains(timKiem) ||
                      llv.TenCa.Contains(timKiem) ||
                      llv.TenLC.Contains(timKiem) ||
                      llv.NgayLam.ToString().Contains(timKiem) ||
                      llv.ChucVu.Contains(timKiem) ||
-                     llv.HoTen.Contains(timKiem))).OrderBy(llv => llv.MaNV);
+                     llv.HoTen.Contains(timKiem)))).OrderBy(llv => llv.MaNV);
             return lichLamViec;
         }
         public LichLamViec ThongTinLichLamViec(string maLLV)
