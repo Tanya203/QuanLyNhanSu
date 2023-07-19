@@ -333,7 +333,7 @@ namespace QuanLyNhanSu.PresentationTier
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
-            }           
+            }          
             
         }
         private void btnTroVe_Click(object sender, EventArgs e)

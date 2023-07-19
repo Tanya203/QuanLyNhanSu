@@ -99,12 +99,11 @@ namespace QuanLyNhanSu.DataTier
                 return false;
             }
         }
-        public bool Delete(ChiTietPhuCap chiTietPhuCap)
+        public bool Delete(string maNV, string maPC)
         {
             try
             {
-                ChiTietPhuCap newChiTietPhuCap = quanLyNhanSu.ChiTietPhuCaps.Where(pc => pc.MaNV == chiTietPhuCap.MaNV && pc.MaPC == chiTietPhuCap.MaPC).FirstOrDefault();
-                string maNV = newChiTietPhuCap.MaNV;
+                ChiTietPhuCap newChiTietPhuCap = quanLyNhanSu.ChiTietPhuCaps.Where(pc => pc.MaNV == maNV && pc.MaPC == maPC).FirstOrDefault();                
                 string phuCap = newChiTietPhuCap.PhuCap.TenPhuCap;
                 if(newChiTietPhuCap != null)
                 {

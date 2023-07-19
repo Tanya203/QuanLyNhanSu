@@ -148,6 +148,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTier\ChiTietLichLamViecDAL.cs" />
     <Compile Include="DataTier\ChiTietPhieuDAL.cs" />
     <Compile Include="DataTier\ChiTietPhuCapDAL.cs" />
     <Compile Include="DataTier\LichLamViecDAL.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="DataTier\QuanLyLoaiHopDongDAL.cs" />
     <Compile Include="DataTier\QuanLyPhongBanDAL.cs" />
     <Compile Include="DataTier\QuanLyNhanVienDAL.cs" />
+    <Compile Include="LogicTier\ChiTietLichLamViecBUS.cs" />
     <Compile Include="LogicTier\ChiTietPhieuBUS.cs" />
     <Compile Include="LogicTier\ChiTietPhuCapBUS.cs" />
     <Compile Include="LogicTier\LichLamViecBUS.cs" />
@@ -322,6 +324,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CaViewModels.cs" />
+    <Compile Include="ViewModels\ChiTietLichLamViecViewModels.cs" />
     <Compile Include="ViewModels\ChiTietPhieuViewModels.cs" />
     <Compile Include="ViewModels\ChucVuViewModels.cs" />
     <Compile Include="ViewModels\LichLamViecViewModels.cs" />

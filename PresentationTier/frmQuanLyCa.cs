@@ -145,7 +145,7 @@ namespace QuanLyNhanSu.PresentationTier
             {                
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {                                    
-                    NgayGio = DateTime.Now.ToString(formatTime),
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên "+ maNV +" thêm ca "+ txtTenCa.Text,                    
                 };
@@ -166,7 +166,7 @@ namespace QuanLyNhanSu.PresentationTier
             {                
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now.ToString(formatTime),
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa ca '" + txtMaCa.Text+"'",
                 };
@@ -185,7 +185,7 @@ namespace QuanLyNhanSu.PresentationTier
                
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
-                    NgayGio = DateTime.Now.ToString(formatTime),
+                    NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
                     ThaoTacThucHien = "Nhân viên " + maNV + " xoá ca '" + txtTenCa.Text + "'",
                 };

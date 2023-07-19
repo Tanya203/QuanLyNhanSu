@@ -554,7 +554,7 @@
             // 
             this.dtpNTNS.AllowDrop = true;
             this.dtpNTNS.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtpNTNS.CustomFormat = "dd/MM/yyyy";
+            this.dtpNTNS.CustomFormat = "yyyy-MM-dd";
             this.dtpNTNS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNTNS.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpNTNS.Location = new System.Drawing.Point(216, 337);

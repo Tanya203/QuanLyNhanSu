@@ -77,6 +77,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieu.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
                 dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap.ToString(formatDate);
                 dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBUS.TongTienPhieu(pt.MaP));
+
             }
         }
         public void LoadLoaiPhieu()
@@ -99,6 +100,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieu.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
                 dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap.ToString(formatDate);
                 dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBUS.TongTienPhieu(pt.MaP));
+                
             }
         }
         //////////////////////////////////////////////////////////////////////////////
