@@ -34,7 +34,7 @@ namespace QuanLyNhanSu.LogicTier
         }
         public bool Delete(ChiTietPhuCap chiTietPhuCap)
         {
-            return chiTietPhuCapDAL.Delete(chiTietPhuCap);
+            return chiTietPhuCapDAL.Delete(chiTietPhuCap.MaNV, chiTietPhuCap.MaPC);
         }
         public List<ChiTietPhuCap> ThongTinPhuCapNhanVien(string maNV)
         {

@@ -200,10 +200,10 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void OpenChiTietLichLamViec(string maNV, string maLLV)
         {
-            /*FrmChiTietPhieu frmOpen = new FrmChiTietPhieu(maNV, maPT);
+            FrmChiTietLichLamViec frmOpen = new FrmChiTietLichLamViec(maNV, maLLV);
             frmOpen.Show();
             this.Hide();
-            frmOpen.FormClosed += CloseForm;*/
+            frmOpen.FormClosed += CloseForm;
         }
         private void XoaLichLamViec(string maLLV, string phongBan, string ngayLam, string ca, string loaiCa)
         {
@@ -240,7 +240,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm lịch ngày " + lichLamViec.NgayLam + " - Ca " + cmbCa.Text + " - Loại ca " + cmbLoaiCa.Text + " - Phòng ban " + nv.ChucVu.PhongBan.TenPhongBan,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm lịch ngày " + lichLamViec.NgayLam.ToString(formatDate) + " - Ca " + cmbCa.Text + " - Loại ca " + cmbLoaiCa.Text + " - Phòng ban " + nv.ChucVu.PhongBan.TenPhongBan,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -251,17 +251,18 @@ namespace QuanLyNhanSu.PresentationTier
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
-            if (e.ColumnIndex == 8)
-            {
-                string maLLV = dgvThongTinLichLamViec.Rows[rowIndex].Cells[0].Value.ToString();
-                string phongBan = dgvThongTinLichLamViec.Rows[rowIndex].Cells[3].Value.ToString();
-                string ngayLam = dgvThongTinLichLamViec.Rows[rowIndex].Cells[5].Value.ToString();
-                string ca = dgvThongTinLichLamViec.Rows[rowIndex].Cells[6].Value.ToString();
-                string loaiCa = dgvThongTinLichLamViec.Rows[rowIndex].Cells[7].Value.ToString();
-                XoaLichLamViec(maLLV, phongBan, ngayLam, ca, loaiCa);
-            }           
-                                           
-            //if (e.ColumnIndex == 9)
+            string maLLV = dgvThongTinLichLamViec.Rows[rowIndex].Cells[0].Value.ToString();
+            string phongBan = dgvThongTinLichLamViec.Rows[rowIndex].Cells[3].Value.ToString();
+            string ngayLam = dgvThongTinLichLamViec.Rows[rowIndex].Cells[5].Value.ToString();
+            string ca = dgvThongTinLichLamViec.Rows[rowIndex].Cells[6].Value.ToString();
+            string loaiCa = dgvThongTinLichLamViec.Rows[rowIndex].Cells[7].Value.ToString();
+            if (rowIndex < 0)
+                return;
+            if (e.ColumnIndex == 8)                           
+                XoaLichLamViec(maLLV, phongBan, ngayLam, ca, loaiCa);                                                                  
+            if (e.ColumnIndex == 9)           
+                OpenChiTietLichLamViec(maNV, maLLV);
+            
                 
         }
         private void btnTroVe_Click(object sender, EventArgs e)

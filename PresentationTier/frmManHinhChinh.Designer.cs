@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.btnDangXuat = new System.Windows.Forms.Button();
             this.btnTTTK = new System.Windows.Forms.Button();
@@ -59,14 +61,14 @@
             this.lblLichLamViec = new System.Windows.Forms.Label();
             this.dtpLichLamViec = new System.Windows.Forms.DateTimePicker();
             this.dgvLichLamViec = new System.Windows.Forms.DataGridView();
+            this.colMaLLV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLoaiCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNgayLam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhep = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLoaiCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colThoiGianDen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colThoiGianVe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhep = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.pnlMenu.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbAnhNV)).BeginInit();
@@ -524,6 +526,7 @@
             this.dtpLichLamViec.Name = "dtpLichLamViec";
             this.dtpLichLamViec.Size = new System.Drawing.Size(308, 34);
             this.dtpLichLamViec.TabIndex = 16;
+            this.dtpLichLamViec.ValueChanged += new System.EventHandler(this.dtpLichLamViec_ValueChanged);
             // 
             // dgvLichLamViec
             // 
@@ -544,22 +547,45 @@
             this.dgvLichLamViec.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLichLamViec.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLichLamViec.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colMaLLV,
             this.colMaNV,
-            this.colHoTen,
-            this.colLoaiCa,
-            this.colCa,
             this.colNgayLam,
-            this.colPhep,
+            this.colCa,
+            this.colLoaiCa,
             this.colThoiGianDen,
-            this.colThoiGianVe});
+            this.colThoiGianVe,
+            this.colPhep});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLichLamViec.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvLichLamViec.Location = new System.Drawing.Point(0, 360);
             this.dgvLichLamViec.Name = "dgvLichLamViec";
             this.dgvLichLamViec.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLichLamViec.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvLichLamViec.RowHeadersVisible = false;
             this.dgvLichLamViec.RowHeadersWidth = 51;
             this.dgvLichLamViec.RowTemplate.Height = 24;
             this.dgvLichLamViec.Size = new System.Drawing.Size(1924, 673);
             this.dgvLichLamViec.TabIndex = 17;
+            // 
+            // colMaLLV
+            // 
+            this.colMaLLV.HeaderText = "Mã lịch làm việc";
+            this.colMaLLV.MinimumWidth = 6;
+            this.colMaLLV.Name = "colMaLLV";
+            this.colMaLLV.ReadOnly = true;
             // 
             // colMaNV
             // 
@@ -568,19 +594,12 @@
             this.colMaNV.Name = "colMaNV";
             this.colMaNV.ReadOnly = true;
             // 
-            // colHoTen
+            // colNgayLam
             // 
-            this.colHoTen.HeaderText = "Họ tên";
-            this.colHoTen.MinimumWidth = 6;
-            this.colHoTen.Name = "colHoTen";
-            this.colHoTen.ReadOnly = true;
-            // 
-            // colLoaiCa
-            // 
-            this.colLoaiCa.HeaderText = "Loại ca";
-            this.colLoaiCa.MinimumWidth = 6;
-            this.colLoaiCa.Name = "colLoaiCa";
-            this.colLoaiCa.ReadOnly = true;
+            this.colNgayLam.HeaderText = "Ngày làm";
+            this.colNgayLam.MinimumWidth = 6;
+            this.colNgayLam.Name = "colNgayLam";
+            this.colNgayLam.ReadOnly = true;
             // 
             // colCa
             // 
@@ -589,19 +608,12 @@
             this.colCa.Name = "colCa";
             this.colCa.ReadOnly = true;
             // 
-            // colNgayLam
+            // colLoaiCa
             // 
-            this.colNgayLam.HeaderText = "Ngày làm";
-            this.colNgayLam.MinimumWidth = 6;
-            this.colNgayLam.Name = "colNgayLam";
-            this.colNgayLam.ReadOnly = true;
-            // 
-            // colPhep
-            // 
-            this.colPhep.HeaderText = "Phép";
-            this.colPhep.MinimumWidth = 6;
-            this.colPhep.Name = "colPhep";
-            this.colPhep.ReadOnly = true;
+            this.colLoaiCa.HeaderText = "Loại ca";
+            this.colLoaiCa.MinimumWidth = 6;
+            this.colLoaiCa.Name = "colLoaiCa";
+            this.colLoaiCa.ReadOnly = true;
             // 
             // colThoiGianDen
             // 
@@ -616,6 +628,13 @@
             this.colThoiGianVe.MinimumWidth = 6;
             this.colThoiGianVe.Name = "colThoiGianVe";
             this.colThoiGianVe.ReadOnly = true;
+            // 
+            // colPhep
+            // 
+            this.colPhep.HeaderText = "Phép";
+            this.colPhep.MinimumWidth = 6;
+            this.colPhep.Name = "colPhep";
+            this.colPhep.ReadOnly = true;
             // 
             // FrmManHinhChinh
             // 
@@ -677,13 +696,13 @@
         private System.Windows.Forms.DataGridView dgvLichLamViec;
         private System.Windows.Forms.Label lblSoNgayPhepConNV;
         private System.Windows.Forms.Label lblSoNgayPhepCon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaLLV;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaNV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHoTen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLoaiCa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNgayLam;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colPhep;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLoaiCa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colThoiGianDen;
         private System.Windows.Forms.DataGridViewTextBoxColumn colThoiGianVe;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colPhep;
     }
 }

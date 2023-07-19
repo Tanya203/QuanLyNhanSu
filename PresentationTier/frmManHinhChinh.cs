@@ -18,12 +18,16 @@ namespace QuanLyNhanSu.PresentationTier
     public partial class FrmManHinhChinh : Form
     {
         private readonly QuanLyNhanVienBUS nhanVienBUS;
+        private readonly ChiTietLichLamViecBUS chiTietLichLamViecBUS;
+        private IEnumerable<ChamCong> lichLamViec;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string formatDate = "yyyy-MM-dd";
         public FrmManHinhChinh(string maNV)
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
+            chiTietLichLamViecBUS = new ChiTietLichLamViecBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             this.maNV = maNV;
             MessageBoxManager.Register_OnceOnly();
@@ -31,6 +35,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void frmManHinhChinh_Load(object sender, EventArgs e)
         {            
             LoadThongTinDangNhap();
+            LoadLichLamViec();
         }       
         public void LoadThongTinDangNhap()
         {
@@ -42,6 +47,27 @@ namespace QuanLyNhanSu.PresentationTier
             lblPhongBanNV.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV.Text = nv.ChucVu.TenChucVu;
             lblSoNgayPhepConNV.Text = nv.SoNgayPhep.ToString();
+        }
+        public void LoadLichLamViec()
+        {
+            dgvLichLamViec.Rows.Clear();
+            lichLamViec = chiTietLichLamViecBUS.LichLamViecNhanVien(maNV,dtpLichLamViec.Value.ToString(formatDate)) ;
+            int rowAdd;
+            foreach (var nv in lichLamViec)
+            {
+                rowAdd = dgvLichLamViec.Rows.Add();
+                dgvLichLamViec.Rows[rowAdd].Cells[0].Value = nv.MaLLV;
+                dgvLichLamViec.Rows[rowAdd].Cells[1].Value = nv.MaNV;
+                dgvLichLamViec.Rows[rowAdd].Cells[2].Value = nv.LichLamViec.NgayLam.ToString(formatDate);
+                dgvLichLamViec.Rows[rowAdd].Cells[3].Value = nv.LichLamViec.Ca.TenCa;
+                dgvLichLamViec.Rows[rowAdd].Cells[4].Value = nv.LichLamViec.LoaiCa.TenLoaiCa;
+                dgvLichLamViec.Rows[rowAdd].Cells[5].Value = nv.ThoiGianDen;
+                dgvLichLamViec.Rows[rowAdd].Cells[6].Value = nv.ThoiGianVe;
+                if (nv.Phep)
+                    dgvLichLamViec.Rows[rowAdd].Cells[7].Value = true;
+                else
+                    dgvLichLamViec.Rows[rowAdd].Cells[7].Value = false;
+            }
         }
         private void btnQLNV_Click(object sender, EventArgs e)
         {
@@ -73,10 +99,10 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnQLCC_Click(object sender, EventArgs e)
         {
-            FrmChiTietLichLamViec frmOpen = new FrmChiTietLichLamViec();
+            /*FrmChiTietLichLamViec frmOpen = new FrmChiTietLichLamViec(maNV);
             frmOpen.Show();
             this.Hide();
-            frmOpen.FormClosed += CloseForm;
+            frmOpen.FormClosed += CloseForm;*/
         }
         private void btnQLLLV_Click(object sender, EventArgs e)
         {
@@ -150,6 +176,11 @@ namespace QuanLyNhanSu.PresentationTier
                 this.Hide();
                 frmOpen.FormClosed += CloseForm;
             }           
+        }
+
+        private void dtpLichLamViec_ValueChanged(object sender, EventArgs e)
+        {
+            LoadLichLamViec();
         }
     }
 }

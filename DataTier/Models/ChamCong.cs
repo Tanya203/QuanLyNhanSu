@@ -19,7 +19,7 @@ namespace QuanLyNhanSu.DataTier.Models
         [StringLength(15)]
         public string MaNV { get; set; }
 
-        public bool? Phep { get; set; }
+        public bool Phep { get; set; }
 
         public TimeSpan? ThoiGianDen { get; set; }
 

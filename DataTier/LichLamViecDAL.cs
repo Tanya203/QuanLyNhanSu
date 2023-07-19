@@ -13,6 +13,7 @@ namespace QuanLyNhanSu.DataTier
     internal class LichLamViecDAL
     {
         private readonly QuanLyNhanSuContextDB quanLyNhanSu;
+        private readonly string formatDate = "yyyy-MM-dd";
         public LichLamViecDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
@@ -93,7 +94,7 @@ namespace QuanLyNhanSu.DataTier
             try
             {
                 LichLamViec lichLamViec = quanLyNhanSu.LichLamViecs.Where(llv => llv.MaLLV == maLLV).FirstOrDefault();
-                string ngayLam = lichLamViec.NgayLam.ToString();
+                string ngayLam = lichLamViec.NgayLam.ToString(formatDate);
                 string ca = lichLamViec.Ca.TenCa;
                 string loaiCa = lichLamViec.LoaiCa.TenLoaiCa;
                 if (lichLamViec != null)
