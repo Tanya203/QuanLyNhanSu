@@ -76,6 +76,11 @@ namespace QuanLyNhanSu.DataTier
             }
             catch (Exception ex)
             {
+                if (ex.InnerException.ToString().Contains("CHECK_Ngay"))
+                {
+                    MessageBox.Show("Không thể thêm lịch trong quá khứ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
                 MessageBoxManager.Yes = "OK";
                 MessageBoxManager.No = "Chi tiết lỗi";
                 DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
