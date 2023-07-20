@@ -80,16 +80,10 @@ namespace QuanLyNhanSu.DataTier
                     int soNgayPhep = nhanVien.NhanVien.SoNgayPhep;
                     if(soNgayPhep > 0)
                     {
-                        if (nhanVien.Phep)
-                        {
-                            nhanVien.Phep = true;
-                            nhanVien.NhanVien.SoNgayPhep -= 1;
-                        }
-                        else
-                        {
-                            nhanVien.Phep = false;
-                            nhanVien.NhanVien.SoNgayPhep += 1;
-                        }                            
+                        if (nhanVien.Phep)                        
+                            nhanVien.NhanVien.SoNgayPhep -= 1;                        
+                        else                       
+                            nhanVien.NhanVien.SoNgayPhep += 1;                                                    
                     }
                     else
                     {

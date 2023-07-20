@@ -41,6 +41,7 @@ namespace QuanLyNhanSu.PresentationTier
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             this.maNV = maNV;
             maPB = nv.ChucVu.PhongBan.MaPB;
+            
         }
         private void FrmLichLamViec_Load(object sender, EventArgs e)
         {
@@ -54,6 +55,7 @@ namespace QuanLyNhanSu.PresentationTier
             LoadCa(dtpNgayLam.Text);
             XoaButton();
             ChiTietButton();
+            
             txtMaCa.ReadOnly = true;
             txtTenCa.ReadOnly = true;
             txtGioBatDau.ReadOnly = true;
@@ -74,6 +76,7 @@ namespace QuanLyNhanSu.PresentationTier
             dgvThongTinLichLamViec.Rows.Clear();
             danhSachLichLamViec = lichLamViecBUS.GetLichLamViecTheoPhongBan(maPB);
             int rowAdd;
+            string now = DateTime.Now.ToString(formatDate);
             foreach (var llv in danhSachLichLamViec)
             {
                 rowAdd = dgvThongTinLichLamViec.Rows.Add();
@@ -85,6 +88,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[6].Value = llv.TenCa;
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[7].Value = llv.TenLC;
+                
             }
         }
         private void LoadLichLamViecTimKiem(string timKiem)
@@ -102,7 +106,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[4].Value = llv.ChucVu;
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[6].Value = llv.TenCa;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[7].Value = llv.TenLC;
+                dgvThongTinLichLamViec.Rows[rowAdd].Cells[7].Value = llv.TenLC;                
             }
         }
         private void LoadThongTinCa(string maCa)
@@ -150,6 +154,10 @@ namespace QuanLyNhanSu.PresentationTier
         private void dtpNgayLam_ValueChanged(object sender, EventArgs e)
         {
             LoadCa(dtpNgayLam.Text);
+            if (dtpNgayLam.Value < DateTime.Parse(DateTime.Now.ToString(formatDate)))
+                btnThem.Enabled = false;
+            else
+                btnThem.Enabled = true;
         }
         /////////////////////////////////////////////////////////////////////////////////////////
         private void CloseForm(object sender, FormClosedEventArgs e)
@@ -179,7 +187,7 @@ namespace QuanLyNhanSu.PresentationTier
                 };
                 btnChiTiet.DefaultCellStyle = buttonCellStyle;
                 dgvThongTinLichLamViec.Columns.Add(btnChiTiet);
-            }
+            }            
         }
         public void XoaButton()
         {
@@ -256,14 +264,20 @@ namespace QuanLyNhanSu.PresentationTier
             string ngayLam = dgvThongTinLichLamViec.Rows[rowIndex].Cells[5].Value.ToString();
             string ca = dgvThongTinLichLamViec.Rows[rowIndex].Cells[6].Value.ToString();
             string loaiCa = dgvThongTinLichLamViec.Rows[rowIndex].Cells[7].Value.ToString();
+            string date = DateTime.Now.ToString(formatDate);
             if (rowIndex < 0)
                 return;
-            if (e.ColumnIndex == 8)                           
-                XoaLichLamViec(maLLV, phongBan, ngayLam, ca, loaiCa);                                                                  
+            if (e.ColumnIndex == 8)
+            {
+                if(DateTime.Parse(ngayLam) < DateTime.Parse(date))
+                {
+                    MessageBox.Show("Không thể xoá lịch trong quá khứ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }    
+                XoaLichLamViec(maLLV, phongBan, ngayLam, ca, loaiCa);
+            }                                                                                                    
             if (e.ColumnIndex == 9)           
-                OpenChiTietLichLamViec(maNV, maLLV);
-            
-                
+                OpenChiTietLichLamViec(maNV, maLLV);                        
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
