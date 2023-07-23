@@ -22,23 +22,11 @@ namespace QuanLyNhanSu.DataTier.Models
         [StringLength(15)]
         public string MaNV { get; set; }
 
-        [Required]
-        [StringLength(15)]
-        public string MaLC { get; set; }
-
-        [Required]
-        [StringLength(15)]
-        public string MaCa { get; set; }
-
         [Column(TypeName = "date")]
         public DateTime NgayLam { get; set; }
 
-        public virtual Ca Ca { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChamCong> ChamCongs { get; set; }
-
-        public virtual LoaiCa LoaiCa { get; set; }
 
         public virtual NhanVien NhanVien { get; set; }
     }

@@ -59,8 +59,8 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvLichLamViec.Rows[rowAdd].Cells[0].Value = nv.MaLLV;
                 dgvLichLamViec.Rows[rowAdd].Cells[1].Value = nv.MaNV;
                 dgvLichLamViec.Rows[rowAdd].Cells[2].Value = nv.LichLamViec.NgayLam.ToString(formatDate);
-                dgvLichLamViec.Rows[rowAdd].Cells[3].Value = nv.LichLamViec.Ca.TenCa;
-                dgvLichLamViec.Rows[rowAdd].Cells[4].Value = nv.LichLamViec.LoaiCa.TenLoaiCa;
+                dgvLichLamViec.Rows[rowAdd].Cells[3].Value = nv.Ca.TenCa;
+                dgvLichLamViec.Rows[rowAdd].Cells[4].Value = nv.LoaiCa.TenLoaiCa;
                 dgvLichLamViec.Rows[rowAdd].Cells[5].Value = nv.ThoiGianDen;
                 dgvLichLamViec.Rows[rowAdd].Cells[6].Value = nv.ThoiGianVe;
                 if (nv.Phep)

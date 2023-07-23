@@ -15,51 +15,34 @@ using System.Windows.Forms;
 namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmLichLamViec : Form
-    {
-        
+    {        
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichLamViecBUS lichLamViecBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
-        private readonly QuanLyCaBUS quanLyCaBUS;
-        private readonly QuanLyLoaiCaBUS quanLyLoaiCaBUS;
         public IEnumerable<LichLamViecViewModels> danhSachLichLamViec;
         public IEnumerable<LichLamViecViewModels> danhSachLichLamViecTimKiem;
         private readonly NhanVien nv;
         private readonly string maPB;
         private readonly string maNV;
         private readonly string formatDate = "yyyy-MM-dd";
-        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
-
+        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";        
         public FrmLichLamViec(string maNV)
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichLamViecBUS = new LichLamViecBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
-            quanLyCaBUS = new QuanLyCaBUS();
-            quanLyLoaiCaBUS = new QuanLyLoaiCaBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             this.maNV = maNV;
-            maPB = nv.ChucVu.PhongBan.MaPB;
-            
+            maPB = nv.ChucVu.PhongBan.MaPB;            
         }
         private void FrmLichLamViec_Load(object sender, EventArgs e)
         {
-            cmbCa.DisplayMember = "TenCa";
-            cmbCa.ValueMember = "MaCa";
-            cmbLoaiCa.DisplayMember = "TenLoaiCa";
-            cmbLoaiCa.ValueMember = "MaLC";
             LoadThongTinDangNhap();
             LoadLichLamViec();
-            LoadLoaiCa();
-            LoadCa(dtpNgayLam.Text);
             XoaButton();
-            ChiTietButton();
-            
-            txtMaCa.ReadOnly = true;
-            txtTenCa.ReadOnly = true;
-            txtGioBatDau.ReadOnly = true;
-            txtGioKetThuc.ReadOnly = true;
+            ChiTietButton();   
+            btnThem.Enabled = false;
         }
         public void LoadThongTinDangNhap()
         {            
@@ -76,7 +59,6 @@ namespace QuanLyNhanSu.PresentationTier
             dgvThongTinLichLamViec.Rows.Clear();
             danhSachLichLamViec = lichLamViecBUS.GetLichLamViecTheoPhongBan(maPB);
             int rowAdd;
-            string now = DateTime.Now.ToString(formatDate);
             foreach (var llv in danhSachLichLamViec)
             {
                 rowAdd = dgvThongTinLichLamViec.Rows.Add();
@@ -85,10 +67,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[2].Value = llv.HoTen;
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[3].Value = llv.PhongBan;
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[4].Value = llv.ChucVu;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[6].Value = llv.TenCa;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[7].Value = llv.TenLC;
-                
+                dgvThongTinLichLamViec.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);                
             }
         }
         private void LoadLichLamViecTimKiem(string timKiem)
@@ -104,60 +83,8 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[2].Value = llv.HoTen;
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[3].Value = llv.PhongBan;
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[4].Value = llv.ChucVu;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[6].Value = llv.TenCa;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[7].Value = llv.TenLC;                
+                dgvThongTinLichLamViec.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);              
             }
-        }
-        private void LoadThongTinCa(string maCa)
-        {
-            if(maCa != null)
-            {
-                Ca ca = quanLyCaBUS.ThongTinCa(maCa);
-                txtMaCa.Text = ca.MaCa;
-                txtTenCa.Text = ca.TenCa;
-                txtGioBatDau.Text = ca.GioBatDau.ToString();
-                txtGioKetThuc.Text = ca.GioKetThuc.ToString();
-            }            
-        }
-        public void LoadCa(string ngayLam)
-        {
-            List<LichLamViec> locLich = lichLamViecBUS.LocLichTheoNgay(maPB, ngayLam).ToList();
-            List<Ca> ca = quanLyCaBUS.GetCa().ToList();
-            foreach(var c in locLich)
-                ca = ca.Where(x => x.MaCa != c.MaCa).ToList();
-            cmbCa.DataSource = ca;
-            if(string.IsNullOrEmpty(cmbCa.Text))
-            {
-                cmbCa.Enabled = false;
-                btnThem.Enabled = false;
-                txtMaCa.Text = string.Empty;
-                txtTenCa.Text = string.Empty;
-                txtGioBatDau.Text = string.Empty;
-                txtGioKetThuc.Text = string.Empty;
-            }
-            else
-            {
-                Ca thongTinca = quanLyCaBUS.ThongTinCa(cmbCa.SelectedValue.ToString());
-                txtMaCa.Text = thongTinca.MaCa;
-                txtTenCa.Text = thongTinca.TenCa;
-                txtGioBatDau.Text = thongTinca.GioBatDau.ToString();
-                txtGioKetThuc.Text = thongTinca.GioKetThuc.ToString();
-                cmbCa.Enabled = true;
-                btnThem.Enabled = true;
-            }
-        }
-        public void LoadLoaiCa()
-        {
-            cmbLoaiCa.DataSource = quanLyLoaiCaBUS.GetLoaiCa();
-        }
-        private void dtpNgayLam_ValueChanged(object sender, EventArgs e)
-        {
-            LoadCa(dtpNgayLam.Text);
-            if (dtpNgayLam.Value < DateTime.Parse(DateTime.Now.ToString(formatDate)))
-                btnThem.Enabled = false;
-            else
-                btnThem.Enabled = true;
         }
         /////////////////////////////////////////////////////////////////////////////////////////
         private void CloseForm(object sender, FormClosedEventArgs e)
@@ -213,7 +140,7 @@ namespace QuanLyNhanSu.PresentationTier
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void XoaLichLamViec(string maLLV, string phongBan, string ngayLam, string ca, string loaiCa)
+        private void XoaLichLamViec(string maLLV, string phongBan, string ngayLam)
         {
             LichLamViec lichLamViec = new LichLamViec
             {
@@ -225,7 +152,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá lịch ngày " + ngayLam + " - Ca " + ca + " - Loại ca " + loaiCa + " - Phòng ban " + phongBan,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá lịch ngày " + ngayLam + " - Phòng ban " + phongBan,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
@@ -237,9 +164,7 @@ namespace QuanLyNhanSu.PresentationTier
             LichLamViec lichLamViec = new LichLamViec
             {
                 MaLLV = "",
-                MaNV = maNV,
-                MaCa = cmbCa.SelectedValue.ToString(),
-                MaLC = cmbLoaiCa.SelectedValue.ToString(),
+                MaNV = maNV,                
                 NgayLam = dtpNgayLam.Value,
             };
             if (lichLamViecBUS.Save(lichLamViec))
@@ -248,7 +173,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm lịch ngày " + lichLamViec.NgayLam.ToString(formatDate) + " - Ca " + cmbCa.Text + " - Loại ca " + cmbLoaiCa.Text + " - Phòng ban " + nv.ChucVu.PhongBan.TenPhongBan,
+                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm lịch ngày " + lichLamViec.NgayLam.ToString(formatDate) + " - Phòng ban " + nv.ChucVu.PhongBan.TenPhongBan,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -261,22 +186,20 @@ namespace QuanLyNhanSu.PresentationTier
                 return;
             string maLLV = dgvThongTinLichLamViec.Rows[rowIndex].Cells[0].Value.ToString();
             string phongBan = dgvThongTinLichLamViec.Rows[rowIndex].Cells[3].Value.ToString();
-            string ngayLam = dgvThongTinLichLamViec.Rows[rowIndex].Cells[5].Value.ToString();
-            string ca = dgvThongTinLichLamViec.Rows[rowIndex].Cells[6].Value.ToString();
-            string loaiCa = dgvThongTinLichLamViec.Rows[rowIndex].Cells[7].Value.ToString();
+            string ngayLam = dgvThongTinLichLamViec.Rows[rowIndex].Cells[5].Value.ToString();           
             string date = DateTime.Now.ToString(formatDate);
             if (rowIndex < 0)
                 return;
-            if (e.ColumnIndex == 8)
+            if (e.ColumnIndex == 6)
             {
                 if(DateTime.Parse(ngayLam) < DateTime.Parse(date))
                 {
                     MessageBox.Show("Không thể xoá lịch trong quá khứ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }    
-                XoaLichLamViec(maLLV, phongBan, ngayLam, ca, loaiCa);
+                XoaLichLamViec(maLLV, phongBan, ngayLam);
             }                                                                                                    
-            if (e.ColumnIndex == 9)           
+            if (e.ColumnIndex == 7)           
                 OpenChiTietLichLamViec(maNV, maLLV);                        
         }
         private void btnTroVe_Click(object sender, EventArgs e)
@@ -291,16 +214,6 @@ namespace QuanLyNhanSu.PresentationTier
         {
             Reload();
         }
-
-        private void cmbCa_TextChanged(object sender, EventArgs e)
-        {
-            Ca ca = quanLyCaBUS.ThongTinCa(cmbCa.SelectedValue.ToString());
-            txtMaCa.Text = ca.MaCa;
-            txtTenCa.Text = ca.TenCa;
-            txtGioBatDau.Text = ca.GioBatDau.ToString();
-            txtGioKetThuc.Text = ca.GioKetThuc.ToString();
-        }
-
         private void txtTimKiem_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTimKiem.Text))
@@ -314,5 +227,18 @@ namespace QuanLyNhanSu.PresentationTier
                 LoadLichLamViecTimKiem(txtTimKiem.Text);
             }
         }
+        private void dtpNgayLam_ValueChanged(object sender, EventArgs e)
+        {
+            int check = 0;
+            List<LichLamViec> locLich = lichLamViecBUS.LocLichTheoNgay(maPB, dtpNgayLam.Text).ToList();
+            foreach (var nv in locLich)            
+                if (nv.NgayLam.ToString(formatDate) == dtpNgayLam.Text)
+                    check = 1;                            
+            if (DateTime.Parse(dtpNgayLam.Text) < DateTime.Parse(DateTime.Now.ToString(formatDate)) || check == 1)
+                btnThem.Enabled = false;
+            else
+                btnThem.Enabled = true;
+        }
+
     }
 }

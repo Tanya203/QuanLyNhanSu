@@ -46,7 +46,7 @@ namespace QuanLyNhanSu.DataTier.Models
                 .HasPrecision(0);
 
             modelBuilder.Entity<Ca>()
-                .HasMany(e => e.LichLamViecs)
+                .HasMany(e => e.ChamCongs)
                 .WithRequired(e => e.Ca)
                 .WillCascadeOnDelete(false);
 
@@ -56,6 +56,14 @@ namespace QuanLyNhanSu.DataTier.Models
 
             modelBuilder.Entity<ChamCong>()
                 .Property(e => e.MaNV)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ChamCong>()
+                .Property(e => e.MaCa)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ChamCong>()
+                .Property(e => e.MaLC)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ChamCong>()
@@ -139,19 +147,6 @@ namespace QuanLyNhanSu.DataTier.Models
                 .Property(e => e.MaNV)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<LichLamViec>()
-                .Property(e => e.MaLC)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<LichLamViec>()
-                .Property(e => e.MaCa)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<LichLamViec>()
-                .HasMany(e => e.ChamCongs)
-                .WithRequired(e => e.LichLamViec)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<LichSuThaoTac>()
                 .Property(e => e.NgayGio)
                 .IsUnicode(false);
@@ -169,7 +164,7 @@ namespace QuanLyNhanSu.DataTier.Models
                 .HasPrecision(38, 4);
 
             modelBuilder.Entity<LoaiCa>()
-                .HasMany(e => e.LichLamViecs)
+                .HasMany(e => e.ChamCongs)
                 .WithRequired(e => e.LoaiCa)
                 .WillCascadeOnDelete(false);
 

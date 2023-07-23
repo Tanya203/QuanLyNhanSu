@@ -28,8 +28,6 @@ namespace QuanLyNhanSu.DataTier
                 MaPB = x.NhanVien.ChucVu.PhongBan.MaPB,
                 HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
                 NgayLam = x.NgayLam,
-                TenCa = x.Ca.TenCa,
-                TenLC = x.LoaiCa.TenLoaiCa,
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
             }).Where(llv => llv.MaPB == maP).OrderBy(llv => llv.MaNV);
@@ -44,14 +42,10 @@ namespace QuanLyNhanSu.DataTier
                 MaPB = x.NhanVien.ChucVu.PhongBan.MaPB,
                 HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,                
                 NgayLam = x.NgayLam,
-                TenCa = x.Ca.TenCa,
-                TenLC = x.LoaiCa.TenLoaiCa,
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
             }).Where(llv => llv.MaPB == maP && ((llv.MaNV.Contains(timKiem )||
                      llv.MaLLV.Contains(timKiem) ||
-                     llv.TenCa.Contains(timKiem) ||
-                     llv.TenLC.Contains(timKiem) ||
                      llv.NgayLam.ToString().Contains(timKiem) ||
                      llv.ChucVu.Contains(timKiem) ||
                      llv.HoTen.Contains(timKiem)))).OrderBy(llv => llv.MaNV);
@@ -100,20 +94,18 @@ namespace QuanLyNhanSu.DataTier
             {
                 LichLamViec lichLamViec = quanLyNhanSu.LichLamViecs.Where(llv => llv.MaLLV == maLLV).FirstOrDefault();
                 string ngayLam = lichLamViec.NgayLam.ToString(formatDate);
-                string ca = lichLamViec.Ca.TenCa;
-                string loaiCa = lichLamViec.LoaiCa.TenLoaiCa;
                 if (lichLamViec != null)
                 {
                     MessageBoxManager.Yes = "Có";
                     MessageBoxManager.No = "Không";
-                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá lịch làm việc ngày " + ngayLam + " - " + ca + " - " + loaiCa + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá lịch làm việc ngày " + ngayLam + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (ketQua == DialogResult.Yes)
                     {
                         MessageBoxManager.Yes = "Có";
                         MessageBoxManager.No = "Không";
                         quanLyNhanSu.LichLamViecs.Remove(lichLamViec);
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Đã xoá lịch làm việc ngày " + ngayLam + " - " + ca + " - " + loaiCa, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Đã xoá lịch làm việc ngày " + ngayLam , "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
                 }

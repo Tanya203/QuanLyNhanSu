@@ -14,8 +14,6 @@ namespace QuanLyNhanSu.ViewModels
         public DateTime NgayLam { get; set; }
         public string HoTen { get; set; }
         public string ChucVu { get; set; }
-        public string TenCa { get; set; }
-        public string TenLC { get; set;}
         public string PhongBan { get; set; }
     }
 }
