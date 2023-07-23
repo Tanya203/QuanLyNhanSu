@@ -28,8 +28,8 @@ namespace QuanLyNhanSu.DataTier
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 NgayLam = x.LichLamViec.NgayLam,
-                Ca = x.LichLamViec.Ca.TenCa,
-                LoaiCa = x.LichLamViec.LoaiCa.TenLoaiCa,
+                Ca = x.Ca.TenCa,
+                LoaiCa = x.LoaiCa.TenLoaiCa,
                 ThoiGianDen = x.ThoiGianDen.ToString(),
                 ThoiGianVe = x.ThoiGianVe.ToString(),
                 Phep = x.Phep,
@@ -46,8 +46,8 @@ namespace QuanLyNhanSu.DataTier
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 NgayLam = x.LichLamViec.NgayLam,
-                Ca = x.LichLamViec.Ca.TenCa,
-                LoaiCa = x.LichLamViec.LoaiCa.TenLoaiCa,
+                Ca = x.Ca.TenCa,
+                LoaiCa = x.LoaiCa.TenLoaiCa,
                 ThoiGianDen = x.ThoiGianDen.ToString(),
                 ThoiGianVe = x.ThoiGianVe.ToString(),
                 Phep = x.Phep,
@@ -74,9 +74,12 @@ namespace QuanLyNhanSu.DataTier
         {
             try
             {
-                ChamCong nhanVien = quanLyNhanSu.ChamCongs.Where(nv => nv.MaLLV == chamCong.MaLLV && nv.MaNV == chamCong.MaNV).FirstOrDefault();
+                ChamCong nhanVien = quanLyNhanSu.ChamCongs.Where(nv => nv.MaLLV == chamCong.MaLLV && nv.MaNV == chamCong.MaNV && nv.MaCa == chamCong.MaCa).FirstOrDefault();
                 if(nhanVien != null)
                 {
+                    List<ChamCong> phep = quanLyNhanSu.ChamCongs.Where(nv => nv.MaLLV == chamCong.MaLLV && nv.MaNV == chamCong.MaNV).ToList();
+                    foreach (var nv in phep)
+                        nv.Phep = nhanVien.Phep;
                     int soNgayPhep = nhanVien.NhanVien.SoNgayPhep;
                     if(soNgayPhep > 0)
                     {

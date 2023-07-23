@@ -12,7 +12,7 @@ namespace QuanLyNhanSu.DataTier.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ca()
         {
-            LichLamViecs = new HashSet<LichLamViec>();
+            ChamCongs = new HashSet<ChamCong>();
         }
 
         [Key]
@@ -27,6 +27,6 @@ namespace QuanLyNhanSu.DataTier.Models
         public TimeSpan GioKetThuc { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LichLamViec> LichLamViecs { get; set; }
+        public virtual ICollection<ChamCong> ChamCongs { get; set; }
     }
 }
