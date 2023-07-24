@@ -64,12 +64,7 @@ namespace QuanLyNhanSu.PresentationTier
             cmbLoaiCa.ValueMember = "MaLC";
             LoadThongTinDangNhap();
             LoadThongTinLichLamViec();
-            if(DateTime.Parse(dtpNgayLam.Text) >= DateTime.Parse(DateTime.Now.ToString(formatDate))) 
-                XoaButton();
             LoadChiTietLichLamViec();
-            LoadNhanVienTheoPhongBan();
-            LoadCa(dtpNgayLam.Text, cmbNhanVien.SelectedValue.ToString());
-            LoadLoaiCa();
             txtMaLLV.ReadOnly = true;
             txtMaNV.ReadOnly = true;
             txtPhongBan.ReadOnly = true;
@@ -78,6 +73,22 @@ namespace QuanLyNhanSu.PresentationTier
             txtHoTenNhanVien_Phep.ReadOnly = true;
             dtpNgayLam.Enabled = false;
             cbPhep.Enabled = false;
+            btnThem.Enabled = false;
+            cmbCa.Enabled = false;
+            cmbLoaiCa.Enabled = false;
+            cmbNhanVien.Enabled = false;
+            if (DateTime.Parse(dtpNgayLam.Text) >= DateTime.Parse(DateTime.Now.ToString(formatDate)))
+            {
+                XoaButton();
+                btnThem.Enabled = true;
+                cmbCa.Enabled = true;
+                cmbLoaiCa.Enabled = true;
+                cmbNhanVien.Enabled = true;
+                LoadNhanVienTheoPhongBan();
+                LoadCa(dtpNgayLam.Text, cmbNhanVien.SelectedValue.ToString());
+                LoadLoaiCa();
+            }               
+            
         }
         public void LoadThongTinDangNhap()
         {
@@ -204,7 +215,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void txtMaNV_Phep_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaNV_Phep.Text))
+            if (string.IsNullOrEmpty(txtMaNV_Phep.Text) || (DateTime.Parse(dtpNgayLam.Text) < DateTime.Parse(DateTime.Now.ToString(formatDate))))
                 cbPhep.Enabled = false;
             else
                 cbPhep.Enabled = true;
