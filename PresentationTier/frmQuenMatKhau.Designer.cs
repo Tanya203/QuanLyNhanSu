@@ -33,19 +33,19 @@
             this.txtMaNhanVien = new System.Windows.Forms.TextBox();
             this.lblTaiKhoan = new System.Windows.Forms.Label();
             this.txtSDT = new System.Windows.Forms.TextBox();
-            this.lblCMND_CCCD = new System.Windows.Forms.Label();
+            this.lblCMND = new System.Windows.Forms.Label();
             this.lblMaNhanVien = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.lblSoDienThoai = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
             this.txtTaiKhoan = new System.Windows.Forms.TextBox();
-            this.txtCCCD_CMND = new System.Windows.Forms.TextBox();
+            this.txtCCCD = new System.Windows.Forms.TextBox();
             this.lblQuenMatKhau = new System.Windows.Forms.Label();
             this.grpDoiMatKhau = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtMatKhau = new System.Windows.Forms.TextBox();
+            this.txtNhapLaiMatKhau = new System.Windows.Forms.TextBox();
             this.btnDoiMatKhau = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cbHienThiMatKhau = new System.Windows.Forms.CheckBox();
             this.lblNhapLaiMatKhauMoi = new System.Windows.Forms.Label();
             this.lblNhapMatKhauMoi = new System.Windows.Forms.Label();
             this.pbPassIcon = new System.Windows.Forms.PictureBox();
@@ -65,13 +65,13 @@
             this.grpXacThucThongTin.Controls.Add(this.txtMaNhanVien);
             this.grpXacThucThongTin.Controls.Add(this.lblTaiKhoan);
             this.grpXacThucThongTin.Controls.Add(this.txtSDT);
-            this.grpXacThucThongTin.Controls.Add(this.lblCMND_CCCD);
+            this.grpXacThucThongTin.Controls.Add(this.lblCMND);
             this.grpXacThucThongTin.Controls.Add(this.lblMaNhanVien);
             this.grpXacThucThongTin.Controls.Add(this.txtEmail);
             this.grpXacThucThongTin.Controls.Add(this.lblSoDienThoai);
             this.grpXacThucThongTin.Controls.Add(this.lblEmail);
             this.grpXacThucThongTin.Controls.Add(this.txtTaiKhoan);
-            this.grpXacThucThongTin.Controls.Add(this.txtCCCD_CMND);
+            this.grpXacThucThongTin.Controls.Add(this.txtCCCD);
             this.grpXacThucThongTin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpXacThucThongTin.Location = new System.Drawing.Point(50, 140);
             this.grpXacThucThongTin.Name = "grpXacThucThongTin";
@@ -87,22 +87,24 @@
             this.btnXacThucThongTin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnXacThucThongTin.Image = global::QuanLyNhanSu.Properties.Resources.verify;
             this.btnXacThucThongTin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXacThucThongTin.Location = new System.Drawing.Point(225, 281);
+            this.btnXacThucThongTin.Location = new System.Drawing.Point(239, 281);
             this.btnXacThucThongTin.Name = "btnXacThucThongTin";
-            this.btnXacThucThongTin.Size = new System.Drawing.Size(311, 73);
+            this.btnXacThucThongTin.Size = new System.Drawing.Size(269, 73);
             this.btnXacThucThongTin.TabIndex = 7;
             this.btnXacThucThongTin.Text = "Xác thực thông tin";
             this.btnXacThucThongTin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnXacThucThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXacThucThongTin.UseVisualStyleBackColor = false;
+            this.btnXacThucThongTin.Click += new System.EventHandler(this.btnXacThucThongTin_Click);
             // 
             // txtMaNhanVien
             // 
-            this.txtMaNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaNhanVien.Location = new System.Drawing.Point(207, 45);
             this.txtMaNhanVien.Name = "txtMaNhanVien";
-            this.txtMaNhanVien.Size = new System.Drawing.Size(329, 27);
+            this.txtMaNhanVien.Size = new System.Drawing.Size(329, 30);
             this.txtMaNhanVien.TabIndex = 2;
+            this.txtMaNhanVien.TextChanged += new System.EventHandler(this.txtMaNhanVien_TextChanged);
             // 
             // lblTaiKhoan
             // 
@@ -115,20 +117,21 @@
             // 
             // txtSDT
             // 
-            this.txtSDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSDT.Location = new System.Drawing.Point(207, 195);
             this.txtSDT.Name = "txtSDT";
-            this.txtSDT.Size = new System.Drawing.Size(329, 27);
+            this.txtSDT.Size = new System.Drawing.Size(329, 30);
             this.txtSDT.TabIndex = 5;
+            this.txtSDT.TextChanged += new System.EventHandler(this.txtMaNhanVien_TextChanged);
             // 
-            // lblCMND_CCCD
+            // lblCMND
             // 
-            this.lblCMND_CCCD.AutoSize = true;
-            this.lblCMND_CCCD.Location = new System.Drawing.Point(37, 145);
-            this.lblCMND_CCCD.Name = "lblCMND_CCCD";
-            this.lblCMND_CCCD.Size = new System.Drawing.Size(153, 25);
-            this.lblCMND_CCCD.TabIndex = 2;
-            this.lblCMND_CCCD.Text = "CCCD/CMND:";
+            this.lblCMND.AutoSize = true;
+            this.lblCMND.Location = new System.Drawing.Point(37, 145);
+            this.lblCMND.Name = "lblCMND";
+            this.lblCMND.Size = new System.Drawing.Size(82, 25);
+            this.lblCMND.TabIndex = 2;
+            this.lblCMND.Text = "CCCD:";
             // 
             // lblMaNhanVien
             // 
@@ -141,11 +144,12 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.Location = new System.Drawing.Point(207, 245);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(329, 27);
+            this.txtEmail.Size = new System.Drawing.Size(329, 30);
             this.txtEmail.TabIndex = 6;
+            this.txtEmail.TextChanged += new System.EventHandler(this.txtMaNhanVien_TextChanged);
             // 
             // lblSoDienThoai
             // 
@@ -167,19 +171,21 @@
             // 
             // txtTaiKhoan
             // 
-            this.txtTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTaiKhoan.Location = new System.Drawing.Point(207, 95);
             this.txtTaiKhoan.Name = "txtTaiKhoan";
-            this.txtTaiKhoan.Size = new System.Drawing.Size(329, 27);
+            this.txtTaiKhoan.Size = new System.Drawing.Size(329, 30);
             this.txtTaiKhoan.TabIndex = 3;
+            this.txtTaiKhoan.TextChanged += new System.EventHandler(this.txtMaNhanVien_TextChanged);
             // 
-            // txtCCCD_CMND
+            // txtCCCD
             // 
-            this.txtCCCD_CMND.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCCCD_CMND.Location = new System.Drawing.Point(207, 145);
-            this.txtCCCD_CMND.Name = "txtCCCD_CMND";
-            this.txtCCCD_CMND.Size = new System.Drawing.Size(329, 27);
-            this.txtCCCD_CMND.TabIndex = 4;
+            this.txtCCCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCCCD.Location = new System.Drawing.Point(207, 145);
+            this.txtCCCD.Name = "txtCCCD";
+            this.txtCCCD.Size = new System.Drawing.Size(329, 30);
+            this.txtCCCD.TabIndex = 4;
+            this.txtCCCD.TextChanged += new System.EventHandler(this.txtMaNhanVien_TextChanged);
             // 
             // lblQuenMatKhau
             // 
@@ -193,10 +199,10 @@
             // 
             // grpDoiMatKhau
             // 
-            this.grpDoiMatKhau.Controls.Add(this.textBox2);
-            this.grpDoiMatKhau.Controls.Add(this.textBox1);
+            this.grpDoiMatKhau.Controls.Add(this.txtMatKhau);
+            this.grpDoiMatKhau.Controls.Add(this.txtNhapLaiMatKhau);
             this.grpDoiMatKhau.Controls.Add(this.btnDoiMatKhau);
-            this.grpDoiMatKhau.Controls.Add(this.checkBox1);
+            this.grpDoiMatKhau.Controls.Add(this.cbHienThiMatKhau);
             this.grpDoiMatKhau.Controls.Add(this.lblNhapLaiMatKhauMoi);
             this.grpDoiMatKhau.Controls.Add(this.lblNhapMatKhauMoi);
             this.grpDoiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -207,21 +213,25 @@
             this.grpDoiMatKhau.TabStop = false;
             this.grpDoiMatKhau.Text = "Đổi mật khẩu";
             // 
-            // textBox2
+            // txtMatKhau
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(273, 52);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(263, 27);
-            this.textBox2.TabIndex = 8;
+            this.txtMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMatKhau.Location = new System.Drawing.Point(273, 52);
+            this.txtMatKhau.Name = "txtMatKhau";
+            this.txtMatKhau.Size = new System.Drawing.Size(263, 27);
+            this.txtMatKhau.TabIndex = 8;
+            this.txtMatKhau.UseSystemPasswordChar = true;
+            this.txtMatKhau.TextChanged += new System.EventHandler(this.txtMatKhau_TextChanged_1);
             // 
-            // textBox1
+            // txtNhapLaiMatKhau
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(273, 107);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(263, 27);
-            this.textBox1.TabIndex = 9;
+            this.txtNhapLaiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNhapLaiMatKhau.Location = new System.Drawing.Point(273, 107);
+            this.txtNhapLaiMatKhau.Name = "txtNhapLaiMatKhau";
+            this.txtNhapLaiMatKhau.Size = new System.Drawing.Size(263, 27);
+            this.txtNhapLaiMatKhau.TabIndex = 9;
+            this.txtNhapLaiMatKhau.UseSystemPasswordChar = true;
+            this.txtNhapLaiMatKhau.TextChanged += new System.EventHandler(this.txtMatKhau_TextChanged_1);
             // 
             // btnDoiMatKhau
             // 
@@ -230,26 +240,28 @@
             this.btnDoiMatKhau.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDoiMatKhau.Image = global::QuanLyNhanSu.Properties.Resources.passchange;
             this.btnDoiMatKhau.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDoiMatKhau.Location = new System.Drawing.Point(273, 152);
+            this.btnDoiMatKhau.Location = new System.Drawing.Point(287, 152);
             this.btnDoiMatKhau.Name = "btnDoiMatKhau";
-            this.btnDoiMatKhau.Size = new System.Drawing.Size(247, 73);
+            this.btnDoiMatKhau.Size = new System.Drawing.Size(221, 73);
             this.btnDoiMatKhau.TabIndex = 11;
             this.btnDoiMatKhau.Text = "Đổi mật khẩu";
             this.btnDoiMatKhau.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDoiMatKhau.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDoiMatKhau.UseVisualStyleBackColor = false;
+            this.btnDoiMatKhau.Click += new System.EventHandler(this.btnDoiMatKhau_Click);
             // 
-            // checkBox1
+            // cbHienThiMatKhau
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(20, 179);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(162, 24);
-            this.checkBox1.TabIndex = 10;
-            this.checkBox1.Text = "Hiển thị mật khẩu";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbHienThiMatKhau.AutoSize = true;
+            this.cbHienThiMatKhau.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbHienThiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbHienThiMatKhau.Location = new System.Drawing.Point(20, 179);
+            this.cbHienThiMatKhau.Name = "cbHienThiMatKhau";
+            this.cbHienThiMatKhau.Size = new System.Drawing.Size(162, 24);
+            this.cbHienThiMatKhau.TabIndex = 10;
+            this.cbHienThiMatKhau.Text = "Hiển thị mật khẩu";
+            this.cbHienThiMatKhau.UseVisualStyleBackColor = true;
+            this.cbHienThiMatKhau.CheckedChanged += new System.EventHandler(this.cbHienThiMatKhau_CheckedChanged);
             // 
             // lblNhapLaiMatKhauMoi
             // 
@@ -336,6 +348,7 @@
             this.Name = "FrmQuenMatKhau";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quên mật khẩu";
+            this.Load += new System.EventHandler(this.FrmQuenMatKhau_Load);
             this.grpXacThucThongTin.ResumeLayout(false);
             this.grpXacThucThongTin.PerformLayout();
             this.grpDoiMatKhau.ResumeLayout(false);
@@ -353,7 +366,7 @@
         private System.Windows.Forms.GroupBox grpXacThucThongTin;
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblSoDienThoai;
-        private System.Windows.Forms.Label lblCMND_CCCD;
+        private System.Windows.Forms.Label lblCMND;
         private System.Windows.Forms.Label lblTaiKhoan;
         private System.Windows.Forms.Label lblMaNhanVien;
         private System.Windows.Forms.Label lblQuenMatKhau;
@@ -361,13 +374,13 @@
         private System.Windows.Forms.TextBox txtSDT;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtTaiKhoan;
-        private System.Windows.Forms.TextBox txtCCCD_CMND;
+        private System.Windows.Forms.TextBox txtCCCD;
         private System.Windows.Forms.TextBox txtMaNhanVien;
         private System.Windows.Forms.Button btnXacThucThongTin;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtMatKhau;
+        private System.Windows.Forms.TextBox txtNhapLaiMatKhau;
         private System.Windows.Forms.Button btnDoiMatKhau;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cbHienThiMatKhau;
         private System.Windows.Forms.Label lblNhapLaiMatKhauMoi;
         private System.Windows.Forms.Label lblNhapMatKhauMoi;
         private System.Windows.Forms.Button btnTroVe;

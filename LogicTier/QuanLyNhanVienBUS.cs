@@ -25,9 +25,9 @@ namespace QuanLyNhanSu.LogicTier
         {
             return nhanVienDAL.GetNhanVien();
         }
-        public NhanVien ThongTinNhanVien(string taiKhoan)
+        public NhanVien ThongTinNhanVien(string maNV)
         {
-            return nhanVienDAL.ThongTinNhanVien(taiKhoan);
+            return nhanVienDAL.ThongTinNhanVien(maNV);
         }
         public IEnumerable<NhanVienViewModel> SearchNhanVien(string timKiem)
         {
@@ -43,8 +43,9 @@ namespace QuanLyNhanSu.LogicTier
         }
         public bool Save(NhanVien nhanVien)
         {
-            NhanVien nv = nhanVienDAL.ThongTinNhanVien(nhanVien.MaNV);            
-            if (nv != null && nhanVien.MatKhau == nv.MatKhau)
+            NhanVien nv = nhanVienDAL.ThongTinNhanVien(nhanVien.MaNV);
+            Regex bcryptCheck = new Regex(@"^\$2[aby]?\$\d{1,2}\$[./0-9A-Za-z]{53}$");
+            if (nv != null && bcryptCheck.IsMatch(nhanVien.MatKhau))
                 return nhanVienDAL.Save(nhanVien);
             nhanVien.MatKhau = BCrypt.Net.BCrypt.HashPassword(nhanVien.MatKhau);
             return nhanVienDAL.Save(nhanVien);
@@ -56,6 +57,10 @@ namespace QuanLyNhanSu.LogicTier
         public bool LoginVerify(string taiKhoan, string matKhau)
         {            
             return nhanVienDAL.LoginVerify(taiKhoan, matKhau);
+        }
+        public bool VerifyInfo(string maNV, string taiKhoan, string CCCD, string sdt, string email)
+        {
+            return nhanVienDAL.VerifyInfo(maNV, taiKhoan, CCCD, sdt, email);
         }
     }
 }

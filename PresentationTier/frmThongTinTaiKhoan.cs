@@ -115,6 +115,13 @@ namespace QuanLyNhanSu.PresentationTier
         {
             this.Close();
         }
+        private void DangXuat()
+        {
+            FrmDangNhap frmOpen = new FrmDangNhap();
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
+        }
         //////////////////////////////////////////////////////////////////////////////
         private void ClearMatKhauText()
         {
@@ -305,9 +312,8 @@ namespace QuanLyNhanSu.PresentationTier
                     ThaoTacThucHien = "Nhân viên " + maNV + " đổi mật khẩu",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
-                Reload();
+                DangXuat();
             }
-            ClearMatKhauText();
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {

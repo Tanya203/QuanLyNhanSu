@@ -130,7 +130,8 @@ namespace QuanLyNhanSu.DataTier
         }
         public NhanVien ThongTinNhanVien(string maNV)
         {
-            return quanLyNhanSu.NhanViens.Where(nv => nv.MaNV == maNV).FirstOrDefault();
+            NhanVien nhanVien = quanLyNhanSu.NhanViens.Where(nv => nv.MaNV == maNV).FirstOrDefault();
+            return nhanVien;
         }
         public bool Save(NhanVien nhanVien)
         {
@@ -162,8 +163,7 @@ namespace QuanLyNhanSu.DataTier
                     newNhanVien.TinhTrang = nhanVien.TinhTrang;
                     newNhanVien.SoNgayPhep = nhanVien.SoNgayPhep;
                     newNhanVien.LuongCoBan = nhanVien.LuongCoBan;
-                    newNhanVien.Hinh = nhanVien.Hinh;
-                    quanLyNhanSu.NhanViens.AddOrUpdate(newNhanVien);
+                    newNhanVien.Hinh = nhanVien.Hinh;                   
                 }
                 else//thêm mới           
                     quanLyNhanSu.NhanViens.Add(nhanVien);
@@ -247,10 +247,6 @@ namespace QuanLyNhanSu.DataTier
                 return false;
             }
         }
-        public NhanVien GetNhanVien(string maNV)
-        {
-            return quanLyNhanSu.NhanViens.Where(nv =>nv.MaNV == maNV).FirstOrDefault();
-        }
         public bool LoginVerify(string taiKhoan, string matKhau)
         {
             var nhanVien = quanLyNhanSu.NhanViens.Where(x => x.TaiKhoan == taiKhoan).FirstOrDefault();
@@ -282,6 +278,38 @@ namespace QuanLyNhanSu.DataTier
                 }
                 return false;
             }                       
+        }
+        public bool VerifyInfo(string maNV, string taiKhoan, string CCCD, string sdt, string email)
+        {
+            try
+            {
+                NhanVien nhanVien = quanLyNhanSu.NhanViens.Where(nv => nv.MaNV == maNV).FirstOrDefault();
+                if (nhanVien != null)
+                {
+                    if(nhanVien.TaiKhoan == taiKhoan && nhanVien.CCCD == CCCD && nhanVien.SDT == sdt && nhanVien.Email == email) 
+                    {
+                        MessageBox.Show("Xác thực thành công! Nhân viên " + nhanVien.MaNV + ".","Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
+                    }
+                }
+                else                
+                    MessageBox.Show("Thông tin xác thực không hợp lệ" , "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            catch(Exception ex)
+            {
+                MessageBoxManager.Yes = "OK";
+                MessageBoxManager.No = "Chi tiết lỗi";
+                DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (ketQua == DialogResult.No)
+                {
+                    if (!string.IsNullOrEmpty(ex.InnerException.ToString()))
+                        MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                        MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return false;
+            }
         }
     }
 }
