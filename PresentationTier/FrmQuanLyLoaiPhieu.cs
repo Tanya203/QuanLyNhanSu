@@ -24,6 +24,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<LoaiPhieuViewModels> danhSachLoaiPhieuTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string hoTen;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiPhieu(string maNV)
         {
@@ -32,6 +33,7 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();            
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             this.maNV = maNV;
         }
         private void FrmQuanLyLoaiPhieu_Load(object sender, EventArgs e)
@@ -145,7 +147,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm loại phiếu '" + txtTenLoaiPhieu.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm loại phiếu '" + txtTenLoaiPhieu.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -164,7 +166,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa loại phiếu '" + txtTenLoaiPhieu.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " chỉnh sửa loại phiếu " + txtMaLP.Text,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
@@ -182,7 +184,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá loại phiếu '" + txtTenLoaiPhieu.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá loại phiếu " + txtTenLoaiPhieu.Text,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();

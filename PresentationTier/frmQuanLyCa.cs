@@ -26,6 +26,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly NhanVien nv;
         string formatTime = "HH:mm";
         private readonly string maNV;
+        private readonly string hoTen;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyCa(string maNV)
         {
@@ -35,6 +36,7 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             txtMaCa.ReadOnly = true;
             dtpThoiGianBatDau.Text = "00:00";
             dtpThoiGianKetThuc.Text = "00:00";
@@ -42,6 +44,7 @@ namespace QuanLyNhanSu.PresentationTier
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
             this.maNV = maNV;
+
         }
         private void frmQuanLyCa_Load(object sender, EventArgs e)
         {
@@ -142,12 +145,12 @@ namespace QuanLyNhanSu.PresentationTier
                 GioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text),
             };
             if (caBUS.Save(newCa))
-            {                
+            {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {                                    
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên "+ maNV +" thêm ca "+ txtTenCa.Text,                    
+                    ThaoTacThucHien = "Nhân viên "+ hoTen +" thêm ca "+ txtTenCa.Text,                    
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -163,12 +166,12 @@ namespace QuanLyNhanSu.PresentationTier
                 GioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text),
             };
             if (caBUS.Save(newCa))
-            {                
+            {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa ca '" + txtMaCa.Text+"'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " chỉnh sửa ca " + txtMaCa.Text,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
@@ -182,12 +185,12 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (caBUS.Delete(ca))
             {
-               
+                
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá ca '" + txtTenCa.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá ca " + txtTenCa.Text,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();

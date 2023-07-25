@@ -23,6 +23,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<PhongBanViewModel> danhSachPhongBan;
         private IEnumerable<PhongBanViewModel> danhSachPhongBanTimKiem;
         private readonly string maNV;
+        private readonly string hoTen;
         private readonly NhanVien nv;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhongBan(string maNV)
@@ -33,6 +34,7 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             txtMaPB.ReadOnly = true;
             txtTongSoNhanVien.ReadOnly = true;
             btnThem.Enabled = false;
@@ -139,7 +141,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm phòng ban '" + txtTenPB.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm phòng ban " + txtTenPB.Text,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -162,12 +164,11 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa phòng ban '" + txtMaPB.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " chỉnh sửa phòng ban " + txtMaPB.Text,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
-            }
-                      
+            }                      
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -181,7 +182,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá phòng ban '" + txtMaPB.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá phòng ban " + txtTenPB.Text,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();

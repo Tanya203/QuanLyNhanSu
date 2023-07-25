@@ -108,7 +108,11 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnDoiMatKhau_Click(object sender, EventArgs e)
         {
-            NhanVien nhanVien = nhanVienBUS.ThongTinNhanVien(txtMaNhanVien.Text);   
+            NhanVien nhanVien = new NhanVien
+            {
+                MaNV = txtMaNhanVien.Text,
+                MatKhau = txtMatKhau.Text,
+            };   
             if (CheckMatKhau(txtMatKhau.Text))
             {
                 nhanVien.MatKhau = txtMatKhau.Text;
@@ -118,7 +122,7 @@ namespace QuanLyNhanSu.PresentationTier
                     {
                         NgayGio = DateTime.Now.ToString(formatDateTime),
                         MaNV = txtMaNhanVien.Text,
-                        ThaoTacThucHien = "Nhân viên " + txtMaNhanVien.Text + " đổi mật khẩu.",
+                        ThaoTacThucHien = "Nhân viên " + txtMaNhanVien.Text + " quên mật khẩu.",
                     };
                     lichSuThaoTacBUS.Save(newLstt);
                     btnTroVe_Click(sender, e);

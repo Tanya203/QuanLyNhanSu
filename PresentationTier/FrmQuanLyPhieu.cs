@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
@@ -28,6 +29,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<PhieuViewModels> danhSachPhieuThuongTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string hoTen;
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhieu(string maNV)
@@ -39,6 +41,7 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             quanLyLoaiPhieuBUS = new QuanLyLoaiPhieuBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten; ;
             this.maNV = maNV;
         }
         private void FrmPhieuThuong_Load(object sender, EventArgs e)
@@ -77,7 +80,6 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieu.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
                 dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap.ToString(formatDate);
                 dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBUS.TongTienPhieu(pt.MaP));
-
             }
         }
         public void LoadLoaiPhieu()
@@ -145,7 +147,7 @@ namespace QuanLyNhanSu.PresentationTier
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void XoaPhieuThuong(string maP)
+        private void XoaPhieuThuong(string maP, string loaiPhieu)
         {
             Phieu phieu = new Phieu()
             {
@@ -157,7 +159,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá '" + maP + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá " + loaiPhieu + " " + maP,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
@@ -197,7 +199,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm phiếu" + newPhieu.LoaiPhieu.TenLoaiPhieu,
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm phiếu" + newPhieu.LoaiPhieu.TenLoaiPhieu,
                 };
                 lichSuThaoTacBUS.Save(newLstt);               
             }
@@ -206,12 +208,14 @@ namespace QuanLyNhanSu.PresentationTier
         private void dgvThongTinPhieuThuong_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
+            string maP = dgvThongTinPhieu.Rows[rowIndex].Cells[0].Value.ToString();
+            string loaiPhieu = dgvThongTinPhieu.Rows[rowIndex].Cells[1].Value.ToString();
             if (rowIndex < 0)
                 return;
             if (e.ColumnIndex == 8)
-                XoaPhieuThuong(dgvThongTinPhieu.Rows[rowIndex].Cells[0].Value.ToString());
+                XoaPhieuThuong(maP, loaiPhieu);
             if (e.ColumnIndex == 9)
-                OpenChiTietPhieuThuong(maNV,dgvThongTinPhieu.Rows[rowIndex].Cells[0].Value.ToString());
+                OpenChiTietPhieuThuong(maNV, maP);
         }
         private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
         {
