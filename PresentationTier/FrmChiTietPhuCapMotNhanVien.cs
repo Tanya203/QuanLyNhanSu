@@ -27,6 +27,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<ChiTietPhuCapViewModels> ctpc;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string hoTen;
         private readonly string nhanVienPC;        
         private readonly string check;
         private string maPC_Chon;
@@ -39,6 +40,7 @@ namespace QuanLyNhanSu.PresentationTier
             phuCapBUS = new QuanLyPhuCapBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             ctpc = chiTietPhuCapBUS.GetPhuCapMotNhanVien(nhanVienPC);
             this.maNV = maNV;
             this.nhanVienPC = nhanVienPC;
@@ -119,8 +121,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 btnThem.Enabled = true;
                 txtSoTien.Text = String.Format(fVND, "{0:N3} ₫", phuCap.TienPhuCap);
-            }              
-
+            }            
         }
         //////////////////////////////////////////////////////////////////////////////////////
         private void btnThem_Click(object sender, EventArgs e)
@@ -132,11 +133,13 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chiTietPhuCapBUS.Save(chiTietPhuCap))
             {
+                NhanVien nhanVien = nhanVienBUS.ThongTinNhanVien(nhanVienPC);
+                string hoTenNV = nhanVien.Ho + " " + nhanVien.TenLot + " " + nhanVien.Ten;
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm phụ cấp " + cmbPhuCap.SelectedValue.ToString() + " cho " + nhanVienPC,
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm " + cmbPhuCap.Text + " cho " + hoTenNV,
                 };
                 lichSuThaoTacBUS.Save(newLstt);                
             }
@@ -160,7 +163,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvChiTietPhuCap.Columns.Add(btnXoa);
             }
         }
-        public void XoaPhuCap(string maNV, string maPC)
+        public void XoaPhuCap(string maNV, string maPC, string tenPC)
         {
             ChiTietPhuCap chiTietPhuCap = new ChiTietPhuCap
             {
@@ -169,11 +172,13 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chiTietPhuCapBUS.Delete(chiTietPhuCap))
             {
+                NhanVien nhanVien = nhanVienBUS.ThongTinNhanVien(nhanVienPC);
+                string hoTenNV = nhanVien.Ho + " " + nhanVien.TenLot + " " + nhanVien.Ten;
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = this.maNV,
-                    ThaoTacThucHien = "Nhân viên " + this.maNV + " xoá phụ cấp " + maPC + " của " + maNV,
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá " + tenPC + " của nhân viên" + hoTenNV,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
@@ -185,7 +190,8 @@ namespace QuanLyNhanSu.PresentationTier
             if (e.ColumnIndex == 7)
             {
                 maPC_Chon = dgvChiTietPhuCap.Rows[rowIndex].Cells[4].Value.ToString();
-                XoaPhuCap(nhanVienPC, maPC_Chon);
+                string tenPC = dgvChiTietPhuCap.Rows[rowIndex].Cells[5].Value.ToString();
+                XoaPhuCap(nhanVienPC, maPC_Chon, tenPC);
             }
         }
         private void btnTroVe_Click(object sender, EventArgs e)
@@ -208,8 +214,6 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Reload();
-        }
-
-        
+        }        
     }
 }

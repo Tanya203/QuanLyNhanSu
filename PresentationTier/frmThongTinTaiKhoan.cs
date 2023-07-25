@@ -23,6 +23,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly ChiTietPhuCapBUS chiTietPhuCapBUS;
         private readonly string maNV;
+        private readonly string hoTen;
         private readonly NhanVien nv;
         private readonly string formatDate = "dd/MM/yyyy";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
@@ -34,6 +35,7 @@ namespace QuanLyNhanSu.PresentationTier
             chiTietPhuCapBUS = new ChiTietPhuCapBUS();
             this.maNV = maNV;
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             txtMaNV.ReadOnly = true;
             txtPhongBan.ReadOnly = true;
             txtChucVu.ReadOnly = true;
@@ -274,7 +276,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa thông tin cá nhân",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " chỉnh sửa thông tin cá nhân",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -302,14 +304,18 @@ namespace QuanLyNhanSu.PresentationTier
             string matKhau = CheckMatKhau(txtMatKhauMoi.Text);
             if (matKhau == null)
                 return;
-            nv.MatKhau = txtMatKhauMoi.Text;
-            if (nhanVienBUS.Save(nv))
+            NhanVien nhanVien = new NhanVien
+            {
+                MaNV = txtMaNV.Text,
+                MatKhau = matKhau,
+            };
+            if (nhanVienBUS.Save(nhanVien))
             {
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " đổi mật khẩu",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " đổi mật khẩu",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 DangXuat();

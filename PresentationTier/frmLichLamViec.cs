@@ -24,8 +24,10 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly NhanVien nv;
         private readonly string maPB;
         private readonly string maNV;
+        private readonly string hoTen;
         private readonly string formatDate = "yyyy-MM-dd";
-        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";        
+        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
+        private readonly string now;
         public FrmLichLamViec(string maNV)
         {
             InitializeComponent();
@@ -33,8 +35,10 @@ namespace QuanLyNhanSu.PresentationTier
             lichLamViecBUS = new LichLamViecBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             this.maNV = maNV;
-            maPB = nv.ChucVu.PhongBan.MaPB;            
+            maPB = nv.ChucVu.PhongBan.MaPB;
+            now = DateTime.Now.ToString(formatDate);
         }
         private void FrmLichLamViec_Load(object sender, EventArgs e)
         {
@@ -147,12 +151,12 @@ namespace QuanLyNhanSu.PresentationTier
                 MaLLV = maLLV,
             };
             if (lichLamViecBUS.Delete(lichLamViec))
-            {
+            {                              
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá lịch ngày " + ngayLam + " - Phòng ban " + phongBan,
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá lịch ngày " + ngayLam + " - Phòng ban " + phongBan,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
@@ -173,7 +177,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm lịch ngày " + lichLamViec.NgayLam.ToString(formatDate) + " - Phòng ban " + nv.ChucVu.PhongBan.TenPhongBan,
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm lịch ngày " + dtpNgayLam.Text + " - Phòng ban " + nv.ChucVu.PhongBan.TenPhongBan,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -233,8 +237,11 @@ namespace QuanLyNhanSu.PresentationTier
             List<LichLamViec> locLich = lichLamViecBUS.LocLichTheoNgay(maPB, dtpNgayLam.Text).ToList();
             foreach (var nv in locLich)            
                 if (nv.NgayLam.ToString(formatDate) == dtpNgayLam.Text)
-                    check = 1;                            
-            if (DateTime.Parse(dtpNgayLam.Text) < DateTime.Parse(DateTime.Now.ToString(formatDate)) || check == 1)
+                {
+                    check = 1;
+                    break;
+                }                                                  
+            if (DateTime.Parse(dtpNgayLam.Text) < DateTime.Parse(now) || check == 1)
                 btnThem.Enabled = false;
             else
                 btnThem.Enabled = true;

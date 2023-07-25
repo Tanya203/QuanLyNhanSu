@@ -68,7 +68,7 @@ namespace QuanLyNhanSu.DataTier
                 CCCD = nv.CCCD,
                 Ho = nv.Ho,
                 TenLot = nv.TenLot,
-                Ten = nv.Ten,
+                Ten = nv.Ten,                
                 NTNS = nv.NTNS,
                 SoNha = nv.SoNha,
                 TenDuong = nv.TenDuong,

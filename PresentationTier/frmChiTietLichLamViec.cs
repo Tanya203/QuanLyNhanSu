@@ -30,12 +30,14 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly NhanVien nv;
         private readonly LichLamViec llv;
         private readonly string maNV;
+        private readonly string hoTen;
         private readonly string maLLV;
         private readonly string maPB;
         private readonly int countCa;
         private string maNV_Chon;
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
+        private readonly string now;
         public FrmChiTietLichLamViec(string maNV, string maLLV)
         {
             InitializeComponent();
@@ -45,7 +47,8 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             caBUS = new QuanLyCaBUS();
             loaiCaBUS = new QuanLyLoaiCaBUS();
-            nv = nhanVienBUS.ThongTinNhanVien(maNV);            
+            nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             chamCong = chiTietLichLamViecBUS.ThongTinChamCong(maLLV);
             this.maNV = maNV;
             this.maLLV = maLLV;
@@ -53,6 +56,7 @@ namespace QuanLyNhanSu.PresentationTier
             countCa = caBUS.GetCa().Count();
             MessageBoxManager.Register_OnceOnly();
             llv = lichLamViecBUS.ThongTinLichLamViec(maLLV);
+            now = DateTime.Now.ToString(formatDate);
         }
         private void FrmChiTietLichLamViec_Load(object sender, EventArgs e)
         {
@@ -77,7 +81,7 @@ namespace QuanLyNhanSu.PresentationTier
             cmbCa.Enabled = false;
             cmbLoaiCa.Enabled = false;
             cmbNhanVien.Enabled = false;
-            if (DateTime.Parse(dtpNgayLam.Text) >= DateTime.Parse(DateTime.Now.ToString(formatDate)))
+            if (DateTime.Compare(DateTime.Parse(dtpNgayLam.Text), DateTime.Parse(now)) >= 0)
             {
                 XoaButton();
                 btnThem.Enabled = true;
@@ -87,8 +91,7 @@ namespace QuanLyNhanSu.PresentationTier
                 LoadNhanVienTheoPhongBan();
                 LoadCa(dtpNgayLam.Text, cmbNhanVien.SelectedValue.ToString());
                 LoadLoaiCa();
-            }               
-            
+            }                        
         }
         public void LoadThongTinDangNhap()
         {
@@ -215,7 +218,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void txtMaNV_Phep_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaNV_Phep.Text) || (DateTime.Parse(dtpNgayLam.Text) < DateTime.Parse(DateTime.Now.ToString(formatDate))))
+            if (string.IsNullOrEmpty(txtMaNV_Phep.Text) || (DateTime.Parse(dtpNgayLam.Text) < DateTime.Parse(now)))
                 cbPhep.Enabled = false;
             else
                 cbPhep.Enabled = true;
@@ -245,11 +248,13 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chiTietLichLamViecBUS.Save(newChamCong))
             {
+                NhanVien nhanVien = nhanVienBUS.ThongTinNhanVien(cmbNhanVien.SelectedValue.ToString());
+                string hoTenNV = nhanVien.Ho + " " + nhanVien.TenLot + " " + nhanVien.Ten;
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm nhân viên " + cmbNhanVien.SelectedValue.ToString() + " vào " + "lịch làm việc " + maLLV,
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm nhân viên " + hoTenNV + " vào " + "lịch làm việc " + maLLV + " ngày " + dtpNgayLam.Text,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -281,11 +286,13 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chiTietLichLamViecBUS.Delete(newChamCong))
             {
+                NhanVien nhanVien = nhanVienBUS.ThongTinNhanVien(cmbNhanVien.SelectedValue.ToString());
+                string hoTenNV = nhanVien.Ho + " " + nhanVien.TenLot + " " + nhanVien.Ten;
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá nhân viên " + maNV_Chon + " trong lịch làm việc " + maLLV,
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá nhân viên " + hoTenNV + " trong lịch làm việc " + maLLV + " ngày " + dtpNgayLam.Text,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();

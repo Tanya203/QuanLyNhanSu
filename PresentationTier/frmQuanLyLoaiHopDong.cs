@@ -24,6 +24,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<LoaiHopDongViewModels> danhSachLoaiHopDongTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string hoTen;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiHopDong(string maNV)
         {
@@ -33,6 +34,7 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             txtMaLHD.ReadOnly = true;
             txtSoLuongNhanVien.ReadOnly = true;
             btnThem.Enabled = false;
@@ -139,7 +141,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm loại hợp đồng '" + txtTenLHD.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm loại hợp đồng '" + txtTenLHD.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -162,7 +164,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa loại hợp đồng '" + txtMaLHD.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " chỉnh sửa loại hợp đồng '" + txtMaLHD.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
@@ -180,7 +182,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm chức vụ '" + txtMaLHD.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm chức vụ '" + txtMaLHD.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();

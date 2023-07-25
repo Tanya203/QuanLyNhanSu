@@ -32,6 +32,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         private readonly string maNV;
+        private readonly string hoTen;
         private readonly NhanVien nv;
 
 
@@ -45,6 +46,7 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             chiTietPhuCapBUS = new ChiTietPhuCapBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             this.maNV = maNV;
         }
 
@@ -439,7 +441,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm nhân viên " + hoTen + "",
+                    ThaoTacThucHien = "Nhân viên " + this.hoTen + " thêm nhân viên " + hoTen,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -489,7 +491,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa nhân viên '" + txtMaNV.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " chỉnh sửa nhân viên '" + txtMaNV.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
@@ -503,11 +505,12 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (nhanVienBUS.Delete(newNhanVien.MaNV))
             {
+                string hoTen = txtHo + " " + txtTenLot.Text + " " + txtTen.Text;
                 LichSuThaoTac newLstt = new LichSuThaoTac
-                {
+                {                    
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá nhân viên '" + txtMaNV.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + this.hoTen + " xoá nhân viên " + hoTen,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();

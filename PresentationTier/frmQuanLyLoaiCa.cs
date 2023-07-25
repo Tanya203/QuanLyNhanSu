@@ -24,6 +24,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<LoaiCaViewModels> danhSachLoaiCaTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string hoTen;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiCa(string maNV)
         {
@@ -33,6 +34,7 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             txtMaLC.ReadOnly = true;           
             btnThem.Enabled = false;
             btnSua.Enabled = false;
@@ -151,7 +153,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm loại ca '" + txtTenLC.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm loại ca '" + txtTenLC.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -171,7 +173,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " sửa loại ca '" + txtMaLC.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " sửa loại ca '" + txtMaLC.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
@@ -189,7 +191,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá loại ca '" + txtMaLC.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá loại ca '" + txtMaLC.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();

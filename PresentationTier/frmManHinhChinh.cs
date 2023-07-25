@@ -177,7 +177,6 @@ namespace QuanLyNhanSu.PresentationTier
                 frmOpen.FormClosed += CloseForm;
             }           
         }
-
         private void dtpLichLamViec_ValueChanged(object sender, EventArgs e)
         {
             LoadLichLamViec();
