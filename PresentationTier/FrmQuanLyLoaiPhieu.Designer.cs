@@ -97,7 +97,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(144, 113);
-            this.btnRefresh.TabIndex = 68;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -230,7 +230,7 @@
             this.txtSoLuongPhieuLap.Location = new System.Drawing.Point(1074, 27);
             this.txtSoLuongPhieuLap.Name = "txtSoLuongPhieuLap";
             this.txtSoLuongPhieuLap.Size = new System.Drawing.Size(241, 30);
-            this.txtSoLuongPhieuLap.TabIndex = 47;
+            this.txtSoLuongPhieuLap.TabIndex = 5;
             // 
             // lblSoLuongPhieuLap
             // 
@@ -248,7 +248,7 @@
             this.txtMaLP.Location = new System.Drawing.Point(180, 27);
             this.txtMaLP.Name = "txtMaLP";
             this.txtMaLP.Size = new System.Drawing.Size(234, 30);
-            this.txtMaLP.TabIndex = 46;
+            this.txtMaLP.TabIndex = 3;
             this.txtMaLP.TextChanged += new System.EventHandler(this.EnableButton);
             // 
             // btnHuy
@@ -263,7 +263,7 @@
             this.btnHuy.Location = new System.Drawing.Point(874, 76);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(99, 49);
-            this.btnHuy.TabIndex = 45;
+            this.btnHuy.TabIndex = 9;
             this.btnHuy.Text = "Huỷ";
             this.btnHuy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHuy.UseVisualStyleBackColor = false;
@@ -281,7 +281,7 @@
             this.btnSua.Location = new System.Drawing.Point(589, 76);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(100, 49);
-            this.btnSua.TabIndex = 44;
+            this.btnSua.TabIndex = 7;
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = false;
@@ -299,7 +299,7 @@
             this.btnXoa.Location = new System.Drawing.Point(729, 76);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(102, 49);
-            this.btnXoa.TabIndex = 43;
+            this.btnXoa.TabIndex = 8;
             this.btnXoa.Text = "Xoá";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
@@ -317,7 +317,7 @@
             this.btnThem.Location = new System.Drawing.Point(425, 76);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(122, 49);
-            this.btnThem.TabIndex = 42;
+            this.btnThem.TabIndex = 6;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
@@ -330,7 +330,7 @@
             this.txtTenLoaiPhieu.MaxLength = 100;
             this.txtTenLoaiPhieu.Name = "txtTenLoaiPhieu";
             this.txtTenLoaiPhieu.Size = new System.Drawing.Size(245, 30);
-            this.txtTenLoaiPhieu.TabIndex = 3;
+            this.txtTenLoaiPhieu.TabIndex = 4;
             this.txtTenLoaiPhieu.TextChanged += new System.EventHandler(this.EnableButton);
             // 
             // lblTenLoaiPhieu
@@ -367,9 +367,10 @@
             // 
             this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTimKiem.Location = new System.Drawing.Point(797, 325);
+            this.txtTimKiem.MaxLength = 50;
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
-            this.txtTimKiem.TabIndex = 52;
+            this.txtTimKiem.TabIndex = 10;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 
@@ -420,7 +421,7 @@
             this.dgvThongTinLoaiPhieu.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvThongTinLoaiPhieu.RowTemplate.Height = 24;
             this.dgvThongTinLoaiPhieu.Size = new System.Drawing.Size(1924, 622);
-            this.dgvThongTinLoaiPhieu.TabIndex = 53;
+            this.dgvThongTinLoaiPhieu.TabIndex = 11;
             this.dgvThongTinLoaiPhieu.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThongTinLoaiPhieu_CellClick);
             // 
             // colMaLP

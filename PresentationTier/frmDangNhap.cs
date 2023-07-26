@@ -45,11 +45,12 @@ namespace QuanLyNhanSu
             if(nhanVienBUS.LoginVerify(txtTaiKhoan.Text, txtMatKhau.Text))
             {                                 
                 NhanVien nv = nhanVienBUS.GetNhanVien().Where(nhanVien => nhanVien.TaiKhoan == txtTaiKhoan.Text).FirstOrDefault();
+                string hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = nv.MaNV,
-                    ThaoTacThucHien = "Nhân viên " + nv.MaNV + " đăng nhập",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " đăng nhập",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 FrmManHinhChinh frmOpen = new FrmManHinhChinh(nv.MaNV);
@@ -65,15 +66,10 @@ namespace QuanLyNhanSu
 
         private void cbHienThiMatKhau_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbHienThiMatKhau.Checked == true)
-            {
-                txtMatKhau.UseSystemPasswordChar = true;
-            }
-            else
-            {
-                txtMatKhau.UseSystemPasswordChar = false;
-            }
-
+            if (cbHienThiMatKhau.Checked == true)            
+                txtMatKhau.UseSystemPasswordChar = false;            
+            else            
+                txtMatKhau.UseSystemPasswordChar = true;            
         }
         private void EnableButtons(object sender, EventArgs e)
         {

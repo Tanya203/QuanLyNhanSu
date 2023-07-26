@@ -24,6 +24,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<PhuCapViewMModels> danhSachPhuCap;
         private IEnumerable<PhuCapViewMModels> danhSachPhuCapTimKiem;
         private readonly string maNV;
+        private readonly string hoTen;
         private readonly NhanVien nv;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhuCap(string maNV)
@@ -34,6 +35,7 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             txtMaPC.ReadOnly = true;
             txtSoLuongNhanVien.ReadOnly = true;
             btnThem.Enabled = false;
@@ -156,7 +158,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " thêm phụ cấp '" + txtTenPC.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm phụ cấp '" + txtTenPC.Text + "'",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -176,7 +178,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " chỉnh sửa phòng ban '" + txtMaPC.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " chỉnh sửa phụ cấp " + txtMaPC.Text,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
@@ -192,7 +194,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + maNV + " xoá phụ cấp '" + txtMaPC.Text + "'",
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá phụ cấp " + txtTenPC,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();

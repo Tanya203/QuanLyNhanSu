@@ -147,7 +147,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(144, 113);
-            this.btnRefresh.TabIndex = 68;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -295,7 +295,7 @@
             this.btnLuu.Location = new System.Drawing.Point(257, 733);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(100, 60);
-            this.btnLuu.TabIndex = 37;
+            this.btnLuu.TabIndex = 32;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLuu.UseVisualStyleBackColor = false;
@@ -313,7 +313,7 @@
             this.btnDatLaiThongTin.Location = new System.Drawing.Point(406, 732);
             this.btnDatLaiThongTin.Name = "btnDatLaiThongTin";
             this.btnDatLaiThongTin.Size = new System.Drawing.Size(236, 61);
-            this.btnDatLaiThongTin.TabIndex = 36;
+            this.btnDatLaiThongTin.TabIndex = 33;
             this.btnDatLaiThongTin.Text = "Đặt lại thông tin";
             this.btnDatLaiThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDatLaiThongTin.UseVisualStyleBackColor = false;
@@ -336,7 +336,7 @@
             this.txtMatKhauMoi.MaxLength = 20;
             this.txtMatKhauMoi.Name = "txtMatKhauMoi";
             this.txtMatKhauMoi.Size = new System.Drawing.Size(289, 27);
-            this.txtMatKhauMoi.TabIndex = 29;
+            this.txtMatKhauMoi.TabIndex = 35;
             this.txtMatKhauMoi.UseSystemPasswordChar = true;
             this.txtMatKhauMoi.TextChanged += new System.EventHandler(this.CheckTextMatKhau);
             // 
@@ -357,7 +357,7 @@
             this.txtNhapLaiMatKhau.MaxLength = 20;
             this.txtNhapLaiMatKhau.Name = "txtNhapLaiMatKhau";
             this.txtNhapLaiMatKhau.Size = new System.Drawing.Size(289, 27);
-            this.txtNhapLaiMatKhau.TabIndex = 32;
+            this.txtNhapLaiMatKhau.TabIndex = 36;
             this.txtNhapLaiMatKhau.UseSystemPasswordChar = true;
             this.txtNhapLaiMatKhau.TextChanged += new System.EventHandler(this.CheckTextMatKhau);
             // 
@@ -408,7 +408,7 @@
             this.txtMatKhauCu.MaxLength = 20;
             this.txtMatKhauCu.Name = "txtMatKhauCu";
             this.txtMatKhauCu.Size = new System.Drawing.Size(289, 27);
-            this.txtMatKhauCu.TabIndex = 39;
+            this.txtMatKhauCu.TabIndex = 34;
             this.txtMatKhauCu.UseSystemPasswordChar = true;
             this.txtMatKhauCu.TextChanged += new System.EventHandler(this.CheckTextMatKhau);
             // 
@@ -499,7 +499,7 @@
             this.txtThoiHanHopDong.Location = new System.Drawing.Point(643, 11);
             this.txtThoiHanHopDong.Name = "txtThoiHanHopDong";
             this.txtThoiHanHopDong.Size = new System.Drawing.Size(211, 27);
-            this.txtThoiHanHopDong.TabIndex = 42;
+            this.txtThoiHanHopDong.TabIndex = 25;
             // 
             // txtNgayVaoLam
             // 
@@ -507,7 +507,7 @@
             this.txtNgayVaoLam.Location = new System.Drawing.Point(216, 697);
             this.txtNgayVaoLam.Name = "txtNgayVaoLam";
             this.txtNgayVaoLam.Size = new System.Drawing.Size(211, 27);
-            this.txtNgayVaoLam.TabIndex = 41;
+            this.txtNgayVaoLam.TabIndex = 24;
             // 
             // txtLoaiHopDong
             // 
@@ -515,7 +515,7 @@
             this.txtLoaiHopDong.Location = new System.Drawing.Point(216, 121);
             this.txtLoaiHopDong.Name = "txtLoaiHopDong";
             this.txtLoaiHopDong.Size = new System.Drawing.Size(212, 27);
-            this.txtLoaiHopDong.TabIndex = 40;
+            this.txtLoaiHopDong.TabIndex = 6;
             // 
             // txtChucVu
             // 
@@ -523,7 +523,7 @@
             this.txtChucVu.Location = new System.Drawing.Point(216, 86);
             this.txtChucVu.Name = "txtChucVu";
             this.txtChucVu.Size = new System.Drawing.Size(212, 27);
-            this.txtChucVu.TabIndex = 39;
+            this.txtChucVu.TabIndex = 5;
             // 
             // txtPhongBan
             // 
@@ -531,7 +531,7 @@
             this.txtPhongBan.Location = new System.Drawing.Point(216, 50);
             this.txtPhongBan.Name = "txtPhongBan";
             this.txtPhongBan.Size = new System.Drawing.Size(212, 27);
-            this.txtPhongBan.TabIndex = 38;
+            this.txtPhongBan.TabIndex = 4;
             // 
             // button1
             // 
@@ -545,7 +545,7 @@
             this.button1.Location = new System.Drawing.Point(466, 276);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(153, 50);
-            this.button1.TabIndex = 33;
+            this.button1.TabIndex = 31;
             this.button1.Text = "Chọn hình";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = false;
@@ -560,7 +560,7 @@
             this.dtpNTNS.Location = new System.Drawing.Point(216, 337);
             this.dtpNTNS.Name = "dtpNTNS";
             this.dtpNTNS.Size = new System.Drawing.Size(213, 27);
-            this.dtpNTNS.TabIndex = 14;
+            this.dtpNTNS.TabIndex = 12;
             // 
             // btnThemPhuCap
             // 
@@ -572,7 +572,7 @@
             this.btnThemPhuCap.Location = new System.Drawing.Point(598, 153);
             this.btnThemPhuCap.Name = "btnThemPhuCap";
             this.btnThemPhuCap.Size = new System.Drawing.Size(39, 37);
-            this.btnThemPhuCap.TabIndex = 31;
+            this.btnThemPhuCap.TabIndex = 29;
             this.btnThemPhuCap.UseVisualStyleBackColor = false;
             this.btnThemPhuCap.Click += new System.EventHandler(this.btnThemPhuCap_Click);
             // 
@@ -584,7 +584,7 @@
             this.rbKhac.Location = new System.Drawing.Point(361, 554);
             this.rbKhac.Name = "rbKhac";
             this.rbKhac.Size = new System.Drawing.Size(68, 24);
-            this.rbKhac.TabIndex = 22;
+            this.rbKhac.TabIndex = 20;
             this.rbKhac.TabStop = true;
             this.rbKhac.Text = "Khác";
             this.rbKhac.UseVisualStyleBackColor = true;
@@ -597,7 +597,7 @@
             this.rbNu.Location = new System.Drawing.Point(287, 554);
             this.rbNu.Name = "rbNu";
             this.rbNu.Size = new System.Drawing.Size(51, 24);
-            this.rbNu.TabIndex = 21;
+            this.rbNu.TabIndex = 19;
             this.rbNu.TabStop = true;
             this.rbNu.Text = "Nữ";
             this.rbNu.UseVisualStyleBackColor = true;
@@ -610,7 +610,7 @@
             this.rbNam.Location = new System.Drawing.Point(216, 554);
             this.rbNam.Name = "rbNam";
             this.rbNam.Size = new System.Drawing.Size(65, 24);
-            this.rbNam.TabIndex = 20;
+            this.rbNam.TabIndex = 18;
             this.rbNam.TabStop = true;
             this.rbNam.Text = "Nam";
             this.rbNam.UseVisualStyleBackColor = true;
@@ -621,7 +621,7 @@
             this.txtPhuCap.Location = new System.Drawing.Point(643, 157);
             this.txtPhuCap.Name = "txtPhuCap";
             this.txtPhuCap.Size = new System.Drawing.Size(215, 27);
-            this.txtPhuCap.TabIndex = 32;
+            this.txtPhuCap.TabIndex = 30;
             // 
             // txtLuongCoBan
             // 
@@ -629,7 +629,7 @@
             this.txtLuongCoBan.Location = new System.Drawing.Point(643, 122);
             this.txtLuongCoBan.Name = "txtLuongCoBan";
             this.txtLuongCoBan.Size = new System.Drawing.Size(215, 27);
-            this.txtLuongCoBan.TabIndex = 30;
+            this.txtLuongCoBan.TabIndex = 28;
             // 
             // txtSoNgayPhep
             // 
@@ -637,7 +637,7 @@
             this.txtSoNgayPhep.Location = new System.Drawing.Point(643, 86);
             this.txtSoNgayPhep.Name = "txtSoNgayPhep";
             this.txtSoNgayPhep.Size = new System.Drawing.Size(215, 27);
-            this.txtSoNgayPhep.TabIndex = 29;
+            this.txtSoNgayPhep.TabIndex = 27;
             // 
             // txtTinhTrang
             // 
@@ -645,7 +645,7 @@
             this.txtTinhTrang.Location = new System.Drawing.Point(643, 46);
             this.txtTinhTrang.Name = "txtTinhTrang";
             this.txtTinhTrang.Size = new System.Drawing.Size(215, 27);
-            this.txtTinhTrang.TabIndex = 28;
+            this.txtTinhTrang.TabIndex = 26;
             // 
             // txtTrinhDoHocVan
             // 
@@ -653,15 +653,16 @@
             this.txtTrinhDoHocVan.Location = new System.Drawing.Point(217, 654);
             this.txtTrinhDoHocVan.Name = "txtTrinhDoHocVan";
             this.txtTrinhDoHocVan.Size = new System.Drawing.Size(211, 27);
-            this.txtTrinhDoHocVan.TabIndex = 25;
+            this.txtTrinhDoHocVan.TabIndex = 23;
             // 
             // txtEmail
             // 
             this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.Location = new System.Drawing.Point(217, 621);
+            this.txtEmail.MaxLength = 100;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(211, 27);
-            this.txtEmail.TabIndex = 24;
+            this.txtEmail.TabIndex = 22;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
             // 
             // txtSDT
@@ -671,7 +672,7 @@
             this.txtSDT.MaxLength = 10;
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(211, 27);
-            this.txtSDT.TabIndex = 23;
+            this.txtSDT.TabIndex = 21;
             this.txtSDT.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
             this.txtSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSDT_KeyPress);
             // 
@@ -682,7 +683,7 @@
             this.txtTinh_ThanhPho.MaxLength = 100;
             this.txtTinh_ThanhPho.Name = "txtTinh_ThanhPho";
             this.txtTinh_ThanhPho.Size = new System.Drawing.Size(213, 27);
-            this.txtTinh_ThanhPho.TabIndex = 19;
+            this.txtTinh_ThanhPho.TabIndex = 17;
             this.txtTinh_ThanhPho.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
             // 
             // txtQuan_Huyen
@@ -692,7 +693,7 @@
             this.txtQuan_Huyen.MaxLength = 100;
             this.txtQuan_Huyen.Name = "txtQuan_Huyen";
             this.txtQuan_Huyen.Size = new System.Drawing.Size(213, 27);
-            this.txtQuan_Huyen.TabIndex = 18;
+            this.txtQuan_Huyen.TabIndex = 16;
             this.txtQuan_Huyen.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
             // 
             // txtPhuong_Xa
@@ -702,7 +703,7 @@
             this.txtPhuong_Xa.MaxLength = 100;
             this.txtPhuong_Xa.Name = "txtPhuong_Xa";
             this.txtPhuong_Xa.Size = new System.Drawing.Size(213, 27);
-            this.txtPhuong_Xa.TabIndex = 17;
+            this.txtPhuong_Xa.TabIndex = 15;
             this.txtPhuong_Xa.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
             // 
             // txtDuong
@@ -712,7 +713,7 @@
             this.txtDuong.MaxLength = 100;
             this.txtDuong.Name = "txtDuong";
             this.txtDuong.Size = new System.Drawing.Size(213, 27);
-            this.txtDuong.TabIndex = 16;
+            this.txtDuong.TabIndex = 14;
             this.txtDuong.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
             // 
             // txtSoNha
@@ -722,7 +723,7 @@
             this.txtSoNha.MaxLength = 20;
             this.txtSoNha.Name = "txtSoNha";
             this.txtSoNha.Size = new System.Drawing.Size(213, 27);
-            this.txtSoNha.TabIndex = 15;
+            this.txtSoNha.TabIndex = 13;
             this.txtSoNha.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
             // 
             // txtTen
@@ -732,7 +733,7 @@
             this.txtTen.MaxLength = 20;
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(213, 27);
-            this.txtTen.TabIndex = 13;
+            this.txtTen.TabIndex = 11;
             this.txtTen.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
             // 
             // txtTenLot
@@ -742,7 +743,7 @@
             this.txtTenLot.MaxLength = 20;
             this.txtTenLot.Name = "txtTenLot";
             this.txtTenLot.Size = new System.Drawing.Size(213, 27);
-            this.txtTenLot.TabIndex = 12;
+            this.txtTenLot.TabIndex = 10;
             this.txtTenLot.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
             // 
             // txtHo
@@ -752,7 +753,7 @@
             this.txtHo.MaxLength = 20;
             this.txtHo.Name = "txtHo";
             this.txtHo.Size = new System.Drawing.Size(213, 27);
-            this.txtHo.TabIndex = 11;
+            this.txtHo.TabIndex = 9;
             this.txtHo.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
             // 
             // txtCCCD
@@ -762,7 +763,7 @@
             this.txtCCCD.MaxLength = 12;
             this.txtCCCD.Name = "txtCCCD";
             this.txtCCCD.Size = new System.Drawing.Size(213, 27);
-            this.txtCCCD.TabIndex = 10;
+            this.txtCCCD.TabIndex = 8;
             this.txtCCCD.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
             this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_CMND_KeyPress);
             // 
@@ -772,7 +773,7 @@
             this.txtTaiKhoan.Location = new System.Drawing.Point(216, 155);
             this.txtTaiKhoan.Name = "txtTaiKhoan";
             this.txtTaiKhoan.Size = new System.Drawing.Size(212, 27);
-            this.txtTaiKhoan.TabIndex = 6;
+            this.txtTaiKhoan.TabIndex = 7;
             // 
             // txtMaNV
             // 
@@ -780,7 +781,7 @@
             this.txtMaNV.Location = new System.Drawing.Point(216, 11);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(212, 27);
-            this.txtMaNV.TabIndex = 2;
+            this.txtMaNV.TabIndex = 3;
             // 
             // lblHinh
             // 

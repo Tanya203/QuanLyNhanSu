@@ -333,6 +333,7 @@ namespace QuanLyNhanSu.PresentationTier
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
                 txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = true;
+                cbHienThiMatKhau.Enabled = true;
                 txtTaiKhoan.ReadOnly = false;
                 return;
             }
@@ -343,6 +344,7 @@ namespace QuanLyNhanSu.PresentationTier
                 btnXoa.Enabled = true;
                 btnThemPhuCap.Enabled = true;
                 txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = false;
+                cbHienThiMatKhau.Enabled = false;
                 txtTaiKhoan.ReadOnly= true;
                 return;
             }
@@ -591,7 +593,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtTinhTrang.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[21].Value.ToString();
             txtSoNgayPhep.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[22].Value.ToString();
             txtLuongCoBan.Text = nhanVienBUS.ThongTinNhanVien(txtMaNV.Text).LuongCoBan.ToString();
-            txtPhuCap.Text = chiTietPhuCapBUS.TongPhuCapMotNhanVien(txtMaNV.Text).ToString();
+            txtPhuCap.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(txtMaNV.Text));
         }
         private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
         {

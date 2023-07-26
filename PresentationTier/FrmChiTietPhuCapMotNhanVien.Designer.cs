@@ -97,7 +97,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(144, 110);
-            this.btnRefresh.TabIndex = 69;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -227,7 +227,7 @@
             this.txtMaNV.Location = new System.Drawing.Point(162, 31);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(233, 30);
-            this.txtMaNV.TabIndex = 5;
+            this.txtMaNV.TabIndex = 3;
             // 
             // lblMaNV
             // 
@@ -245,7 +245,7 @@
             this.txtSoTien.Location = new System.Drawing.Point(1001, 31);
             this.txtSoTien.Name = "txtSoTien";
             this.txtSoTien.Size = new System.Drawing.Size(294, 30);
-            this.txtSoTien.TabIndex = 3;
+            this.txtSoTien.TabIndex = 5;
             // 
             // lblSoTien
             // 
@@ -268,7 +268,7 @@
             this.btnThem.Location = new System.Drawing.Point(607, 91);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(131, 50);
-            this.btnThem.TabIndex = 4;
+            this.btnThem.TabIndex = 6;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
@@ -282,7 +282,7 @@
             this.cmbPhuCap.Location = new System.Drawing.Point(506, 31);
             this.cmbPhuCap.Name = "cmbPhuCap";
             this.cmbPhuCap.Size = new System.Drawing.Size(375, 33);
-            this.cmbPhuCap.TabIndex = 2;
+            this.cmbPhuCap.TabIndex = 4;
             this.cmbPhuCap.TextChanged += new System.EventHandler(this.cmbPhuCap_TextChanged);
             // 
             // lblTenPhuCap
@@ -320,7 +320,7 @@
             this.dgvChiTietPhuCap.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvChiTietPhuCap.RowTemplate.Height = 24;
             this.dgvChiTietPhuCap.Size = new System.Drawing.Size(1924, 634);
-            this.dgvChiTietPhuCap.TabIndex = 5;
+            this.dgvChiTietPhuCap.TabIndex = 7;
             this.dgvChiTietPhuCap.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChiTietPhuCap_CellClick);
             // 
             // colMaNV

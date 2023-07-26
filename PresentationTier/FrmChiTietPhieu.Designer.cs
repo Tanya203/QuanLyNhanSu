@@ -108,9 +108,10 @@
             // 
             this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTimKiem.Location = new System.Drawing.Point(1613, 434);
+            this.txtTimKiem.MaxLength = 50;
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
-            this.txtTimKiem.TabIndex = 59;
+            this.txtTimKiem.TabIndex = 21;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 
@@ -144,7 +145,7 @@
             this.txtLoaiPhieu.Location = new System.Drawing.Point(272, 55);
             this.txtLoaiPhieu.Name = "txtLoaiPhieu";
             this.txtLoaiPhieu.Size = new System.Drawing.Size(336, 30);
-            this.txtLoaiPhieu.TabIndex = 76;
+            this.txtLoaiPhieu.TabIndex = 4;
             // 
             // lblLoaiPhieu
             // 
@@ -172,7 +173,7 @@
             this.txtTongTien.Location = new System.Drawing.Point(272, 274);
             this.txtTongTien.Name = "txtTongTien";
             this.txtTongTien.Size = new System.Drawing.Size(336, 30);
-            this.txtTongTien.TabIndex = 67;
+            this.txtTongTien.TabIndex = 10;
             // 
             // txtHoTenTT
             // 
@@ -180,7 +181,7 @@
             this.txtHoTenTT.Location = new System.Drawing.Point(272, 127);
             this.txtHoTenTT.Name = "txtHoTenTT";
             this.txtHoTenTT.Size = new System.Drawing.Size(336, 30);
-            this.txtHoTenTT.TabIndex = 73;
+            this.txtHoTenTT.TabIndex = 6;
             // 
             // lblHoTenTT
             // 
@@ -198,7 +199,7 @@
             this.txtChucVu.Location = new System.Drawing.Point(272, 202);
             this.txtChucVu.Name = "txtChucVu";
             this.txtChucVu.Size = new System.Drawing.Size(336, 30);
-            this.txtChucVu.TabIndex = 71;
+            this.txtChucVu.TabIndex = 8;
             // 
             // txtPhongBan
             // 
@@ -206,7 +207,7 @@
             this.txtPhongBan.Location = new System.Drawing.Point(272, 166);
             this.txtPhongBan.Name = "txtPhongBan";
             this.txtPhongBan.Size = new System.Drawing.Size(336, 30);
-            this.txtPhongBan.TabIndex = 70;
+            this.txtPhongBan.TabIndex = 7;
             // 
             // lblChucVuTT
             // 
@@ -234,7 +235,7 @@
             this.txtMaP.Location = new System.Drawing.Point(272, 15);
             this.txtMaP.Name = "txtMaP";
             this.txtMaP.Size = new System.Drawing.Size(336, 30);
-            this.txtMaP.TabIndex = 46;
+            this.txtMaP.TabIndex = 3;
             // 
             // txtMaNV
             // 
@@ -242,7 +243,7 @@
             this.txtMaNV.Location = new System.Drawing.Point(272, 91);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(336, 30);
-            this.txtMaNV.TabIndex = 3;
+            this.txtMaNV.TabIndex = 5;
             // 
             // lblNhanVienLapPhieu
             // 
@@ -272,7 +273,7 @@
             this.dtpNgayLapPhieu.Location = new System.Drawing.Point(272, 238);
             this.dtpNgayLapPhieu.Name = "dtpNgayLapPhieu";
             this.dtpNgayLapPhieu.Size = new System.Drawing.Size(336, 30);
-            this.dtpNgayLapPhieu.TabIndex = 47;
+            this.dtpNgayLapPhieu.TabIndex = 9;
             // 
             // lblThoiGianBatDau
             // 
@@ -292,7 +293,7 @@
             this.cmbNhanVien.Location = new System.Drawing.Point(237, 69);
             this.cmbNhanVien.Name = "cmbNhanVien";
             this.cmbNhanVien.Size = new System.Drawing.Size(263, 33);
-            this.cmbNhanVien.TabIndex = 61;
+            this.cmbNhanVien.TabIndex = 13;
             this.cmbNhanVien.SelectedIndexChanged += new System.EventHandler(this.cmbNhanVien_SelectedIndexChanged);
             this.cmbNhanVien.TextChanged += new System.EventHandler(this.BatTatBut);
             // 
@@ -314,7 +315,7 @@
             this.cmbPhongBan.Location = new System.Drawing.Point(237, 21);
             this.cmbPhongBan.Name = "cmbPhongBan";
             this.cmbPhongBan.Size = new System.Drawing.Size(263, 33);
-            this.cmbPhongBan.TabIndex = 58;
+            this.cmbPhongBan.TabIndex = 11;
             this.cmbPhongBan.TextChanged += new System.EventHandler(this.LoadChucVu);
             // 
             // txtSoTien
@@ -324,7 +325,7 @@
             this.txtSoTien.MaxLength = 42;
             this.txtSoTien.Name = "txtSoTien";
             this.txtSoTien.Size = new System.Drawing.Size(268, 30);
-            this.txtSoTien.TabIndex = 56;
+            this.txtSoTien.TabIndex = 16;
             this.txtSoTien.TextChanged += new System.EventHandler(this.BatTatBut);
             this.txtSoTien.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTienThuong_KeyPress);
             // 
@@ -390,7 +391,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(144, 113);
-            this.btnRefresh.TabIndex = 67;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -589,7 +590,7 @@
             this.txtHoTenNV.Location = new System.Drawing.Point(735, 70);
             this.txtHoTenNV.Name = "txtHoTenNV";
             this.txtHoTenNV.Size = new System.Drawing.Size(268, 30);
-            this.txtHoTenNV.TabIndex = 62;
+            this.txtHoTenNV.TabIndex = 14;
             // 
             // label1
             // 
@@ -643,7 +644,7 @@
             this.txtMaNV_Sua.MaxLength = 42;
             this.txtMaNV_Sua.Name = "txtMaNV_Sua";
             this.txtMaNV_Sua.Size = new System.Drawing.Size(263, 30);
-            this.txtMaNV_Sua.TabIndex = 70;
+            this.txtMaNV_Sua.TabIndex = 15;
             // 
             // btnSua
             // 
@@ -657,7 +658,7 @@
             this.btnSua.Location = new System.Drawing.Point(735, 194);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(100, 49);
-            this.btnSua.TabIndex = 69;
+            this.btnSua.TabIndex = 19;
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = false;
@@ -671,7 +672,7 @@
             this.cmbChucVu.Location = new System.Drawing.Point(735, 16);
             this.cmbChucVu.Name = "cmbChucVu";
             this.cmbChucVu.Size = new System.Drawing.Size(268, 33);
-            this.cmbChucVu.TabIndex = 69;
+            this.cmbChucVu.TabIndex = 12;
             this.cmbChucVu.TextChanged += new System.EventHandler(this.LoadNhanVien);
             // 
             // lblChucVu
@@ -691,7 +692,7 @@
             this.rtxtGhiChu.MaxLength = 500;
             this.rtxtGhiChu.Name = "rtxtGhiChu";
             this.rtxtGhiChu.Size = new System.Drawing.Size(263, 99);
-            this.rtxtGhiChu.TabIndex = 67;
+            this.rtxtGhiChu.TabIndex = 17;
             this.rtxtGhiChu.Text = "";
             // 
             // btnThem
@@ -706,7 +707,7 @@
             this.btnThem.Location = new System.Drawing.Point(543, 194);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(109, 49);
-            this.btnThem.TabIndex = 48;
+            this.btnThem.TabIndex = 18;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
@@ -724,7 +725,7 @@
             this.btnHuy.Location = new System.Drawing.Point(904, 194);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(99, 49);
-            this.btnHuy.TabIndex = 51;
+            this.btnHuy.TabIndex = 20;
             this.btnHuy.Text = "Huỷ";
             this.btnHuy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHuy.UseVisualStyleBackColor = false;

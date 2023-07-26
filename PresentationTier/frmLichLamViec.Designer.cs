@@ -63,9 +63,10 @@
             // 
             this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTimKiem.Location = new System.Drawing.Point(884, 370);
+            this.txtTimKiem.MaxLength = 50;
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
-            this.txtTimKiem.TabIndex = 59;
+            this.txtTimKiem.TabIndex = 5;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 
@@ -99,7 +100,7 @@
             this.dtpNgayLam.Location = new System.Drawing.Point(270, 22);
             this.dtpNgayLam.Name = "dtpNgayLam";
             this.dtpNgayLam.Size = new System.Drawing.Size(141, 30);
-            this.dtpNgayLam.TabIndex = 51;
+            this.dtpNgayLam.TabIndex = 3;
             this.dtpNgayLam.ValueChanged += new System.EventHandler(this.dtpNgayLam_ValueChanged);
             // 
             // lblNgayLam
@@ -124,7 +125,7 @@
             this.btnThem.Location = new System.Drawing.Point(235, 72);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(122, 49);
-            this.btnThem.TabIndex = 42;
+            this.btnThem.TabIndex = 4;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
@@ -149,7 +150,7 @@
             this.dgvThongTinLichLamViec.Name = "dgvThongTinLichLamViec";
             this.dgvThongTinLichLamViec.ReadOnly = true;
             this.dgvThongTinLichLamViec.RowHeadersVisible = false;
-            this.dgvThongTinLichLamViec.RowHeadersWidth = 51;
+            this.dgvThongTinLichLamViec.RowHeadersWidth = 6;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvThongTinLichLamViec.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvThongTinLichLamViec.RowTemplate.Height = 24;
@@ -323,7 +324,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(144, 113);
-            this.btnRefresh.TabIndex = 68;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;

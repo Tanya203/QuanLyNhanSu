@@ -155,7 +155,7 @@
             this.txtHoTenNV.Location = new System.Drawing.Point(204, 93);
             this.txtHoTenNV.Name = "txtHoTenNV";
             this.txtHoTenNV.Size = new System.Drawing.Size(255, 30);
-            this.txtHoTenNV.TabIndex = 62;
+            this.txtHoTenNV.TabIndex = 9;
             // 
             // label1
             // 
@@ -192,7 +192,7 @@
             this.cmbLoaiCa.Location = new System.Drawing.Point(560, 90);
             this.cmbLoaiCa.Name = "cmbLoaiCa";
             this.cmbLoaiCa.Size = new System.Drawing.Size(255, 33);
-            this.cmbLoaiCa.TabIndex = 67;
+            this.cmbLoaiCa.TabIndex = 10;
             // 
             // lblLoaiCa
             // 
@@ -212,7 +212,7 @@
             this.cmbCa.Location = new System.Drawing.Point(561, 27);
             this.cmbCa.Name = "cmbCa";
             this.cmbCa.Size = new System.Drawing.Size(255, 33);
-            this.cmbCa.TabIndex = 65;
+            this.cmbCa.TabIndex = 8;
             // 
             // lblCa
             // 
@@ -232,7 +232,7 @@
             this.cmbNhanVien.Location = new System.Drawing.Point(204, 27);
             this.cmbNhanVien.Name = "cmbNhanVien";
             this.cmbNhanVien.Size = new System.Drawing.Size(255, 33);
-            this.cmbNhanVien.TabIndex = 61;
+            this.cmbNhanVien.TabIndex = 7;
             this.cmbNhanVien.TextChanged += new System.EventHandler(this.cmbNhanVien_TextChanged);
             // 
             // btnThem
@@ -247,7 +247,7 @@
             this.btnThem.Location = new System.Drawing.Point(383, 138);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(109, 44);
-            this.btnThem.TabIndex = 48;
+            this.btnThem.TabIndex = 11;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
@@ -312,7 +312,7 @@
             this.txtTimKiem.Location = new System.Drawing.Point(1046, 420);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
-            this.txtTimKiem.TabIndex = 73;
+            this.txtTimKiem.TabIndex = 15;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 
@@ -348,7 +348,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(144, 113);
-            this.btnRefresh.TabIndex = 68;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -412,7 +412,7 @@
             this.dgvChiTietLichLamViec.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvChiTietLichLamViec.RowTemplate.Height = 24;
             this.dgvChiTietLichLamViec.Size = new System.Drawing.Size(1924, 527);
-            this.dgvChiTietLichLamViec.TabIndex = 70;
+            this.dgvChiTietLichLamViec.TabIndex = 15;
             this.dgvChiTietLichLamViec.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChiTietLichLamViec_CellClick);
             // 
             // colMaLLV
@@ -507,7 +507,7 @@
             this.txtPhongBan.Location = new System.Drawing.Point(206, 115);
             this.txtPhongBan.Name = "txtPhongBan";
             this.txtPhongBan.Size = new System.Drawing.Size(207, 30);
-            this.txtPhongBan.TabIndex = 60;
+            this.txtPhongBan.TabIndex = 5;
             // 
             // lblPhongBan
             // 
@@ -525,7 +525,7 @@
             this.txtMaNV.Location = new System.Drawing.Point(206, 67);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(207, 30);
-            this.txtMaNV.TabIndex = 58;
+            this.txtMaNV.TabIndex = 4;
             // 
             // lblNhanVienLapLich
             // 
@@ -545,7 +545,7 @@
             this.dtpNgayLam.Location = new System.Drawing.Point(206, 163);
             this.dtpNgayLam.Name = "dtpNgayLam";
             this.dtpNgayLam.Size = new System.Drawing.Size(207, 30);
-            this.dtpNgayLam.TabIndex = 51;
+            this.dtpNgayLam.TabIndex = 6;
             // 
             // lblNgayLam
             // 
@@ -563,7 +563,7 @@
             this.txtMaLLV.Location = new System.Drawing.Point(206, 21);
             this.txtMaLLV.Name = "txtMaLLV";
             this.txtMaLLV.Size = new System.Drawing.Size(207, 30);
-            this.txtMaLLV.TabIndex = 46;
+            this.txtMaLLV.TabIndex = 3;
             // 
             // lblMaLichLamViec
             // 
@@ -594,7 +594,7 @@
             this.cbPhep.Location = new System.Drawing.Point(221, 145);
             this.cbPhep.Name = "cbPhep";
             this.cbPhep.Size = new System.Drawing.Size(84, 29);
-            this.cbPhep.TabIndex = 68;
+            this.cbPhep.TabIndex = 14;
             this.cbPhep.Text = "Phép";
             this.cbPhep.UseVisualStyleBackColor = true;
             this.cbPhep.Click += new System.EventHandler(this.cbPhep_Click);
@@ -605,7 +605,7 @@
             this.txtMaNV_Phep.Location = new System.Drawing.Point(221, 19);
             this.txtMaNV_Phep.Name = "txtMaNV_Phep";
             this.txtMaNV_Phep.Size = new System.Drawing.Size(255, 30);
-            this.txtMaNV_Phep.TabIndex = 66;
+            this.txtMaNV_Phep.TabIndex = 12;
             this.txtMaNV_Phep.TextChanged += new System.EventHandler(this.txtMaNV_Phep_TextChanged);
             // 
             // lblMaNV
@@ -624,7 +624,7 @@
             this.txtHoTenNhanVien_Phep.Location = new System.Drawing.Point(221, 85);
             this.txtHoTenNhanVien_Phep.Name = "txtHoTenNhanVien_Phep";
             this.txtHoTenNhanVien_Phep.Size = new System.Drawing.Size(255, 30);
-            this.txtHoTenNhanVien_Phep.TabIndex = 64;
+            this.txtHoTenNhanVien_Phep.TabIndex = 13;
             // 
             // label2
             // 

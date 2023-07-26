@@ -83,12 +83,19 @@ namespace QuanLyNhanSu.PresentationTier
                 txtNhapLaiMatKhau.UseSystemPasswordChar = true;
             }
         }
-                private void txtMatKhau_TextChanged_1(object sender, EventArgs e)
+        private void txtMatKhau_TextChanged_1(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtMatKhau.Text) && !string.IsNullOrEmpty(txtNhapLaiMatKhau.Text))
                 btnDoiMatKhau.Enabled = true;
             else
                 btnDoiMatKhau.Enabled = false;
+        }
+        private void txtCCCD_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
         ////////////////////////////////////////////////////////////////////////////////////////
         private void btnXacThucThongTin_Click(object sender, EventArgs e)
@@ -136,6 +143,7 @@ namespace QuanLyNhanSu.PresentationTier
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
+
         
     }
 }

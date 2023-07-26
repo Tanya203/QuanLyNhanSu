@@ -81,7 +81,7 @@ namespace QuanLyNhanSu.PresentationTier
             cmbCa.Enabled = false;
             cmbLoaiCa.Enabled = false;
             cmbNhanVien.Enabled = false;
-            if (DateTime.Compare(DateTime.Parse(dtpNgayLam.Text), DateTime.Parse(now)) >= 0)
+            if (DateTime.Parse(dtpNgayLam.Text) >= DateTime.Parse(now))
             {
                 XoaButton();
                 btnThem.Enabled = true;
@@ -382,6 +382,5 @@ namespace QuanLyNhanSu.PresentationTier
                     cbPhep.Checked = true;
             }    
         }
-        
     }
 }

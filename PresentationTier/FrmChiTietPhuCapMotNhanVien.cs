@@ -55,11 +55,10 @@ namespace QuanLyNhanSu.PresentationTier
             LoadPhuCap();            
             txtMaNV.ReadOnly = true;
             txtSoTien.ReadOnly = true;
-            txtTongPhuCap.ReadOnly = true;
-            btnThem.Enabled = false;
+            txtTongPhuCap.ReadOnly = true;           
             if(check == "nhanVien")
             {
-                pnlMenu.Visible = true;
+                pnlMenu.Visible = true;                
                 XoaButton();
             }                           
         }
@@ -78,6 +77,8 @@ namespace QuanLyNhanSu.PresentationTier
             List<PhuCap> phuCap = phuCapBUS.GetPhuCap().ToList();
             foreach (var pc in ctpc)
                 phuCap = phuCap.Where(p => p.MaPC != pc.MaPC).ToList();
+            if(phuCap.Count() == 0)
+                btnThem.Enabled = false;
             cmbPhuCap.DataSource = phuCap;
         }
         public void LoadPhuCapNhanVien()
@@ -178,7 +179,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = this.maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá " + tenPC + " của nhân viên" + hoTenNV,
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá " + tenPC + " của nhân viên " + hoTenNV,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 Reload();
@@ -187,6 +188,8 @@ namespace QuanLyNhanSu.PresentationTier
         private void dgvChiTietPhuCap_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
+            if (rowIndex < 0)
+                return;
             if (e.ColumnIndex == 7)
             {
                 maPC_Chon = dgvChiTietPhuCap.Rows[rowIndex].Cells[4].Value.ToString();

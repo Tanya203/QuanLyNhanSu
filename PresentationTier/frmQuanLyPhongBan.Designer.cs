@@ -96,7 +96,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(144, 113);
-            this.btnRefresh.TabIndex = 68;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -235,7 +235,7 @@
             this.btnHuy.Location = new System.Drawing.Point(837, 77);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(99, 49);
-            this.btnHuy.TabIndex = 41;
+            this.btnHuy.TabIndex = 9;
             this.btnHuy.Text = "Huỷ";
             this.btnHuy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHuy.UseVisualStyleBackColor = false;
@@ -253,7 +253,7 @@
             this.btnSua.Location = new System.Drawing.Point(558, 77);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(100, 49);
-            this.btnSua.TabIndex = 40;
+            this.btnSua.TabIndex = 7;
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = false;
@@ -271,7 +271,7 @@
             this.btnXoa.Location = new System.Drawing.Point(696, 77);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(102, 49);
-            this.btnXoa.TabIndex = 39;
+            this.btnXoa.TabIndex = 8;
             this.btnXoa.Text = "Xoá";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
@@ -289,7 +289,7 @@
             this.btnThem.Location = new System.Drawing.Point(403, 77);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(122, 49);
-            this.btnThem.TabIndex = 38;
+            this.btnThem.TabIndex = 6;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
@@ -301,7 +301,7 @@
             this.txtTongSoNhanVien.Location = new System.Drawing.Point(1029, 27);
             this.txtTongSoNhanVien.Name = "txtTongSoNhanVien";
             this.txtTongSoNhanVien.Size = new System.Drawing.Size(238, 30);
-            this.txtTongSoNhanVien.TabIndex = 10;
+            this.txtTongSoNhanVien.TabIndex = 5;
             this.txtTongSoNhanVien.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblTongSoNhanVien
@@ -321,7 +321,7 @@
             this.txtTenPB.MaxLength = 50;
             this.txtTenPB.Name = "txtTenPB";
             this.txtTenPB.Size = new System.Drawing.Size(221, 30);
-            this.txtTenPB.TabIndex = 8;
+            this.txtTenPB.TabIndex = 4;
             this.txtTenPB.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblTenPB
@@ -340,7 +340,7 @@
             this.txtMaPB.Location = new System.Drawing.Point(193, 27);
             this.txtMaPB.Name = "txtMaPB";
             this.txtMaPB.Size = new System.Drawing.Size(218, 30);
-            this.txtMaPB.TabIndex = 5;
+            this.txtMaPB.TabIndex = 3;
             this.txtMaPB.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblMaPhongBan
@@ -367,9 +367,10 @@
             // 
             this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTimKiem.Location = new System.Drawing.Point(910, 305);
+            this.txtTimKiem.MaxLength = 50;
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
-            this.txtTimKiem.TabIndex = 28;
+            this.txtTimKiem.TabIndex = 10;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.TimKiem);
             this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 
@@ -427,7 +428,7 @@
             this.dgvThongTinPhongBan.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvThongTinPhongBan.RowTemplate.Height = 24;
             this.dgvThongTinPhongBan.Size = new System.Drawing.Size(1924, 642);
-            this.dgvThongTinPhongBan.TabIndex = 6;
+            this.dgvThongTinPhongBan.TabIndex = 11;
             this.dgvThongTinPhongBan.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThongTinPhongBan_CellClick);
             // 
             // FrmQuanLyPhongBan
