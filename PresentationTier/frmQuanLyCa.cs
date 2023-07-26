@@ -24,7 +24,6 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<CaViewModels> danhSachCa;
         private IEnumerable<CaViewModels> danhSachCaTimKiem;        
         private readonly NhanVien nv;
-        string formatTime = "HH:mm";
         private readonly string maNV;
         private readonly string hoTen;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";

@@ -29,7 +29,6 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<ChiTietPhieu> ctp;
         private readonly NhanVien nv;
         private readonly Phieu phieu;
-        private string maNV_Chon;
         private readonly string maNV;
         private readonly string hoTen;
         private readonly string maP;
@@ -95,10 +94,8 @@ namespace QuanLyNhanSu.PresentationTier
         private void LoadChucVu(object sender, EventArgs e)
         {
             LoadChucVuTheoPhongBan(cmbPhongBan.SelectedValue.ToString());
-            if (string.IsNullOrEmpty(cmbNhanVien.Text) && string.IsNullOrEmpty(maNV_Chon))
-            {
-                txtHoTenNV.Text = string.Empty;
-            }
+            if (string.IsNullOrEmpty(cmbNhanVien.Text) && string.IsNullOrEmpty(txtMaNV_Sua.Text))            
+                txtHoTenNV.Text = string.Empty;            
             else
                 txtSoTien.Text = string.Empty;
         }
@@ -165,10 +162,9 @@ namespace QuanLyNhanSu.PresentationTier
         }
         ///////////////////////////////////////////////////////////////////////////////////////////
         private void cmbNhanVien_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {            
             NhanVien nv = nhanVienBUS.ThongTinNhanVien(cmbNhanVien.SelectedValue.ToString());
             txtHoTenNV.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
-            maNV_Chon = null;
             txtMaNV_Sua.Text = string.Empty;
             txtSoTien.Text = string.Empty;
         }
@@ -179,13 +175,13 @@ namespace QuanLyNhanSu.PresentationTier
                 btnThem.Enabled = btnSua.Enabled = false;
                 return;
             }
-            if (!string.IsNullOrEmpty(cmbNhanVien.Text) && !string.IsNullOrEmpty(txtSoTien.Text) && maNV_Chon == null)
+            if (!string.IsNullOrEmpty(cmbNhanVien.Text) && !string.IsNullOrEmpty(txtSoTien.Text) && string.IsNullOrEmpty(txtMaNV_Sua.Text))
             {
                 btnThem.Enabled = true;
                 btnSua.Enabled = false;
                 return;
             }
-            if (maNV_Chon != null && !string.IsNullOrEmpty(txtSoTien.Text))
+            if (!string.IsNullOrEmpty(txtMaNV_Sua.Text) && !string.IsNullOrEmpty(txtSoTien.Text))
             {
                 btnThem.Enabled = false;
                 btnSua.Enabled = true;
@@ -199,25 +195,19 @@ namespace QuanLyNhanSu.PresentationTier
         private void dgvThongTinPhieuThuong_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
-            cmbNhanVien.Text = string.Empty;
             if (rowIndex < 0)
-                return;
-            maNV_Chon = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[2].Value.ToString();
+                return;            
             cmbPhongBan.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[4].Value.ToString();
             cmbChucVu.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[5].Value.ToString();
             txtHoTenNV.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[3].Value.ToString();            
-            txtSoTien.Text = chiTietPhieuBus.SoTienNhanVienTrongPhieu(maNV_Chon,txtMaP.Text).ToString();
             txtMaNV_Sua.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[2].Value.ToString();
+            txtSoTien.Text = chiTietPhieuBus.SoTienNhanVienTrongPhieu(txtMaNV_Sua.Text, txtMaP.Text).ToString();
             if (dgvThongTinPhieuThuong.Rows[rowIndex].Cells[7].Value is null)
                 rtxtGhiChu.Text = string.Empty;
             else
                 rtxtGhiChu.Text = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[7].Value.ToString();
-            if (e.ColumnIndex == 8)
-            {
-                maNV_Chon = dgvThongTinPhieuThuong.Rows[rowIndex].Cells[2].Value.ToString();
-                XoaNhanVien();
-            }
-                
+            if (e.ColumnIndex == 8)            
+                XoaNhanVien();                         
         }
         ///////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
@@ -227,7 +217,6 @@ namespace QuanLyNhanSu.PresentationTier
             rtxtGhiChu.Text = string.Empty;
             cmbPhongBan.SelectedIndex = 0;
             cmbChucVu.SelectedIndex = 0;
-            maNV_Chon = null;
             txtMaNV_Sua.Text = string.Empty;
         }
         ///////////////////////////////////////////////////////////////////////////////////////////   
@@ -287,7 +276,7 @@ namespace QuanLyNhanSu.PresentationTier
             ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
             {
                 MaP = maP,
-                MaNV = maNV_Chon,
+                MaNV = txtMaNV_Sua.Text,
                 SoTien = decimal.Parse(txtSoTien.Text),
                 GhiChu = rtxtGhiChu.Text,
             };
@@ -327,11 +316,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
             {
-                MaNV = maNV_Chon,
+                MaNV = txtMaNV_Sua.Text,
             };
             if (chiTietPhieuBus.Delete(newChiTietPhieu))
             {
-                NhanVien nhanVien = nhanVienBUS.ThongTinNhanVien(maNV_Chon);
+                NhanVien nhanVien = nhanVienBUS.ThongTinNhanVien(txtMaNV_Sua.Text);
                 string hoTenNV = nhanVien.Ho + " " + nhanVien.TenLot + " " + nhanVien.Ten;
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {

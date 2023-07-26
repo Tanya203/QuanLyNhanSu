@@ -107,7 +107,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(144, 110);
-            this.btnRefresh.TabIndex = 68;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -221,7 +221,7 @@
             this.txtMaLC.Location = new System.Drawing.Point(152, 20);
             this.txtMaLC.Name = "txtMaLC";
             this.txtMaLC.Size = new System.Drawing.Size(225, 30);
-            this.txtMaLC.TabIndex = 46;
+            this.txtMaLC.TabIndex = 3;
             this.txtMaLC.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // btnHuy
@@ -236,7 +236,7 @@
             this.btnHuy.Location = new System.Drawing.Point(715, 76);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(99, 49);
-            this.btnHuy.TabIndex = 45;
+            this.btnHuy.TabIndex = 9;
             this.btnHuy.Text = "Huỷ";
             this.btnHuy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHuy.UseVisualStyleBackColor = false;
@@ -254,7 +254,7 @@
             this.btnSua.Location = new System.Drawing.Point(426, 76);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(100, 49);
-            this.btnSua.TabIndex = 44;
+            this.btnSua.TabIndex = 7;
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = false;
@@ -272,7 +272,7 @@
             this.btnXoa.Location = new System.Drawing.Point(564, 76);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(102, 49);
-            this.btnXoa.TabIndex = 43;
+            this.btnXoa.TabIndex = 8;
             this.btnXoa.Text = "Xoá";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
@@ -290,7 +290,7 @@
             this.btnThem.Location = new System.Drawing.Point(272, 76);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(122, 49);
-            this.btnThem.TabIndex = 42;
+            this.btnThem.TabIndex = 6;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
@@ -321,7 +321,7 @@
             this.txtHeSoLuong.MaxLength = 42;
             this.txtHeSoLuong.Name = "txtHeSoLuong";
             this.txtHeSoLuong.Size = new System.Drawing.Size(255, 30);
-            this.txtHeSoLuong.TabIndex = 47;
+            this.txtHeSoLuong.TabIndex = 5;
             this.txtHeSoLuong.TextChanged += new System.EventHandler(this.EnableButtons);
             this.txtHeSoLuong.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHeSoLuong_KeyPress);
             // 
@@ -342,7 +342,7 @@
             this.txtTenLC.MaxLength = 50;
             this.txtTenLC.Name = "txtTenLC";
             this.txtTenLC.Size = new System.Drawing.Size(211, 30);
-            this.txtTenLC.TabIndex = 3;
+            this.txtTenLC.TabIndex = 4;
             this.txtTenLC.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblTenLoaiCa
@@ -412,7 +412,7 @@
             this.dgvThongTinLoaiCa.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvThongTinLoaiCa.RowTemplate.Height = 24;
             this.dgvThongTinLoaiCa.Size = new System.Drawing.Size(1924, 647);
-            this.dgvThongTinLoaiCa.TabIndex = 44;
+            this.dgvThongTinLoaiCa.TabIndex = 11;
             this.dgvThongTinLoaiCa.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThongTinLoaiCa_CellClick);
             // 
             // colMaLC
@@ -442,7 +442,7 @@
             this.txtTimKiem.Location = new System.Drawing.Point(929, 300);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
-            this.txtTimKiem.TabIndex = 48;
+            this.txtTimKiem.TabIndex = 10;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.TimKiem);
             this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 

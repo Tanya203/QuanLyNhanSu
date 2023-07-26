@@ -231,7 +231,7 @@
             this.dgvLichSuThaoTac.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvLichSuThaoTac.RowTemplate.Height = 24;
             this.dgvLichSuThaoTac.Size = new System.Drawing.Size(1924, 827);
-            this.dgvLichSuThaoTac.TabIndex = 49;
+            this.dgvLichSuThaoTac.TabIndex = 5;
             // 
             // colNgayio
             // 
@@ -307,7 +307,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(144, 113);
-            this.btnRefresh.TabIndex = 68;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -319,7 +319,7 @@
             this.txtTimKiem.Location = new System.Drawing.Point(726, 171);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
-            this.txtTimKiem.TabIndex = 51;
+            this.txtTimKiem.TabIndex = 3;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 
@@ -341,7 +341,7 @@
             this.dtpNgay.Location = new System.Drawing.Point(1134, 171);
             this.dtpNgay.Name = "dtpNgay";
             this.dtpNgay.Size = new System.Drawing.Size(151, 30);
-            this.dtpNgay.TabIndex = 56;
+            this.dtpNgay.TabIndex = 4;
             this.dtpNgay.ValueChanged += new System.EventHandler(this.dtpNgay_ValueChanged);
             // 
             // FrmLichSuThaoTac

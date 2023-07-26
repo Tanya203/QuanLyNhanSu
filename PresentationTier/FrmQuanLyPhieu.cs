@@ -207,11 +207,11 @@ namespace QuanLyNhanSu.PresentationTier
         }       
         private void dgvThongTinPhieuThuong_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int rowIndex = e.RowIndex;
-            string maP = dgvThongTinPhieu.Rows[rowIndex].Cells[0].Value.ToString();
-            string loaiPhieu = dgvThongTinPhieu.Rows[rowIndex].Cells[1].Value.ToString();
+            int rowIndex = e.RowIndex;            
             if (rowIndex < 0)
                 return;
+            string maP = dgvThongTinPhieu.Rows[rowIndex].Cells[0].Value.ToString();
+            string loaiPhieu = dgvThongTinPhieu.Rows[rowIndex].Cells[1].Value.ToString();
             if (e.ColumnIndex == 8)
                 XoaPhieuThuong(maP, loaiPhieu);
             if (e.ColumnIndex == 9)

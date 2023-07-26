@@ -103,7 +103,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(144, 113);
-            this.btnRefresh.TabIndex = 68;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -250,7 +250,7 @@
             this.dgvThongTinChucVu.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvThongTinChucVu.RowTemplate.Height = 24;
             this.dgvThongTinChucVu.Size = new System.Drawing.Size(1924, 620);
-            this.dgvThongTinChucVu.TabIndex = 32;
+            this.dgvThongTinChucVu.TabIndex = 13;
             this.dgvThongTinChucVu.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThongTinChucVu_CellClick);
             // 
             // colMaCV
@@ -325,9 +325,10 @@
             // 
             this.txtLuongKhoiDiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLuongKhoiDiem.Location = new System.Drawing.Point(622, 54);
+            this.txtLuongKhoiDiem.MaxLength = 42;
             this.txtLuongKhoiDiem.Name = "txtLuongKhoiDiem";
             this.txtLuongKhoiDiem.Size = new System.Drawing.Size(234, 30);
-            this.txtLuongKhoiDiem.TabIndex = 45;
+            this.txtLuongKhoiDiem.TabIndex = 6;
             this.txtLuongKhoiDiem.TextChanged += new System.EventHandler(this.EnableButtons);
             this.txtLuongKhoiDiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLuongKhoiDiem_KeyPress);
             // 
@@ -349,7 +350,7 @@
             this.cmbPhongBan.Location = new System.Drawing.Point(154, 54);
             this.cmbPhongBan.Name = "cmbPhongBan";
             this.cmbPhongBan.Size = new System.Drawing.Size(240, 33);
-            this.cmbPhongBan.TabIndex = 44;
+            this.cmbPhongBan.TabIndex = 4;
             // 
             // lblPhongBan
             // 
@@ -373,7 +374,7 @@
             this.btnHuy.Location = new System.Drawing.Point(787, 105);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(99, 49);
-            this.btnHuy.TabIndex = 41;
+            this.btnHuy.TabIndex = 11;
             this.btnHuy.Text = "Huỷ";
             this.btnHuy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHuy.UseVisualStyleBackColor = false;
@@ -391,7 +392,7 @@
             this.btnSua.Location = new System.Drawing.Point(497, 105);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(100, 49);
-            this.btnSua.TabIndex = 40;
+            this.btnSua.TabIndex = 9;
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = false;
@@ -409,7 +410,7 @@
             this.btnXoa.Location = new System.Drawing.Point(638, 105);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(102, 49);
-            this.btnXoa.TabIndex = 39;
+            this.btnXoa.TabIndex = 10;
             this.btnXoa.Text = "Xoá";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
@@ -427,7 +428,7 @@
             this.btnThem.Location = new System.Drawing.Point(339, 105);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(122, 49);
-            this.btnThem.TabIndex = 38;
+            this.btnThem.TabIndex = 8;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
@@ -439,7 +440,7 @@
             this.txtTongSoNhanVien.Location = new System.Drawing.Point(1066, 37);
             this.txtTongSoNhanVien.Name = "txtTongSoNhanVien";
             this.txtTongSoNhanVien.Size = new System.Drawing.Size(234, 30);
-            this.txtTongSoNhanVien.TabIndex = 10;
+            this.txtTongSoNhanVien.TabIndex = 7;
             // 
             // lblTongSoNhanVien
             // 
@@ -455,9 +456,10 @@
             // 
             this.txtTenCV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTenCV.Location = new System.Drawing.Point(622, 15);
+            this.txtTenCV.MaxLength = 50;
             this.txtTenCV.Name = "txtTenCV";
             this.txtTenCV.Size = new System.Drawing.Size(234, 30);
-            this.txtTenCV.TabIndex = 8;
+            this.txtTenCV.TabIndex = 5;
             this.txtTenCV.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblTenCV
@@ -476,7 +478,7 @@
             this.txtMaCV.Location = new System.Drawing.Point(154, 12);
             this.txtMaCV.Name = "txtMaCV";
             this.txtMaCV.Size = new System.Drawing.Size(240, 30);
-            this.txtMaCV.TabIndex = 5;
+            this.txtMaCV.TabIndex = 3;
             this.txtMaCV.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblMaChucVu
@@ -503,9 +505,10 @@
             // 
             this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTimKiem.Location = new System.Drawing.Point(902, 327);
+            this.txtTimKiem.MaxLength = 50;
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
-            this.txtTimKiem.TabIndex = 34;
+            this.txtTimKiem.TabIndex = 12;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.TimKiem);
             this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 

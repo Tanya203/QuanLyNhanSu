@@ -174,7 +174,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(144, 113);
-            this.btnRefresh.TabIndex = 68;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -332,7 +332,7 @@
             this.dgvThongTinNhanVien.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvThongTinNhanVien.RowTemplate.Height = 24;
             this.dgvThongTinNhanVien.Size = new System.Drawing.Size(1924, 450);
-            this.dgvThongTinNhanVien.TabIndex = 22;
+            this.dgvThongTinNhanVien.TabIndex = 40;
             this.dgvThongTinNhanVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThongTinNhanVien_CellClick);
             // 
             // colMaNV
@@ -650,7 +650,7 @@
             this.button1.Location = new System.Drawing.Point(1511, 266);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(153, 50);
-            this.button1.TabIndex = 33;
+            this.button1.TabIndex = 34;
             this.button1.Text = "Chọn hình";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = false;
@@ -665,7 +665,7 @@
             this.dtpNTNS.Location = new System.Drawing.Point(481, 157);
             this.dtpNTNS.Name = "dtpNTNS";
             this.dtpNTNS.Size = new System.Drawing.Size(183, 27);
-            this.dtpNTNS.TabIndex = 14;
+            this.dtpNTNS.TabIndex = 15;
             // 
             // btnHuy
             // 
@@ -679,7 +679,7 @@
             this.btnHuy.Location = new System.Drawing.Point(1057, 266);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(99, 49);
-            this.btnHuy.TabIndex = 37;
+            this.btnHuy.TabIndex = 38;
             this.btnHuy.Text = "Huỷ";
             this.btnHuy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHuy.UseVisualStyleBackColor = false;
@@ -715,7 +715,7 @@
             this.btnXoa.Location = new System.Drawing.Point(911, 266);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(102, 49);
-            this.btnXoa.TabIndex = 35;
+            this.btnXoa.TabIndex = 37;
             this.btnXoa.Text = "Xoá";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
@@ -729,7 +729,7 @@
             this.cbHienThiMatKhau.Location = new System.Drawing.Point(216, 266);
             this.cbHienThiMatKhau.Name = "cbHienThiMatKhau";
             this.cbHienThiMatKhau.Size = new System.Drawing.Size(162, 24);
-            this.cbHienThiMatKhau.TabIndex = 9;
+            this.cbHienThiMatKhau.TabIndex = 10;
             this.cbHienThiMatKhau.Text = "Hiển thị mật khẩu";
             this.cbHienThiMatKhau.UseVisualStyleBackColor = true;
             this.cbHienThiMatKhau.CheckedChanged += new System.EventHandler(this.cbHienThiMatKhau_CheckedChanged);
@@ -741,7 +741,7 @@
             this.txtNhapLaiMatKhau.MaxLength = 20;
             this.txtNhapLaiMatKhau.Name = "txtNhapLaiMatKhau";
             this.txtNhapLaiMatKhau.Size = new System.Drawing.Size(181, 27);
-            this.txtNhapLaiMatKhau.TabIndex = 8;
+            this.txtNhapLaiMatKhau.TabIndex = 9;
             this.txtNhapLaiMatKhau.UseSystemPasswordChar = true;
             this.txtNhapLaiMatKhau.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
@@ -765,7 +765,7 @@
             this.btnThemPhuCap.Location = new System.Drawing.Point(1198, 196);
             this.btnThemPhuCap.Name = "btnThemPhuCap";
             this.btnThemPhuCap.Size = new System.Drawing.Size(39, 38);
-            this.btnThemPhuCap.TabIndex = 31;
+            this.btnThemPhuCap.TabIndex = 32;
             this.btnThemPhuCap.UseVisualStyleBackColor = false;
             this.btnThemPhuCap.Click += new System.EventHandler(this.btnThemPhuCap_Click);
             // 
@@ -781,7 +781,7 @@
             this.btnThem.Location = new System.Drawing.Point(607, 266);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(122, 49);
-            this.btnThem.TabIndex = 34;
+            this.btnThem.TabIndex = 35;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
@@ -795,7 +795,7 @@
             this.rbKhac.Location = new System.Drawing.Point(958, 126);
             this.rbKhac.Name = "rbKhac";
             this.rbKhac.Size = new System.Drawing.Size(68, 24);
-            this.rbKhac.TabIndex = 22;
+            this.rbKhac.TabIndex = 23;
             this.rbKhac.TabStop = true;
             this.rbKhac.Text = "Khác";
             this.rbKhac.UseVisualStyleBackColor = true;
@@ -809,7 +809,7 @@
             this.rbNu.Location = new System.Drawing.Point(901, 126);
             this.rbNu.Name = "rbNu";
             this.rbNu.Size = new System.Drawing.Size(51, 24);
-            this.rbNu.TabIndex = 21;
+            this.rbNu.TabIndex = 22;
             this.rbNu.TabStop = true;
             this.rbNu.Text = "Nữ";
             this.rbNu.UseVisualStyleBackColor = true;
@@ -823,7 +823,7 @@
             this.rbNam.Location = new System.Drawing.Point(834, 126);
             this.rbNam.Name = "rbNam";
             this.rbNam.Size = new System.Drawing.Size(65, 24);
-            this.rbNam.TabIndex = 20;
+            this.rbNam.TabIndex = 21;
             this.rbNam.TabStop = true;
             this.rbNam.Text = "Nam";
             this.rbNam.UseVisualStyleBackColor = true;
@@ -839,7 +839,7 @@
             this.dtpThoiHanHopDong.Location = new System.Drawing.Point(1243, 52);
             this.dtpThoiHanHopDong.Name = "dtpThoiHanHopDong";
             this.dtpThoiHanHopDong.Size = new System.Drawing.Size(172, 27);
-            this.dtpThoiHanHopDong.TabIndex = 27;
+            this.dtpThoiHanHopDong.TabIndex = 28;
             // 
             // dtpNgayVaoLam
             // 
@@ -851,7 +851,7 @@
             this.dtpNgayVaoLam.Location = new System.Drawing.Point(1243, 16);
             this.dtpNgayVaoLam.Name = "dtpNgayVaoLam";
             this.dtpNgayVaoLam.Size = new System.Drawing.Size(172, 27);
-            this.dtpNgayVaoLam.TabIndex = 26;
+            this.dtpNgayVaoLam.TabIndex = 27;
             // 
             // txtPhuCap
             // 
@@ -859,7 +859,7 @@
             this.txtPhuCap.Location = new System.Drawing.Point(1243, 196);
             this.txtPhuCap.Name = "txtPhuCap";
             this.txtPhuCap.Size = new System.Drawing.Size(172, 27);
-            this.txtPhuCap.TabIndex = 32;
+            this.txtPhuCap.TabIndex = 33;
             // 
             // txtLuongCoBan
             // 
@@ -868,7 +868,7 @@
             this.txtLuongCoBan.MaxLength = 50;
             this.txtLuongCoBan.Name = "txtLuongCoBan";
             this.txtLuongCoBan.Size = new System.Drawing.Size(172, 27);
-            this.txtLuongCoBan.TabIndex = 30;
+            this.txtLuongCoBan.TabIndex = 31;
             this.txtLuongCoBan.TextChanged += new System.EventHandler(this.EnableButtons);
             this.txtLuongCoBan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLuongCoBan_KeyPress);
             // 
@@ -879,7 +879,7 @@
             this.txtSoNgayPhep.MaxLength = 3;
             this.txtSoNgayPhep.Name = "txtSoNgayPhep";
             this.txtSoNgayPhep.Size = new System.Drawing.Size(172, 27);
-            this.txtSoNgayPhep.TabIndex = 29;
+            this.txtSoNgayPhep.TabIndex = 30;
             this.txtSoNgayPhep.TextChanged += new System.EventHandler(this.EnableButtons);
             this.txtSoNgayPhep.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSoNgayPhep_KeyPress);
             // 
@@ -890,7 +890,7 @@
             this.txtTinhTrang.MaxLength = 50;
             this.txtTinhTrang.Name = "txtTinhTrang";
             this.txtTinhTrang.Size = new System.Drawing.Size(172, 27);
-            this.txtTinhTrang.TabIndex = 28;
+            this.txtTinhTrang.TabIndex = 29;
             this.txtTinhTrang.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtTrinhDoHocVan
@@ -900,7 +900,7 @@
             this.txtTrinhDoHocVan.MaxLength = 50;
             this.txtTrinhDoHocVan.Name = "txtTrinhDoHocVan";
             this.txtTrinhDoHocVan.Size = new System.Drawing.Size(181, 27);
-            this.txtTrinhDoHocVan.TabIndex = 25;
+            this.txtTrinhDoHocVan.TabIndex = 26;
             this.txtTrinhDoHocVan.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtEmail
@@ -910,7 +910,7 @@
             this.txtEmail.MaxLength = 50;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(179, 27);
-            this.txtEmail.TabIndex = 24;
+            this.txtEmail.TabIndex = 25;
             this.txtEmail.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtSDT
@@ -920,7 +920,7 @@
             this.txtSDT.MaxLength = 10;
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(179, 27);
-            this.txtSDT.TabIndex = 23;
+            this.txtSDT.TabIndex = 24;
             this.txtSDT.TextChanged += new System.EventHandler(this.EnableButtons);
             this.txtSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSDT_KeyPress);
             // 
@@ -931,7 +931,7 @@
             this.txtTinh_ThanhPho.MaxLength = 100;
             this.txtTinh_ThanhPho.Name = "txtTinh_ThanhPho";
             this.txtTinh_ThanhPho.Size = new System.Drawing.Size(181, 27);
-            this.txtTinh_ThanhPho.TabIndex = 19;
+            this.txtTinh_ThanhPho.TabIndex = 20;
             this.txtTinh_ThanhPho.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtQuan_Huyen
@@ -941,7 +941,7 @@
             this.txtQuan_Huyen.MaxLength = 100;
             this.txtQuan_Huyen.Name = "txtQuan_Huyen";
             this.txtQuan_Huyen.Size = new System.Drawing.Size(181, 27);
-            this.txtQuan_Huyen.TabIndex = 18;
+            this.txtQuan_Huyen.TabIndex = 19;
             this.txtQuan_Huyen.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtPhuong_Xa
@@ -951,7 +951,7 @@
             this.txtPhuong_Xa.MaxLength = 100;
             this.txtPhuong_Xa.Name = "txtPhuong_Xa";
             this.txtPhuong_Xa.Size = new System.Drawing.Size(181, 27);
-            this.txtPhuong_Xa.TabIndex = 17;
+            this.txtPhuong_Xa.TabIndex = 18;
             this.txtPhuong_Xa.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtDuong
@@ -961,7 +961,7 @@
             this.txtDuong.MaxLength = 100;
             this.txtDuong.Name = "txtDuong";
             this.txtDuong.Size = new System.Drawing.Size(183, 27);
-            this.txtDuong.TabIndex = 16;
+            this.txtDuong.TabIndex = 17;
             this.txtDuong.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtSoNha
@@ -971,7 +971,7 @@
             this.txtSoNha.MaxLength = 20;
             this.txtSoNha.Name = "txtSoNha";
             this.txtSoNha.Size = new System.Drawing.Size(183, 27);
-            this.txtSoNha.TabIndex = 15;
+            this.txtSoNha.TabIndex = 16;
             this.txtSoNha.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtTen
@@ -981,7 +981,7 @@
             this.txtTen.MaxLength = 20;
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(183, 27);
-            this.txtTen.TabIndex = 13;
+            this.txtTen.TabIndex = 14;
             this.txtTen.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtTenLot
@@ -991,7 +991,7 @@
             this.txtTenLot.MaxLength = 20;
             this.txtTenLot.Name = "txtTenLot";
             this.txtTenLot.Size = new System.Drawing.Size(183, 27);
-            this.txtTenLot.TabIndex = 12;
+            this.txtTenLot.TabIndex = 13;
             // 
             // txtHo
             // 
@@ -1000,7 +1000,7 @@
             this.txtHo.MaxLength = 20;
             this.txtHo.Name = "txtHo";
             this.txtHo.Size = new System.Drawing.Size(183, 27);
-            this.txtHo.TabIndex = 11;
+            this.txtHo.TabIndex = 12;
             this.txtHo.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtCCCD
@@ -1010,7 +1010,7 @@
             this.txtCCCD.MaxLength = 12;
             this.txtCCCD.Name = "txtCCCD";
             this.txtCCCD.Size = new System.Drawing.Size(183, 27);
-            this.txtCCCD.TabIndex = 10;
+            this.txtCCCD.TabIndex = 11;
             this.txtCCCD.TextChanged += new System.EventHandler(this.EnableButtons);
             this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_KeyPress);
             // 
@@ -1021,7 +1021,7 @@
             this.txtMatKhau.MaxLength = 20;
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.Size = new System.Drawing.Size(181, 27);
-            this.txtMatKhau.TabIndex = 7;
+            this.txtMatKhau.TabIndex = 8;
             this.txtMatKhau.UseSystemPasswordChar = true;
             this.txtMatKhau.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
@@ -1032,7 +1032,7 @@
             this.txtTaiKhoan.MaxLength = 20;
             this.txtTaiKhoan.Name = "txtTaiKhoan";
             this.txtTaiKhoan.Size = new System.Drawing.Size(181, 27);
-            this.txtTaiKhoan.TabIndex = 6;
+            this.txtTaiKhoan.TabIndex = 7;
             this.txtTaiKhoan.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // cmbLoaiHopDong
@@ -1044,7 +1044,7 @@
             this.cmbLoaiHopDong.Location = new System.Drawing.Point(206, 118);
             this.cmbLoaiHopDong.Name = "cmbLoaiHopDong";
             this.cmbLoaiHopDong.Size = new System.Drawing.Size(181, 28);
-            this.cmbLoaiHopDong.TabIndex = 5;
+            this.cmbLoaiHopDong.TabIndex = 6;
             // 
             // cmbChucVu
             // 
@@ -1055,7 +1055,7 @@
             this.cmbChucVu.Location = new System.Drawing.Point(206, 82);
             this.cmbChucVu.Name = "cmbChucVu";
             this.cmbChucVu.Size = new System.Drawing.Size(181, 28);
-            this.cmbChucVu.TabIndex = 4;
+            this.cmbChucVu.TabIndex = 5;
             this.cmbChucVu.SelectedIndexChanged += new System.EventHandler(this.LoadLuongKhoiDiem);
             // 
             // cmbPhongBan
@@ -1067,7 +1067,7 @@
             this.cmbPhongBan.Location = new System.Drawing.Point(206, 46);
             this.cmbPhongBan.Name = "cmbPhongBan";
             this.cmbPhongBan.Size = new System.Drawing.Size(181, 28);
-            this.cmbPhongBan.TabIndex = 3;
+            this.cmbPhongBan.TabIndex = 4;
             this.cmbPhongBan.TextChanged += new System.EventHandler(this.LoadChucVu);
             // 
             // txtMaNV
@@ -1076,7 +1076,7 @@
             this.txtMaNV.Location = new System.Drawing.Point(206, 11);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(181, 27);
-            this.txtMaNV.TabIndex = 2;
+            this.txtMaNV.TabIndex = 3;
             this.txtMaNV.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblHinh
@@ -1383,9 +1383,10 @@
             // 
             this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTimKiem.Location = new System.Drawing.Point(963, 497);
+            this.txtTimKiem.MaxLength = 50;
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
-            this.txtTimKiem.TabIndex = 26;
+            this.txtTimKiem.TabIndex = 39;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
             // 

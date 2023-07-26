@@ -101,6 +101,7 @@
             // 
             this.txtMaNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaNhanVien.Location = new System.Drawing.Point(207, 45);
+            this.txtMaNhanVien.MaxLength = 12;
             this.txtMaNhanVien.Name = "txtMaNhanVien";
             this.txtMaNhanVien.Size = new System.Drawing.Size(329, 30);
             this.txtMaNhanVien.TabIndex = 2;
@@ -119,10 +120,12 @@
             // 
             this.txtSDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSDT.Location = new System.Drawing.Point(207, 195);
+            this.txtSDT.MaxLength = 10;
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(329, 30);
             this.txtSDT.TabIndex = 5;
             this.txtSDT.TextChanged += new System.EventHandler(this.txtMaNhanVien_TextChanged);
+            this.txtSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_KeyPress);
             // 
             // lblCMND
             // 
@@ -146,6 +149,7 @@
             // 
             this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.Location = new System.Drawing.Point(207, 245);
+            this.txtEmail.MaxLength = 50;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(329, 30);
             this.txtEmail.TabIndex = 6;
@@ -173,6 +177,7 @@
             // 
             this.txtTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTaiKhoan.Location = new System.Drawing.Point(207, 95);
+            this.txtTaiKhoan.MaxLength = 20;
             this.txtTaiKhoan.Name = "txtTaiKhoan";
             this.txtTaiKhoan.Size = new System.Drawing.Size(329, 30);
             this.txtTaiKhoan.TabIndex = 3;
@@ -182,10 +187,12 @@
             // 
             this.txtCCCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCCCD.Location = new System.Drawing.Point(207, 145);
+            this.txtCCCD.MaxLength = 12;
             this.txtCCCD.Name = "txtCCCD";
             this.txtCCCD.Size = new System.Drawing.Size(329, 30);
             this.txtCCCD.TabIndex = 4;
             this.txtCCCD.TextChanged += new System.EventHandler(this.txtMaNhanVien_TextChanged);
+            this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_KeyPress);
             // 
             // lblQuenMatKhau
             // 
@@ -217,6 +224,7 @@
             // 
             this.txtMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMatKhau.Location = new System.Drawing.Point(273, 52);
+            this.txtMatKhau.MaxLength = 20;
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.Size = new System.Drawing.Size(263, 27);
             this.txtMatKhau.TabIndex = 8;
@@ -227,6 +235,7 @@
             // 
             this.txtNhapLaiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNhapLaiMatKhau.Location = new System.Drawing.Point(273, 107);
+            this.txtNhapLaiMatKhau.MaxLength = 20;
             this.txtNhapLaiMatKhau.Name = "txtNhapLaiMatKhau";
             this.txtNhapLaiMatKhau.Size = new System.Drawing.Size(263, 27);
             this.txtNhapLaiMatKhau.TabIndex = 9;
