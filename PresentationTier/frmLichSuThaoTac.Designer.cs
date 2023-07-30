@@ -360,7 +360,7 @@
             this.dtpThang.ShowUpDown = true;
             this.dtpThang.Size = new System.Drawing.Size(151, 30);
             this.dtpThang.TabIndex = 56;
-            this.dtpThang.ValueChanged += new System.EventHandler(this.CheckChangeThang);
+            this.dtpThang.ValueChanged += new System.EventHandler(this.CheckThangChange);
             // 
             // lvlThang
             // 

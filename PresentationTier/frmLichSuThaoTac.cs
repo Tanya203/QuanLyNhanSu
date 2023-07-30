@@ -56,9 +56,9 @@ namespace QuanLyNhanSu.PresentationTier
             if (dtpNgay.Checked)
                 lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoNgay(dtpNgay.Text);
             if (dtpThang.Checked)
-                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuTThaoTacTheoThang(dtpThang.Text);
+                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoThang(dtpThang.Text);
             if (dtpNam.Checked)
-                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuTThaoTacTheoThang(dtpNam.Text);            
+                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoNam(dtpNam.Text);            
             int rowAdd;
             foreach(var tt in lichSuThaoTac)
             {
@@ -103,11 +103,12 @@ namespace QuanLyNhanSu.PresentationTier
                 dtpNam.Checked = false;
                 txtTimKiem.Text = string.Empty;
                 LoadLichSuThaoTac();
-            }                       
+            }
+            LoadLichSuThaoTac();
         }
-        private void CheckChangeThang(object sender, EventArgs e)
+        private void CheckThangChange(object sender, EventArgs e)
         {
-            if(Check(dtpThang))
+            if (Check(dtpThang))
                 return;
             if (dtpThang.Checked)
             {
@@ -131,11 +132,11 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public bool Check(DateTimePicker dtp)
         {
-            if (!dtpNam.Checked && !dtpThang.Checked && !dtpNam.Checked)
+            if (!dtpNgay.Checked && !dtpThang.Checked && !dtpNam.Checked)
             {
-                dtp.Checked = true;
+                dtp.Checked = true;                
                 return true;
-            }
+            }            
             return false;
         }
             
