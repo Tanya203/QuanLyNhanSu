@@ -54,6 +54,8 @@ namespace QuanLyNhanSu.DataTier
                 TenPhongBan = nv.ChucVu.PhongBan.TenPhongBan,
                 TenChucVu = nv.ChucVu.TenChucVu,
                 TenLoaiHopDong = nv.LoaiHopDong.TenLoaiHopDong,
+                NgayKhoa = nv.NgayKhoa,
+                SoTienNo = nv.SoTienNo,
             }).OrderBy(nv=>nv.MaNV);                                   
             return danhSachNhanVien;
         }
@@ -88,6 +90,8 @@ namespace QuanLyNhanSu.DataTier
                 TenPhongBan = nv.ChucVu.PhongBan.TenPhongBan,
                 TenChucVu = nv.ChucVu.TenChucVu,
                 TenLoaiHopDong = nv.LoaiHopDong.TenLoaiHopDong,
+                NgayKhoa = nv.NgayKhoa,
+                SoTienNo = nv.SoTienNo,
             }).Where(nhanVien => nhanVien.MaNV.Contains(timKiem) ||
                                           nhanVien.TenPhongBan.Contains(timKiem) ||
                                           nhanVien.TenChucVu.Contains(timKiem) ||
@@ -111,7 +115,9 @@ namespace QuanLyNhanSu.DataTier
                                           nhanVien.ThoiHanHopDong.ToString().Contains(timKiem) ||
                                           nhanVien.TinhTrang.Contains(timKiem) ||
                                           nhanVien.SoNgayPhep.ToString().Contains(timKiem) ||
-                                          nhanVien.LuongCoBan.ToString().Contains(timKiem)).OrderBy(nhanVien => nhanVien.MaNV).OrderBy(nv => nv.MaNV);
+                                          nhanVien.LuongCoBan.ToString().Contains(timKiem) ||
+                                          nhanVien.NgayKhoa.ToString().Contains(timKiem) ||
+                                          nhanVien.SoTienNo.ToString().Contains(timKiem)).OrderBy(nhanVien => nhanVien.MaNV).OrderBy(nv => nv.MaNV);
             return danhSachNhanVien;
         }
         public IEnumerable<NhanVien> GetNhanVienChucVu(string maCV)
@@ -163,7 +169,9 @@ namespace QuanLyNhanSu.DataTier
                     newNhanVien.TinhTrang = nhanVien.TinhTrang;
                     newNhanVien.SoNgayPhep = nhanVien.SoNgayPhep;
                     newNhanVien.LuongCoBan = nhanVien.LuongCoBan;
-                    newNhanVien.Hinh = nhanVien.Hinh;                   
+                    newNhanVien.Hinh = nhanVien.Hinh;
+                    newNhanVien.NgayKhoa = nhanVien.NgayKhoa;
+                    newNhanVien.SoTienNo = nhanVien.SoTienNo;
                 }
                 else//thêm mới           
                     quanLyNhanSu.NhanViens.Add(nhanVien);

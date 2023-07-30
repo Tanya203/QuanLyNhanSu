@@ -240,6 +240,10 @@ namespace QuanLyNhanSu.DataTier.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<NhanVien>()
+                .Property(e => e.SoTienNo)
+                .HasPrecision(38, 3);
+
+            modelBuilder.Entity<NhanVien>()
                 .HasMany(e => e.ChamCongs)
                 .WithRequired(e => e.NhanVien)
                 .WillCascadeOnDelete(false);
@@ -258,6 +262,11 @@ namespace QuanLyNhanSu.DataTier.Models
                 .HasMany(e => e.ChiTietPhuCaps)
                 .WithRequired(e => e.NhanVien)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<NhanVien>()
+                .HasMany(e => e.LichSuThaoTacs)
+                .WithOptional(e => e.NhanVien)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<NhanVien>()
                 .HasMany(e => e.Phieux)

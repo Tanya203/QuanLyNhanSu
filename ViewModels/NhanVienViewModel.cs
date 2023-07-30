@@ -35,5 +35,7 @@ namespace QuanLyNhanSu.ViewModels
         public string TenPhongBan { get; set; }
         public string TenChucVu { get; set; }
         public string TenLoaiHopDong { get; set; }
+        public decimal? SoTienNo { get; set; }
+        public DateTime? NgayKhoa { get; set; }
     }
 }

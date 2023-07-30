@@ -16,13 +16,29 @@ namespace QuanLyNhanSu.LogicTier
         {
             lichSuThaoTacDAL = new LichSuThaoTacDAL();
         }
-        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuTThaoTac(string ngay)
+        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuThaoTacTheoNgay(string ngay)
         {
-            return lichSuThaoTacDAL.GetAllLichSuTThaoTac(ngay);
+            return lichSuThaoTacDAL.GetAllLichSuThaoTacTheoNgay(ngay);
         }
-        public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiem(string ngay ,string timKiem)
+        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuTThaoTacTheoThang(string thang)
         {
-            return lichSuThaoTacDAL.LichSuThaoTacTimKiem(ngay, timKiem);
+            return lichSuThaoTacDAL.GetAllLichSuThaoTacTheoThang(thang);
+        }
+        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuThaoTacTheoNam(string nam)
+        {
+            return lichSuThaoTacDAL.GetAllLichSuThaoTacTheoNam(nam);
+        }
+        public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiemNgay(string ngay ,string timKiem)
+        {
+            return lichSuThaoTacDAL.LichSuThaoTacTimKiemNgay(ngay, timKiem);
+        }
+        public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiemThang(string thang, string timKiem)
+        {
+            return lichSuThaoTacDAL.LichSuThaoTacTimKiemThang(thang, timKiem);
+        }
+        public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiemNam(string nam, string timKiem)
+        {
+            return lichSuThaoTacDAL.LichSuThaoTacTimKiemNam(nam, timKiem);
         }
         public bool Save(LichSuThaoTac lstt)
         {

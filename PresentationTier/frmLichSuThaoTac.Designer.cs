@@ -55,6 +55,10 @@
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.lblNgay = new System.Windows.Forms.Label();
             this.dtpNgay = new System.Windows.Forms.DateTimePicker();
+            this.dtpThang = new System.Windows.Forms.DateTimePicker();
+            this.lvlThang = new System.Windows.Forms.Label();
+            this.dtpNam = new System.Windows.Forms.DateTimePicker();
+            this.lblNam = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichSuThaoTac)).BeginInit();
             this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
@@ -175,7 +179,7 @@
             // 
             this.lblTimKiem.AutoSize = true;
             this.lblTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimKiem.Location = new System.Drawing.Point(575, 168);
+            this.lblTimKiem.Location = new System.Drawing.Point(489, 172);
             this.lblTimKiem.Name = "lblTimKiem";
             this.lblTimKiem.Size = new System.Drawing.Size(145, 32);
             this.lblTimKiem.TabIndex = 50;
@@ -214,7 +218,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvLichSuThaoTac.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvLichSuThaoTac.Location = new System.Drawing.Point(0, 206);
+            this.dgvLichSuThaoTac.Location = new System.Drawing.Point(0, 211);
             this.dgvLichSuThaoTac.Name = "dgvLichSuThaoTac";
             this.dgvLichSuThaoTac.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -230,7 +234,7 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvLichSuThaoTac.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvLichSuThaoTac.RowTemplate.Height = 24;
-            this.dgvLichSuThaoTac.Size = new System.Drawing.Size(1924, 827);
+            this.dgvLichSuThaoTac.Size = new System.Drawing.Size(1924, 822);
             this.dgvLichSuThaoTac.TabIndex = 5;
             // 
             // colNgayio
@@ -316,7 +320,7 @@
             // txtTimKiem
             // 
             this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimKiem.Location = new System.Drawing.Point(726, 171);
+            this.txtTimKiem.Location = new System.Drawing.Point(640, 175);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
             this.txtTimKiem.TabIndex = 3;
@@ -327,7 +331,7 @@
             // 
             this.lblNgay.AutoSize = true;
             this.lblNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgay.Location = new System.Drawing.Point(1035, 169);
+            this.lblNgay.Location = new System.Drawing.Point(961, 173);
             this.lblNgay.Name = "lblNgay";
             this.lblNgay.Size = new System.Drawing.Size(93, 32);
             this.lblNgay.TabIndex = 55;
@@ -338,11 +342,58 @@
             this.dtpNgay.CustomFormat = "dd/MM/yyyy";
             this.dtpNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNgay.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgay.Location = new System.Drawing.Point(1134, 171);
+            this.dtpNgay.Location = new System.Drawing.Point(1060, 175);
             this.dtpNgay.Name = "dtpNgay";
+            this.dtpNgay.ShowCheckBox = true;
             this.dtpNgay.Size = new System.Drawing.Size(151, 30);
             this.dtpNgay.TabIndex = 4;
-            this.dtpNgay.ValueChanged += new System.EventHandler(this.dtpNgay_ValueChanged);
+            this.dtpNgay.ValueChanged += new System.EventHandler(this.CheckChangeNgay);
+            // 
+            // dtpThang
+            // 
+            this.dtpThang.CustomFormat = "MM/yyyy";
+            this.dtpThang.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpThang.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpThang.Location = new System.Drawing.Point(1328, 175);
+            this.dtpThang.Name = "dtpThang";
+            this.dtpThang.ShowCheckBox = true;
+            this.dtpThang.ShowUpDown = true;
+            this.dtpThang.Size = new System.Drawing.Size(151, 30);
+            this.dtpThang.TabIndex = 56;
+            this.dtpThang.ValueChanged += new System.EventHandler(this.CheckChangeThang);
+            // 
+            // lvlThang
+            // 
+            this.lvlThang.AutoSize = true;
+            this.lvlThang.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvlThang.Location = new System.Drawing.Point(1229, 173);
+            this.lvlThang.Name = "lvlThang";
+            this.lvlThang.Size = new System.Drawing.Size(109, 32);
+            this.lvlThang.TabIndex = 57;
+            this.lvlThang.Text = "Tháng:";
+            // 
+            // dtpNam
+            // 
+            this.dtpNam.CustomFormat = "yyyy";
+            this.dtpNam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpNam.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpNam.Location = new System.Drawing.Point(1587, 175);
+            this.dtpNam.Name = "dtpNam";
+            this.dtpNam.ShowCheckBox = true;
+            this.dtpNam.ShowUpDown = true;
+            this.dtpNam.Size = new System.Drawing.Size(105, 30);
+            this.dtpNam.TabIndex = 58;
+            this.dtpNam.ValueChanged += new System.EventHandler(this.CheckChangeNam);
+            // 
+            // lblNam
+            // 
+            this.lblNam.AutoSize = true;
+            this.lblNam.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNam.Location = new System.Drawing.Point(1488, 173);
+            this.lblNam.Name = "lblNam";
+            this.lblNam.Size = new System.Drawing.Size(85, 32);
+            this.lblNam.TabIndex = 59;
+            this.lblNam.Text = "Năm:";
             // 
             // FrmLichSuThaoTac
             // 
@@ -350,6 +401,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1924, 1033);
+            this.Controls.Add(this.dtpNam);
+            this.Controls.Add(this.lblNam);
+            this.Controls.Add(this.dtpThang);
+            this.Controls.Add(this.lvlThang);
             this.Controls.Add(this.dtpNgay);
             this.Controls.Add(this.lblNgay);
             this.Controls.Add(this.lblLichSuThaoTac);
@@ -395,5 +450,9 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Label lblNgay;
         private System.Windows.Forms.DateTimePicker dtpNgay;
+        private System.Windows.Forms.DateTimePicker dtpThang;
+        private System.Windows.Forms.Label lvlThang;
+        private System.Windows.Forms.DateTimePicker dtpNam;
+        private System.Windows.Forms.Label lblNam;
     }
 }
