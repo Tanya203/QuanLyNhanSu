@@ -20,7 +20,7 @@ namespace QuanLyNhanSu.LogicTier
         {
             return lichSuThaoTacDAL.GetAllLichSuThaoTacTheoNgay(ngay);
         }
-        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuTThaoTacTheoThang(string thang)
+        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuThaoTacTheoThang(string thang)
         {
             return lichSuThaoTacDAL.GetAllLichSuThaoTacTheoThang(thang);
         }
