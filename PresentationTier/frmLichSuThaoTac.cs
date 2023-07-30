@@ -35,6 +35,8 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void frmLichSuThaoTac_Load(object sender, EventArgs e)
         {
+            dtpThang.Checked = false;
+            dtpNam.Checked = false;
             LoadLichSuThaoTac();
             LoadThongTinDangNhap();
         }
@@ -51,7 +53,12 @@ namespace QuanLyNhanSu.PresentationTier
         public void LoadLichSuThaoTac()
         {
             dgvLichSuThaoTac.Rows.Clear();
-            lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuTThaoTac(dtpNgay.Text);
+            if (dtpNgay.Checked)
+                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoNgay(dtpNgay.Text);
+            if (dtpThang.Checked)
+                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuTThaoTacTheoThang(dtpThang.Text);
+            if (dtpNam.Checked)
+                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuTThaoTacTheoThang(dtpNam.Text);            
             int rowAdd;
             foreach(var tt in lichSuThaoTac)
             {
@@ -67,7 +74,12 @@ namespace QuanLyNhanSu.PresentationTier
         public void LoadLichSuThaoTacTimKiem(string timKiem)
         {
             dgvLichSuThaoTac.Rows.Clear();
-            lichSuThaoTacTimKiem = lichSuThaoTacBUS.LichSuThaoTacTimKiem(dtpNgay.Text,timKiem);
+            if(dtpNgay.Checked)
+                lichSuThaoTacTimKiem = lichSuThaoTacBUS.LichSuThaoTacTimKiemNgay(dtpNgay.Text,timKiem);
+            if(dtpThang.Checked)
+                lichSuThaoTacTimKiem = lichSuThaoTacBUS.LichSuThaoTacTimKiemThang(dtpThang.Text, timKiem);
+            if(dtpNam.Checked)
+                lichSuThaoTacTimKiem = lichSuThaoTacBUS.LichSuThaoTacTimKiemNam(dtpNam.Text, timKiem);
             int rowAdd;
             foreach (var tt in lichSuThaoTacTimKiem)
             {
@@ -80,11 +92,53 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[5].Value = tt.ThaoTacThucHien;
             }
         }
-        private void dtpNgay_ValueChanged(object sender, EventArgs e)
+        /////////////////////////////////////////////////////////////////////////////////////////    
+        private void CheckChangeNgay(object sender, EventArgs e)
         {
-            txtTimKiem.Text = txtTimKiem.Text;
-            LoadLichSuThaoTac();
+            if (Check(dtpNgay))
+                return;
+            if (dtpNgay.Checked)
+            {
+                dtpThang.Checked = false;
+                dtpNam.Checked = false;
+                txtTimKiem.Text = string.Empty;
+                LoadLichSuThaoTac();
+            }                       
         }
+        private void CheckChangeThang(object sender, EventArgs e)
+        {
+            if(Check(dtpThang))
+                return;
+            if (dtpThang.Checked)
+            {
+                dtpNgay.Checked = false;
+                dtpNam.Checked = false;
+                txtTimKiem.Text = string.Empty;
+                LoadLichSuThaoTac();
+            }
+        }
+        private void CheckChangeNam(object sender, EventArgs e)
+        {
+            if (Check(dtpNam))
+                return;
+            if (dtpNam.Checked)
+            {
+                dtpNgay.Checked = false;
+                dtpThang.Checked = false;
+                txtTimKiem.Text = string.Empty;
+                LoadLichSuThaoTac();                
+            }
+        }
+        public bool Check(DateTimePicker dtp)
+        {
+            if (!dtpNam.Checked && !dtpThang.Checked && !dtpNam.Checked)
+            {
+                dtp.Checked = true;
+                return true;
+            }
+            return false;
+        }
+            
         /////////////////////////////////////////////////////////////////////////////////////////        
         public void Reload()
         {
@@ -113,9 +167,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
-            {
-                LoadLichSuThaoTacTimKiem(txtTimKiem.Text);
-            }
+                LoadLichSuThaoTacTimKiem(txtTimKiem.Text);            
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {

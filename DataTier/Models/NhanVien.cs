@@ -103,6 +103,10 @@ namespace QuanLyNhanSu.DataTier.Models
         [StringLength(200)]
         public string Hinh { get; set; }
 
+        public DateTime? NgayKhoa { get; set; }
+
+        public decimal? SoTienNo { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChamCong> ChamCongs { get; set; }
 

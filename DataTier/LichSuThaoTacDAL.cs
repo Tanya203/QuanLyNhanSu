@@ -20,7 +20,7 @@ namespace QuanLyNhanSu.DataTier
             quanLyNhanSu = new QuanLyNhanSuContextDB();
             MessageBoxManager.Register_OnceOnly();
         }
-        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuTThaoTac(string ngay)
+        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuThaoTacTheoNgay(string ngay)
         {
             var lichSuThaoTac = quanLyNhanSu.LichSuThaoTacs.Select(x => new LichSuThaoTacViewModels
             {
@@ -33,7 +33,33 @@ namespace QuanLyNhanSu.DataTier
             }).Where(lstt => lstt.NgayGio.Contains(ngay)).OrderBy(lstt => lstt.NgayGio);
             return lichSuThaoTac;
         }
-        public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiem(string ngay ,string timKiem)
+        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuThaoTacTheoThang(string thang)
+        {
+            var lichSuThaoTac = quanLyNhanSu.LichSuThaoTacs.Select(x => new LichSuThaoTacViewModels
+            {
+                NgayGio = x.NgayGio,
+                MaNV = x.MaNV,
+                HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
+                PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
+                ChucVu = x.NhanVien.ChucVu.TenChucVu,
+                ThaoTacThucHien = x.ThaoTacThucHien
+            }).Where(lstt => lstt.NgayGio.Contains(thang)).OrderBy(lstt => lstt.NgayGio);
+            return lichSuThaoTac;
+        }
+        public IEnumerable<LichSuThaoTacViewModels> GetAllLichSuThaoTacTheoNam(string nam)
+        {
+            var lichSuThaoTac = quanLyNhanSu.LichSuThaoTacs.Select(x => new LichSuThaoTacViewModels
+            {
+                NgayGio = x.NgayGio,
+                MaNV = x.MaNV,
+                HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
+                PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
+                ChucVu = x.NhanVien.ChucVu.TenChucVu,
+                ThaoTacThucHien = x.ThaoTacThucHien
+            }).Where(lstt => lstt.NgayGio.Contains(nam)).OrderBy(lstt => lstt.NgayGio);
+            return lichSuThaoTac;
+        }
+        public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiemNgay(string ngay ,string timKiem)
         {
             var lichSuThaoTac = quanLyNhanSu.LichSuThaoTacs.Select(x => new LichSuThaoTacViewModels
             {
@@ -49,6 +75,42 @@ namespace QuanLyNhanSu.DataTier
                      lstc.ThaoTacThucHien.Contains(timKiem) ||
                      lstc.PhongBan.Contains(timKiem) ||
                      lstc.ChucVu.Contains(timKiem))).OrderBy(lstt => lstt.NgayGio);            
+            return lichSuThaoTac;
+        }
+        public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiemThang(string thang, string timKiem)
+        {
+            var lichSuThaoTac = quanLyNhanSu.LichSuThaoTacs.Select(x => new LichSuThaoTacViewModels
+            {
+                NgayGio = x.NgayGio,
+                MaNV = x.MaNV,
+                HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
+                PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
+                ChucVu = x.NhanVien.ChucVu.TenChucVu,
+                ThaoTacThucHien = x.ThaoTacThucHien
+            }).Where(lstc => lstc.NgayGio.Contains(thang) && (lstc.NgayGio.Contains(timKiem) ||
+                     lstc.MaNV.Contains(timKiem) ||
+                     lstc.HoTen.Contains(timKiem) ||
+                     lstc.ThaoTacThucHien.Contains(timKiem) ||
+                     lstc.PhongBan.Contains(timKiem) ||
+                     lstc.ChucVu.Contains(timKiem))).OrderBy(lstt => lstt.NgayGio);
+            return lichSuThaoTac;
+        }
+        public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiemNam(string nam, string timKiem)
+        {
+            var lichSuThaoTac = quanLyNhanSu.LichSuThaoTacs.Select(x => new LichSuThaoTacViewModels
+            {
+                NgayGio = x.NgayGio,
+                MaNV = x.MaNV,
+                HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
+                PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
+                ChucVu = x.NhanVien.ChucVu.TenChucVu,
+                ThaoTacThucHien = x.ThaoTacThucHien
+            }).Where(lstc => lstc.NgayGio.Contains(nam) && (lstc.NgayGio.Contains(timKiem) ||
+                     lstc.MaNV.Contains(timKiem) ||
+                     lstc.HoTen.Contains(timKiem) ||
+                     lstc.ThaoTacThucHien.Contains(timKiem) ||
+                     lstc.PhongBan.Contains(timKiem) ||
+                     lstc.ChucVu.Contains(timKiem))).OrderBy(lstt => lstt.NgayGio);
             return lichSuThaoTac;
         }
         public bool Save(LichSuThaoTac lstt)
