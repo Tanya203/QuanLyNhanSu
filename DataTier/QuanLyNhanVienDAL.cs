@@ -12,15 +12,21 @@ using System.Data.Entity.Migrations;
 using System.Windows.Forms;
 using WECPOFLogic;
 using System.Data.Entity;
+using QuanLyNhanSu.LogicTier;
 
 namespace QuanLyNhanSu.DataTier
 {
     internal class QuanLyNhanVienDAL
     {
         private readonly QuanLyNhanSuContextDB quanLyNhanSu;
+        private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
+        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
+        private int count;
         public QuanLyNhanVienDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
+            lichSuThaoTacBUS = new LichSuThaoTacBUS();
+
             MessageBoxManager.Register_OnceOnly();
         }
         public IEnumerable<NhanVienViewModel> GetAllNhanVien()
@@ -257,17 +263,52 @@ namespace QuanLyNhanSu.DataTier
         }
         public bool LoginVerify(string taiKhoan, string matKhau)
         {
-            var nhanVien = quanLyNhanSu.NhanViens.Where(x => x.TaiKhoan == taiKhoan).FirstOrDefault();
+            var nhanVien = quanLyNhanSu.NhanViens.Where(x => x.TaiKhoan == taiKhoan).FirstOrDefault();            
             try
             {                
+                if (nhanVien.NgayKhoa != null && nhanVien.NgayKhoa > DateTime.Now)
+                {                  
+                    MessageBox.Show("Tài khoản " + nhanVien.TaiKhoan + " của nhân viên " + nhanVien.MaNV + " đã bị khoá đến " + nhanVien.NgayKhoa +"! Liên hệ phòng kỹ thuật để biết thêm chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+                if(nhanVien != null && !BCrypt.Net.BCrypt.Verify(matKhau, nhanVien.MatKhau))
+                {
+                    count++;
+                    if (count == 3)
+                    {
+                        DateTime lockDate = DateTime.Now.AddDays(1);
+                        nhanVien.NgayKhoa = lockDate;
+                        quanLyNhanSu.SaveChanges();
+                        MessageBox.Show("Nhập sai mật khẩu lần 3! Tài khoản " + nhanVien.TaiKhoan + " của nhân viên " + nhanVien.MaNV + " đã bị khoá đến " + nhanVien.NgayKhoa + "! Liên hệ phòng kỹ thuật để biết thêm chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        count = 0;
+                        LichSuThaoTac newLstt = new LichSuThaoTac
+                        {
+                            NgayGio = DateTime.Now.ToString(formatDateTime),
+                            MaNV = nhanVien.MaNV,
+                            ThaoTacThucHien = "Tài khoản " + nhanVien.TaiKhoan + " bị khoá đến " + lockDate,
+                        };
+                        lichSuThaoTacBUS.Save(newLstt);
+                        return false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nhập sai mật khẩu lần thứ " + count +"! Lần thứ 3 tài khoản sẽ bị khoá!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }                    
+                }
                 if (nhanVien == null || !BCrypt.Net.BCrypt.Verify(matKhau, nhanVien.MatKhau))
                 {
                     MessageBox.Show("Tài khoản hoặc mật khẩu không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
-                }
+                }                             
                 else if(nhanVien != null  && BCrypt.Net.BCrypt.Verify(matKhau, nhanVien.MatKhau))
                 {
-                    MessageBox.Show("Đăng nhập thành công! - "+nhanVien.MaNV+"","Thông báo", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    if(nhanVien.NgayKhoa != null && nhanVien.NgayKhoa < DateTime.Now)
+                    {
+                        nhanVien.NgayKhoa = null;
+                        quanLyNhanSu.SaveChanges();
+                    }
+                    MessageBox.Show("Đăng nhập thành công! - "+ nhanVien.MaNV,"Thông báo", MessageBoxButtons.OK,MessageBoxIcon.Information);
                     return true;
                 }
                 return false;
