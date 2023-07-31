@@ -8,12 +8,14 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using WECPOFLogic;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace QuanLyNhanSu.PresentationTier
@@ -45,6 +47,7 @@ namespace QuanLyNhanSu.PresentationTier
             loaiHopDongBUS = new QuanLyLoaiHopDongBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             chiTietPhuCapBUS = new ChiTietPhuCapBUS();
+            MessageBoxManager.Register_OnceOnly();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             this.maNV = maNV;
@@ -65,10 +68,13 @@ namespace QuanLyNhanSu.PresentationTier
             LoadThongTinDangNhap();
             txtMaNV.ReadOnly = true;
             txtPhuCap.ReadOnly = true;
+            txtNgayKhoa.ReadOnly = true;
+            txtSoTienNo.ReadOnly = true;
             btnThem.Enabled = false;
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
             btnThemPhuCap.Enabled = false;
+            btnMoKhoa.Enabled = false;
             dtpNTNS.Text = "01/01/1990";          
             
         }
@@ -116,6 +122,8 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[22].Value = nv.SoNgayPhep;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(nv.MaNV));
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[25].Value = nv.NgayKhoa.ToString();
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", nv.SoTienNo);
             }
         }
         private void LoadNhanVienTimKiem(string timKiem)
@@ -151,6 +159,8 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[22].Value = nv.SoNgayPhep;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(nv.MaNV));
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[25].Value = nv.NgayKhoa.ToString();
+                dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", nv.SoTienNo);
             }
         }
         public void LoadPhongBan()
@@ -208,6 +218,8 @@ namespace QuanLyNhanSu.PresentationTier
             txtPhuCap.Text = string.Empty;
             txtTaiKhoan.ReadOnly = false;
             txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = true;
+            txtNgayKhoa.Text = string.Empty;
+            txtSoTienNo.Text = string.Empty;
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         private void CloseForm(object sender, FormClosedEventArgs e)
@@ -353,6 +365,19 @@ namespace QuanLyNhanSu.PresentationTier
         {
             BatTatNut();            
         }
+        private void txtNgayKhoa_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtNgayKhoa.Text))
+            {
+                btnMoKhoa.Enabled = false;
+                return;
+            }
+            else
+            {
+                btnMoKhoa.Enabled = true;
+                return;
+            }
+        }
         ///////////////////////////////////////////////////////////////////////////////////////
         private void txtSoNgayPhep_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -430,20 +455,16 @@ namespace QuanLyNhanSu.PresentationTier
                 TinhTrang = txtTinhTrang.Text,
                 SoNgayPhep = int.Parse(txtSoNgayPhep.Text),
                 LuongCoBan = decimal.Parse(txtLuongCoBan.Text),
+                SoTienNo = 0,
                 //hinh
             };
             if (nhanVienBUS.Save(newNhanVien))
-            {
-                string hoTen;
-                if (string.IsNullOrEmpty(txtTenLot.Text))
-                    hoTen = txtHo.Text + txtTen.Text;
-                else
-                    hoTen = txtHo.Text + txtTenLot.Text + txtTen.Text;
+            {                
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + this.hoTen + " thêm nhân viên " + hoTen,
+                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm nhân viên " + hoTen,
                 };
                 lichSuThaoTacBUS.Save(newLstt);
             }
@@ -507,7 +528,7 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (nhanVienBUS.Delete(newNhanVien.MaNV))
             {
-                string hoTen = txtHo + " " + txtTenLot.Text + " " + txtTen.Text;
+                string hoTen = txtHo.Text + " " + txtTenLot.Text + " " + txtTen.Text;
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {                    
                     NgayGio = DateTime.Now.ToString(formatDateTime),
@@ -538,7 +559,32 @@ namespace QuanLyNhanSu.PresentationTier
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-       
+        private void btnMoKhoa_Click(object sender, EventArgs e)
+        {
+            string hoTen = txtHo.Text + " " + txtTenLot.Text + " " + txtTen.Text;
+            NhanVien nhanVien = nhanVienBUS.ThongTinNhanVien(txtMaNV.Text);
+            nhanVien.NgayKhoa = null;
+            MessageBoxManager.Yes = "Có";
+            MessageBoxManager.No = "Không";
+            DialogResult ketQua = MessageBox.Show("Xác nhận mở khoá tài khoản của " + txtMaNV.Text + " - " + hoTen + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (ketQua == DialogResult.Yes)
+            {
+                if (nhanVienBUS.Save(nhanVien))
+                {
+
+                    LichSuThaoTac newLstt = new LichSuThaoTac
+                    {
+                        NgayGio = DateTime.Now.ToString(formatDateTime),
+                        MaNV = maNV,
+                        ThaoTacThucHien = "Nhân viên " + this.hoTen + " mở khoá tài khoản cho nhân viên " + hoTen,
+                    };
+                    lichSuThaoTacBUS.Save(newLstt);
+                    Reload();
+                }
+            }
+            else
+                return;            
+        }
         private void cbHienThiMatKhau_CheckedChanged(object sender, EventArgs e)
         {
             if (cbHienThiMatKhau.Checked)            
@@ -594,6 +640,8 @@ namespace QuanLyNhanSu.PresentationTier
             txtSoNgayPhep.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[22].Value.ToString();
             txtLuongCoBan.Text = nhanVienBUS.ThongTinNhanVien(txtMaNV.Text).LuongCoBan.ToString();
             txtPhuCap.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(txtMaNV.Text));
+            txtNgayKhoa.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[25].Value.ToString();
+            txtSoTienNo.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[26].Value.ToString();
         }
         private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -604,5 +652,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             Reload();
         }
+
+        
     }
 }

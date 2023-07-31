@@ -19,6 +19,7 @@ namespace QuanLyNhanSu.PresentationTier
         Thread currentForm;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
+        private readonly LoadingScreen loadingScreen;
         private IEnumerable<LichSuThaoTacViewModels> lichSuThaoTac;
         private IEnumerable<LichSuThaoTacViewModels> lichSuThaoTacTimKiem;
         private readonly NhanVien nv;
@@ -30,6 +31,7 @@ namespace QuanLyNhanSu.PresentationTier
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
+            loadingScreen = new LoadingScreen();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             this.maNV = maNV;
         }
@@ -58,11 +60,10 @@ namespace QuanLyNhanSu.PresentationTier
             if (dtpThang.Checked)
                 lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoThang(dtpThang.Text);
             if (dtpNam.Checked)
-                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoNam(dtpNam.Text);            
-            int rowAdd;
-            foreach(var tt in lichSuThaoTac)
+                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoNam(dtpNam.Text);
+            foreach (var tt in lichSuThaoTac)
             {
-                rowAdd = dgvLichSuThaoTac.Rows.Add();
+                int rowAdd = dgvLichSuThaoTac.Rows.Add();
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[0].Value = tt.NgayGio;
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[1].Value = tt.MaNV;
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[2].Value = tt.HoTen;
@@ -71,6 +72,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[5].Value = tt.ThaoTacThucHien;
             }
         }
+        
         public void LoadLichSuThaoTacTimKiem(string timKiem)
         {
             dgvLichSuThaoTac.Rows.Clear();
