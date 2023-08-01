@@ -340,10 +340,17 @@ namespace QuanLyNhanSu.DataTier
                         MessageBox.Show("Xác thực thành công! Nhân viên " + nhanVien.MaNV + ".","Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
+                    else
+                    {
+                        MessageBox.Show("Thông tin xác thực không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
                 }
-                else                
-                    MessageBox.Show("Thông tin xác thực không hợp lệ" , "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
+                else
+                {
+                    MessageBox.Show("Thông tin xác thực không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }              
             }
             catch(Exception ex)
             {

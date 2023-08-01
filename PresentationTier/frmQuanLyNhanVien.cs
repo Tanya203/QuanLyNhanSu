@@ -123,7 +123,10 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(nv.MaNV));
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[25].Value = nv.NgayKhoa.ToString();
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", nv.SoTienNo);
+                if (nv.SoTienNo == null)
+                    dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", 0.000);
+                else
+                    dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", nv.SoTienNo);
             }
         }
         private void LoadNhanVienTimKiem(string timKiem)
@@ -160,7 +163,10 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(nv.MaNV));
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[25].Value = nv.NgayKhoa.ToString();
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", nv.SoTienNo);
+                if(nv.SoTienNo == null)
+                    dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", 0.000);
+                else
+                    dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", nv.SoTienNo);
             }
         }
         public void LoadPhongBan()
@@ -214,12 +220,12 @@ namespace QuanLyNhanSu.PresentationTier
             dtpThoiHanHopDong.Text = DateTime.Now.ToString();
             txtTinhTrang.Text = string.Empty;
             txtSoNgayPhep.Text = string.Empty;
-            txtLuongCoBan.Text = string.Empty;
             txtPhuCap.Text = string.Empty;
             txtTaiKhoan.ReadOnly = false;
             txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = true;
             txtNgayKhoa.Text = string.Empty;
             txtSoTienNo.Text = string.Empty;
+            
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         private void CloseForm(object sender, FormClosedEventArgs e)
@@ -337,6 +343,7 @@ namespace QuanLyNhanSu.PresentationTier
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
                 btnThemPhuCap.Enabled = false;
+                cbHienThiMatKhau.Enabled = true;
                 return;
             }
             if (string.IsNullOrEmpty(txtMaNV.Text) && CheckEmptyText() && CheckChonGioiTinh())
@@ -429,6 +436,7 @@ namespace QuanLyNhanSu.PresentationTier
             string gioiTinh = ChonGioiTinh();
             if (string.IsNullOrEmpty(gioiTinh))
                 return;
+            decimal soTienNo = 0;
             NhanVien newNhanVien = new NhanVien
             {
                 MaNV = "",
@@ -455,7 +463,6 @@ namespace QuanLyNhanSu.PresentationTier
                 TinhTrang = txtTinhTrang.Text,
                 SoNgayPhep = int.Parse(txtSoNgayPhep.Text),
                 LuongCoBan = decimal.Parse(txtLuongCoBan.Text),
-                SoTienNo = 0,
                 //hinh
             };
             if (nhanVienBUS.Save(newNhanVien))
