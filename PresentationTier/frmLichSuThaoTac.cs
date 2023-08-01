@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -19,7 +20,6 @@ namespace QuanLyNhanSu.PresentationTier
         Thread currentForm;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
-        private readonly LoadingScreen loadingScreen;
         private IEnumerable<LichSuThaoTacViewModels> lichSuThaoTac;
         private IEnumerable<LichSuThaoTacViewModels> lichSuThaoTacTimKiem;
         private readonly NhanVien nv;
@@ -31,14 +31,14 @@ namespace QuanLyNhanSu.PresentationTier
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
-            loadingScreen = new LoadingScreen();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            
             this.maNV = maNV;
         }
         private void frmLichSuThaoTac_Load(object sender, EventArgs e)
         {
             dtpThang.Checked = false;
-            dtpNam.Checked = false;
+            dtpNam.Checked = false;           
             LoadLichSuThaoTac();
             LoadThongTinDangNhap();
         }
@@ -54,7 +54,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void LoadLichSuThaoTac()
         {
-            dgvLichSuThaoTac.Rows.Clear();
+            dgvLichSuThaoTac.Rows.Clear();           
             if (dtpNgay.Checked)
                 lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoNgay(dtpNgay.Text);
             if (dtpThang.Checked)
