@@ -148,6 +148,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTier\ChamCongDAL.cs" />
     <Compile Include="DataTier\ChiTietLichLamViecDAL.cs" />
     <Compile Include="DataTier\ChiTietPhieuDAL.cs" />
     <Compile Include="DataTier\ChiTietPhuCapDAL.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="DataTier\QuanLyLoaiHopDongDAL.cs" />
     <Compile Include="DataTier\QuanLyPhongBanDAL.cs" />
     <Compile Include="DataTier\QuanLyNhanVienDAL.cs" />
+    <Compile Include="LogicTier\ChamCongBUS.cs" />
     <Compile Include="LogicTier\ChiTietLichLamViecBUS.cs" />
     <Compile Include="LogicTier\ChiTietPhieuBUS.cs" />
     <Compile Include="LogicTier\ChiTietPhuCapBUS.cs" />

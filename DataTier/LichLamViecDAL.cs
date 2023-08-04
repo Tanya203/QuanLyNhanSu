@@ -19,7 +19,7 @@ namespace QuanLyNhanSu.DataTier
             quanLyNhanSu = new QuanLyNhanSuContextDB();
             MessageBoxManager.Register_OnceOnly();
         }
-        public IEnumerable<LichLamViecViewModels> GetLichLamViecTheoPhongBan(string maP)
+        public List<LichLamViecViewModels> GetLichLamViecTheoPhongBan(string maP)
         {
             var lichLamViec = quanLyNhanSu.LichLamViecs.Select(x => new LichLamViecViewModels
             {
@@ -30,7 +30,7 @@ namespace QuanLyNhanSu.DataTier
                 NgayLam = x.NgayLam,
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
-            }).Where(llv => llv.MaPB == maP).OrderBy(llv => llv.MaNV);
+            }).Where(llv => llv.MaPB == maP).OrderBy(llv => llv.MaNV).ToList();
             return lichLamViec;            
         }
         public IEnumerable<LichLamViecViewModels> SearchLichLamViecTheoPhongBan(string maP, string timKiem)
@@ -58,7 +58,7 @@ namespace QuanLyNhanSu.DataTier
         public IEnumerable<LichLamViec> LocLichTheoNgay(string maPB ,string ngayLam)
         {
             return quanLyNhanSu.LichLamViecs.Where(llv => llv.NhanVien.ChucVu.PhongBan.MaPB == maPB && llv.NgayLam.ToString() == ngayLam).ToList();
-        }
+        }       
         public bool Save(LichLamViec lichLamViec)
         {
             try
