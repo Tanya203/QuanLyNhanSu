@@ -65,7 +65,7 @@
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(280, 30);
             this.txtMaNV.TabIndex = 2;
-            this.txtMaNV.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtMaNV.TextChanged += new System.EventHandler(this.txtMaNV_TextChanged);
             // 
             // btnChamCong
             // 
@@ -83,6 +83,7 @@
             this.btnChamCong.Text = "Chấm công";
             this.btnChamCong.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnChamCong.UseVisualStyleBackColor = false;
+            this.btnChamCong.Click += new System.EventHandler(this.btnChamCong_Click);
             // 
             // pnlMenu
             // 
@@ -109,6 +110,7 @@
             this.Name = "FrmChamCong";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmChamCong";
+            this.Load += new System.EventHandler(this.FrmChamCong_Load);
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             this.ResumeLayout(false);
