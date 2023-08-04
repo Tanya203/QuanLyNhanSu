@@ -220,7 +220,6 @@ namespace QuanLyNhanSu.PresentationTier
                     }
                     if (nv.ThoiGianDen == null && timeNow < nv.Ca.GioKetThuc)
                     {
-                        checkThoiGianVaoCaDau = 1;
                         nv.ThoiGianDen = timeNow;
                         if (chamCongBUS.ChamCong(nv))
                         {
@@ -236,7 +235,8 @@ namespace QuanLyNhanSu.PresentationTier
                         }
                     }                
                     if (nv.ThoiGianDen != null  && nv.ThoiGianVe == null)
-                    {                        
+                    {
+                        checkThoiGianVaoCaDau = 1;
                         nv.ThoiGianVe = timeNow;
                         if (chamCongBUS.ChamCong(nv))
                         {
@@ -305,8 +305,8 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnChamCong_Click(object sender, EventArgs e)
         {
-            ChamCongTungCa(txtMaNV.Text);
-            //ChamCongLienCa(txtMaNV.Text);
+            //ChamCongTungCa(txtMaNV.Text);
+            ChamCongLienCa(txtMaNV.Text);
         }
         private void txtMaNV_TextChanged(object sender, EventArgs e)
         {
