@@ -69,7 +69,7 @@ namespace QuanLyNhanSu.PresentationTier
                     countCa++;
                     string hoTen = nv.NhanVien.Ho + " " + nv.NhanVien.TenLot + " " + nv.NhanVien.Ten;
                     string ca = nv.Ca.TenCa;
-                    if (nv.Ca.GioBatDau > nv.Ca.GioKetThuc && nv.ThoiGianDen != null)
+                    if (nv.Ca.GioBatDau > nv.Ca.GioKetThuc && nv.ThoiGianDen != null && nv.ThoiGianVe == null)
                     {
                         nv.ThoiGianVe = timeNow;
                         if (chamCongBUS.ChamCong(nv))
