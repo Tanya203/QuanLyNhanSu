@@ -120,7 +120,13 @@ namespace QuanLyNhanSu.PresentationTier
                             txtMaNV.Text = string.Empty;
                             return;
                         }
-                    }                    
+                    }
+                    if (nv.ThoiGianDen != null && nv.ThoiGianVe == null && timeNow < nv.Ca.GioBatDau)
+                    {
+                        MessageBox.Show("Vẫn chưa vào ca " + ca + "!\n(" + nv.Ca.GioBatDau + " - " + nv.Ca.GioKetThuc + ")", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMaNV.Text = string.Empty;
+                        return;
+                    }
                     if (nv.ThoiGianDen == null && timeNow < nv.Ca.GioKetThuc)
                     {
                         nv.ThoiGianDen = timeNow;
@@ -170,11 +176,6 @@ namespace QuanLyNhanSu.PresentationTier
                                 MaNV = maNV,
                                 ThaoTacThucHien = "Nhân viên " + hoTen + " chấm công giờ vào ca " + ca,
                             };
-                            if (countCa == maxCa)
-                            {
-                                txtMaNV.Text = string.Empty;
-                                return;
-                            }
                         }
                     }        
                     if(timeNow > nv.Ca.GioKetThuc && nv.ThoiGianVe == null && checkThoiGianVaoCaDau == 1)
@@ -194,13 +195,7 @@ namespace QuanLyNhanSu.PresentationTier
                                 return;
                             }                                
                         }
-                    }  
-                    if (timeNow < nv.Ca.GioBatDau)
-                    {
-                        MessageBox.Show("Vẫn chưa vào ca " + ca +"!\n(" + nv.Ca.GioBatDau + " - " + nv.Ca.GioKetThuc + ")", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        txtMaNV.Text = string.Empty;
-                        return;
-                    }
+                    }                      
                     if (nv.ThoiGianDen == null && timeNow > nv.Ca.GioKetThuc && checkThoiGianVaoCaDau == 0)
                     {
                         if (countCa == maxCa)
@@ -209,7 +204,8 @@ namespace QuanLyNhanSu.PresentationTier
                             return;
                         }
                         continue;
-                    }
+                    }               
+                    txtMaNV.Text = string.Empty;
                 }
                 MessageBox.Show("Nhân viên " + maNV + " đã chấm công hết các ca trong ngày hoặc đã quá giờ chấm công ngày " + dateNow, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtMaNV.Text = string.Empty;
