@@ -133,10 +133,11 @@ namespace QuanLyNhanSu.PresentationTier
                                 ThaoTacThucHien = "Nhân viên " + hoTen + " chấm công giờ vào ca " + ca,
                             };
                             lichSuThaoTacBUS.Save(newLstt);
+                            txtMaNV.Text = string.Empty;
                             return;
                         }
                     }                
-                    if (nv.ThoiGianDen != null && timeNow > nv.Ca.GioKetThuc && nv.ThoiGianVe == null)
+                    if (nv.ThoiGianDen != null  && nv.ThoiGianVe == null)
                     {
                         checkThoiGianVaoCaDau = 1;
                         nv.ThoiGianVe = timeNow;
@@ -219,7 +220,6 @@ namespace QuanLyNhanSu.PresentationTier
         {
             ChamCong(txtMaNV.Text);
         }
-
         private void txtMaNV_TextChanged(object sender, EventArgs e)
         {
             if(string.IsNullOrEmpty(txtMaNV.Text))
