@@ -22,6 +22,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyCaBUS caBUS;
         private readonly List<ChamCong> lichLamViec;
         private readonly List<ChamCong> lichCaDem;
+        private readonly Ca caDau;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatTime = "HH:mm:ss";
@@ -31,8 +32,9 @@ namespace QuanLyNhanSu.PresentationTier
             chamCongBUS = new ChamCongBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             caBUS = new QuanLyCaBUS();
+            caDau = caBUS.GetCa().OrderBy(ca => ca.TenCa).FirstOrDefault();
             lichLamViec = chamCongBUS.GetLichLamViecTheoNgay(DateTime.Now.ToString(formatDate)).OrderBy(llv => llv.Ca.TenCa).ToList();
-            lichCaDem = chamCongBUS.GetLichLamViecTheoNgay(DateTime.Now.AddDays(-1).ToString(formatDate)).ToList();
+            lichCaDem = chamCongBUS.GetLichLamViecTheoNgay(DateTime.Now.AddDays(-1).ToString(formatDate)).Where(nv => nv.Ca.GioKetThuc < caDau.GioBatDau).ToList();
             MessageBoxManager.Register_OnceOnly();
         }
         private void FrmChamCong_Load(object sender, EventArgs e)
@@ -40,56 +42,145 @@ namespace QuanLyNhanSu.PresentationTier
             LoadLichLamViec();
             btnChamCong.Enabled = false;
         }
+        public void ChamCongCaDem(string maNV)
+        {
+            TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString(formatTime));            
+            List<ChamCong> caDem = lichCaDem.Where(nv => nv.MaNV == maNV).ToList();
+            if (caDem != null)
+            {
+                foreach (ChamCong nv in caDem)
+                {
+                    string hoTen = nv.NhanVien.Ho + " " + nv.NhanVien.TenLot + " " + nv.NhanVien.Ten;
+                    string ca = nv.Ca.TenCa;
+                    if (nv.ThoiGianDen == null && timeNow < nv.Ca.GioKetThuc)
+                    {
+                        nv.ThoiGianVe = timeNow;
+                        if (chamCongBUS.ChamCong(nv))
+                        {
+                            LichSuThaoTac newLstt = new LichSuThaoTac
+                            {
+                                NgayGio = DateTime.Now.ToString(formatDateTime),
+                                MaNV = maNV,
+                                ThaoTacThucHien = "Nhân viên " + hoTen + " chấm công giờ ra ca " + ca,
+                            };
+                            lichSuThaoTacBUS.Save(newLstt);
+                            txtMaNV.Text = string.Empty;
+                            return;
+                        }
+                    }
+                    if (nv.ThoiGianDen != null && nv.ThoiGianVe == null && timeNow < caDau.GioBatDau)
+                    {
+                        nv.ThoiGianVe = timeNow;
+                        if (chamCongBUS.ChamCong(nv))
+                        {
+                            LichSuThaoTac newLstt = new LichSuThaoTac
+                            {
+                                NgayGio = DateTime.Now.ToString(formatDateTime),
+                                MaNV = maNV,
+                                ThaoTacThucHien = "Nhân viên " + hoTen + " chấm công giờ ra ca " + ca,
+                            };
+                            lichSuThaoTacBUS.Save(newLstt);
+                            txtMaNV.Text = string.Empty;
+                            return;
+                        }
+                    }
+                }
+
+            }
+        }
         private void LoadLichLamViec()
         {
             
         }
-        public void ChamCong(string maNV)
+        public void ChamCongTungCa(string maNV)
         {
             TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString(formatTime));
             string dateNow = DateTime.Now.ToString(formatDate);
-            Ca caDau = caBUS.GetCa().OrderBy(ca => ca.TenCa).FirstOrDefault();
             List<ChamCong> chamCong = lichLamViec.Where(nv => nv.MaNV == maNV).OrderBy(nv => nv.Ca.TenCa).ToList();
-            ChamCong caDem = lichCaDem.Where(nv => nv.MaNV == maNV).FirstOrDefault();
-            if(caDem != null)
+            int countMax = chamCong.Count;
+            int count = 0;
+            ChamCongCaDem(maNV);
+            if (chamCong.Count == 0)
             {
-                string hoTen = caDem.NhanVien.Ho + " " + caDem.NhanVien.TenLot + " " + caDem.NhanVien.Ten;
-                string ca = caDem.Ca.TenCa;
-                if (caDem.ThoiGianDen == null && timeNow < caDem.Ca.GioKetThuc)
-                {
-                    caDem.ThoiGianVe = timeNow;
-                    if (chamCongBUS.ChamCong(caDem))
-                    {
-                        LichSuThaoTac newLstt = new LichSuThaoTac
-                        {
-                            NgayGio = DateTime.Now.ToString(formatDateTime),
-                            MaNV = maNV,
-                            ThaoTacThucHien = "Nhân viên " + hoTen + " chấm công giờ ra ca " + ca,
-                        };
-                        lichSuThaoTacBUS.Save(newLstt);
-                        txtMaNV.Text = string.Empty;
-                        caDem = null;
-                        return;
-                    }
-                }
-                if (caDem.ThoiGianDen != null && caDem.ThoiGianVe == null && timeNow < caDau.GioBatDau)
-                {
-                    caDem.ThoiGianVe = timeNow;
-                    if (chamCongBUS.ChamCong(caDem))
-                    {
-                        LichSuThaoTac newLstt = new LichSuThaoTac
-                        {
-                            NgayGio = DateTime.Now.ToString(formatDateTime),
-                            MaNV = maNV,
-                            ThaoTacThucHien = "Nhân viên " + hoTen + " chấm công giờ ra ca " + ca,
-                        };
-                        lichSuThaoTacBUS.Save(newLstt);
-                        txtMaNV.Text = string.Empty;
-                        caDem = null;
-                        return;
-                    }
-                }
+                MessageBox.Show("Mã nhân viên không hợp lệ hoặc nhân viên không có lịch làm việc trong hôm nay " + dateNow, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            else
+            {
+                foreach (ChamCong nv in chamCong)
+                {
+                    string hoTen = nv.NhanVien.Ho + " " + nv.NhanVien.TenLot + " " + nv.NhanVien.Ten;
+                    string ca = nv.Ca.TenCa;
+                    if (timeNow < nv.Ca.GioKetThuc && nv.ThoiGianDen == null)
+                    {                        
+                        nv.ThoiGianDen = timeNow;
+                        if (chamCongBUS.ChamCong(nv))
+                        {
+                            LichSuThaoTac newLstt = new LichSuThaoTac
+                            {
+                                NgayGio = DateTime.Now.ToString(formatDateTime),
+                                MaNV = maNV,
+                                ThaoTacThucHien = "Nhân viên " + hoTen + " chấm công giờ vào ca " + ca,
+                            };
+                            lichSuThaoTacBUS.Save(newLstt);
+                            txtMaNV.Text = string.Empty;
+                            count++;
+                            return;
+                        }
+                    }
+                    if (nv.ThoiGianDen != null && nv.ThoiGianVe == null)
+                    {
+                        if(count < countMax)
+                        {
+                            if(timeNow < chamCong[count++].Ca.GioBatDau)
+                            {
+                                nv.ThoiGianVe = timeNow;
+                                if (chamCongBUS.ChamCong(nv))
+                                {
+                                    LichSuThaoTac newLstt = new LichSuThaoTac
+                                    {
+                                        NgayGio = DateTime.Now.ToString(formatDateTime),
+                                        MaNV = maNV,
+                                        ThaoTacThucHien = "Nhân viên " + hoTen + " chấm công giờ ra ca " + ca,
+                                    };
+                                    lichSuThaoTacBUS.Save(newLstt);
+                                    txtMaNV.Text = string.Empty;
+                                    count++;
+                                    return;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            nv.ThoiGianVe = timeNow;
+                            if (chamCongBUS.ChamCong(nv))
+                            {
+                                LichSuThaoTac newLstt = new LichSuThaoTac
+                                {
+                                    NgayGio = DateTime.Now.ToString(formatDateTime),
+                                    MaNV = maNV,
+                                    ThaoTacThucHien = "Nhân viên " + hoTen + " chấm công giờ ra ca " + ca,
+                                };
+                                lichSuThaoTacBUS.Save(newLstt);
+                                txtMaNV.Text = string.Empty;
+                                count++;
+                                return;
+                            }
+                        }
+                    }
+                    count++;
+                }
+                MessageBox.Show("Nhân viên " + maNV + " đã chấm công hết các ca trong ngày hoặc đã quá giờ chấm công ngày " + dateNow, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtMaNV.Text = string.Empty;
+                return;
+            }
+        }
+        public void ChamCongLienCa(string maNV)
+        {
+            TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString(formatTime));
+            string dateNow = DateTime.Now.ToString(formatDate);
+            List<ChamCong> chamCong = lichLamViec.Where(nv => nv.MaNV == maNV).OrderBy(nv => nv.Ca.TenCa).ToList();
+            ChamCongCaDem(maNV);
             if (chamCong.Count == 0)
             {
                 MessageBox.Show("Mã nhân viên không hợp lệ hoặc nhân viên không có lịch làm việc trong hôm nay " + dateNow, "Thông báo" , MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -129,6 +220,7 @@ namespace QuanLyNhanSu.PresentationTier
                     }
                     if (nv.ThoiGianDen == null && timeNow < nv.Ca.GioKetThuc)
                     {
+                        checkThoiGianVaoCaDau = 1;
                         nv.ThoiGianDen = timeNow;
                         if (chamCongBUS.ChamCong(nv))
                         {
@@ -144,8 +236,7 @@ namespace QuanLyNhanSu.PresentationTier
                         }
                     }                
                     if (nv.ThoiGianDen != null  && nv.ThoiGianVe == null)
-                    {
-                        checkThoiGianVaoCaDau = 1;
+                    {                        
                         nv.ThoiGianVe = timeNow;
                         if (chamCongBUS.ChamCong(nv))
                         {
@@ -214,7 +305,8 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnChamCong_Click(object sender, EventArgs e)
         {
-            ChamCong(txtMaNV.Text);
+            ChamCongTungCa(txtMaNV.Text);
+            //ChamCongLienCa(txtMaNV.Text);
         }
         private void txtMaNV_TextChanged(object sender, EventArgs e)
         {
