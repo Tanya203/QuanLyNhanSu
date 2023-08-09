@@ -6,28 +6,24 @@ namespace QuanLyNhanSu.DataTier.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("LoaiHopDong")]
-    public partial class LoaiHopDong
+    [Table("HinhThucChamCong")]
+    public partial class HinhThucChamCong
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LoaiHopDong()
+        public HinhThucChamCong()
         {
-            NhanViens = new HashSet<NhanVien>();
+            LoaiHopDongs = new HashSet<LoaiHopDong>();
         }
 
         [Key]
         [StringLength(15)]
-        public string MaLHD { get; set; }
-
-        [StringLength(15)]
         public string MaHTCC { get; set; }
 
-        [StringLength(100)]
-        public string TenLoaiHopDong { get; set; }
-
-        public virtual HinhThucChamCong HinhThucChamCong { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string TenHinhThucChamCong { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NhanVien> NhanViens { get; set; }
+        public virtual ICollection<LoaiHopDong> LoaiHopDongs { get; set; }
     }
 }

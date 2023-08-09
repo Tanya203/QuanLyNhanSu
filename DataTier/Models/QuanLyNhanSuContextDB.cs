@@ -18,6 +18,7 @@ namespace QuanLyNhanSu.DataTier.Models
         public virtual DbSet<ChiTietPhieu> ChiTietPhieux { get; set; }
         public virtual DbSet<ChiTietPhuCap> ChiTietPhuCaps { get; set; }
         public virtual DbSet<ChucVu> ChucVus { get; set; }
+        public virtual DbSet<HinhThucChamCong> HinhThucChamCongs { get; set; }
         public virtual DbSet<LichLamViec> LichLamViecs { get; set; }
         public virtual DbSet<LichSuThaoTac> LichSuThaoTacs { get; set; }
         public virtual DbSet<LoaiCa> LoaiCas { get; set; }
@@ -139,6 +140,10 @@ namespace QuanLyNhanSu.DataTier.Models
                 .WithRequired(e => e.ChucVu)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<HinhThucChamCong>()
+                .Property(e => e.MaHTCC)
+                .IsUnicode(false);
+
             modelBuilder.Entity<LichLamViec>()
                 .Property(e => e.MaLLV)
                 .IsUnicode(false);
@@ -170,6 +175,10 @@ namespace QuanLyNhanSu.DataTier.Models
 
             modelBuilder.Entity<LoaiHopDong>()
                 .Property(e => e.MaLHD)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LoaiHopDong>()
+                .Property(e => e.MaHTCC)
                 .IsUnicode(false);
 
             modelBuilder.Entity<LoaiHopDong>()
