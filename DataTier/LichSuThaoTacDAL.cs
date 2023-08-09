@@ -25,11 +25,9 @@ namespace QuanLyNhanSu.DataTier
             var lichSuThaoTac = quanLyNhanSu.LichSuThaoTacs.Select(x => new LichSuThaoTacViewModels
             {
                 NgayGio = x.NgayGio,
-                MaNV = x.MaNV,
-                HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
-                PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
-                ChucVu = x.NhanVien.ChucVu.TenChucVu,
-                ThaoTacThucHien = x.ThaoTacThucHien
+                MaNV = x.MaNV,          
+                ThaoTacThucHien = x.ThaoTacThucHien,
+                ThongTinNhanVien = x.ThongTinNhanVien
             }).Where(lstt => lstt.NgayGio.Contains(ngay)).OrderBy(lstt => lstt.NgayGio);
             return lichSuThaoTac;
         }
@@ -39,10 +37,7 @@ namespace QuanLyNhanSu.DataTier
             {
                 NgayGio = x.NgayGio,
                 MaNV = x.MaNV,
-                HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
-                PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
-                ChucVu = x.NhanVien.ChucVu.TenChucVu,
-                ThaoTacThucHien = x.ThaoTacThucHien
+                ThongTinNhanVien = x.ThongTinNhanVien
             }).Where(lstt => lstt.NgayGio.Contains(thang)).OrderBy(lstt => lstt.NgayGio);
             return lichSuThaoTac;
         }
@@ -52,10 +47,8 @@ namespace QuanLyNhanSu.DataTier
             {
                 NgayGio = x.NgayGio,
                 MaNV = x.MaNV,
-                HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
-                PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
-                ChucVu = x.NhanVien.ChucVu.TenChucVu,
-                ThaoTacThucHien = x.ThaoTacThucHien
+                ThaoTacThucHien = x.ThaoTacThucHien,
+                ThongTinNhanVien = x.ThongTinNhanVien
             }).Where(lstt => lstt.NgayGio.Contains(nam)).OrderBy(lstt => lstt.NgayGio);
             return lichSuThaoTac;
         }
@@ -65,16 +58,12 @@ namespace QuanLyNhanSu.DataTier
             {
                 NgayGio = x.NgayGio,
                 MaNV = x.MaNV,
-                HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
-                PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
-                ChucVu = x.NhanVien.ChucVu.TenChucVu,
-                ThaoTacThucHien = x.ThaoTacThucHien
+                ThaoTacThucHien = x.ThaoTacThucHien,
+                ThongTinNhanVien = x.ThongTinNhanVien
             }).Where(lstc => lstc.NgayGio.Contains(ngay) && (lstc.NgayGio.Contains(timKiem) ||
-                     lstc.MaNV.Contains(timKiem) || 
-                     lstc.HoTen.Contains(timKiem) ||
+                     lstc.MaNV.Contains(timKiem) ||
                      lstc.ThaoTacThucHien.Contains(timKiem) ||
-                     lstc.PhongBan.Contains(timKiem) ||
-                     lstc.ChucVu.Contains(timKiem))).OrderBy(lstt => lstt.NgayGio);            
+                     lstc.ThongTinNhanVien.Contains(timKiem))).OrderBy(lstt => lstt.NgayGio);            
             return lichSuThaoTac;
         }
         public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiemThang(string thang, string timKiem)
@@ -83,16 +72,11 @@ namespace QuanLyNhanSu.DataTier
             {
                 NgayGio = x.NgayGio,
                 MaNV = x.MaNV,
-                HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
-                PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
-                ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 ThaoTacThucHien = x.ThaoTacThucHien
             }).Where(lstc => lstc.NgayGio.Contains(thang) && (lstc.NgayGio.Contains(timKiem) ||
                      lstc.MaNV.Contains(timKiem) ||
-                     lstc.HoTen.Contains(timKiem) ||
                      lstc.ThaoTacThucHien.Contains(timKiem) ||
-                     lstc.PhongBan.Contains(timKiem) ||
-                     lstc.ChucVu.Contains(timKiem))).OrderBy(lstt => lstt.NgayGio);
+                     lstc.ThongTinNhanVien.Contains(timKiem))).OrderBy(lstt => lstt.NgayGio);
             return lichSuThaoTac;
         }
         public IEnumerable<LichSuThaoTacViewModels> LichSuThaoTacTimKiemNam(string nam, string timKiem)
@@ -101,16 +85,11 @@ namespace QuanLyNhanSu.DataTier
             {
                 NgayGio = x.NgayGio,
                 MaNV = x.MaNV,
-                HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
-                PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
-                ChucVu = x.NhanVien.ChucVu.TenChucVu,
                 ThaoTacThucHien = x.ThaoTacThucHien
             }).Where(lstc => lstc.NgayGio.Contains(nam) && (lstc.NgayGio.Contains(timKiem) ||
                      lstc.MaNV.Contains(timKiem) ||
-                     lstc.HoTen.Contains(timKiem) ||
                      lstc.ThaoTacThucHien.Contains(timKiem) ||
-                     lstc.PhongBan.Contains(timKiem) ||
-                     lstc.ChucVu.Contains(timKiem))).OrderBy(lstt => lstt.NgayGio);
+                     lstc.ThongTinNhanVien.Contains(timKiem))).OrderBy(lstt => lstt.NgayGio);
             return lichSuThaoTac;
         }
         public bool Save(LichSuThaoTac lstt)

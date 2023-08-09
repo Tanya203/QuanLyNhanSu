@@ -64,12 +64,15 @@ namespace QuanLyNhanSu.PresentationTier
             foreach (var tt in lichSuThaoTac)
             {
                 int rowAdd = dgvLichSuThaoTac.Rows.Add();
+                string maNV = tt.MaNV;
+                if (maNV == null)
+                    maNV = "Đã xoá";
+                else
+                    maNV = tt.MaNV;
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[0].Value = tt.NgayGio;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[1].Value = tt.MaNV;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[2].Value = tt.HoTen;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[3].Value = tt.PhongBan;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[4].Value = tt.ChucVu;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[5].Value = tt.ThaoTacThucHien;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[1].Value = maNV;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[2].Value = tt.ThongTinNhanVien;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[3].Value = tt.ThaoTacThucHien;
             }
         }
         
@@ -86,12 +89,15 @@ namespace QuanLyNhanSu.PresentationTier
             foreach (var tt in lichSuThaoTacTimKiem)
             {
                 rowAdd = dgvLichSuThaoTac.Rows.Add();
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[0].Value = tt.NgayGio;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[1].Value = tt.MaNV;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[2].Value = tt.HoTen;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[3].Value = tt.PhongBan;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[4].Value = tt.ChucVu;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[5].Value = tt.ThaoTacThucHien;
+                string maNV = tt.MaNV;
+                if (maNV == null)
+                    maNV = "Đã xoá";
+                else
+                    maNV = tt.MaNV;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[0].Value = tt.NgayGio;                
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[1].Value = maNV;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[2].Value = tt.ThongTinNhanVien;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[3].Value = tt.ThaoTacThucHien;
             }
         }
         /////////////////////////////////////////////////////////////////////////////////////////    

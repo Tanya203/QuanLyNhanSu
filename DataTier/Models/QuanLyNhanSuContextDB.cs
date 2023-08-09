@@ -273,11 +273,6 @@ namespace QuanLyNhanSu.DataTier.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<NhanVien>()
-                .HasMany(e => e.LichSuThaoTacs)
-                .WithOptional(e => e.NhanVien)
-                .WillCascadeOnDelete();
-
-            modelBuilder.Entity<NhanVien>()
                 .HasMany(e => e.Phieux)
                 .WithOptional(e => e.NhanVien)
                 .WillCascadeOnDelete();
