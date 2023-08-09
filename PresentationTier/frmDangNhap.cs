@@ -46,11 +46,15 @@ namespace QuanLyNhanSu
             {                                 
                 NhanVien nv = nhanVienBUS.GetNhanVien().Where(nhanVien => nhanVien.TaiKhoan == txtTaiKhoan.Text).FirstOrDefault();
                 string hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+                string chucVu = nv.ChucVu.TenChucVu;
+                string phongban = nv.ChucVu.PhongBan.TenPhongBan;
+                string thongTin = hoTen +"\nPhòng ban " + phongban + "\nChức vụ " + chucVu;
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = nv.MaNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " đăng nhập",
+                    ThongTinNhanVien = thongTin,
+                    ThaoTacThucHien = "Đăng nhập",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
                 FrmManHinhChinh frmOpen = new FrmManHinhChinh(nv.MaNV);
