@@ -20,6 +20,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyLoaiHopDongBUS loaiHopDongBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;  
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
+        private readonly HinhThucChamCongBUS hinhThucChamCongBUS;
         private IEnumerable<LoaiHopDongViewModels> danhSachLoaiHopDong;
         private IEnumerable<LoaiHopDongViewModels> danhSachLoaiHopDongTimKiem;
         private readonly NhanVien nv;
@@ -33,6 +34,7 @@ namespace QuanLyNhanSu.PresentationTier
             loaiHopDongBUS = new QuanLyLoaiHopDongBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
+            hinhThucChamCongBUS = new HinhThucChamCongBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
             hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             txtMaLHD.ReadOnly = true;
@@ -44,8 +46,11 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void frmQuanLyLoaiHopDong_Load(object sender, EventArgs e)
         {
+            cmbHinhThucChamCong.DisplayMember = "TenHinhThucChamCong";
+            cmbHinhThucChamCong.ValueMember = "MaHTCC";
             LoadLoaiHopDong();
             LoadThongTinDangNhap();
+            LoadHinhThucChamCong();
         }
         public void LoadThongTinDangNhap()
         {            
@@ -67,8 +72,13 @@ namespace QuanLyNhanSu.PresentationTier
                 rowAdd = dgvThongTinLoaiHopDong.Rows.Add();
                 dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[0].Value = lhd.MaLHD;
                 dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[1].Value = lhd.TenLoaiHopDong;
-                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[2].Value = loaiHopDongBUS.TongSoNhanVienTrongLoaiHopDong(lhd.MaLHD).ToString();
+                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[2].Value = lhd.TenHinhThucChamCong;
+                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[3].Value = loaiHopDongBUS.TongSoNhanVienTrongLoaiHopDong(lhd.MaLHD).ToString();
             }
+        }
+        private void LoadHinhThucChamCong()
+        {
+            cmbHinhThucChamCong.DataSource = hinhThucChamCongBUS.GetAllHinhThucChamCong();
         }
         private void LoadLoaiHopDongTimKiem(string timKiem)
         {            
@@ -80,7 +90,8 @@ namespace QuanLyNhanSu.PresentationTier
                 rowAdd = dgvThongTinLoaiHopDong.Rows.Add();
                 dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[0].Value = lhd.MaLHD;
                 dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[1].Value = lhd.TenLoaiHopDong;
-                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[2].Value = loaiHopDongBUS.TongSoNhanVienTrongLoaiHopDong(lhd.MaLHD).ToString();
+                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[2].Value = lhd.TenHinhThucChamCong;
+                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[3].Value = loaiHopDongBUS.TongSoNhanVienTrongLoaiHopDong(lhd.MaLHD).ToString();
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -133,7 +144,8 @@ namespace QuanLyNhanSu.PresentationTier
             LoaiHopDong newLoaiHopDong = new LoaiHopDong
             {
                 MaLHD = "",
-                TenLoaiHopDong = txtTenLHD.Text
+                TenLoaiHopDong = txtTenLHD.Text,
+                MaHTCC = cmbHinhThucChamCong.SelectedValue.ToString(),
             };
             if (loaiHopDongBUS.Save(newLoaiHopDong))
             {
@@ -156,7 +168,8 @@ namespace QuanLyNhanSu.PresentationTier
             LoaiHopDong newLoaiHopDong = new LoaiHopDong
             {
                 MaLHD = txtMaLHD.Text,
-                TenLoaiHopDong = txtTenLHD.Text
+                TenLoaiHopDong = txtTenLHD.Text,
+                MaHTCC = cmbHinhThucChamCong.SelectedValue.ToString(),
             };
             if (loaiHopDongBUS.Save(newLoaiHopDong))
             {
@@ -203,7 +216,8 @@ namespace QuanLyNhanSu.PresentationTier
                 return;
             txtMaLHD.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[0].Value.ToString();
             txtTenLHD.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[1].Value.ToString();
-            txtSoLuongNhanVien.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[2].Value.ToString();
+            cmbHinhThucChamCong.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[2].Value.ToString();
+            txtSoLuongNhanVien.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[3].Value.ToString();
         }           
         private void TimKiem(object sender, EventArgs e)
         {

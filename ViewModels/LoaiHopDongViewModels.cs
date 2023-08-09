@@ -10,5 +10,6 @@ namespace QuanLyNhanSu.ViewModels
     {
         public string MaLHD { get; set; }
         public string TenLoaiHopDong { get; set; }
+        public string TenHinhThucChamCong { get; set; }
     }
 }

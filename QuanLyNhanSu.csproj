@@ -152,6 +152,7 @@
     <Compile Include="DataTier\ChiTietLichLamViecDAL.cs" />
     <Compile Include="DataTier\ChiTietPhieuDAL.cs" />
     <Compile Include="DataTier\ChiTietPhuCapDAL.cs" />
+    <Compile Include="DataTier\HinhThucChamCongDAL.cs" />
     <Compile Include="DataTier\LichLamViecDAL.cs" />
     <Compile Include="DataTier\LichSuThaoTacDAL.cs" />
     <Compile Include="DataTier\Models\Ca.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="DataTier\Models\ChiTietPhieu.cs" />
     <Compile Include="DataTier\Models\ChiTietPhuCap.cs" />
     <Compile Include="DataTier\Models\ChucVu.cs" />
+    <Compile Include="DataTier\Models\HinhThucChamCong.cs" />
     <Compile Include="DataTier\Models\LichLamViec.cs" />
     <Compile Include="DataTier\Models\LichSuThaoTac.cs" />
     <Compile Include="DataTier\Models\LoaiCa.cs" />
@@ -186,6 +188,7 @@
     <Compile Include="LogicTier\ChiTietLichLamViecBUS.cs" />
     <Compile Include="LogicTier\ChiTietPhieuBUS.cs" />
     <Compile Include="LogicTier\ChiTietPhuCapBUS.cs" />
+    <Compile Include="LogicTier\HinhThucChamCongBUS.cs" />
     <Compile Include="LogicTier\LichLamViecBUS.cs" />
     <Compile Include="LogicTier\LichSuThaoTacBUS.cs" />
     <Compile Include="LogicTier\PhieuBUS.cs" />

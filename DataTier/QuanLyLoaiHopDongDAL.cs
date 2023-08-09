@@ -25,6 +25,7 @@ namespace QuanLyNhanSu.DataTier
             {
                 MaLHD = x.MaLHD,
                 TenLoaiHopDong = x.TenLoaiHopDong,
+                TenHinhThucChamCong = x.HinhThucChamCong.TenHinhThucChamCong,
             }).OrderBy(lhd => lhd.MaLHD);
             return danhSachLoaiHopDong;
         }
@@ -34,8 +35,9 @@ namespace QuanLyNhanSu.DataTier
             {
                 MaLHD = x.MaLHD,
                 TenLoaiHopDong = x.TenLoaiHopDong,
-            }).Where(pb => pb.TenLoaiHopDong.Contains(timKiem) ||
-                     pb.MaLHD.Contains(timKiem)).OrderBy(lhd => lhd.MaLHD).OrderBy(lhd => lhd.MaLHD);
+                TenHinhThucChamCong = x.HinhThucChamCong.TenHinhThucChamCong
+            }).Where(lhd => lhd.TenLoaiHopDong.Contains(timKiem) ||
+                     lhd.TenHinhThucChamCong.Contains(timKiem)).OrderBy(lhd => lhd.MaLHD).OrderBy(lhd => lhd.MaLHD);
             return danhSachLoaiHopDong;
         }
         public IEnumerable<LoaiHopDong> GetLoaiHopDong()
@@ -50,8 +52,8 @@ namespace QuanLyNhanSu.DataTier
                 LoaiHopDong newLoaiHopDong = quanLyNhanSu.LoaiHopDongs.Where(pb => pb.MaLHD == loaiHopDong.MaLHD).FirstOrDefault();
                 if (newLoaiHopDong != null)//cập nhật
                 {
+                    newLoaiHopDong.MaHTCC = loaiHopDong.MaHTCC;
                     newLoaiHopDong.TenLoaiHopDong = loaiHopDong.TenLoaiHopDong;
-                    quanLyNhanSu.LoaiHopDongs.Add(newLoaiHopDong);
                 }
                 else//thêm mới
                     quanLyNhanSu.LoaiHopDongs.Add(loaiHopDong);
