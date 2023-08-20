@@ -53,7 +53,6 @@ namespace QuanLyNhanSu
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),
                     MaNV = nv.MaNV,
-                    ThongTinNhanVien = thongTin,
                     ThaoTacThucHien = "Đăng nhập",
                 };
                 lichSuThaoTacBUS.Save(newLstt);
