@@ -17,9 +17,6 @@ namespace QuanLyNhanSu.DataTier.Models
         public string MaNV { get; set; }
 
         [StringLength(500)]
-        public string ThongTinNhanVien { get; set; }
-
-        [StringLength(500)]
         public string ThaoTacThucHien { get; set; }
 
         public virtual NhanVien NhanVien { get; set; }

@@ -56,11 +56,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             dgvLichSuThaoTac.Rows.Clear();           
             if (dtpNgay.Checked)
-                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoNgay(dtpNgay.Text);
+                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoThoiGian(dtpNgay.Text);
             if (dtpThang.Checked)
-                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoThang(dtpThang.Text);
+                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoThoiGian(dtpThang.Text);
             if (dtpNam.Checked)
-                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoNam(dtpNam.Text);
+                lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoThoiGian(dtpNam.Text);
             foreach (var tt in lichSuThaoTac)
             {
                 int rowAdd = dgvLichSuThaoTac.Rows.Add();
@@ -71,8 +71,10 @@ namespace QuanLyNhanSu.PresentationTier
                     maNV = tt.MaNV;
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[0].Value = tt.NgayGio;
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[1].Value = maNV;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[2].Value = tt.ThongTinNhanVien;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[3].Value = tt.ThaoTacThucHien;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[2].Value = tt.HoTen;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[3].Value = tt.PhongBan;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[4].Value = tt.ChucVu;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[5].Value = tt.ThaoTacThucHien;
             }
         }
         
@@ -80,11 +82,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             dgvLichSuThaoTac.Rows.Clear();
             if(dtpNgay.Checked)
-                lichSuThaoTacTimKiem = lichSuThaoTacBUS.LichSuThaoTacTimKiemNgay(dtpNgay.Text,timKiem);
+                lichSuThaoTacTimKiem = lichSuThaoTacBUS.LichSuThaoTacTimKiem(dtpNgay.Text,timKiem);
             if(dtpThang.Checked)
-                lichSuThaoTacTimKiem = lichSuThaoTacBUS.LichSuThaoTacTimKiemThang(dtpThang.Text, timKiem);
+                lichSuThaoTacTimKiem = lichSuThaoTacBUS.LichSuThaoTacTimKiem(dtpThang.Text, timKiem);
             if(dtpNam.Checked)
-                lichSuThaoTacTimKiem = lichSuThaoTacBUS.LichSuThaoTacTimKiemNam(dtpNam.Text, timKiem);
+                lichSuThaoTacTimKiem = lichSuThaoTacBUS.LichSuThaoTacTimKiem(dtpNam.Text, timKiem);
             int rowAdd;
             foreach (var tt in lichSuThaoTacTimKiem)
             {
@@ -94,10 +96,12 @@ namespace QuanLyNhanSu.PresentationTier
                     maNV = "Đã xoá";
                 else
                     maNV = tt.MaNV;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[0].Value = tt.NgayGio;                
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[0].Value = tt.NgayGio;
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[1].Value = maNV;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[2].Value = tt.ThongTinNhanVien;
-                dgvLichSuThaoTac.Rows[rowAdd].Cells[3].Value = tt.ThaoTacThucHien;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[2].Value = tt.HoTen;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[3].Value = tt.PhongBan;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[4].Value = tt.ChucVu;
+                dgvLichSuThaoTac.Rows[rowAdd].Cells[5].Value = tt.ThaoTacThucHien;
             }
         }
         /////////////////////////////////////////////////////////////////////////////////////////    

@@ -55,7 +55,9 @@
             this.lblNam = new System.Windows.Forms.Label();
             this.colNgayio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colThongTinNhanVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colThaoTacThucHien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichSuThaoTac)).BeginInit();
             this.pnlHeader.SuspendLayout();
@@ -204,7 +206,9 @@
             this.dgvLichSuThaoTac.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNgayio,
             this.colMaNV,
-            this.colThongTinNhanVien,
+            this.colHoTen,
+            this.colPhongBan,
+            this.colChucVu,
             this.colThaoTacThucHien});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -363,12 +367,26 @@
             this.colMaNV.Name = "colMaNV";
             this.colMaNV.ReadOnly = true;
             // 
-            // colThongTinNhanVien
+            // colHoTen
             // 
-            this.colThongTinNhanVien.HeaderText = "Thông tin nhân viên";
-            this.colThongTinNhanVien.MinimumWidth = 6;
-            this.colThongTinNhanVien.Name = "colThongTinNhanVien";
-            this.colThongTinNhanVien.ReadOnly = true;
+            this.colHoTen.HeaderText = "Họ tên";
+            this.colHoTen.MinimumWidth = 6;
+            this.colHoTen.Name = "colHoTen";
+            this.colHoTen.ReadOnly = true;
+            // 
+            // colPhongBan
+            // 
+            this.colPhongBan.HeaderText = "Phòng ban";
+            this.colPhongBan.MinimumWidth = 6;
+            this.colPhongBan.Name = "colPhongBan";
+            this.colPhongBan.ReadOnly = true;
+            // 
+            // colChucVu
+            // 
+            this.colChucVu.HeaderText = "Chức vụ";
+            this.colChucVu.MinimumWidth = 6;
+            this.colChucVu.Name = "colChucVu";
+            this.colChucVu.ReadOnly = true;
             // 
             // colThaoTacThucHien
             // 
@@ -432,7 +450,9 @@
         private System.Windows.Forms.Label lblNam;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNgayio;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaNV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colThongTinNhanVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHoTen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPhongBan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colChucVu;
         private System.Windows.Forms.DataGridViewTextBoxColumn colThaoTacThucHien;
     }
 }
