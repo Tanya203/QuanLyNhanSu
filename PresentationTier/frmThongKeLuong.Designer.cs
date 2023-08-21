@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
@@ -41,26 +39,37 @@
             this.lblMaNV_DN = new System.Windows.Forms.Label();
             this.lblMaNhanVienDN = new System.Windows.Forms.Label();
             this.btnTroVe = new System.Windows.Forms.Button();
+            this.tabControlMenu = new System.Windows.Forms.TabControl();
+            this.tabPageThongKe = new System.Windows.Forms.TabPage();
+            this.btnXuatExcel = new System.Windows.Forms.Button();
+            this.btnThongKe = new System.Windows.Forms.Button();
+            this.btnLuu = new System.Windows.Forms.Button();
+            this.lblThongKeLuong = new System.Windows.Forms.Label();
+            this.txtTimKiem = new System.Windows.Forms.TextBox();
+            this.lblThang = new System.Windows.Forms.Label();
+            this.cmbPhongBan = new System.Windows.Forms.ComboBox();
+            this.dtpThangNam = new System.Windows.Forms.DateTimePicker();
             this.dgvThongKeLuong = new System.Windows.Forms.DataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTongGioLam = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTongLuongTheoGio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTongThuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTongPhat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTongPhuCap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTienNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTongLuongThang = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtpThangNam = new System.Windows.Forms.DateTimePicker();
-            this.cmbPhongBan = new System.Windows.Forms.ComboBox();
-            this.lblPhongBan = new System.Windows.Forms.Label();
-            this.lblThang = new System.Windows.Forms.Label();
-            this.txtTimKiem = new System.Windows.Forms.TextBox();
+            this.rbToanBoNhanVien = new System.Windows.Forms.RadioButton();
+            this.rbPhongBan = new System.Windows.Forms.RadioButton();
+            this.rbChucVu = new System.Windows.Forms.RadioButton();
+            this.cmbChucVu = new System.Windows.Forms.ComboBox();
             this.lblTimKiem = new System.Windows.Forms.Label();
-            this.lblThongKeLuong = new System.Windows.Forms.Label();
-            this.btnXuatExcel = new System.Windows.Forms.Button();
-            this.btnThongKe = new System.Windows.Forms.Button();
-            this.btnLuu = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
+            this.tabControlMenu.SuspendLayout();
+            this.tabPageThongKe.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongKeLuong)).BeginInit();
             this.SuspendLayout();
             // 
@@ -203,6 +212,147 @@
             this.btnTroVe.UseVisualStyleBackColor = false;
             this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
+            // tabControlMenu
+            // 
+            this.tabControlMenu.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tabControlMenu.Controls.Add(this.tabPageThongKe);
+            this.tabControlMenu.Controls.Add(this.tabPage2);
+            this.tabControlMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlMenu.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControlMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControlMenu.Location = new System.Drawing.Point(0, 113);
+            this.tabControlMenu.Name = "tabControlMenu";
+            this.tabControlMenu.SelectedIndex = 0;
+            this.tabControlMenu.Size = new System.Drawing.Size(1924, 920);
+            this.tabControlMenu.TabIndex = 68;
+            this.tabControlMenu.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlMenu_DrawItem);
+            // 
+            // tabPageThongKe
+            // 
+            this.tabPageThongKe.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPageThongKe.Controls.Add(this.lblTimKiem);
+            this.tabPageThongKe.Controls.Add(this.rbChucVu);
+            this.tabPageThongKe.Controls.Add(this.cmbChucVu);
+            this.tabPageThongKe.Controls.Add(this.rbPhongBan);
+            this.tabPageThongKe.Controls.Add(this.rbToanBoNhanVien);
+            this.tabPageThongKe.Controls.Add(this.btnXuatExcel);
+            this.tabPageThongKe.Controls.Add(this.btnThongKe);
+            this.tabPageThongKe.Controls.Add(this.btnLuu);
+            this.tabPageThongKe.Controls.Add(this.lblThongKeLuong);
+            this.tabPageThongKe.Controls.Add(this.txtTimKiem);
+            this.tabPageThongKe.Controls.Add(this.lblThang);
+            this.tabPageThongKe.Controls.Add(this.cmbPhongBan);
+            this.tabPageThongKe.Controls.Add(this.dtpThangNam);
+            this.tabPageThongKe.Controls.Add(this.dgvThongKeLuong);
+            this.tabPageThongKe.Location = new System.Drawing.Point(4, 37);
+            this.tabPageThongKe.Name = "tabPageThongKe";
+            this.tabPageThongKe.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageThongKe.Size = new System.Drawing.Size(1916, 879);
+            this.tabPageThongKe.TabIndex = 0;
+            this.tabPageThongKe.Text = "Thống kê lương";
+            this.tabPageThongKe.Click += new System.EventHandler(this.tabPageThongKeLuong_Click);
+            // 
+            // btnXuatExcel
+            // 
+            this.btnXuatExcel.AutoSize = true;
+            this.btnXuatExcel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnXuatExcel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnXuatExcel.FlatAppearance.BorderSize = 0;
+            this.btnXuatExcel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnXuatExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXuatExcel.Image = global::QuanLyNhanSu.Properties.Resources.excel;
+            this.btnXuatExcel.Location = new System.Drawing.Point(1156, 122);
+            this.btnXuatExcel.Name = "btnXuatExcel";
+            this.btnXuatExcel.Size = new System.Drawing.Size(179, 49);
+            this.btnXuatExcel.TabIndex = 78;
+            this.btnXuatExcel.Text = "Xuất Excel";
+            this.btnXuatExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnXuatExcel.UseVisualStyleBackColor = false;
+            // 
+            // btnThongKe
+            // 
+            this.btnThongKe.AutoSize = true;
+            this.btnThongKe.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnThongKe.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnThongKe.FlatAppearance.BorderSize = 0;
+            this.btnThongKe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnThongKe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThongKe.Image = global::QuanLyNhanSu.Properties.Resources.calculate;
+            this.btnThongKe.Location = new System.Drawing.Point(976, 122);
+            this.btnThongKe.Name = "btnThongKe";
+            this.btnThongKe.Size = new System.Drawing.Size(165, 49);
+            this.btnThongKe.TabIndex = 77;
+            this.btnThongKe.Text = "Thống kê";
+            this.btnThongKe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnThongKe.UseVisualStyleBackColor = false;
+            // 
+            // btnLuu
+            // 
+            this.btnLuu.AutoSize = true;
+            this.btnLuu.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnLuu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLuu.FlatAppearance.BorderSize = 0;
+            this.btnLuu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLuu.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLuu.Image = global::QuanLyNhanSu.Properties.Resources.save;
+            this.btnLuu.Location = new System.Drawing.Point(848, 122);
+            this.btnLuu.Name = "btnLuu";
+            this.btnLuu.Size = new System.Drawing.Size(122, 49);
+            this.btnLuu.TabIndex = 76;
+            this.btnLuu.Text = "Lưu";
+            this.btnLuu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLuu.UseVisualStyleBackColor = false;
+            // 
+            // lblThongKeLuong
+            // 
+            this.lblThongKeLuong.AutoSize = true;
+            this.lblThongKeLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThongKeLuong.Location = new System.Drawing.Point(799, 10);
+            this.lblThongKeLuong.Name = "lblThongKeLuong";
+            this.lblThongKeLuong.Size = new System.Drawing.Size(332, 51);
+            this.lblThongKeLuong.TabIndex = 75;
+            this.lblThongKeLuong.Text = "Thống kê lương";
+            // 
+            // txtTimKiem
+            // 
+            this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTimKiem.Location = new System.Drawing.Point(543, 133);
+            this.txtTimKiem.Name = "txtTimKiem";
+            this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
+            this.txtTimKiem.TabIndex = 74;
+            // 
+            // lblThang
+            // 
+            this.lblThang.AutoSize = true;
+            this.lblThang.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThang.Location = new System.Drawing.Point(177, 70);
+            this.lblThang.Name = "lblThang";
+            this.lblThang.Size = new System.Drawing.Size(109, 32);
+            this.lblThang.TabIndex = 72;
+            this.lblThang.Text = "Tháng:";
+            this.lblThang.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbPhongBan
+            // 
+            this.cmbPhongBan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPhongBan.FormattingEnabled = true;
+            this.cmbPhongBan.Location = new System.Drawing.Point(915, 74);
+            this.cmbPhongBan.Name = "cmbPhongBan";
+            this.cmbPhongBan.Size = new System.Drawing.Size(244, 33);
+            this.cmbPhongBan.TabIndex = 70;
+            // 
+            // dtpThangNam
+            // 
+            this.dtpThangNam.CustomFormat = "MM/yyyy";
+            this.dtpThangNam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpThangNam.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpThangNam.Location = new System.Drawing.Point(292, 72);
+            this.dtpThangNam.Name = "dtpThangNam";
+            this.dtpThangNam.ShowUpDown = true;
+            this.dtpThangNam.Size = new System.Drawing.Size(127, 30);
+            this.dtpThangNam.TabIndex = 69;
+            // 
             // dgvThongKeLuong
             // 
             this.dgvThongKeLuong.AllowUserToAddRows = false;
@@ -211,40 +361,37 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvThongKeLuong.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongKeLuong.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvThongKeLuong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvThongKeLuong.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaNV,
+            this.colHoTen,
             this.colPhongBan,
+            this.colChucVu,
             this.colTongGioLam,
             this.colTongLuongTheoGio,
             this.colTongThuong,
             this.colTongPhat,
             this.colTongPhuCap,
+            this.colTienNo,
             this.colTongLuongThang});
-            this.dgvThongKeLuong.Location = new System.Drawing.Point(0, 252);
+            this.dgvThongKeLuong.Location = new System.Drawing.Point(-4, 177);
             this.dgvThongKeLuong.Name = "dgvThongKeLuong";
             this.dgvThongKeLuong.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongKeLuong.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvThongKeLuong.RowHeadersVisible = false;
             this.dgvThongKeLuong.RowHeadersWidth = 51;
             this.dgvThongKeLuong.RowTemplate.Height = 24;
-            this.dgvThongKeLuong.Size = new System.Drawing.Size(1924, 781);
-            this.dgvThongKeLuong.TabIndex = 56;
+            this.dgvThongKeLuong.Size = new System.Drawing.Size(1924, 706);
+            this.dgvThongKeLuong.TabIndex = 68;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage2.Location = new System.Drawing.Point(4, 37);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1916, 879);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Thống kê chấm công";
             // 
             // colMaNV
             // 
@@ -253,12 +400,26 @@
             this.colMaNV.Name = "colMaNV";
             this.colMaNV.ReadOnly = true;
             // 
+            // colHoTen
+            // 
+            this.colHoTen.HeaderText = "Họ tên";
+            this.colHoTen.MinimumWidth = 6;
+            this.colHoTen.Name = "colHoTen";
+            this.colHoTen.ReadOnly = true;
+            // 
             // colPhongBan
             // 
             this.colPhongBan.HeaderText = "Phòng ban";
             this.colPhongBan.MinimumWidth = 6;
             this.colPhongBan.Name = "colPhongBan";
             this.colPhongBan.ReadOnly = true;
+            // 
+            // colChucVu
+            // 
+            this.colChucVu.HeaderText = "Chức vụ";
+            this.colChucVu.MinimumWidth = 6;
+            this.colChucVu.Name = "colChucVu";
+            this.colChucVu.ReadOnly = true;
             // 
             // colTongGioLam
             // 
@@ -295,6 +456,13 @@
             this.colTongPhuCap.Name = "colTongPhuCap";
             this.colTongPhuCap.ReadOnly = true;
             // 
+            // colTienNo
+            // 
+            this.colTienNo.HeaderText = "Tiền nợ";
+            this.colTienNo.MinimumWidth = 6;
+            this.colTienNo.Name = "colTienNo";
+            this.colTienNo.ReadOnly = true;
+            // 
             // colTongLuongThang
             // 
             this.colTongLuongThang.HeaderText = "Tổng lương tháng";
@@ -302,126 +470,62 @@
             this.colTongLuongThang.Name = "colTongLuongThang";
             this.colTongLuongThang.ReadOnly = true;
             // 
-            // dtpThangNam
+            // rbToanBoNhanVien
             // 
-            this.dtpThangNam.CustomFormat = "MM/yyyy";
-            this.dtpThangNam.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpThangNam.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpThangNam.Location = new System.Drawing.Point(557, 206);
-            this.dtpThangNam.Name = "dtpThangNam";
-            this.dtpThangNam.ShowUpDown = true;
-            this.dtpThangNam.Size = new System.Drawing.Size(127, 38);
-            this.dtpThangNam.TabIndex = 57;
+            this.rbToanBoNhanVien.AutoSize = true;
+            this.rbToanBoNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbToanBoNhanVien.Location = new System.Drawing.Point(425, 70);
+            this.rbToanBoNhanVien.Name = "rbToanBoNhanVien";
+            this.rbToanBoNhanVien.Size = new System.Drawing.Size(287, 36);
+            this.rbToanBoNhanVien.TabIndex = 80;
+            this.rbToanBoNhanVien.TabStop = true;
+            this.rbToanBoNhanVien.Text = "Toàn bộ nhân viên";
+            this.rbToanBoNhanVien.UseVisualStyleBackColor = true;
             // 
-            // cmbPhongBan
+            // rbPhongBan
             // 
-            this.cmbPhongBan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbPhongBan.FormattingEnabled = true;
-            this.cmbPhongBan.Location = new System.Drawing.Point(192, 205);
-            this.cmbPhongBan.Name = "cmbPhongBan";
-            this.cmbPhongBan.Size = new System.Drawing.Size(244, 39);
-            this.cmbPhongBan.TabIndex = 59;
+            this.rbPhongBan.AutoSize = true;
+            this.rbPhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbPhongBan.Location = new System.Drawing.Point(718, 70);
+            this.rbPhongBan.Name = "rbPhongBan";
+            this.rbPhongBan.Size = new System.Drawing.Size(191, 36);
+            this.rbPhongBan.TabIndex = 81;
+            this.rbPhongBan.TabStop = true;
+            this.rbPhongBan.Text = "Phòng ban:";
+            this.rbPhongBan.UseVisualStyleBackColor = true;
             // 
-            // lblPhongBan
+            // rbChucVu
             // 
-            this.lblPhongBan.AutoSize = true;
-            this.lblPhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBan.Location = new System.Drawing.Point(16, 209);
-            this.lblPhongBan.Name = "lblPhongBan";
-            this.lblPhongBan.Size = new System.Drawing.Size(170, 32);
-            this.lblPhongBan.TabIndex = 60;
-            this.lblPhongBan.Text = "Phòng ban:";
+            this.rbChucVu.AutoSize = true;
+            this.rbChucVu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbChucVu.Location = new System.Drawing.Point(1165, 68);
+            this.rbChucVu.Name = "rbChucVu";
+            this.rbChucVu.Size = new System.Drawing.Size(154, 36);
+            this.rbChucVu.TabIndex = 83;
+            this.rbChucVu.TabStop = true;
+            this.rbChucVu.Text = "Chức vụ:";
+            this.rbChucVu.UseVisualStyleBackColor = true;
             // 
-            // lblThang
+            // cmbChucVu
             // 
-            this.lblThang.AutoSize = true;
-            this.lblThang.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThang.Location = new System.Drawing.Point(442, 210);
-            this.lblThang.Name = "lblThang";
-            this.lblThang.Size = new System.Drawing.Size(109, 32);
-            this.lblThang.TabIndex = 61;
-            this.lblThang.Text = "Tháng:";
-            this.lblThang.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtTimKiem
-            // 
-            this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimKiem.Location = new System.Drawing.Point(862, 208);
-            this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(299, 38);
-            this.txtTimKiem.TabIndex = 63;
+            this.cmbChucVu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbChucVu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbChucVu.FormattingEnabled = true;
+            this.cmbChucVu.Location = new System.Drawing.Point(1325, 74);
+            this.cmbChucVu.Name = "cmbChucVu";
+            this.cmbChucVu.Size = new System.Drawing.Size(244, 33);
+            this.cmbChucVu.TabIndex = 82;
             // 
             // lblTimKiem
             // 
             this.lblTimKiem.AutoSize = true;
             this.lblTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimKiem.Location = new System.Drawing.Point(711, 209);
+            this.lblTimKiem.Location = new System.Drawing.Point(392, 133);
             this.lblTimKiem.Name = "lblTimKiem";
             this.lblTimKiem.Size = new System.Drawing.Size(145, 32);
-            this.lblTimKiem.TabIndex = 62;
+            this.lblTimKiem.TabIndex = 84;
             this.lblTimKiem.Text = "Tìm kiếm:";
-            // 
-            // lblThongKeLuong
-            // 
-            this.lblThongKeLuong.AutoSize = true;
-            this.lblThongKeLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThongKeLuong.Location = new System.Drawing.Point(799, 139);
-            this.lblThongKeLuong.Name = "lblThongKeLuong";
-            this.lblThongKeLuong.Size = new System.Drawing.Size(332, 51);
-            this.lblThongKeLuong.TabIndex = 64;
-            this.lblThongKeLuong.Text = "Thống kê lương";
-            // 
-            // btnXuatExcel
-            // 
-            this.btnXuatExcel.AutoSize = true;
-            this.btnXuatExcel.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnXuatExcel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnXuatExcel.FlatAppearance.BorderSize = 0;
-            this.btnXuatExcel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnXuatExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXuatExcel.Image = global::QuanLyNhanSu.Properties.Resources.excel;
-            this.btnXuatExcel.Location = new System.Drawing.Point(1633, 197);
-            this.btnXuatExcel.Name = "btnXuatExcel";
-            this.btnXuatExcel.Size = new System.Drawing.Size(179, 49);
-            this.btnXuatExcel.TabIndex = 67;
-            this.btnXuatExcel.Text = "Xuất Excel";
-            this.btnXuatExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnXuatExcel.UseVisualStyleBackColor = false;
-            // 
-            // btnThongKe
-            // 
-            this.btnThongKe.AutoSize = true;
-            this.btnThongKe.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnThongKe.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnThongKe.FlatAppearance.BorderSize = 0;
-            this.btnThongKe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnThongKe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThongKe.Image = global::QuanLyNhanSu.Properties.Resources.calculate;
-            this.btnThongKe.Location = new System.Drawing.Point(1453, 197);
-            this.btnThongKe.Name = "btnThongKe";
-            this.btnThongKe.Size = new System.Drawing.Size(165, 49);
-            this.btnThongKe.TabIndex = 66;
-            this.btnThongKe.Text = "Thống kê";
-            this.btnThongKe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnThongKe.UseVisualStyleBackColor = false;
-            // 
-            // btnLuu
-            // 
-            this.btnLuu.AutoSize = true;
-            this.btnLuu.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnLuu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLuu.FlatAppearance.BorderSize = 0;
-            this.btnLuu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLuu.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLuu.Image = global::QuanLyNhanSu.Properties.Resources.save;
-            this.btnLuu.Location = new System.Drawing.Point(1325, 197);
-            this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new System.Drawing.Size(122, 49);
-            this.btnLuu.TabIndex = 65;
-            this.btnLuu.Text = "Lưu";
-            this.btnLuu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLuu.UseVisualStyleBackColor = false;
+            this.lblTimKiem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FrmThongKeLuong
             // 
@@ -429,17 +533,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1924, 1033);
-            this.Controls.Add(this.btnXuatExcel);
-            this.Controls.Add(this.btnThongKe);
-            this.Controls.Add(this.btnLuu);
-            this.Controls.Add(this.lblThongKeLuong);
-            this.Controls.Add(this.txtTimKiem);
-            this.Controls.Add(this.lblTimKiem);
-            this.Controls.Add(this.lblThang);
-            this.Controls.Add(this.lblPhongBan);
-            this.Controls.Add(this.cmbPhongBan);
-            this.Controls.Add(this.dtpThangNam);
-            this.Controls.Add(this.dgvThongKeLuong);
+            this.Controls.Add(this.tabControlMenu);
             this.Controls.Add(this.pnlHeader);
             this.MinimumSize = new System.Drawing.Size(1918, 1018);
             this.Name = "FrmThongKeLuong";
@@ -448,9 +542,11 @@
             this.Load += new System.EventHandler(this.FrmThongKeLuong_Load);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
+            this.tabControlMenu.ResumeLayout(false);
+            this.tabPageThongKe.ResumeLayout(false);
+            this.tabPageThongKe.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongKeLuong)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -465,25 +561,34 @@
         private System.Windows.Forms.Label lblMaNV_DN;
         private System.Windows.Forms.Label lblMaNhanVienDN;
         private System.Windows.Forms.Button btnTroVe;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.TabControl tabControlMenu;
+        private System.Windows.Forms.TabPage tabPageThongKe;
+        private System.Windows.Forms.Button btnXuatExcel;
+        private System.Windows.Forms.Button btnThongKe;
+        private System.Windows.Forms.Button btnLuu;
+        private System.Windows.Forms.Label lblThongKeLuong;
+        private System.Windows.Forms.TextBox txtTimKiem;
+        private System.Windows.Forms.Label lblThang;
+        private System.Windows.Forms.ComboBox cmbPhongBan;
+        private System.Windows.Forms.DateTimePicker dtpThangNam;
         private System.Windows.Forms.DataGridView dgvThongKeLuong;
+        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaNV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHoTen;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhongBan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colChucVu;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTongGioLam;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTongLuongTheoGio;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTongThuong;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTongPhat;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTongPhuCap;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTienNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTongLuongThang;
-        private System.Windows.Forms.DateTimePicker dtpThangNam;
-        private System.Windows.Forms.ComboBox cmbPhongBan;
-        private System.Windows.Forms.Label lblPhongBan;
-        private System.Windows.Forms.Label lblThang;
-        private System.Windows.Forms.TextBox txtTimKiem;
+        private System.Windows.Forms.RadioButton rbChucVu;
+        private System.Windows.Forms.ComboBox cmbChucVu;
+        private System.Windows.Forms.RadioButton rbPhongBan;
+        private System.Windows.Forms.RadioButton rbToanBoNhanVien;
         private System.Windows.Forms.Label lblTimKiem;
-        private System.Windows.Forms.Label lblThongKeLuong;
-        private System.Windows.Forms.Button btnLuu;
-        private System.Windows.Forms.Button btnThongKe;
-        private System.Windows.Forms.Button btnXuatExcel;
-        private System.Windows.Forms.Button btnRefresh;
     }
 }
