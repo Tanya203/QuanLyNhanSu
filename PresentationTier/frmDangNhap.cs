@@ -48,7 +48,6 @@ namespace QuanLyNhanSu
                 string hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
                 string chucVu = nv.ChucVu.TenChucVu;
                 string phongban = nv.ChucVu.PhongBan.TenPhongBan;
-                string thongTin = hoTen +"\nPhòng ban " + phongban + "\nChức vụ " + chucVu;
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
                     NgayGio = DateTime.Now.ToString(formatDateTime),

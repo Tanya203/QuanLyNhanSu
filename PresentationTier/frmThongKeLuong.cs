@@ -39,6 +39,15 @@ namespace QuanLyNhanSu.PresentationTier
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
+        private void tabControlMenu_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            TabControl tabControl = (TabControl)sender;
+            TabPage tabPage = tabControl.TabPages[e.Index];
+            Font font = tabPage.Font;
+            Brush brush = new SolidBrush(tabPage.ForeColor);
+            Rectangle bounds = e.Bounds;
+            e.Graphics.DrawString(tabPage.Text, font, brush, bounds);
+        }
         //////////////////////////////////////////////////////////////////////////////
         public void CloseCurrentForm(string maNV)
         {
@@ -63,6 +72,13 @@ namespace QuanLyNhanSu.PresentationTier
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
-        }              
+        }
+
+        private void tabPageThongKeLuong_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
