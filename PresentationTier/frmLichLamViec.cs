@@ -24,7 +24,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly NhanVien nv;
         private readonly string maPB;
         private readonly string maNV;
-        private readonly string hoTen;
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         private readonly string now;
@@ -35,7 +34,6 @@ namespace QuanLyNhanSu.PresentationTier
             lichLamViecBUS = new LichLamViecBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
-            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             this.maNV = maNV;
             maPB = nv.ChucVu.PhongBan.MaPB;
             now = DateTime.Now.ToString(formatDate);
@@ -103,6 +101,17 @@ namespace QuanLyNhanSu.PresentationTier
             frmOpen.FormClosed += CloseForm;
         }
         /////////////////////////////////////////////////////////////////////////////////////////
+        private void LichSuThaoTac(string thaoTac) 
+        {
+            LichSuThaoTac newLstt = new LichSuThaoTac
+            {
+                NgayGio = DateTime.Now.ToString(formatDateTime),
+                MaNV = maNV,
+                ThaoTacThucHien = thaoTac
+            };
+            lichSuThaoTacBUS.Save(newLstt);
+        }
+
         public void ChiTietButton()
         {
             DataGridViewButtonColumn btnChiTiet = new DataGridViewButtonColumn();
@@ -151,14 +160,9 @@ namespace QuanLyNhanSu.PresentationTier
                 MaLLV = maLLV,
             };
             if (lichLamViecBUS.Delete(lichLamViec))
-            {                              
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá lịch ngày " + ngayLam + " - Phòng ban " + phongBan,
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+            {
+                string thaoTac = "Xoá lịch làm việc " + maLLV + " - ngày " + ngayLam + " - phòng ban " + phongBan;
+                LichSuThaoTac(thaoTac);
                 Reload();
             }
         }
@@ -173,13 +177,8 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (lichLamViecBUS.Save(lichLamViec))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm lịch ngày " + dtpNgayLam.Text + " - Phòng ban " + nv.ChucVu.PhongBan.TenPhongBan,
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = "Thêm lịch làm việc ngày " + dtpNgayLam.Text + " - phòng ban " + nv.ChucVu.PhongBan.TenPhongBan;
+                LichSuThaoTac(thaoTac);
             }
             Reload();
         }
