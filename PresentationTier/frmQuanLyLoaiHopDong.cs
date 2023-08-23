@@ -64,6 +64,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadLoaiHopDong()
         {
+            Enabled = false;
             dgvThongTinLoaiHopDong.Rows.Clear();
             danhSachLoaiHopDong = loaiHopDongBUS.GetAllLoaiHopDong();
             int rowAdd;
@@ -75,13 +76,15 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[2].Value = lhd.TenHinhThucChamCong;
                 dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[3].Value = loaiHopDongBUS.TongSoNhanVienTrongLoaiHopDong(lhd.MaLHD).ToString();
             }
+            Enabled = true;
         }
         private void LoadHinhThucChamCong()
         {
             cmbHinhThucChamCong.DataSource = hinhThucChamCongBUS.GetAllHinhThucChamCong();
         }
         private void LoadLoaiHopDongTimKiem(string timKiem)
-        {            
+        {
+            Enabled = false;
             dgvThongTinLoaiHopDong.Rows.Clear();
             danhSachLoaiHopDongTimKiem = loaiHopDongBUS.SearchLoaiHopDong(timKiem);           
             int rowAdd;
@@ -93,6 +96,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[2].Value = lhd.TenHinhThucChamCong;
                 dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[3].Value = loaiHopDongBUS.TongSoNhanVienTrongLoaiHopDong(lhd.MaLHD).ToString();
             }
+            Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()

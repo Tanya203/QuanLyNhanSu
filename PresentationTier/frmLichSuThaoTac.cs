@@ -1,4 +1,5 @@
-﻿using QuanLyNhanSu.DataTier.Models;
+﻿using Eco.Framework.Impl;
+using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
@@ -17,30 +18,26 @@ namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmLichSuThaoTac : Form
     {
-        Thread currentForm;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private IEnumerable<LichSuThaoTacViewModels> lichSuThaoTac;
         private IEnumerable<LichSuThaoTacViewModels> lichSuThaoTacTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
-        
-
         public FrmLichSuThaoTac(string maNV)
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
-            nv = nhanVienBUS.ThongTinNhanVien(maNV);
-            
+            nv = nhanVienBUS.ThongTinNhanVien(maNV);   
             this.maNV = maNV;
         }
         private void frmLichSuThaoTac_Load(object sender, EventArgs e)
         {
             dtpThang.Checked = false;
-            dtpNam.Checked = false;           
-            LoadLichSuThaoTac();
+            dtpNam.Checked = false;
             LoadThongTinDangNhap();
+            LoadLichSuThaoTac();            
         }
         public void LoadThongTinDangNhap()
         {            
@@ -52,9 +49,11 @@ namespace QuanLyNhanSu.PresentationTier
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
+        
         public void LoadLichSuThaoTac()
         {
-            dgvLichSuThaoTac.Rows.Clear();           
+            Enabled = false;
+            dgvLichSuThaoTac.Rows.Clear();
             if (dtpNgay.Checked)
                 lichSuThaoTac = lichSuThaoTacBUS.GetAllLichSuThaoTacTheoThoiGian(dtpNgay.Text);
             if (dtpThang.Checked)
@@ -76,10 +75,12 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[4].Value = tt.ChucVu;
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[5].Value = tt.ThaoTacThucHien;
             }
+            Enabled = true;
         }
-        
+
         public void LoadLichSuThaoTacTimKiem(string timKiem)
         {
+            Enabled = false;
             dgvLichSuThaoTac.Rows.Clear();
             if(dtpNgay.Checked)
                 lichSuThaoTacTimKiem = lichSuThaoTacBUS.LichSuThaoTacTimKiem(dtpNgay.Text,timKiem);
@@ -103,6 +104,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[4].Value = tt.ChucVu;
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[5].Value = tt.ThaoTacThucHien;
             }
+            Enabled = true;
         }
         /////////////////////////////////////////////////////////////////////////////////////////    
         private void CheckChangeNgay(object sender, EventArgs e)
@@ -116,7 +118,6 @@ namespace QuanLyNhanSu.PresentationTier
                 txtTimKiem.Text = string.Empty;
                 LoadLichSuThaoTac();
             }
-            LoadLichSuThaoTac();
         }
         private void CheckThangChange(object sender, EventArgs e)
         {
@@ -138,7 +139,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 dtpNgay.Checked = false;
                 dtpThang.Checked = false;
-                txtTimKiem.Text = string.Empty;
+                txtTimKiem.Text = string.Empty;                
                 LoadLichSuThaoTac();                
             }
         }
@@ -151,7 +152,6 @@ namespace QuanLyNhanSu.PresentationTier
             }            
             return false;
         }
-            
         /////////////////////////////////////////////////////////////////////////////////////////        
         public void Reload()
         {

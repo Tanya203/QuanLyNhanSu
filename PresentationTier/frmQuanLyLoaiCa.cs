@@ -58,6 +58,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadLoaiCa()
         {
+            Enabled = false;
             dgvThongTinLoaiCa.Rows.Clear();
             danhSachLoaiCa = loaiCaBUS.GetAllLoaiCa();
             int rowAdd;
@@ -68,9 +69,11 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLoaiCa.Rows[rowAdd].Cells[1].Value = lc.TenLoaiCa;
                 dgvThongTinLoaiCa.Rows[rowAdd].Cells[2].Value = lc.HeSoLuong;
             }
+            Enabled = true;
         }
         private void LoadLoaiCaTimKiem(string timKiem)
         {            
+            Enabled = false;
             dgvThongTinLoaiCa.Rows.Clear();
             danhSachLoaiCaTimKiem = loaiCaBUS.SearchLoaiCa(timKiem);
             int rowAdd;
@@ -81,6 +84,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLoaiCa.Rows[rowAdd].Cells[1].Value = lc.TenLoaiCa;
                 dgvThongTinLoaiCa.Rows[rowAdd].Cells[2].Value = lc.HeSoLuong;
             }
+            Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()

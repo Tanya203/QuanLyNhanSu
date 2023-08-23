@@ -66,7 +66,8 @@ namespace QuanLyNhanSu.PresentationTier
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
         private void LoadThongTinTaiKhoan()
-        {            
+        {
+            Enabled = false;
             txtMaNV.Text = nv.MaNV;
             txtPhongBan.Text = nv.ChucVu.PhongBan.TenPhongBan;
             txtChucVu.Text = nv.ChucVu.TenChucVu;
@@ -104,6 +105,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtSoNgayPhep.Text = nv.SoNgayPhep.ToString();
             txtLuongCoBan.Text = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
             txtPhuCap.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(maNV));
+            Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////   
         public void Reload()
