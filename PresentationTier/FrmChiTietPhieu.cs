@@ -124,6 +124,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void LoadChiTietPhieuThuong()
         {
+            Enabled = false;
             dgvThongTinPhieuThuong.Rows.Clear();
             danhSachChiTietPhieu = chiTietPhieuBus.GetAllChiTietPhieu(maP);
             int rowAdd;
@@ -139,9 +140,11 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[6].Value = String.Format(fVND, "{0:N3} ₫", phieu.SoTien);
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[7].Value = phieu.GhiChu;
             }
+            Enabled = true;
         }
         public void LoadChiTietPhieuThuongTimKiem(string timKiem)
         {
+            Enabled = false;
             dgvThongTinPhieuThuong.Rows.Clear();
             danhSachChiTietPhieuTimKiem = chiTietPhieuBus.SearchChiTietPhieu(maP, timKiem);
             int rowAdd;
@@ -157,6 +160,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[6].Value = String.Format(fVND, "{0:N3} ₫", phieu.SoTien);
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[7].Value = phieu.GhiChu;
             }
+            Enabled = true;
         }
         ///////////////////////////////////////////////////////////////////////////////////////////
         private void cmbNhanVien_SelectedIndexChanged(object sender, EventArgs e)
@@ -297,7 +301,7 @@ namespace QuanLyNhanSu.PresentationTier
             if (chiTietPhieuBus.Save(newChiTietPhieu))
             {
                 string maNV = txtMaNV_Sua.Text;
-                string thaoTac = "Sửa nhân viên trong ";
+                string thaoTac = "Sửa nhân viên ";
                 string phieu = " trong " + txtLoaiPhieu.Text + " " + maP;
                 if (chiTietSua != null)
                     phieu += ":" + chiTietSua;

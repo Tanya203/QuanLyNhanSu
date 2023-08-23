@@ -80,6 +80,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void LoadPhuCapNhanVien()
         {
+            Enabled = false;
             dgvChiTietPhuCap.Rows.Clear();
             danhSachChiTietPhuCap = chiTietPhuCapBUS.GetPhuCapMotNhanVien(nhanVienPC);
             int rowAdd;
@@ -96,6 +97,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             txtTongPhuCap.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(nhanVienPC));
             txtMaNV.Text = nhanVienPC;
+            Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////////////        
         private void CloseForm(object sender, FormClosedEventArgs e)

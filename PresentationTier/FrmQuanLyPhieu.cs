@@ -49,9 +49,9 @@ namespace QuanLyNhanSu.PresentationTier
             cmbLoaiPhieu.DisplayMember = "TenLoaiPhieu";
             cmbLoaiPhieu.ValueMember = "MaLP";
             LoadThongTinDangNhap();
-            LoadPhieuThuong();
+            LoadPhieu();
             XoaButton();
-            ChiTietPhieuThuongButton();
+            ChiTietPhieuButton();
             LoadLoaiPhieu();  
         }
         public void LoadThongTinDangNhap()
@@ -64,8 +64,9 @@ namespace QuanLyNhanSu.PresentationTier
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
-        public void LoadPhieuThuong()
+        public void LoadPhieu()
         {
+            Enabled = false;
             dgvThongTinPhieu.Rows.Clear();
             danhSachPhieuThuong = phieuBus.GetAllPhieu();
             int rowAdd;
@@ -81,13 +82,15 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap.ToString(formatDate);
                 dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBUS.TongTienPhieu(pt.MaP));
             }
+            Enabled = true;
         }
         public void LoadLoaiPhieu()
         {
             cmbLoaiPhieu.DataSource = quanLyLoaiPhieuBUS.GetLoaiPhieu();
         }
-        public void LoadPhieuThuongTimKiem(string timKiem)
+        public void LoadPhieuTimKiem(string timKiem)
         {
+            Enabled = false;
             dgvThongTinPhieu.Rows.Clear();
             danhSachPhieuThuongTimKiem = phieuBus.SearchPhieu(timKiem);
             int rowAdd;
@@ -101,12 +104,12 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieu.Rows[rowAdd].Cells[4].Value = pt.PhongBan;
                 dgvThongTinPhieu.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
                 dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap.ToString(formatDate);
-                dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBUS.TongTienPhieu(pt.MaP));
-                
+                dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBUS.TongTienPhieu(pt.MaP));                
             }
+            Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////
-        public void ChiTietPhieuThuongButton()
+        public void ChiTietPhieuButton()
         {
             DataGridViewButtonColumn btnChiTiet = new DataGridViewButtonColumn();
             {                           
@@ -140,7 +143,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieu.Columns.Add(btnXoa);
             }
         }
-        private void OpenChiTietPhieuThuong(string maNV, string maPT)
+        private void OpenChiTietPhieu(string maNV, string maPT)
         {
             FrmChiTietPhieu frmOpen = new FrmChiTietPhieu(maNV,maPT);
             frmOpen.Show();
@@ -181,7 +184,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void txtTimKiem_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTimKiem.Text))
-                LoadPhieuThuong();
+                LoadPhieu();
         }
         //////////////////////////////////////////////////////////////////////////////
         private void btnThem_Click(object sender, EventArgs e)
@@ -215,13 +218,13 @@ namespace QuanLyNhanSu.PresentationTier
             if (e.ColumnIndex == 8)
                 XoaPhieuThuong(maP, loaiPhieu);
             if (e.ColumnIndex == 9)
-                OpenChiTietPhieuThuong(maNV, maP);
+                OpenChiTietPhieu(maNV, maP);
         }
         private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                LoadPhieuThuongTimKiem(txtTimKiem.Text);
+                LoadPhieuTimKiem(txtTimKiem.Text);
             }
         }
         private void btnTroVe_Click(object sender, EventArgs e)

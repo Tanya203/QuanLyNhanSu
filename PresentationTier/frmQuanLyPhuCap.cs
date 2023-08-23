@@ -60,6 +60,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadPhuCap()
         {
+            Enabled = false;
             dgvThongTinPhuCap.Rows.Clear();
             danhSachPhuCap = phuCapBUS.GetAllPhuCap();
             int rowAdd;
@@ -71,9 +72,11 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = String.Format(fVND, "{0:N3} ₫", pc.TienPhuCap);
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = phuCapBUS.TongSoLuongNhanVienTrongPhongBan(pc.MaPC).ToString();
             }
+            Enabled = true;
         }
         private void LoadPhuCapTimKiem(string timKiem)
-        {            
+        {
+            Enabled = false;
             dgvThongTinPhuCap.Rows.Clear();
             danhSachPhuCapTimKiem = phuCapBUS.SearchPhuCap(timKiem);
             int rowAdd;
@@ -85,6 +88,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = String.Format(fVND, "{0:N3} ₫", pc.TienPhuCap);
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = phuCapBUS.TongSoLuongNhanVienTrongPhongBan(pc.MaPC).ToString();
             }
+            Enabled = true;
         }
         ////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()

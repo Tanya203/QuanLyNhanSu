@@ -91,6 +91,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadNhanVien()
         {
+            Enabled = false;
             dgvThongTinNhanVien.Rows.Clear();
             danhSachNhanVien = nhanVienBUS.GetAllNhanVien();
             int rowAdd;
@@ -128,9 +129,11 @@ namespace QuanLyNhanSu.PresentationTier
                 else
                     dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", nv.SoTienNo);
             }
+            Enabled = true;
         }
         private void LoadNhanVienTimKiem(string timKiem)
-        {            
+        {       
+            Enabled = false;
             dgvThongTinNhanVien.Rows.Clear();
             danhSachNhanVienTimKiem = nhanVienBUS.SearchNhanVien(timKiem);
             int rowAdd;
@@ -168,6 +171,7 @@ namespace QuanLyNhanSu.PresentationTier
                 else
                     dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", nv.SoTienNo);
             }
+            Enabled = true;
         }
         public void LoadPhongBan()
         {

@@ -58,6 +58,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadLoaiPhieu()
         {
+            Enabled = false;
             dgvThongTinLoaiPhieu.Rows.Clear();
             danhSachLoaiPhieu = loaiPhieuBUS.GetAllLoaiPhieu();
             int rowAdd;
@@ -68,9 +69,11 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLoaiPhieu.Rows[rowAdd].Cells[1].Value = lp.TenLoaiPhieu;
                 dgvThongTinLoaiPhieu.Rows[rowAdd].Cells[2].Value = loaiPhieuBUS.SoLuongPhieuLap(lp.MaLP).ToString();
             }
+            Enabled = true;
         }
         private void LoadLoaiPhieuTimKiem(string timKiem)
         {
+            Enabled = false;
             dgvThongTinLoaiPhieu.Rows.Clear();
             danhSachLoaiPhieuTimKiem = loaiPhieuBUS.SearchLoaiPhieu(timKiem);
             int rowAdd;
@@ -81,6 +84,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLoaiPhieu.Rows[rowAdd].Cells[1].Value = lp.TenLoaiPhieu;
                 dgvThongTinLoaiPhieu.Rows[rowAdd].Cells[2].Value = loaiPhieuBUS.SoLuongPhieuLap(lp.MaLP).ToString();
             }
+            Enabled = true;
         }
         /////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()

@@ -17,7 +17,6 @@ namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmQuanLyCa : Form
     {
-        Thread currentForm;
         private readonly QuanLyCaBUS caBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
@@ -60,6 +59,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadCa()
         {
+            Enabled = false;
             dgvThongTinCa.Rows.Clear();
             danhSachCa = caBUS.GetAllCa();
             int rowAdd;
@@ -71,9 +71,11 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinCa.Rows[rowAdd].Cells[2].Value = ca.GioBatDau;
                 dgvThongTinCa.Rows[rowAdd].Cells[3].Value = ca.GioKetThuc;
             }
+            Enabled = true;
         }
         private void LoadCaTimKiem(string timKiem)
-        {            
+        {
+            Enabled = false;
             dgvThongTinCa.Rows.Clear();
             danhSachCaTimKiem = caBUS.SearchCa(timKiem);
             int rowAdd;
@@ -85,6 +87,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinCa.Rows[rowAdd].Cells[2].Value = ca.GioBatDau;
                 dgvThongTinCa.Rows[rowAdd].Cells[3].Value = ca.GioKetThuc;
             }
+            Enabled = true;
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
@@ -147,11 +150,11 @@ namespace QuanLyNhanSu.PresentationTier
             string chiTietSua = null;
             Ca ca = caBUS.ThongTinCa(txtMaCa.Text);
             if (txtTenCa.Text != ca.TenCa)
-                chiTietSua = "Tên ca: " + ca.TenCa + " -> Tên ca: " + txtTenCa.Text;
-            if (dtpThoiGianBatDau.Text != ca.GioBatDau.ToString())
-                chiTietSua = "Giờ bắt đầu: " + ca.GioBatDau + " -> Giờ bắt đầu: " + dtpThoiGianBatDau.Text;
-            if (dtpThoiGianKetThuc.Text != ca.GioKetThuc.ToString())
-                chiTietSua = "Giờ kết thức " + ca.GioKetThuc + " -> Giờ kết thúc: " + dtpThoiGianKetThuc.Text;
+                chiTietSua = chiTietSua +  "\n  - Tên ca: " + ca.TenCa + " -> Tên ca: " + txtTenCa.Text;
+            if (TimeSpan.Parse(dtpThoiGianBatDau.Text) != ca.GioBatDau)
+                chiTietSua = chiTietSua + "\n   - Giờ bắt đầu: " + ca.GioBatDau + " -> Giờ bắt đầu: " + dtpThoiGianBatDau.Text.ToString();
+            if (TimeSpan.Parse(dtpThoiGianKetThuc.Text) != ca.GioKetThuc)
+                chiTietSua = chiTietSua + "\n   - Giờ kết thúc " + ca.GioKetThuc + " -> Giờ kết thúc: " + dtpThoiGianKetThuc.Text;
             return chiTietSua;
         }
         private void btnThem_Click(object sender, EventArgs e)
@@ -165,13 +168,14 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (caBUS.Save(newCa))
             {
-                string thaoTac = "Thêm ca " + txtTenCa.Text;
+                string thaoTac = "Thêm ca " + txtTenCa.Text +  "\n  - Giờ bắt đầu: " + dtpThoiGianBatDau.Text + "\n  - Giờ kết thúc:" + dtpThoiGianKetThuc.Text;
                 LichSuThaoTac(thaoTac);
             }
             Reload();            
         }
         private void btnSua_Click(object sender, EventArgs e)
-        {            
+        {
+            string chiTietSua = CheckChange();
             Ca newCa = new Ca
             {
                 MaCa = txtMaCa.Text,
@@ -182,9 +186,8 @@ namespace QuanLyNhanSu.PresentationTier
             if (caBUS.Save(newCa))
             {
                 string thaoTac = "Sửa ca " + txtMaCa.Text;
-                string chiTietSua = CheckChange();
                 if(chiTietSua != null)
-                    thaoTac += ":\n" + chiTietSua;
+                    thaoTac += ":" + chiTietSua;
                 LichSuThaoTac(thaoTac);
                 Reload();
             }                      

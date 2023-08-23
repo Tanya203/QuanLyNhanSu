@@ -89,6 +89,7 @@
             this.colTenCa,
             this.colThoiGianBatDau,
             this.colThoiGianKetThuc});
+            this.dgvThongTinCa.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvThongTinCa.Location = new System.Drawing.Point(0, 370);
             this.dgvThongTinCa.Name = "dgvThongTinCa";
             this.dgvThongTinCa.ReadOnly = true;
@@ -259,7 +260,7 @@
             this.pnlMenu.Controls.Add(this.lblMaCa);
             this.pnlMenu.Location = new System.Drawing.Point(540, 148);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(850, 181);
+            this.pnlMenu.Size = new System.Drawing.Size(869, 181);
             this.pnlMenu.TabIndex = 13;
             // 
             // btnQuanLyLoaiCa
@@ -283,7 +284,7 @@
             // dtpThoiGianKetThuc
             // 
             this.dtpThoiGianKetThuc.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpThoiGianKetThuc.CustomFormat = "HH:mm";
+            this.dtpThoiGianKetThuc.CustomFormat = "HH:mm:ss";
             this.dtpThoiGianKetThuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpThoiGianKetThuc.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpThoiGianKetThuc.Location = new System.Drawing.Point(736, 58);
@@ -295,7 +296,7 @@
             // dtpThoiGianBatDau
             // 
             this.dtpThoiGianBatDau.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpThoiGianBatDau.CustomFormat = "HH:mm";
+            this.dtpThoiGianBatDau.CustomFormat = "HH:mm:ss";
             this.dtpThoiGianBatDau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpThoiGianBatDau.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpThoiGianBatDau.Location = new System.Drawing.Point(736, 15);

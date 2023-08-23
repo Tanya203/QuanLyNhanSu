@@ -154,6 +154,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void LoadChiTietLichLamViec()
         {
+            Enabled = false;
             dgvChiTietLichLamViec.Rows.Clear();
             chiTietLichLamViec = chiTietLichLamViecBUS.GetChiTietLichLamViec(maLLV);
             int rowAdd;
@@ -174,9 +175,11 @@ namespace QuanLyNhanSu.PresentationTier
                 else
                     dgvChiTietLichLamViec.Rows[rowAdd].Cells[9].Value = false;
             } 
+            Enabled = true;
         }
         public void LoadChiTietLichLamViecTimKiem(string timKiem)
         {
+            Enabled = false;
             dgvChiTietLichLamViec.Rows.Clear();
             chiTietLichLamViecTimKiem = chiTietLichLamViecBUS.SearchChiTietLichLamViec(maLLV, timKiem);
             int rowAdd;
@@ -195,8 +198,9 @@ namespace QuanLyNhanSu.PresentationTier
                 if(nv.Phep)
                     dgvChiTietLichLamViec.Rows[rowAdd].Cells[9].Value = true;
                 else
-                    dgvChiTietLichLamViec.Rows[rowAdd].Cells[9].Value = false;
+                    dgvChiTietLichLamViec.Rows[rowAdd].Cells[9].Value = false;                
             }
+            Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////////////
         private void cmbNhanVien_TextChanged(object sender, EventArgs e)

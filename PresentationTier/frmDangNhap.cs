@@ -41,7 +41,7 @@ namespace QuanLyNhanSu
             frmOpen.FormClosed += CloseForm;
         }
         private void btnDangNhap_Click(object sender, EventArgs e)
-        {            
+        {
             if(nhanVienBUS.LoginVerify(txtTaiKhoan.Text, txtMatKhau.Text))
             {                                 
                 NhanVien nv = nhanVienBUS.GetNhanVien().Where(nhanVien => nhanVien.TaiKhoan == txtTaiKhoan.Text).FirstOrDefault();

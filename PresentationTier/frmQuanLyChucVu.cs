@@ -64,6 +64,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadChucVu()
         {
+            Enabled = false;
             dgvThongTinChucVu.Rows.Clear();
             danhSachChucVu = chucVuBUS.GetAllChucVu();
             int rowAdd;
@@ -76,9 +77,11 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinChucVu.Rows[rowAdd].Cells[3].Value = String.Format(fVND, "{0:N3} ₫", cv.LuongKhoiDiem);
                 dgvThongTinChucVu.Rows[rowAdd].Cells[4].Value = chucVuBUS.TongSoNhanVienThuocChucVu(cv.MaCV);
             }
+            Enabled = true;
         }
         private void LoadChucVuTimKiem(string timKiem)
-        {            
+        {    
+            Enabled = false;
             dgvThongTinChucVu.Rows.Clear();
             danhSachChucVuTimKiem = chucVuBUS.SearchChucVu(timKiem);
             int rowAdd;
@@ -91,6 +94,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinChucVu.Rows[rowAdd].Cells[3].Value = String.Format(fVND, "{0:N3} ₫", cv.LuongKhoiDiem);
                 dgvThongTinChucVu.Rows[rowAdd].Cells[4].Value = chucVuBUS.TongSoNhanVienThuocChucVu(cv.MaCV);
             }
+            Enabled = true;
         }
         public void LoadPhongBan()
         {

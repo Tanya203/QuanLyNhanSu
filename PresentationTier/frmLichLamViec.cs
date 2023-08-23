@@ -58,6 +58,7 @@ namespace QuanLyNhanSu.PresentationTier
         }             
         private void LoadLichLamViec()
         {
+            Enabled = false;
             dgvThongTinLichLamViec.Rows.Clear();
             danhSachLichLamViec = lichLamViecBUS.GetLichLamViecTheoPhongBan(maPB);
             int rowAdd;
@@ -71,9 +72,11 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[4].Value = llv.ChucVu;
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);                
             }
+            Enabled = true;
         }
         private void LoadLichLamViecTimKiem(string timKiem)
         {
+            Enabled = false;
             dgvThongTinLichLamViec.Rows.Clear();
             danhSachLichLamViecTimKiem = lichLamViecBUS.SearchLichLamViecTheoPhongBan(maPB, timKiem);
             int rowAdd;
@@ -87,6 +90,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[4].Value = llv.ChucVu;
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);              
             }
+            Enabled = true;
         }
         /////////////////////////////////////////////////////////////////////////////////////////
         private void CloseForm(object sender, FormClosedEventArgs e)
