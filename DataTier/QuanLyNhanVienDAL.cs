@@ -233,14 +233,14 @@ namespace QuanLyNhanSu.DataTier
                 {
                     MessageBoxManager.Yes = "Có";
                     MessageBoxManager.No = "Không";
-                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá nhân viên " + nhanVien.MaNV + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult ketQua = MessageBox.Show($"Xác nhận xoá nhân viên {maNV}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (ketQua == DialogResult.Yes)
                     {
                         MessageBoxManager.Yes = "Có";
                         MessageBoxManager.No = "Không";
                         quanLyNhanSu.NhanViens.Remove(nhanVien);
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Đã xoá nhân viên " + nhanVien.MaNV, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Đã xoá nhân viên {maNV}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
                 }
@@ -265,10 +265,12 @@ namespace QuanLyNhanSu.DataTier
         {
             var nhanVien = quanLyNhanSu.NhanViens.Where(x => x.TaiKhoan == taiKhoan).FirstOrDefault();            
             try
-            {                
+            {
+                string maNV = nhanVien.MaNV;
+                string ngayKhoa = nhanVien.NgayKhoa.ToString();
                 if (nhanVien.NgayKhoa != null && nhanVien.NgayKhoa > DateTime.Now)
-                {                  
-                    MessageBox.Show("Tài khoản " + nhanVien.TaiKhoan + " của nhân viên " + nhanVien.MaNV + " đã bị khoá đến " + nhanVien.NgayKhoa +"! Liên hệ phòng kỹ thuật để biết thêm chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                {                    
+                    MessageBox.Show($"Tài khoản {taiKhoan} của nhân viên {maNV} đã bị khoá đến {ngayKhoa}! Liên hệ phòng kỹ thuật để biết thêm chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
                 if(nhanVien != null && !BCrypt.Net.BCrypt.Verify(matKhau, nhanVien.MatKhau))
@@ -276,23 +278,23 @@ namespace QuanLyNhanSu.DataTier
                     count++;
                     if (count == 3)
                     {
-                        DateTime lockDate = DateTime.Now.AddDays(1);
+                        DateTime lockDate = DateTime.Now.AddMinutes(30);
                         nhanVien.NgayKhoa = lockDate;
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Nhập sai mật khẩu lần 3! Tài khoản " + nhanVien.TaiKhoan + " của nhân viên " + nhanVien.MaNV + " đã bị khoá đến " + nhanVien.NgayKhoa + "! Liên hệ phòng kỹ thuật để biết thêm chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show($"Nhập sai mật khẩu lần 3! Tài khoản {taiKhoan} của nhân viên {maNV} đã bị khoá đến {lockDate}! Liên hệ phòng kỹ thuật để biết thêm chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         count = 0;
                         LichSuThaoTac newLstt = new LichSuThaoTac
                         {
                             NgayGio = DateTime.Now.ToString(formatDateTime),
-                            MaNV = nhanVien.MaNV,
-                            ThaoTacThucHien = "Tài khoản " + nhanVien.TaiKhoan + " bị khoá đến " + lockDate,
+                            MaNV = maNV,
+                            ThaoTacThucHien = "Tài khoản " + taiKhoan + " bị khoá đến " + lockDate,
                         };
                         lichSuThaoTacBUS.Save(newLstt);
                         return false;
                     }
                     else
                     {
-                        MessageBox.Show("Nhập sai mật khẩu lần thứ " + count +"! Lần thứ 3 tài khoản sẽ bị khoá!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show($"Nhập sai mật khẩu lần thứ {count}! Lần thứ 3 tài khoản sẽ bị khoá!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }                    
                 }
@@ -308,7 +310,7 @@ namespace QuanLyNhanSu.DataTier
                         nhanVien.NgayKhoa = null;
                         quanLyNhanSu.SaveChanges();
                     }
-                    MessageBox.Show("Đăng nhập thành công! - "+ nhanVien.MaNV,"Thông báo", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MessageBox.Show($"Đăng nhập thành công! - {maNV}", "Thông báo", MessageBoxButtons.OK,MessageBoxIcon.Information);
                     return true;
                 }
                 return false;
@@ -337,7 +339,7 @@ namespace QuanLyNhanSu.DataTier
                 {
                     if(nhanVien.TaiKhoan == taiKhoan && nhanVien.CCCD == CCCD && nhanVien.SDT == sdt && nhanVien.Email == email) 
                     {
-                        MessageBox.Show("Xác thực thành công! Nhân viên " + nhanVien.MaNV + ".","Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Xác thực thành công! Nhân viên {maNV}.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
                     else

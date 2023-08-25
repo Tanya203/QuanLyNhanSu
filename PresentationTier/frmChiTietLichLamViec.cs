@@ -244,7 +244,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 NgayGio = DateTime.Now.ToString(formatDateTime),
                 MaNV = this.maNV,
-                ThaoTacThucHien = thaoTac + maNV + "lịch làm việc " + maLLV + " ngày " + dtpNgayLam.Text,
+                ThaoTacThucHien = $"{thaoTac} {maNV} lịch làm việc {maLLV} ngày {dtpNgayLam.Text}",
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
@@ -359,7 +359,7 @@ namespace QuanLyNhanSu.PresentationTier
             }                
             MessageBoxManager.Yes = "Có";
             MessageBoxManager.No = "Không";
-            DialogResult ketQua = MessageBox.Show(thongBao + txtMaNV_Phep.Text + " vào ngày " + dtpNgayLam.Text + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult ketQua = MessageBox.Show($"{thongBao} {txtMaNV_Phep.Text} vào ngày {dtpNgayLam.Text}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (ketQua == DialogResult.Yes)
             {
                 if (chiTietLichLamViecBUS.Save(nv))
@@ -368,7 +368,7 @@ namespace QuanLyNhanSu.PresentationTier
                     {
                         NgayGio = DateTime.Now.ToString(formatDateTime),
                         MaNV = maNV,
-                        ThaoTacThucHien = "Nhân viên " + maNV + lichSu + cmbNhanVien.SelectedValue.ToString() + " trong " + "lịch làm việc " + maLLV + " ngày" + dtpNgayLam.Text,
+                        ThaoTacThucHien = $"Nhân viên {maNV} {lichSu} {cmbNhanVien.SelectedValue} trong lịch làm việc {maLLV} ngày {dtpNgayLam.Text}",
                     };
                     lichSuThaoTacBUS.Save(newLstt);
                     Reload();

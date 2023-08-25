@@ -28,6 +28,10 @@ namespace QuanLyNhanSu.LogicTier
         {
             return chucVuDAL.GetChucVuTheoPhongBan(maPB);
         }
+        public IEnumerable<ChucVu> GetChucVu()
+        {
+            return chucVuDAL.GetChucVu();
+        }
         public bool Save(ChucVu chucVu)
         {
             return chucVuDAL.Save(chucVu);

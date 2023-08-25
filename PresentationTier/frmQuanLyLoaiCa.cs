@@ -143,6 +143,28 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void LichSuThaoTac(string thaoTac)
+        {
+            LichSuThaoTac newLstt = new LichSuThaoTac
+            {
+                NgayGio = DateTime.Now.ToString(formatDateTime),
+                MaNV = maNV,
+                ThaoTacThucHien = thaoTac,
+            };
+            lichSuThaoTacBUS.Save(newLstt);
+        }
+        private string CheckChange()
+        {
+            List<string> changes = new List<string>();
+            LoaiCa loaiCa = loaiCaBUS.GetLoaiCa().Where(lc => lc.MaLC == txtMaLC.Text).FirstOrDefault();
+            string tenLoaiCa = txtTenLC.Text;
+            string heSoLuong = txtHeSoLuong.Text;
+            if (tenLoaiCa != loaiCa.TenLoaiCa)
+                changes.Add($"- Tên loại ca: {loaiCa.TenLoaiCa} -> Tên loại ca: {tenLoaiCa}");
+            if (decimal.Parse(txtHeSoLuong.Text) != loaiCa.HeSoLuong)
+                changes.Add($"- Hệ số lương: {loaiCa.HeSoLuong} -> Hệ số lương: {heSoLuong}");
+            return string.Join("\n", changes);
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
             LoaiCa newLoaiCa = new LoaiCa
@@ -153,13 +175,8 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (loaiCaBUS.Save(newLoaiCa))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm loại ca '" + txtTenLC.Text + "'",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = "Thêm loại ca " + txtTenLC.Text + "\n  - Hệ số lương: " + decimal.Parse(txtHeSoLuong.Text);
+                LichSuThaoTac(thaoTac);
             }
             Reload();          
         }
@@ -173,13 +190,11 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (loaiCaBUS.Save(newLoaiCa))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " sửa loại ca '" + txtMaLC.Text + "'",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = "Sửa loại ca " + txtMaLC.Text;
+                string chiTietSua = CheckChange();
+                if (!string.IsNullOrEmpty(chiTietSua))
+                    thaoTac += ":\n" + chiTietSua;
+                LichSuThaoTac(thaoTac);
                 Reload();
             }
         }
@@ -191,13 +206,10 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (loaiCaBUS.Delete(loaiCa))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá loại ca '" + txtMaLC.Text + "'",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string tenLoaiCa = txtTenLC.Text;
+                string heSoLuong = txtHeSoLuong.Text;
+                string thaoTac = $"Xoá loại ca {tenLoaiCa}\n    - Hệ số lương: {heSoLuong}";
+                LichSuThaoTac(thaoTac);
                 Reload();
             }
         }

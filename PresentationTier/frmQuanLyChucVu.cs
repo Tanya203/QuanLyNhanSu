@@ -36,7 +36,6 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.ThongTinNhanVien(maNV);
-            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             txtMaCV.ReadOnly = true;
             txtTongSoNhanVien.ReadOnly = true;
             btnThem.Enabled = false;
@@ -160,6 +159,30 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         /////////////////////////////////////////////////////////////////////////////////////////////
+        private void LichSuThaoTac(string thaoTac)
+        {
+            LichSuThaoTac newLstt = new LichSuThaoTac
+            {
+                NgayGio = DateTime.Now.ToString(formatDateTime),
+                MaNV = maNV,
+                ThaoTacThucHien = thaoTac,
+            };
+            lichSuThaoTacBUS.Save(newLstt);
+        }
+        private string CheckChange()
+        {
+            List<string> changes = new List<string>();
+            ChucVu chucVu = chucVuBUS.GetChucVu().Where(cv => cv.MaCV == txtMaCV.Text).FirstOrDefault();
+            string luongKhoiDiemCu = String.Format(fVND, "{0:N3} ₫", chucVu.LuongKhoiDiem);
+            string luongKhoiDiemMoi = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongKhoiDiem.Text));
+            if (txtTenCV.Text != chucVu.TenChucVu)
+                changes.Add($"- Tên chức vụ: {chucVu.TenChucVu} -> Tên chức vụ: {txtTenCV.Text}");
+            if (cmbPhongBan.ValueMember != chucVu.MaPB)
+                changes.Add($"- Phòng ban: {chucVu.PhongBan.TenPhongBan} -> Phòng ban: {cmbPhongBan.Text}");
+            if (luongKhoiDiemCu != luongKhoiDiemMoi)
+                changes.Add($"- Lương khởi điểm: : {luongKhoiDiemCu} -> Lương khởi điểm: {luongKhoiDiemMoi}");
+            return string.Join("\n", changes);
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
             ChucVu chucVu = new ChucVu
@@ -171,18 +194,15 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chucVuBUS.Save(chucVu))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm chức vụ '" + txtTenCV.Text + "'",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string luongKhoiDiem = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongKhoiDiem.Text));
+                string thaoTac = "Thêm chức vụ : " + txtTenCV.Text + "\n   - Phòng ban: " + cmbPhongBan.Text + "\n   - Lương khỏi điểm: " + luongKhoiDiem; 
+                LichSuThaoTac(thaoTac);
             }
             Reload();
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
+            string chiTietSua = CheckChange();
             ChucVu chucVu = new ChucVu
             {
                 MaCV = txtMaCV.Text,
@@ -192,13 +212,10 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chucVuBUS.Save(chucVu))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " chỉnh sửa chức vụ '" + txtMaCV.Text + "'",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = "Sửa chức vụ " + txtMaCV.Text;
+                if (!string.IsNullOrEmpty(chiTietSua))
+                    thaoTac += ":\n" + chiTietSua;
+                LichSuThaoTac(thaoTac);
                 Reload();
             }                     
         }
@@ -210,13 +227,11 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chucVuBUS.Delete(chucVu))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá chức vụ '" + txtTenCV.Text + "'",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string tenChucVu = txtTenCV.Text;
+                string phongBan = cmbPhongBan.Text;
+                string luongKhoiDiem = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongKhoiDiem.Text));
+                string thaoTac = "Xoá chức vụ " + tenChucVu + ":\n    - Phòng ban: " + phongBan + "\n    - Lương khởi điểm: " + luongKhoiDiem;
+                LichSuThaoTac(thaoTac);
                 Reload();
             }            
         }

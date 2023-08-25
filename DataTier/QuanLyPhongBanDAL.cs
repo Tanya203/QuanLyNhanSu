@@ -90,12 +90,12 @@ namespace QuanLyNhanSu.DataTier.Models
                 {
                     MessageBoxManager.Yes = "Có";
                     MessageBoxManager.No = "Không";
-                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá phòng ban " + phongBan.TenPhongBan + "?","Thông báo",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+                    DialogResult ketQua = MessageBox.Show($"Xác nhận xoá phòng ban {phongBan.TenPhongBan}?", "Thông báo",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
                     if(ketQua == DialogResult.Yes)
                     {
                         quanLyNhanSu.PhongBans.Remove(phongBan);
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Đã xoá phòng ban " + phongBan.TenPhongBan, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Đã xoá phòng ban {phongBan.TenPhongBan}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }                    
                 }
@@ -105,7 +105,7 @@ namespace QuanLyNhanSu.DataTier.Models
             {
                 if (ex.InnerException.ToString().Contains("FK_NhanVien_ChucVu"))
                 {
-                    MessageBox.Show("Chức vụ thuộc phòng ban " + phongBan.TenPhongBan + " vẫn còn nhân viên. Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Chức vụ thuộc phòng ban {phongBan.TenPhongBan} vẫn còn nhân viên. Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
                 MessageBoxManager.Yes = "OK";

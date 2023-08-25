@@ -89,19 +89,20 @@ namespace QuanLyNhanSu.DataTier
             try
             {
                 Phieu phieu = quanLyNhanSu.Phieux.Where(pt => pt.MaP == maPhieu).FirstOrDefault();
-                string loaiPhieu = phieu.LoaiPhieu.TenLoaiPhieu.ToLower();
                 if(phieu != null)
                 {
                     MessageBoxManager.Yes = "Có";
                     MessageBoxManager.No = "Không";
-                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá " + phieu.LoaiPhieu.TenLoaiPhieu.ToLower() + " " + phieu.MaP + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    string loaiPhieu = phieu.LoaiPhieu.TenLoaiPhieu.ToLower();
+                    string maP = phieu.MaP;
+                    DialogResult ketQua = MessageBox.Show($"Xác nhận xoá {loaiPhieu} {maP}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (ketQua == DialogResult.Yes)
                     {
                         MessageBoxManager.Yes = "Có";
                         MessageBoxManager.No = "Không";
                         quanLyNhanSu.Phieux.Remove(phieu);
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Đã xoá " + loaiPhieu + " " + phieu.MaP, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Đã xoá {loaiPhieu} {maP}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
                 }

@@ -49,7 +49,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 NgayGio = DateTime.Now.ToString(formatDateTime),
                 MaNV = maNV,
-                ThaoTacThucHien = "Chấm công " + gio + "ca "+ ca,
+                ThaoTacThucHien = $"Chấm công {gio} ca {ca}",
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
@@ -139,7 +139,7 @@ namespace QuanLyNhanSu.PresentationTier
                 }
                 count++;
             }
-            MessageBox.Show("Nhân viên " + txtMaNV.Text + " đã chấm công hết các ca trong ngày hoặc đã quá giờ chấm công ngày " + dateNow, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Nhân viên {txtMaNV.Text} đã chấm công hết các ca trong ngày hoặc đã quá giờ chấm công ngày {dateNow}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             txtMaNV.Text = string.Empty;
             return;            
         }
@@ -156,7 +156,7 @@ namespace QuanLyNhanSu.PresentationTier
                 string ca = nv.Ca.TenCa;                
                 if (nv.ThoiGianDen != null && nv.ThoiGianVe == null && timeNow < nv.Ca.GioBatDau)
                 {
-                    MessageBox.Show("Vẫn chưa vào ca " + ca + "!\n(" + nv.Ca.GioBatDau + " - " + nv.Ca.GioKetThuc + ")", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Vẫn chưa vào ca {ca}!\n({nv.Ca.GioBatDau} - {nv.Ca.GioKetThuc})", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtMaNV.Text = string.Empty;
                     return;
                 }
@@ -222,7 +222,7 @@ namespace QuanLyNhanSu.PresentationTier
                 }               
                 txtMaNV.Text = string.Empty;
             }
-            MessageBox.Show("Nhân viên " + txtMaNV.Text + " đã chấm công hết các ca trong ngày hoặc đã quá giờ chấm công ngày " + dateNow, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Nhân viên {txtMaNV.Text} đã chấm công hết các ca trong ngày hoặc đã quá giờ chấm công ngày {dateNow}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             txtMaNV.Text = string.Empty;
             return;
         }                     
@@ -245,7 +245,7 @@ namespace QuanLyNhanSu.PresentationTier
                 ChamCongCaDem(caDem);
                 if(chamCong.Count == 0)
                 {
-                    MessageBox.Show("Nhân viên " + maNV + " không có lịch làm việc trong hôm nay " + dateNow, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Nhân viên {maNV} không có lịch làm việc trong hôm nay {dateNow}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtMaNV.Text = string.Empty;
                     return;
                 }

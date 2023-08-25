@@ -99,12 +99,12 @@ namespace QuanLyNhanSu.DataTier.Models
                 {
                     MessageBoxManager.Yes = "Có";
                     MessageBoxManager.No = "Không";
-                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá phụ cấp " + phuCap.TenPhuCap + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult ketQua = MessageBox.Show($"Xác nhận xoá phụ cấp {phuCap.TenPhuCap}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (ketQua == DialogResult.Yes)
                     {
                         quanLyNhanSu.PhuCaps.Remove(phuCap);
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Đã xoá phụ cấp " + phuCap.TenPhuCap, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Đã xoá phụ cấp {phuCap.TenPhuCap}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
                 }

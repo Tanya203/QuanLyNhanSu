@@ -262,13 +262,15 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private string CheckChange()
         {
-            string chiTietSua = null;
-            ChiTietPhieu nhanVien = chiTietPhieuBus.ThongTinChiTietPhieu(maP).Where(phieu => phieu.MaNV == txtMaNV_Sua.Text).FirstOrDefault();
+            List<string> changes = new List<string>();
+            ChiTietPhieu nhanVien = chiTietPhieuBus.ThongTinChiTietPhieu(maP).FirstOrDefault(phieu => phieu.MaNV == txtMaNV_Sua.Text);
+            string soTienCu = string.Format(fVND, "{0:N3} ₫", nhanVien.SoTien);
+            string soTienMoi = string.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
             if (rtxtGhiChu.Text != nhanVien.GhiChu)
-                chiTietSua = chiTietSua + "\n    - Ghi chú: " + nhanVien.GhiChu + " -> Ghi chú: " + rtxtGhiChu.Text;
-            if (decimal.Parse(txtSoTien.Text) != nhanVien.SoTien)
-                chiTietSua = chiTietSua + "\n    - Số tiền: " + String.Format(fVND, "{0:N3} ₫", nhanVien.SoTien) + " -> Số tiền: " + String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
-            return chiTietSua;
+                changes.Add($"- Ghi chú: {nhanVien.GhiChu} -> Ghi chú: {rtxtGhiChu.Text}");            
+            if (soTienCu != soTienMoi)
+                changes.Add($"- Số tiền: {soTienCu} -> Số tiền: {soTienMoi}");
+            return string.Join("\n", changes);
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
@@ -281,9 +283,10 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chiTietPhieuBus.Save(newChiTietPhieu))
             {
+                string soTien = string.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
                 string maNV = cmbNhanVien.SelectedValue.ToString();
                 string thaoTac = "Thêm nhân viên ";
-                string phieu = " vào " + txtLoaiPhieu.Text + " " + maP;
+                string phieu = $" vào {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {rtxtGhiChu.Text}";
                 LichSuThaoTac(thaoTac, maNV, phieu);
             }
             Reload();
@@ -302,9 +305,9 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 string maNV = txtMaNV_Sua.Text;
                 string thaoTac = "Sửa nhân viên ";
-                string phieu = " trong " + txtLoaiPhieu.Text + " " + maP;
-                if (chiTietSua != null)
-                    phieu += ":" + chiTietSua;
+                string phieu = $" trong {txtLoaiPhieu.Text} {maP}";
+                if (!string.IsNullOrEmpty(chiTietSua))
+                    phieu += $":\n{chiTietSua}";
                 LichSuThaoTac(thaoTac, maNV, phieu);
                 Reload();
             }          
@@ -327,7 +330,7 @@ namespace QuanLyNhanSu.PresentationTier
             }            
         }
         public void XoaNhanVien()
-        {
+        {            
             ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
             {
                 MaNV = txtMaNV_Sua.Text,
@@ -335,8 +338,10 @@ namespace QuanLyNhanSu.PresentationTier
             if (chiTietPhieuBus.Delete(newChiTietPhieu))
             {
                 string maNV = txtMaNV_Sua.Text;
+                string soTien = string.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
+                string ghiChu = rtxtGhiChu.Text;
                 string thaoTac = "Xoá nhân viên ";
-                string phieu = " khỏi " + txtLoaiPhieu.Text + " " + maP;
+                string phieu = $" khỏi {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {ghiChu}";
                 LichSuThaoTac(thaoTac, maNV, phieu);
                 Reload();
             }                      

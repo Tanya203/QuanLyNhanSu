@@ -147,15 +147,17 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private string CheckChange()
         {
-            string chiTietSua = null;
+            List<string> changes = new List<string>();
             Ca ca = caBUS.ThongTinCa(txtMaCa.Text);
             if (txtTenCa.Text != ca.TenCa)
-                chiTietSua = chiTietSua +  "\n  - Tên ca: " + ca.TenCa + " -> Tên ca: " + txtTenCa.Text;
-            if (TimeSpan.Parse(dtpThoiGianBatDau.Text) != ca.GioBatDau)
-                chiTietSua = chiTietSua + "\n   - Giờ bắt đầu: " + ca.GioBatDau + " -> Giờ bắt đầu: " + dtpThoiGianBatDau.Text.ToString();
-            if (TimeSpan.Parse(dtpThoiGianKetThuc.Text) != ca.GioKetThuc)
-                chiTietSua = chiTietSua + "\n   - Giờ kết thúc " + ca.GioKetThuc + " -> Giờ kết thúc: " + dtpThoiGianKetThuc.Text;
-            return chiTietSua;
+                changes.Add($"- Tên ca: {ca.TenCa} -> Tên ca: {txtTenCa.Text}");
+            TimeSpan gioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text);
+            if (gioBatDau != ca.GioBatDau)
+                changes.Add($"- Giờ bắt đầu: {ca.GioBatDau} -> Giờ bắt đầu: {gioBatDau}");
+            TimeSpan gioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text);
+            if (gioKetThuc != ca.GioKetThuc)
+                changes.Add($"- Giờ kết thúc: {ca.GioKetThuc} -> Giờ kết thúc: {gioKetThuc}");
+            return string.Join("\n", changes);
         }
         private void btnThem_Click(object sender, EventArgs e)
         {            
@@ -168,7 +170,7 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (caBUS.Save(newCa))
             {
-                string thaoTac = "Thêm ca " + txtTenCa.Text +  "\n  - Giờ bắt đầu: " + dtpThoiGianBatDau.Text + "\n  - Giờ kết thúc:" + dtpThoiGianKetThuc.Text;
+                string thaoTac = "Thêm ca " + txtTenCa.Text +  ":\n  - Giờ bắt đầu: " + dtpThoiGianBatDau.Text + "\n  - Giờ kết thúc:" + dtpThoiGianKetThuc.Text;
                 LichSuThaoTac(thaoTac);
             }
             Reload();            
@@ -186,21 +188,24 @@ namespace QuanLyNhanSu.PresentationTier
             if (caBUS.Save(newCa))
             {
                 string thaoTac = "Sửa ca " + txtMaCa.Text;
-                if(chiTietSua != null)
-                    thaoTac += ":" + chiTietSua;
+                if(!string.IsNullOrEmpty(chiTietSua))
+                    thaoTac += ":\n" + chiTietSua;
                 LichSuThaoTac(thaoTac);
                 Reload();
             }                      
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            
             Ca ca = new Ca
             {
                 MaCa = txtMaCa.Text,
             };
             if (caBUS.Delete(ca))
             {
-                string thaoTac = "Xoá ca " + txtTenCa.Text;
+                string gioBatDau = dtpThoiGianBatDau.Text;
+                string gioKetThuc = dtpThoiGianKetThuc.Text;
+                string thaoTac = "Xoá ca " + txtTenCa.Text + ":\n   - Giờ bắt đầu: " + gioBatDau + "\n   - Giờ kết thúc: " + gioKetThuc;
                 LichSuThaoTac(thaoTac);
                 Reload();
             }                    
