@@ -43,7 +43,7 @@ namespace QuanLyNhanSu.DataTier
                 string maNV = chamCong.MaNV;
                 string ca = chamCong.Ca.TenCa;
                 string ngay = chamCong.LichLamViec.NgayLam.ToString(formatDate);
-                MessageBox.Show("Chấm công" + thongBao + "thành công! Nhân viên " + maNV + " - ca " + ca + " - ngày " + ngay + " - lúc " + thoiGian, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Chấm công {thongBao} thành công! Nhân viên {maNV} - ca {ca} - ngày {ngay} - lúc {thoiGian}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
             }
             catch (Exception ex)

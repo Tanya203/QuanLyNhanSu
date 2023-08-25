@@ -103,20 +103,20 @@ namespace QuanLyNhanSu.DataTier
         {
             try
             {
-                ChiTietPhuCap newChiTietPhuCap = quanLyNhanSu.ChiTietPhuCaps.Where(pc => pc.MaNV == maNV && pc.MaPC == maPC).FirstOrDefault();                
-                string phuCap = newChiTietPhuCap.PhuCap.TenPhuCap;
+                ChiTietPhuCap newChiTietPhuCap = quanLyNhanSu.ChiTietPhuCaps.Where(pc => pc.MaNV == maNV && pc.MaPC == maPC).FirstOrDefault();             
                 if(newChiTietPhuCap != null)
                 {
                     MessageBoxManager.Yes = "Có";
                     MessageBoxManager.No = "Không";
-                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá " + newChiTietPhuCap.PhuCap.TenPhuCap + " của " + newChiTietPhuCap.MaNV + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    string phuCap = newChiTietPhuCap.PhuCap.TenPhuCap;
+                    DialogResult ketQua = MessageBox.Show($"Xác nhận xoá {phuCap} của {maNV}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (ketQua == DialogResult.Yes)
                     {
                         MessageBoxManager.Yes = "Có";
                         MessageBoxManager.No = "Không";
                         quanLyNhanSu.ChiTietPhuCaps.Remove(newChiTietPhuCap);
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Đã xoá " + phuCap + " của " + maNV, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Đã xoá {phuCap} của {maNV}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;                                            
                     }                    
                 }

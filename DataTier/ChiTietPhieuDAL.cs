@@ -102,19 +102,20 @@ namespace QuanLyNhanSu.DataTier
             try
             {
                 ChiTietPhieu phieu = quanLyNhanSu.ChiTietPhieux.Where(pt => pt.MaNV == maNV).FirstOrDefault();
-                string loaiPhieu = phieu.Phieu.LoaiPhieu.TenLoaiPhieu.ToLower();
                 if (phieu != null)
                 {
                     MessageBoxManager.Yes = "Có";
                     MessageBoxManager.No = "Không";
-                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá nhân viên " + phieu.MaNV + " " + "khỏi " + phieu.Phieu.LoaiPhieu.TenLoaiPhieu.ToLower() + " " + phieu.MaP + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    string loaiPhieu = phieu.Phieu.LoaiPhieu.TenLoaiPhieu;
+                    string maP = phieu.MaP;
+                    DialogResult ketQua = MessageBox.Show($"Xác nhận xoá nhân viên {maNV} khỏi {loaiPhieu} {maP}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (ketQua == DialogResult.Yes)
                     {
                         MessageBoxManager.Yes = "Có";
                         MessageBoxManager.No = "Không";
                         quanLyNhanSu.ChiTietPhieux.Remove(phieu);
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Đã xoá nhân viên " + phieu.MaNV + " " + "khỏi " + loaiPhieu  + " " + phieu.MaP, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Đã xoá nhân viên {maNV} khỏi {loaiPhieu} {maP}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
                 }

@@ -45,7 +45,6 @@ namespace QuanLyNhanSu.DataTier
                               chucVu.LuongKhoiDiem.ToString().Contains(timKiem)).OrderBy(cv => cv.MaCV);
             return danhSachChucVu;
         }
-
         public IEnumerable<ChucVu> GetChucVuTheoPhongBan(string maPB)
         {
             return quanLyNhanSu.ChucVus.Where(cv => cv.MaPB == maPB).OrderBy(cv => cv.MaCV).ToList();
@@ -53,6 +52,10 @@ namespace QuanLyNhanSu.DataTier
         public decimal GetLuongCoBanCuaChucVu(string maCV)
         {
             return quanLyNhanSu.ChucVus.Where(cv => cv.MaCV == maCV).Sum(cv => cv.LuongKhoiDiem);
+        }
+        public IEnumerable<ChucVu> GetChucVu()
+        {
+            return quanLyNhanSu.ChucVus.OrderBy(cv => cv.MaCV).ToList();
         }
         public bool Save(ChucVu chucVu)
         {
@@ -107,12 +110,12 @@ namespace QuanLyNhanSu.DataTier
                 {
                     MessageBoxManager.Yes = "Có";
                     MessageBoxManager.No = "Không";
-                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá chức vụ " + chucVu.TenChucVu + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult ketQua = MessageBox.Show($"Xác nhận xoá chức vụ {chucVu.TenChucVu}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (ketQua == DialogResult.Yes)
                     {
                         quanLyNhanSu.ChucVus.Remove(chucVu);
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Đã xoá chức vụ " + chucVu.TenChucVu, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Đã xoá chức vụ {chucVu.TenChucVu}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
                 }
@@ -122,7 +125,7 @@ namespace QuanLyNhanSu.DataTier
             {
                 if (ex.InnerException.ToString().Contains("FK_NhanVien_ChucVu"))
                 {
-                    MessageBox.Show("Vẫn còn nhân viên thuộc chức vụ " + chucVu.TenChucVu + ". Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Vẫn còn nhân viên thuộc chức vụ {chucVu.TenChucVu}. Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
                 MessageBoxManager.Yes = "OK";

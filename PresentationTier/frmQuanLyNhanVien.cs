@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Services.Protocols;
 using System.Windows.Forms;
 using WECPOFLogic;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
@@ -132,8 +133,9 @@ namespace QuanLyNhanSu.PresentationTier
             Enabled = true;
         }
         private void LoadNhanVienTimKiem(string timKiem)
-        {       
-            Enabled = false;
+        {
+            this.UseWaitCursor = true;
+            Enabled = false;            
             dgvThongTinNhanVien.Rows.Clear();
             danhSachNhanVienTimKiem = nhanVienBUS.SearchNhanVien(timKiem);
             int rowAdd;
@@ -171,6 +173,7 @@ namespace QuanLyNhanSu.PresentationTier
                 else
                     dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", nv.SoTienNo);
             }
+            this.UseWaitCursor = false;
             Enabled = true;
         }
         public void LoadPhongBan()
@@ -440,7 +443,6 @@ namespace QuanLyNhanSu.PresentationTier
             string gioiTinh = ChonGioiTinh();
             if (string.IsNullOrEmpty(gioiTinh))
                 return;
-            decimal soTienNo = 0;
             NhanVien newNhanVien = new NhanVien
             {
                 MaNV = "",
@@ -533,6 +535,13 @@ namespace QuanLyNhanSu.PresentationTier
         }      
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            if (txtMaNV.Text == maNV)
+            {
+                MessageBox.Show("Không thể xoá tài khoản đang đăng nhập", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ClearAllText();
+                return;
+            }
+                
             NhanVien newNhanVien = new NhanVien
             {
                 MaNV = txtMaNV.Text,                

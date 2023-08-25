@@ -90,7 +90,7 @@ namespace QuanLyNhanSu.DataTier
                     }
                     else
                     {
-                        MessageBox.Show("Nhân viên " + nhanVien.MaNV +" đã hết phép!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show($"Nhân viên {nhanVien.MaNV} đã hết phép!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
                 }
@@ -124,14 +124,14 @@ namespace QuanLyNhanSu.DataTier
                 {
                     MessageBoxManager.Yes = "Có";
                     MessageBoxManager.No = "Không";
-                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá nhân viên " + maNV + " " + "khỏi lịch " + maLLV + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult ketQua = MessageBox.Show($"Xác nhận xoá nhân viên {maNV} khỏi lịch {maLLV}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (ketQua == DialogResult.Yes)
                     {
                         MessageBoxManager.Yes = "Có";
                         MessageBoxManager.No = "Không";
                         quanLyNhanSu.ChamCongs.Remove(chamCong);
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Đã xoá nhân viên " + maNV + " " + "khỏi lịch " + maLLV, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Đã xoá nhân viên {maNV} khỏi lịch {maLLV}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
                 }

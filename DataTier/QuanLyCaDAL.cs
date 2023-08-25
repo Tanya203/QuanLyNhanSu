@@ -108,14 +108,14 @@ namespace QuanLyNhanSu.DataTier
                 {
                     MessageBoxManager.Yes = "Có";
                     MessageBoxManager.No = "Không";
-                    DialogResult ketQua = MessageBox.Show("Xác nhận xoá ca " + ca.TenCa + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult ketQua = MessageBox.Show($"Xác nhận xoá ca {ca.TenCa}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (ketQua == DialogResult.Yes)
                     {
                         MessageBoxManager.Yes = "Có";
                         MessageBoxManager.No = "Không";
                         quanLyNhanSu.Cas.Remove(ca);
                         quanLyNhanSu.SaveChanges();
-                        MessageBox.Show("Đã xoá ca " + ca.TenCa, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);                        
+                        MessageBox.Show($"Đã xoá ca {ca.TenCa}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);                        
                         return true;
                     }
                 }
