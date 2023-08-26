@@ -3,14 +3,9 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
@@ -35,7 +30,7 @@ namespace QuanLyNhanSu.PresentationTier
             phongBanBUS = new QuanLyPhongBanBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
-            nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             txtMaCV.ReadOnly = true;
             txtTongSoNhanVien.ReadOnly = true;
             btnThem.Enabled = false;
@@ -55,9 +50,9 @@ namespace QuanLyNhanSu.PresentationTier
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
@@ -194,8 +189,10 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chucVuBUS.Save(chucVu))
             {
+                string tenChucVu = txtTenCV.Text;
+                string phongBan = cmbPhongBan.Text;
                 string luongKhoiDiem = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongKhoiDiem.Text));
-                string thaoTac = "Thêm chức vụ : " + txtTenCV.Text + "\n   - Phòng ban: " + cmbPhongBan.Text + "\n   - Lương khỏi điểm: " + luongKhoiDiem; 
+                string thaoTac = $"Thêm chức vụ: {tenChucVu}\n - Phòng ban: {phongBan}\n - Lương khỏi điểm: {luongKhoiDiem}";
                 LichSuThaoTac(thaoTac);
             }
             Reload();
@@ -230,7 +227,7 @@ namespace QuanLyNhanSu.PresentationTier
                 string tenChucVu = txtTenCV.Text;
                 string phongBan = cmbPhongBan.Text;
                 string luongKhoiDiem = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongKhoiDiem.Text));
-                string thaoTac = "Xoá chức vụ " + tenChucVu + ":\n    - Phòng ban: " + phongBan + "\n    - Lương khởi điểm: " + luongKhoiDiem;
+                string thaoTac = $"Xoá chức vụ {tenChucVu}:\n - Phòng ban: {phongBan}\n - Lương khởi điểm: {luongKhoiDiem}";
                 LichSuThaoTac(thaoTac);
                 Reload();
             }            

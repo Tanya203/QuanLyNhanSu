@@ -3,20 +3,13 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmQuanLyLoaiHopDong : Form
     {
-        private Thread currentForm;
         private readonly QuanLyLoaiHopDongBUS loaiHopDongBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;  
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
@@ -25,7 +18,6 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<LoaiHopDongViewModels> danhSachLoaiHopDongTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
-        private readonly string hoTen;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiHopDong(string maNV)
         {
@@ -35,8 +27,7 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             hinhThucChamCongBUS = new HinhThucChamCongBUS();
-            nv = nhanVienBUS.ThongTinNhanVien(maNV);
-            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             txtMaLHD.ReadOnly = true;
             txtSoLuongNhanVien.ReadOnly = true;
             btnThem.Enabled = false;
@@ -53,12 +44,12 @@ namespace QuanLyNhanSu.PresentationTier
             LoadHinhThucChamCong();
         }
         public void LoadThongTinDangNhap()
-        {            
+        {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
@@ -143,6 +134,28 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void LichSuThaoTac(string thaoTac)
+        {
+            LichSuThaoTac newLstt = new LichSuThaoTac
+            {
+                NgayGio = DateTime.Now.ToString(formatDateTime),
+                MaNV = maNV,
+                ThaoTacThucHien = thaoTac,
+            };
+            lichSuThaoTacBUS.Save(newLstt);
+        }
+        private string CheckChange()
+        {
+            List<string> changes = new List<string>();
+            LoaiHopDong lhd = loaiHopDongBUS.GetLoaiHopDong().FirstOrDefault(hd => hd.MaLHD == txtMaLHD.Text);
+            string tenLoaiHopDong = txtTenLHD.Text;
+            string hinhThucChamCong = cmbHinhThucChamCong.Text;
+            if (tenLoaiHopDong != lhd.TenLoaiHopDong)
+                changes.Add($"- Tên loại hợp đồng {lhd.TenLoaiHopDong} -> Tên loại hợp đồng: {tenLoaiHopDong}");
+            if (hinhThucChamCong != lhd.HinhThucChamCong.TenHinhThucChamCong)
+                changes.Add($"- Hình thức chấm công: {lhd.HinhThucChamCong.TenHinhThucChamCong} -> Hình thức chấm công: {hinhThucChamCong}");
+            return string.Join("\n", changes);
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
             LoaiHopDong newLoaiHopDong = new LoaiHopDong
@@ -153,13 +166,10 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (loaiHopDongBUS.Save(newLoaiHopDong))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm loại hợp đồng '" + txtTenLHD.Text + "'",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string tenLoaiHopDong = txtTenLHD.Text;
+                string hinhThucChamCong = cmbHinhThucChamCong.Text;
+                string thaoTac = $"Thêm loại hợp đông {tenLoaiHopDong}: \n  - Hình thức chấm công: {hinhThucChamCong}";
+                LichSuThaoTac(thaoTac);
             }
             Reload();
         }
@@ -169,6 +179,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
+            string chiTietSua = CheckChange();
             LoaiHopDong newLoaiHopDong = new LoaiHopDong
             {
                 MaLHD = txtMaLHD.Text,
@@ -177,13 +188,10 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (loaiHopDongBUS.Save(newLoaiHopDong))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " chỉnh sửa loại hợp đồng '" + txtMaLHD.Text + "'",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = $"Sửa loại hợp đồng {txtMaLHD.Text}";                
+                if (!string.IsNullOrEmpty(chiTietSua))
+                    thaoTac += $":\n{chiTietSua}";
+                LichSuThaoTac(thaoTac);
                 Reload();
             }            
         }
@@ -195,16 +203,12 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (loaiHopDongBUS.Delete(loaiHopDong))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm chức vụ '" + txtMaLHD.Text + "'",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string tenLoaiHopDong = txtTenLHD.Text;
+                string hinhThucChamCong = cmbHinhThucChamCong.Text;
+                string thaoTac = $"Xoá loại hợp đồng {tenLoaiHopDong}:\n    - Hình thức chấm công: {hinhThucChamCong}";
+                LichSuThaoTac(thaoTac);
                 Reload();
-            }
-            
+            }            
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {

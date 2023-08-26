@@ -1,17 +1,11 @@
-﻿using MDriven.WPF;
-using QuanLyNhanSu.DataTier.Models;
+﻿using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.LogicTier;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WECPOFLogic;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -229,7 +223,7 @@ namespace QuanLyNhanSu.PresentationTier
         
         private void btnChamCong_Click(object sender, EventArgs e)
         {
-            NhanVien nhanVien = nhanVienBUS.ThongTinNhanVien(txtMaNV.Text);
+            NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);
             if(nhanVien == null)
             {
                 MessageBox.Show("Mã nhân viên không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);

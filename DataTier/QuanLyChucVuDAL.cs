@@ -45,10 +45,6 @@ namespace QuanLyNhanSu.DataTier
                               chucVu.LuongKhoiDiem.ToString().Contains(timKiem)).OrderBy(cv => cv.MaCV);
             return danhSachChucVu;
         }
-        public IEnumerable<ChucVu> GetChucVuTheoPhongBan(string maPB)
-        {
-            return quanLyNhanSu.ChucVus.Where(cv => cv.MaPB == maPB).OrderBy(cv => cv.MaCV).ToList();
-        }
         public decimal GetLuongCoBanCuaChucVu(string maCV)
         {
             return quanLyNhanSu.ChucVus.Where(cv => cv.MaCV == maCV).Sum(cv => cv.LuongKhoiDiem);

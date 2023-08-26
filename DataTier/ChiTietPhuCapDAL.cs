@@ -70,9 +70,9 @@ namespace QuanLyNhanSu.DataTier
                      pc.ChucVu.Contains(timKiem))).OrderBy(pc => pc.MaNV);
             return phuCapTimKiem;
         }
-        public List<ChiTietPhuCap> ThongTinPhuCapNhanVien(string maNV)
+        public IEnumerable<ChiTietPhuCap> GetChiTIetPhuCap()
         {
-            return quanLyNhanSu.ChiTietPhuCaps.Where(pc => pc.MaNV == maNV).ToList();   
+            return quanLyNhanSu.ChiTietPhuCaps.OrderBy(ctpc => ctpc.MaPC).ToList();
         }
         public bool Save(ChiTietPhuCap chiTietPhuCap)
         {

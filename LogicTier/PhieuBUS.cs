@@ -32,9 +32,9 @@ namespace QuanLyNhanSu.LogicTier
         {
             return phieuDAL.Delete(phieu.MaP);
         }
-        public Phieu ThongTinPhieu(string maP)
+        public IEnumerable<Phieu> GetPhieu()
         {
-            return phieuDAL.ThongTinPhieu(maP);
+            return phieuDAL.GetPhieu();
         }
     }
 }

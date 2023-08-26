@@ -3,14 +3,10 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
@@ -37,7 +33,7 @@ namespace QuanLyNhanSu.PresentationTier
             chiTietPhuCapBUS = new ChiTietPhuCapBUS();
             phuCapBUS = new QuanLyPhuCapBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
-            nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             ctpc = chiTietPhuCapBUS.GetPhuCapMotNhanVien(nhanVienPC);
             this.maNV = maNV;
             this.nhanVienPC = nhanVienPC;
@@ -63,9 +59,9 @@ namespace QuanLyNhanSu.PresentationTier
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
@@ -143,7 +139,7 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chiTietPhuCapBUS.Save(chiTietPhuCap))
             {
-                string thaoTac = "Thêm phụ cấp " + cmbPhuCap.Text + " cho nhân viên ";
+                string thaoTac = $"Thêm phụ cấp {cmbPhuCap.Text} cho nhân viên";
                 LichSuThaoTac(thaoTac, nhanVienPC);
             }
             txtSoTien.Text = string.Empty;
@@ -175,7 +171,7 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chiTietPhuCapBUS.Delete(chiTietPhuCap))
             {
-                string thaoTac = "Xoá phụ cấp " + tenPC + " của nhân viên ";
+                string thaoTac = $"Xoá phụ cấp {tenPC} của nhân viên";
                 LichSuThaoTac(thaoTac, nhanVienPC);
                 Reload();
             }

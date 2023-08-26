@@ -308,11 +308,11 @@
     <Compile Include="PresentationTier\FrmQuenMatKhau.Designer.cs">
       <DependentUpon>FrmQuenMatKhau.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmThongKeLuong.cs">
+    <Compile Include="PresentationTier\FrmThongKe.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmThongKeLuong.Designer.cs">
-      <DependentUpon>FrmThongKeLuong.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmThongKe.Designer.cs">
+      <DependentUpon>FrmThongKe.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationTier\FrmThongTinTaiKhoan.cs">
       <SubType>Form</SubType>
@@ -402,8 +402,8 @@
     <EmbeddedResource Include="PresentationTier\FrmQuenMatKhau.resx">
       <DependentUpon>FrmQuenMatKhau.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmThongKeLuong.resx">
-      <DependentUpon>FrmThongKeLuong.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmThongKe.resx">
+      <DependentUpon>FrmThongKe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\FrmThongTinTaiKhoan.resx">
       <DependentUpon>FrmThongTinTaiKhoan.cs</DependentUpon>

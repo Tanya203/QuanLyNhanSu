@@ -36,9 +36,9 @@ namespace QuanLyNhanSu.LogicTier
         {
             return chiTietPhieuDAL.TongTienPhieu(maPhieu);
         }
-        public IEnumerable<ChiTietPhieu> ThongTinChiTietPhieu(string maP)
+        public IEnumerable<ChiTietPhieu> GetChiTietPhieu()
         {
-            return chiTietPhieuDAL.ThongTinChiTietPhieu(maP);
+            return chiTietPhieuDAL.GetChiTietPhieu();
         }
         public decimal SoTienNhanVienTrongPhieu(string maNV, string maPhieu)
         {

@@ -49,7 +49,7 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             chiTietPhuCapBUS = new ChiTietPhuCapBUS();
             MessageBoxManager.Register_OnceOnly();
-            nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             this.maNV = maNV;
         }
@@ -81,12 +81,12 @@ namespace QuanLyNhanSu.PresentationTier
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         public void LoadThongTinDangNhap()
-        {            
+        {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
@@ -182,7 +182,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void LoadChucVuTheoPhongBan(string maPB)
         {
-            cmbChucVu.DataSource = chucVuBUS.GetChucVuTheoPhongBan(maPB);
+            cmbChucVu.DataSource = chucVuBUS.GetChucVu().Where(cv => cv.MaPB == maPB).ToList();
         }
         public void LoadLoaiHopDong()
         {
@@ -497,7 +497,7 @@ namespace QuanLyNhanSu.PresentationTier
             string gioiTinh = ChonGioiTinh();
             if (string.IsNullOrEmpty(gioiTinh))
                 return;
-            NhanVien nhanVien = nhanVienBUS.ThongTinNhanVien(txtMaNV.Text);                     
+            NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);                     
             nhanVien.MaCV = cmbChucVu.SelectedValue.ToString();
             nhanVien.MaLHD = cmbLoaiHopDong.SelectedValue.ToString();
             /*nhanVien.MatKhau = matKhau;//*/
@@ -582,7 +582,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnMoKhoa_Click(object sender, EventArgs e)
         {
             string hoTen = txtHo.Text + " " + txtTenLot.Text + " " + txtTen.Text;
-            NhanVien nhanVien = nhanVienBUS.ThongTinNhanVien(txtMaNV.Text);
+            NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);
             nhanVien.NgayKhoa = null;
             MessageBoxManager.Yes = "Có";
             MessageBoxManager.No = "Không";
@@ -658,7 +658,7 @@ namespace QuanLyNhanSu.PresentationTier
             dtpThoiHanHopDong.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[20].Value.ToString();
             txtTinhTrang.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[21].Value.ToString();
             txtSoNgayPhep.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[22].Value.ToString();
-            txtLuongCoBan.Text = nhanVienBUS.ThongTinNhanVien(txtMaNV.Text).LuongCoBan.ToString();
+            txtLuongCoBan.Text = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text).LuongCoBan.ToString();
             txtPhuCap.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(txtMaNV.Text));
             txtNgayKhoa.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[25].Value.ToString();
             txtSoTienNo.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[26].Value.ToString();
