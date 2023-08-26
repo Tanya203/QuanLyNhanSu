@@ -3,16 +3,11 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WECPOFLogic;
-using static System.Net.WebRequestMethods;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -46,14 +41,14 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             caBUS = new QuanLyCaBUS();
             loaiCaBUS = new QuanLyLoaiCaBUS();
-            nv = nhanVienBUS.ThongTinNhanVien(maNV);
-            chamCong = chiTietLichLamViecBUS.ThongTinChamCong(maLLV);
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
+            chamCong = chiTietLichLamViecBUS.GetChiTietLichLamViec().Where(ct => ct.MaLLV == maLLV);
             this.maNV = maNV;
             this.maLLV = maLLV;
             maPB = nv.ChucVu.PhongBan.MaPB;
             countCa = caBUS.GetCa().Count();
             MessageBoxManager.Register_OnceOnly();
-            llv = lichLamViecBUS.ThongTinLichLamViec(maLLV);
+            llv = lichLamViecBUS.GetLichLamViec().FirstOrDefault(llv => llv.MaLLV == maLLV); 
             now = DateTime.Now.ToString(formatDate);
         }
         private void FrmChiTietLichLamViec_Load(object sender, EventArgs e)
@@ -95,9 +90,9 @@ namespace QuanLyNhanSu.PresentationTier
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
@@ -110,7 +105,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void LoadNhanVienTheoPhongBan()
         {            
-            List<NhanVien> nhanVienList = nhanVienBUS.GetNhanVienPhongBan(maPB).ToList();   
+            List<NhanVien> nhanVienList = nhanVienBUS.GetNhanVien().Where(nv => nv.ChucVu.PhongBan.MaPB == maPB).ToList();   
             foreach(var nv in nhanVienList)
             {
                 int count = chamCong.Where(x => x.MaNV == nv.MaNV).Count();
@@ -207,7 +202,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             if (!string.IsNullOrEmpty(cmbNhanVien.Text))
             {
-                NhanVien nv = nhanVienBUS.ThongTinNhanVien(cmbNhanVien.SelectedValue.ToString());
+                NhanVien nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nhanVien => nhanVien.MaNV == cmbNhanVien.Text);
                 txtHoTenNV.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
                 btnThem.Enabled = true;
                 LoadCa(dtpNgayLam.Text, cmbNhanVien.SelectedValue.ToString());

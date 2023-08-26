@@ -3,20 +3,13 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmQuanLyLoaiCa : Form
     {
-        Thread currentForm;
         private readonly QuanLyLoaiCaBUS loaiCaBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
@@ -24,7 +17,6 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<LoaiCaViewModels> danhSachLoaiCaTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
-        private readonly string hoTen;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiCa(string maNV)
         {
@@ -33,8 +25,7 @@ namespace QuanLyNhanSu.PresentationTier
             loaiCaBUS = new QuanLyLoaiCaBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
-            nv = nhanVienBUS.ThongTinNhanVien(maNV);
-            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             txtMaLC.ReadOnly = true;           
             btnThem.Enabled = false;
             btnSua.Enabled = false;
@@ -47,12 +38,12 @@ namespace QuanLyNhanSu.PresentationTier
             LoadThongTinDangNhap();
         }
         public void LoadThongTinDangNhap()
-        {           
+        {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
@@ -156,7 +147,7 @@ namespace QuanLyNhanSu.PresentationTier
         private string CheckChange()
         {
             List<string> changes = new List<string>();
-            LoaiCa loaiCa = loaiCaBUS.GetLoaiCa().Where(lc => lc.MaLC == txtMaLC.Text).FirstOrDefault();
+            LoaiCa loaiCa = loaiCaBUS.GetLoaiCa().FirstOrDefault(lc => lc.MaLC == txtMaLC.Text);
             string tenLoaiCa = txtTenLC.Text;
             string heSoLuong = txtHeSoLuong.Text;
             if (tenLoaiCa != loaiCa.TenLoaiCa)
@@ -175,13 +166,16 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (loaiCaBUS.Save(newLoaiCa))
             {
-                string thaoTac = "Thêm loại ca " + txtTenLC.Text + "\n  - Hệ số lương: " + decimal.Parse(txtHeSoLuong.Text);
+                string loaiCa = txtTenLC.Text;
+                decimal heSoLuong = decimal.Parse(txtHeSoLuong.Text);
+                string thaoTac = $"Thêm loại ca {loaiCa}\n - Hệ số lương: {heSoLuong}";
                 LichSuThaoTac(thaoTac);
             }
             Reload();          
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
+            string chiTietSua = CheckChange();
             LoaiCa newLoaiCa = new LoaiCa
             {
                 MaLC = txtMaLC.Text,
@@ -190,8 +184,7 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (loaiCaBUS.Save(newLoaiCa))
             {
-                string thaoTac = "Sửa loại ca " + txtMaLC.Text;
-                string chiTietSua = CheckChange();
+                string thaoTac = $"Sửa loại ca {txtMaLC.Text}";                
                 if (!string.IsNullOrEmpty(chiTietSua))
                     thaoTac += ":\n" + chiTietSua;
                 LichSuThaoTac(thaoTac);

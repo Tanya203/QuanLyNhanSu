@@ -24,13 +24,9 @@ namespace QuanLyNhanSu.LogicTier
         {
             return chiTietLichLamViecDAL.SearchChiTietLichLamViec(maLLV, timKiem);
         }
-        public IEnumerable<ChamCong> ThongTinChamCong(string maLLV)
+        public IEnumerable<ChamCong> GetChiTietLichLamViec()
         {
-            return chiTietLichLamViecDAL.ThongTinChamCong(maLLV);
-        }
-        public IEnumerable<ChamCong> LichLamViecNhanVien(string maNV, string ngayLam)
-        {
-            return chiTietLichLamViecDAL.LichLamViecNhanVien(maNV, ngayLam);
+            return chiTietLichLamViecDAL.GetChiTietLichLamViec();
         }
         public bool Save(ChamCong chamCong)
         {

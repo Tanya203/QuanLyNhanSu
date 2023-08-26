@@ -62,13 +62,9 @@ namespace QuanLyNhanSu.DataTier
                      llv.LoaiCa.Contains(timKiem))).OrderBy(llv => llv.MaNV);
             return chiTietLichLamViec;
         }       
-        public IEnumerable<ChamCong> ThongTinChamCong(string maLLV)
+        public IEnumerable<ChamCong> GetChiTietLichLamViec()
         {
-            return quanLyNhanSu.ChamCongs.Where(llv => llv.MaLLV == maLLV).ToList();
-        }
-        public IEnumerable<ChamCong> LichLamViecNhanVien(string maNV, string ngayLam)
-        {
-            return quanLyNhanSu.ChamCongs.Where(llv => llv.MaNV == maNV && llv.LichLamViec.NgayLam.ToString() == ngayLam).ToList();
+            return quanLyNhanSu.ChamCongs.OrderBy(c => c.MaLLV).ToList();
         }
         public bool Save(ChamCong chamCong)
         {

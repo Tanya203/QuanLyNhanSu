@@ -2,14 +2,8 @@
 using QuanLyNhanSu.LogicTier;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WECPOFLogic;
 
@@ -28,7 +22,7 @@ namespace QuanLyNhanSu.PresentationTier
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
             chiTietLichLamViecBUS = new ChiTietLichLamViecBUS();
-            nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             this.maNV = maNV;
             MessageBoxManager.Register_OnceOnly();
         }
@@ -41,9 +35,9 @@ namespace QuanLyNhanSu.PresentationTier
         {
             lblMaNV.Text = nv.MaNV;
             if(string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV.Text = nv.Ho + " " + nv.Ten;
+                lblHoTenNV.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+                lblHoTenNV.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV.Text = nv.ChucVu.TenChucVu;
             lblSoNgayPhepConNV.Text = nv.SoNgayPhep.ToString();
@@ -51,7 +45,8 @@ namespace QuanLyNhanSu.PresentationTier
         public void LoadLichLamViec()
         {
             dgvLichLamViec.Rows.Clear();
-            lichLamViec = chiTietLichLamViecBUS.LichLamViecNhanVien(maNV,dtpLichLamViec.Value.ToString(formatDate)) ;
+            DateTime ngayLam = DateTime.Parse(dtpLichLamViec.Value.ToString(formatDate));
+            lichLamViec = chiTietLichLamViecBUS.GetChiTietLichLamViec().Where(llv => llv.MaNV == maNV && llv.LichLamViec.NgayLam == ngayLam);
             int rowAdd;
             foreach (var nv in lichLamViec)
             {
@@ -127,7 +122,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnQLTK_Click(object sender, EventArgs e)
         {
-            FrmThongKeLuong frmOpen = new FrmThongKeLuong(maNV);
+            FrmThongKe frmOpen = new FrmThongKe(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;

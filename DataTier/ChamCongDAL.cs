@@ -18,7 +18,7 @@ namespace QuanLyNhanSu.DataTier
             quanLyNhanSu = new QuanLyNhanSuContextDB();
             MessageBoxManager.Register_OnceOnly();
         }
-        public List<ChamCong> GetLichLamViecTheoNgay(string ngayLam)
+        public IEnumerable<ChamCong> GetLichLamViecTheoNgay(string ngayLam)
         {
             return quanLyNhanSu.ChamCongs.Where(llv => llv.LichLamViec.NgayLam.ToString() == ngayLam).ToList();
         }

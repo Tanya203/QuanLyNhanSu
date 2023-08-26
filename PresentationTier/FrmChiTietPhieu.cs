@@ -3,14 +3,10 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
@@ -41,8 +37,8 @@ namespace QuanLyNhanSu.PresentationTier
             phieuBUS = new PhieuBUS();
             chiTietPhieuBus = new ChiTietPhieuBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
-            nv = nhanVienBUS.ThongTinNhanVien(maNV);
-            phieu = phieuBUS.ThongTinPhieu(maP);
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
+            phieu = phieuBUS.GetPhieu().FirstOrDefault(p => p.MaP == maP);
             this.maNV = maNV;
             this.maP = maP;
         }
@@ -54,7 +50,7 @@ namespace QuanLyNhanSu.PresentationTier
             cmbChucVu.ValueMember = "MaCV";
             cmbNhanVien.DisplayMember = "MaNV";
             cmbNhanVien.ValueMember = "MaNV";
-            ctp = chiTietPhieuBus.ThongTinChiTietPhieu(maP);
+            ctp = chiTietPhieuBus.GetChiTietPhieu().Where(ctp => ctp.MaP == maP);
             LoadThongTinDangNhap();
             LoadThongTinPhieuThuong();
             LoadChiTietPhieuThuong();
@@ -73,11 +69,11 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void LoadChucVuTheoPhongBan(string maPB)
         {
-            cmbChucVu.DataSource = chucVuBUS.GetChucVuTheoPhongBan(maPB);
+            cmbChucVu.DataSource = chucVuBUS.GetChucVu().Where(cv => cv.MaPB == maPB).ToList();
         }
         public void LoadNhanVienTheoChucVu(string maCV)
         {
-            List<NhanVien> nhanVienList = nhanVienBUS.GetNhanVienChucVu(maCV).ToList();
+            List<NhanVien> nhanVienList = nhanVienBUS.GetNhanVien().Where(nv => nv.MaCV == maCV).ToList();
             foreach (var pt in ctp)
                 nhanVienList = nhanVienList.Where(nv => nv.MaNV != pt.MaNV).ToList();
             cmbNhanVien.DataSource = nhanVienList;
@@ -105,9 +101,9 @@ namespace QuanLyNhanSu.PresentationTier
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
@@ -116,7 +112,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtMaP.Text = phieu.MaP;
             txtLoaiPhieu.Text = phieu.LoaiPhieu.TenLoaiPhieu;
             txtMaNV.Text = phieu.MaNV;
-            txtHoTenTT.Text = phieu.NhanVien.Ho + " " + phieu.NhanVien.TenLot + " " + phieu.NhanVien.Ten;
+            txtHoTenTT.Text = $"{phieu.NhanVien.Ho} {phieu.NhanVien.TenLot} {phieu.NhanVien.Ten}";
             txtPhongBan.Text = phieu.NhanVien.ChucVu.PhongBan.TenPhongBan;
             txtChucVu.Text = phieu.NhanVien.ChucVu.TenChucVu;
             dtpNgayLapPhieu.Text = phieu.NgayLap.ToString();
@@ -165,8 +161,8 @@ namespace QuanLyNhanSu.PresentationTier
         ///////////////////////////////////////////////////////////////////////////////////////////
         private void cmbNhanVien_SelectedIndexChanged(object sender, EventArgs e)
         {            
-            NhanVien nv = nhanVienBUS.ThongTinNhanVien(cmbNhanVien.SelectedValue.ToString());
-            txtHoTenNV.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+            NhanVien nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nhanVien => nhanVien.MaNV == cmbNhanVien.Text);
+            txtHoTenNV.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             txtMaNV_Sua.Text = string.Empty;
             txtSoTien.Text = string.Empty;
         }
@@ -263,7 +259,7 @@ namespace QuanLyNhanSu.PresentationTier
         private string CheckChange()
         {
             List<string> changes = new List<string>();
-            ChiTietPhieu nhanVien = chiTietPhieuBus.ThongTinChiTietPhieu(maP).FirstOrDefault(phieu => phieu.MaNV == txtMaNV_Sua.Text);
+            ChiTietPhieu nhanVien = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(phieu => phieu.MaNV == txtMaNV_Sua.Text);
             string soTienCu = string.Format(fVND, "{0:N3} ₫", nhanVien.SoTien);
             string soTienMoi = string.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
             if (rtxtGhiChu.Text != nhanVien.GhiChu)

@@ -24,10 +24,6 @@ namespace QuanLyNhanSu.LogicTier
         {
             return chucVuDAL.SearchChucVu(timKiem);
         }
-        public IEnumerable<ChucVu> GetChucVuTheoPhongBan(string maPB)
-        {
-            return chucVuDAL.GetChucVuTheoPhongBan(maPB);
-        }
         public IEnumerable<ChucVu> GetChucVu()
         {
             return chucVuDAL.GetChucVu();

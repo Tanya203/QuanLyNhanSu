@@ -32,12 +32,10 @@ namespace QuanLyNhanSu.LogicTier
         {
             return loaiHopDongDAL.Save(loaiHopDong);
         }
-
         public bool Delete(LoaiHopDong loaiHopDong)
         {
             return loaiHopDongDAL.Delete(loaiHopDong.MaLHD);
         }
-
         public int TongSoNhanVienTrongLoaiHopDong(string maLHD)
         {
             return loaiHopDongDAL.TongSoNhanVienTrongLoaiHopDong(maLHD);

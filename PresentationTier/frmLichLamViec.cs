@@ -3,13 +3,9 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
@@ -33,7 +29,7 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichLamViecBUS = new LichLamViecBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
-            nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             this.maNV = maNV;
             maPB = nv.ChucVu.PhongBan.MaPB;
             now = DateTime.Now.ToString(formatDate);
@@ -47,12 +43,12 @@ namespace QuanLyNhanSu.PresentationTier
             btnThem.Enabled = false;
         }
         public void LoadThongTinDangNhap()
-        {            
+        {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }             
@@ -165,7 +161,7 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (lichLamViecBUS.Delete(lichLamViec))
             {
-                string thaoTac = "Xoá lịch làm việc " + maLLV + " - ngày " + ngayLam + " - phòng ban " + phongBan;
+                string thaoTac = $"Xoá lịch làm việc ngày {ngayLam} - phòng ban {phongBan}";
                 LichSuThaoTac(thaoTac);
                 Reload();
             }
@@ -181,7 +177,9 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (lichLamViecBUS.Save(lichLamViec))
             {
-                string thaoTac = "Thêm lịch làm việc ngày " + dtpNgayLam.Text + " - phòng ban " + nv.ChucVu.PhongBan.TenPhongBan;
+                string ngayLam = dtpNgayLam.Text;
+                string phongBan = nv.ChucVu.PhongBan.TenPhongBan;
+                string thaoTac = $"Thêm lịch làm việc ngày {ngayLam} - phòng ban {phongBan}";
                 LichSuThaoTac(thaoTac);
             }
             Reload();
@@ -237,7 +235,8 @@ namespace QuanLyNhanSu.PresentationTier
         private void dtpNgayLam_ValueChanged(object sender, EventArgs e)
         {
             int check = 0;
-            List<LichLamViec> locLich = lichLamViecBUS.LocLichTheoNgay(maPB, dtpNgayLam.Text).ToList();
+            DateTime ngayLam = DateTime.Parse(dtpNgayLam.Text);
+            IEnumerable<LichLamViec> locLich = lichLamViecBUS.GetLichLamViec().Where(llv => llv.NhanVien.ChucVu.PhongBan.MaPB == maPB && llv.NgayLam == ngayLam);
             foreach (var nv in locLich)            
                 if (nv.NgayLam.ToString(formatDate) == dtpNgayLam.Text)
                 {

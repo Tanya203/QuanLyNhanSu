@@ -3,20 +3,13 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmQuanLyLoaiPhieu : Form
     {
-        private Thread currentForm;
         private readonly QuanLyLoaiPhieuBUS loaiPhieuBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
@@ -32,7 +25,7 @@ namespace QuanLyNhanSu.PresentationTier
             loaiPhieuBUS = new QuanLyLoaiPhieuBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();            
-            nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             this.maNV = maNV;
         }
@@ -50,9 +43,9 @@ namespace QuanLyNhanSu.PresentationTier
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
@@ -101,10 +94,10 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void Reload()
         {
-            this.Close();
-            currentForm = new Thread(new ThreadStart(() => CloseCurrentForm(maNV)));
-            currentForm.SetApartmentState(ApartmentState.STA);
-            currentForm.Start();
+            FrmQuanLyLoaiPhieu frmOpen = new FrmQuanLyLoaiPhieu(maNV);
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
         }
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
@@ -138,6 +131,25 @@ namespace QuanLyNhanSu.PresentationTier
                 LoadLoaiPhieu();
         }
         //////////////////////////////////////////////////////////////////////////////////////////
+        private void LichSuThaoTac(string thaoTac)
+        {
+            LichSuThaoTac newLstt = new LichSuThaoTac
+            {
+                NgayGio = DateTime.Now.ToString(formatDateTime),
+                MaNV = maNV,
+                ThaoTacThucHien = thaoTac,
+            };
+            lichSuThaoTacBUS.Save(newLstt);
+        }
+        private string CheckChange()
+        {
+            List<string> changes = new List<string>();
+            LoaiPhieu loaiPhieu = loaiPhieuBUS.GetLoaiPhieu().FirstOrDefault(lp => lp.MaLP == txtMaLP.Text);
+            string tenLoaiPhieu = txtTenLoaiPhieu.Text;
+            if (tenLoaiPhieu != loaiPhieu.TenLoaiPhieu)
+                changes.Add($"- Tên loại phiếu: {loaiPhieu.TenLoaiPhieu} -> Tên loại phiếu: {tenLoaiPhieu}");
+            return string.Join("\n", changes);
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
             LoaiPhieu newLoaiPhieu = new LoaiPhieu
@@ -147,18 +159,14 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (loaiPhieuBUS.Save(newLoaiPhieu))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm loại phiếu '" + txtTenLoaiPhieu.Text + "'",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = $"Thêm loại phiếu {txtTenLoaiPhieu.Text}";
+                LichSuThaoTac(thaoTac);
             }
             Reload();
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
+            string chiTietSua = CheckChange();
             LoaiPhieu newLoaiPhieu = new LoaiPhieu
             {
                 MaLP = txtMaLP.Text,
@@ -166,13 +174,10 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (loaiPhieuBUS.Save(newLoaiPhieu))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " chỉnh sửa loại phiếu " + txtMaLP.Text,
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = $"Sửa loại phiếu {txtMaLP.Text}";                
+                if (!string.IsNullOrEmpty(chiTietSua))
+                    thaoTac += $":\n{chiTietSua}";
+                LichSuThaoTac(thaoTac);
                 Reload();
             }
         }
@@ -184,13 +189,8 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (loaiPhieuBUS.Delete(newLoaiPhieu))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá loại phiếu " + txtTenLoaiPhieu.Text,
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = $"Xoá loại phiếu {txtTenLoaiPhieu.Text}";
+                LichSuThaoTac(thaoTac);
                 Reload();
             }
         }

@@ -43,8 +43,7 @@ namespace QuanLyNhanSu.DataTier
         public IEnumerable<LoaiHopDong> GetLoaiHopDong()
         {
             return quanLyNhanSu.LoaiHopDongs.OrderBy(lhd => lhd.MaLHD).ToList();
-        }
-      
+        }      
         public bool Save(LoaiHopDong loaiHopDong)
         {
             try

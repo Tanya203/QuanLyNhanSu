@@ -62,6 +62,10 @@ namespace QuanLyNhanSu.DataTier
                 return chiTietPhieu.SoTien;
             return 0;
         }
+        public IEnumerable<ChiTietPhieu> GetChiTietPhieu()
+        {
+            return quanLyNhanSu.ChiTietPhieux.OrderBy(ctp => ctp.MaP).ToList();
+        }
         public IEnumerable<ChiTietPhieu> ThongTinChiTietPhieu(string maP)
         {
             return quanLyNhanSu.ChiTietPhieux.Where(pt => pt.MaP == maP).ToList();

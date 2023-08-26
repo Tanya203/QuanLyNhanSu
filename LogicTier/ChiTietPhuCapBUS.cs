@@ -36,9 +36,9 @@ namespace QuanLyNhanSu.LogicTier
         {
             return chiTietPhuCapDAL.Delete(chiTietPhuCap.MaNV, chiTietPhuCap.MaPC);
         }
-        public List<ChiTietPhuCap> ThongTinPhuCapNhanVien(string maNV)
+        public IEnumerable<ChiTietPhuCap> GetChiTIetPhuCap()
         {
-            return chiTietPhuCapDAL.ThongTinPhuCapNhanVien(maNV);
+            return chiTietPhuCapDAL.GetChiTIetPhuCap();
         }
         public decimal TongPhuCapMotNhanVien(string maNV)
         {

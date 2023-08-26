@@ -24,10 +24,6 @@ namespace QuanLyNhanSu.LogicTier
         {
             return caDAL.SearchCa(timKiem);
         }
-        public Ca ThongTinCa(string maCa)
-        {
-            return caDAL.ThongTinCa(maCa);
-        }
         public IEnumerable<Ca> GetCa()
         {
             return caDAL.GetCa();

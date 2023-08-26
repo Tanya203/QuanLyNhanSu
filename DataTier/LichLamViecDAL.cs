@@ -51,14 +51,10 @@ namespace QuanLyNhanSu.DataTier
                      llv.HoTen.Contains(timKiem)))).OrderBy(llv => llv.MaNV);
             return lichLamViec;
         }
-        public LichLamViec ThongTinLichLamViec(string maLLV)
+        public IEnumerable<LichLamViec> GetLichLamViec()
         {
-            return quanLyNhanSu.LichLamViecs.Where(llv => llv.MaLLV == maLLV).FirstOrDefault();
+            return quanLyNhanSu.LichLamViecs.OrderBy(llv => llv.MaLLV).ToList();
         }
-        public IEnumerable<LichLamViec> LocLichTheoNgay(string maPB ,string ngayLam)
-        {
-            return quanLyNhanSu.LichLamViecs.Where(llv => llv.NhanVien.ChucVu.PhongBan.MaPB == maPB && llv.NgayLam.ToString() == ngayLam).ToList();
-        }       
         public bool Save(LichLamViec lichLamViec)
         {
             try

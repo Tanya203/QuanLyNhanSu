@@ -3,14 +3,7 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
@@ -32,7 +25,7 @@ namespace QuanLyNhanSu.PresentationTier
             caBUS = new QuanLyCaBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
-            nv = nhanVienBUS.ThongTinNhanVien(maNV);
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             txtMaCa.ReadOnly = true;
             dtpThoiGianBatDau.Text = "00:00";
             dtpThoiGianKetThuc.Text = "00:00";
@@ -51,9 +44,9 @@ namespace QuanLyNhanSu.PresentationTier
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
@@ -148,7 +141,7 @@ namespace QuanLyNhanSu.PresentationTier
         private string CheckChange()
         {
             List<string> changes = new List<string>();
-            Ca ca = caBUS.ThongTinCa(txtMaCa.Text);
+            Ca ca = caBUS.GetCa().FirstOrDefault(c => c.MaCa == txtMaCa.Text);
             if (txtTenCa.Text != ca.TenCa)
                 changes.Add($"- Tên ca: {ca.TenCa} -> Tên ca: {txtTenCa.Text}");
             TimeSpan gioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text);
@@ -170,7 +163,10 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (caBUS.Save(newCa))
             {
-                string thaoTac = "Thêm ca " + txtTenCa.Text +  ":\n  - Giờ bắt đầu: " + dtpThoiGianBatDau.Text + "\n  - Giờ kết thúc:" + dtpThoiGianKetThuc.Text;
+                string ca = txtTenCa.Text;
+                string gioBatDau = dtpThoiGianBatDau.Text;
+                string gioKetThuc = dtpThoiGianKetThuc.Text;
+                string thaoTac = $"Thêm ca {ca}:\n - Giờ bắt đầu: {gioBatDau}\n - Giờ kết thúc: {gioKetThuc}";
                 LichSuThaoTac(thaoTac);
             }
             Reload();            
@@ -203,9 +199,10 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (caBUS.Delete(ca))
             {
+                string tenCa = txtTenCa.Text;
                 string gioBatDau = dtpThoiGianBatDau.Text;
                 string gioKetThuc = dtpThoiGianKetThuc.Text;
-                string thaoTac = "Xoá ca " + txtTenCa.Text + ":\n   - Giờ bắt đầu: " + gioBatDau + "\n   - Giờ kết thúc: " + gioKetThuc;
+                string thaoTac = $"Xoá ca {tenCa}:\n - Giờ bắt đầu: {gioBatDau}\n - Giờ kết thúc: {gioKetThuc}";
                 LichSuThaoTac(thaoTac);
                 Reload();
             }                    

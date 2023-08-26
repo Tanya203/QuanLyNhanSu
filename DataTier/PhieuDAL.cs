@@ -56,9 +56,9 @@ namespace QuanLyNhanSu.DataTier
                pt.NgayLap.ToString().Contains(timKiem)).OrderBy(x => x.MaP);
             return danhSachPhieuThuong;
         }
-        public Phieu ThongTinPhieu(string maP)
+        public IEnumerable<Phieu> GetPhieu()
         {
-            return quanLyNhanSu.Phieux.Where(pt => pt.MaP == maP).FirstOrDefault();
+            return quanLyNhanSu.Phieux.OrderBy(p => p.MaP).ToList();
         }
         public bool Save(Phieu phieu)
         {
