@@ -1,12 +1,8 @@
-﻿using Eco.FrameworkImpl.Ocl;
-using QuanLyNhanSu.DataTier.Models;
+﻿using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WECPOFLogic;
 

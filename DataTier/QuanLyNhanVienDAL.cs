@@ -2,16 +2,9 @@
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using System.Data.Entity.Migrations;
 using System.Windows.Forms;
 using WECPOFLogic;
-using System.Data.Entity;
 using QuanLyNhanSu.LogicTier;
 
 namespace QuanLyNhanSu.DataTier

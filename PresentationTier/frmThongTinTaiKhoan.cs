@@ -1,17 +1,10 @@
 ﻿using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.LogicTier;
-using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
@@ -23,7 +16,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly ChiTietPhuCapBUS chiTietPhuCapBUS;
         private readonly string maNV;
-        private readonly string hoTen;
         private readonly NhanVien nv;
         private readonly string formatDate = "dd/MM/yyyy";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
@@ -34,8 +26,7 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             chiTietPhuCapBUS = new ChiTietPhuCapBUS();
             this.maNV = maNV;
-            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV); ;
-            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             txtMaNV.ReadOnly = true;
             txtPhongBan.ReadOnly = true;
             txtChucVu.ReadOnly = true;
@@ -222,15 +213,6 @@ namespace QuanLyNhanSu.PresentationTier
             else
                 return rbKhac.Text;
         }
-        //////////////////////////////////////////////////////////////////////////////
-        private void btnTroVe_Click(object sender, EventArgs e)
-        {
-            FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
-            frmOpen.Show();
-            this.Hide();
-            frmOpen.FormClosed += CloseForm;
-        }
-
         private void txtTen_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtHo.Text) || string.IsNullOrEmpty(txtTen.Text) ||
@@ -242,12 +224,46 @@ namespace QuanLyNhanSu.PresentationTier
             else
                 btnLuu.Enabled = true;
         }
-
+        //////////////////////////////////////////////////////////////////////////////       
+        private void LichSuThaoTac(string thaoTac)
+        {
+            LichSuThaoTac newLstt = new LichSuThaoTac
+            {
+                NgayGio = DateTime.Now.ToString(formatDateTime),
+                MaNV = maNV,
+                ThaoTacThucHien = thaoTac,
+            };
+            lichSuThaoTacBUS.Save(newLstt);
+        }
+        private string GetValueAsString(NhanVien nhanVien, string propertyName)
+        {
+            object value = typeof(NhanVien).GetProperty(propertyName)?.GetValue(nhanVien);
+            if (propertyName == "NTNS")
+            {
+                DateTime dateValue = (DateTime)value;
+                return dateValue.ToString("yyyy-MM-dd");
+            }
+            return value?.ToString() ?? string.Empty;
+        }
+        private string CheckChange()
+        {
+            List<string> changes = new List<string>();
+            NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
+            string[] properties = { "CCCD", "Ho", "TenLot", "Ten", "NTNS", "GioiTinh", "SDT", "Email" };
+            string[] labels = { "CCCD", "Họ", "Tên lót", "Tên", "NTNS", "Giới tính", "SDT", "Email" };
+            string[] values = { txtCCCD.Text, txtHo.Text, txtTenLot.Text, txtTen.Text, dtpNTNS.Text, ChonGioiTinh(), txtSDT.Text, txtEmail.Text };
+            for (int i = 0; i < properties.Length; i++)
+            {
+                string currentValue = GetValueAsString(nhanVien, properties[i]);
+                if (values[i] != currentValue)
+                    changes.Add($"- {labels[i]}: {currentValue} -> {labels[i]}: {values[i]}");
+            }
+            return string.Join("\n", changes);
+        }
         private void btnDatLaiThongTin_Click(object sender, EventArgs e)
         {
             LoadThongTinTaiKhoan();
         }
-
         private void btnLuu_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(CheckSDT(txtSDT.Text)))
@@ -259,6 +275,7 @@ namespace QuanLyNhanSu.PresentationTier
             string gioiTinh = ChonGioiTinh();
             if (string.IsNullOrEmpty(gioiTinh))
                 return;
+            string chiTietSua = CheckChange();
             nv.CCCD = txtCCCD.Text;
             nv.Ho = txtHo.Text;
             nv.TenLot = txtTenLot.Text;
@@ -274,13 +291,10 @@ namespace QuanLyNhanSu.PresentationTier
             nv.Email = txtEmail.Text;
             if (nhanVienBUS.Save(nv))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " chỉnh sửa thông tin cá nhân",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = "Cập nhật thông tin cá nhân";
+                if (!string.IsNullOrEmpty(chiTietSua))
+                    thaoTac += $":\n{chiTietSua}";
+                LichSuThaoTac(thaoTac);
             }
             Reload();
         }
@@ -313,13 +327,8 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (nhanVienBUS.Save(nhanVien))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " đổi mật khẩu",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = $"Nhân viên {txtMaNV.Text} đổi mật khẩu";
+                LichSuThaoTac(thaoTac);
                 DangXuat();
             }
         }
@@ -330,6 +339,13 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnThemPhuCap_Click(object sender, EventArgs e)
         {
             FrmChiTietPhuCapMotNhanVien frmOpen = new FrmChiTietPhuCapMotNhanVien(maNV,maNV,"thongTin");
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
+        }
+        private void btnTroVe_Click(object sender, EventArgs e)
+        {
+            FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;

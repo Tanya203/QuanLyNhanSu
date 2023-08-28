@@ -1,18 +1,11 @@
-﻿using Eco.Persistence;
-using QuanLyNhanSu.DataTier.Models;
+﻿using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
@@ -29,7 +22,6 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<PhieuViewModels> danhSachPhieuThuongTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
-        private readonly string hoTen;
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhieu(string maNV)
@@ -41,7 +33,6 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             quanLyLoaiPhieuBUS = new QuanLyLoaiPhieuBUS();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
-            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten; ;
             this.maNV = maNV;
         }
         private void FrmPhieuThuong_Load(object sender, EventArgs e)
@@ -150,7 +141,7 @@ namespace QuanLyNhanSu.PresentationTier
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void XoaPhieuThuong(string maP, string loaiPhieu)
+        private void XoaPhieuThuong(string maP, string loaiPhieu, string ngayLap)
         {
             Phieu phieu = new Phieu()
             {
@@ -158,13 +149,8 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (phieuBus.Delete(phieu))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá " + loaiPhieu + " " + maP,
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = $"Xoá {loaiPhieu} được lập ngày {ngayLap}";
+                LichSuThaoTac(thaoTac);
                 Reload();
             }
         }
@@ -187,6 +173,16 @@ namespace QuanLyNhanSu.PresentationTier
                 LoadPhieu();
         }
         //////////////////////////////////////////////////////////////////////////////
+        private void LichSuThaoTac(string thaoTac)
+        {
+            LichSuThaoTac newLstt = new LichSuThaoTac
+            {
+                NgayGio = DateTime.Now.ToString(formatDateTime),
+                MaNV = maNV,
+                ThaoTacThucHien = thaoTac,
+            };
+            lichSuThaoTacBUS.Save(newLstt);
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
             Phieu newPhieu = new Phieu
@@ -198,13 +194,8 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (phieuBus.Save(newPhieu))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm phiếu" + newPhieu.LoaiPhieu.TenLoaiPhieu,
-                };
-                lichSuThaoTacBUS.Save(newLstt);               
+                string thaoTac = $"Thêm {cmbLoaiPhieu.Text}";
+                LichSuThaoTac(thaoTac);
             }
             Reload();            
         }       
@@ -215,8 +206,9 @@ namespace QuanLyNhanSu.PresentationTier
                 return;
             string maP = dgvThongTinPhieu.Rows[rowIndex].Cells[0].Value.ToString();
             string loaiPhieu = dgvThongTinPhieu.Rows[rowIndex].Cells[1].Value.ToString();
+            string ngayLap = dgvThongTinPhieu.Rows[rowIndex].Cells[6].Value.ToString();
             if (e.ColumnIndex == 8)
-                XoaPhieuThuong(maP, loaiPhieu);
+                XoaPhieuThuong(maP, loaiPhieu, ngayLap);
             if (e.ColumnIndex == 9)
                 OpenChiTietPhieu(maNV, maP);
         }

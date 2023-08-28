@@ -3,21 +3,12 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Services.Protocols;
 using System.Windows.Forms;
 using WECPOFLogic;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -35,7 +26,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         private readonly string maNV;
-        private readonly string hoTen;
         private readonly NhanVien nv;
 
 
@@ -50,7 +40,6 @@ namespace QuanLyNhanSu.PresentationTier
             chiTietPhuCapBUS = new ChiTietPhuCapBUS();
             MessageBoxManager.Register_OnceOnly();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
-            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             this.maNV = maNV;
         }
 
@@ -429,7 +418,63 @@ namespace QuanLyNhanSu.PresentationTier
                 e.Handled = true;
             }
         }
-        ///////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////        
+        private void LichSuThaoTac(string thaoTac)
+        {
+            LichSuThaoTac newLstt = new LichSuThaoTac
+            {
+                NgayGio = DateTime.Now.ToString(formatDateTime),
+                MaNV = maNV,
+                ThaoTacThucHien = thaoTac,
+            };
+            lichSuThaoTacBUS.Save(newLstt);
+        }
+        private string GetValueAsString(NhanVien nhanVien, string propertyName)
+        {
+            object value;
+            if (propertyName.Contains("."))
+            {
+                string[] propertyNames = propertyName.Split('.');
+                value = nhanVien;
+                foreach (string name in propertyNames)
+                {
+                    value = value?.GetType().GetProperty(name)?.GetValue(value);
+                    if (value == null)
+                        break;
+                }
+                return value?.ToString() ?? string.Empty;
+            }
+            if (propertyName == "NTNS" || propertyName == "NgayVaoLam" || propertyName == "ThoiHanHopDong")
+            {
+                value = typeof(NhanVien).GetProperty(propertyName)?.GetValue(nhanVien);
+                DateTime dateValue = (DateTime)value;
+                return dateValue.ToString("yyyy-MM-dd");
+            }
+            else
+                value = typeof(NhanVien).GetProperty(propertyName)?.GetValue(nhanVien);
+            return value?.ToString() ?? string.Empty;
+        }
+        private string CheckChange()
+        {
+            List<string> changes = new List<string>();            
+            NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);
+            string[] properties = { "ChucVu.PhongBan.TenPhongBan", "ChucVu.TenChucVu", "LoaiHopDong.TenLoaiHopDong", "CCCD", "Ho", "TenLot", "Ten", "NTNS", "GioiTinh", "SDT", "Email", "TrinhDoHocVan", "NgayVaoLam", "ThoiHanHopDong", "TinhTrang", "SoNgayPhep", "LuongCoBan" };
+            string[] labels = { "Chức vụ", "Phòng ban", "Loại hợp đồng", "CCCD", "Họ", "Tên lót", "Tên", "NTNS", "Giới tính", "SDT", "Email", "Trình độ học vấn", "Ngày vào làm", "Thời hạn hợp đồng", "Tình trạng", "Số ngày phép", "Lương cơ bản" };
+            string[] values = { cmbPhongBan.Text, cmbChucVu.Text, cmbLoaiHopDong.Text, txtCCCD.Text, txtHo.Text, txtTenLot.Text, txtTen.Text, dtpNTNS.Text, ChonGioiTinh(), txtSDT.Text, txtEmail.Text, txtTrinhDoHocVan.Text, dtpNgayVaoLam.Text, dtpThoiHanHopDong.Text, txtTinhTrang.Text,txtSoNgayPhep.Text, txtLuongCoBan.Text };
+            for (int i = 0; i < properties.Length; i++)
+            {
+                string currentValue = GetValueAsString(nhanVien, properties[i]);
+                if (values[i] != currentValue)
+                {
+                    if (properties[i] == "LuongCoBan")
+                        changes.Add($"- {labels[i]}: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(currentValue))} -> {labels[i]}: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(values[i]))}");
+                    else
+                        changes.Add($"- {labels[i]}: {currentValue} -> {labels[i]}: {values[i]}");
+                }
+                    
+            }
+            return string.Join("\n", changes);
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {            
             if (string.IsNullOrEmpty(CheckMatKhau(txtMatKhau.Text)))
@@ -472,14 +517,29 @@ namespace QuanLyNhanSu.PresentationTier
                 //hinh
             };
             if (nhanVienBUS.Save(newNhanVien))
-            {                
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm nhân viên " + hoTen,
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+            {
+                string thaoTac = $"Thêm nhân viên {txtHo.Text} {txtHo.Text} {txtTen.Text}:\n" +
+                                $"- Phòng ban: {cmbPhongBan.Text}" +
+                                $"- Chức vụ: {cmbChucVu.Text}" +
+                                $"- Loại hợp đồng: {cmbLoaiHopDong.Text}" +
+                                $"- Tài khoản: {txtTaiKhoan.Text}" +
+                                $"- CCCD: {txtCCCD.Text}" +
+                                $"- NTNS: {dtpNTNS.Text}" +
+                                $"- Số nhà: {txtSoNha.Text}" +
+                                $"- Đường: {txtDuong.Text}" +
+                                $"- Phường/xã: {txtPhuong_Xa.Text}" +
+                                $"- Quận/huyện: {txtQuan_Huyen.Text}" +
+                                $"- Tỉnh/Thành Phố: {txtTinh_ThanhPho.Text}" +
+                                $"- Giới tính: {ChonGioiTinh()}" +
+                                $"- Số điện thoại: {txtSDT.Text}" +
+                                $"- Email: {txtEmail.Text}" +
+                                $"- Trình độ học vấn: {txtTrinhDoHocVan.Text}" +
+                                $"- Ngày vào làm: {dtpNgayVaoLam.Text}" +
+                                $"- Thời hạn hợp đồng: {dtpThoiHanHopDong.Text}" +
+                                $"- Tình trạng: {txtTinhTrang.Text}" +
+                                $"- Số ngày phép: {txtSoNgayPhep.Text}" +
+                                $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", txtLuongCoBan.Text)}";
+                LichSuThaoTac(thaoTac);
             }
             Reload();
         }
@@ -497,6 +557,7 @@ namespace QuanLyNhanSu.PresentationTier
             string gioiTinh = ChonGioiTinh();
             if (string.IsNullOrEmpty(gioiTinh))
                 return;
+            string chiTietSua = CheckChange();
             NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);                     
             nhanVien.MaCV = cmbChucVu.SelectedValue.ToString();
             nhanVien.MaLHD = cmbLoaiHopDong.SelectedValue.ToString();
@@ -523,13 +584,10 @@ namespace QuanLyNhanSu.PresentationTier
             //hinh
             if (nhanVienBUS.Save(nhanVien))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " chỉnh sửa nhân viên '" + txtMaNV.Text + "'",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = $"Sửa nhân viên {txtMaNV.Text}";
+                if (!string.IsNullOrEmpty(chiTietSua))
+                    thaoTac += $":\n{chiTietSua}";
+                LichSuThaoTac(thaoTac);
                 Reload();
             }                      
         }      
@@ -548,14 +606,30 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (nhanVienBUS.Delete(newNhanVien.MaNV))
             {
-                string hoTen = txtHo.Text + " " + txtTenLot.Text + " " + txtTen.Text;
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {                    
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + this.hoTen + " xoá nhân viên " + hoTen,
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = $"Xoá nhân viên {txtHo.Text} {txtHo.Text} {txtTen.Text}:\n" +
+                                $"- Phòng ban: {cmbPhongBan.Text}" +
+                                $"- Chức vụ: {cmbChucVu.Text}" +
+                                $"- Loại hợp đồng: {cmbLoaiHopDong.Text}" +
+                                $"- Tài khoản: {txtTaiKhoan.Text}" +
+                                $"- CCCD: {txtCCCD.Text}" +
+                                $"- NTNS: {dtpNTNS.Text}" +
+                                $"- Số nhà: {txtSoNha.Text}" +
+                                $"- Đường: {txtDuong.Text}" +
+                                $"- Phường/xã: {txtPhuong_Xa.Text}" +
+                                $"- Quận/huyện: {txtQuan_Huyen.Text}" +
+                                $"- Tỉnh/Thành Phố: {txtTinh_ThanhPho.Text}" +
+                                $"- Giới tính: {ChonGioiTinh()}" +
+                                $"- Số điện thoại: {txtSDT.Text}" +
+                                $"- Email: {txtEmail.Text}" +
+                                $"- Trình độ học vấn: {txtTrinhDoHocVan.Text}" +
+                                $"- Ngày vào làm: {dtpNgayVaoLam.Text}" +
+                                $"- Thời hạn hợp đồng: {dtpThoiHanHopDong.Text}" +
+                                $"- Tình trạng: {txtTinhTrang.Text}" +
+                                $"- Số ngày phép: {txtSoNgayPhep.Text}" +
+                                $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", txtLuongCoBan.Text)}" +
+                                $"- Phụ cấp: {String.Format(fVND, "{0:N3} ₫", txtPhuCap.Text)}" +
+                                $"- Số tiền nợ: {String.Format(fVND, "{0:N3} ₫", txtSoTienNo.Text)}";
+                LichSuThaoTac(thaoTac);
                 Reload();
             }
         }
@@ -591,14 +665,8 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 if (nhanVienBUS.Save(nhanVien))
                 {
-
-                    LichSuThaoTac newLstt = new LichSuThaoTac
-                    {
-                        NgayGio = DateTime.Now.ToString(formatDateTime),
-                        MaNV = maNV,
-                        ThaoTacThucHien = "Nhân viên " + this.hoTen + " mở khoá tài khoản cho nhân viên " + hoTen,
-                    };
-                    lichSuThaoTacBUS.Save(newLstt);
+                    string thaoTac = $"Mở khoá tài khoản của nhân viên {txtMaNV.Text}";
+                    LichSuThaoTac(thaoTac);
                     Reload();
                 }
             }
