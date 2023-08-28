@@ -17,7 +17,6 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<LoaiPhieuViewModels> danhSachLoaiPhieuTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
-        private readonly string hoTen;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiPhieu(string maNV)
         {
@@ -26,7 +25,6 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();            
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
-            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             this.maNV = maNV;
         }
         private void FrmQuanLyLoaiPhieu_Load(object sender, EventArgs e)
