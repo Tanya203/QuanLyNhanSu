@@ -18,6 +18,7 @@ namespace QuanLyNhanSu.DataTier.Models
         public virtual DbSet<ChiTietPhieu> ChiTietPhieux { get; set; }
         public virtual DbSet<ChiTietPhuCap> ChiTietPhuCaps { get; set; }
         public virtual DbSet<ChucVu> ChucVus { get; set; }
+        public virtual DbSet<GiaoDien> GiaoDiens { get; set; }
         public virtual DbSet<HinhThucChamCong> HinhThucChamCongs { get; set; }
         public virtual DbSet<LichLamViec> LichLamViecs { get; set; }
         public virtual DbSet<LichSuThaoTac> LichSuThaoTacs { get; set; }
@@ -30,7 +31,7 @@ namespace QuanLyNhanSu.DataTier.Models
         public virtual DbSet<Phieu> Phieux { get; set; }
         public virtual DbSet<PhongBan> PhongBans { get; set; }
         public virtual DbSet<PhuCap> PhuCaps { get; set; }
-        public virtual DbSet<QuyenHan> QuyenHans { get; set; }
+        public virtual DbSet<ThaoTac> ThaoTacs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -140,6 +141,10 @@ namespace QuanLyNhanSu.DataTier.Models
                 .WithRequired(e => e.ChucVu)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<GiaoDien>()
+                .Property(e => e.MaGD)
+                .IsUnicode(false);
+
             modelBuilder.Entity<HinhThucChamCong>()
                 .Property(e => e.MaHTCC)
                 .IsUnicode(false);
@@ -158,6 +163,10 @@ namespace QuanLyNhanSu.DataTier.Models
 
             modelBuilder.Entity<LichSuThaoTac>()
                 .Property(e => e.MaNV)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LichSuThaoTac>()
+                .Property(e => e.MaTT)
                 .IsUnicode(false);
 
             modelBuilder.Entity<LoaiCa>()
@@ -282,7 +291,11 @@ namespace QuanLyNhanSu.DataTier.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<PhanQuyen>()
-                .Property(e => e.MaQH)
+                .Property(e => e.MaTT)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PhanQuyen>()
+                .Property(e => e.MaGD)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Phieu>()
@@ -314,14 +327,13 @@ namespace QuanLyNhanSu.DataTier.Models
                 .WithRequired(e => e.PhuCap)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<QuyenHan>()
-                .Property(e => e.MaQH)
+            modelBuilder.Entity<ThaoTac>()
+                .Property(e => e.MaTT)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<QuyenHan>()
-                .HasMany(e => e.PhanQuyens)
-                .WithRequired(e => e.QuyenHan)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<ThaoTac>()
+                .Property(e => e.MaGD)
+                .IsUnicode(false);
         }
     }
 }

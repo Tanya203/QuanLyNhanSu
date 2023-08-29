@@ -6,23 +6,23 @@ namespace QuanLyNhanSu.DataTier.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("QuyenHan")]
-    public partial class QuyenHan
+    [Table("GiaoDien")]
+    public partial class GiaoDien
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public QuyenHan()
+        public GiaoDien()
         {
-            PhanQuyens = new HashSet<PhanQuyen>();
+            ThaoTacs = new HashSet<ThaoTac>();
         }
 
         [Key]
         [StringLength(15)]
-        public string MaQH { get; set; }
+        public string MaGD { get; set; }
 
         [StringLength(100)]
-        public string TenQuyenHan { get; set; }
+        public string TenGiaoDien { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhanQuyen> PhanQuyens { get; set; }
+        public virtual ICollection<ThaoTac> ThaoTacs { get; set; }
     }
 }

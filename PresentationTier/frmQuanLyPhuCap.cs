@@ -3,14 +3,8 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
@@ -24,7 +18,6 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<PhuCapViewMModels> danhSachPhuCap;
         private IEnumerable<PhuCapViewMModels> danhSachPhuCapTimKiem;
         private readonly string maNV;
-        private readonly string hoTen;
         private readonly NhanVien nv;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhuCap(string maNV)
@@ -35,7 +28,6 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
-            hoTen = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
             txtMaPC.ReadOnly = true;
             txtSoLuongNhanVien.ReadOnly = true;
             btnThem.Enabled = false;
@@ -148,28 +140,49 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////
+        private void LichSuThaoTac(string thaoTac)
+        {
+            LichSuThaoTac newLstt = new LichSuThaoTac
+            {
+                NgayGio = DateTime.Now.ToString(formatDateTime),
+                MaNV = maNV,
+                ThaoTacThucHien = thaoTac,
+            };
+            lichSuThaoTacBUS.Save(newLstt);
+        }
+        private string CheckChange()
+        {
+            List<string> changes = new List<string>();
+            PhuCap phuCap = phuCapBUS.GetPhuCap().FirstOrDefault(pc => pc.MaPC == txtMaPC.Text);
+            string tenPhuCap = txtTenPC.Text;
+            string tienPhuCapCu = String.Format(fVND, "{0:N3} ₫", phuCap.TienPhuCap);
+            string tienPhuCapMoi = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
+            if (tenPhuCap != phuCap.TenPhuCap)
+                changes.Add($"- Tên phụ cấp: {phuCap.TenPhuCap} -> Tên phụ cấp: {tenPhuCap}");
+            if (tienPhuCapCu != tienPhuCapMoi)
+                changes.Add($"- Số tiền: {tienPhuCapCu} -> Số tiền : {tienPhuCapMoi}");
+            return string.Join("\n", changes);
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
             PhuCap newPhuCap = new PhuCap
             {
-                MaPC = "1",
+                MaPC = "",
                 TenPhuCap = txtTenPC.Text,
                 TienPhuCap = decimal.Parse(txtSoTien.Text)
             };
             if (phuCapBUS.Save(newPhuCap))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " thêm phụ cấp '" + txtTenPC.Text + "'",
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string tenPhuCap = txtTenPC.Text;
+                string soTien = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
+                string thaoTac = $"Thêm phụ cấp {tenPhuCap}:\n  - Số tiền: {soTien}";
+                LichSuThaoTac(thaoTac);
             }
             Reload();
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
+            string chiTietSua = CheckChange();
             PhuCap newPhuCap = new PhuCap
             {
                 MaPC = txtMaPC.Text,
@@ -178,13 +191,10 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (phuCapBUS.Save(newPhuCap))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " chỉnh sửa phụ cấp " + txtMaPC.Text,
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string thaoTac = $"Sửa phụ cấp {txtMaPC.Text}";                
+                if (!string.IsNullOrEmpty(chiTietSua))
+                    thaoTac += $":\n{chiTietSua}";
+                LichSuThaoTac(thaoTac);
                 Reload();
             }
         }
@@ -194,13 +204,10 @@ namespace QuanLyNhanSu.PresentationTier
             phuCap.MaPC = txtMaPC.Text;
             if (phuCapBUS.Delete(phuCap))
             {
-                LichSuThaoTac newLstt = new LichSuThaoTac
-                {
-                    NgayGio = DateTime.Now.ToString(formatDateTime),
-                    MaNV = maNV,
-                    ThaoTacThucHien = "Nhân viên " + hoTen + " xoá phụ cấp " + txtTenPC,
-                };
-                lichSuThaoTacBUS.Save(newLstt);
+                string tenPhuCap = txtTenPC.Text;
+                string soTien = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
+                string thaoTac = $"Xoá phụ cấp {tenPhuCap}:\n  - Số tiền: {soTien}";
+                LichSuThaoTac(thaoTac);
                 Reload();
             }
         }

@@ -152,6 +152,7 @@
     <Compile Include="DataTier\ChiTietLichLamViecDAL.cs" />
     <Compile Include="DataTier\ChiTietPhieuDAL.cs" />
     <Compile Include="DataTier\ChiTietPhuCapDAL.cs" />
+    <Compile Include="DataTier\GiaoDienDAL.cs" />
     <Compile Include="DataTier\HinhThucChamCongDAL.cs" />
     <Compile Include="DataTier\LichLamViecDAL.cs" />
     <Compile Include="DataTier\LichSuThaoTacDAL.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="DataTier\Models\ChiTietPhieu.cs" />
     <Compile Include="DataTier\Models\ChiTietPhuCap.cs" />
     <Compile Include="DataTier\Models\ChucVu.cs" />
+    <Compile Include="DataTier\Models\GiaoDien.cs" />
     <Compile Include="DataTier\Models\HinhThucChamCong.cs" />
     <Compile Include="DataTier\Models\LichLamViec.cs" />
     <Compile Include="DataTier\Models\LichSuThaoTac.cs" />
@@ -174,7 +176,7 @@
     <Compile Include="DataTier\Models\PhongBan.cs" />
     <Compile Include="DataTier\Models\PhuCap.cs" />
     <Compile Include="DataTier\Models\QuanLyNhanSuContextDB.cs" />
-    <Compile Include="DataTier\Models\QuyenHan.cs" />
+    <Compile Include="DataTier\Models\ThaoTac.cs" />
     <Compile Include="DataTier\PhieuDAL.cs" />
     <Compile Include="DataTier\QuanLyCaDAL.cs" />
     <Compile Include="DataTier\QuanLyChucVuDAL.cs" />
@@ -184,10 +186,12 @@
     <Compile Include="DataTier\QuanLyLoaiHopDongDAL.cs" />
     <Compile Include="DataTier\QuanLyPhongBanDAL.cs" />
     <Compile Include="DataTier\QuanLyNhanVienDAL.cs" />
+    <Compile Include="DataTier\ThaoTacDAL.cs" />
     <Compile Include="LogicTier\ChamCongBUS.cs" />
     <Compile Include="LogicTier\ChiTietLichLamViecBUS.cs" />
     <Compile Include="LogicTier\ChiTietPhieuBUS.cs" />
     <Compile Include="LogicTier\ChiTietPhuCapBUS.cs" />
+    <Compile Include="LogicTier\GiaoDienBUS.cs" />
     <Compile Include="LogicTier\HinhThucChamCongBUS.cs" />
     <Compile Include="LogicTier\LichLamViecBUS.cs" />
     <Compile Include="LogicTier\LichSuThaoTacBUS.cs" />
@@ -200,6 +204,7 @@
     <Compile Include="LogicTier\QuanLyNhanVienBUS.cs" />
     <Compile Include="LogicTier\QuanLyPhongBanBUS.cs" />
     <Compile Include="LogicTier\QuanLyPhuCapBUS.cs" />
+    <Compile Include="LogicTier\ThaoTacBUS.cs" />
     <Compile Include="PresentationTier\FrmChamCong.cs">
       <SubType>Form</SubType>
     </Compile>
