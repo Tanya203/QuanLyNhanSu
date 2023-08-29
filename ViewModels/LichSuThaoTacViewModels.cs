@@ -7,6 +7,8 @@
         public string HoTen { get; set; }
         public string PhongBan { get; set; }
         public string ChucVu { get; set; }
+        public string GiaoDien { get; set; }
+        public string ThaoTac { get; set; }
         public string ThaoTacThucHien { get; set; }     
     }
 }
