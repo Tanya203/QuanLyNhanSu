@@ -125,7 +125,7 @@ namespace QuanLyNhanSu.PresentationTier
         public void LoadCa(string ngayLam, string maNV)
         {
             List<Ca> ca = caBUS.GetCa().ToList();
-            List<ChamCong> lichLamViec = chamCong.Where(nv => nv.MaNV == maNV).ToList();
+            List<ChamCong> lichLamViec = chamCong.Where(nv => nv.MaNV == maNV /*&& nv.LichLamViec.NgayLam.ToString() == ngayLam*/).ToList();
             if(lichLamViec == null)
                 cmbCa.DataSource = ca;
             else
@@ -256,7 +256,7 @@ namespace QuanLyNhanSu.PresentationTier
             if (chiTietLichLamViecBUS.Save(newChamCong))
             {
                 string maNV = cmbNhanVien.SelectedValue.ToString();
-                string thaoTac = "Thêm nhân viên ";
+                string thaoTac = "Thêm nhân viên";
                 LichSuThaoTac(thaoTac, maNV);
             }
             Reload();
@@ -288,7 +288,7 @@ namespace QuanLyNhanSu.PresentationTier
             if (chiTietLichLamViecBUS.Delete(newChamCong))
             {
                 string maNV = cmbNhanVien.SelectedValue.ToString();
-                string thaoTac = "Xoá nhân viên ";
+                string thaoTac = "Xoá nhân viên";
                 LichSuThaoTac(thaoTac, maNV);
                 Reload();
             }
@@ -343,14 +343,14 @@ namespace QuanLyNhanSu.PresentationTier
             if (cbPhep.Checked)
             {
                 nv.Phep = true;
-                thongBao = "Thêm phép của nhân viên ";
-                lichSu = " thêm phép cho nhân viên ";
+                thongBao = "Thêm phép của nhân viên";
+                lichSu = "thêm phép cho nhân viên";
             }
             else
             {
                 nv.Phep = false;
-                thongBao = "Xoá phép của nhân viên ";
-                lichSu = " xoá phép của nhân viên ";
+                thongBao = "Xoá phép của nhân viên";
+                lichSu = "xoá phép của nhân viên";
             }                
             MessageBoxManager.Yes = "Có";
             MessageBoxManager.No = "Không";

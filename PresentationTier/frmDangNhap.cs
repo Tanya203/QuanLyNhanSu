@@ -12,21 +12,18 @@ namespace QuanLyNhanSu
 {
     public partial class FrmDangNhap : Form
     {
-        Thread currentForm;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;       
         private readonly List<ThaoTac> listThaoTac;
         private readonly ThaoTacBUS thaoTacBUS;
-        private readonly string giaoDien;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmDangNhap()
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
-            giaoDien = "Đăng nhập";
             thaoTacBUS = new ThaoTacBUS();
-            listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.GiaoDien.TenGiaoDien == giaoDien).ToList();
+            listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.GiaoDien.TenGiaoDien == "Đăng nhập").ToList();
             btnDangNhap.Enabled = false;
             txtTaiKhoan.Text = "TK001";
             txtMatKhau.Text = "Aa@12345";

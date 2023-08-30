@@ -64,10 +64,6 @@ namespace QuanLyNhanSu.DataTier
         {
             return quanLyNhanSu.ChiTietPhieux.OrderBy(ctp => ctp.MaP).ToList();
         }
-        public IEnumerable<ChiTietPhieu> ThongTinChiTietPhieu(string maP)
-        {
-            return quanLyNhanSu.ChiTietPhieux.Where(pt => pt.MaP == maP).ToList();
-        }
         public bool Save(ChiTietPhieu chiTietPhieu)
         {
             try

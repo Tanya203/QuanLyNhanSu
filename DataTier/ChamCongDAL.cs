@@ -30,12 +30,12 @@ namespace QuanLyNhanSu.DataTier
                 string thoiGian;
                 if (nhanVien.ThoiGianVe == null)
                 {
-                    thongBao = " giờ vào ";
+                    thongBao = "giờ vào";
                     thoiGian = chamCong.ThoiGianDen.ToString();
                 }
                 else
                 {
-                    thongBao = " giờ ra ";
+                    thongBao = "giờ ra";
                     thoiGian = chamCong.ThoiGianVe.ToString();
                 }
                 string maNV = chamCong.MaNV;
