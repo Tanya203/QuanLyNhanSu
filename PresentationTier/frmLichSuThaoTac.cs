@@ -3,6 +3,7 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -18,6 +19,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<LichSuThaoTacViewModels> lichSuThaoTacTimKiem;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private int check;
         private string thoiGian;
         private string giaoDien;
         private string thaoTac;
@@ -28,7 +30,8 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
-            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);   
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
+            check = 0; 
             this.maNV = maNV;
         }
         private void frmLichSuThaoTac_Load(object sender, EventArgs e)
@@ -43,7 +46,9 @@ namespace QuanLyNhanSu.PresentationTier
             thoiGian = dtpNgay.Text;
             giaoDien = null;
             thaoTac = null;
-            LoadThongTinDangNhap();     
+            LoadThongTinDangNhap();
+            LoadGiaoDien();
+            LoadThaoTac();
         }
         public void LoadThongTinDangNhap()
         {
@@ -59,7 +64,6 @@ namespace QuanLyNhanSu.PresentationTier
         { 
             cmbGiaoDien.ValueMember = "MaGD";
             cmbGiaoDien.DisplayMember = "TenGiaoDien";
-            cmbGiaoDien.
             cmbGiaoDien.DataSource = giaoDienBUS.GetGiaoDiens();
         }
         private void LoadThaoTac()
@@ -94,7 +98,6 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[7].Value = tt.ThaoTacThucHien;
             }
             Enabled = true;
-            return;
         }
         public void LoadLichSuThaoTacTimKiem(string timKiem)
         {
@@ -156,26 +159,23 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         private void rbToanBoGiaoDien_Click(object sender, EventArgs e)
-        {
+        {   
             if (rbToanBoGiaoDien.Checked)
             {
-                giaoDien = null;
-                //cmbGiaoDien.DataSource = null;
+                giaoDien = null;                
                 cmbGiaoDien.Enabled = false;
-                LoadThaoTac();
-                LoadLichSuThaoTac();
+                LoadThaoTac();                
             }
         }
         private void rbLocTheoGiaoDien_CheckedChanged(object sender, EventArgs e)
-        {
-            if(cmbGiaoDien.DataSource == null)
-                LoadGiaoDien();            
+        {                      
             if (rbLocTheoGiaoDien.Checked)
             {
                 cmbGiaoDien.Enabled = true;                
                 giaoDien = cmbGiaoDien.Text;
                 LoadThaoTac();
-                LoadLichSuThaoTac();
+                if(!rbLocTheoThaoTac.Checked)
+                    LoadLichSuThaoTac();
             }
         }
         private void rbToanBoThaoTac_Click(object sender, EventArgs e)
@@ -183,15 +183,12 @@ namespace QuanLyNhanSu.PresentationTier
             if (rbToanBoThaoTac.Checked)
             {
                 thaoTac = null;
-                //cmbThaoTac.DataSource = null;
                 cmbThaoTac.Enabled = false;
                 LoadLichSuThaoTac();
             }
         }        
         private void rbLocTheoThaoTac_CheckedChanged(object sender, EventArgs e)
         {
-            if(cmbThaoTac.DataSource == null)
-                LoadThaoTac();
             if (rbLocTheoThaoTac.Checked)
             {                
                 cmbThaoTac.Enabled = true;
@@ -216,18 +213,33 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void cmbGiaoDien_SelectedIndexChanged(object sender, EventArgs e)
         {
-            giaoDien = cmbGiaoDien.Text;
-            if (rbLocTheoThaoTac.Checked)
+            if (check == 0)
             {
+                check++;
+                return;
+            }            
+            if (rbLocTheoGiaoDien.Checked)
+            {
+                giaoDien = cmbGiaoDien.Text;
                 LoadThaoTac();
+                if(!rbLocTheoThaoTac.Checked)
+                    LoadLichSuThaoTac();
                 return;
             }                
             LoadLichSuThaoTac();
         }
         private void cmbThaoTac_SelectedIndexChanged(object sender, EventArgs e)
         {
-            thaoTac = cmbThaoTac.Text;
-            LoadLichSuThaoTac();
+            if (check == 1)
+            {
+                check++;
+                return;
+            }
+            if (rbLocTheoThaoTac.Checked)
+            {
+                thaoTac = cmbThaoTac.Text;
+                LoadLichSuThaoTac();
+            }            
         }
         /////////////////////////////////////////////////////////////////////////////////////////        
         public void Reload()
@@ -263,7 +275,5 @@ namespace QuanLyNhanSu.PresentationTier
         {
             Reload();
         }
-
-        
     }
 }

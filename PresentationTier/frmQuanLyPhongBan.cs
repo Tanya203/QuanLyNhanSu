@@ -19,8 +19,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhongBan(string maNV)
         {
-            InitializeComponent();
-            this.Load += frmQuanLyPhongBan_Load;
+            InitializeComponent();            
             phongBanBUS = new QuanLyPhongBanBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();

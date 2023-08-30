@@ -216,7 +216,32 @@ namespace QuanLyNhanSu.DataTier
                 }
                 return false;
             }            
-        }                            
+        }       
+        public bool CapNhatSoTienNo(List<NhanVien> nhanVien)
+        {
+            try
+            {
+                foreach(NhanVien nv in nhanVien)
+                {
+                    quanLyNhanSu.SaveChanges();
+                }
+                return true;
+            }
+            catch(Exception ex)
+            {
+                MessageBoxManager.Yes = "OK";
+                MessageBoxManager.No = "Chi tiết lỗi";
+                DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (ketQua == DialogResult.No)
+                {
+                    if (!string.IsNullOrEmpty(ex.InnerException.ToString()))
+                        MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                        MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return false;
+            }
+        }
         public bool Delete(string maNV)
         {
             try

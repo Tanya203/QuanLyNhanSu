@@ -285,6 +285,12 @@ namespace QuanLyNhanSu.PresentationTier
                 string phieu = $" vào {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {rtxtGhiChu.Text}";
                 LichSuThaoTac(thaoTac, maNV, phieu);
             }
+            if(phieu.MaP == "P0000000003")
+            {
+                NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == cmbNhanVien.SelectedValue.ToString());
+                nhanVien.SoTienNo += decimal.Parse(txtSoTien.Text);              
+                nhanVienBUS.Save(nhanVien);
+            }
             Reload();
         }
         private void btnSua_Click(object sender, EventArgs e)
@@ -305,6 +311,17 @@ namespace QuanLyNhanSu.PresentationTier
                 if (!string.IsNullOrEmpty(chiTietSua))
                     phieu += $":\n{chiTietSua}";
                 LichSuThaoTac(thaoTac, maNV, phieu);
+                decimal soTienNoCu = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(ctp => ctp.MaP == this.phieu.MaP && ctp.MaNV == txtMaNV_Sua.Text).SoTien;
+                decimal soTienNoMoi = decimal.Parse(txtSoTien.Text);
+                if (this.phieu.MaP == "P0000000003" && soTienNoCu != soTienNoMoi)
+                {
+                    NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaCV == txtMaNV_Sua.Text);
+                    if (soTienNoCu > soTienNoMoi)
+                        nhanVien.SoTienNo -= (soTienNoCu - soTienNoMoi);
+                    if (soTienNoCu < soTienNoMoi)
+                        nhanVien.SoTienNo += (soTienNoMoi - soTienNoCu);
+                    nhanVienBUS.Save(nhanVien);
+                }
                 Reload();
             }          
         }
@@ -339,6 +356,14 @@ namespace QuanLyNhanSu.PresentationTier
                 string thaoTac = "Xoá nhân viên ";
                 string phieu = $" khỏi {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {ghiChu}";
                 LichSuThaoTac(thaoTac, maNV, phieu);
+                
+                if (this.phieu.MaP == "P0000000003")
+                {
+                    NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == cmbNhanVien.SelectedValue.ToString());
+                    decimal soTienNo = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(ctp => ctp.MaP == this.phieu.MaP && ctp.MaNV == txtMaNV_Sua.Text).SoTien;
+                    nhanVien.SoTienNo -= soTienNo;
+                    nhanVienBUS.Save(nhanVien);
+                }
                 Reload();
             }                      
         }

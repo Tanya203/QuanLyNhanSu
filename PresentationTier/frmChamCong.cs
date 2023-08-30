@@ -20,7 +20,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly List<ChamCong> lichLamViec;
         private readonly List<ChamCong> lichCaDem;
         private readonly List<ThaoTac> listThaoTac;
-        private readonly GiaoDien giaoDien;
         private readonly Ca caDau;
         private readonly string thaoTac;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
@@ -35,8 +34,7 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             thaoTacBUS = new ThaoTacBUS();
             giaoDienBUS = new GiaoDienBUS();
-            listThaoTac = thaoTacBUS.GetThaoTac().ToList();
-            giaoDien = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Chấm công");
+            listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.GiaoDien.TenGiaoDien == "Chấm công").ToList();
             caDau = caBUS.GetCa().OrderBy(ca => ca.TenCa).FirstOrDefault();
             lichLamViec = chamCongBUS.GetLichLamViecTheoNgay(DateTime.Now.ToString(formatDate)).OrderBy(llv => llv.Ca.TenCa).ToList();
             lichCaDem = chamCongBUS.GetLichLamViecTheoNgay(DateTime.Now.AddDays(-1).ToString(formatDate)).Where(nv => nv.Ca.GioKetThuc < caDau.GioBatDau).ToList();
@@ -49,15 +47,14 @@ namespace QuanLyNhanSu.PresentationTier
         }        
         private void LichSuThaoTac(string maNV, string gio,string ca, string thaoTac)
         {
-            /*LichSuThaoTac newLstt = new LichSuThaoTac
+            LichSuThaoTac newLstt = new LichSuThaoTac
             {
                 NgayGio = DateTime.Now.ToString(formatDateTime),
                 MaNV = maNV,
-                MaGD = giaoDien.MaGD,
                 MaTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac == thaoTac).MaTT,
                 ThaoTacThucHien = $"Chấm công {gio} ca {ca}",
             };
-            lichSuThaoTacBUS.Save(newLstt);*/
+            lichSuThaoTacBUS.Save(newLstt);
         }
         public void ChamCongCaDem(List<ChamCong> caDem)
         {
@@ -72,7 +69,7 @@ namespace QuanLyNhanSu.PresentationTier
                         nv.ThoiGianDen = timeNow;                
                         if (chamCongBUS.ChamCong(nv))
                         {
-                            string gio = "giờ vào ";
+                            string gio = "giờ vào";
                             LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
                             txtMaNV.Text = string.Empty;
                             return;
@@ -83,7 +80,7 @@ namespace QuanLyNhanSu.PresentationTier
                         nv.ThoiGianVe = timeNow;
                         if (chamCongBUS.ChamCong(nv))
                         {
-                            string gio = "giờ ra ";
+                            string gio = "giờ ra";
                             LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
                             txtMaNV.Text = string.Empty;
                             return;
@@ -106,7 +103,7 @@ namespace QuanLyNhanSu.PresentationTier
                     nv.ThoiGianDen = timeNow;
                     if (chamCongBUS.ChamCong(nv))
                     {
-                        string gio = "giờ vào ";
+                        string gio = "giờ vào";
                         LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
                         txtMaNV.Text = string.Empty;
                         count++;
@@ -122,7 +119,7 @@ namespace QuanLyNhanSu.PresentationTier
                             nv.ThoiGianVe = timeNow;
                             if (chamCongBUS.ChamCong(nv))
                             {
-                                string gio = "giờ vào ";
+                                string gio = "giờ vào";
                                 LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
                                 txtMaNV.Text = string.Empty;
                                 count++;
@@ -135,7 +132,7 @@ namespace QuanLyNhanSu.PresentationTier
                         nv.ThoiGianVe = timeNow;
                         if (chamCongBUS.ChamCong(nv))
                         {
-                            string gio = "giờ ra ";
+                            string gio = "giờ ra";
                             LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
                             txtMaNV.Text = string.Empty;
                             count++;
@@ -171,7 +168,7 @@ namespace QuanLyNhanSu.PresentationTier
                     nv.ThoiGianDen = timeNow;
                     if (chamCongBUS.ChamCong(nv))
                     {
-                        string gio = "giờ vào ";
+                        string gio = "giờ vào";
                         LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
                         txtMaNV.Text = string.Empty;
                         return;
@@ -183,7 +180,7 @@ namespace QuanLyNhanSu.PresentationTier
                     nv.ThoiGianVe = timeNow;
                     if (chamCongBUS.ChamCong(nv))
                     {
-                        string gio = "giờ ra ";
+                        string gio = "giờ ra";
                         LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
                         if (countCa == maxCa)
                         {
@@ -199,7 +196,7 @@ namespace QuanLyNhanSu.PresentationTier
                     nv.ThoiGianDen = timeNow;
                     if (chamCongBUS.ChamCong(nv))
                     {
-                        string gio = "giờ vào ";
+                        string gio = "giờ vào";
                         LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
                     }
                 }        
@@ -208,7 +205,7 @@ namespace QuanLyNhanSu.PresentationTier
                     nv.ThoiGianVe = timeNow;
                     if (chamCongBUS.ChamCong(nv))
                     {
-                        string gio = "giờ ra ";
+                        string gio = "giờ ra";
                         LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
                         if (countCa == maxCa)
                         {
