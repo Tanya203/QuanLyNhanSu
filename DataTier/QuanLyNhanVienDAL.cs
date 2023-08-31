@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using WECPOFLogic;
 using QuanLyNhanSu.LogicTier;
+using System.Data.Entity.Migrations;
 
 namespace QuanLyNhanSu.DataTier
 {
@@ -223,6 +224,7 @@ namespace QuanLyNhanSu.DataTier
             {
                 foreach(NhanVien nv in nhanVien)
                 {
+                    quanLyNhanSu.NhanViens.AddOrUpdate(nv);
                     quanLyNhanSu.SaveChanges();
                 }
                 return true;

@@ -26,7 +26,7 @@ namespace QuanLyNhanSu.LogicTier
         }
         public bool Delete(ChiTietPhieu chiTietPhieu)
         {
-            return chiTietPhieuDAL.Delete(chiTietPhieu.MaNV);
+            return chiTietPhieuDAL.Delete(chiTietPhieu.MaNV, chiTietPhieu.MaP);
         }
         public decimal TongTienPhieu(string maPhieu)
         {

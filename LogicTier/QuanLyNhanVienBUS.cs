@@ -28,13 +28,9 @@ namespace QuanLyNhanSu.LogicTier
         {
             return nhanVienDAL.SearchNhanVien(timKiem);
         }
-        public IEnumerable<NhanVien> GetNhanVienChucVu(string maPB)
+        public bool CapNhatSoTienNo(List<NhanVien> nhanVien)
         {
-            return nhanVienDAL.GetNhanVienChucVu(maPB);
-        }
-        public IEnumerable<NhanVien> GetNhanVienPhongBan(string maPB)
-        {
-            return nhanVienDAL.GetNhanVienPhongBan(maPB);
+            return nhanVienDAL.CapNhatSoTienNo(nhanVien);
         }
         public bool Save(NhanVien nhanVien)
         {

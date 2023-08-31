@@ -285,24 +285,31 @@ namespace QuanLyNhanSu.PresentationTier
                 string phieu = $" vào {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {rtxtGhiChu.Text}";
                 LichSuThaoTac(thaoTac, maNV, phieu);
             }
-            if(phieu.MaP == "P0000000003")
+            if(phieu.LoaiPhieu.MaLP == "LP0000000003")
             {
-                NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == cmbNhanVien.SelectedValue.ToString());
-                nhanVien.SoTienNo += decimal.Parse(txtSoTien.Text);              
-                nhanVienBUS.Save(nhanVien);
+                List<NhanVien> listNhanVien = new List<NhanVien>();
+                NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == cmbNhanVien.SelectedValue.ToString());  
+                if(nhanVien.SoTienNo == null)
+                    nhanVien.SoTienNo = decimal.Parse(txtSoTien.Text);
+                else
+                    nhanVien.SoTienNo += decimal.Parse(txtSoTien.Text);
+                listNhanVien.Add(nhanVien);
+                nhanVienBUS.CapNhatSoTienNo(listNhanVien);
             }
             Reload();
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
             string chiTietSua = CheckChange();
+            decimal soTienNoCu = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(ctp => ctp.MaP == this.phieu.MaP && ctp.MaNV == txtMaNV_Sua.Text).SoTien;
+            decimal soTienNoMoi = decimal.Parse(txtSoTien.Text);
             ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
             {
                 MaP = maP,
                 MaNV = txtMaNV_Sua.Text,
                 SoTien = decimal.Parse(txtSoTien.Text),
                 GhiChu = rtxtGhiChu.Text,
-            };
+            };            
             if (chiTietPhieuBus.Save(newChiTietPhieu))
             {
                 string maNV = txtMaNV_Sua.Text;
@@ -310,17 +317,19 @@ namespace QuanLyNhanSu.PresentationTier
                 string phieu = $" trong {txtLoaiPhieu.Text} {maP}";
                 if (!string.IsNullOrEmpty(chiTietSua))
                     phieu += $":\n{chiTietSua}";
-                LichSuThaoTac(thaoTac, maNV, phieu);
-                decimal soTienNoCu = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(ctp => ctp.MaP == this.phieu.MaP && ctp.MaNV == txtMaNV_Sua.Text).SoTien;
-                decimal soTienNoMoi = decimal.Parse(txtSoTien.Text);
-                if (this.phieu.MaP == "P0000000003" && soTienNoCu != soTienNoMoi)
+                LichSuThaoTac(thaoTac, maNV, phieu);               
+                if (this.phieu.LoaiPhieu.MaLP == "LP0000000003" && soTienNoCu != soTienNoMoi)
                 {
-                    NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaCV == txtMaNV_Sua.Text);
-                    if (soTienNoCu > soTienNoMoi)
+                    List<NhanVien> listNhanVien = new List<NhanVien>();
+                    NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV_Sua.Text);
+                    if (nhanVien.SoTienNo == soTienNoCu)
+                        nhanVien.SoTienNo = soTienNoMoi;
+                    else if (soTienNoCu > soTienNoMoi)
                         nhanVien.SoTienNo -= (soTienNoCu - soTienNoMoi);
-                    if (soTienNoCu < soTienNoMoi)
+                    else if (soTienNoCu < soTienNoMoi)
                         nhanVien.SoTienNo += (soTienNoMoi - soTienNoCu);
-                    nhanVienBUS.Save(nhanVien);
+                    listNhanVien.Add(nhanVien);
+                    nhanVienBUS.CapNhatSoTienNo(listNhanVien);
                 }
                 Reload();
             }          
@@ -344,8 +353,10 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void XoaNhanVien()
         {            
+             decimal soTienNo = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(ctp => ctp.MaP == this.phieu.MaP && ctp.MaNV == txtMaNV_Sua.Text).SoTien;
             ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
             {
+                MaP = txtMaP.Text,
                 MaNV = txtMaNV_Sua.Text,
             };
             if (chiTietPhieuBus.Delete(newChiTietPhieu))
@@ -355,14 +366,14 @@ namespace QuanLyNhanSu.PresentationTier
                 string ghiChu = rtxtGhiChu.Text;
                 string thaoTac = "Xoá nhân viên ";
                 string phieu = $" khỏi {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {ghiChu}";
-                LichSuThaoTac(thaoTac, maNV, phieu);
-                
-                if (this.phieu.MaP == "P0000000003")
+                LichSuThaoTac(thaoTac, maNV, phieu);               
+                if (this.phieu.LoaiPhieu.MaLP == "LP0000000003")
                 {
-                    NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == cmbNhanVien.SelectedValue.ToString());
-                    decimal soTienNo = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(ctp => ctp.MaP == this.phieu.MaP && ctp.MaNV == txtMaNV_Sua.Text).SoTien;
+                    List<NhanVien> listNhanVien = new List<NhanVien>();
+                    NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV_Sua.Text);                   
                     nhanVien.SoTienNo -= soTienNo;
-                    nhanVienBUS.Save(nhanVien);
+                    listNhanVien.Add(nhanVien);
+                    nhanVienBUS.CapNhatSoTienNo(listNhanVien);
                 }
                 Reload();
             }                      
