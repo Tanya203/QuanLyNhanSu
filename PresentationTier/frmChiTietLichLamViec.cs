@@ -82,7 +82,7 @@ namespace QuanLyNhanSu.PresentationTier
                 cmbLoaiCa.Enabled = true;
                 cmbNhanVien.Enabled = true;
                 LoadNhanVienTheoPhongBan();
-                LoadCa(dtpNgayLam.Text, cmbNhanVien.SelectedValue.ToString());
+                LoadCa(cmbNhanVien.SelectedValue.ToString());
                 LoadLoaiCa();
             }                        
         }
@@ -121,11 +121,12 @@ namespace QuanLyNhanSu.PresentationTier
             }
             else
                 cmbNhanVien.Enabled = true;
+            AutoAdjustComboBox(cmbNhanVien);
         }
-        public void LoadCa(string ngayLam, string maNV)
+        public void LoadCa(string maNV)
         {
             List<Ca> ca = caBUS.GetCa().ToList();
-            List<ChamCong> lichLamViec = chamCong.Where(nv => nv.MaNV == maNV /*&& nv.LichLamViec.NgayLam.ToString() == ngayLam*/).ToList();
+            List<ChamCong> lichLamViec = chamCong.Where(nv => nv.MaNV == maNV).ToList();
             if(lichLamViec == null)
                 cmbCa.DataSource = ca;
             else
@@ -142,10 +143,12 @@ namespace QuanLyNhanSu.PresentationTier
                 cmbCa.Enabled = true;
                 btnThem.Enabled = true;
             }
+            AutoAdjustComboBox(cmbCa);
         }
         public void LoadLoaiCa()
         {
             cmbLoaiCa.DataSource = loaiCaBUS.GetLoaiCa();
+            AutoAdjustComboBox(cmbLoaiCa);
         }
         public void LoadChiTietLichLamViec()
         {
@@ -197,6 +200,16 @@ namespace QuanLyNhanSu.PresentationTier
             }
             Enabled = true;
         }
+        public void AutoAdjustComboBox(ComboBox comboBox)
+        {
+            int maxWidth = 0;
+            foreach (var items in comboBox.Items)
+            {
+                int itemWidth = TextRenderer.MeasureText(comboBox.GetItemText(items), comboBox.Font).Width;
+                maxWidth = Math.Max(maxWidth, itemWidth);
+            }
+            comboBox.DropDownWidth = maxWidth + SystemInformation.VerticalScrollBarWidth;
+        }
         //////////////////////////////////////////////////////////////////////////////////////
         private void cmbNhanVien_TextChanged(object sender, EventArgs e)
         {
@@ -205,7 +218,7 @@ namespace QuanLyNhanSu.PresentationTier
                 NhanVien nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nhanVien => nhanVien.MaNV == cmbNhanVien.Text);
                 txtHoTenNV.Text = nv.Ho + " " + nv.TenLot + " " + nv.Ten;
                 btnThem.Enabled = true;
-                LoadCa(dtpNgayLam.Text, cmbNhanVien.SelectedValue.ToString());
+                LoadCa(cmbNhanVien.SelectedValue.ToString());
             }
             else
             {

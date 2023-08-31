@@ -93,6 +93,17 @@ namespace QuanLyNhanSu.PresentationTier
         public void LoadPhongBan()
         {
             cmbPhongBan.DataSource = phongBanBUS.GetPhongBan();
+            AutoAdjustComboBox(cmbPhongBan);
+        }
+        public void AutoAdjustComboBox(ComboBox comboBox)
+        {
+            int maxWidth = 0;
+            foreach (var items in comboBox.Items)
+            {
+                int itemWidth = TextRenderer.MeasureText(comboBox.GetItemText(items), comboBox.Font).Width;
+                maxWidth = Math.Max(maxWidth, itemWidth);
+            }
+            comboBox.DropDownWidth = maxWidth + SystemInformation.VerticalScrollBarWidth;
         }
         /////////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()

@@ -168,14 +168,17 @@ namespace QuanLyNhanSu.PresentationTier
         public void LoadPhongBan()
         {
             cmbPhongBan.DataSource = phongBanBus.GetPhongBan();
+            AutoAdjustComboBox(cmbPhongBan);
         }
         public void LoadChucVuTheoPhongBan(string maPB)
         {
             cmbChucVu.DataSource = chucVuBUS.GetChucVu().Where(cv => cv.MaPB == maPB).ToList();
+            AutoAdjustComboBox(cmbChucVu);
         }
         public void LoadLoaiHopDong()
         {
             cmbLoaiHopDong.DataSource = loaiHopDongBUS.GetLoaiHopDong();
+            AutoAdjustComboBox(cmbLoaiHopDong);
         }
         private void LoadLuongKhoiDiem(object sender, EventArgs e)
         {
@@ -185,6 +188,16 @@ namespace QuanLyNhanSu.PresentationTier
         private void LoadChucVu(object sender, EventArgs e)
         {
             LoadChucVuTheoPhongBan(cmbPhongBan.SelectedValue.ToString());
+        }
+        public void AutoAdjustComboBox(ComboBox comboBox)
+        {
+            int maxWidth = 0;
+            foreach (var items in comboBox.Items)
+            {
+                int itemWidth = TextRenderer.MeasureText(comboBox.GetItemText(items), comboBox.Font).Width;
+                maxWidth = Math.Max(maxWidth, itemWidth);
+            }
+            comboBox.DropDownWidth = maxWidth + SystemInformation.VerticalScrollBarWidth;
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()

@@ -65,6 +65,7 @@ namespace QuanLyNhanSu.PresentationTier
             cmbGiaoDien.ValueMember = "MaGD";
             cmbGiaoDien.DisplayMember = "TenGiaoDien";
             cmbGiaoDien.DataSource = giaoDienBUS.GetGiaoDiens();
+            AutoAdjustComboBox(cmbGiaoDien);
         }
         private void LoadThaoTac()
         {
@@ -74,6 +75,7 @@ namespace QuanLyNhanSu.PresentationTier
                 cmbThaoTac.DataSource = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == cmbGiaoDien.SelectedValue.ToString()).ToList();
             if(rbToanBoGiaoDien.Checked)
                 cmbThaoTac.DataSource = thaoTacBUS.GetThaoTac();
+            AutoAdjustComboBox(cmbThaoTac);
         }
         public void LoadLichSuThaoTac()
         {
@@ -123,6 +125,16 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvLichSuThaoTac.Rows[rowAdd].Cells[7].Value = tt.ThaoTacThucHien;
             }
             Enabled = true;
+        }
+        public void AutoAdjustComboBox(ComboBox comboBox)
+        {
+            int maxWidth = 0;
+            foreach (var items in comboBox.Items)
+            {
+                int itemWidth = TextRenderer.MeasureText(comboBox.GetItemText(items), comboBox.Font).Width;
+                maxWidth = Math.Max(maxWidth, itemWidth);
+            }
+            comboBox.DropDownWidth = maxWidth + SystemInformation.VerticalScrollBarWidth;
         }
         /////////////////////////////////////////////////////////////////////////////////////////    
         private void rbNgay_CheckedChanged(object sender, EventArgs e)

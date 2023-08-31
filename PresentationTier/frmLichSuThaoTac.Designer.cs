@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblHoTenDN = new System.Windows.Forms.Label();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
             this.lblChucVuDN = new System.Windows.Forms.Label();
@@ -211,14 +211,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLichSuThaoTac.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvLichSuThaoTac.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLichSuThaoTac.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLichSuThaoTac.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvLichSuThaoTac.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLichSuThaoTac.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNgayio,
@@ -229,29 +229,29 @@
             this.colGiaoDien,
             this.colThaoTac,
             this.colThaoTacThucHien});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLichSuThaoTac.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLichSuThaoTac.DefaultCellStyle = dataGridViewCellStyle18;
             this.dgvLichSuThaoTac.Location = new System.Drawing.Point(0, 323);
             this.dgvLichSuThaoTac.Name = "dgvLichSuThaoTac";
             this.dgvLichSuThaoTac.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLichSuThaoTac.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLichSuThaoTac.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.dgvLichSuThaoTac.RowHeadersVisible = false;
             this.dgvLichSuThaoTac.RowHeadersWidth = 51;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvLichSuThaoTac.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvLichSuThaoTac.RowsDefaultCellStyle = dataGridViewCellStyle20;
             this.dgvLichSuThaoTac.RowTemplate.Height = 24;
             this.dgvLichSuThaoTac.Size = new System.Drawing.Size(1924, 710);
             this.dgvLichSuThaoTac.TabIndex = 5;
@@ -365,7 +365,7 @@
             this.dtpNgay.CustomFormat = "dd/MM/yyyy";
             this.dtpNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNgay.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgay.Location = new System.Drawing.Point(141, 62);
+            this.dtpNgay.Location = new System.Drawing.Point(123, 62);
             this.dtpNgay.Name = "dtpNgay";
             this.dtpNgay.Size = new System.Drawing.Size(151, 30);
             this.dtpNgay.TabIndex = 4;
@@ -376,7 +376,7 @@
             this.dtpThang.CustomFormat = "MM/yyyy";
             this.dtpThang.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpThang.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpThang.Location = new System.Drawing.Point(435, 62);
+            this.dtpThang.Location = new System.Drawing.Point(416, 63);
             this.dtpThang.Name = "dtpThang";
             this.dtpThang.ShowUpDown = true;
             this.dtpThang.Size = new System.Drawing.Size(136, 30);
@@ -388,7 +388,7 @@
             this.dtpNam.CustomFormat = "yyyy";
             this.dtpNam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNam.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNam.Location = new System.Drawing.Point(690, 62);
+            this.dtpNam.Location = new System.Drawing.Point(670, 62);
             this.dtpNam.Name = "dtpNam";
             this.dtpNam.ShowUpDown = true;
             this.dtpNam.Size = new System.Drawing.Size(105, 30);
@@ -405,16 +405,16 @@
             this.pnlLocTheoThoiGian.Controls.Add(this.dtpNam);
             this.pnlLocTheoThoiGian.Controls.Add(this.dtpThang);
             this.pnlLocTheoThoiGian.Controls.Add(this.dtpNgay);
-            this.pnlLocTheoThoiGian.Location = new System.Drawing.Point(19, 170);
+            this.pnlLocTheoThoiGian.Location = new System.Drawing.Point(41, 170);
             this.pnlLocTheoThoiGian.Name = "pnlLocTheoThoiGian";
-            this.pnlLocTheoThoiGian.Size = new System.Drawing.Size(826, 111);
+            this.pnlLocTheoThoiGian.Size = new System.Drawing.Size(791, 111);
             this.pnlLocTheoThoiGian.TabIndex = 62;
             // 
             // rbNam
             // 
             this.rbNam.AutoSize = true;
             this.rbNam.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbNam.Location = new System.Drawing.Point(578, 59);
+            this.rbNam.Location = new System.Drawing.Point(558, 59);
             this.rbNam.Name = "rbNam";
             this.rbNam.Size = new System.Drawing.Size(106, 36);
             this.rbNam.TabIndex = 65;
@@ -427,7 +427,7 @@
             // 
             this.rbThang.AutoSize = true;
             this.rbThang.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbThang.Location = new System.Drawing.Point(298, 59);
+            this.rbThang.Location = new System.Drawing.Point(280, 59);
             this.rbThang.Name = "rbThang";
             this.rbThang.Size = new System.Drawing.Size(130, 36);
             this.rbThang.TabIndex = 64;
@@ -440,7 +440,7 @@
             // 
             this.rbNgay.AutoSize = true;
             this.rbNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbNgay.Location = new System.Drawing.Point(21, 59);
+            this.rbNgay.Location = new System.Drawing.Point(3, 59);
             this.rbNgay.Name = "rbNgay";
             this.rbNgay.Size = new System.Drawing.Size(114, 36);
             this.rbNgay.TabIndex = 63;
@@ -453,7 +453,7 @@
             // 
             this.lblLocTheoThoiGian.AutoSize = true;
             this.lblLocTheoThoiGian.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLocTheoThoiGian.Location = new System.Drawing.Point(314, 12);
+            this.lblLocTheoThoiGian.Location = new System.Drawing.Point(295, 12);
             this.lblLocTheoThoiGian.Name = "lblLocTheoThoiGian";
             this.lblLocTheoThoiGian.Size = new System.Drawing.Size(257, 32);
             this.lblLocTheoThoiGian.TabIndex = 62;
@@ -466,7 +466,7 @@
             this.pnlLocTheoThaoTac.Controls.Add(this.rbToanBoThaoTac);
             this.pnlLocTheoThaoTac.Controls.Add(this.cmbThaoTac);
             this.pnlLocTheoThaoTac.Controls.Add(this.lblLocTheoThaoTac);
-            this.pnlLocTheoThaoTac.Location = new System.Drawing.Point(1372, 170);
+            this.pnlLocTheoThaoTac.Location = new System.Drawing.Point(1344, 170);
             this.pnlLocTheoThaoTac.Name = "pnlLocTheoThaoTac";
             this.pnlLocTheoThaoTac.Size = new System.Drawing.Size(515, 111);
             this.pnlLocTheoThaoTac.TabIndex = 63;
@@ -475,7 +475,7 @@
             // 
             this.rbLocTheoThaoTac.AutoSize = true;
             this.rbLocTheoThaoTac.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbLocTheoThaoTac.Location = new System.Drawing.Point(164, 59);
+            this.rbLocTheoThaoTac.Location = new System.Drawing.Point(155, 63);
             this.rbLocTheoThaoTac.Name = "rbLocTheoThaoTac";
             this.rbLocTheoThaoTac.Size = new System.Drawing.Size(93, 36);
             this.rbLocTheoThaoTac.TabIndex = 67;
@@ -488,7 +488,7 @@
             // 
             this.rbToanBoThaoTac.AutoSize = true;
             this.rbToanBoThaoTac.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbToanBoThaoTac.Location = new System.Drawing.Point(12, 59);
+            this.rbToanBoThaoTac.Location = new System.Drawing.Point(3, 63);
             this.rbToanBoThaoTac.Name = "rbToanBoThaoTac";
             this.rbToanBoThaoTac.Size = new System.Drawing.Size(146, 36);
             this.rbToanBoThaoTac.TabIndex = 66;
@@ -503,7 +503,7 @@
             this.cmbThaoTac.DropDownWidth = 233;
             this.cmbThaoTac.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbThaoTac.FormattingEnabled = true;
-            this.cmbThaoTac.Location = new System.Drawing.Point(263, 62);
+            this.cmbThaoTac.Location = new System.Drawing.Point(254, 62);
             this.cmbThaoTac.Name = "cmbThaoTac";
             this.cmbThaoTac.Size = new System.Drawing.Size(233, 33);
             this.cmbThaoTac.TabIndex = 65;
@@ -513,7 +513,7 @@
             // 
             this.lblLocTheoThaoTac.AutoSize = true;
             this.lblLocTheoThaoTac.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLocTheoThaoTac.Location = new System.Drawing.Point(139, 12);
+            this.lblLocTheoThaoTac.Location = new System.Drawing.Point(132, 12);
             this.lblLocTheoThaoTac.Name = "lblLocTheoThaoTac";
             this.lblLocTheoThaoTac.Size = new System.Drawing.Size(248, 32);
             this.lblLocTheoThaoTac.TabIndex = 63;
@@ -526,16 +526,16 @@
             this.panel1.Controls.Add(this.rbToanBoGiaoDien);
             this.panel1.Controls.Add(this.cmbGiaoDien);
             this.panel1.Controls.Add(this.lblLocTheoGiaoDien);
-            this.panel1.Location = new System.Drawing.Point(851, 170);
+            this.panel1.Location = new System.Drawing.Point(838, 170);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(515, 111);
+            this.panel1.Size = new System.Drawing.Size(500, 111);
             this.panel1.TabIndex = 64;
             // 
             // rbLocTheoGiaoDien
             // 
             this.rbLocTheoGiaoDien.AutoSize = true;
             this.rbLocTheoGiaoDien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbLocTheoGiaoDien.Location = new System.Drawing.Point(164, 59);
+            this.rbLocTheoGiaoDien.Location = new System.Drawing.Point(155, 63);
             this.rbLocTheoGiaoDien.Name = "rbLocTheoGiaoDien";
             this.rbLocTheoGiaoDien.Size = new System.Drawing.Size(93, 36);
             this.rbLocTheoGiaoDien.TabIndex = 67;
@@ -548,7 +548,7 @@
             // 
             this.rbToanBoGiaoDien.AutoSize = true;
             this.rbToanBoGiaoDien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbToanBoGiaoDien.Location = new System.Drawing.Point(12, 59);
+            this.rbToanBoGiaoDien.Location = new System.Drawing.Point(3, 62);
             this.rbToanBoGiaoDien.Name = "rbToanBoGiaoDien";
             this.rbToanBoGiaoDien.Size = new System.Drawing.Size(146, 36);
             this.rbToanBoGiaoDien.TabIndex = 66;
@@ -563,7 +563,7 @@
             this.cmbGiaoDien.DropDownWidth = 233;
             this.cmbGiaoDien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGiaoDien.FormattingEnabled = true;
-            this.cmbGiaoDien.Location = new System.Drawing.Point(263, 62);
+            this.cmbGiaoDien.Location = new System.Drawing.Point(254, 65);
             this.cmbGiaoDien.Name = "cmbGiaoDien";
             this.cmbGiaoDien.Size = new System.Drawing.Size(233, 33);
             this.cmbGiaoDien.TabIndex = 65;
