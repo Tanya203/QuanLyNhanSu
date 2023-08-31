@@ -82,6 +82,11 @@ namespace QuanLyNhanSu.DataTier
             }
             catch (Exception ex)
             {
+                if (ex.InnerException.ToString().Contains("CHECK_SoTien"))
+                { 
+                    MessageBox.Show("Số tiền nhập vào phải lớn hơn 0!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
                 MessageBoxManager.Yes = "OK";
                 MessageBoxManager.No = "Chi tiết lỗi";
                 DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
@@ -95,11 +100,11 @@ namespace QuanLyNhanSu.DataTier
                 return false;
             }
         }
-        public bool Delete(string maNV)
+        public bool Delete(string maNV, string maPhieu)
         {
             try
             {
-                ChiTietPhieu phieu = quanLyNhanSu.ChiTietPhieux.Where(pt => pt.MaNV == maNV).FirstOrDefault();
+                ChiTietPhieu phieu = quanLyNhanSu.ChiTietPhieux.Where(pt => pt.MaNV == maNV && pt.MaP == maPhieu).FirstOrDefault();
                 if (phieu != null)
                 {
                     MessageBoxManager.Yes = "Có";

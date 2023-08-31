@@ -44,6 +44,7 @@ namespace QuanLyNhanSu.PresentationTier
             XoaButton();
             ChiTietPhieuButton();
             LoadLoaiPhieu();  
+            btnQuanLyLoaiPhieu.Enabled = false;
         }
         public void LoadThongTinDangNhap()
         {
@@ -143,6 +144,9 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void XoaPhieuThuong(string maP, string loaiPhieu, string ngayLap)
         {
+            string maLoaiPhieu = phieuBus.GetPhieu().FirstOrDefault(p => p.MaP == maP).MaLP;
+            List<ChiTietPhieu> listChiTietPhieu = chiTietPhieuBUS.GetChiTietPhieu().Where(ctp => ctp.MaP == maP).ToList();
+            List<NhanVien> listNhanVien = new List<NhanVien>();           
             Phieu phieu = new Phieu()
             {
                 MaP = maP,
@@ -151,6 +155,15 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 string thaoTac = $"Xoá {loaiPhieu} được lập ngày {ngayLap}";
                 LichSuThaoTac(thaoTac);
+                if (maLoaiPhieu == "LP0000000003")
+                {
+                    foreach (ChiTietPhieu nv in listChiTietPhieu)
+                    {
+                        nv.NhanVien.SoTienNo -= nv.SoTien;
+                        listNhanVien.Add(nv.NhanVien);
+                    }
+                    nhanVienBUS.CapNhatSoTienNo(listNhanVien);
+                }
                 Reload();
             }
         }
