@@ -72,6 +72,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void LoadHinhThucChamCong()
         {
             cmbHinhThucChamCong.DataSource = hinhThucChamCongBUS.GetAllHinhThucChamCong();
+            AutoAdjustComboBox(cmbHinhThucChamCong);
         }
         private void LoadLoaiHopDongTimKiem(string timKiem)
         {
@@ -88,6 +89,16 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[3].Value = loaiHopDongBUS.TongSoNhanVienTrongLoaiHopDong(lhd.MaLHD).ToString();
             }
             Enabled = true;
+        }
+        public void AutoAdjustComboBox(ComboBox comboBox)
+        {
+            int maxWidth = 0;
+            foreach (var items in comboBox.Items)
+            {
+                int itemWidth = TextRenderer.MeasureText(comboBox.GetItemText(items), comboBox.Font).Width;
+                maxWidth = Math.Max(maxWidth, itemWidth);
+            }
+            comboBox.DropDownWidth = maxWidth + SystemInformation.VerticalScrollBarWidth;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()

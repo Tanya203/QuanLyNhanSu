@@ -73,6 +73,7 @@ namespace QuanLyNhanSu.PresentationTier
             if(phuCap.Count() == 0)
                 btnThem.Enabled = false;
             cmbPhuCap.DataSource = phuCap;
+            AutoAdjustComboBox(cmbPhuCap);
         }
         public void LoadPhuCapNhanVien()
         {
@@ -94,6 +95,16 @@ namespace QuanLyNhanSu.PresentationTier
             txtTongPhuCap.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(nhanVienPC));
             txtMaNV.Text = nhanVienPC;
             Enabled = true;
+        }
+        public void AutoAdjustComboBox(ComboBox comboBox)
+        {
+            int maxWidth = 0;
+            foreach (var items in comboBox.Items)
+            {
+                int itemWidth = TextRenderer.MeasureText(comboBox.GetItemText(items), comboBox.Font).Width;
+                maxWidth = Math.Max(maxWidth, itemWidth);
+            }
+            comboBox.DropDownWidth = maxWidth + SystemInformation.VerticalScrollBarWidth;
         }
         //////////////////////////////////////////////////////////////////////////////////////        
         private void CloseForm(object sender, FormClosedEventArgs e)

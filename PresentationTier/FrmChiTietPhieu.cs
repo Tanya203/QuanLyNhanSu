@@ -66,10 +66,12 @@ namespace QuanLyNhanSu.PresentationTier
         public void LoadPhongBan()
         {
             cmbPhongBan.DataSource = phongBanBUS.GetPhongBan();
+            AutoAdjustComboBox(cmbPhongBan);
         }
         public void LoadChucVuTheoPhongBan(string maPB)
         {
             cmbChucVu.DataSource = chucVuBUS.GetChucVu().Where(cv => cv.MaPB == maPB).ToList();
+            AutoAdjustComboBox(cmbChucVu);
         }
         public void LoadNhanVienTheoChucVu(string maCV)
         {
@@ -84,6 +86,7 @@ namespace QuanLyNhanSu.PresentationTier
             }                
             else 
                 cmbNhanVien.Enabled = true;
+            AutoAdjustComboBox(cmbNhanVien);
         }
         private void LoadChucVu(object sender, EventArgs e)
         {
@@ -96,6 +99,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void LoadNhanVien(object sender, EventArgs e)
         {
             LoadNhanVienTheoChucVu(cmbChucVu.SelectedValue.ToString());
+            AutoAdjustComboBox(cmbChucVu);
         }
         public void LoadThongTinDangNhap()
         {
@@ -157,6 +161,16 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieuThuong.Rows[rowAdd].Cells[7].Value = phieu.GhiChu;
             }
             Enabled = true;
+        }
+        public void AutoAdjustComboBox(ComboBox comboBox)
+        {
+            int maxWidth = 0;
+            foreach (var items in comboBox.Items)
+            {
+                int itemWidth = TextRenderer.MeasureText(comboBox.GetItemText(items), comboBox.Font).Width;
+                maxWidth = Math.Max(maxWidth, itemWidth);
+            }
+            comboBox.DropDownWidth = maxWidth + SystemInformation.VerticalScrollBarWidth;
         }
         ///////////////////////////////////////////////////////////////////////////////////////////
         private void cmbNhanVien_SelectedIndexChanged(object sender, EventArgs e)
