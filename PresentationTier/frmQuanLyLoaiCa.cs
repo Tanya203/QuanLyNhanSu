@@ -21,7 +21,6 @@ namespace QuanLyNhanSu.PresentationTier
         public FrmQuanLyLoaiCa(string maNV)
         {
             InitializeComponent();
-            this.Load += frmQuanLyLoaiCa_Load;
             loaiCaBUS = new QuanLyLoaiCaBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
