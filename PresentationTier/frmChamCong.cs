@@ -173,7 +173,7 @@ namespace QuanLyNhanSu.PresentationTier
             int maxCa = llv.Count();
             int countCa = 0;
             string maNV = llv.FirstOrDefault().MaNV;
-            string thaoTac = $"Nhân viên {maNV} chấm công lúc {timeNow} ngày {dateNow} cho:\n";
+            string thaoTac = $"Nhân viên {maNV} chấm công lúc {timeNow} ngày {dateNow} cho:";
             foreach (ChamCong nv in llv)
             {
                 countCa++;
@@ -187,7 +187,7 @@ namespace QuanLyNhanSu.PresentationTier
                 if (nv.ThoiGianDen == null && (timeNow < nv.Ca.GioKetThuc || nv.Ca.GioBatDau > nv.Ca.GioKetThuc))
                 {
                     nv.ThoiGianDen = timeNow;
-                    thaoTac += $"- Giờ vào ca {ca}\n";
+                    thaoTac += $"\n- Giờ vào ca {ca}";
                     chamCong.Add(nv);           
                     if (nv.Ca.GioBatDau > nv.Ca.GioKetThuc)
                     {
@@ -204,7 +204,7 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     checkThoiGianVaoCaDau = 1;
                     nv.ThoiGianVe = timeNow;
-                    thaoTac += $"- Giờ ra ca {ca}\n";
+                    thaoTac += $"\n- Giờ ra ca {ca}";
                     chamCong.Add(nv);                   
                     if (countCa == maxCa)
                     {
@@ -222,7 +222,7 @@ namespace QuanLyNhanSu.PresentationTier
                 if (timeNow > nv.Ca.GioKetThuc && nv.ThoiGianDen == null && checkThoiGianVaoCaDau == 1)
                 {
                     nv.ThoiGianDen = timeNow;
-                    thaoTac += $"- Giờ vào ca {ca}\n";
+                    thaoTac += $"\n- Giờ vào ca {ca}";
                     chamCong.Add(nv);
                 }        
                 if(timeNow > nv.Ca.GioKetThuc && nv.ThoiGianVe == null && checkThoiGianVaoCaDau == 1)
@@ -230,7 +230,7 @@ namespace QuanLyNhanSu.PresentationTier
                     if(nv.Ca.GioBatDau > nv.Ca.GioKetThuc)                    
                         continue;
                     nv.ThoiGianVe = timeNow;
-                    thaoTac += $"- Giờ ra ca {ca}\n";
+                    thaoTac += $"\n- Giờ ra ca {ca}";
                     chamCong.Add(nv);                    
                     if (countCa == maxCa)
                     {
@@ -242,12 +242,7 @@ namespace QuanLyNhanSu.PresentationTier
                             return;
                         }
                     }                               
-                }                      
-                if (nv.ThoiGianDen == null && timeNow > nv.Ca.GioKetThuc && checkThoiGianVaoCaDau == 0)
-                {
-                    continue;
-                }               
-                txtMaNV.Text = string.Empty;
+                }                    
             }
             MessageBox.Show($"Nhân viên {txtMaNV.Text} đã chấm công hết các ca trong ngày hoặc đã quá giờ chấm công ngày {dateNow}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             txtMaNV.Text = string.Empty;
