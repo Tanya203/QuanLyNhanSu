@@ -1,6 +1,7 @@
 ﻿using QuanLyNhanSu.DataTier.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows.Forms;
 using WECPOFLogic;
@@ -20,28 +21,16 @@ namespace QuanLyNhanSu.DataTier
         {
             return quanLyNhanSu.ChamCongs.Where(llv => llv.LichLamViec.NgayLam.ToString() == ngayLam).ToList();
         }
-        public bool ChamCong(ChamCong nhanVien)
+        public bool ChamCong(List<ChamCong> nhanVien, string thaoTac)
         {
             try
             {
-                ChamCong chamCong = nhanVien;
-                quanLyNhanSu.SaveChanges();
-                string thongBao;
-                string thoiGian;
-                if (nhanVien.ThoiGianVe == null)
+                foreach(ChamCong nv in nhanVien)
                 {
-                    thongBao = "giờ vào";
-                    thoiGian = chamCong.ThoiGianDen.ToString();
+                    quanLyNhanSu.ChamCongs.AddOrUpdate(nv);
+                    quanLyNhanSu.SaveChanges();
                 }
-                else
-                {
-                    thongBao = "giờ ra";
-                    thoiGian = chamCong.ThoiGianVe.ToString();
-                }
-                string maNV = chamCong.MaNV;
-                string ca = chamCong.Ca.TenCa;
-                string ngay = chamCong.LichLamViec.NgayLam.ToString(formatDate);
-                MessageBox.Show($"Chấm công {thongBao} thành công! Nhân viên {maNV} - ca {ca} - ngày {ngay} - lúc {thoiGian}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(thaoTac, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
             }
             catch (Exception ex)

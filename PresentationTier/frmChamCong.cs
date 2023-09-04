@@ -19,8 +19,11 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly List<ChamCong> lichLamViec;
         private readonly List<ChamCong> lichCaDem;
+        private List<ChamCong> chamCong;
         private readonly List<ThaoTac> listThaoTac;
         private readonly Ca caDau;
+        private TimeSpan timeNow;
+        private string dateNow;
         private readonly string thaoTac;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         private readonly string formatDate = "yyyy-MM-dd";
@@ -34,6 +37,7 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             thaoTacBUS = new ThaoTacBUS();
             giaoDienBUS = new GiaoDienBUS();
+            chamCong = new List<ChamCong>();
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.GiaoDien.TenGiaoDien == "Chấm công").ToList();
             caDau = caBUS.GetCa().OrderBy(ca => ca.TenCa).FirstOrDefault();
             lichLamViec = chamCongBUS.GetLichLamViecTheoNgay(DateTime.Now.ToString(formatDate)).OrderBy(llv => llv.Ca.TenCa).ToList();
@@ -45,67 +49,78 @@ namespace QuanLyNhanSu.PresentationTier
         {
             btnChamCong.Enabled = false;
         }        
-        private void LichSuThaoTac(string maNV, string gio,string ca, string thaoTac)
+        private void LichSuThaoTac(string maNV, string thaoTac)
         {
             LichSuThaoTac newLstt = new LichSuThaoTac
             {
                 NgayGio = DateTime.Now.ToString(formatDateTime),
                 MaNV = maNV,
-                MaTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac == thaoTac).MaTT,
-                ThaoTacThucHien = $"Chấm công {gio} ca {ca}",
+                MaTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac == this.thaoTac).MaTT,
+                ThaoTacThucHien = thaoTac,
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
-        public void ChamCongCaDem(List<ChamCong> caDem)
+        public bool ChamCongCaDem(List<ChamCong> caDem)
         {
-            TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString(formatTime));
+            timeNow = TimeSpan.Parse(DateTime.Now.ToString(formatTime));
+            dateNow = DateTime.Now.ToString(formatDate);
             if (caDem != null)
             {
                 foreach (ChamCong nv in caDem)
-                {
+                {                    
                     string ca = nv.Ca.TenCa;
+                    string ngayLam = nv.LichLamViec.NgayLam.ToString(formatDate);
+                    string thaoTac = $"Nhân viên {nv.MaNV} chấm công lúc {timeNow} ngày {dateNow} (lịch ngày: {ngayLam}) cho:\n";
                     if (nv.ThoiGianDen == null && timeNow < nv.Ca.GioKetThuc)
                     {
-                        nv.ThoiGianDen = timeNow;                
-                        if (chamCongBUS.ChamCong(nv))
-                        {
-                            string gio = "giờ vào";
-                            LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
+                        nv.ThoiGianDen = timeNow;
+                        thaoTac += $"- Giờ vào ca {ca}";
+                        chamCong.Add(nv);
+                        if (chamCongBUS.ChamCong(chamCong, thaoTac))
+                        {                     
+                            LichSuThaoTac(nv.MaNV, thaoTac);
                             txtMaNV.Text = string.Empty;
-                            return;
+                            chamCong.Clear();
+                            return true;
                         }
                     }
                     if (nv.ThoiGianDen != null && nv.ThoiGianVe == null && timeNow < caDau.GioBatDau)
                     {
                         nv.ThoiGianVe = timeNow;
-                        if (chamCongBUS.ChamCong(nv))
+                        thaoTac += $"- Giờ ra ca {ca}";
+                        chamCong.Add(nv);
+                        if (chamCongBUS.ChamCong(chamCong, thaoTac))
                         {
-                            string gio = "giờ ra";
-                            LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
+                            LichSuThaoTac(nv.MaNV, thaoTac);
                             txtMaNV.Text = string.Empty;
-                            return;
+                            chamCong.Clear();
+                            return true;
                         }
                     }
                 }
             }
+            return false;
         }
-        public void ChamCongTungCa(List<ChamCong> chamCong)
+        public void ChamCongTungCa(List<ChamCong> llv)
         {
-            TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString(formatTime));
-            string dateNow = DateTime.Now.ToString(formatDate);           
-            int countMax = chamCong.Count;
-            int count = 1;
-            foreach (ChamCong nv in chamCong)
-            {                
-                string ca = nv.Ca.TenCa;                
+            timeNow = TimeSpan.Parse(DateTime.Now.ToString(formatTime));
+            dateNow = DateTime.Now.ToString(formatDate);           
+            int countMax = llv.Count;
+            int count = 1;          
+            foreach (ChamCong nv in llv)
+            {
+                string ca = nv.Ca.TenCa;
+                string thaoTac = $"Nhân viên {nv.MaNV} chấm công lúc {timeNow} ngày {dateNow} cho:\n";
                 if ( nv.ThoiGianDen == null && (timeNow < nv.Ca.GioKetThuc || nv.Ca.GioBatDau > nv.Ca.GioKetThuc))
-                {                        
+                {                   
                     nv.ThoiGianDen = timeNow;
-                    if (chamCongBUS.ChamCong(nv))
+                    thaoTac += $"- Giờ vào ca {ca}";
+                    chamCong.Add(nv);
+                    if (chamCongBUS.ChamCong(chamCong, thaoTac))
                     {
-                        string gio = "giờ vào";
-                        LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
+                        LichSuThaoTac(nv.MaNV, thaoTac);
                         txtMaNV.Text = string.Empty;
+                        chamCong.Clear();
                         count++;
                         return;
                     }
@@ -114,14 +129,16 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     if(count < countMax)
                     {
-                        if(timeNow < chamCong[count].Ca.GioBatDau)
+                        if(timeNow < nv.Ca.GioBatDau)
                         {
                             nv.ThoiGianVe = timeNow;
-                            if (chamCongBUS.ChamCong(nv))
+                            thaoTac += $"- Giờ ra ca {ca}";
+                            chamCong.Add(nv);
+                            if (chamCongBUS.ChamCong(chamCong, thaoTac))                                
                             {
-                                string gio = "giờ vào";
-                                LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
+                                LichSuThaoTac(nv.MaNV, thaoTac);
                                 txtMaNV.Text = string.Empty;
+                                chamCong.Clear();
                                 count++;
                                 return;
                             }
@@ -130,11 +147,13 @@ namespace QuanLyNhanSu.PresentationTier
                     else
                     {
                         nv.ThoiGianVe = timeNow;
-                        if (chamCongBUS.ChamCong(nv))
-                        {
-                            string gio = "giờ ra";
-                            LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
+                        thaoTac += $"- Giờ ra ca {ca}";
+                        if (chamCongBUS.ChamCong(chamCong, thaoTac))
+                        {                            
+                            chamCong.Add(nv);
+                            LichSuThaoTac(nv.MaNV, thaoTac);
                             txtMaNV.Text = string.Empty;
+                            chamCong.Clear();
                             count++;
                             return;
                         }
@@ -146,17 +165,19 @@ namespace QuanLyNhanSu.PresentationTier
             txtMaNV.Text = string.Empty;
             return;            
         }
-        public void ChamCongLienCa(List<ChamCong> chamCong)
+        public void ChamCongLienCa(List<ChamCong> llv)
         {
-            TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString(formatTime));
-            string dateNow = DateTime.Now.ToString(formatDate);  
+            timeNow = TimeSpan.Parse(DateTime.Now.ToString(formatTime));
+            dateNow = DateTime.Now.ToString(formatDate);  
             int checkThoiGianVaoCaDau = 0;
-            int maxCa = chamCong.Count();
+            int maxCa = llv.Count();
             int countCa = 0;
-            foreach (ChamCong nv in chamCong)
+            string maNV = llv.FirstOrDefault().MaNV;
+            string thaoTac = $"Nhân viên {maNV} chấm công lúc {timeNow} ngày {dateNow} cho:\n";
+            foreach (ChamCong nv in llv)
             {
                 countCa++;
-                string ca = nv.Ca.TenCa;                
+                string ca = nv.Ca.TenCa;                                          
                 if (nv.ThoiGianDen != null && nv.ThoiGianVe == null && timeNow < nv.Ca.GioBatDau)
                 {
                     MessageBox.Show($"Vẫn chưa vào ca {ca}!\n({nv.Ca.GioBatDau} - {nv.Ca.GioKetThuc})", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -166,61 +187,64 @@ namespace QuanLyNhanSu.PresentationTier
                 if (nv.ThoiGianDen == null && (timeNow < nv.Ca.GioKetThuc || nv.Ca.GioBatDau > nv.Ca.GioKetThuc))
                 {
                     nv.ThoiGianDen = timeNow;
-                    if (chamCongBUS.ChamCong(nv))
+                    thaoTac += $"- Giờ vào ca {ca}\n";
+                    chamCong.Add(nv);           
+                    if (nv.Ca.GioBatDau > nv.Ca.GioKetThuc)
                     {
-                        string gio = "giờ vào";
-                        LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
-                        txtMaNV.Text = string.Empty;
-                        return;
+                        if (chamCongBUS.ChamCong(chamCong, thaoTac))
+                        {
+                            LichSuThaoTac(nv.MaNV, thaoTac);
+                            txtMaNV.Text = string.Empty;
+                            chamCong.Clear();
+                            return;
+                        }
                     }
-                }                
+                }              
                 if (nv.ThoiGianDen != null  && nv.ThoiGianVe == null)
                 {
                     checkThoiGianVaoCaDau = 1;
                     nv.ThoiGianVe = timeNow;
-                    if (chamCongBUS.ChamCong(nv))
+                    thaoTac += $"- Giờ ra ca {ca}\n";
+                    chamCong.Add(nv);                   
+                    if (countCa == maxCa)
                     {
-                        string gio = "giờ ra";
-                        LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
-                        if (countCa == maxCa)
+                        if(chamCongBUS.ChamCong(chamCong, thaoTac))
                         {
+                            LichSuThaoTac(nv.MaNV, thaoTac);
                             txtMaNV.Text = string.Empty;
+                            chamCong.Clear();
                             return;
-                        }
-                        else
-                            continue;
+                        }                        
                     }
+                    else
+                        continue;                    
                 }
                 if (timeNow > nv.Ca.GioKetThuc && nv.ThoiGianDen == null && checkThoiGianVaoCaDau == 1)
                 {
                     nv.ThoiGianDen = timeNow;
-                    if (chamCongBUS.ChamCong(nv))
-                    {
-                        string gio = "giờ vào";
-                        LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
-                    }
+                    thaoTac += $"- Giờ vào ca {ca}\n";
+                    chamCong.Add(nv);
                 }        
                 if(timeNow > nv.Ca.GioKetThuc && nv.ThoiGianVe == null && checkThoiGianVaoCaDau == 1)
                 {
+                    if(nv.Ca.GioBatDau > nv.Ca.GioKetThuc)                    
+                        continue;
                     nv.ThoiGianVe = timeNow;
-                    if (chamCongBUS.ChamCong(nv))
+                    thaoTac += $"- Giờ ra ca {ca}\n";
+                    chamCong.Add(nv);                    
+                    if (countCa == maxCa)
                     {
-                        string gio = "giờ ra";
-                        LichSuThaoTac(nv.MaNV, gio, ca, thaoTac);
-                        if (countCa == maxCa)
+                        if (chamCongBUS.ChamCong(chamCong, thaoTac))
                         {
+                            LichSuThaoTac(nv.MaNV, thaoTac);
                             txtMaNV.Text = string.Empty;
+                            chamCong.Clear();
                             return;
-                        }                                
-                    }
+                        }
+                    }                               
                 }                      
                 if (nv.ThoiGianDen == null && timeNow > nv.Ca.GioKetThuc && checkThoiGianVaoCaDau == 0)
                 {
-                    if (countCa == maxCa)
-                    {
-                        txtMaNV.Text = string.Empty;
-                        return;
-                    }
                     continue;
                 }               
                 txtMaNV.Text = string.Empty;
@@ -245,14 +269,15 @@ namespace QuanLyNhanSu.PresentationTier
                 string dateNow = DateTime.Now.ToString(formatDate);
                 List<ChamCong> caDem = lichCaDem.Where(nv => nv.MaNV == maNV).ToList();
                 List<ChamCong> chamCong = lichLamViec.Where(nv => nv.MaNV == maNV).OrderBy(nv => nv.Ca.TenCa).ToList();
-                ChamCongCaDem(caDem);
+                if (ChamCongCaDem(caDem))
+                    return;
                 if(chamCong.Count == 0)
                 {
                     MessageBox.Show($"Nhân viên {maNV} không có lịch làm việc trong hôm nay {dateNow}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtMaNV.Text = string.Empty;
                     return;
                 }
-                if (nhanVien.LoaiHopDong.HinhThucChamCong.TenHinhThucChamCong == "Liên ca")
+                if (nhanVien.LoaiHopDong.HinhThucChamCong.TenHinhThucChamCong == "Liên ca") 
                     ChamCongLienCa(chamCong);
                 else
                     ChamCongTungCa(chamCong);               

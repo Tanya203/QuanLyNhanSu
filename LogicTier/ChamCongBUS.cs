@@ -16,9 +16,9 @@ namespace QuanLyNhanSu.LogicTier
         {
             return chamCongDAL.GetLichLamViecTheoNgay(ngayLam).ToList();
         }
-        public bool ChamCong(ChamCong nhanVien)
+        public bool ChamCong(List<ChamCong> nhanVien, string thaoTac)
         {
-            return chamCongDAL.ChamCong(nhanVien);
+            return chamCongDAL.ChamCong(nhanVien, thaoTac);
         }
     }
 }
