@@ -20,13 +20,17 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly PhieuBUS phieuBUS;
         private readonly ChiTietPhieuBUS chiTietPhieuBus;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
+        private readonly GiaoDienBUS giaoDienBUS;
+        private readonly ThaoTacBUS thaoTacBUS;
         private IEnumerable<ChiTietPhieuViewModels> danhSachChiTietPhieu;
         private IEnumerable<ChiTietPhieuViewModels> danhSachChiTietPhieuTimKiem;
         private IEnumerable<ChiTietPhieu> ctp;
+        private readonly List<ThaoTac> listThaoTac;
         private readonly NhanVien nv;
         private readonly Phieu phieu;
         private readonly string maNV;
         private readonly string maP;
+        private readonly string maGD;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmChiTietPhieu(string maNV, string maP)
         {
@@ -37,6 +41,10 @@ namespace QuanLyNhanSu.PresentationTier
             phieuBUS = new PhieuBUS();
             chiTietPhieuBus = new ChiTietPhieuBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
+            giaoDienBUS = new GiaoDienBUS();
+            thaoTacBUS = new ThaoTacBUS();
+            maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý chi tiết phiếu").MaGD;
+            listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD  == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             phieu = phieuBUS.GetPhieu().FirstOrDefault(p => p.MaP == maP);
             this.maNV = maNV;
@@ -179,6 +187,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtHoTenNV.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             txtMaNV_Sua.Text = string.Empty;
             txtSoTien.Text = string.Empty;
+            rtxtGhiChu.Text = string.Empty;
         }
         private void EnableButton()
         {
@@ -260,13 +269,14 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         ///////////////////////////////////////////////////////////////////////////////////////////
-        private void LichSuThaoTac(string thaoTac, string maNV, string phieu)
+        private void LichSuThaoTac(string thaoTac, string maTT)
         {
             LichSuThaoTac newLstt = new LichSuThaoTac
             {
                 NgayGio = DateTime.Now.ToString(formatDateTime),
                 MaNV = this.maNV,
-                ThaoTacThucHien = thaoTac + maNV + phieu
+                MaTT = maTT,
+                ThaoTacThucHien = thaoTac,
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
@@ -276,10 +286,10 @@ namespace QuanLyNhanSu.PresentationTier
             ChiTietPhieu nhanVien = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(phieu => phieu.MaNV == txtMaNV_Sua.Text);
             string soTienCu = string.Format(fVND, "{0:N3} ₫", nhanVien.SoTien);
             string soTienMoi = string.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
-            if (rtxtGhiChu.Text != nhanVien.GhiChu)
-                changes.Add($"- Ghi chú: {nhanVien.GhiChu} -> Ghi chú: {rtxtGhiChu.Text}");            
             if (soTienCu != soTienMoi)
                 changes.Add($"- Số tiền: {soTienCu} -> Số tiền: {soTienMoi}");
+            if (rtxtGhiChu.Text != nhanVien.GhiChu)
+                changes.Add($"- Ghi chú: {nhanVien.GhiChu} -> Ghi chú: {rtxtGhiChu.Text}");  
             return string.Join("\n", changes);
         }
         private void btnThem_Click(object sender, EventArgs e)
@@ -295,9 +305,9 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 string soTien = string.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
                 string maNV = cmbNhanVien.SelectedValue.ToString();
-                string thaoTac = "Thêm nhân viên ";
-                string phieu = $" vào {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {rtxtGhiChu.Text}";
-                LichSuThaoTac(thaoTac, maNV, phieu);
+                string thaoTac = $"Thêm nhân viên {maNV} vào {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {rtxtGhiChu.Text}";
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
             }
             if(phieu.LoaiPhieu.MaLP == "LP0000000003")
             {
@@ -327,11 +337,11 @@ namespace QuanLyNhanSu.PresentationTier
             if (chiTietPhieuBus.Save(newChiTietPhieu))
             {
                 string maNV = txtMaNV_Sua.Text;
-                string thaoTac = "Sửa nhân viên ";
-                string phieu = $" trong {txtLoaiPhieu.Text} {maP}";
+                string thaoTac = $"Sửa nhân viên {maNV} trong {txtLoaiPhieu.Text} {maP}";
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
                 if (!string.IsNullOrEmpty(chiTietSua))
-                    phieu += $":\n{chiTietSua}";
-                LichSuThaoTac(thaoTac, maNV, phieu);               
+                    thaoTac += $":\n{chiTietSua}";
+                LichSuThaoTac(thaoTac, maTT);               
                 if (this.phieu.LoaiPhieu.MaLP == "LP0000000003" && soTienNoCu != soTienNoMoi)
                 {
                     List<NhanVien> listNhanVien = new List<NhanVien>();
@@ -378,9 +388,9 @@ namespace QuanLyNhanSu.PresentationTier
                 string maNV = txtMaNV_Sua.Text;
                 string soTien = string.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
                 string ghiChu = rtxtGhiChu.Text;
-                string thaoTac = "Xoá nhân viên ";
-                string phieu = $" khỏi {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {ghiChu}";
-                LichSuThaoTac(thaoTac, maNV, phieu);               
+                string thaoTac = $"Xoá nhân viên {maNV} khỏi {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {ghiChu}";
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);               
                 if (this.phieu.LoaiPhieu.MaLP == "LP0000000003")
                 {
                     List<NhanVien> listNhanVien = new List<NhanVien>();

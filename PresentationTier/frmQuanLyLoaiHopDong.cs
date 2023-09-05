@@ -14,10 +14,14 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyNhanVienBUS nhanVienBUS;  
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly HinhThucChamCongBUS hinhThucChamCongBUS;
+        private readonly GiaoDienBUS giaoDienBUS;
+        private readonly ThaoTacBUS thaoTacBUS;
         private IEnumerable<LoaiHopDongViewModels> danhSachLoaiHopDong;
         private IEnumerable<LoaiHopDongViewModels> danhSachLoaiHopDongTimKiem;
+        private readonly List<ThaoTac> listThaoTac;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string maGD;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiHopDong(string maNV)
         {
@@ -26,6 +30,10 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             hinhThucChamCongBUS = new HinhThucChamCongBUS();
+            giaoDienBUS = new GiaoDienBUS();
+            thaoTacBUS = new ThaoTacBUS();
+            maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý loại hợp đồng").MaGD;
+            listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             txtMaLHD.ReadOnly = true;
             txtSoLuongNhanVien.ReadOnly = true;
@@ -144,12 +152,13 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void LichSuThaoTac(string thaoTac)
+        private void LichSuThaoTac(string thaoTac, string maTT)
         {
             LichSuThaoTac newLstt = new LichSuThaoTac
             {
                 NgayGio = DateTime.Now.ToString(formatDateTime),
                 MaNV = maNV,
+                MaTT = maTT,
                 ThaoTacThucHien = thaoTac,
             };
             lichSuThaoTacBUS.Save(newLstt);
@@ -179,7 +188,8 @@ namespace QuanLyNhanSu.PresentationTier
                 string tenLoaiHopDong = txtTenLHD.Text;
                 string hinhThucChamCong = cmbHinhThucChamCong.Text;
                 string thaoTac = $"Thêm loại hợp đông {tenLoaiHopDong}: \n  - Hình thức chấm công: {hinhThucChamCong}";
-                LichSuThaoTac(thaoTac);
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
             }
             Reload();
         }
@@ -201,7 +211,8 @@ namespace QuanLyNhanSu.PresentationTier
                 string thaoTac = $"Sửa loại hợp đồng {txtMaLHD.Text}";                
                 if (!string.IsNullOrEmpty(chiTietSua))
                     thaoTac += $":\n{chiTietSua}";
-                LichSuThaoTac(thaoTac);
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }            
         }
@@ -216,7 +227,8 @@ namespace QuanLyNhanSu.PresentationTier
                 string tenLoaiHopDong = txtTenLHD.Text;
                 string hinhThucChamCong = cmbHinhThucChamCong.Text;
                 string thaoTac = $"Xoá loại hợp đồng {tenLoaiHopDong}:\n    - Hình thức chấm công: {hinhThucChamCong}";
-                LichSuThaoTac(thaoTac);
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }            
         }

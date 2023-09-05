@@ -21,11 +21,15 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyLoaiHopDongBUS loaiHopDongBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly ChiTietPhuCapBUS chiTietPhuCapBUS;
+        private readonly GiaoDienBUS giaoDienBUS;
+        private readonly ThaoTacBUS thaoTacBUS;
         private IEnumerable<NhanVienViewModel> danhSachNhanVien;
         private IEnumerable<NhanVienViewModel> danhSachNhanVienTimKiem;
+        private readonly List<ThaoTac> listThaoTac;
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         private readonly string maNV;
+        private readonly string maGD;
         private readonly NhanVien nv;
 
 
@@ -38,6 +42,10 @@ namespace QuanLyNhanSu.PresentationTier
             loaiHopDongBUS = new QuanLyLoaiHopDongBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             chiTietPhuCapBUS = new ChiTietPhuCapBUS();
+            giaoDienBUS = new GiaoDienBUS();
+            thaoTacBUS = new ThaoTacBUS();
+            maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý nhân viên").MaGD;
+            listThaoTac = thaoTacBUS.GetThaoTac().Where(tc => tc.MaGD == maGD).ToList();
             MessageBoxManager.Register_OnceOnly();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             this.maNV = maNV;
@@ -344,6 +352,10 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void BatTatNut()
         {
+            if (string.IsNullOrEmpty(txtMaNV.Text))
+                cbHienThiMatKhau.Enabled = true;
+            if (!string.IsNullOrEmpty(txtMaNV.Text))
+                cbHienThiMatKhau.Enabled = false;
             if (string.IsNullOrEmpty(txtMaNV.Text) && !CheckEmptyText() && !CheckChonGioiTinh() ||
              string.IsNullOrEmpty(txtMaNV.Text) && !CheckEmptyText() ||
              string.IsNullOrEmpty(txtMaNV.Text) && !CheckChonGioiTinh() || !CheckEmptyTextSua())
@@ -352,7 +364,6 @@ namespace QuanLyNhanSu.PresentationTier
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
                 btnThemPhuCap.Enabled = false;
-                cbHienThiMatKhau.Enabled = true;
                 return;
             }
             if (string.IsNullOrEmpty(txtMaNV.Text) && CheckEmptyText() && CheckChonGioiTinh())
@@ -361,7 +372,6 @@ namespace QuanLyNhanSu.PresentationTier
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
                 txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = true;
-                cbHienThiMatKhau.Enabled = true;
                 txtTaiKhoan.ReadOnly = false;
                 return;
             }
@@ -372,10 +382,9 @@ namespace QuanLyNhanSu.PresentationTier
                 btnXoa.Enabled = true;
                 btnThemPhuCap.Enabled = true;
                 txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = false;
-                cbHienThiMatKhau.Enabled = false;
                 txtTaiKhoan.ReadOnly= true;
                 return;
-            }
+            }            
         }
         private void EnableButtons(object sender, EventArgs e)
         {
@@ -432,12 +441,13 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         ///////////////////////////////////////////////////////////////////////////////////////        
-        private void LichSuThaoTac(string thaoTac)
+        private void LichSuThaoTac(string thaoTac, string maTT)
         {
             LichSuThaoTac newLstt = new LichSuThaoTac
             {
                 NgayGio = DateTime.Now.ToString(formatDateTime),
                 MaNV = maNV,
+                MaTT = maTT,
                 ThaoTacThucHien = thaoTac,
             };
             lichSuThaoTacBUS.Save(newLstt);
@@ -532,27 +542,28 @@ namespace QuanLyNhanSu.PresentationTier
             if (nhanVienBUS.Save(newNhanVien))
             {
                 string thaoTac = $"Thêm nhân viên {txtHo.Text} {txtHo.Text} {txtTen.Text}:\n" +
-                                $"- Phòng ban: {cmbPhongBan.Text}" +
-                                $"- Chức vụ: {cmbChucVu.Text}" +
-                                $"- Loại hợp đồng: {cmbLoaiHopDong.Text}" +
-                                $"- Tài khoản: {txtTaiKhoan.Text}" +
-                                $"- CCCD: {txtCCCD.Text}" +
-                                $"- NTNS: {dtpNTNS.Text}" +
-                                $"- Số nhà: {txtSoNha.Text}" +
-                                $"- Đường: {txtDuong.Text}" +
-                                $"- Phường/xã: {txtPhuong_Xa.Text}" +
-                                $"- Quận/huyện: {txtQuan_Huyen.Text}" +
-                                $"- Tỉnh/Thành Phố: {txtTinh_ThanhPho.Text}" +
-                                $"- Giới tính: {ChonGioiTinh()}" +
-                                $"- Số điện thoại: {txtSDT.Text}" +
-                                $"- Email: {txtEmail.Text}" +
-                                $"- Trình độ học vấn: {txtTrinhDoHocVan.Text}" +
-                                $"- Ngày vào làm: {dtpNgayVaoLam.Text}" +
-                                $"- Thời hạn hợp đồng: {dtpThoiHanHopDong.Text}" +
-                                $"- Tình trạng: {txtTinhTrang.Text}" +
-                                $"- Số ngày phép: {txtSoNgayPhep.Text}" +
-                                $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", txtLuongCoBan.Text)}";
-                LichSuThaoTac(thaoTac);
+                                $"- Phòng ban: {cmbPhongBan.Text}\n" +
+                                $"- Chức vụ: {cmbChucVu.Text}\n" +
+                                $"- Loại hợp đồng: {cmbLoaiHopDong.Text}\n" +
+                                $"- Tài khoản: {txtTaiKhoan.Text}\n" +
+                                $"- CCCD: {txtCCCD.Text}\n" +
+                                $"- NTNS: {dtpNTNS.Text}\n" +
+                                $"- Số nhà: {txtSoNha.Text}\n" +
+                                $"- Đường: {txtDuong.Text}\n" +
+                                $"- Phường/xã: {txtPhuong_Xa.Text}\n" +
+                                $"- Quận/huyện: {txtQuan_Huyen.Text}\n" +
+                                $"- Tỉnh/Thành Phố: {txtTinh_ThanhPho.Text}\n" +
+                                $"- Giới tính: {ChonGioiTinh()}\n" +
+                                $"- Số điện thoại: {txtSDT.Text}\n" +
+                                $"- Email: {txtEmail.Text}\n" +
+                                $"- Trình độ học vấn: {txtTrinhDoHocVan.Text}\n" +
+                                $"- Ngày vào làm: {dtpNgayVaoLam.Text}\n" +
+                                $"- Thời hạn hợp đồng: {dtpThoiHanHopDong.Text}\n" +
+                                $"- Tình trạng: {txtTinhTrang.Text}\n" +
+                                $"- Số ngày phép: {txtSoNgayPhep.Text}\n" +
+                                $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongCoBan.Text))}\n";
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
             }
             Reload();
         }
@@ -598,9 +609,10 @@ namespace QuanLyNhanSu.PresentationTier
             if (nhanVienBUS.Save(nhanVien))
             {
                 string thaoTac = $"Sửa nhân viên {txtMaNV.Text}";
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
                 if (!string.IsNullOrEmpty(chiTietSua))
                     thaoTac += $":\n{chiTietSua}";
-                LichSuThaoTac(thaoTac);
+                LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }                      
         }      
@@ -611,8 +623,7 @@ namespace QuanLyNhanSu.PresentationTier
                 MessageBox.Show("Không thể xoá tài khoản đang đăng nhập", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ClearAllText();
                 return;
-            }
-                
+            }                
             NhanVien newNhanVien = new NhanVien
             {
                 MaNV = txtMaNV.Text,                
@@ -620,29 +631,30 @@ namespace QuanLyNhanSu.PresentationTier
             if (nhanVienBUS.Delete(newNhanVien.MaNV))
             {
                 string thaoTac = $"Xoá nhân viên {txtHo.Text} {txtHo.Text} {txtTen.Text}:\n" +
-                                $"- Phòng ban: {cmbPhongBan.Text}" +
-                                $"- Chức vụ: {cmbChucVu.Text}" +
-                                $"- Loại hợp đồng: {cmbLoaiHopDong.Text}" +
-                                $"- Tài khoản: {txtTaiKhoan.Text}" +
-                                $"- CCCD: {txtCCCD.Text}" +
-                                $"- NTNS: {dtpNTNS.Text}" +
-                                $"- Số nhà: {txtSoNha.Text}" +
-                                $"- Đường: {txtDuong.Text}" +
-                                $"- Phường/xã: {txtPhuong_Xa.Text}" +
-                                $"- Quận/huyện: {txtQuan_Huyen.Text}" +
-                                $"- Tỉnh/Thành Phố: {txtTinh_ThanhPho.Text}" +
-                                $"- Giới tính: {ChonGioiTinh()}" +
-                                $"- Số điện thoại: {txtSDT.Text}" +
-                                $"- Email: {txtEmail.Text}" +
-                                $"- Trình độ học vấn: {txtTrinhDoHocVan.Text}" +
-                                $"- Ngày vào làm: {dtpNgayVaoLam.Text}" +
-                                $"- Thời hạn hợp đồng: {dtpThoiHanHopDong.Text}" +
-                                $"- Tình trạng: {txtTinhTrang.Text}" +
-                                $"- Số ngày phép: {txtSoNgayPhep.Text}" +
-                                $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", txtLuongCoBan.Text)}" +
-                                $"- Phụ cấp: {String.Format(fVND, "{0:N3} ₫", txtPhuCap.Text)}" +
-                                $"- Số tiền nợ: {String.Format(fVND, "{0:N3} ₫", txtSoTienNo.Text)}";
-                LichSuThaoTac(thaoTac);
+                                $"- Phòng ban: {cmbPhongBan.Text}\n" +
+                                $"- Chức vụ: {cmbChucVu.Text}\n" +
+                                $"- Loại hợp đồng: {cmbLoaiHopDong.Text}\n" +
+                                $"- Tài khoản: {txtTaiKhoan.Text}\n" +
+                                $"- CCCD: {txtCCCD.Text}\n" +
+                                $"- NTNS: {dtpNTNS.Text}\n" +
+                                $"- Số nhà: {txtSoNha.Text}\n" +
+                                $"- Đường: {txtDuong.Text}\n" +
+                                $"- Phường/xã: {txtPhuong_Xa.Text}\n" +
+                                $"- Quận/huyện: {txtQuan_Huyen.Text}\n" +
+                                $"- Tỉnh/Thành Phố: {txtTinh_ThanhPho.Text}\n" +
+                                $"- Giới tính: {ChonGioiTinh()}\n" +
+                                $"- Số điện thoại: {txtSDT.Text}\n" +
+                                $"- Email: {txtEmail.Text}\n" +
+                                $"- Trình độ học vấn: {txtTrinhDoHocVan.Text}\n" +
+                                $"- Ngày vào làm: {dtpNgayVaoLam.Text}\n" +
+                                $"- Thời hạn hợp đồng: {dtpThoiHanHopDong.Text}\n" +
+                                $"- Tình trạng: {txtTinhTrang.Text}\n" +
+                                $"- Số ngày phép: {txtSoNgayPhep.Text}\n" +
+                                $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongCoBan.Text))}\n" +
+                                $"- Phụ cấp: {String.Format(fVND, "{0:N3} ₫", txtPhuCap.Text)}\n" +
+                                $"- Số tiền nợ: {String.Format(fVND, "{0:N3} ₫", txtSoTienNo.Text)}\n";
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }
         }
@@ -679,7 +691,8 @@ namespace QuanLyNhanSu.PresentationTier
                 if (nhanVienBUS.Save(nhanVien))
                 {
                     string thaoTac = $"Mở khoá tài khoản của nhân viên {txtMaNV.Text}";
-                    LichSuThaoTac(thaoTac);
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Mở khoá")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
                     Reload();
                 }
             }

@@ -18,11 +18,15 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly ChiTietPhuCapBUS chiTietPhuCapBUS;
         private readonly QuanLyPhuCapBUS phuCapBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
+        private readonly GiaoDienBUS giaoDienBUS;
+        private readonly ThaoTacBUS thaoTacBUS;
         private IEnumerable<ChiTietPhuCapViewModels> danhSachChiTietPhuCap;
-        private IEnumerable<ChiTietPhuCapViewModels> ctpc;
+        private readonly IEnumerable<ChiTietPhuCapViewModels> ctpc;
+        private readonly List<ThaoTac> listThaoTac;
         private readonly NhanVien nv;
         private readonly string maNV;
-        private readonly string nhanVienPC;        
+        private readonly string nhanVienPC;
+        private readonly string maGD;
         private readonly string check;
         private string maPC_Chon;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
@@ -33,6 +37,10 @@ namespace QuanLyNhanSu.PresentationTier
             chiTietPhuCapBUS = new ChiTietPhuCapBUS();
             phuCapBUS = new QuanLyPhuCapBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
+            giaoDienBUS = new GiaoDienBUS();
+            thaoTacBUS = new ThaoTacBUS();
+            maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Phụ cấp một nhân viên").MaGD;
+            listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             ctpc = chiTietPhuCapBUS.GetPhuCapMotNhanVien(nhanVienPC);
             this.maNV = maNV;
@@ -131,13 +139,14 @@ namespace QuanLyNhanSu.PresentationTier
             }            
         }
         //////////////////////////////////////////////////////////////////////////////////////
-        private void LichSuThaoTac(string thaoTac, string maNV)
+        private void LichSuThaoTac(string thaoTac, string maTT)
         {
             LichSuThaoTac newLstt = new LichSuThaoTac
             {
                 NgayGio = DateTime.Now.ToString(formatDateTime),
                 MaNV = this.maNV,
-                ThaoTacThucHien = thaoTac + maNV,
+                MaTT = maTT,
+                ThaoTacThucHien = thaoTac,
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
@@ -150,8 +159,9 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chiTietPhuCapBUS.Save(chiTietPhuCap))
             {
-                string thaoTac = $"Thêm phụ cấp {cmbPhuCap.Text} cho nhân viên";
-                LichSuThaoTac(thaoTac, nhanVienPC);
+                string thaoTac = $"Thêm phụ cấp {cmbPhuCap.Text} cho nhân viên {nhanVienPC}";
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
             }
             txtSoTien.Text = string.Empty;
             Reload();
@@ -173,7 +183,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvChiTietPhuCap.Columns.Add(btnXoa);
             }
         }
-        public void XoaPhuCap(string maNV, string maPC, string tenPC)
+        public void XoaPhuCap( string maPC, string tenPC)
         {
             ChiTietPhuCap chiTietPhuCap = new ChiTietPhuCap
             {
@@ -182,8 +192,9 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chiTietPhuCapBUS.Delete(chiTietPhuCap))
             {
-                string thaoTac = $"Xoá phụ cấp {tenPC} của nhân viên";
-                LichSuThaoTac(thaoTac, nhanVienPC);
+                string thaoTac = $"Xoá phụ cấp {tenPC} của nhân viên {nhanVienPC}";
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }
         }
@@ -196,7 +207,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 maPC_Chon = dgvChiTietPhuCap.Rows[rowIndex].Cells[4].Value.ToString();
                 string tenPC = dgvChiTietPhuCap.Rows[rowIndex].Cells[5].Value.ToString();
-                XoaPhuCap(nhanVienPC, maPC_Chon, tenPC);
+                XoaPhuCap(maPC_Chon, tenPC);
             }
         }
         private void btnTroVe_Click(object sender, EventArgs e)

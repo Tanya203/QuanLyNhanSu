@@ -19,14 +19,18 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly QuanLyCaBUS caBUS;
         private readonly QuanLyLoaiCaBUS loaiCaBUS;
+        private readonly GiaoDienBUS giaoDienBUS;
+        private readonly ThaoTacBUS thaoTacBUS;
         private IEnumerable<ChiTietLichLamViecViewModels> chiTietLichLamViec;
         private IEnumerable<ChiTietLichLamViecViewModels> chiTietLichLamViecTimKiem;
-        private IEnumerable<ChamCong> chamCong;
+        private readonly IEnumerable<ChamCong> chamCong;
+        private readonly List<ThaoTac> listThaoTac;
         private readonly NhanVien nv;
         private readonly LichLamViec llv;
         private readonly string maNV;
         private readonly string maLLV;
         private readonly string maPB;
+        private readonly string maGD;
         private readonly int countCa;
         private string maNV_Chon;
         private readonly string formatDate = "yyyy-MM-dd";
@@ -41,6 +45,10 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             caBUS = new QuanLyCaBUS();
             loaiCaBUS = new QuanLyLoaiCaBUS();
+            giaoDienBUS = new GiaoDienBUS();
+            thaoTacBUS = new ThaoTacBUS();
+            maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý chi tiết lịch làm việc").MaGD;
+            listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD ==  maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             chamCong = chiTietLichLamViecBUS.GetChiTietLichLamViec().Where(ct => ct.MaLLV == maLLV);
             this.maNV = maNV;
@@ -246,13 +254,14 @@ namespace QuanLyNhanSu.PresentationTier
             frmOpen.FormClosed += CloseForm;
         }
         //////////////////////////////////////////////////////////////////////////////////////
-        private void LichSuThaoTac(string thaoTac,string maNV)
+        private void LichSuThaoTac(string thaoTac,string maTT)
         {
             LichSuThaoTac newLstt = new LichSuThaoTac
             {
                 NgayGio = DateTime.Now.ToString(formatDateTime),
                 MaNV = this.maNV,
-                ThaoTacThucHien = $"{thaoTac} {maNV} lịch làm việc {maLLV} ngày {dtpNgayLam.Text}",
+                MaTT = maTT,
+                ThaoTacThucHien = $"{thaoTac} lịch làm việc {maLLV} ngày {dtpNgayLam.Text} - phòng ban {txtPhongBan.Text}",
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
@@ -269,8 +278,9 @@ namespace QuanLyNhanSu.PresentationTier
             if (chiTietLichLamViecBUS.Save(newChamCong))
             {
                 string maNV = cmbNhanVien.SelectedValue.ToString();
-                string thaoTac = "Thêm nhân viên";
-                LichSuThaoTac(thaoTac, maNV);
+                string thaoTac = $"Thêm nhân viên {maNV} vào";
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm nhân viên")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
             }
             Reload();
         }      
@@ -299,10 +309,10 @@ namespace QuanLyNhanSu.PresentationTier
                 MaNV = maNV_Chon,
             };
             if (chiTietLichLamViecBUS.Delete(newChamCong))
-            {
-                string maNV = cmbNhanVien.SelectedValue.ToString();
-                string thaoTac = "Xoá nhân viên";
-                LichSuThaoTac(thaoTac, maNV);
+            {                
+                string thaoTac = $"Xoá nhân viên {maNV_Chon} khỏi";
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá nhân viên")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }
         }
@@ -372,13 +382,13 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 if (chiTietLichLamViecBUS.Save(nv))
                 {
-                    LichSuThaoTac newLstt = new LichSuThaoTac
-                    {
-                        NgayGio = DateTime.Now.ToString(formatDateTime),
-                        MaNV = maNV,
-                        ThaoTacThucHien = $"Nhân viên {maNV} {lichSu} {cmbNhanVien.SelectedValue} trong lịch làm việc {maLLV} ngày {dtpNgayLam.Text}",
-                    };
-                    lichSuThaoTacBUS.Save(newLstt);
+                    string thaoTac = $"Nhân viên {maNV} {lichSu} {maNV_Chon} trong ";
+                    string maTT;
+                    if (thongBao.Contains("Thêm"))
+                        maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm phép")).MaTT;
+                    else
+                        maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá phép")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
                     Reload();
                 }
             }

@@ -13,10 +13,14 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyCaBUS caBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
+        private readonly GiaoDienBUS giaoDienBUS;
+        private readonly ThaoTacBUS thaoTacBUS;
         private IEnumerable<CaViewModels> danhSachCa;
-        private IEnumerable<CaViewModels> danhSachCaTimKiem;        
+        private IEnumerable<CaViewModels> danhSachCaTimKiem;
+        private List<ThaoTac> listThaoTac;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string maGD;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyCa(string maNV)
         {
@@ -24,6 +28,10 @@ namespace QuanLyNhanSu.PresentationTier
             caBUS = new QuanLyCaBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
+            giaoDienBUS = new GiaoDienBUS();
+            thaoTacBUS = new ThaoTacBUS();
+            maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý ca").MaGD;
+            listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             txtMaCa.ReadOnly = true;
             dtpThoiGianBatDau.Text = "00:00";
@@ -127,12 +135,13 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         ///////////////////////////////////////////////////////////////////////////////////////
-        private void LichSuThaoTac(string thaoTac)
+        private void LichSuThaoTac(string thaoTac, string maTT)
         {
             LichSuThaoTac newLstt = new LichSuThaoTac
             {
                 NgayGio = DateTime.Now.ToString(formatDateTime),
                 MaNV = maNV,
+                MaTT = maTT,
                 ThaoTacThucHien = thaoTac,
             };
             lichSuThaoTacBUS.Save(newLstt);
@@ -141,12 +150,12 @@ namespace QuanLyNhanSu.PresentationTier
         {
             List<string> changes = new List<string>();
             Ca ca = caBUS.GetCa().FirstOrDefault(c => c.MaCa == txtMaCa.Text);
-            if (txtTenCa.Text != ca.TenCa)
-                changes.Add($"- Tên ca: {ca.TenCa} -> Tên ca: {txtTenCa.Text}");
             TimeSpan gioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text);
-            if (gioBatDau != ca.GioBatDau)
-                changes.Add($"- Giờ bắt đầu: {ca.GioBatDau} -> Giờ bắt đầu: {gioBatDau}");
             TimeSpan gioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text);
+            if (txtTenCa.Text != ca.TenCa)
+                changes.Add($"- Tên ca: {ca.TenCa} -> Tên ca: {txtTenCa.Text}");           
+            if (gioBatDau != ca.GioBatDau)
+                changes.Add($"- Giờ bắt đầu: {ca.GioBatDau} -> Giờ bắt đầu: {gioBatDau}");            
             if (gioKetThuc != ca.GioKetThuc)
                 changes.Add($"- Giờ kết thúc: {ca.GioKetThuc} -> Giờ kết thúc: {gioKetThuc}");
             return string.Join("\n", changes);
@@ -166,7 +175,8 @@ namespace QuanLyNhanSu.PresentationTier
                 string gioBatDau = dtpThoiGianBatDau.Text;
                 string gioKetThuc = dtpThoiGianKetThuc.Text;
                 string thaoTac = $"Thêm ca {ca}:\n - Giờ bắt đầu: {gioBatDau}\n - Giờ kết thúc: {gioKetThuc}";
-                LichSuThaoTac(thaoTac);
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
             }
             Reload();            
         }
@@ -185,7 +195,8 @@ namespace QuanLyNhanSu.PresentationTier
                 string thaoTac = "Sửa ca " + txtMaCa.Text;
                 if(!string.IsNullOrEmpty(chiTietSua))
                     thaoTac += ":\n" + chiTietSua;
-                LichSuThaoTac(thaoTac);
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }                      
         }
@@ -202,7 +213,8 @@ namespace QuanLyNhanSu.PresentationTier
                 string gioBatDau = dtpThoiGianBatDau.Text;
                 string gioKetThuc = dtpThoiGianKetThuc.Text;
                 string thaoTac = $"Xoá ca {tenCa}:\n - Giờ bắt đầu: {gioBatDau}\n - Giờ kết thúc: {gioKetThuc}";
-                LichSuThaoTac(thaoTac);
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }                    
         }
