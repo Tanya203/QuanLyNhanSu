@@ -1,6 +1,8 @@
 ﻿using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.LogicTier;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -10,12 +12,20 @@ namespace QuanLyNhanSu.PresentationTier
     {
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
+        private readonly GiaoDienBUS giaoDienBUS;
+        private readonly ThaoTacBUS thaoTacBUS;
+        private readonly List<ThaoTac> listThaoTac;
+        private readonly string maDG;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuenMatKhau()
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
+            giaoDienBUS = new GiaoDienBUS();
+            thaoTacBUS = new ThaoTacBUS();
+            maDG = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quên mật khẩu").MaGD;
+            listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maDG).ToList();
         }       
         private void FrmQuenMatKhau_Load(object sender, EventArgs e)
         {
@@ -115,13 +125,15 @@ namespace QuanLyNhanSu.PresentationTier
             if (CheckMatKhau(txtMatKhau.Text))
             {
                 nhanVien.MatKhau = txtMatKhau.Text;
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Quên mật khẩu")).MaTT;
                 if (nhanVienBUS.Save(nhanVien))
                 {
                     LichSuThaoTac newLstt = new LichSuThaoTac
                     {
                         NgayGio = DateTime.Now.ToString(formatDateTime),
                         MaNV = txtMaNhanVien.Text,
-                        ThaoTacThucHien = "Nhân viên " + txtMaNhanVien.Text + " quên mật khẩu.",
+                        MaTT = maTT,
+                        ThaoTacThucHien = $"Nhân viên { txtMaNhanVien.Text } quên mật khẩu.",
                     };
                     lichSuThaoTacBUS.Save(newLstt);
                     btnTroVe_Click(sender, e);

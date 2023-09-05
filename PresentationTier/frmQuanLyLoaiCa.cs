@@ -13,10 +13,14 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyLoaiCaBUS loaiCaBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
+        private readonly GiaoDienBUS giaoDienBUS;
+        private readonly ThaoTacBUS thaoTacBUS;
         private IEnumerable<LoaiCaViewModels> danhSachLoaiCa;
         private IEnumerable<LoaiCaViewModels> danhSachLoaiCaTimKiem;
+        private readonly List<ThaoTac> listThaoTac;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string maGD;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiCa(string maNV)
         {
@@ -24,6 +28,10 @@ namespace QuanLyNhanSu.PresentationTier
             loaiCaBUS = new QuanLyLoaiCaBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
+            giaoDienBUS = new GiaoDienBUS();
+            thaoTacBUS = new ThaoTacBUS();
+            maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý loại ca").MaGD;
+            listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             txtMaLC.ReadOnly = true;           
             btnThem.Enabled = false;
@@ -133,12 +141,13 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void LichSuThaoTac(string thaoTac)
+        private void LichSuThaoTac(string thaoTac, string maTT)
         {
             LichSuThaoTac newLstt = new LichSuThaoTac
             {
                 NgayGio = DateTime.Now.ToString(formatDateTime),
                 MaNV = maNV,
+                MaTT = maTT,
                 ThaoTacThucHien = thaoTac,
             };
             lichSuThaoTacBUS.Save(newLstt);
@@ -168,7 +177,8 @@ namespace QuanLyNhanSu.PresentationTier
                 string loaiCa = txtTenLC.Text;
                 decimal heSoLuong = decimal.Parse(txtHeSoLuong.Text);
                 string thaoTac = $"Thêm loại ca {loaiCa}\n - Hệ số lương: {heSoLuong}";
-                LichSuThaoTac(thaoTac);
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
             }
             Reload();          
         }
@@ -186,7 +196,8 @@ namespace QuanLyNhanSu.PresentationTier
                 string thaoTac = $"Sửa loại ca {txtMaLC.Text}";                
                 if (!string.IsNullOrEmpty(chiTietSua))
                     thaoTac += ":\n" + chiTietSua;
-                LichSuThaoTac(thaoTac);
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }
         }
@@ -201,7 +212,8 @@ namespace QuanLyNhanSu.PresentationTier
                 string tenLoaiCa = txtTenLC.Text;
                 string heSoLuong = txtHeSoLuong.Text;
                 string thaoTac = $"Xoá loại ca {tenLoaiCa}\n    - Hệ số lương: {heSoLuong}";
-                LichSuThaoTac(thaoTac);
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }
         }

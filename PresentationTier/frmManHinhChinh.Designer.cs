@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.btnDangXuat = new System.Windows.Forms.Button();
             this.btnTTTK = new System.Windows.Forms.Button();
@@ -41,7 +41,6 @@
             this.btnQLP = new System.Windows.Forms.Button();
             this.btnQLPC = new System.Windows.Forms.Button();
             this.btnQLLLV = new System.Windows.Forms.Button();
-            this.btnQLCC = new System.Windows.Forms.Button();
             this.btnQLC = new System.Windows.Forms.Button();
             this.btnQLCV = new System.Windows.Forms.Button();
             this.btnQLPB = new System.Windows.Forms.Button();
@@ -87,7 +86,6 @@
             this.pnlMenu.Controls.Add(this.btnQLP);
             this.pnlMenu.Controls.Add(this.btnQLPC);
             this.pnlMenu.Controls.Add(this.btnQLLLV);
-            this.pnlMenu.Controls.Add(this.btnQLCC);
             this.pnlMenu.Controls.Add(this.btnQLC);
             this.pnlMenu.Controls.Add(this.btnQLCV);
             this.pnlMenu.Controls.Add(this.btnQLPB);
@@ -129,7 +127,7 @@
             this.btnTTTK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnTTTK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTTTK.Image = global::QuanLyNhanSu.Properties.Resources.info_small;
-            this.btnTTTK.Location = new System.Drawing.Point(1285, 0);
+            this.btnTTTK.Location = new System.Drawing.Point(1172, 0);
             this.btnTTTK.Name = "btnTTTK";
             this.btnTTTK.Size = new System.Drawing.Size(100, 100);
             this.btnTTTK.TabIndex = 13;
@@ -149,7 +147,7 @@
             this.btnLSTT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLSTT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLSTT.Image = global::QuanLyNhanSu.Properties.Resources.history;
-            this.btnLSTT.Location = new System.Drawing.Point(1130, 0);
+            this.btnLSTT.Location = new System.Drawing.Point(1017, 0);
             this.btnLSTT.Name = "btnLSTT";
             this.btnLSTT.Size = new System.Drawing.Size(155, 100);
             this.btnLSTT.TabIndex = 12;
@@ -169,7 +167,7 @@
             this.btnQLPQ.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnQLPQ.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQLPQ.Image = global::QuanLyNhanSu.Properties.Resources.decentralization;
-            this.btnQLPQ.Location = new System.Drawing.Point(1014, 0);
+            this.btnQLPQ.Location = new System.Drawing.Point(901, 0);
             this.btnQLPQ.Name = "btnQLPQ";
             this.btnQLPQ.Size = new System.Drawing.Size(116, 100);
             this.btnQLPQ.TabIndex = 11;
@@ -189,7 +187,7 @@
             this.btnQLLHD.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnQLLHD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQLLHD.Image = global::QuanLyNhanSu.Properties.Resources.contract;
-            this.btnQLLHD.Location = new System.Drawing.Point(877, 0);
+            this.btnQLLHD.Location = new System.Drawing.Point(764, 0);
             this.btnQLLHD.Name = "btnQLLHD";
             this.btnQLLHD.Size = new System.Drawing.Size(137, 100);
             this.btnQLLHD.TabIndex = 10;
@@ -209,7 +207,7 @@
             this.btnQLTK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnQLTK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQLTK.Image = global::QuanLyNhanSu.Properties.Resources.chart;
-            this.btnQLTK.Location = new System.Drawing.Point(782, 0);
+            this.btnQLTK.Location = new System.Drawing.Point(669, 0);
             this.btnQLTK.Name = "btnQLTK";
             this.btnQLTK.Size = new System.Drawing.Size(95, 100);
             this.btnQLTK.TabIndex = 9;
@@ -229,7 +227,7 @@
             this.btnQLP.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnQLP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQLP.Image = global::QuanLyNhanSu.Properties.Resources.card;
-            this.btnQLP.Location = new System.Drawing.Point(681, 0);
+            this.btnQLP.Location = new System.Drawing.Point(568, 0);
             this.btnQLP.Name = "btnQLP";
             this.btnQLP.Size = new System.Drawing.Size(101, 100);
             this.btnQLP.TabIndex = 8;
@@ -249,7 +247,7 @@
             this.btnQLPC.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnQLPC.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQLPC.Image = global::QuanLyNhanSu.Properties.Resources.allowance;
-            this.btnQLPC.Location = new System.Drawing.Point(594, 0);
+            this.btnQLPC.Location = new System.Drawing.Point(481, 0);
             this.btnQLPC.Name = "btnQLPC";
             this.btnQLPC.Size = new System.Drawing.Size(87, 100);
             this.btnQLPC.TabIndex = 7;
@@ -269,7 +267,7 @@
             this.btnQLLLV.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnQLLLV.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQLLLV.Image = global::QuanLyNhanSu.Properties.Resources.timetable;
-            this.btnQLLLV.Location = new System.Drawing.Point(463, 0);
+            this.btnQLLLV.Location = new System.Drawing.Point(350, 0);
             this.btnQLLLV.Name = "btnQLLLV";
             this.btnQLLLV.Size = new System.Drawing.Size(131, 100);
             this.btnQLLLV.TabIndex = 6;
@@ -277,26 +275,6 @@
             this.btnQLLLV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnQLLLV.UseVisualStyleBackColor = true;
             this.btnQLLLV.Click += new System.EventHandler(this.btnQLLLV_Click);
-            // 
-            // btnQLCC
-            // 
-            this.btnQLCC.AutoSize = true;
-            this.btnQLCC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnQLCC.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnQLCC.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnQLCC.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnQLCC.FlatAppearance.BorderSize = 2;
-            this.btnQLCC.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnQLCC.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQLCC.Image = global::QuanLyNhanSu.Properties.Resources.timekeeping;
-            this.btnQLCC.Location = new System.Drawing.Point(350, 0);
-            this.btnQLCC.Name = "btnQLCC";
-            this.btnQLCC.Size = new System.Drawing.Size(113, 100);
-            this.btnQLCC.TabIndex = 5;
-            this.btnQLCC.Text = "Chấm công";
-            this.btnQLCC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnQLCC.UseVisualStyleBackColor = true;
-            this.btnQLCC.Click += new System.EventHandler(this.btnQLCC_Click);
             // 
             // btnQLC
             // 
@@ -537,14 +515,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLichLamViec.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvLichLamViec.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLichLamViec.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLichLamViec.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLichLamViec.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLichLamViec.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaLLV,
@@ -555,25 +533,25 @@
             this.colThoiGianDen,
             this.colThoiGianVe,
             this.colPhep});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLichLamViec.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLichLamViec.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvLichLamViec.Location = new System.Drawing.Point(0, 360);
             this.dgvLichLamViec.Name = "dgvLichLamViec";
             this.dgvLichLamViec.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLichLamViec.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLichLamViec.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvLichLamViec.RowHeadersVisible = false;
             this.dgvLichLamViec.RowHeadersWidth = 51;
             this.dgvLichLamViec.RowTemplate.Height = 24;
@@ -673,7 +651,6 @@
         private System.Windows.Forms.Button btnQLP;
         private System.Windows.Forms.Button btnQLPC;
         private System.Windows.Forms.Button btnQLLLV;
-        private System.Windows.Forms.Button btnQLCC;
         private System.Windows.Forms.Button btnQLC;
         private System.Windows.Forms.Button btnQLCV;
         private System.Windows.Forms.Button btnQLPB;

@@ -15,8 +15,12 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly ChiTietPhuCapBUS chiTietPhuCapBUS;
-        private readonly string maNV;
+        private readonly GiaoDienBUS giaoDienBUS;
+        private readonly ThaoTacBUS thaoTacBus;
+        private readonly List<ThaoTac> listThaoTac;
         private readonly NhanVien nv;
+        private readonly string maNV;
+        private readonly string maGD;
         private readonly string formatDate = "dd/MM/yyyy";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmThongTinTaiKhoan(string maNV)
@@ -25,6 +29,10 @@ namespace QuanLyNhanSu.PresentationTier
             nhanVienBUS = new QuanLyNhanVienBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             chiTietPhuCapBUS = new ChiTietPhuCapBUS();
+            giaoDienBUS = new GiaoDienBUS();
+            thaoTacBus = new ThaoTacBUS();
+            maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Tài khoản").MaGD;
+            listThaoTac = thaoTacBus.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             this.maNV = maNV;
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             txtMaNV.ReadOnly = true;
@@ -225,12 +233,13 @@ namespace QuanLyNhanSu.PresentationTier
                 btnLuu.Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////       
-        private void LichSuThaoTac(string thaoTac)
+        private void LichSuThaoTac(string thaoTac, string maTT)
         {
             LichSuThaoTac newLstt = new LichSuThaoTac
             {
                 NgayGio = DateTime.Now.ToString(formatDateTime),
                 MaNV = maNV,
+                MaTT = maTT,
                 ThaoTacThucHien = thaoTac,
             };
             lichSuThaoTacBUS.Save(newLstt);
@@ -294,7 +303,8 @@ namespace QuanLyNhanSu.PresentationTier
                 string thaoTac = "Cập nhật thông tin cá nhân";
                 if (!string.IsNullOrEmpty(chiTietSua))
                     thaoTac += $":\n{chiTietSua}";
-                LichSuThaoTac(thaoTac);
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
             }
             Reload();
         }
@@ -328,7 +338,8 @@ namespace QuanLyNhanSu.PresentationTier
             if (nhanVienBUS.Save(nhanVien))
             {
                 string thaoTac = $"Nhân viên {txtMaNV.Text} đổi mật khẩu";
-                LichSuThaoTac(thaoTac);
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Đổi mật khẩu")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
                 DangXuat();
             }
         }
