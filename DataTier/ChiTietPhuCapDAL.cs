@@ -20,15 +20,13 @@ namespace QuanLyNhanSu.DataTier
         {
             var chiTietPhuCap = quanLyNhanSu.ChiTietPhuCaps.Select(x => new ChiTietPhuCapViewModels
             {
-
                 MaPC = x.MaPC,
                 MaNV = x.MaNV,
                 HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
-                TenPhuCap = x.PhuCap.TenPhuCap,
-                TienPhuCap = x.PhuCap.TienPhuCap,
+                TenPhuCap = x.PhuCap.TenPhuCap,                
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
-                ChucVu = x.NhanVien.ChucVu.TenChucVu,
-                GhiChu = x.GhiChu
+                ChucVu = x.NhanVien.ChucVu.TenChucVu,             
+                TienPhuCap = x.PhuCap.TienPhuCap,
             }).Where(pc => pc.MaPC == maPC).OrderBy(pc => pc.MaNV);
             return chiTietPhuCap;
         }
@@ -39,11 +37,10 @@ namespace QuanLyNhanSu.DataTier
                 MaPC = x.MaPC,
                 MaNV = x.MaNV,
                 HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
-                TenPhuCap = x.PhuCap.TenPhuCap,
-                TienPhuCap = x.PhuCap.TienPhuCap,
+                TenPhuCap = x.PhuCap.TenPhuCap,                
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
-                GhiChu = x.GhiChu
+                TienPhuCap = x.PhuCap.TienPhuCap,
             }).Where(pc => pc.MaNV == maNV).OrderBy(pc => pc.MaPC);
             return phuCapNhanVien;
         }
@@ -55,16 +52,15 @@ namespace QuanLyNhanSu.DataTier
                 MaPC = x.MaPC,
                 MaNV = x.MaNV,
                 HoTen = x.NhanVien.Ho + " " + x.NhanVien.TenLot + " " + x.NhanVien.Ten,
-                TenPhuCap = x.PhuCap.TenPhuCap,
-                TienPhuCap = x.PhuCap.TienPhuCap,
+                TenPhuCap = x.PhuCap.TenPhuCap,                
                 PhongBan = x.NhanVien.ChucVu.PhongBan.TenPhongBan,
                 ChucVu = x.NhanVien.ChucVu.TenChucVu,
-                GhiChu = x.GhiChu
+                TienPhuCap = x.PhuCap.TienPhuCap,
             }).Where(pc => pc.MaPC == maPC && (pc.MaNV.Contains(timKiem) ||
                      pc.HoTen.Contains(timKiem) ||
                      pc.TenPhuCap.Contains(timKiem) ||
-                     pc.TienPhuCap.ToString().Contains(timKiem) ||
                      pc.PhongBan.Contains(timKiem) ||
+                     pc.TienPhuCap.ToString().Contains(timKiem) ||
                      pc.ChucVu.Contains(timKiem))).OrderBy(pc => pc.MaNV);
             return phuCapTimKiem;
         }
@@ -135,9 +131,21 @@ namespace QuanLyNhanSu.DataTier
                 return false;
             }
         }
+        public int TongSoNhanVienTrongPhuCap(string maPC)
+        {
+            int sl = quanLyNhanSu.ChiTietPhuCaps.Where(pc => pc.MaPC == maPC).Count();
+            return sl;
+        }
         public decimal TongPhuCapMotNhanVien(string maNV)
         {            
             List<ChiTietPhuCap> chiTietPhuCap = quanLyNhanSu.ChiTietPhuCaps.Where(pc => pc.MaNV == maNV).ToList();
+            if (chiTietPhuCap != null)
+                return chiTietPhuCap.Sum(pc => pc.PhuCap.TienPhuCap);
+            return 0;
+        }
+        public decimal TongTienMotPhuCap(string maPC)
+        {
+            List<ChiTietPhuCap> chiTietPhuCap = quanLyNhanSu.ChiTietPhuCaps.Where(pc => pc.MaPC == maPC).ToList();
             if (chiTietPhuCap != null)
                 return chiTietPhuCap.Sum(pc => pc.PhuCap.TienPhuCap);
             return 0;

@@ -107,7 +107,6 @@ namespace QuanLyNhanSu.PresentationTier
         private void LoadNhanVien(object sender, EventArgs e)
         {
             LoadNhanVienTheoChucVu(cmbChucVu.SelectedValue.ToString());
-            AutoAdjustComboBox(cmbChucVu);
         }
         public void LoadThongTinDangNhap()
         {
@@ -377,7 +376,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void XoaNhanVien()
         {            
-             decimal soTienNo = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(ctp => ctp.MaP == this.phieu.MaP && ctp.MaNV == txtMaNV_Sua.Text).SoTien;
+            decimal soTienNo = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(ctp => ctp.MaP == this.phieu.MaP && ctp.MaNV == txtMaNV_Sua.Text).SoTien;
             ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
             {
                 MaP = txtMaP.Text,

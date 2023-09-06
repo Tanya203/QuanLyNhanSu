@@ -40,5 +40,13 @@ namespace QuanLyNhanSu.LogicTier
         {
             return chiTietPhuCapDAL.TongPhuCapMotNhanVien(maNV);
         }
+        public int TongSoNhanVienTrongPhuCap(string maPC)
+        {
+            return chiTietPhuCapDAL.TongSoNhanVienTrongPhuCap(maPC);
+        }
+        public decimal TongTienMotPhuCap(string maPC)
+        {
+            return chiTietPhuCapDAL.TongTienMotPhuCap(maPC);
+        }
     }
 }

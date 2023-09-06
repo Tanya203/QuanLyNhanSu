@@ -3,6 +3,7 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,7 +14,8 @@ namespace QuanLyNhanSu.PresentationTier
     {
         private readonly CultureInfo fVND = CultureInfo.GetCultureInfo("vi-VN");
         private readonly QuanLyPhuCapBUS phuCapBUS;
-        private readonly QuanLyNhanVienBUS nhanVienBUS;
+        private readonly ChiTietPhuCapBUS chiTietPhuCapBUS;
+        private readonly QuanLyNhanVienBUS nhanVienBUS;        
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
@@ -29,6 +31,7 @@ namespace QuanLyNhanSu.PresentationTier
             InitializeComponent();
             phuCapBUS = new QuanLyPhuCapBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
+            chiTietPhuCapBUS = new ChiTietPhuCapBUS();
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
@@ -69,8 +72,9 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[0].Value = pc.MaPC;
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[1].Value = pc.TenPhuCap;
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = String.Format(fVND, "{0:N3} ₫", pc.TienPhuCap);
-                dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = phuCapBUS.TongSoLuongNhanVienTrongPhongBan(pc.MaPC).ToString();
+                dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = chiTietPhuCapBUS.TongSoNhanVienTrongPhuCap(pc.MaPC);
             }
+            ChiTietButton();
             Enabled = true;
         }
         private void LoadPhuCapTimKiem(string timKiem)
@@ -85,8 +89,9 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[0].Value = pc.MaPC;
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[1].Value = pc.TenPhuCap;
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = String.Format(fVND, "{0:N3} ₫", pc.TienPhuCap);
-                dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = phuCapBUS.TongSoLuongNhanVienTrongPhongBan(pc.MaPC).ToString();
+                dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = chiTietPhuCapBUS.TongSoNhanVienTrongPhuCap(pc.MaPC).ToString();
             }
+            ChiTietButton();
             Enabled = true;
         }
         ////////////////////////////////////////////////////////////////////////////////////////
@@ -171,6 +176,30 @@ namespace QuanLyNhanSu.PresentationTier
                 changes.Add($"- Số tiền: {tienPhuCapCu} -> Số tiền : {tienPhuCapMoi}");
             return string.Join("\n", changes);
         }
+        public void ChiTietButton()
+        {
+            DataGridViewButtonColumn btnXoa = new DataGridViewButtonColumn();
+            {
+                btnXoa.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                btnXoa.Text = "Chi tiết";
+                btnXoa.UseColumnTextForButtonValue = true;
+                btnXoa.FlatStyle = FlatStyle.Popup;
+                var buttonCellStyle = new DataGridViewCellStyle
+                {
+                    BackColor = SystemColors.ScrollBar,
+                    Alignment = DataGridViewContentAlignment.MiddleCenter
+                };
+                btnXoa.DefaultCellStyle = buttonCellStyle;
+                dgvThongTinPhuCap.Columns.Add(btnXoa);
+            }
+        }
+        public void ChiTietPhuCap(string maPC)
+        {
+            FrmChiTietPhuCap frmOpen = new FrmChiTietPhuCap(maNV, maPC);
+            frmOpen.Show();
+            this.Hide();
+            frmOpen.FormClosed += CloseForm;
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
             PhuCap newPhuCap = new PhuCap
@@ -242,6 +271,8 @@ namespace QuanLyNhanSu.PresentationTier
             txtTenPC.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[1].Value.ToString();
             txtSoTien.Text = phuCapBUS.ThongTinPhuCap(txtMaPC.Text).TienPhuCap.ToString();
             txtSoLuongNhanVien.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[3].Value.ToString();
+            if (e.ColumnIndex == 4)
+                ChiTietPhuCap(txtMaPC.Text);
         }
        
         private void TimKiem(object sender, EventArgs e)

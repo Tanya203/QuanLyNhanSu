@@ -9,6 +9,5 @@
         public string ChucVu { get; set; }
         public string PhongBan { get; set; }
         public decimal TienPhuCap { get; set; }
-        public string GhiChu { get; set; }
     }
 }

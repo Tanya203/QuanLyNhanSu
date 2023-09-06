@@ -35,9 +35,5 @@ namespace QuanLyNhanSu.LogicTier
         {
             return phuCapDAL.ThongTinPhuCap(maPC);
         }
-        public int TongSoLuongNhanVienTrongPhongBan(string maPC)
-        {
-            return phuCapDAL.TongSoNhanVienTrongPhuCap(maPC);
-        }
     }
 }

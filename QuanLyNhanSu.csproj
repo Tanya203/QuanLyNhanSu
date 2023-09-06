@@ -223,6 +223,12 @@
     <Compile Include="PresentationTier\FrmChiTietPhieu.Designer.cs">
       <DependentUpon>FrmChiTietPhieu.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationTier\FrmChiTietPhuCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\FrmChiTietPhuCap.Designer.cs">
+      <DependentUpon>FrmChiTietPhuCap.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationTier\FrmDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\FrmChiTietPhieu.resx">
       <DependentUpon>FrmChiTietPhieu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\FrmChiTietPhuCap.resx">
+      <DependentUpon>FrmChiTietPhuCap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\FrmDangNhap.resx">
       <DependentUpon>FrmDangNhap.cs</DependentUpon>
