@@ -122,11 +122,6 @@ namespace QuanLyNhanSu.DataTier.Models
                 }
                 return false;
             }
-        }
-        public int TongSoNhanVienTrongPhuCap(string maPC)
-        {
-            int sl = quanLyNhanSu.ChiTietPhuCaps.Where(pc => pc.MaPC == maPC).Count();
-            return sl;
-        }
+        }        
     }
 }
