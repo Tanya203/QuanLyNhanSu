@@ -222,7 +222,7 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (chiTietPhuCapBUS.Save(chiTietPhuCap))
             {
-                string thaoTac = $"Nhân viên {maNV} thêm phụ cấp {phuCap.TenPhuCap} cho nhân viên {cmbNhanVien.SelectedValue}";
+                string thaoTac = $"Thêm phụ cấp {phuCap.TenPhuCap} cho nhân viên {cmbNhanVien.SelectedValue}";
                 string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
                 LichSuThaoTac(thaoTac, maTT);
             }
@@ -250,7 +250,7 @@ namespace QuanLyNhanSu.PresentationTier
             ChiTietPhuCap nv = chiTietPhuCap.FirstOrDefault(pc => pc.MaNV == maNV);
             if (chiTietPhuCapBUS.Delete(nv))
             {
-                string thaoTac = $"Nhân viên {this.maNV} xoá phụ cấp {phuCap.TenPhuCap} của nhân viên {maNV}";
+                string thaoTac = $"Xoá phụ cấp {phuCap.TenPhuCap} của nhân viên {maNV}";
                 string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
                 LichSuThaoTac(thaoTac, maTT);
                 Reload();

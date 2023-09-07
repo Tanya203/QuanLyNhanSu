@@ -36,12 +36,6 @@
             this.lblNgayLam = new System.Windows.Forms.Label();
             this.btnThem = new System.Windows.Forms.Button();
             this.dgvThongTinLichLamViec = new System.Windows.Forms.DataGridView();
-            this.colMaLLV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNhanVienLapLich = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNgaylam = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
             this.lblChucVuDN = new System.Windows.Forms.Label();
             this.lblPhongBanNV_DN = new System.Windows.Forms.Label();
@@ -54,6 +48,12 @@
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnTroVe = new System.Windows.Forms.Button();
+            this.colMaLLV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNhanVienLapLich = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNgaylam = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinLichLamViec)).BeginInit();
             this.pnlHeader.SuspendLayout();
@@ -157,48 +157,6 @@
             this.dgvThongTinLichLamViec.Size = new System.Drawing.Size(1924, 577);
             this.dgvThongTinLichLamViec.TabIndex = 55;
             this.dgvThongTinLichLamViec.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThongTinLichLamViec_CellClick);
-            // 
-            // colMaLLV
-            // 
-            this.colMaLLV.HeaderText = "Mã lịch làm việc";
-            this.colMaLLV.MinimumWidth = 6;
-            this.colMaLLV.Name = "colMaLLV";
-            this.colMaLLV.ReadOnly = true;
-            // 
-            // colNhanVienLapLich
-            // 
-            this.colNhanVienLapLich.HeaderText = "Nhân viên lập lịch";
-            this.colNhanVienLapLich.MinimumWidth = 6;
-            this.colNhanVienLapLich.Name = "colNhanVienLapLich";
-            this.colNhanVienLapLich.ReadOnly = true;
-            // 
-            // colHoTen
-            // 
-            this.colHoTen.HeaderText = "Họ tên";
-            this.colHoTen.MinimumWidth = 6;
-            this.colHoTen.Name = "colHoTen";
-            this.colHoTen.ReadOnly = true;
-            // 
-            // colPhongBan
-            // 
-            this.colPhongBan.HeaderText = "Phòng ban";
-            this.colPhongBan.MinimumWidth = 6;
-            this.colPhongBan.Name = "colPhongBan";
-            this.colPhongBan.ReadOnly = true;
-            // 
-            // colChucVu
-            // 
-            this.colChucVu.HeaderText = "Chức vụ";
-            this.colChucVu.MinimumWidth = 6;
-            this.colChucVu.Name = "colChucVu";
-            this.colChucVu.ReadOnly = true;
-            // 
-            // colNgaylam
-            // 
-            this.colNgaylam.HeaderText = "Ngày làm";
-            this.colNgaylam.MinimumWidth = 6;
-            this.colNgaylam.Name = "colNgaylam";
-            this.colNgaylam.ReadOnly = true;
             // 
             // lblChucVuNV_DN
             // 
@@ -349,6 +307,48 @@
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTroVe.UseVisualStyleBackColor = false;
             this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
+            // 
+            // colMaLLV
+            // 
+            this.colMaLLV.HeaderText = "Mã lịch làm việc";
+            this.colMaLLV.MinimumWidth = 6;
+            this.colMaLLV.Name = "colMaLLV";
+            this.colMaLLV.ReadOnly = true;
+            // 
+            // colNhanVienLapLich
+            // 
+            this.colNhanVienLapLich.HeaderText = "Nhân viên lập lịch";
+            this.colNhanVienLapLich.MinimumWidth = 6;
+            this.colNhanVienLapLich.Name = "colNhanVienLapLich";
+            this.colNhanVienLapLich.ReadOnly = true;
+            // 
+            // colHoTen
+            // 
+            this.colHoTen.HeaderText = "Họ tên";
+            this.colHoTen.MinimumWidth = 6;
+            this.colHoTen.Name = "colHoTen";
+            this.colHoTen.ReadOnly = true;
+            // 
+            // colPhongBan
+            // 
+            this.colPhongBan.HeaderText = "Phòng ban";
+            this.colPhongBan.MinimumWidth = 6;
+            this.colPhongBan.Name = "colPhongBan";
+            this.colPhongBan.ReadOnly = true;
+            // 
+            // colChucVu
+            // 
+            this.colChucVu.HeaderText = "Chức vụ";
+            this.colChucVu.MinimumWidth = 6;
+            this.colChucVu.Name = "colChucVu";
+            this.colChucVu.ReadOnly = true;
+            // 
+            // colNgaylam
+            // 
+            this.colNgaylam.HeaderText = "Ngày làm";
+            this.colNgaylam.MinimumWidth = 6;
+            this.colNgaylam.Name = "colNgaylam";
+            this.colNgaylam.ReadOnly = true;
             // 
             // FrmLichLamViec
             // 
