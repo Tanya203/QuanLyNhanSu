@@ -176,10 +176,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvChiTietLichLamViec.Rows[rowAdd].Cells[6].Value = nv.LoaiCa;
                 dgvChiTietLichLamViec.Rows[rowAdd].Cells[7].Value = nv.ThoiGianDen;
                 dgvChiTietLichLamViec.Rows[rowAdd].Cells[8].Value = nv.ThoiGianVe;
-                if(nv.Phep)
-                    dgvChiTietLichLamViec.Rows[rowAdd].Cells[9].Value = true;
-                else
-                    dgvChiTietLichLamViec.Rows[rowAdd].Cells[9].Value = false;
+                dgvChiTietLichLamViec.Rows[rowAdd].Cells[9].Value = nv.Phep;
             } 
             Enabled = true;
         }
@@ -201,10 +198,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvChiTietLichLamViec.Rows[rowAdd].Cells[6].Value = nv.LoaiCa;
                 dgvChiTietLichLamViec.Rows[rowAdd].Cells[7].Value = nv.ThoiGianDen;
                 dgvChiTietLichLamViec.Rows[rowAdd].Cells[8].Value = nv.ThoiGianVe;
-                if(nv.Phep)
-                    dgvChiTietLichLamViec.Rows[rowAdd].Cells[9].Value = true;
-                else
-                    dgvChiTietLichLamViec.Rows[rowAdd].Cells[9].Value = false;                
+                dgvChiTietLichLamViec.Rows[rowAdd].Cells[9].Value = nv.Phep;
             }
             Enabled = true;
         }
@@ -362,18 +356,15 @@ namespace QuanLyNhanSu.PresentationTier
         {            
             ChamCong nv = chamCong.Where(x => x.MaNV == txtMaNV_Phep.Text).FirstOrDefault();
             string thongBao;
-            string lichSu;
             if (cbPhep.Checked)
             {
                 nv.Phep = true;
-                thongBao = "Thêm phép của nhân viên";
-                lichSu = "thêm phép cho nhân viên";
+                thongBao = "Thêm phép cho nhân viên";
             }
             else
             {
                 nv.Phep = false;
                 thongBao = "Xoá phép của nhân viên";
-                lichSu = "xoá phép của nhân viên";
             }                
             MessageBoxManager.Yes = "Có";
             MessageBoxManager.No = "Không";
@@ -382,7 +373,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 if (chiTietLichLamViecBUS.Save(nv))
                 {
-                    string thaoTac = $"Nhân viên {maNV} {lichSu} {maNV_Chon} trong ";
+                    string thaoTac = $"{thongBao} {maNV_Chon} trong ";
                     string maTT;
                     if (thongBao.Contains("Thêm"))
                         maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm phép")).MaTT;

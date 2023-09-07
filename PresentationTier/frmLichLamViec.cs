@@ -46,8 +46,6 @@ namespace QuanLyNhanSu.PresentationTier
         {
             LoadThongTinDangNhap();
             LoadLichLamViec();
-            XoaButton();
-            ChiTietButton();   
             btnThem.Enabled = false;
         }
         public void LoadThongTinDangNhap()
@@ -76,6 +74,8 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[4].Value = llv.ChucVu;
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);                
             }
+            XoaButton();
+            ChiTietButton();
             Enabled = true;
         }
         private void LoadLichLamViecTimKiem(string timKiem)
@@ -92,8 +92,10 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[2].Value = llv.HoTen;
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[3].Value = llv.PhongBan;
                 dgvThongTinLichLamViec.Rows[rowAdd].Cells[4].Value = llv.ChucVu;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);              
+                dgvThongTinLichLamViec.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);
             }
+            XoaButton();
+            ChiTietButton();
             Enabled = true;
         }
         /////////////////////////////////////////////////////////////////////////////////////////
