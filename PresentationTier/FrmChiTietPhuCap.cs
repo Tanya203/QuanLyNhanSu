@@ -72,6 +72,7 @@ namespace QuanLyNhanSu.PresentationTier
             LoadChucVuTheoPhongBan(cmbPhongBan.SelectedValue.ToString());
             LoadNhanVienTheoChucVu(cmbChucVu.SelectedValue.ToString());
             LoadThongTinChiTietMotPhuCap();
+            XoaButton();
         }
         public void LoadThongTinDangNhap()
         {
@@ -180,14 +181,13 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvChiTietMotPhuCap.Rows[row].Cells[3].Value = nv.PhongBan;
                 dgvChiTietMotPhuCap.Rows[row].Cells[4].Value = nv.ChucVu;
             };
-            XoaButton();
             Enabled = true;
         }
         private void LoadThongTinChiTietMotPhuCapTimKiem(string timKiem)
         {
             Enabled = false;
             dgvChiTietMotPhuCap.Rows.Clear();
-            danhSachchiTietPhuCapTimKiem = chiTietPhuCapBUS.GetAllChiTietPhuCap(maPC);
+            danhSachchiTietPhuCapTimKiem = chiTietPhuCapBUS.SearchChiTietPhuCap(maPC, timKiem);
             int row;
             foreach (ChiTietPhuCapViewModels nv in danhSachchiTietPhuCapTimKiem)
             {
@@ -198,7 +198,6 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvChiTietMotPhuCap.Rows[row].Cells[3].Value = nv.PhongBan;
                 dgvChiTietMotPhuCap.Rows[row].Cells[4].Value = nv.ChucVu;
             };
-            XoaButton();
             Enabled = true;
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

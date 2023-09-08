@@ -31,6 +31,7 @@ namespace QuanLyNhanSu.DataTier.Models
         public virtual DbSet<Phieu> Phieux { get; set; }
         public virtual DbSet<PhongBan> PhongBans { get; set; }
         public virtual DbSet<PhuCap> PhuCaps { get; set; }
+        public virtual DbSet<QuyenHan> QuyenHans { get; set; }
         public virtual DbSet<ThaoTac> ThaoTacs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -145,6 +146,11 @@ namespace QuanLyNhanSu.DataTier.Models
                 .Property(e => e.MaGD)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<GiaoDien>()
+                .HasMany(e => e.QuyenHans)
+                .WithRequired(e => e.GiaoDien)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<HinhThucChamCong>()
                 .Property(e => e.MaHTCC)
                 .IsUnicode(false);
@@ -175,7 +181,7 @@ namespace QuanLyNhanSu.DataTier.Models
 
             modelBuilder.Entity<LoaiCa>()
                 .Property(e => e.HeSoLuong)
-                .HasPrecision(38, 4);
+                .HasPrecision(38, 3);
 
             modelBuilder.Entity<LoaiCa>()
                 .HasMany(e => e.ChamCongs)
@@ -291,11 +297,7 @@ namespace QuanLyNhanSu.DataTier.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<PhanQuyen>()
-                .Property(e => e.MaTT)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PhanQuyen>()
-                .Property(e => e.MaGD)
+                .Property(e => e.MaQH)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Phieu>()
@@ -325,6 +327,19 @@ namespace QuanLyNhanSu.DataTier.Models
             modelBuilder.Entity<PhuCap>()
                 .HasMany(e => e.ChiTietPhuCaps)
                 .WithRequired(e => e.PhuCap)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<QuyenHan>()
+                .Property(e => e.MaQH)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<QuyenHan>()
+                .Property(e => e.MaGD)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<QuyenHan>()
+                .HasMany(e => e.PhanQuyens)
+                .WithRequired(e => e.QuyenHan)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ThaoTac>()

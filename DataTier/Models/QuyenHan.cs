@@ -6,27 +6,29 @@ namespace QuanLyNhanSu.DataTier.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("GiaoDien")]
-    public partial class GiaoDien
+    [Table("QuyenHan")]
+    public partial class QuyenHan
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GiaoDien()
+        public QuyenHan()
         {
-            QuyenHans = new HashSet<QuyenHan>();
-            ThaoTacs = new HashSet<ThaoTac>();
+            PhanQuyens = new HashSet<PhanQuyen>();
         }
 
         [Key]
         [StringLength(15)]
+        public string MaQH { get; set; }
+
+        [Required]
+        [StringLength(15)]
         public string MaGD { get; set; }
 
         [StringLength(100)]
-        public string TenGiaoDien { get; set; }
+        public string TenQuyenHan { get; set; }
+
+        public virtual GiaoDien GiaoDien { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuyenHan> QuyenHans { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThaoTac> ThaoTacs { get; set; }
+        public virtual ICollection<PhanQuyen> PhanQuyens { get; set; }
     }
 }

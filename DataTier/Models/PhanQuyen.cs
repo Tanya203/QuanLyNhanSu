@@ -17,15 +17,12 @@ namespace QuanLyNhanSu.DataTier.Models
         [Key]
         [Column(Order = 1)]
         [StringLength(15)]
-        public string MaTT { get; set; }
+        public string MaQH { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
-        [StringLength(15)]
-        public string MaGD { get; set; }
-
-        public bool? CapQuyen { get; set; }
+        public bool CapQuyen { get; set; }
 
         public virtual ChucVu ChucVu { get; set; }
+
+        public virtual QuyenHan QuyenHan { get; set; }
     }
 }

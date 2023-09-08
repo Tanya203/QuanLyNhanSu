@@ -19,10 +19,13 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
+        private readonly PhanQuyenBUS phanQuyenBUS;
+        private readonly QuyenHanBUS quyenHanBUS;
         private readonly NhanVien nv;
         private IEnumerable<ChucVuViewModels> danhSachChucVu;
         private IEnumerable<ChucVuViewModels> danhSachChucVuTimKiem;
-        private readonly List<ThaoTac> listThaoTac;
+        private readonly IEnumerable<QuyenHan> listQuyenHan;
+        private readonly IEnumerable<ThaoTac> listThaoTac;        
         private readonly string maNV;
         private readonly string maGD;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
@@ -35,6 +38,9 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
+            phanQuyenBUS = new PhanQuyenBUS();
+            quyenHanBUS = new QuyenHanBUS();
+            listQuyenHan = quyenHanBUS.GetQuyenHans();
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý chức vụ").MaGD;
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
@@ -214,6 +220,19 @@ namespace QuanLyNhanSu.PresentationTier
                 string thaoTac = $"Thêm chức vụ: {tenChucVu}\n - Phòng ban: {phongBan}\n - Lương khỏi điểm: {luongKhoiDiem}";
                 string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
                 LichSuThaoTac(thaoTac, maTT);
+                List<PhanQuyen> phanQuyen = new List<PhanQuyen>();
+                ChucVu cv = chucVuBUS.GetChucVu().FirstOrDefault(x => x.TenChucVu == tenChucVu);                
+                foreach(QuyenHan qh in listQuyenHan)
+                {
+                    PhanQuyen pq = new PhanQuyen
+                    {
+                        MaCV = cv.MaCV,
+                        MaQH = qh.MaQH,
+                        CapQuyen = false,
+                    };
+                    phanQuyen.Add(pq);
+                }
+                phanQuyenBUS.AddChucVuVaoPhanQuyen(phanQuyen);
             }
             Reload();
         }

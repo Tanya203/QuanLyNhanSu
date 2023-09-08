@@ -176,7 +176,9 @@
     <Compile Include="DataTier\Models\PhongBan.cs" />
     <Compile Include="DataTier\Models\PhuCap.cs" />
     <Compile Include="DataTier\Models\QuanLyNhanSuContextDB.cs" />
+    <Compile Include="DataTier\Models\QuyenHan.cs" />
     <Compile Include="DataTier\Models\ThaoTac.cs" />
+    <Compile Include="DataTier\PhanQuyenDAL.cs" />
     <Compile Include="DataTier\PhieuDAL.cs" />
     <Compile Include="DataTier\QuanLyCaDAL.cs" />
     <Compile Include="DataTier\QuanLyChucVuDAL.cs" />
@@ -186,6 +188,7 @@
     <Compile Include="DataTier\QuanLyLoaiHopDongDAL.cs" />
     <Compile Include="DataTier\QuanLyPhongBanDAL.cs" />
     <Compile Include="DataTier\QuanLyNhanVienDAL.cs" />
+    <Compile Include="DataTier\QuyenHanDAL.cs" />
     <Compile Include="DataTier\ThaoTacDAL.cs" />
     <Compile Include="LogicTier\ChamCongBUS.cs" />
     <Compile Include="LogicTier\ChiTietLichLamViecBUS.cs" />
@@ -195,6 +198,7 @@
     <Compile Include="LogicTier\HinhThucChamCongBUS.cs" />
     <Compile Include="LogicTier\LichLamViecBUS.cs" />
     <Compile Include="LogicTier\LichSuThaoTacBUS.cs" />
+    <Compile Include="LogicTier\PhanQuyenBUS.cs" />
     <Compile Include="LogicTier\PhieuBUS.cs" />
     <Compile Include="LogicTier\QuanLyCaBUS.cs" />
     <Compile Include="LogicTier\QuanLyChucVuBUS.cs" />
@@ -204,6 +208,7 @@
     <Compile Include="LogicTier\QuanLyNhanVienBUS.cs" />
     <Compile Include="LogicTier\QuanLyPhongBanBUS.cs" />
     <Compile Include="LogicTier\QuanLyPhuCapBUS.cs" />
+    <Compile Include="LogicTier\QuyenHanBUS.cs" />
     <Compile Include="LogicTier\ThaoTacBUS.cs" />
     <Compile Include="PresentationTier\FrmChamCong.cs">
       <SubType>Form</SubType>
@@ -349,6 +354,7 @@
     <Compile Include="ViewModels\LoaiHopDongViewModels.cs" />
     <Compile Include="ViewModels\LoaiPhieuViewModels.cs" />
     <Compile Include="ViewModels\NhanVienViewModel.cs" />
+    <Compile Include="ViewModels\PhanQuyenViewModels.cs" />
     <Compile Include="ViewModels\PhieuViewModels.cs" />
     <Compile Include="ViewModels\PhongBanViewModels.cs" />
     <Compile Include="ViewModels\PhuCapViewMModels.cs" />

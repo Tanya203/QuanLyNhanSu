@@ -2,6 +2,7 @@
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows.Forms;
 using WECPOFLogic;
@@ -55,14 +56,7 @@ namespace QuanLyNhanSu.DataTier
         {
             try
             {
-                ChucVu newChucVu = quanLyNhanSu.ChucVus.Where(cv => cv.MaCV == chucVu.MaCV).FirstOrDefault();
-                if (newChucVu != null)//cập nhật
-                {                    
-                    newChucVu.TenChucVu = chucVu.TenChucVu;
-                    newChucVu.LuongKhoiDiem = chucVu.LuongKhoiDiem;
-                }
-                else//thêm mới
-                    quanLyNhanSu.ChucVus.Add(chucVu);
+                quanLyNhanSu.ChucVus.AddOrUpdate(chucVu);
                 quanLyNhanSu.SaveChanges();
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;

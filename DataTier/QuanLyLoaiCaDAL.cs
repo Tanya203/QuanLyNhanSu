@@ -2,6 +2,7 @@
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows.Forms;
 using WECPOFLogic;
@@ -46,14 +47,7 @@ namespace QuanLyNhanSu.DataTier
         {
             try
             {
-                LoaiCa newLoaiCa = quanLyNhanSu.LoaiCas.Where(lc => lc.MaLC == loaiCa.MaLC).FirstOrDefault();
-                if (newLoaiCa != null)//cập nhật
-                {
-                    newLoaiCa.TenLoaiCa = loaiCa.TenLoaiCa;
-                    newLoaiCa.HeSoLuong = loaiCa.HeSoLuong;
-                }
-                else//thêm mới
-                    quanLyNhanSu.LoaiCas.Add(loaiCa);
+                quanLyNhanSu.LoaiCas.AddOrUpdate(loaiCa);
                 quanLyNhanSu.SaveChanges();
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
