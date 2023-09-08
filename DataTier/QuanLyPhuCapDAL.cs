@@ -1,6 +1,7 @@
 ﻿using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows.Forms;
 using WECPOFLogic;
@@ -48,14 +49,7 @@ namespace QuanLyNhanSu.DataTier.Models
         {
             try
             {
-                PhuCap newPhuCap = quanLyNhanSu.PhuCaps.Where(pc => pc.MaPC == phuCap.MaPC).FirstOrDefault();
-                if (newPhuCap != null)//cập nhật
-                {
-                    newPhuCap.TenPhuCap = phuCap.TenPhuCap;
-                    newPhuCap.TienPhuCap = phuCap.TienPhuCap;
-                }
-                else//thêm mới
-                    quanLyNhanSu.PhuCaps.Add(phuCap);
+                quanLyNhanSu.PhuCaps.AddOrUpdate(phuCap);
                 quanLyNhanSu.SaveChanges();
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;

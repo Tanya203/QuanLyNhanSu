@@ -2,6 +2,7 @@
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows.Forms;
 using WECPOFLogic;
@@ -68,14 +69,7 @@ namespace QuanLyNhanSu.DataTier
         {
             try
             {
-                ChiTietPhieu newChiTietPhieu = quanLyNhanSu.ChiTietPhieux.Where(pt => pt.MaP == chiTietPhieu.MaP && pt.MaNV == chiTietPhieu.MaNV).FirstOrDefault();
-                if (newChiTietPhieu != null)
-                {
-                    newChiTietPhieu.SoTien = chiTietPhieu.SoTien;
-                    newChiTietPhieu.GhiChu = chiTietPhieu.GhiChu;
-                }
-                else
-                    quanLyNhanSu.ChiTietPhieux.Add(chiTietPhieu);
+                quanLyNhanSu.ChiTietPhieux.AddOrUpdate(chiTietPhieu);
                 quanLyNhanSu.SaveChanges();
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;

@@ -1,6 +1,7 @@
 ﻿using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows.Forms;
 using WECPOFLogic;
@@ -43,13 +44,7 @@ namespace QuanLyNhanSu.DataTier.Models
         {
             try
             {
-                PhongBan newPhongBan = quanLyNhanSu.PhongBans.Where(pb => pb.MaPB == phongBan.MaPB).FirstOrDefault();
-                if (newPhongBan != null)//cập nhật
-                {
-                    newPhongBan.TenPhongBan = phongBan.TenPhongBan;
-                }
-                else//thêm mới
-                    quanLyNhanSu.PhongBans.Add(phongBan);
+                quanLyNhanSu.PhongBans.AddOrUpdate(phongBan);
                 quanLyNhanSu.SaveChanges();
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;

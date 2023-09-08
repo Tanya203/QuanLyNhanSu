@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace QuanLyNhanSu.LogicTier
 {
-    internal class GiaoDienBUS
+    internal class QuyenHanBUS
     {
-        private readonly GiaoDienDAL giaoDienDAL;
-        public GiaoDienBUS()
+        private readonly QuyenHanDAL quyenHanDAL;
+        public QuyenHanBUS()
         {
-            giaoDienDAL = new GiaoDienDAL();
+            quyenHanDAL = new QuyenHanDAL();
         }
-        public IEnumerable<GiaoDien> GetGiaoDiens()
+        public IEnumerable<QuyenHan> GetQuyenHans()
         {
-            return giaoDienDAL.GetGiaoDiens().ToList();
+            return quyenHanDAL.GetQuyenHans();
         }
     }
 }

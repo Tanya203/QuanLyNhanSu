@@ -2,6 +2,7 @@
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows.Forms;
 using WECPOFLogic;
@@ -49,15 +50,7 @@ namespace QuanLyNhanSu.DataTier
         {
             try
             {
-                Ca newCa = quanLyNhanSu.Cas.Where(lc => lc.MaCa == ca.MaCa).FirstOrDefault();
-                if (newCa != null)//cập nhật
-                {
-                    newCa.TenCa = ca.TenCa;
-                    newCa.GioBatDau = ca.GioBatDau;
-                    newCa.GioKetThuc = ca.GioKetThuc;
-                }
-                else//thêm mới
-                    quanLyNhanSu.Cas.Add(ca);
+                quanLyNhanSu.Cas.AddOrUpdate(ca);
                 quanLyNhanSu.SaveChanges();
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;

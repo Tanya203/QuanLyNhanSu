@@ -100,7 +100,7 @@ namespace QuanLyNhanSu.DataTier.Models
 
         public decimal LuongCoBan { get; set; }
 
-        [StringLength(200)]
+        [StringLength(50)]
         public string Hinh { get; set; }
 
         public DateTime? NgayKhoa { get; set; }

@@ -17,7 +17,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly ThaoTacBUS thaoTacBUS;
         private IEnumerable<CaViewModels> danhSachCa;
         private IEnumerable<CaViewModels> danhSachCaTimKiem;
-        private List<ThaoTac> listThaoTac;
+        private readonly IEnumerable<ThaoTac> listThaoTac;
         private readonly NhanVien nv;
         private readonly string maNV;
         private readonly string maGD;
@@ -263,5 +263,6 @@ namespace QuanLyNhanSu.PresentationTier
         {
             Reload();
         }
+
     }
 }

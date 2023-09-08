@@ -49,6 +49,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             LoadPhuCap();
             LoadThongTinDangNhap();
+            ChiTietButton();
         }
         public void LoadThongTinDangNhap()
         {
@@ -73,8 +74,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[1].Value = pc.TenPhuCap;
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = String.Format(fVND, "{0:N3} ₫", pc.TienPhuCap);
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = chiTietPhuCapBUS.TongSoNhanVienTrongPhuCap(pc.MaPC);
-            }
-            ChiTietButton();
+            }            
             Enabled = true;
         }
         private void LoadPhuCapTimKiem(string timKiem)
@@ -91,7 +91,6 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = String.Format(fVND, "{0:N3} ₫", pc.TienPhuCap);
                 dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = chiTietPhuCapBUS.TongSoNhanVienTrongPhuCap(pc.MaPC).ToString();
             }
-            ChiTietButton();
             Enabled = true;
         }
         ////////////////////////////////////////////////////////////////////////////////////////
