@@ -13,23 +13,35 @@ namespace QuanLyNhanSu.PresentationTier
     {
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly ChiTietLichLamViecBUS chiTietLichLamViecBUS;
+        private readonly GiaoDienBUS giaoDienBUS;
+        private readonly PhanQuyenBUS phanQuyenBUS;
         private IEnumerable<ChamCong> lichLamViec;
+        private readonly IEnumerable<PhanQuyen> phanQuyen;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string maCV;
+        private readonly string maGD;
         private readonly string formatDate = "yyyy-MM-dd";
         public FrmManHinhChinh(string maNV)
         {
             InitializeComponent();
             nhanVienBUS = new QuanLyNhanVienBUS();
             chiTietLichLamViecBUS = new ChiTietLichLamViecBUS();
+            giaoDienBUS = new GiaoDienBUS();
+            phanQuyenBUS = new PhanQuyenBUS();
+            maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Màn hính chính").MaGD;           
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             this.maNV = maNV;
+            maCV = nv.MaCV;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
             MessageBoxManager.Register_OnceOnly();
         }
         private void frmManHinhChinh_Load(object sender, EventArgs e)
         {            
             LoadThongTinDangNhap();
             LoadLichLamViec();
+            PhanQuyen();
+
         }       
         public void LoadThongTinDangNhap()
         {
@@ -58,10 +70,18 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvLichLamViec.Rows[rowAdd].Cells[4].Value = nv.LoaiCa.TenLoaiCa;
                 dgvLichLamViec.Rows[rowAdd].Cells[5].Value = nv.ThoiGianDen;
                 dgvLichLamViec.Rows[rowAdd].Cells[6].Value = nv.ThoiGianVe;
-                if (nv.Phep)
-                    dgvLichLamViec.Rows[rowAdd].Cells[7].Value = true;
-                else
-                    dgvLichLamViec.Rows[rowAdd].Cells[7].Value = false;
+                dgvLichLamViec.Rows[rowAdd].Cells[7].Value = nv.Phep;
+            }
+        }
+        public void PhanQuyen()
+        {
+            int count = 0;            
+            List<Button> button = new List<Button>{ btnQLNV, btnQLPB, btnQLCV, btnQLC, btnQLLLV, btnQLPC, btnQLP, btnQLTK, btnQLLHD, btnQLPQ, btnLSTT};            
+            foreach (PhanQuyen qh in phanQuyen)
+            {
+                if(!qh.CapQuyen)
+                    typeof(Button).GetProperty("Visible").SetValue(button[count], false);
+                count++;
             }
         }
         private void btnQLNV_Click(object sender, EventArgs e)
@@ -91,13 +111,6 @@ namespace QuanLyNhanSu.PresentationTier
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
-        }
-        private void btnQLCC_Click(object sender, EventArgs e)
-        {
-            /*FrmChiTietLichLamViec frmOpen = new FrmChiTietLichLamViec(maNV);
-            frmOpen.Show();
-            this.Hide();
-            frmOpen.FormClosed += CloseForm;*/
         }
         private void btnQLLLV_Click(object sender, EventArgs e)
         {

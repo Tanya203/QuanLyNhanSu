@@ -58,8 +58,6 @@
             this.rbLocQuyenHan = new System.Windows.Forms.RadioButton();
             this.cmbQuyenHan = new System.Windows.Forms.ComboBox();
             this.pnlMenu = new System.Windows.Forms.Panel();
-            this.cmbGiaoDien = new System.Windows.Forms.ComboBox();
-            this.rbLocTheoGiaoDien = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhanQuyen)).BeginInit();
             this.pnlHeader.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -324,7 +322,7 @@
             this.cmbChucVu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbChucVu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbChucVu.FormattingEnabled = true;
-            this.cmbChucVu.Location = new System.Drawing.Point(250, 31);
+            this.cmbChucVu.Location = new System.Drawing.Point(250, 30);
             this.cmbChucVu.Name = "cmbChucVu";
             this.cmbChucVu.Size = new System.Drawing.Size(264, 33);
             this.cmbChucVu.TabIndex = 46;
@@ -380,40 +378,14 @@
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.SystemColors.Info;
-            this.pnlMenu.Controls.Add(this.cmbGiaoDien);
-            this.pnlMenu.Controls.Add(this.rbLocTheoGiaoDien);
             this.pnlMenu.Controls.Add(this.cmbChucVu);
             this.pnlMenu.Controls.Add(this.rbLocTheoChucVu);
             this.pnlMenu.Controls.Add(this.cmbQuyenHan);
             this.pnlMenu.Controls.Add(this.rbLocQuyenHan);
-            this.pnlMenu.Location = new System.Drawing.Point(150, 170);
+            this.pnlMenu.Location = new System.Drawing.Point(424, 170);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(1594, 87);
+            this.pnlMenu.Size = new System.Drawing.Size(1073, 87);
             this.pnlMenu.TabIndex = 51;
-            // 
-            // cmbGiaoDien
-            // 
-            this.cmbGiaoDien.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGiaoDien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGiaoDien.FormattingEnabled = true;
-            this.cmbGiaoDien.Location = new System.Drawing.Point(1309, 27);
-            this.cmbGiaoDien.Name = "cmbGiaoDien";
-            this.cmbGiaoDien.Size = new System.Drawing.Size(264, 33);
-            this.cmbGiaoDien.TabIndex = 51;
-            this.cmbGiaoDien.SelectedIndexChanged += new System.EventHandler(this.cmbGiaoDien_SelectedIndexChanged);
-            // 
-            // rbLocTheoGiaoDien
-            // 
-            this.rbLocTheoGiaoDien.AutoSize = true;
-            this.rbLocTheoGiaoDien.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbLocTheoGiaoDien.Location = new System.Drawing.Point(1046, 29);
-            this.rbLocTheoGiaoDien.Name = "rbLocTheoGiaoDien";
-            this.rbLocTheoGiaoDien.Size = new System.Drawing.Size(257, 33);
-            this.rbLocTheoGiaoDien.TabIndex = 52;
-            this.rbLocTheoGiaoDien.TabStop = true;
-            this.rbLocTheoGiaoDien.Text = "Lọc theo giao diện:";
-            this.rbLocTheoGiaoDien.UseVisualStyleBackColor = true;
-            this.rbLocTheoGiaoDien.CheckedChanged += new System.EventHandler(this.rbLocTheoGiaoDien_CheckedChanged);
             // 
             // FrmPhanQuyen
             // 
@@ -464,8 +436,6 @@
         private System.Windows.Forms.RadioButton rbLocQuyenHan;
         private System.Windows.Forms.ComboBox cmbQuyenHan;
         private System.Windows.Forms.Panel pnlMenu;
-        private System.Windows.Forms.ComboBox cmbGiaoDien;
-        private System.Windows.Forms.RadioButton rbLocTheoGiaoDien;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaQH;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaCV;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTenQuyenHan;

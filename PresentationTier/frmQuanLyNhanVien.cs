@@ -23,13 +23,17 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly ChiTietPhuCapBUS chiTietPhuCapBUS;
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
+        private readonly PhanQuyenBUS phanQuyenBUS;
         private IEnumerable<NhanVienViewModel> danhSachNhanVien;
         private IEnumerable<NhanVienViewModel> danhSachNhanVienTimKiem;
+        private readonly IEnumerable<PhanQuyen> phanQuyen;
         private readonly List<ThaoTac> listThaoTac;
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         private readonly string maNV;
+        private readonly string maCV;
         private readonly string maGD;
+        private bool checkThaoTac;
         private readonly NhanVien nv;
 
 
@@ -44,13 +48,16 @@ namespace QuanLyNhanSu.PresentationTier
             chiTietPhuCapBUS = new ChiTietPhuCapBUS();
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
+            phanQuyenBUS = new PhanQuyenBUS();
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý nhân viên").MaGD;
-            listThaoTac = thaoTacBUS.GetThaoTac().Where(tc => tc.MaGD == maGD).ToList();
-            MessageBoxManager.Register_OnceOnly();
+            listThaoTac = thaoTacBUS.GetThaoTac().Where(tc => tc.MaGD == maGD).ToList();            
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
+            maCV = nv.MaCV;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
             this.maNV = maNV;
+            checkThaoTac = false;
+            MessageBoxManager.Register_OnceOnly();
         }
-
         private void frmQuanLyNhanVien_Load(object sender, EventArgs e)
         {
             cmbPhongBan.DisplayMember = "TenPhongBan";
@@ -59,22 +66,13 @@ namespace QuanLyNhanSu.PresentationTier
             cmbChucVu.ValueMember = "MaCV";
             cmbLoaiHopDong.DisplayMember = "TenLoaiHopDong";
             cmbLoaiHopDong.ValueMember = "MaLHD";
+            InputStatus(false);
+            PhanQuyen();
             LoadNhanVien();
             LoadPhongBan();
             LoadChucVuTheoPhongBan(cmbPhongBan.SelectedValue.ToString());
             LoadLoaiHopDong();
             LoadThongTinDangNhap();
-            txtMaNV.ReadOnly = true;
-            txtPhuCap.ReadOnly = true;
-            txtNgayKhoa.ReadOnly = true;
-            txtSoTienNo.ReadOnly = true;
-            btnThem.Enabled = false;
-            btnSua.Enabled = false;
-            btnXoa.Enabled = false;
-            btnThemPhuCap.Enabled = false;
-            btnMoKhoa.Enabled = false;
-            dtpNTNS.Text = "01/01/1990";          
-            
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         public void LoadThongTinDangNhap()
@@ -87,11 +85,84 @@ namespace QuanLyNhanSu.PresentationTier
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
+        private void PhanQuyen()
+        {
+            foreach (PhanQuyen qh in phanQuyen)
+            {
+                if(qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
+                {
+                    //HienNut();
+                    InputStatus(true);
+                    checkThaoTac = true;
+                    continue;
+                }
+                if(qh.QuyenHan.TenQuyenHan.Contains("Truy cập") && qh.CapQuyen && checkThaoTac)
+                {
+                    btnThemPhuCap.Visible = true;
+                    continue;
+                }
+            }
+        }
+        private void InputStatus(bool value)
+        {
+            ButtonStatus(value);
+            List<object> listInput = new List<object> { cmbChucVu, cmbLoaiHopDong, cmbPhongBan, txtTaiKhoan, txtMatKhau, txtNhapLaiMatKhau,
+                                                        txtCCCD, txtHo, txtTenLot, txtTen, dtpNTNS, txtSoNha, txtDuong, txtPhuong_Xa, txtQuan_Huyen, 
+                                                        txtTinh_ThanhPho, rbNam, rbNu, rbKhac, txtSDT, txtEmail, txtTrinhDoHocVan, dtpNgayVaoLam, dtpThoiHanHopDong, 
+                                                        txtTinhTrang, txtSoNgayPhep, txtLuongCoBan};
+            if (!value)
+                listInput.AddRange(new List<object> { txtMaNV, txtPhuCap, txtNgayKhoa, txtSoTienNo });
+            for (int i = 0; i < listInput.Count; i++)
+            {
+                if (listInput[i] is TextBox)
+                {
+                    typeof(TextBox).GetProperty("ReadOnly").SetValue(listInput[i], !value);
+                    continue;
+                }               
+                else if (listInput[i] is ComboBox)
+                {
+                    typeof(ComboBox).GetProperty("Enabled").SetValue(listInput[i], value);
+                    continue;
+                }
+                else if(listInput[i] is DateTimePicker)
+                {
+                    typeof(DateTimePicker).GetProperty("Enabled").SetValue(listInput[i], value);
+                    continue;
+                }
+                else if (listInput[i] is RadioButton)
+                {
+                    typeof(RadioButton).GetProperty("Enabled").SetValue(listInput[i], value);
+                    continue;
+                }
+            }                  
+        }
+        private void ButtonStatus(bool value)
+        {
+            List<object> lisButtons = new List<object>() { btnThem, btnSua, btnXoa, btnHuy, btnMoKhoa, btnChonHinh, btnThemPhuCap ,cbHienThiMatKhau };
+            for (int i = 0; i < lisButtons.Count; i++)
+            {
+                if (lisButtons[i] is Button)
+                {
+                    typeof(Button).GetProperty("Visible").SetValue(lisButtons[i], value);
+                    if(value && lisButtons[i] != btnHuy)
+                        typeof(Button).GetProperty("Enabled").SetValue(lisButtons[i], !value);
+                    continue;
+                }
+                else if (lisButtons[i] is CheckBox)
+                {
+                    typeof(RadioButton).GetProperty("Visible").SetValue(lisButtons[i], value);
+                    continue;
+                }               
+            }
+        }
         private void LoadNhanVien()
         {
             Enabled = false;
             dgvThongTinNhanVien.Rows.Clear();
-            danhSachNhanVien = nhanVienBUS.GetAllNhanVien();
+            if (checkThaoTac)
+                danhSachNhanVien = nhanVienBUS.GetAllNhanVien();
+            else
+                danhSachNhanVien = nhanVienBUS.GetAllNhanVien().Where(nv => nv.TenPhongBan == this.nv.ChucVu.PhongBan.TenPhongBan);
             int rowAdd;
             foreach (var nv in danhSachNhanVien)
             {
@@ -119,13 +190,16 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[20].Value = nv.ThoiHanHopDong.ToString(formatDate);
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[21].Value = nv.TinhTrang;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[22].Value = nv.SoNgayPhep;
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(nv.MaNV));
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[25].Value = nv.NgayKhoa.ToString();
-                if (nv.SoTienNo == null)
-                    dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", 0.000);
-                else
-                    dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", nv.SoTienNo);
+                if (checkThaoTac)
+                {
+                    dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
+                    dgvThongTinNhanVien.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(nv.MaNV));
+                    if (nv.SoTienNo == null)
+                        dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", 0.000);
+                    else
+                        dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", nv.SoTienNo);
+                }
             }
             Enabled = true;
         }
@@ -134,7 +208,10 @@ namespace QuanLyNhanSu.PresentationTier
             this.UseWaitCursor = true;
             Enabled = false;            
             dgvThongTinNhanVien.Rows.Clear();
-            danhSachNhanVienTimKiem = nhanVienBUS.SearchNhanVien(timKiem);
+            if (checkThaoTac)
+                danhSachNhanVienTimKiem = nhanVienBUS.SearchNhanVien(timKiem);
+            else
+                danhSachNhanVienTimKiem = nhanVienBUS.SearchNhanVien(timKiem).Where(nv => nv.TenPhongBan == this.nv.ChucVu.PhongBan.TenPhongBan);
             int rowAdd;
             foreach (var nv in danhSachNhanVienTimKiem)
             {
@@ -162,13 +239,16 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[20].Value = nv.ThoiHanHopDong.ToString(formatDate);
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[21].Value = nv.TinhTrang;
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[22].Value = nv.SoNgayPhep;
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
-                dgvThongTinNhanVien.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(nv.MaNV));
                 dgvThongTinNhanVien.Rows[rowAdd].Cells[25].Value = nv.NgayKhoa.ToString();
-                if(nv.SoTienNo == null)
-                    dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", 0.000);
-                else
-                    dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", nv.SoTienNo);
+                if (checkThaoTac)
+                {
+                    dgvThongTinNhanVien.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
+                    dgvThongTinNhanVien.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(nv.MaNV));
+                    if (nv.SoTienNo == null)
+                        dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", 0.000);
+                    else
+                        dgvThongTinNhanVien.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", nv.SoTienNo);
+                }
             }
             this.UseWaitCursor = false;
             Enabled = true;
@@ -190,7 +270,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadLuongKhoiDiem(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaNV.Text) || string.IsNullOrEmpty(txtLuongCoBan.Text))
+            if ((string.IsNullOrEmpty(txtMaNV.Text) || string.IsNullOrEmpty(txtLuongCoBan.Text)) && cmbChucVu.Enabled)
                 txtLuongCoBan.Text = chucVuBUS.GetLuongCoBanCuaChucVu(cmbChucVu.SelectedValue.ToString()).ToString();
         }
         private void LoadChucVu(object sender, EventArgs e)
@@ -210,39 +290,34 @@ namespace QuanLyNhanSu.PresentationTier
         ///////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
-            txtMaNV.Text = string.Empty;
-            cmbPhongBan.SelectedIndex = 0;
-            cmbChucVu.SelectedIndex = 0;            
-            cmbLoaiHopDong.SelectedIndex = 0;
-            txtTaiKhoan.Text = string.Empty;
-            txtMatKhau.Text = string.Empty;
-            txtNhapLaiMatKhau.Text= string.Empty;
-            txtCCCD.Text = string.Empty;
-            txtHo.Text = string.Empty;
-            txtTenLot.Text = string.Empty;
-            txtTen.Text = string.Empty;
-            dtpNTNS.Text = "01/01/1990";
-            txtSoNha.Text = string.Empty;
-            txtDuong.Text = string.Empty;
-            txtPhuong_Xa.Text = string.Empty;
-            txtQuan_Huyen.Text = string.Empty;
-            txtTinh_ThanhPho.Text = string.Empty;
-            rbNam.Checked = false;
-            rbNu.Checked = false;
-            rbKhac.Checked = false;
-            txtSDT.Text = string.Empty;
-            txtEmail.Text = string.Empty;
-            txtTrinhDoHocVan.Text = string.Empty;
-            dtpNgayVaoLam.Text = DateTime.Now.ToString();
-            dtpThoiHanHopDong.Text = DateTime.Now.ToString();
-            txtTinhTrang.Text = string.Empty;
-            txtSoNgayPhep.Text = string.Empty;
-            txtPhuCap.Text = string.Empty;
-            txtTaiKhoan.ReadOnly = false;
-            txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = true;
-            txtNgayKhoa.Text = string.Empty;
-            txtSoTienNo.Text = string.Empty;
-            
+            List<object> listInput = new List<object> { cmbChucVu, cmbLoaiHopDong, cmbPhongBan, txtTaiKhoan, txtMatKhau, txtNhapLaiMatKhau,
+                                                        txtCCCD, txtHo, txtTenLot, txtTen, dtpNTNS, txtSoNha, txtDuong, txtPhuong_Xa, txtQuan_Huyen,
+                                                        txtTinh_ThanhPho, rbNam, rbNu, rbKhac, txtSDT, txtEmail, txtTrinhDoHocVan, dtpNgayVaoLam, dtpThoiHanHopDong,
+                                                        txtTinhTrang, txtSoNgayPhep, txtMaNV, txtPhuCap, txtNgayKhoa, txtSoTienNo,
+                                                        btnThem, btnSua, btnXoa, btnHuy, btnMoKhoa, btnChonHinh, btnThemPhuCap ,cbHienThiMatKhau};
+            for(int i = 0; i < listInput.Count; i++)
+            {
+                if (listInput[i] is TextBox)
+                {
+                    typeof(TextBox).GetProperty("Text").SetValue(listInput[i], string.Empty);
+                    continue;
+                }
+                else if(listInput[i] is ComboBox)
+                {
+                    typeof(ComboBox).GetProperty("SelectedIndex").SetValue(listInput[i], 0);
+                    continue;
+                }
+                else if (listInput[i] is RadioButton)
+                {
+                    typeof(RadioButton).GetProperty("Checked").SetValue(listInput[i], false);
+                    continue;
+                }
+                else if (listInput[i] is DateTimePicker)
+                {
+                    typeof(DateTimePicker).GetProperty("Text").SetValue(listInput[i], DateTime.Now.ToString());
+                    continue;
+                }
+            }
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         private void CloseForm(object sender, FormClosedEventArgs e)
@@ -344,6 +419,7 @@ namespace QuanLyNhanSu.PresentationTier
                 return false;
             return true;
         }
+
         public bool CheckChonGioiTinh()
         {
             if (!rbNam.Checked && !rbNu.Checked && !rbKhac.Checked)
@@ -353,24 +429,30 @@ namespace QuanLyNhanSu.PresentationTier
         public void BatTatNut()
         {
             if (string.IsNullOrEmpty(txtMaNV.Text))
+            {
                 cbHienThiMatKhau.Enabled = true;
+                btnThemPhuCap.Enabled = false;
+                btnXoa.Enabled = false;
+                LoadChucVuTheoPhongBan(cmbPhongBan.SelectedValue.ToString());
+            }                
             if (!string.IsNullOrEmpty(txtMaNV.Text))
+            {
                 cbHienThiMatKhau.Enabled = false;
+                btnThemPhuCap.Enabled = true;
+                btnXoa.Enabled = true;
+            }                
             if (string.IsNullOrEmpty(txtMaNV.Text) && !CheckEmptyText() && !CheckChonGioiTinh() ||
              string.IsNullOrEmpty(txtMaNV.Text) && !CheckEmptyText() ||
              string.IsNullOrEmpty(txtMaNV.Text) && !CheckChonGioiTinh() || !CheckEmptyTextSua())
             {
                 btnThem.Enabled = false;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                btnThemPhuCap.Enabled = false;
+                btnSua.Enabled = false;            
                 return;
             }
             if (string.IsNullOrEmpty(txtMaNV.Text) && CheckEmptyText() && CheckChonGioiTinh())
             {
                 btnThem.Enabled = true;
                 btnSua.Enabled = false;
-                btnXoa.Enabled = false;
                 txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = true;
                 txtTaiKhoan.ReadOnly = false;
                 return;
@@ -379,8 +461,6 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 btnThem.Enabled = false;
                 btnSua.Enabled = true;
-                btnXoa.Enabled = true;
-                btnThemPhuCap.Enabled = true;
                 txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = false;
                 txtTaiKhoan.ReadOnly= true;
                 return;
@@ -752,10 +832,14 @@ namespace QuanLyNhanSu.PresentationTier
             dtpThoiHanHopDong.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[20].Value.ToString();
             txtTinhTrang.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[21].Value.ToString();
             txtSoNgayPhep.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[22].Value.ToString();
-            txtLuongCoBan.Text = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text).LuongCoBan.ToString();
-            txtPhuCap.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(txtMaNV.Text));
             txtNgayKhoa.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[25].Value.ToString();
-            txtSoTienNo.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[26].Value.ToString();
+            if (checkThaoTac)
+            {
+                txtLuongCoBan.Text = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text).LuongCoBan.ToString();
+                txtPhuCap.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(txtMaNV.Text));                
+                txtSoTienNo.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[26].Value.ToString();
+            }
+            
         }
         private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -765,8 +849,6 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Reload();
-        }
-
-        
+        }        
     }
 }
