@@ -13,17 +13,25 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyLoaiPhieuBUS loaiPhieuBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
+        private readonly GiaoDienBUS giaoDienBUS;
+        private readonly ThaoTacBUS thaoTacBUS;
         private IEnumerable<LoaiPhieuViewModels> danhSachLoaiPhieu;
         private IEnumerable<LoaiPhieuViewModels> danhSachLoaiPhieuTimKiem;
+        private readonly List<ThaoTac> listThaoTac;
         private readonly NhanVien nv;
         private readonly string maNV;
+        private readonly string maGD;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiPhieu(string maNV)
         {
             InitializeComponent();
             loaiPhieuBUS = new QuanLyLoaiPhieuBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
-            lichSuThaoTacBUS = new LichSuThaoTacBUS();            
+            lichSuThaoTacBUS = new LichSuThaoTacBUS();   
+            giaoDienBUS = new GiaoDienBUS();
+            thaoTacBUS = new ThaoTacBUS();
+            maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý loại phiếu").MaGD;
+            listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             this.maNV = maNV;
         }
@@ -129,12 +137,13 @@ namespace QuanLyNhanSu.PresentationTier
                 LoadLoaiPhieu();
         }
         //////////////////////////////////////////////////////////////////////////////////////////
-        private void LichSuThaoTac(string thaoTac)
+        private void LichSuThaoTac(string thaoTac, string maTT)
         {
             LichSuThaoTac newLstt = new LichSuThaoTac
             {
                 NgayGio = DateTime.Now.ToString(formatDateTime),
                 MaNV = maNV,
+                MaTT = maTT,
                 ThaoTacThucHien = thaoTac,
             };
             lichSuThaoTacBUS.Save(newLstt);
@@ -158,7 +167,8 @@ namespace QuanLyNhanSu.PresentationTier
             if (loaiPhieuBUS.Save(newLoaiPhieu))
             {
                 string thaoTac = $"Thêm loại phiếu {txtTenLoaiPhieu.Text}";
-                LichSuThaoTac(thaoTac);
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
             }
             Reload();
         }
@@ -172,10 +182,11 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (loaiPhieuBUS.Save(newLoaiPhieu))
             {
-                string thaoTac = $"Sửa loại phiếu {txtMaLP.Text}";                
+                string thaoTac = $"Sửa loại phiếu {txtMaLP.Text}";
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
                 if (!string.IsNullOrEmpty(chiTietSua))
                     thaoTac += $":\n{chiTietSua}";
-                LichSuThaoTac(thaoTac);
+                LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }
         }
@@ -188,7 +199,8 @@ namespace QuanLyNhanSu.PresentationTier
             if (loaiPhieuBUS.Delete(newLoaiPhieu))
             {
                 string thaoTac = $"Xoá loại phiếu {txtTenLoaiPhieu.Text}";
-                LichSuThaoTac(thaoTac);
+                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }
         }

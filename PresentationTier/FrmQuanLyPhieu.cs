@@ -52,7 +52,6 @@ namespace QuanLyNhanSu.PresentationTier
             XoaButton();
             ChiTietPhieuButton();
             LoadLoaiPhieu();  
-            btnQuanLyLoaiPhieu.Enabled = false;
         }
         public void LoadThongTinDangNhap()
         {
