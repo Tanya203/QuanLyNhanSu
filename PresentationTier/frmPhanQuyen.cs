@@ -153,7 +153,7 @@ namespace QuanLyNhanSu.PresentationTier
         } 
         private void cmbGiaoDien_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (check != 3)
+            if (check != 2)
             {
                 check++;
                 return;
