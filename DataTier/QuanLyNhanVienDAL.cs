@@ -255,6 +255,11 @@ namespace QuanLyNhanSu.DataTier
             var nhanVien = quanLyNhanSu.NhanViens.Where(x => x.TaiKhoan == taiKhoan).FirstOrDefault();            
             try
             {
+                if(nhanVien == null)
+                {
+                    MessageBox.Show("Tài khoản không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
                 string maNV = nhanVien.MaNV;
                 string ngayKhoa = nhanVien.NgayKhoa.ToString();
                 if (nhanVien.NgayKhoa != null && nhanVien.NgayKhoa > DateTime.Now)
@@ -286,12 +291,7 @@ namespace QuanLyNhanSu.DataTier
                         MessageBox.Show($"Nhập sai mật khẩu lần thứ {count}! Lần thứ 3 tài khoản sẽ bị khoá!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }                    
-                }
-                if (nhanVien == null || !BCrypt.Net.BCrypt.Verify(matKhau, nhanVien.MatKhau))
-                {
-                    MessageBox.Show("Tài khoản hoặc mật khẩu không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-                }                             
+                }                           
                 else if(nhanVien != null  && BCrypt.Net.BCrypt.Verify(matKhau, nhanVien.MatKhau))
                 {
                     if(nhanVien.NgayKhoa != null && nhanVien.NgayKhoa < DateTime.Now)

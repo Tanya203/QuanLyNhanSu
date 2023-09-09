@@ -51,12 +51,9 @@ namespace QuanLyNhanSu.PresentationTier
             cmbChucVu.ValueMember = "MaCV";
             cmbQuyenHan.DisplayMember = "TenQuyenHan";
             cmbQuyenHan.ValueMember = "MaQH";
-            cmbGiaoDien.DisplayMember = "TenGiaoDien";
-            cmbGiaoDien.ValueMember = "MaGD";
             LoadThongTinDangNhap();           
             LoadChucVu();
             LoadQuyenHan();
-            LoadGiaoDien();
             rbLocTheoChucVu.Checked = true;
         }
         public void LoadThongTinDangNhap()
@@ -75,8 +72,6 @@ namespace QuanLyNhanSu.PresentationTier
                 loc = cmbChucVu.SelectedValue.ToString();
             if(rbLocQuyenHan.Checked)
                 loc = cmbQuyenHan.SelectedValue.ToString();
-            if(rbLocTheoGiaoDien.Checked)
-                loc = cmbGiaoDien.SelectedValue.ToString();
             Enabled = false;
             dgvPhanQuyen.Rows.Clear();
             danhSachPhanQuyen = phanQuyenBUS.GetAllPhanQuyen(loc);
@@ -99,8 +94,6 @@ namespace QuanLyNhanSu.PresentationTier
                 loc = cmbChucVu.SelectedValue.ToString();
             if (rbLocQuyenHan.Checked)
                 loc = cmbQuyenHan.SelectedValue.ToString();
-            if (rbLocTheoGiaoDien.Checked)
-                loc = cmbGiaoDien.SelectedValue.ToString();
             Enabled = false;
             dgvPhanQuyen.Rows.Clear();
             danhSachPhanQuyenTimKiem = phanQuyenBUS.GetAllPhanQuyenTimKiem(loc, timKiem);
@@ -127,24 +120,6 @@ namespace QuanLyNhanSu.PresentationTier
             cmbQuyenHan.DataSource = quyenHanBUS.GetQuyenHans();
             AutoAdjustComboBox(cmbQuyenHan);
         }
-        private void LoadGiaoDien() 
-        {
-            List<GiaoDien> giaoDien = giaoDienBUS.GetGiaoDiens().ToList();
-            List<GiaoDien> itemsToRemove = new List<GiaoDien>();
-            foreach (GiaoDien gd in giaoDien)
-            {
-                if (phanQuyenBUS.GetPhanQuyens().FirstOrDefault(pq => pq.QuyenHan.GiaoDien.MaGD == gd.MaGD) == null)
-                {
-                    itemsToRemove.Add(gd);
-                }
-            }
-            foreach (GiaoDien gdToRemove in itemsToRemove)
-            {
-                giaoDien.Remove(gdToRemove);
-            }
-            cmbGiaoDien.DataSource = giaoDien;
-            AutoAdjustComboBox(cmbGiaoDien);
-        }
         public void AutoAdjustComboBox(ComboBox comboBox)
         {
             int maxWidth = 0;
@@ -162,7 +137,6 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 cmbChucVu.Enabled = true;
                 cmbQuyenHan.Enabled = false;
-                cmbGiaoDien.Enabled = false;
                 LoadDanhSachPhanQuyen();
                 return;
             }
@@ -173,22 +147,10 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 cmbQuyenHan.Enabled = true;
                 cmbChucVu.Enabled = false;
-                cmbGiaoDien.Enabled = false;
                 LoadDanhSachPhanQuyen();
                 return;
             }
-        }
-        private void rbLocTheoGiaoDien_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbLocTheoGiaoDien.Checked)
-            {
-                cmbGiaoDien.Enabled = true;
-                cmbChucVu.Enabled = false;
-                cmbQuyenHan.Enabled = false;
-                LoadDanhSachPhanQuyen();
-                return;
-            }
-        }
+        } 
         private void cmbGiaoDien_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (check != 3)

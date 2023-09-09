@@ -64,6 +64,11 @@ namespace QuanLyNhanSu.DataTier
                                                                       pq.TenChucVu.Contains(timKiem));
             return danhSachPhanQuyenTimKiem;
         }
+        
+        public IEnumerable<PhanQuyen> GetPhanQuyens()
+        {
+            return quanLyNhanSu.PhanQuyens.OrderBy(pq => pq.MaCV).ToList();
+        }
         public bool Save(PhanQuyen pq)
         {
             try
@@ -113,10 +118,6 @@ namespace QuanLyNhanSu.DataTier
                 }
                 return false;
             }
-        }
-        public IEnumerable<PhanQuyen> GetPhanQuyens()
-        {
-            return quanLyNhanSu.PhanQuyens.OrderBy(pq => pq.MaCV).ToList();
         }
     }
 }

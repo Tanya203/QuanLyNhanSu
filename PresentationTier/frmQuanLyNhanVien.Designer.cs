@@ -77,7 +77,7 @@
             this.btnMoKhoa = new System.Windows.Forms.Button();
             this.txtNgayKhoa = new System.Windows.Forms.TextBox();
             this.lblNgayKhoa = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnChonHinh = new System.Windows.Forms.Button();
             this.dtpNTNS = new System.Windows.Forms.DateTimePicker();
             this.btnHuy = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
@@ -615,7 +615,7 @@
             this.pnlMenu.Controls.Add(this.btnMoKhoa);
             this.pnlMenu.Controls.Add(this.txtNgayKhoa);
             this.pnlMenu.Controls.Add(this.lblNgayKhoa);
-            this.pnlMenu.Controls.Add(this.button1);
+            this.pnlMenu.Controls.Add(this.btnChonHinh);
             this.pnlMenu.Controls.Add(this.dtpNTNS);
             this.pnlMenu.Controls.Add(this.btnHuy);
             this.pnlMenu.Controls.Add(this.btnSua);
@@ -738,22 +738,22 @@
             this.lblNgayKhoa.TabIndex = 59;
             this.lblNgayKhoa.Text = "Ngày khoá:";
             // 
-            // button1
+            // btnChonHinh
             // 
-            this.button1.AutoSize = true;
-            this.button1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = global::QuanLyNhanSu.Properties.Resources.chose_picture;
-            this.button1.Location = new System.Drawing.Point(1520, 266);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(153, 50);
-            this.button1.TabIndex = 34;
-            this.button1.Text = "Chọn hình";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnChonHinh.AutoSize = true;
+            this.btnChonHinh.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnChonHinh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnChonHinh.FlatAppearance.BorderSize = 0;
+            this.btnChonHinh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnChonHinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChonHinh.Image = global::QuanLyNhanSu.Properties.Resources.chose_picture;
+            this.btnChonHinh.Location = new System.Drawing.Point(1520, 266);
+            this.btnChonHinh.Name = "btnChonHinh";
+            this.btnChonHinh.Size = new System.Drawing.Size(153, 50);
+            this.btnChonHinh.TabIndex = 34;
+            this.btnChonHinh.Text = "Chọn hình";
+            this.btnChonHinh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnChonHinh.UseVisualStyleBackColor = false;
             // 
             // dtpNTNS
             // 
@@ -1598,7 +1598,7 @@
         private System.Windows.Forms.DateTimePicker dtpNTNS;
         private System.Windows.Forms.Label lblTimKiem;
         private System.Windows.Forms.TextBox txtTimKiem;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnChonHinh;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnMoKhoa;
         private System.Windows.Forms.TextBox txtNgayKhoa;
