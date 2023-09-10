@@ -15,12 +15,15 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
+        private readonly PhanQuyenBUS phanQuyenBUS;
         private IEnumerable<LoaiCaViewModels> danhSachLoaiCa;
         private IEnumerable<LoaiCaViewModels> danhSachLoaiCaTimKiem;
-        private readonly List<ThaoTac> listThaoTac;
+        private IEnumerable<PhanQuyen> phanQuyen;
+        private readonly IEnumerable<ThaoTac> listThaoTac;
         private readonly NhanVien nv;
         private readonly string maNV;
         private readonly string maGD;
+        private readonly string maCV;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiCa(string maNV)
         {
@@ -30,19 +33,53 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
+            phanQuyenBUS = new PhanQuyenBUS();
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý loại ca").MaGD;
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
-            txtMaLC.ReadOnly = true;           
-            btnThem.Enabled = false;
-            btnSua.Enabled = false;
-            btnXoa.Enabled = false;
+            maCV = nv.MaCV;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
             this.maNV = maNV;
         }
         private void frmQuanLyLoaiCa_Load(object sender, EventArgs e)
         {
-            LoadLoaiCa();
             LoadThongTinDangNhap();
+            InputStatus(false);
+            PhanQuyen();
+            LoadLoaiCa();            
+        }
+        public void PhanQuyen()
+        {
+            foreach(PhanQuyen qh in phanQuyen)
+            {
+                if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
+                {
+                    InputStatus(true);
+                    continue;
+                }
+            }
+        }
+        public void InputStatus(bool value)
+        {
+            ButtonStatus(value);
+            List<TextBox> listTextBox = new List<TextBox> { txtTenLC, txtHeSoLuong };
+            if (!value)
+                listTextBox.Add(txtMaLC);
+            for(int i = 0; i< listTextBox.Count; i++)
+            {
+                typeof(TextBox).GetProperty("ReadOnly").SetValue(listTextBox[i], !value);
+                continue;
+            }
+        }
+        public void ButtonStatus(bool value)
+        {
+            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy };
+            for (int i = 0; i < listButtons.Count; i++)
+            {
+                typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
+                if (value && listButtons[i] != btnHuy)
+                    typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
+            }
         }
         public void LoadThongTinDangNhap()
         {
@@ -87,9 +124,11 @@ namespace QuanLyNhanSu.PresentationTier
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
-            txtMaLC.Text = string.Empty;
-            txtTenLC.Text = string.Empty;
-            txtHeSoLuong.Text = string.Empty;
+            List<TextBox> listTextBox = new List<TextBox> { txtMaLC, txtTenLC, txtHeSoLuong };
+            for(int i = 0; i < listTextBox.Count; i++)
+            {
+                typeof(TextBox).GetProperty("Text").SetValue(listTextBox[i], string.Empty);
+            }
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void Reload()

@@ -91,7 +91,6 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 if(qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
                 {
-                    //HienNut();
                     InputStatus(true);
                     checkThaoTac = true;
                     continue;
@@ -138,19 +137,21 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value)
         {
-            List<object> lisButtons = new List<object>() { btnThem, btnSua, btnXoa, btnHuy, btnMoKhoa, btnChonHinh, btnThemPhuCap ,cbHienThiMatKhau };
-            for (int i = 0; i < lisButtons.Count; i++)
+            List<object> listButtons = new List<object>() { btnThem, btnSua, btnXoa, btnHuy, btnMoKhoa, btnChonHinh ,cbHienThiMatKhau };
+            if (!value)
+                listButtons.Add(btnThemPhuCap);
+            for (int i = 0; i < listButtons.Count; i++)
             {
-                if (lisButtons[i] is Button)
+                if (listButtons[i] is Button)
                 {
-                    typeof(Button).GetProperty("Visible").SetValue(lisButtons[i], value);
-                    if(value && lisButtons[i] != btnHuy)
-                        typeof(Button).GetProperty("Enabled").SetValue(lisButtons[i], !value);
+                    typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
+                    if(value && listButtons[i] != btnHuy)
+                        typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
                     continue;
                 }
-                else if (lisButtons[i] is CheckBox)
+                else if (listButtons[i] is CheckBox)
                 {
-                    typeof(RadioButton).GetProperty("Visible").SetValue(lisButtons[i], value);
+                    typeof(RadioButton).GetProperty("Visible").SetValue(listButtons[i], value);
                     continue;
                 }               
             }

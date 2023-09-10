@@ -15,12 +15,16 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
+        private readonly PhanQuyenBUS phanQuyenBUS;
         private IEnumerable<CaViewModels> danhSachCa;
         private IEnumerable<CaViewModels> danhSachCaTimKiem;
         private readonly IEnumerable<ThaoTac> listThaoTac;
+        private readonly IEnumerable<PhanQuyen> phanQuyen;
         private readonly NhanVien nv;
         private readonly string maNV;
         private readonly string maGD;
+        private readonly string maCV;
+        private bool checkThaoTac;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyCa(string maNV)
         {
@@ -30,22 +34,24 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
+            phanQuyenBUS = new PhanQuyenBUS();
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý ca").MaGD;
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
-            txtMaCa.ReadOnly = true;
+            maCV = nv.MaCV;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();            
             dtpThoiGianBatDau.Text = "00:00";
             dtpThoiGianKetThuc.Text = "00:00";
-            btnThem.Enabled = false;
-            btnSua.Enabled = false;
-            btnXoa.Enabled = false;
+            checkThaoTac = false;
             this.maNV = maNV;
 
         }
         private void frmQuanLyCa_Load(object sender, EventArgs e)
         {
-            LoadCa();
             LoadThongTinDangNhap();
+            InputStatus(false);
+            PhanQuyen();
+            LoadCa();
         }
         public void LoadThongTinDangNhap()
         {
@@ -56,6 +62,55 @@ namespace QuanLyNhanSu.PresentationTier
                 lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+        }
+        private void PhanQuyen()
+        {
+            foreach(PhanQuyen qh in phanQuyen)
+            {
+                if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
+                {
+                    InputStatus(true);
+                    checkThaoTac = true;
+                    continue;
+                }
+                else if(qh.QuyenHan.TenQuyenHan.Contains("Truy cập") && qh.CapQuyen && checkThaoTac)
+                {
+                    btnQuanLyLoaiCa.Visible = true;
+                    continue;
+                }
+            }
+        }
+        private void InputStatus(bool value)
+        {
+            ButtonStatus(value);    
+            List<object> listInput = new List<object> { txtTenCa, dtpThoiGianBatDau, dtpThoiGianKetThuc};
+            if (!value)
+                listInput.Add(txtMaCa);
+            for(int i = 0; i < listInput.Count; i++)
+            {
+                if (listInput[i] is TextBox)
+                {
+                    typeof(TextBox).GetProperty("ReadOnly").SetValue(listInput[i], !value);
+                    continue;
+                }
+                if (listInput[i] is DateTimePicker)
+                {
+                    typeof(DateTimePicker).GetProperty("Enabled").SetValue(listInput[i], value);
+                    continue;
+                }
+            }
+        }
+        private void ButtonStatus(bool value)
+        {
+            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy };
+            if (!value)
+                listButtons.Add(btnQuanLyLoaiCa);
+            for (int i = 0; i < listButtons.Count; i++)
+            {
+                typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
+                if (value && listButtons[i] != btnHuy && listButtons[i] != btnQuanLyLoaiCa)
+                    typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
+            }
         }
         private void LoadCa()
         {
@@ -92,10 +147,20 @@ namespace QuanLyNhanSu.PresentationTier
         ///////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
-            txtMaCa.Text = string.Empty;
-            txtTenCa.Text = string.Empty;
-            dtpThoiGianBatDau.Text = "00:00";
-            dtpThoiGianKetThuc.Text = "00:00";
+            List<object> listInput = new List<object> { txtMaCa, txtTenCa, dtpThoiGianBatDau, dtpThoiGianKetThuc };
+            for(int i = 0; i < listInput.Count; i++)
+            {
+                if (listInput[i] is TextBox)
+                {
+                    typeof(TextBox).GetProperty("Text").SetValue(listInput[i], string.Empty);
+                    continue;
+                }
+                else if (listInput[i] is DateTimePicker)
+                {
+                    typeof(DateTimePicker).GetProperty("Text").SetValue(listInput[i], "00:00");
+                    continue;
+                }
+            }
         }
         ///////////////////////////////////////////////////////////////////////////////////////       
         public void Reload()

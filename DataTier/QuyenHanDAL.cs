@@ -1,9 +1,6 @@
 ﻿using QuanLyNhanSu.DataTier.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuanLyNhanSu.DataTier
 {
@@ -16,7 +13,7 @@ namespace QuanLyNhanSu.DataTier
         }
         public IEnumerable<QuyenHan> GetQuyenHans()
         {
-            return quanLyNhanSu.QuyenHans.OrderBy(qh => qh.MaQH).ToList();
+            return quanLyNhanSu.QuyenHans.OrderBy(qh => qh.TenQuyenHan).ToList();
         }
     }
 }

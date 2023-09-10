@@ -56,9 +56,12 @@ namespace QuanLyNhanSu.PresentationTier
             LoadPhuCap();            
             txtMaNV.ReadOnly = true;
             txtSoTien.ReadOnly = true;
-            txtTongPhuCap.ReadOnly = true;           
+            txtTongPhuCap.ReadOnly = true;
+            pnlMenu.Visible = false;
+            lblPhuCap.Visible = false;
             if(check == "nhanVien")
             {
+                lblPhuCap.Visible = false;
                 pnlMenu.Visible = true;                
                 XoaButton();
             }                           
