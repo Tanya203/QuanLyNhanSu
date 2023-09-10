@@ -17,14 +17,19 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
-        public IEnumerable<LichLamViecViewModels> danhSachLichLamViec;
-        public IEnumerable<LichLamViecViewModels> danhSachLichLamViecTimKiem;
-        private readonly List<ThaoTac> listThaoTac;
+        private readonly PhanQuyenBUS phanQuyenBUS;
+        private IEnumerable<LichLamViecViewModels> danhSachLichLamViec;
+        private IEnumerable<LichLamViecViewModels> danhSachLichLamViecTimKiem;
+        private readonly IEnumerable<ThaoTac> listThaoTac;
+        private readonly IEnumerable<PhanQuyen> phanQuyen;
         private readonly NhanVien nv;
         private readonly string maPB;
         private readonly string maNV;
         private readonly string maGD;
+        private readonly string maCV;
         private readonly string now;
+        private bool checkTruyCap;
+        private bool checkThaoTac;
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmLichLamViec(string maNV)
@@ -35,20 +40,24 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
+            phanQuyenBUS = new PhanQuyenBUS();
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý lịch làm việc").MaGD;
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
-            this.maNV = maNV;
+            maCV = nv.MaCV;
             maPB = nv.ChucVu.PhongBan.MaPB;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
+            this.maNV = maNV;
+            checkTruyCap = false;
+            checkThaoTac = false;
             now = DateTime.Now.ToString(formatDate);
         }
         private void FrmLichLamViec_Load(object sender, EventArgs e)
         {
             LoadThongTinDangNhap();
+            ButtonStatus(false);
+            PhanQuyen();
             LoadLichLamViec();
-            XoaButton();
-            ChiTietButton();
-            btnThem.Enabled = false;
         }
         public void LoadThongTinDangNhap()
         {
@@ -60,6 +69,42 @@ namespace QuanLyNhanSu.PresentationTier
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }             
+        private void PhanQuyen()
+        {
+            foreach(PhanQuyen qh in phanQuyen)
+            {
+                if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
+                {
+                    checkThaoTac = true;
+                    pnlMenu.Visible = true;
+                    ButtonStatus(true);
+                    continue;
+                }
+                else if (qh.QuyenHan.TenQuyenHan.Contains("Truy cập") && qh.CapQuyen)
+                {
+                    checkTruyCap = true;
+                    ChiTietButton();
+                    continue;
+                }
+            }
+        }
+        private void ButtonStatus(bool value)
+        {
+            List<Button> listButtons = new List<Button> { btnThem };
+            if (!value)
+            {
+                pnlMenu.Visible = false;
+                return;
+            }
+            if (value)
+                XoaButton();
+            for(int i = 0; i < listButtons.Count; i++)
+            {
+                typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
+                if(value)
+                    typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
+            }
+        }
         private void LoadLichLamViec()
         {
             Enabled = false;
@@ -205,17 +250,38 @@ namespace QuanLyNhanSu.PresentationTier
             string date = DateTime.Now.ToString(formatDate);
             if (rowIndex < 0)
                 return;
-            if (e.ColumnIndex == 6)
+            if (checkTruyCap && checkThaoTac)
             {
-                if(DateTime.Parse(ngayLam) < DateTime.Parse(date))
+
+                if (e.ColumnIndex == 6)
                 {
-                    MessageBox.Show("Không thể xoá lịch trong quá khứ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }    
-                XoaLichLamViec(maLLV, phongBan, ngayLam);
-            }                                                                                                    
-            if (e.ColumnIndex == 7)           
-                OpenChiTietLichLamViec(maNV, maLLV);                        
+                    if (DateTime.Parse(ngayLam) < DateTime.Parse(date))
+                    {
+                        MessageBox.Show("Không thể xoá lịch trong quá khứ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    XoaLichLamViec(maLLV, phongBan, ngayLam);
+                }
+                if (e.ColumnIndex == 7)
+                    OpenChiTietLichLamViec(maNV, maLLV);
+            }
+            else if(checkTruyCap)
+            {
+                if (e.ColumnIndex == 6)
+                    OpenChiTietLichLamViec(maNV, maLLV);
+            }
+            else if (checkThaoTac)
+            {
+                if (e.ColumnIndex == 6)
+                {
+                    if (DateTime.Parse(ngayLam) < DateTime.Parse(date))
+                    {
+                        MessageBox.Show("Không thể xoá lịch trong quá khứ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    XoaLichLamViec(maLLV, phongBan, ngayLam);
+                }
+            }
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {

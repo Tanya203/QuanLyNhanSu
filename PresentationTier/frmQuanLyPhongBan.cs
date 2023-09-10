@@ -14,12 +14,15 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
+        private readonly PhanQuyenBUS phanQuyenBUS;
         private IEnumerable<PhongBanViewModel> danhSachPhongBan;
         private IEnumerable<PhongBanViewModel> danhSachPhongBanTimKiem;
+        private readonly IEnumerable<PhanQuyen> phanQuyen;
         private readonly List<ThaoTac> listThaoTac;
         private readonly string maNV;
         private readonly NhanVien nv;
         private readonly string maGD;
+        private readonly string maCV;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhongBan(string maNV)
         {
@@ -29,20 +32,20 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
+            phanQuyenBUS = new PhanQuyenBUS();
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý phòng ban").MaGD;
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
-            txtMaPB.ReadOnly = true;
-            txtTongSoNhanVien.ReadOnly = true;
-            btnThem.Enabled = false;
-            btnSua.Enabled = false;
-            btnXoa.Enabled = false;
+            maCV = nv.MaCV;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();            
             this.maNV = maNV;
         }
         private void frmQuanLyPhongBan_Load(object sender, EventArgs e)
-        {
-            LoadPhongBan();
+        {            
             LoadThongTinDangNhap();
+            InputStatus(false);
+            PhanQuyen();
+            LoadPhongBan();
         }
         public void LoadThongTinDangNhap()
         {
@@ -53,6 +56,38 @@ namespace QuanLyNhanSu.PresentationTier
                 lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+        }
+        public void PhanQuyen()
+        {
+            foreach(PhanQuyen qh in phanQuyen)
+            {
+                if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
+                {
+                    InputStatus(true);
+                    continue;
+                }
+            }
+        }
+        public void InputStatus(bool value)
+        {
+            ButtonStatus(value);
+            List<TextBox> listTextBox = new List<TextBox> { txtTenPB };
+            if (!value)
+                listTextBox.AddRange(new List<TextBox> { txtMaPB, txtTongSoNhanVien});
+            for (int i = 0; i < listTextBox.Count; i++)
+            {
+                typeof(TextBox).GetProperty("ReadOnly").SetValue(listTextBox[i], !value);                
+            }
+        }
+        public void ButtonStatus(bool value)
+        {
+            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy};
+            for (int i = 0; i < listButtons.Count; i++)
+            {
+                typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
+                if (value && listButtons[i] != btnHuy)
+                    typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
+            }
         }
         private void LoadPhongBan()
         {
@@ -83,13 +118,15 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhongBan.Rows[rowAdd].Cells[2].Value = phongBanBUS.TongSoLuongNhanVienTrongPhongBan(pb.MaPB).ToString();
             }
             Enabled = true;
-        }
+        }        
         //////////////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
-            txtMaPB.Text = string.Empty;
-            txtTenPB.Text = string.Empty;
-            txtTongSoNhanVien.Text = string.Empty;
+            List<TextBox> listTextBox = new List<TextBox> { txtMaPB, txtTenPB, txtTongSoNhanVien };
+            for(int i = 0; i < listTextBox.Count; i++)
+            {
+                typeof(TextBox).GetProperty("Text").SetValue(listTextBox[i], string.Empty);
+            }
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////
         public void Reload()

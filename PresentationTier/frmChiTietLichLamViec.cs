@@ -21,21 +21,25 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyLoaiCaBUS loaiCaBUS;
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
+        private readonly PhanQuyenBUS phanQuyenBUS;
         private IEnumerable<ChiTietLichLamViecViewModels> chiTietLichLamViec;
         private IEnumerable<ChiTietLichLamViecViewModels> chiTietLichLamViecTimKiem;
         private readonly IEnumerable<ChamCong> chamCong;
-        private readonly List<ThaoTac> listThaoTac;
+        private readonly IEnumerable<ThaoTac> listThaoTac;
+        private readonly IEnumerable<PhanQuyen> phanQuyen;
         private readonly NhanVien nv;
         private readonly LichLamViec llv;
         private readonly string maNV;
         private readonly string maLLV;
         private readonly string maPB;
         private readonly string maGD;
+        private readonly string maCV;
         private readonly int countCa;
         private string maNV_Chon;
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         private readonly string now;
+        private bool checkThaoTac;
         public FrmChiTietLichLamViec(string maNV, string maLLV)
         {
             InitializeComponent();
@@ -47,6 +51,7 @@ namespace QuanLyNhanSu.PresentationTier
             loaiCaBUS = new QuanLyLoaiCaBUS();
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
+            phanQuyenBUS = new PhanQuyenBUS();
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý chi tiết lịch làm việc").MaGD;
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD ==  maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
@@ -54,10 +59,13 @@ namespace QuanLyNhanSu.PresentationTier
             this.maNV = maNV;
             this.maLLV = maLLV;
             maPB = nv.ChucVu.PhongBan.MaPB;
+            maCV = nv.MaCV;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
             countCa = caBUS.GetCa().Count();
-            MessageBoxManager.Register_OnceOnly();
             llv = lichLamViecBUS.GetLichLamViec().FirstOrDefault(llv => llv.MaLLV == maLLV); 
             now = DateTime.Now.ToString(formatDate);
+            checkThaoTac = false;
+            MessageBoxManager.Register_OnceOnly();
         }
         private void FrmChiTietLichLamViec_Load(object sender, EventArgs e)
         {
@@ -69,30 +77,19 @@ namespace QuanLyNhanSu.PresentationTier
             cmbLoaiCa.ValueMember = "MaLC";
             LoadThongTinDangNhap();
             LoadThongTinLichLamViec();
-            LoadChiTietLichLamViec();
-            txtMaLLV.ReadOnly = true;
-            txtMaNV.ReadOnly = true;
-            txtPhongBan.ReadOnly = true;
-            txtHoTenNV.ReadOnly = true;
-            txtMaNV_Phep.ReadOnly = true;
-            txtHoTenNhanVien_Phep.ReadOnly = true;
-            dtpNgayLam.Enabled = false;
-            cbPhep.Enabled = false;
-            btnThem.Enabled = false;
-            cmbCa.Enabled = false;
-            cmbLoaiCa.Enabled = false;
-            cmbNhanVien.Enabled = false;
+            DisableDisplay();
+            InputStatus(false);
             if (DateTime.Parse(dtpNgayLam.Text) >= DateTime.Parse(now))
             {
-                XoaButton();
-                btnThem.Enabled = true;
-                cmbCa.Enabled = true;
-                cmbLoaiCa.Enabled = true;
-                cmbNhanVien.Enabled = true;
-                LoadNhanVienTheoPhongBan();
-                LoadCa(cmbNhanVien.SelectedValue.ToString());
-                LoadLoaiCa();
-            }                        
+                PhanQuyen();
+                if (checkThaoTac)
+                {
+                    LoadNhanVienTheoPhongBan();
+                    LoadCa(cmbNhanVien.SelectedValue.ToString());
+                    LoadLoaiCa();
+                }           
+            }
+            LoadChiTietLichLamViec();
         }
         public void LoadThongTinDangNhap()
         {
@@ -103,6 +100,68 @@ namespace QuanLyNhanSu.PresentationTier
                 lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+        }
+        public void PhanQuyen()
+        {
+            foreach(PhanQuyen qh in phanQuyen)
+            {
+                if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
+                {
+                    checkThaoTac = true;
+                    InputStatus(true);
+                    continue;
+                }
+                else
+                {
+                    InputStatus(false);
+                    continue;
+                }
+            }
+        }
+        private void InputStatus(bool value)
+        {
+            ButtonStatus(value);
+            List<ComboBox> listComboBox = new List<ComboBox> { cmbCa, cmbLoaiCa, cmbNhanVien};
+            for(int i =  0; i < listComboBox.Count; i++)
+            {
+                typeof(Button).GetProperty("Enabled").SetValue(listComboBox[i], value);
+            }
+        }
+        private void ButtonStatus(bool value)
+        {
+            List<object> listButton = new List<object> { btnThem };
+            if (value)
+                XoaButton();
+            for(int i = 0; i < listButton.Count; i++)
+            {
+                if (listButton[i] is Button)
+                {
+                    typeof(Button).GetProperty("Visible").SetValue(listButton[i], value);
+                    continue;
+                }
+                else if(listButton[i] is CheckBox)
+                {
+                    typeof(CheckBox).GetProperty("Enabled").SetValue(listButton[i], false);
+                    continue;
+                }
+            }
+        }
+        public void DisableDisplay()
+        {
+            List<object> listDisplay= new List<object> { txtMaLLV, txtMaNV, txtPhongBan, dtpNgayLam, txtHoTenNV};
+            for(int i = 0; i< listDisplay.Count; i++)
+            {
+                if(listDisplay[i] is TextBox)
+                {
+                    typeof(TextBox).GetProperty("ReadOnly").SetValue(listDisplay[i], true);
+                    continue;
+                }
+                else if (listDisplay[i] is DateTimePicker)
+                {
+                    typeof(DateTimePicker).GetProperty("Enabled").SetValue(listDisplay[i], false);
+                    continue;
+                }
+            }
         }
         public void LoadThongTinLichLamViec()
         {
@@ -228,13 +287,6 @@ namespace QuanLyNhanSu.PresentationTier
                 btnThem.Enabled = false;
             }                
         }
-        private void txtMaNV_Phep_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtMaNV_Phep.Text) || (DateTime.Parse(dtpNgayLam.Text) < DateTime.Parse(now)))
-                cbPhep.Enabled = false;
-            else
-                cbPhep.Enabled = true;
-        }
         //////////////////////////////////////////////////////////////////////////////////////
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
@@ -315,13 +367,9 @@ namespace QuanLyNhanSu.PresentationTier
             int row = e.RowIndex;
             if (row < 0)
                 return;
-            maNV_Chon = dgvChiTietLichLamViec.Rows[row].Cells[1].Value.ToString();
-            txtMaNV_Phep.Text = dgvChiTietLichLamViec.Rows[row].Cells[1].Value.ToString();
-            txtHoTenNhanVien_Phep.Text = dgvChiTietLichLamViec.Rows[row].Cells[2].Value.ToString();
-            if((bool)dgvChiTietLichLamViec.Rows[row].Cells[9].Value)
-                cbPhep.Checked = true;
-            else
-                cbPhep.Checked = false;
+            maNV_Chon = dgvChiTietLichLamViec.Rows[row].Cells[1].Value.ToString();            
+            if(e.ColumnIndex == 9 && checkThaoTac)
+                CapNhatPhep();                
             if (e.ColumnIndex == 10)
             {
                 XoaNhanVien();
@@ -351,12 +399,11 @@ namespace QuanLyNhanSu.PresentationTier
             if (e.KeyChar == (char)Keys.Enter)
                 LoadChiTietLichLamViecTimKiem(txtTimKiem.Text);
         }
-
-        private void cbPhep_Click(object sender, EventArgs e)
-        {            
-            ChamCong nv = chamCong.Where(x => x.MaNV == txtMaNV_Phep.Text).FirstOrDefault();
+        public void CapNhatPhep()
+        {
+            ChamCong nv = chamCong.Where(x => x.MaNV == maNV_Chon).FirstOrDefault();
             string thongBao;
-            if (cbPhep.Checked)
+            if (!nv.Phep)
             {
                 nv.Phep = true;
                 thongBao = "Thêm phép cho nhân viên";
@@ -368,7 +415,7 @@ namespace QuanLyNhanSu.PresentationTier
             }                
             MessageBoxManager.Yes = "Có";
             MessageBoxManager.No = "Không";
-            DialogResult ketQua = MessageBox.Show($"{thongBao} {txtMaNV_Phep.Text} vào ngày {dtpNgayLam.Text}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult ketQua = MessageBox.Show($"{thongBao} {maNV_Chon} vào ngày {dtpNgayLam.Text}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (ketQua == DialogResult.Yes)
             {
                 if (chiTietLichLamViecBUS.Save(nv))
@@ -383,13 +430,6 @@ namespace QuanLyNhanSu.PresentationTier
                     Reload();
                 }
             }
-            if(ketQua == DialogResult.No)
-            {
-                if(cbPhep.Checked)
-                    cbPhep.Checked = false;
-                else
-                    cbPhep.Checked = true;
-            }    
         }
     }
 }

@@ -220,7 +220,6 @@
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(1348, 159);
             this.pnlMenu.TabIndex = 5;
-            this.pnlMenu.Visible = false;
             // 
             // txtMaNV
             // 

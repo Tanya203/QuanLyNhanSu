@@ -25,9 +25,11 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<ChucVuViewModels> danhSachChucVu;
         private IEnumerable<ChucVuViewModels> danhSachChucVuTimKiem;
         private readonly IEnumerable<QuyenHan> listQuyenHan;
-        private readonly IEnumerable<ThaoTac> listThaoTac;        
+        private readonly IEnumerable<ThaoTac> listThaoTac;
+        private readonly IEnumerable<PhanQuyen> phanQuyen;
         private readonly string maNV;
         private readonly string maGD;
+        private readonly string maCV;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyChucVu(string maNV)
         {
@@ -44,6 +46,8 @@ namespace QuanLyNhanSu.PresentationTier
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý chức vụ").MaGD;
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
+            maCV = nv.MaCV;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
             txtMaCV.ReadOnly = true;
             txtTongSoNhanVien.ReadOnly = true;
             btnThem.Enabled = false;
@@ -55,9 +59,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             cmbPhongBan.DisplayMember = "TenPhongBan";
             cmbPhongBan.ValueMember = "MaPB";
-            LoadPhongBan();
-            LoadChucVu();
             LoadThongTinDangNhap();
+            LoadPhongBan();
+            InputStatus(false);
+            PhanQuyen();
+            LoadChucVu();
         }
         public void LoadThongTinDangNhap()
         {
@@ -68,6 +74,47 @@ namespace QuanLyNhanSu.PresentationTier
                 lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+        }
+        private void PhanQuyen()
+        {
+            foreach (PhanQuyen qh in phanQuyen)
+            {
+                if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
+                {
+                    InputStatus(true);
+                    continue;
+                }
+            }
+        }
+        private void InputStatus(bool value)
+        {
+            ButtonStatus(value);
+            List<object> listInput = new List<object> { txtTenCV, txtLuongKhoiDiem, cmbPhongBan };
+            if (!value)
+                listInput.AddRange(new List<TextBox> { txtMaCV, txtTongSoNhanVien });
+            for (int i = 0; i < listInput.Count; i++)
+            {
+                if (listInput[i] is TextBox)
+                {
+                    typeof(TextBox).GetProperty("ReadOnly").SetValue(listInput[i], !value);
+                    continue;
+                }
+                if(listInput[i] is ComboBox)
+                {
+                    typeof(TextBox).GetProperty("Enabled").SetValue(listInput[i], value);
+                    continue;
+                }
+            }
+        }
+        private void ButtonStatus(bool value)
+        {
+            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy };
+            for (int i = 0; i < listButtons.Count; i++)
+            {
+                typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
+                if (value && listButtons[i] != btnHuy)
+                    typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
+            }
         }
         private void LoadChucVu()
         {
@@ -121,11 +168,20 @@ namespace QuanLyNhanSu.PresentationTier
         /////////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
-            txtMaCV.Text = string.Empty;
-            cmbPhongBan.SelectedIndex = 0;
-            txtTenCV.Text = string.Empty;
-            txtTongSoNhanVien.Text = string.Empty;
-            txtLuongKhoiDiem.Text = string.Empty;
+            List<object> listInput = new List<object> { txtMaCV, cmbPhongBan, txtTenCV, txtTongSoNhanVien, txtLuongKhoiDiem };
+            for(int i = 0; i< listInput.Count; i++)
+            {
+                if (listInput[i] is TextBox)
+                {
+                    typeof(TextBox).GetProperty("Text").SetValue(listInput[i], string.Empty);
+                    continue;
+                }
+                else if(listInput[i] is ComboBox)
+                {
+                    typeof(ComboBox).GetProperty("SelectedIndex").SetValue(listInput[i], 0);
+                    continue;
+                }
+            }
         }
         /////////////////////////////////////////////////////////////////////////////////////////////
         public void Reload()

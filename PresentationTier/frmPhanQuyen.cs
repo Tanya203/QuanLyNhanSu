@@ -81,9 +81,9 @@ namespace QuanLyNhanSu.PresentationTier
                 rowAdd = dgvPhanQuyen.Rows.Add();
                 dgvPhanQuyen.Rows[rowAdd].Cells[0].Value = ph.MaQH;
                 dgvPhanQuyen.Rows[rowAdd].Cells[1].Value = ph.MaCV;
-                dgvPhanQuyen.Rows[rowAdd].Cells[2].Value = ph.TenQuyenHan;
+                dgvPhanQuyen.Rows[rowAdd].Cells[2].Value = ph.TenChucVu;
                 dgvPhanQuyen.Rows[rowAdd].Cells[3].Value = ph.GiaoDien;
-                dgvPhanQuyen.Rows[rowAdd].Cells[4].Value = ph.TenChucVu;
+                dgvPhanQuyen.Rows[rowAdd].Cells[4].Value = ph.TenQuyenHan;
                 dgvPhanQuyen.Rows[rowAdd].Cells[5].Value = ph.CapQuyen;
             }
             Enabled = true;
@@ -103,9 +103,9 @@ namespace QuanLyNhanSu.PresentationTier
                 rowAdd = dgvPhanQuyen.Rows.Add();
                 dgvPhanQuyen.Rows[rowAdd].Cells[0].Value = ph.MaQH;
                 dgvPhanQuyen.Rows[rowAdd].Cells[1].Value = ph.MaCV;
-                dgvPhanQuyen.Rows[rowAdd].Cells[2].Value = ph.TenQuyenHan;
+                dgvPhanQuyen.Rows[rowAdd].Cells[2].Value = ph.TenChucVu;
                 dgvPhanQuyen.Rows[rowAdd].Cells[3].Value = ph.GiaoDien;
-                dgvPhanQuyen.Rows[rowAdd].Cells[4].Value = ph.TenChucVu;
+                dgvPhanQuyen.Rows[rowAdd].Cells[4].Value = ph.TenQuyenHan;
                 dgvPhanQuyen.Rows[rowAdd].Cells[5].Value = ph.CapQuyen;
             }
             Enabled = true;
