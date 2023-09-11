@@ -35,6 +35,12 @@
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.lblTimKiem = new System.Windows.Forms.Label();
             this.dgvPhanQuyen = new System.Windows.Forms.DataGridView();
+            this.colMaQH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaCV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTenChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGiaoDien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTenQuyenHan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCapQuyen = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
@@ -52,12 +58,6 @@
             this.rbLocQuyenHan = new System.Windows.Forms.RadioButton();
             this.cmbQuyenHan = new System.Windows.Forms.ComboBox();
             this.pnlMenu = new System.Windows.Forms.Panel();
-            this.colMaQH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMaCV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTenChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGiaoDien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTenQuyenHan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCapQuyen = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhanQuyen)).BeginInit();
             this.pnlHeader.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -88,7 +88,7 @@
             this.dgvPhanQuyen.AllowUserToDeleteRows = false;
             this.dgvPhanQuyen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPhanQuyen.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -125,13 +125,56 @@
             this.dgvPhanQuyen.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPhanQuyen.RowHeadersVisible = false;
             this.dgvPhanQuyen.RowHeadersWidth = 51;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvPhanQuyen.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvPhanQuyen.RowTemplate.Height = 24;
             this.dgvPhanQuyen.Size = new System.Drawing.Size(1924, 692);
             this.dgvPhanQuyen.TabIndex = 36;
             this.dgvPhanQuyen.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPhanQuyen_CellClick);
+            // 
+            // colMaQH
+            // 
+            this.colMaQH.HeaderText = "Mã quyền hạn";
+            this.colMaQH.MinimumWidth = 6;
+            this.colMaQH.Name = "colMaQH";
+            this.colMaQH.ReadOnly = true;
+            // 
+            // colMaCV
+            // 
+            this.colMaCV.HeaderText = "Mã chức vụ";
+            this.colMaCV.MinimumWidth = 6;
+            this.colMaCV.Name = "colMaCV";
+            this.colMaCV.ReadOnly = true;
+            // 
+            // colTenChucVu
+            // 
+            this.colTenChucVu.HeaderText = "Tên chức vụ";
+            this.colTenChucVu.MinimumWidth = 6;
+            this.colTenChucVu.Name = "colTenChucVu";
+            this.colTenChucVu.ReadOnly = true;
+            // 
+            // colGiaoDien
+            // 
+            this.colGiaoDien.HeaderText = "Tên giao diện";
+            this.colGiaoDien.MinimumWidth = 6;
+            this.colGiaoDien.Name = "colGiaoDien";
+            this.colGiaoDien.ReadOnly = true;
+            // 
+            // colTenQuyenHan
+            // 
+            this.colTenQuyenHan.HeaderText = "Tên quyền hạn";
+            this.colTenQuyenHan.MinimumWidth = 6;
+            this.colTenQuyenHan.Name = "colTenQuyenHan";
+            this.colTenQuyenHan.ReadOnly = true;
+            // 
+            // colCapQuyen
+            // 
+            this.colCapQuyen.HeaderText = "Cấp quyền";
+            this.colCapQuyen.MinimumWidth = 6;
+            this.colCapQuyen.Name = "colCapQuyen";
+            this.colCapQuyen.ReadOnly = true;
+            this.colCapQuyen.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colCapQuyen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // pnlHeader
             // 
@@ -342,50 +385,6 @@
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(1073, 87);
             this.pnlMenu.TabIndex = 51;
-            // 
-            // colMaQH
-            // 
-            this.colMaQH.HeaderText = "Mã quyền hạn";
-            this.colMaQH.MinimumWidth = 6;
-            this.colMaQH.Name = "colMaQH";
-            this.colMaQH.ReadOnly = true;
-            // 
-            // colMaCV
-            // 
-            this.colMaCV.HeaderText = "Mã chức vụ";
-            this.colMaCV.MinimumWidth = 6;
-            this.colMaCV.Name = "colMaCV";
-            this.colMaCV.ReadOnly = true;
-            // 
-            // colTenChucVu
-            // 
-            this.colTenChucVu.HeaderText = "Tên chức vụ";
-            this.colTenChucVu.MinimumWidth = 6;
-            this.colTenChucVu.Name = "colTenChucVu";
-            this.colTenChucVu.ReadOnly = true;
-            // 
-            // colGiaoDien
-            // 
-            this.colGiaoDien.HeaderText = "Tên giao diện";
-            this.colGiaoDien.MinimumWidth = 6;
-            this.colGiaoDien.Name = "colGiaoDien";
-            this.colGiaoDien.ReadOnly = true;
-            // 
-            // colTenQuyenHan
-            // 
-            this.colTenQuyenHan.HeaderText = "Tên quyền hạn";
-            this.colTenQuyenHan.MinimumWidth = 6;
-            this.colTenQuyenHan.Name = "colTenQuyenHan";
-            this.colTenQuyenHan.ReadOnly = true;
-            // 
-            // colCapQuyen
-            // 
-            this.colCapQuyen.HeaderText = "Cấp quyền";
-            this.colCapQuyen.MinimumWidth = 6;
-            this.colCapQuyen.Name = "colCapQuyen";
-            this.colCapQuyen.ReadOnly = true;
-            this.colCapQuyen.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colCapQuyen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // FrmPhanQuyen
             // 

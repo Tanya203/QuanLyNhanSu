@@ -390,7 +390,7 @@
             this.dgvThongTinLoaiPhieu.AllowUserToDeleteRows = false;
             this.dgvThongTinLoaiPhieu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvThongTinLoaiPhieu.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -416,7 +416,6 @@
             this.dgvThongTinLoaiPhieu.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvThongTinLoaiPhieu.RowHeadersVisible = false;
             this.dgvThongTinLoaiPhieu.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvThongTinLoaiPhieu.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvThongTinLoaiPhieu.RowTemplate.Height = 24;
