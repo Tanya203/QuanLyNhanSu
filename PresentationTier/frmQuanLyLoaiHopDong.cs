@@ -16,12 +16,15 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly HinhThucChamCongBUS hinhThucChamCongBUS;
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
+        private readonly PhanQuyenBUS phanQuyenBUS;
         private IEnumerable<LoaiHopDongViewModels> danhSachLoaiHopDong;
         private IEnumerable<LoaiHopDongViewModels> danhSachLoaiHopDongTimKiem;
-        private readonly List<ThaoTac> listThaoTac;
+        private readonly IEnumerable<ThaoTac> listThaoTac;
+        private readonly IEnumerable<PhanQuyen> phanQuyen;
         private readonly NhanVien nv;
         private readonly string maNV;
         private readonly string maGD;
+        private readonly string maCV;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiHopDong(string maNV)
         {
@@ -32,23 +35,23 @@ namespace QuanLyNhanSu.PresentationTier
             hinhThucChamCongBUS = new HinhThucChamCongBUS();
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
+            phanQuyenBUS = new PhanQuyenBUS();
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý loại hợp đồng").MaGD;
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
-            txtMaLHD.ReadOnly = true;
-            txtSoLuongNhanVien.ReadOnly = true;
-            btnThem.Enabled = false;
-            btnSua.Enabled = false;
-            btnXoa.Enabled = false;
+            maCV = nv.MaCV;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
             this.maNV = maNV;
         }
         private void frmQuanLyLoaiHopDong_Load(object sender, EventArgs e)
         {
             cmbHinhThucChamCong.DisplayMember = "TenHinhThucChamCong";
-            cmbHinhThucChamCong.ValueMember = "MaHTCC";
-            LoadLoaiHopDong();
+            cmbHinhThucChamCong.ValueMember = "MaHTCC";            
             LoadThongTinDangNhap();
             LoadHinhThucChamCong();
+            InputStatus(false);
+            PhanQuyen();
+            LoadLoaiHopDong();
         }
         public void LoadThongTinDangNhap()
         {
@@ -59,6 +62,47 @@ namespace QuanLyNhanSu.PresentationTier
                 lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+        }
+        private void PhanQuyen()
+        {
+            foreach(PhanQuyen qh in phanQuyen)
+            {
+                if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
+                {
+                    InputStatus(true);
+                    continue;
+                }
+            }
+        }
+        private void InputStatus(bool value)
+        {
+            ButtonStatus(value);
+            List<object> listInput = new List<object> {txtTenLHD, cmbHinhThucChamCong };
+            if (!value)
+                listInput.AddRange(new List<object> {txtMaLHD, txtSoLuongNhanVien});
+            for(int i = 0; i < listInput.Count; i++)
+            {
+                if (listInput[i] is TextBox)
+                {
+                    typeof(TextBox).GetProperty("ReadOnly").SetValue(listInput[i], !value);
+                    continue;
+                }
+                else if (listInput[i] is ComboBox)
+                {
+                    typeof(ComboBox).GetProperty("Enabled").SetValue(listInput[i], value);
+                    continue;
+                }
+            }
+        }
+        private void ButtonStatus(bool value) 
+        {
+            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy };
+            for (int i = 0; i < listButtons.Count; i++)
+            {
+                typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
+                if (value && listButtons[i] != btnHuy)
+                    typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
+            }
         }
         private void LoadLoaiHopDong()
         {
@@ -110,9 +154,20 @@ namespace QuanLyNhanSu.PresentationTier
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
-            txtMaLHD.Text = string.Empty;
-            txtTenLHD.Text = string.Empty;
-            txtSoLuongNhanVien.Text = string.Empty;
+            List<object> listInput = new List<object> { txtMaLHD, txtTenLHD, txtSoLuongNhanVien, cmbHinhThucChamCong};
+            for(int i = 0; i < listInput.Count; i++)
+            {
+                if (listInput[i] is TextBox)
+                {
+                    typeof(TextBox).GetProperty("Text").SetValue(listInput[i], string.Empty);
+                    continue;
+                }
+                else if (listInput[i] is ComboBox) 
+                {
+                    typeof(ComboBox).GetProperty("SelectedIndex").SetValue(listInput[i], 0);
+                    continue;
+                }
+            }            
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         public void Reload()

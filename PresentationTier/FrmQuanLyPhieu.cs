@@ -1,4 +1,4 @@
-﻿using QuanLyNhanSu.DataTier.Models;
+using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
@@ -20,12 +20,16 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyLoaiPhieuBUS quanLyLoaiPhieuBUS;
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
+        private readonly PhanQuyenBUS phanQuyenBUS;
         private IEnumerable<PhieuViewModels> danhSachPhieuThuong;
         private IEnumerable<PhieuViewModels> danhSachPhieuThuongTimKiem;
-        private readonly List<ThaoTac> listThaoTac;
+        private readonly IEnumerable<ThaoTac> listThaoTac;
+        private readonly IEnumerable<PhanQuyen> phanQuyen;
         private readonly NhanVien nv;
         private readonly string maNV;
         private readonly string maGD;
+        private readonly string maCV;
+        private bool checkThaoTac;
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhieu(string maNV)
@@ -38,9 +42,13 @@ namespace QuanLyNhanSu.PresentationTier
             quanLyLoaiPhieuBUS = new QuanLyLoaiPhieuBUS();
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
+            phanQuyenBUS = new PhanQuyenBUS();
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý phiếu").MaGD;
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD  == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
+            maCV = nv.MaCV;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
+            checkThaoTac = false;
             this.maNV = maNV;
         }
         private void FrmPhieuThuong_Load(object sender, EventArgs e)
@@ -48,12 +56,12 @@ namespace QuanLyNhanSu.PresentationTier
             cmbLoaiPhieu.DisplayMember = "TenLoaiPhieu";
             cmbLoaiPhieu.ValueMember = "MaLP";
             LoadThongTinDangNhap();
+            LoadLoaiPhieu();
+            InputStatus(false);
+            PhanQuyen();
             LoadPhieu();
-            XoaButton();
-            ChiTietPhieuButton();
-            LoadLoaiPhieu();  
         }
-        public void LoadThongTinDangNhap()
+        private void LoadThongTinDangNhap()
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
@@ -63,7 +71,50 @@ namespace QuanLyNhanSu.PresentationTier
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
-        public void LoadPhieu()
+        private void PhanQuyen()
+        {
+            foreach(PhanQuyen qh in phanQuyen)
+            {
+                if(qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
+                {
+                    checkThaoTac = true;
+                    InputStatus(true);
+                    continue;
+                }
+                else if (qh.QuyenHan.TenQuyenHan.Contains("Truy cập chi tiết phiếu") && qh.CapQuyen)
+                {
+                    ChiTietPhieuButton();
+                    continue;
+                }
+                else if (qh.QuyenHan.TenQuyenHan.Contains("Truy cập quản lý loại phiếu") && qh.CapQuyen)
+                {
+                    btnQuanLyLoaiPhieu.Visible = true;
+                    continue;
+                }
+            }
+        }
+        private void InputStatus(bool value)
+        {
+            ButtonStatus(value);
+            List<ComboBox> listComboBox = new List<ComboBox> { cmbLoaiPhieu};
+            for(int i = 0; i < listComboBox.Count; i++)
+            {
+                typeof(Button).GetProperty("Enabled").SetValue(listComboBox[i], value);
+            }
+        }
+        private void ButtonStatus(bool value)
+        {
+            List<Button> listButton = new List<Button> { btnThem , btnQuanLyLoaiPhieu};
+            if (value)
+                XoaButton();
+            for(int i = 0; i <  listButton.Count; i++)
+            {
+                typeof(Button).GetProperty("Visible").SetValue(listButton[i], value);
+                if (listButton[i] == btnQuanLyLoaiPhieu)
+                    typeof(Button).GetProperty("Visible").SetValue(listButton[i], false);
+            }
+        }
+        private void LoadPhieu()
         {
             Enabled = false;
             dgvThongTinPhieu.Rows.Clear();
@@ -83,12 +134,12 @@ namespace QuanLyNhanSu.PresentationTier
             }
             Enabled = true;
         }
-        public void LoadLoaiPhieu()
+        private void LoadLoaiPhieu()
         {
             cmbLoaiPhieu.DataSource = quanLyLoaiPhieuBUS.GetLoaiPhieu();
             AutoAdjustComboBox(cmbLoaiPhieu);
         }
-        public void LoadPhieuTimKiem(string timKiem)
+        private void LoadPhieuTimKiem(string timKiem)
         {
             Enabled = false;
             dgvThongTinPhieu.Rows.Clear();
@@ -108,7 +159,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             Enabled = true;
         }
-        public void AutoAdjustComboBox(ComboBox comboBox)
+        private void AutoAdjustComboBox(ComboBox comboBox)
         {
             int maxWidth = 0;
             foreach (var items in comboBox.Items)
@@ -119,7 +170,7 @@ namespace QuanLyNhanSu.PresentationTier
             comboBox.DropDownWidth = maxWidth + SystemInformation.VerticalScrollBarWidth;
         }
         //////////////////////////////////////////////////////////////////////////////
-        public void ChiTietPhieuButton()
+        private void ChiTietPhieuButton()
         {
             DataGridViewButtonColumn btnChiTiet = new DataGridViewButtonColumn();
             {                           
@@ -136,7 +187,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhieu.Columns.Add(btnChiTiet);                 
             }
         }
-        public void XoaButton()
+        private void XoaButton()
         {
             DataGridViewButtonColumn btnXoa = new DataGridViewButtonColumn();
             {
@@ -241,10 +292,18 @@ namespace QuanLyNhanSu.PresentationTier
             string maP = dgvThongTinPhieu.Rows[rowIndex].Cells[0].Value.ToString();
             string loaiPhieu = dgvThongTinPhieu.Rows[rowIndex].Cells[1].Value.ToString();
             string ngayLap = dgvThongTinPhieu.Rows[rowIndex].Cells[6].Value.ToString();
-            if (e.ColumnIndex == 8)
-                XoaPhieu(maP, loaiPhieu, ngayLap);
-            if (e.ColumnIndex == 9)
-                OpenChiTietPhieu(maNV, maP);
+            if (checkThaoTac)
+            {
+                if (e.ColumnIndex == 8)
+                    XoaPhieu(maP, loaiPhieu, ngayLap);
+                if (e.ColumnIndex == 9)
+                    OpenChiTietPhieu(maNV, maP);
+            }
+            else
+            {
+                if (e.ColumnIndex == 8)
+                    OpenChiTietPhieu(maNV, maP);
+            }
         }
         private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
         {

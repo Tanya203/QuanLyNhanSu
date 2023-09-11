@@ -4,6 +4,7 @@ using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -22,15 +23,19 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
+        private readonly PhanQuyenBUS phanQuyenBUS;
         private IEnumerable<ChiTietPhieuViewModels> danhSachChiTietPhieu;
         private IEnumerable<ChiTietPhieuViewModels> danhSachChiTietPhieuTimKiem;
         private IEnumerable<ChiTietPhieu> ctp;
-        private readonly List<ThaoTac> listThaoTac;
+        private readonly IEnumerable<ThaoTac> listThaoTac;
+        private readonly IEnumerable<PhanQuyen> phanQuyen;
         private readonly NhanVien nv;
         private readonly Phieu phieu;
         private readonly string maNV;
         private readonly string maP;
         private readonly string maGD;
+        private readonly string maCV;
+        private bool checkThaoTac;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmChiTietPhieu(string maNV, string maP)
         {
@@ -43,12 +48,17 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
+            phanQuyenBUS = new PhanQuyenBUS();
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý chi tiết phiếu").MaGD;
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD  == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
+            maCV = nv.MaCV;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
             phieu = phieuBUS.GetPhieu().FirstOrDefault(p => p.MaP == maP);
+            ctp = chiTietPhieuBus.GetChiTietPhieu().Where(ctp => ctp.MaP == maP);
             this.maNV = maNV;
             this.maP = maP;
+            checkThaoTac = false;
         }
         private void FrmChiTietPhieuThuong_Load(object sender, EventArgs e)
         {
@@ -58,30 +68,104 @@ namespace QuanLyNhanSu.PresentationTier
             cmbChucVu.ValueMember = "MaCV";
             cmbNhanVien.DisplayMember = "MaNV";
             cmbNhanVien.ValueMember = "MaNV";
-            ctp = chiTietPhieuBus.GetChiTietPhieu().Where(ctp => ctp.MaP == maP);
             LoadThongTinDangNhap();
+            DisableDisplay();
             LoadThongTinPhieuThuong();
-            LoadChiTietPhieuThuong();
-            LoadPhongBan();
-            XoaButton();
-            LoadChucVuTheoPhongBan(cmbPhongBan.SelectedValue.ToString());
-            LoadNhanVienTheoChucVu(cmbChucVu.SelectedValue.ToString());
-            txtMaP.ReadOnly = txtMaNV.ReadOnly = txtHoTenTT.ReadOnly = txtPhongBan.ReadOnly = txtChucVu.ReadOnly = txtHoTenNV.ReadOnly = txtTongTien.ReadOnly = txtLoaiPhieu.ReadOnly = true;
-            dtpNgayLapPhieu.Enabled = false;
-            txtMaNV_Sua.ReadOnly = true;
-            btnThem.Enabled = btnSua.Enabled = false;
+            InputStatus(false);
+            PhanQuyen();
+            if (checkThaoTac)
+            {
+                LoadPhongBan();
+                LoadChucVuTheoPhongBan(cmbPhongBan.SelectedValue.ToString());
+                LoadNhanVienTheoChucVu(cmbChucVu.SelectedValue.ToString());
+            }
+            LoadChiTietPhieuThuong();           
         }
-        public void LoadPhongBan()
+        public void LoadThongTinDangNhap()
+        {
+            lblMaNV_DN.Text = nv.MaNV;
+            if (string.IsNullOrEmpty(nv.TenLot))
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+            else
+                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+        }
+        private void PhanQuyen()
+        {
+            foreach(PhanQuyen qh in phanQuyen)
+            {
+                if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
+                {
+                    checkThaoTac = true;
+                    InputStatus(true);
+                    continue;
+                }
+            }
+        }
+        private void InputStatus(bool value)
+        {
+            ButtonStatus(value);
+            List<object> listInput = new List<object> { cmbPhongBan, cmbChucVu, cmbNhanVien, txtSoTien, rtxtGhiChu};
+            for(int i = 0; i < listInput.Count; i++)
+            {
+                if(listInput[i] is ComboBox)
+                {
+                    typeof(ComboBox).GetProperty("Enabled").SetValue(listInput[i], value);
+                    continue;
+                }
+                else if (listInput[i] is TextBox)
+                {
+                    typeof(TextBox).GetProperty("ReadOnly").SetValue(listInput[i], !value);
+                    continue;
+                }
+                else if (listInput[i] is RichTextBox)
+                {
+                    typeof(RichTextBox).GetProperty("ReadOnly").SetValue(listInput[i], !value);
+                    continue;
+                }
+            }
+        }
+        private void ButtonStatus(bool value)
+        {
+            List<Button> listButton = new List<Button> { btnThem, btnSua, btnHuy};
+            if (value)
+                XoaButton();
+            for(int i =  0; i < listButton.Count; i++)
+            {
+                typeof(Button).GetProperty("Visible").SetValue(listButton[i], value);
+                if (value && listButton[i] != btnHuy)
+                    typeof(Button).GetProperty("Enabled").SetValue(listButton[i], !value);
+            }
+        }
+        private void DisableDisplay()
+        {
+            List<object> listDisplay = new List<object> { txtMaP, txtLoaiPhieu, txtHoTenTT, txtPhongBan, txtChucVu, dtpNgayLapPhieu, txtTongTien, txtMaNV_Sua, txtHoTenNV, txtMaNV };
+            for(int i = 0;i < listDisplay.Count; i++)
+            {
+                if (listDisplay[i] is TextBox)
+                {
+                    typeof(TextBox).GetProperty("ReadOnly").SetValue(listDisplay[i], true);
+                    continue;
+                }
+                else if (listDisplay[i] is DateTimePicker) 
+                {
+                    typeof(DateTimePicker).GetProperty("Enabled").SetValue(listDisplay[i], false);
+                    continue;
+                }
+            }
+        }
+        private void LoadPhongBan()
         {
             cmbPhongBan.DataSource = phongBanBUS.GetPhongBan();
             AutoAdjustComboBox(cmbPhongBan);
         }
-        public void LoadChucVuTheoPhongBan(string maPB)
+        private void LoadChucVuTheoPhongBan(string maPB)
         {
             cmbChucVu.DataSource = chucVuBUS.GetChucVu().Where(cv => cv.MaPB == maPB).ToList();
             AutoAdjustComboBox(cmbChucVu);
         }
-        public void LoadNhanVienTheoChucVu(string maCV)
+        private void LoadNhanVienTheoChucVu(string maCV)
         {
             List<NhanVien> nhanVienList = nhanVienBUS.GetNhanVien().Where(nv => nv.MaCV == maCV).ToList();
             foreach (var pt in ctp)
@@ -98,6 +182,8 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadChucVu(object sender, EventArgs e)
         {
+            if (!checkThaoTac)
+                return;
             LoadChucVuTheoPhongBan(cmbPhongBan.SelectedValue.ToString());
             if (string.IsNullOrEmpty(cmbNhanVien.Text) && string.IsNullOrEmpty(txtMaNV_Sua.Text))            
                 txtHoTenNV.Text = string.Empty;            
@@ -106,17 +192,9 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadNhanVien(object sender, EventArgs e)
         {
+            if (!checkThaoTac)
+                return;
             LoadNhanVienTheoChucVu(cmbChucVu.SelectedValue.ToString());
-        }
-        public void LoadThongTinDangNhap()
-        {
-            lblMaNV_DN.Text = nv.MaNV;
-            if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
-            else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
         public void LoadThongTinPhieuThuong()
         {
@@ -129,7 +207,7 @@ namespace QuanLyNhanSu.PresentationTier
             dtpNgayLapPhieu.Text = phieu.NgayLap.ToString();
             txtTongTien.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBus.TongTienPhieu(maP));
         }
-        public void LoadChiTietPhieuThuong()
+        private void LoadChiTietPhieuThuong()
         {
             Enabled = false;
             dgvThongTinPhieuThuong.Rows.Clear();
@@ -149,7 +227,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             Enabled = true;
         }
-        public void LoadChiTietPhieuThuongTimKiem(string timKiem)
+        private void LoadChiTietPhieuThuongTimKiem(string timKiem)
         {
             Enabled = false;
             dgvThongTinPhieuThuong.Rows.Clear();
@@ -169,7 +247,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             Enabled = true;
         }
-        public void AutoAdjustComboBox(ComboBox comboBox)
+        private void AutoAdjustComboBox(ComboBox comboBox)
         {
             int maxWidth = 0;
             foreach (var items in comboBox.Items)
@@ -230,17 +308,30 @@ namespace QuanLyNhanSu.PresentationTier
                 XoaNhanVien();                         
         }
         ///////////////////////////////////////////////////////////////////////////////////////////
-        public void ClearAllText()
+        private void ClearAllText()
         {
-            txtSoTien.Text = string.Empty;
-            txtHoTenNV.Text = string.Empty;
-            rtxtGhiChu.Text = string.Empty;
-            cmbPhongBan.SelectedIndex = 0;
-            cmbChucVu.SelectedIndex = 0;
-            txtMaNV_Sua.Text = string.Empty;
+            List<object> listInput = new List<object> { txtSoTien, txtHoTenNV, rtxtGhiChu, cmbPhongBan, txtMaNV_Sua};
+            for(int i = 0; i < listInput.Count; i++)
+            {
+                if (listInput[i] is TextBox)
+                {
+                    typeof(TextBox).GetProperty("Text").SetValue(listInput[i], string.Empty);
+                    continue;
+                }
+                else if(listInput[i] is RichTextBox)
+                {
+                    typeof(RichTextBox).GetProperty("Text").SetValue(listInput[i], string.Empty);
+                    continue;
+                }
+                else if(listInput[i] is ComboBox)
+                {
+                    typeof(ComboBox).GetProperty("SelectedIndex").SetValue(listInput[i], 0);
+                    continue;
+                }
+            }
         }
         ///////////////////////////////////////////////////////////////////////////////////////////   
-        public void Reload()
+        private void Reload()
         {
             FrmChiTietPhieu frmOpen = new FrmChiTietPhieu(maNV,phieu.MaP);
             frmOpen.Show();
@@ -357,7 +448,7 @@ namespace QuanLyNhanSu.PresentationTier
                 Reload();
             }          
         }
-        public void XoaButton()
+        private void XoaButton()
         {
             DataGridViewButtonColumn btnXoa = new DataGridViewButtonColumn();
             {

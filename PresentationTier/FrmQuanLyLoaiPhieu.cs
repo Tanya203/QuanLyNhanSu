@@ -1,4 +1,4 @@
-﻿using QuanLyNhanSu.DataTier.Models;
+using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
@@ -15,35 +15,38 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
+        private readonly PhanQuyenBUS phanQuyenBUS;
         private IEnumerable<LoaiPhieuViewModels> danhSachLoaiPhieu;
         private IEnumerable<LoaiPhieuViewModels> danhSachLoaiPhieuTimKiem;
-        private readonly List<ThaoTac> listThaoTac;
+        private readonly IEnumerable<ThaoTac> listThaoTac;
+        private readonly IEnumerable<PhanQuyen> phanQuyen;
         private readonly NhanVien nv;
         private readonly string maNV;
         private readonly string maGD;
+        private readonly string maCV;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiPhieu(string maNV)
         {
             InitializeComponent();
             loaiPhieuBUS = new QuanLyLoaiPhieuBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
-            lichSuThaoTacBUS = new LichSuThaoTacBUS();   
+            lichSuThaoTacBUS = new LichSuThaoTacBUS();      
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
+            phanQuyenBUS = new PhanQuyenBUS();
+            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý loại phiếu").MaGD;
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
-            nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
+            maCV = nv.MaCV;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
             this.maNV = maNV;
         }
         private void FrmQuanLyLoaiPhieu_Load(object sender, EventArgs e)
         {
-            LoadLoaiPhieu();
             LoadThongTinDangNhap();
-            txtMaLP.ReadOnly = true;
-            txtSoLuongPhieuLap.ReadOnly = true;
-            btnThem.Enabled = false;
-            btnSua.Enabled = false;
-            btnXoa.Enabled = false;
+            InputStatus(false);
+            PhanQuyen();
+            LoadLoaiPhieu();
         }
         public void LoadThongTinDangNhap()
         {
@@ -54,6 +57,38 @@ namespace QuanLyNhanSu.PresentationTier
                 lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+        }
+        private void PhanQuyen()
+        {
+            foreach(PhanQuyen qh in phanQuyen) 
+            {
+                if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
+                {
+                    InputStatus(true);
+                    continue;
+                }
+            }
+        }
+        private void InputStatus(bool value)
+        {
+            ButtonStatus(value);
+            List<TextBox> listTextBox = new List<TextBox> { txtTenLoaiPhieu };
+            if(!value)
+                listTextBox.AddRange(new List<TextBox> { txtMaLP, txtSoLuongPhieuLap});
+            for(int i = 0; i < listTextBox.Count; i++)
+            {
+                typeof(TextBox).GetProperty("ReadOnly").SetValue(listTextBox[i], !value);
+            }
+        }
+        private void ButtonStatus(bool value)
+        {
+            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy };
+            for (int i = 0; i < listButtons.Count; i++)
+            {
+                typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
+                if (value && listButtons[i] != btnHuy)
+                    typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
+            }
         }
         private void LoadLoaiPhieu()
         {
@@ -88,9 +123,11 @@ namespace QuanLyNhanSu.PresentationTier
         /////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
-            txtMaLP.Text = string.Empty;
-            txtTenLoaiPhieu.Text = string.Empty;
-            txtSoLuongPhieuLap.Text = string.Empty;
+            List<TextBox> listTextBox = new List<TextBox> { txtMaLP, txtTenLoaiPhieu, txtTenLoaiPhieu };
+            for (int i = 0; i < listTextBox.Count; i++)
+            {
+                typeof(TextBox).GetProperty("Text").SetValue(listTextBox[i], string.Empty);
+            }
         }
         /////////////////////////////////////////////////////////////////////////////////////
         public void CloseCurrentForm(string maNV)
