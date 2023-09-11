@@ -248,8 +248,8 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     string maQH = dgvPhanQuyen.Rows[row].Cells[0].Value.ToString();
                     string maCV = dgvPhanQuyen.Rows[row].Cells[1].Value.ToString();
-                    string tenQuyenHan = dgvPhanQuyen.Rows[row].Cells[2].Value.ToString();
-                    string tenChucVu = dgvPhanQuyen.Rows[row].Cells[4].Value.ToString();
+                    string tenQuyenHan = dgvPhanQuyen.Rows[row].Cells[4].Value.ToString();
+                    string tenChucVu = dgvPhanQuyen.Rows[row].Cells[2].Value.ToString();
                     bool capQuyen = (bool)dgvPhanQuyen.Rows[row].Cells[5].Value;
                     string thongBao;
                     string maTT;

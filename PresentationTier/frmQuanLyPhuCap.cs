@@ -19,12 +19,15 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly GiaoDienBUS giaoDienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
+        private readonly PhanQuyenBUS phanQuyenBUS;
         private IEnumerable<PhuCapViewMModels> danhSachPhuCap;
         private IEnumerable<PhuCapViewMModels> danhSachPhuCapTimKiem;
-        private readonly List<ThaoTac> listThaoTac;
+        private readonly IEnumerable<ThaoTac> listThaoTac;
+        private readonly IEnumerable<PhanQuyen> phanQuyen;
         private readonly NhanVien nv;
         private readonly string maNV;
         private readonly string maGD;
+        private readonly string maCV;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhuCap(string maNV)
         {
@@ -35,21 +38,57 @@ namespace QuanLyNhanSu.PresentationTier
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             giaoDienBUS = new GiaoDienBUS();
             thaoTacBUS = new ThaoTacBUS();
+            phanQuyenBUS = new PhanQuyenBUS();
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Quản lý phụ cấp").MaGD;
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
-            txtMaPC.ReadOnly = true;
-            txtSoLuongNhanVien.ReadOnly = true;
-            btnThem.Enabled = false;
-            btnSua.Enabled = false;
-            btnXoa.Enabled = false;
+            maCV = nv.MaCV;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
             this.maNV = maNV;
         }
         private void frmQuanLyPhuCap_Load(object sender, EventArgs e)
         {
-            LoadPhuCap();
             LoadThongTinDangNhap();
-            ChiTietButton();
+            InputStatus(false);
+            PhanQuyen();
+            LoadPhuCap();            
+        }
+        private void PhanQuyen()
+        {
+            foreach(PhanQuyen qh in phanQuyen)
+            {
+                if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
+                {
+                    InputStatus(true);
+                    continue;
+                }
+                else if (qh.QuyenHan.TenQuyenHan.Contains("Truy cập") && qh.CapQuyen)
+                {
+                    ChiTietButton();
+                    continue;
+                }
+            }
+        }
+        private void InputStatus(bool value)
+        {
+            ButtonStatus(value);
+            List<TextBox> listTextBox = new List<TextBox> { txtTenPC, txtSoTien};
+            if (!value)
+                listTextBox.AddRange(new List<TextBox> { txtMaPC, txtSoLuongNhanVien });
+            for(int i = 0; i < listTextBox.Count; i++)
+            {
+                typeof(TextBox).GetProperty("ReadOnly").SetValue(listTextBox[i], !value);
+            } 
+        }
+        private void ButtonStatus(bool value)
+        {
+            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy };
+            for (int i = 0; i < listButtons.Count; i++)
+            {
+                typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
+                if (value && listButtons[i] != btnHuy)
+                    typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
+            }
         }
         public void LoadThongTinDangNhap()
         {
@@ -96,10 +135,11 @@ namespace QuanLyNhanSu.PresentationTier
         ////////////////////////////////////////////////////////////////////////////////////////
         public void ClearAllText()
         {
-            txtMaPC.Text = string.Empty;
-            txtTenPC.Text = string.Empty;
-            txtSoTien.Text = string.Empty;
-            txtSoLuongNhanVien.Text = string.Empty;
+            List<TextBox> listTextBox = new List<TextBox> { txtMaPC, txtTenPC , txtSoTien, txtSoLuongNhanVien };
+            for(int i = 0;  i < listTextBox.Count; i++)
+            {
+                typeof(TextBox).GetProperty("Text").SetValue(listTextBox[i], string.Empty);
+            }
         }
         ////////////////////////////////////////////////////////////////////////////////////////
         public void Reload()
