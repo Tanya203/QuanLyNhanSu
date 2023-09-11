@@ -22,11 +22,14 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<PhanQuyenViewModels> danhSachPhanQuyen;
         private IEnumerable<PhanQuyenViewModels> danhSachPhanQuyenTimKiem;
         private readonly IEnumerable<ThaoTac> listThaoTac;
+        private readonly IEnumerable<PhanQuyen> phanQuyen;
         private readonly NhanVien nv;
         private readonly string maNV;
         private readonly string maGD;
+        private readonly string maCV;
         private string loc;
         private int check;
+        private bool checkThaoTac;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmPhanQuyen(string maNV)
         {
@@ -42,8 +45,11 @@ namespace QuanLyNhanSu.PresentationTier
             maGD = giaoDienBUS.GetGiaoDiens().FirstOrDefault(gd => gd.TenGiaoDien == "Phân quyền").MaGD;
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
+            maCV = nv.MaCV;
+            phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
             this.maNV = maNV;
-            check = 0; ;
+            check = 0;
+            checkThaoTac = false;
         }
         private void FrmPhanQuyen_Load(object sender, EventArgs e)
         {
@@ -54,6 +60,7 @@ namespace QuanLyNhanSu.PresentationTier
             LoadThongTinDangNhap();           
             LoadChucVu();
             LoadQuyenHan();
+            PhanQuyen();
             rbLocTheoChucVu.Checked = true;
         }
         public void LoadThongTinDangNhap()
@@ -65,6 +72,17 @@ namespace QuanLyNhanSu.PresentationTier
                 lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+        }
+        public void PhanQuyen()
+        {
+            foreach (PhanQuyen qh in phanQuyen)
+            {
+                if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
+                {
+                    checkThaoTac = true;
+                    continue;
+                }
+            }
         }
         public void LoadDanhSachPhanQuyen()
         {
@@ -200,7 +218,10 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 LichSuThaoTac(thaoTac, maTT);
             }
-            LoadDanhSachPhanQuyen();
+            if (string.IsNullOrEmpty(txtTimKiem.Text))
+                LoadDanhSachPhanQuyen();
+            else
+                LoadDanhSachPhanQuyenTimKiem(txtTimKiem.Text);
         }  
         
         private void btnTroVe_Click(object sender, EventArgs e)
@@ -221,38 +242,41 @@ namespace QuanLyNhanSu.PresentationTier
             int column = e.ColumnIndex;
             if (row < 0)
                 return;
-            else if (column == 5)
+            else if (checkThaoTac)
             {
-                string maQH = dgvPhanQuyen.Rows[row].Cells[0].Value.ToString();
-                string maCV = dgvPhanQuyen.Rows[row].Cells[1].Value.ToString();
-                string tenQuyenHan = dgvPhanQuyen.Rows[row].Cells[2].Value.ToString();
-                string tenChucVu = dgvPhanQuyen.Rows[row].Cells[4].Value.ToString();
-                bool capQuyen = (bool)dgvPhanQuyen.Rows[row].Cells[5].Value;
-                string thongBao;
-                string maTT;
-                string thaoTac;
-                if (capQuyen)
+                if (column == 5)
                 {
-                    capQuyen = false;
-                    thongBao = $"Xác nhận xoá quyền hạn {tenQuyenHan} của chức vụ {tenChucVu}?";
-                    maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
-                    thaoTac = $"Xoá quyền hạn {tenQuyenHan} của chức vụ {tenChucVu}";
-                }
-                else
-                {
-                    capQuyen = true;
-                    thongBao = $"Xác nhận thêm quyền hạn {tenQuyenHan} cho chức vụ {tenChucVu}?";
-                    maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
-                    thaoTac = $"Thêm quyền hạn {tenQuyenHan} cho chức vụ {tenChucVu}";                    
-                }
-                MessageBoxManager.Yes = "Có";
-                MessageBoxManager.No = "Không";
-                DialogResult ketQua = MessageBox.Show(thongBao, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (ketQua == DialogResult.Yes)
-                    CapNhatQuyenHan(maCV, maQH, capQuyen, thaoTac, maTT);
-                else
-                {
-                    return;
+                    string maQH = dgvPhanQuyen.Rows[row].Cells[0].Value.ToString();
+                    string maCV = dgvPhanQuyen.Rows[row].Cells[1].Value.ToString();
+                    string tenQuyenHan = dgvPhanQuyen.Rows[row].Cells[2].Value.ToString();
+                    string tenChucVu = dgvPhanQuyen.Rows[row].Cells[4].Value.ToString();
+                    bool capQuyen = (bool)dgvPhanQuyen.Rows[row].Cells[5].Value;
+                    string thongBao;
+                    string maTT;
+                    string thaoTac;
+                    if (capQuyen)
+                    {
+                        capQuyen = false;
+                        thongBao = $"Xác nhận xoá quyền hạn {tenQuyenHan} của chức vụ {tenChucVu}?";
+                        maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                        thaoTac = $"Xoá quyền hạn {tenQuyenHan} của chức vụ {tenChucVu}";
+                    }
+                    else
+                    {
+                        capQuyen = true;
+                        thongBao = $"Xác nhận thêm quyền hạn {tenQuyenHan} cho chức vụ {tenChucVu}?";
+                        maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                        thaoTac = $"Thêm quyền hạn {tenQuyenHan} cho chức vụ {tenChucVu}";
+                    }
+                    MessageBoxManager.Yes = "Có";
+                    MessageBoxManager.No = "Không";
+                    DialogResult ketQua = MessageBox.Show(thongBao, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (ketQua == DialogResult.Yes)
+                        CapNhatQuyenHan(maCV, maQH, capQuyen, thaoTac, maTT);
+                    else
+                    {
+                        return;
+                    }
                 }
             }
         }

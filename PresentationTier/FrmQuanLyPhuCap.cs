@@ -28,7 +28,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly string maNV;
         private readonly string maGD;
         private readonly string maCV;
-        private bool checkThaoTac;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhuCap(string maNV)
         {
@@ -46,7 +45,6 @@ namespace QuanLyNhanSu.PresentationTier
             maCV = nv.MaCV;
             phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
             this.maNV = maNV;
-            checkThaoTac = false;
         }
         private void frmQuanLyPhuCap_Load(object sender, EventArgs e)
         {
@@ -62,7 +60,6 @@ namespace QuanLyNhanSu.PresentationTier
                 if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
                 {
                     InputStatus(true);
-                    checkThaoTac = true;
                     continue;
                 }
                 else if (qh.QuyenHan.TenQuyenHan.Contains("Truy cập") && qh.CapQuyen)
@@ -81,7 +78,6 @@ namespace QuanLyNhanSu.PresentationTier
             for(int i = 0; i < listTextBox.Count; i++)
             {
                 typeof(TextBox).GetProperty("ReadOnly").SetValue(listTextBox[i], !value);
-                continue;
             } 
         }
         private void ButtonStatus(bool value)
@@ -144,10 +140,6 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 typeof(TextBox).GetProperty("Text").SetValue(listTextBox[i], string.Empty);
             }
-            txtMaPC.Text = string.Empty;
-            txtTenPC.Text = string.Empty;
-            txtSoTien.Text = string.Empty;
-            txtSoLuongNhanVien.Text = string.Empty;
         }
         ////////////////////////////////////////////////////////////////////////////////////////
         public void Reload()

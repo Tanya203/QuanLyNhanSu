@@ -24,7 +24,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly string maNV;
         private readonly string maGD;
         private readonly string maCV;
-        private bool checkThaoTac;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyCa(string maNV)
         {
@@ -42,7 +41,6 @@ namespace QuanLyNhanSu.PresentationTier
             phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();            
             dtpThoiGianBatDau.Text = "00:00";
             dtpThoiGianKetThuc.Text = "00:00";
-            checkThaoTac = false;
             this.maNV = maNV;
 
         }
@@ -70,10 +68,9 @@ namespace QuanLyNhanSu.PresentationTier
                 if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
                 {
                     InputStatus(true);
-                    checkThaoTac = true;
                     continue;
                 }
-                else if(qh.QuyenHan.TenQuyenHan.Contains("Truy cập") && qh.CapQuyen && checkThaoTac)
+                else if(qh.QuyenHan.TenQuyenHan.Contains("Truy cập") && qh.CapQuyen)
                 {
                     btnQuanLyLoaiCa.Visible = true;
                     continue;
