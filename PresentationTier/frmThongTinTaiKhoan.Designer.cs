@@ -663,7 +663,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(211, 27);
             this.txtEmail.TabIndex = 22;
-            this.txtEmail.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
+            this.txtEmail.TextChanged += new System.EventHandler(this.EnableButton);
             // 
             // txtSDT
             // 
@@ -673,7 +673,7 @@
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(211, 27);
             this.txtSDT.TabIndex = 21;
-            this.txtSDT.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
+            this.txtSDT.TextChanged += new System.EventHandler(this.EnableButton);
             this.txtSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSDT_KeyPress);
             // 
             // txtTinh_ThanhPho
@@ -684,7 +684,7 @@
             this.txtTinh_ThanhPho.Name = "txtTinh_ThanhPho";
             this.txtTinh_ThanhPho.Size = new System.Drawing.Size(213, 27);
             this.txtTinh_ThanhPho.TabIndex = 17;
-            this.txtTinh_ThanhPho.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
+            this.txtTinh_ThanhPho.TextChanged += new System.EventHandler(this.EnableButton);
             // 
             // txtQuan_Huyen
             // 
@@ -694,7 +694,7 @@
             this.txtQuan_Huyen.Name = "txtQuan_Huyen";
             this.txtQuan_Huyen.Size = new System.Drawing.Size(213, 27);
             this.txtQuan_Huyen.TabIndex = 16;
-            this.txtQuan_Huyen.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
+            this.txtQuan_Huyen.TextChanged += new System.EventHandler(this.EnableButton);
             // 
             // txtPhuong_Xa
             // 
@@ -704,7 +704,7 @@
             this.txtPhuong_Xa.Name = "txtPhuong_Xa";
             this.txtPhuong_Xa.Size = new System.Drawing.Size(213, 27);
             this.txtPhuong_Xa.TabIndex = 15;
-            this.txtPhuong_Xa.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
+            this.txtPhuong_Xa.TextChanged += new System.EventHandler(this.EnableButton);
             // 
             // txtDuong
             // 
@@ -714,7 +714,7 @@
             this.txtDuong.Name = "txtDuong";
             this.txtDuong.Size = new System.Drawing.Size(213, 27);
             this.txtDuong.TabIndex = 14;
-            this.txtDuong.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
+            this.txtDuong.TextChanged += new System.EventHandler(this.EnableButton);
             // 
             // txtSoNha
             // 
@@ -724,7 +724,7 @@
             this.txtSoNha.Name = "txtSoNha";
             this.txtSoNha.Size = new System.Drawing.Size(213, 27);
             this.txtSoNha.TabIndex = 13;
-            this.txtSoNha.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
+            this.txtSoNha.TextChanged += new System.EventHandler(this.EnableButton);
             // 
             // txtTen
             // 
@@ -734,7 +734,7 @@
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(213, 27);
             this.txtTen.TabIndex = 11;
-            this.txtTen.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
+            this.txtTen.TextChanged += new System.EventHandler(this.EnableButton);
             // 
             // txtTenLot
             // 
@@ -744,7 +744,7 @@
             this.txtTenLot.Name = "txtTenLot";
             this.txtTenLot.Size = new System.Drawing.Size(213, 27);
             this.txtTenLot.TabIndex = 10;
-            this.txtTenLot.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
+            this.txtTenLot.TextChanged += new System.EventHandler(this.EnableButton);
             // 
             // txtHo
             // 
@@ -754,7 +754,7 @@
             this.txtHo.Name = "txtHo";
             this.txtHo.Size = new System.Drawing.Size(213, 27);
             this.txtHo.TabIndex = 9;
-            this.txtHo.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
+            this.txtHo.TextChanged += new System.EventHandler(this.EnableButton);
             // 
             // txtCCCD
             // 
@@ -764,7 +764,7 @@
             this.txtCCCD.Name = "txtCCCD";
             this.txtCCCD.Size = new System.Drawing.Size(213, 27);
             this.txtCCCD.TabIndex = 8;
-            this.txtCCCD.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
+            this.txtCCCD.TextChanged += new System.EventHandler(this.EnableButton);
             this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_CMND_KeyPress);
             // 
             // txtTaiKhoan

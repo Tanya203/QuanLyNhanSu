@@ -45,12 +45,12 @@ namespace QuanLyNhanSu.PresentationTier
             e.Graphics.DrawString(tabPage.Text, font, brush, bounds);
         }
         //////////////////////////////////////////////////////////////////////////////
-        public void CloseCurrentForm(string maNV)
+        private void CloseCurrentForm(string maNV)
         {
             this.Close();
             Application.Run(new FrmThongKe(maNV));
         }
-        public void Reload()
+        private void Reload()
         {
             this.Close();
             currentForm = new Thread(new ThreadStart(() => CloseCurrentForm(maNV)));

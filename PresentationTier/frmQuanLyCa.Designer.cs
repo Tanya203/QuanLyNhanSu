@@ -330,7 +330,6 @@
             this.btnHuy.Text = "Huỷ";
             this.btnHuy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHuy.UseVisualStyleBackColor = false;
-            this.btnHuy.TextChanged += new System.EventHandler(this.EnableButtons);
             this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
             // btnSua

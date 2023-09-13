@@ -91,7 +91,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             LoadChiTietLichLamViec();
         }
-        public void LoadThongTinDangNhap()
+        private void LoadThongTinDangNhap()
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
@@ -101,7 +101,7 @@ namespace QuanLyNhanSu.PresentationTier
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
-        public void PhanQuyen()
+        private void PhanQuyen()
         {
             foreach(PhanQuyen qh in phanQuyen)
             {
@@ -146,7 +146,7 @@ namespace QuanLyNhanSu.PresentationTier
                 }
             }
         }
-        public void DisableDisplay()
+        private void DisableDisplay()
         {
             List<object> listDisplay= new List<object> { txtMaLLV, txtMaNV, txtPhongBan, dtpNgayLam, txtHoTenNV};
             for(int i = 0; i< listDisplay.Count; i++)
@@ -163,14 +163,14 @@ namespace QuanLyNhanSu.PresentationTier
                 }
             }
         }
-        public void LoadThongTinLichLamViec()
+        private void LoadThongTinLichLamViec()
         {
             txtMaLLV.Text = llv.MaLLV;
             txtMaNV.Text = llv.MaNV;
             txtPhongBan.Text = llv.NhanVien.ChucVu.PhongBan.TenPhongBan;
             dtpNgayLam.Text = llv.NgayLam.ToString();
         }
-        public void LoadNhanVienTheoPhongBan()
+        private void LoadNhanVienTheoPhongBan()
         {            
             List<NhanVien> nhanVienList = nhanVienBUS.GetNhanVien().Where(nv => nv.ChucVu.PhongBan.MaPB == maPB).ToList();   
             foreach(var nv in nhanVienList)
@@ -190,7 +190,7 @@ namespace QuanLyNhanSu.PresentationTier
                 cmbNhanVien.Enabled = true;
             AutoAdjustComboBox(cmbNhanVien);
         }
-        public void LoadCa(string maNV)
+        private void LoadCa(string maNV)
         {
             List<Ca> ca = caBUS.GetCa().ToList();
             List<ChamCong> lichLamViec = chamCong.Where(nv => nv.MaNV == maNV).ToList();
@@ -212,12 +212,12 @@ namespace QuanLyNhanSu.PresentationTier
             }
             AutoAdjustComboBox(cmbCa);
         }
-        public void LoadLoaiCa()
+        private void LoadLoaiCa()
         {
             cmbLoaiCa.DataSource = loaiCaBUS.GetLoaiCa();
             AutoAdjustComboBox(cmbLoaiCa);
         }
-        public void LoadChiTietLichLamViec()
+        private void LoadChiTietLichLamViec()
         {
             Enabled = false;
             dgvChiTietLichLamViec.Rows.Clear();
@@ -239,7 +239,7 @@ namespace QuanLyNhanSu.PresentationTier
             } 
             Enabled = true;
         }
-        public void LoadChiTietLichLamViecTimKiem(string timKiem)
+        private void LoadChiTietLichLamViecTimKiem(string timKiem)
         {
             Enabled = false;
             dgvChiTietLichLamViec.Rows.Clear();
@@ -261,7 +261,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             Enabled = true;
         }
-        public void AutoAdjustComboBox(ComboBox comboBox)
+        private void AutoAdjustComboBox(ComboBox comboBox)
         {
             int maxWidth = 0;
             foreach (var items in comboBox.Items)
@@ -329,8 +329,8 @@ namespace QuanLyNhanSu.PresentationTier
                 LichSuThaoTac(thaoTac, maTT);
             }
             Reload();
-        }      
-        public void XoaButton()
+        }
+        private void XoaButton()
         {
             DataGridViewButtonColumn btnXoa = new DataGridViewButtonColumn();
             {
@@ -347,7 +347,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvChiTietLichLamViec.Columns.Add(btnXoa);
             }
         }
-        public void XoaNhanVien()
+        private void XoaNhanVien()
         {
             ChamCong newChamCong = new ChamCong
             {

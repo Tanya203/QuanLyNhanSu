@@ -238,7 +238,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         //////////////////////////////////////////////////////////////////////////////
-        public void Reload()
+        private void Reload()
         {
             FrmQuanLyPhieu frmOpen = new FrmQuanLyPhieu(maNV);
             frmOpen.Show();

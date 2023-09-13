@@ -47,7 +47,7 @@ namespace QuanLyNhanSu.PresentationTier
             this.Close();
         }
         ////////////////////////////////////////////////////////////////////////////////////////
-        public bool CheckMatKhau(string matKhau)
+        private bool CheckMatKhau(string matKhau)
         {
             Regex passCheck = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
             if (!passCheck.IsMatch(matKhau) || matKhau.Length > 20)

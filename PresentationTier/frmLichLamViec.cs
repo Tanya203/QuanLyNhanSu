@@ -59,7 +59,7 @@ namespace QuanLyNhanSu.PresentationTier
             PhanQuyen();
             LoadLichLamViec();
         }
-        public void LoadThongTinDangNhap()
+        private void LoadThongTinDangNhap()
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
@@ -68,7 +68,7 @@ namespace QuanLyNhanSu.PresentationTier
                 lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
-        }             
+        }
         private void PhanQuyen()
         {
             foreach(PhanQuyen qh in phanQuyen)
@@ -146,7 +146,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             this.Close();
         }
-        public void Reload()
+        private void Reload()
         {
             FrmLichLamViec frmOpen = new FrmLichLamViec(maNV);
             frmOpen.Show();
@@ -165,7 +165,7 @@ namespace QuanLyNhanSu.PresentationTier
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
-        public void ChiTietButton()
+        private void ChiTietButton()
         {
             DataGridViewButtonColumn btnChiTiet = new DataGridViewButtonColumn();
             {
@@ -182,7 +182,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinLichLamViec.Columns.Add(btnChiTiet);
             }            
         }
-        public void XoaButton()
+        private void XoaButton()
         {
             DataGridViewButtonColumn btnXoa = new DataGridViewButtonColumn();
             {

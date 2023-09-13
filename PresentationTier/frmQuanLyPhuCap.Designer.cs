@@ -157,7 +157,6 @@
             this.txtSoLuongNhanVien.Name = "txtSoLuongNhanVien";
             this.txtSoLuongNhanVien.Size = new System.Drawing.Size(263, 30);
             this.txtSoLuongNhanVien.TabIndex = 6;
-            this.txtSoLuongNhanVien.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblSoLuongNhanVien
             // 

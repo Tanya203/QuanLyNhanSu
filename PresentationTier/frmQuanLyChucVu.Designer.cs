@@ -337,9 +337,9 @@
             this.lblLuongKhoiDiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLuongKhoiDiem.Location = new System.Drawing.Point(417, 57);
             this.lblLuongKhoiDiem.Name = "lblLuongKhoiDiem";
-            this.lblLuongKhoiDiem.Size = new System.Drawing.Size(170, 25);
+            this.lblLuongKhoiDiem.Size = new System.Drawing.Size(177, 25);
             this.lblLuongKhoiDiem.TabIndex = 46;
-            this.lblLuongKhoiDiem.Text = "Lương khởi điểm";
+            this.lblLuongKhoiDiem.Text = "Lương khởi điểm:";
             // 
             // cmbPhongBan
             // 
@@ -529,7 +529,6 @@
             this.Text = "frmQuanLyChucVu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmQuanLyChucVu_Load);
-            this.TextChanged += new System.EventHandler(this.EnableButtons);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinChucVu)).EndInit();

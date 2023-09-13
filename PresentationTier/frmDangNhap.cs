@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu
@@ -27,10 +26,6 @@ namespace QuanLyNhanSu
             btnDangNhap.Enabled = false;
             txtTaiKhoan.Text = "TK001";
             txtMatKhau.Text = "Aa@12345";
-        }
-        private void FrmDangNhap_Load(object sender, EventArgs e)
-        {
-
         }
         private void llblQuenMatKhau_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

@@ -131,7 +131,7 @@ namespace QuanLyNhanSu.PresentationTier
                 typeof(TextBox).GetProperty("ReadOnly").SetValue(listTextBox[i],true);
             }
         }
-        public void LoadThongTinPhuCap()
+        private void LoadThongTinPhuCap()
         {
             txtMaPC.Text = maPC;
             txtTenPhuCap.Text = phuCap.TenPhuCap;
@@ -139,17 +139,17 @@ namespace QuanLyNhanSu.PresentationTier
             txtSoLuongNhanVien.Text = chiTietPhuCapBUS.TongSoNhanVienTrongPhuCap(maPC).ToString();
             txtTongTien.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongTienMotPhuCap(maPC)); 
         }
-        public void LoadPhongBan()
+        private void LoadPhongBan()
         {
             cmbPhongBan.DataSource = phongBanBUS.GetPhongBan();
             AutoAdjustComboBox(cmbPhongBan);
         }
-        public void LoadChucVuTheoPhongBan(string maPB)
+        private void LoadChucVuTheoPhongBan(string maPB)
         {
             cmbChucVu.DataSource = chucVuBUS.GetChucVu().Where(cv => cv.MaPB == maPB).ToList();
             AutoAdjustComboBox(cmbChucVu);
         }
-        public void LoadNhanVienTheoChucVu(string maCV)
+        private void LoadNhanVienTheoChucVu(string maCV)
         {
             List<NhanVien> nhanVienList = nhanVienBUS.GetNhanVien().Where(nv => nv.MaCV == maCV).ToList();
             foreach (var pt in chiTietPhuCap)
@@ -190,7 +190,7 @@ namespace QuanLyNhanSu.PresentationTier
                 
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void AutoAdjustComboBox(ComboBox comboBox)
+        private void AutoAdjustComboBox(ComboBox comboBox)
         {
             int maxWidth = 0;
             foreach (var items in comboBox.Items)
@@ -201,7 +201,7 @@ namespace QuanLyNhanSu.PresentationTier
             comboBox.DropDownWidth = maxWidth + SystemInformation.VerticalScrollBarWidth;
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void Reload()
+        private void Reload()
         {
             FrmChiTietPhuCap frmOpen = new FrmChiTietPhuCap(maNV, maPC);
             frmOpen.Show();
@@ -274,7 +274,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             Reload();
         }
-        public void XoaButton()
+        private void XoaButton()
         {
             DataGridViewButtonColumn btnXoa = new DataGridViewButtonColumn();
             {
@@ -291,7 +291,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvChiTietMotPhuCap.Columns.Add(btnXoa);
             }
         }
-        public void XoaNhanVien(string maNV)
+        private void XoaNhanVien(string maNV)
         {
             ChiTietPhuCap nv = chiTietPhuCap.FirstOrDefault(pc => pc.MaNV == maNV);
             if (chiTietPhuCapBUS.Delete(nv))

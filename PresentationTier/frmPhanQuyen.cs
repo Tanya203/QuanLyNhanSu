@@ -63,7 +63,7 @@ namespace QuanLyNhanSu.PresentationTier
             PhanQuyen();
             rbLocTheoChucVu.Checked = true;
         }
-        public void LoadThongTinDangNhap()
+        private void LoadThongTinDangNhap()
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
@@ -73,7 +73,7 @@ namespace QuanLyNhanSu.PresentationTier
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
-        public void PhanQuyen()
+        private void PhanQuyen()
         {
             foreach (PhanQuyen qh in phanQuyen)
             {
@@ -84,7 +84,7 @@ namespace QuanLyNhanSu.PresentationTier
                 }
             }
         }
-        public void LoadDanhSachPhanQuyen()
+        private void LoadDanhSachPhanQuyen()
         {
             if (rbLocTheoChucVu.Checked)
                 loc = cmbChucVu.SelectedValue.ToString();
@@ -106,7 +106,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             Enabled = true;
         }
-        public void LoadDanhSachPhanQuyenTimKiem(string timKiem)
+        private void LoadDanhSachPhanQuyenTimKiem(string timKiem)
         {
             if (rbLocTheoChucVu.Checked)
                 loc = cmbChucVu.SelectedValue.ToString();
@@ -138,7 +138,7 @@ namespace QuanLyNhanSu.PresentationTier
             cmbQuyenHan.DataSource = quyenHanBUS.GetQuyenHans();
             AutoAdjustComboBox(cmbQuyenHan);
         }
-        public void AutoAdjustComboBox(ComboBox comboBox)
+        private void AutoAdjustComboBox(ComboBox comboBox)
         {
             int maxWidth = 0;
             foreach (var items in comboBox.Items)
@@ -183,7 +183,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////        
-        public void Reload()
+        private void Reload()
         {
             FrmPhanQuyen frmOpen = new FrmPhanQuyen(maNV);
             frmOpen.Show();
@@ -206,7 +206,7 @@ namespace QuanLyNhanSu.PresentationTier
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
-        public void CapNhatQuyenHan(string maCV, string maQH, bool capQuyen, string thaoTac, string maTT)
+        private void CapNhatQuyenHan(string maCV, string maQH, bool capQuyen, string thaoTac, string maTT)
         {
             PhanQuyen capNhat = new PhanQuyen
             {

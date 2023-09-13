@@ -302,7 +302,6 @@
             this.txtTongSoNhanVien.Name = "txtTongSoNhanVien";
             this.txtTongSoNhanVien.Size = new System.Drawing.Size(238, 30);
             this.txtTongSoNhanVien.TabIndex = 5;
-            this.txtTongSoNhanVien.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblTongSoNhanVien
             // 
@@ -449,7 +448,6 @@
             this.Text = "frmQuanLyPhongBan";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmQuanLyPhongBan_Load);
-            this.TextChanged += new System.EventHandler(this.EnableButtons);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             this.pnlMenu.ResumeLayout(false);
