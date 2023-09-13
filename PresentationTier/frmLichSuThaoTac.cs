@@ -50,7 +50,7 @@ namespace QuanLyNhanSu.PresentationTier
             LoadGiaoDien();
             LoadThaoTac();
         }
-        public void LoadThongTinDangNhap()
+        private void LoadThongTinDangNhap()
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
@@ -77,7 +77,7 @@ namespace QuanLyNhanSu.PresentationTier
                 cmbThaoTac.DataSource = thaoTacBUS.GetThaoTac();
             AutoAdjustComboBox(cmbThaoTac);
         }
-        public void LoadLichSuThaoTac()
+        private void LoadLichSuThaoTac()
         {
             Enabled = false;
             dgvLichSuThaoTac.Rows.Clear();
@@ -101,7 +101,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             Enabled = true;
         }
-        public void LoadLichSuThaoTacTimKiem(string timKiem)
+        private void LoadLichSuThaoTacTimKiem(string timKiem)
         {
             Enabled = false;
             dgvLichSuThaoTac.Rows.Clear();
@@ -126,7 +126,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             Enabled = true;
         }
-        public void AutoAdjustComboBox(ComboBox comboBox)
+        private void AutoAdjustComboBox(ComboBox comboBox)
         {
             int maxWidth = 0;
             foreach (var items in comboBox.Items)
@@ -254,7 +254,7 @@ namespace QuanLyNhanSu.PresentationTier
             }            
         }
         /////////////////////////////////////////////////////////////////////////////////////////        
-        public void Reload()
+        private void Reload()
         {
             FrmLichSuThaoTac frmOpen = new FrmLichSuThaoTac(maNV);
             frmOpen.Show();

@@ -28,6 +28,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly string maNV;
         private readonly string maGD;
         private readonly string maCV;
+        private bool checkThaoTac;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhuCap(string maNV)
         {
@@ -45,6 +46,7 @@ namespace QuanLyNhanSu.PresentationTier
             maCV = nv.MaCV;
             phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
             this.maNV = maNV;
+            checkThaoTac = false;
         }
         private void frmQuanLyPhuCap_Load(object sender, EventArgs e)
         {
@@ -59,6 +61,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
                 {
+                    checkThaoTac = true;
                     InputStatus(true);
                     continue;
                 }
@@ -90,7 +93,7 @@ namespace QuanLyNhanSu.PresentationTier
                     typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
             }
         }
-        public void LoadThongTinDangNhap()
+        private void LoadThongTinDangNhap()
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
@@ -133,7 +136,7 @@ namespace QuanLyNhanSu.PresentationTier
             Enabled = true;
         }
         ////////////////////////////////////////////////////////////////////////////////////////
-        public void ClearAllText()
+        private void ClearAllText()
         {
             List<TextBox> listTextBox = new List<TextBox> { txtMaPC, txtTenPC , txtSoTien, txtSoLuongNhanVien };
             for(int i = 0;  i < listTextBox.Count; i++)
@@ -142,7 +145,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////
-        public void Reload()
+        private void Reload()
         {
             FrmQuanLyPhuCap frmOpen = new FrmQuanLyPhuCap(maNV);
             frmOpen.Show();
@@ -154,29 +157,53 @@ namespace QuanLyNhanSu.PresentationTier
             this.Close();
         }
         ////////////////////////////////////////////////////////////////////////////////////////
+        private bool CheckEmptyText(bool check)
+        {
+            List<TextBox> listTextBox = new List<TextBox> { txtTenPC, txtSoTien };
+            for (int i = 0; i < listTextBox.Count; i++)
+            {
+                if (string.IsNullOrEmpty(listTextBox[i].Text))
+                {
+                    if (check)
+                    {
+                        btnThem.Enabled = false;
+                        return false;
+                    }
+                    else
+                    {
+                        btnSua.Enabled = false;
+                        return false;
+                    }
+                }
+            }
+            return true;
+        } 
         private void EnableButtons(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaPC.Text) && string.IsNullOrEmpty(txtTenPC.Text) && string.IsNullOrEmpty(txtSoTien.Text) ||
-               string.IsNullOrEmpty(txtTenPC.Text) && string.IsNullOrEmpty(txtSoTien.Text))
+            if (!checkThaoTac)
+                return;
+            bool check;
+            if (string.IsNullOrEmpty(txtMaPC.Text))
             {
-                btnThem.Enabled = false;
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
-                return;
+                check = true;
+                if (CheckEmptyText(check))
+                {
+                    btnThem.Enabled = true;
+                    return;
+                }
             }
-            else if (string.IsNullOrEmpty(txtMaPC.Text) && !string.IsNullOrEmpty(txtTenPC.Text) && !string.IsNullOrEmpty(txtSoTien.Text))
-            {
-                btnThem.Enabled = true;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                return;
-            }
-            else if (!string.IsNullOrEmpty(txtMaPC.Text) && !string.IsNullOrEmpty(txtTenPC.Text) && !string.IsNullOrEmpty(txtSoTien.Text))
+            else
             {
                 btnThem.Enabled = false;
-                btnSua.Enabled = true;
                 btnXoa.Enabled = true;
-                return;
+                check = false;
+                if (CheckEmptyText(check))
+                {
+                    btnSua.Enabled = true;
+                    return;
+                }
             }
         }
         private void txtSoTien_KeyPress(object sender, KeyPressEventArgs e)

@@ -24,6 +24,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly string maNV;
         private readonly string maGD;
         private readonly string maCV;
+        private bool checkThaoTac;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyLoaiPhieu(string maNV)
         {
@@ -40,6 +41,7 @@ namespace QuanLyNhanSu.PresentationTier
             maCV = nv.MaCV;
             phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
             this.maNV = maNV;
+            checkThaoTac = false;
         }
         private void FrmQuanLyLoaiPhieu_Load(object sender, EventArgs e)
         {
@@ -48,7 +50,7 @@ namespace QuanLyNhanSu.PresentationTier
             PhanQuyen();
             LoadLoaiPhieu();
         }
-        public void LoadThongTinDangNhap()
+        private void LoadThongTinDangNhap()
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
@@ -64,6 +66,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
                 {
+                    checkThaoTac = true;
                     InputStatus(true);
                     continue;
                 }
@@ -121,7 +124,7 @@ namespace QuanLyNhanSu.PresentationTier
             Enabled = true;
         }
         /////////////////////////////////////////////////////////////////////////////////////
-        public void ClearAllText()
+        private void ClearAllText()
         {
             List<TextBox> listTextBox = new List<TextBox> { txtMaLP, txtTenLoaiPhieu, txtTenLoaiPhieu };
             for (int i = 0; i < listTextBox.Count; i++)
@@ -130,12 +133,12 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         /////////////////////////////////////////////////////////////////////////////////////
-        public void CloseCurrentForm(string maNV)
+        private void CloseCurrentForm(string maNV)
         {
             this.Close();
             Application.Run(new FrmQuanLyLoaiPhieu(maNV));
         }
-        public void Reload()
+        private void Reload()
         {
             FrmQuanLyLoaiPhieu frmOpen = new FrmQuanLyLoaiPhieu(maNV);
             frmOpen.Show();
@@ -147,25 +150,53 @@ namespace QuanLyNhanSu.PresentationTier
             this.Close();
         }
         //////////////////////////////////////////////////////////////////////////////////////////
+        private bool CheckEmptyText(bool check)
+        {
+            List<TextBox> listTextBox = new List<TextBox> { txtTenLoaiPhieu };
+            for (int i = 0; i < listTextBox.Count; i++)
+            {
+                if (string.IsNullOrEmpty(listTextBox[i].Text))
+                {
+                    if (check)
+                    {
+                        btnThem.Enabled = false;
+                        return false;
+                    }
+                    else
+                    {
+                        btnSua.Enabled = false;
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
         private void EnableButton(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaLP.Text) && string.IsNullOrEmpty(txtTenLoaiPhieu.Text) || string.IsNullOrEmpty(txtTenLoaiPhieu.Text))
+            if (!checkThaoTac)
+                return;
+            bool check;
+            if (string.IsNullOrEmpty(txtMaLP.Text))
             {
-                btnThem.Enabled = false;
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
+                check = true;
+                if (CheckEmptyText(check))
+                {
+                    btnThem.Enabled = true;
+                    return;
+                }
             }
-            if (string.IsNullOrEmpty(txtMaLP.Text) && !string.IsNullOrEmpty(txtTenLoaiPhieu.Text))
-            {
-                btnThem.Enabled = true;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-            }
-            if (!string.IsNullOrEmpty(txtMaLP.Text) && !string.IsNullOrEmpty(txtTenLoaiPhieu.Text))
+            else
             {
                 btnThem.Enabled = false;
-                btnSua.Enabled = true;
                 btnXoa.Enabled = true;
+                check = false;
+                if (CheckEmptyText(check))
+                {
+                    btnSua.Enabled = true;
+                    return;
+                }
             }
         }
         private void txtTimKiem_TextChanged(object sender, EventArgs e)

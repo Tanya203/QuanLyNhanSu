@@ -203,7 +203,6 @@
             this.btnTroVe.Text = "Trở về";
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTroVe.UseVisualStyleBackColor = false;
-            this.btnTroVe.TextChanged += new System.EventHandler(this.EnableButton);
             this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
             // pnlMenu

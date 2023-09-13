@@ -287,7 +287,6 @@
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
-            this.btnThem.TextChanged += new System.EventHandler(this.EnableButtons);
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // pnlMenu
@@ -337,7 +336,6 @@
             this.txtSoLuongNhanVien.Name = "txtSoLuongNhanVien";
             this.txtSoLuongNhanVien.Size = new System.Drawing.Size(241, 30);
             this.txtSoLuongNhanVien.TabIndex = 5;
-            this.txtSoLuongNhanVien.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // lblSoLuongNhanVien
             // 

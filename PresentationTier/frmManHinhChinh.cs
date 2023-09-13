@@ -42,8 +42,8 @@ namespace QuanLyNhanSu.PresentationTier
             LoadLichLamViec();
             PhanQuyen();
 
-        }       
-        public void LoadThongTinDangNhap()
+        }
+        private void LoadThongTinDangNhap()
         {
             lblMaNV.Text = nv.MaNV;
             if(string.IsNullOrEmpty(nv.TenLot))
@@ -54,7 +54,7 @@ namespace QuanLyNhanSu.PresentationTier
             lblChucVuNV.Text = nv.ChucVu.TenChucVu;
             lblSoNgayPhepConNV.Text = nv.SoNgayPhep.ToString();
         }
-        public void LoadLichLamViec()
+        private void LoadLichLamViec()
         {
             dgvLichLamViec.Rows.Clear();
             DateTime ngayLam = DateTime.Parse(dtpLichLamViec.Value.ToString(formatDate));
@@ -73,7 +73,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvLichLamViec.Rows[rowAdd].Cells[7].Value = nv.Phep;
             }
         }
-        public void PhanQuyen()
+        private void PhanQuyen()
         {
             int count = 0;            
             List<Button> button = new List<Button>{ btnQLNV, btnQLPB, btnQLCV, btnQLC, btnQLLLV, btnQLPC, btnQLP, btnQLTK, btnQLLHD, btnQLPQ, btnLSTT};            

@@ -30,6 +30,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly string maNV;
         private readonly string maGD;
         private readonly string maCV;
+        private bool checkThaoTac;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyChucVu(string maNV)
         {
@@ -54,6 +55,7 @@ namespace QuanLyNhanSu.PresentationTier
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
             this.maNV = maNV;
+            checkThaoTac = false;
         }
         private void frmQuanLyChucVu_Load(object sender, EventArgs e)
         {
@@ -65,7 +67,7 @@ namespace QuanLyNhanSu.PresentationTier
             PhanQuyen();
             LoadChucVu();
         }
-        public void LoadThongTinDangNhap()
+        private void LoadThongTinDangNhap()
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
@@ -81,6 +83,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
                 {
+                    checkThaoTac = true;
                     InputStatus(true);
                     continue;
                 }
@@ -150,12 +153,12 @@ namespace QuanLyNhanSu.PresentationTier
             }
             Enabled = true;
         }
-        public void LoadPhongBan()
+        private void LoadPhongBan()
         {
             cmbPhongBan.DataSource = phongBanBUS.GetPhongBan();
             AutoAdjustComboBox(cmbPhongBan);
         }
-        public void AutoAdjustComboBox(ComboBox comboBox)
+        private void AutoAdjustComboBox(ComboBox comboBox)
         {
             int maxWidth = 0;
             foreach (var items in comboBox.Items)
@@ -166,7 +169,7 @@ namespace QuanLyNhanSu.PresentationTier
             comboBox.DropDownWidth = maxWidth + SystemInformation.VerticalScrollBarWidth;
         }
         /////////////////////////////////////////////////////////////////////////////////////////////
-        public void ClearAllText()
+        private void ClearAllText()
         {
             List<object> listInput = new List<object> { txtMaCV, cmbPhongBan, txtTenCV, txtTongSoNhanVien, txtLuongKhoiDiem };
             for(int i = 0; i< listInput.Count; i++)
@@ -184,7 +187,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         /////////////////////////////////////////////////////////////////////////////////////////////
-        public void Reload()
+        private void Reload()
         {
             FrmQuanLyChucVu frmOpen = new FrmQuanLyChucVu(maNV);
             frmOpen.Show();
@@ -196,29 +199,53 @@ namespace QuanLyNhanSu.PresentationTier
             this.Close();
         }
         /////////////////////////////////////////////////////////////////////////////////////////////
+        private bool CheckEmptyText(bool check) 
+        {
+            List<TextBox> listTextBox = new List<TextBox> { txtTenCV, txtLuongKhoiDiem};
+            for(int i = 0; i < listTextBox.Count; i++)
+            {
+                if (string.IsNullOrEmpty(listTextBox[i].Text))
+                {
+                    if (check) 
+                    {
+                        btnThem.Enabled = false;
+                        return false;
+                    }
+                    else
+                    {
+                        btnSua.Enabled = false;
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
         private void EnableButtons(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaCV.Text) && string.IsNullOrEmpty(txtTenCV.Text) && string.IsNullOrEmpty(txtLuongKhoiDiem.Text) ||
-                string.IsNullOrEmpty(txtTenCV.Text) && string.IsNullOrEmpty(txtLuongKhoiDiem.Text))
+            if (!checkThaoTac)
+                return;
+            bool check;
+            if (string.IsNullOrEmpty(txtMaCV.Text))
             {
-                btnThem.Enabled = false;
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
-                return;
+                check = true;
+                if (CheckEmptyText(check))
+                {
+                    btnThem.Enabled = true;
+                    return; 
+                }
             }
-            if (string.IsNullOrEmpty(txtMaCV.Text) && !string.IsNullOrEmpty(txtTenCV.Text) && !string.IsNullOrEmpty(txtLuongKhoiDiem.Text))
-            {
-                btnThem.Enabled = true;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                return;
-            }
-            if (!string.IsNullOrEmpty(txtMaCV.Text) && !string.IsNullOrEmpty(txtTenCV.Text) && !string.IsNullOrEmpty(txtLuongKhoiDiem.Text))
+            else
             {
                 btnThem.Enabled = false;
-                btnSua.Enabled = true;
                 btnXoa.Enabled = true;
-                return;
+                check = false;
+                if (CheckEmptyText(check))
+                {
+                    btnSua.Enabled = true;
+                    return;
+                }
             }
         }
         /////////////////////////////////////////////////////////////////////////////////////////////

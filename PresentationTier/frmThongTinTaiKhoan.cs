@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -35,26 +36,16 @@ namespace QuanLyNhanSu.PresentationTier
             listThaoTac = thaoTacBus.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             this.maNV = maNV;
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
-            txtMaNV.ReadOnly = true;
-            txtPhongBan.ReadOnly = true;
-            txtChucVu.ReadOnly = true;
-            txtLoaiHopDong.ReadOnly = true;
-            txtTaiKhoan.ReadOnly = true;
-            txtTrinhDoHocVan.ReadOnly = true;
-            txtNgayVaoLam.ReadOnly = true;
-            txtThoiHanHopDong.ReadOnly = true;
-            txtTinhTrang.ReadOnly = true;
-            txtSoNgayPhep.ReadOnly = true;
-            txtLuongCoBan.ReadOnly = true;
-            txtPhuCap.ReadOnly = true;
             btnDoiMatKhau.Enabled = false;
         }
         private void FrmThongTinTaiKhoan_Load(object sender, EventArgs e)
         {
+            DisableDisplay();
+            btnDoiMatKhau.Enabled = false;
             LoadThongTinTaiKhoan();
             LoadThongTinDangNhap();
         }
-        public void LoadThongTinDangNhap()
+        private void LoadThongTinDangNhap()
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
@@ -63,6 +54,14 @@ namespace QuanLyNhanSu.PresentationTier
                 lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+        }
+        private void DisableDisplay()
+        {
+            List<TextBox> listDisplay = new List<TextBox> { txtMaNV, txtPhongBan, txtChucVu, txtLoaiHopDong, txtTaiKhoan, txtTrinhDoHocVan, txtNgayVaoLam, txtThoiHanHopDong, txtTinhTrang, txtSoNgayPhep, txtLuongCoBan, txtPhuCap};
+            for(int i =0; i< listDisplay.Count; i++)
+            {
+                typeof(TextBox).GetProperty("ReadOnly").SetValue(listDisplay[i], true);
+            }
         }
         private void LoadThongTinTaiKhoan()
         {
@@ -107,7 +106,7 @@ namespace QuanLyNhanSu.PresentationTier
             Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////   
-        public void Reload()
+        private void Reload()
         {
             FrmThongTinTaiKhoan frmOpen = new FrmThongTinTaiKhoan(maNV);
             frmOpen.Show();
@@ -133,7 +132,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtNhapLaiMatKhau.Text = string.Empty;
         }
         //////////////////////////////////////////////////////////////////////////////
-        public string CheckMatKhau(string matKhau)
+        private string CheckMatKhau(string matKhau)
         {
             Regex passCheck = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
             if (!passCheck.IsMatch(matKhau) || matKhau.Length > 20)
@@ -148,7 +147,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             return matKhau;
         }
-        public string CheckSDT(string sdt)
+        private string CheckSDT(string sdt)
         {
             Regex sdtCheck = new Regex(@"(84|0[3|5|7|8|9])+([0-9]{8})\b");
             if (!sdtCheck.IsMatch(sdt))
@@ -158,7 +157,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             return sdt;
         }
-        public string CheckEmail(string email)
+        private string CheckEmail(string email)
         {
             Regex emailCheck = new Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
             if (!emailCheck.IsMatch(email))
@@ -168,7 +167,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             return email;
         }
-        public string CheckCCCD(string cccd)
+        private string CheckCCCD(string cccd)
         {
             Regex cccdCheck = new Regex(@"^(001|002|004|006|008|010|011|012|014|015|017|019|020|022|024|025|026|027|030|031|033|034|035|036|037|
                                         038|040|042|044|045|046|048|049|051|052|054|056|058|060|062|064|066|067|068|070|072|074|075|077|079|080|
@@ -212,7 +211,7 @@ namespace QuanLyNhanSu.PresentationTier
                 e.Handled = true;
             }
         }
-        public string ChonGioiTinh()
+        private string ChonGioiTinh()
         {
             if (rbNam.Checked)
                 return rbNam.Text;
@@ -221,16 +220,26 @@ namespace QuanLyNhanSu.PresentationTier
             else
                 return rbKhac.Text;
         }
-        private void txtTen_TextChanged(object sender, EventArgs e)
+        private bool CheckEmptyText()
         {
-            if (string.IsNullOrEmpty(txtHo.Text) || string.IsNullOrEmpty(txtTen.Text) ||
-               string.IsNullOrEmpty(txtCCCD.Text) || string.IsNullOrEmpty(txtSoNha.Text) ||
-               string.IsNullOrEmpty(txtDuong.Text) || string.IsNullOrEmpty(txtPhuong_Xa.Text) ||
-               string.IsNullOrEmpty(txtQuan_Huyen.Text) || string.IsNullOrEmpty(txtTinh_ThanhPho.Text) ||
-               string.IsNullOrEmpty(txtSDT.Text) || string.IsNullOrEmpty(txtEmail.Text))
-                btnLuu.Enabled = false;
-            else
+            List<TextBox> listTextBox = new List<TextBox> { txtCCCD, txtHo, txtTen, txtSoNha, txtDuong, txtPhuong_Xa, txtQuan_Huyen, txtTinh_ThanhPho, txtSDT, txtEmail};
+            for (int i = 0; i < listTextBox.Count; i++)
+            {
+                if (string.IsNullOrEmpty(listTextBox[i].Text))
+                {
+                    btnLuu.Enabled = false;
+                    return false;
+                }
+            }
+            return true;
+        }
+        private void EnableButton(object sender, EventArgs e)
+        {
+            if (CheckEmptyText())
+            {
                 btnLuu.Enabled = true;
+                return;
+            }
         }
         //////////////////////////////////////////////////////////////////////////////       
         private void LichSuThaoTac(string thaoTac, string maTT)

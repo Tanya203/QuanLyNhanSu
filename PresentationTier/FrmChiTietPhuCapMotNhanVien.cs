@@ -66,7 +66,7 @@ namespace QuanLyNhanSu.PresentationTier
                 XoaButton();
             }                           
         }
-        public void LoadThongTinDangNhap()
+        private void LoadThongTinDangNhap()
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
@@ -76,7 +76,7 @@ namespace QuanLyNhanSu.PresentationTier
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
-        public void LoadPhuCap()
+        private void LoadPhuCap()
         {
             List<PhuCap> phuCap = phuCapBUS.GetPhuCap().ToList();
             foreach (var pc in ctpc)
@@ -86,7 +86,7 @@ namespace QuanLyNhanSu.PresentationTier
             cmbPhuCap.DataSource = phuCap;
             AutoAdjustComboBox(cmbPhuCap);
         }
-        public void LoadPhuCapNhanVien()
+        private void LoadPhuCapNhanVien()
         {
             Enabled = false;
             dgvChiTietPhuCap.Rows.Clear();
@@ -107,7 +107,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtMaNV.Text = nhanVienPC;
             Enabled = true;
         }
-        public void AutoAdjustComboBox(ComboBox comboBox)
+        private void AutoAdjustComboBox(ComboBox comboBox)
         {
             int maxWidth = 0;
             foreach (var items in comboBox.Items)
@@ -169,7 +169,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtSoTien.Text = string.Empty;
             Reload();
         }
-        public void XoaButton()
+        private void XoaButton()
         {
             DataGridViewButtonColumn btnXoa = new DataGridViewButtonColumn();
             {
@@ -186,7 +186,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvChiTietPhuCap.Columns.Add(btnXoa);
             }
         }
-        public void XoaPhuCap( string maPC, string tenPC)
+        private void XoaPhuCap( string maPC, string tenPC)
         {
             ChiTietPhuCap chiTietPhuCap = new ChiTietPhuCap
             {

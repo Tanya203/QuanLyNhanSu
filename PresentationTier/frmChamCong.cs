@@ -28,7 +28,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatTime = "HH:mm:ss";
-        public FrmChamCong()
+        private FrmChamCong()
         {
             InitializeComponent();
             chamCongBUS = new ChamCongBUS();
@@ -60,7 +60,7 @@ namespace QuanLyNhanSu.PresentationTier
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
-        public bool ChamCongCaDem(List<ChamCong> caDem)
+        private bool ChamCongCaDem(List<ChamCong> caDem)
         {
             timeNow = TimeSpan.Parse(DateTime.Now.ToString(formatTime));
             dateNow = DateTime.Now.ToString(formatDate);
@@ -101,7 +101,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
             return false;
         }
-        public void ChamCongTungCa(List<ChamCong> llv)
+        private void ChamCongTungCa(List<ChamCong> llv)
         {
             timeNow = TimeSpan.Parse(DateTime.Now.ToString(formatTime));
             dateNow = DateTime.Now.ToString(formatDate);           
@@ -165,7 +165,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtMaNV.Text = string.Empty;
             return;            
         }
-        public void ChamCongLienCa(List<ChamCong> llv)
+        private void ChamCongLienCa(List<ChamCong> llv)
         {
             timeNow = TimeSpan.Parse(DateTime.Now.ToString(formatTime));
             dateNow = DateTime.Now.ToString(formatDate);  
@@ -247,8 +247,8 @@ namespace QuanLyNhanSu.PresentationTier
             MessageBox.Show($"Nhân viên {txtMaNV.Text} đã chấm công hết các ca trong ngày hoặc đã quá giờ chấm công ngày {dateNow}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             txtMaNV.Text = string.Empty;
             return;
-        }                     
-        
+        }
+
         private void btnChamCong_Click(object sender, EventArgs e)
         {
             NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);

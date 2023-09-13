@@ -23,6 +23,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly NhanVien nv;
         private readonly string maGD;
         private readonly string maCV;
+        private bool checkThaoTac;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         public FrmQuanLyPhongBan(string maNV)
         {
@@ -39,6 +40,7 @@ namespace QuanLyNhanSu.PresentationTier
             maCV = nv.MaCV;
             phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();            
             this.maNV = maNV;
+            checkThaoTac = false;
         }
         private void frmQuanLyPhongBan_Load(object sender, EventArgs e)
         {            
@@ -47,7 +49,7 @@ namespace QuanLyNhanSu.PresentationTier
             PhanQuyen();
             LoadPhongBan();
         }
-        public void LoadThongTinDangNhap()
+        private void LoadThongTinDangNhap()
         {
             lblMaNV_DN.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
@@ -57,18 +59,19 @@ namespace QuanLyNhanSu.PresentationTier
             lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
             lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
         }
-        public void PhanQuyen()
+        private void PhanQuyen()
         {
             foreach(PhanQuyen qh in phanQuyen)
             {
                 if (qh.QuyenHan.TenQuyenHan.Contains("Thao tác") && qh.CapQuyen)
                 {
+                    checkThaoTac = true;
                     InputStatus(true);
                     continue;
                 }
             }
         }
-        public void InputStatus(bool value)
+        private void InputStatus(bool value)
         {
             ButtonStatus(value);
             List<TextBox> listTextBox = new List<TextBox> { txtTenPB };
@@ -79,7 +82,7 @@ namespace QuanLyNhanSu.PresentationTier
                 typeof(TextBox).GetProperty("ReadOnly").SetValue(listTextBox[i], !value);                
             }
         }
-        public void ButtonStatus(bool value)
+        private void ButtonStatus(bool value)
         {
             List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy};
             for (int i = 0; i < listButtons.Count; i++)
@@ -118,9 +121,9 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvThongTinPhongBan.Rows[rowAdd].Cells[2].Value = phongBanBUS.TongSoLuongNhanVienTrongPhongBan(pb.MaPB).ToString();
             }
             Enabled = true;
-        }        
+        }
         //////////////////////////////////////////////////////////////////////////////////////////////////
-        public void ClearAllText()
+        private void ClearAllText()
         {
             List<TextBox> listTextBox = new List<TextBox> { txtMaPB, txtTenPB, txtTongSoNhanVien };
             for(int i = 0; i < listTextBox.Count; i++)
@@ -129,7 +132,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////
-        public void Reload()
+        private void Reload()
         {
             FrmQuanLyPhongBan frmOpen = new FrmQuanLyPhongBan(maNV);
             frmOpen.Show();
@@ -141,28 +144,53 @@ namespace QuanLyNhanSu.PresentationTier
             this.Close();
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////
+        private bool CheckEmptyText(bool check)
+        {
+            List<TextBox> listTextBox = new List<TextBox> {txtTenPB};
+            for(int i =0; i<listTextBox.Count; i++)
+            {
+                if (string.IsNullOrEmpty(listTextBox[i].Text))
+                {
+                    if (check)
+                    {
+                        btnThem.Enabled = false;
+                        return false;
+                    }
+                    else
+                    {
+                        btnSua.Enabled = false;
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
         private void EnableButtons(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaPB.Text) && string.IsNullOrEmpty(txtTenPB.Text) || string.IsNullOrEmpty(txtTenPB.Text))
+            if (!checkThaoTac)
+                return;
+            bool check;
+            if (string.IsNullOrEmpty(txtMaPB.Text))
             {
-                btnThem.Enabled = false;
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
-                return;
+                check = true;
+                if (CheckEmptyText(check))
+                {
+                    btnThem.Enabled = true;
+                    return;
+                }                    
             }
-            else if (string.IsNullOrEmpty(txtMaPB.Text) && !string.IsNullOrEmpty(txtTenPB.Text))
-            {
-                btnThem.Enabled = true;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                return;
-            }
-            else if (!string.IsNullOrEmpty(txtMaPB.Text) && !string.IsNullOrEmpty(txtTenPB.Text))
+            else
             {
                 btnThem.Enabled = false;
-                btnSua.Enabled = true;
                 btnXoa.Enabled = true;
-                return;
+                check = false;
+                if (CheckEmptyText(check))
+                {
+                    btnSua.Enabled = true;
+                    return;
+                }
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////
