@@ -73,5 +73,10 @@ namespace QuanLyNhanSu
             else
                 btnDangNhap.Enabled = true;
         }
+
+        private void FrmDangNhap_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

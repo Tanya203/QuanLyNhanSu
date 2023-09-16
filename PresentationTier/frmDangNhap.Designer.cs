@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblTaiKhoan = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cbHienThiMatKhau = new System.Windows.Forms.CheckBox();
@@ -38,8 +39,10 @@
             this.btnDangNhap = new System.Windows.Forms.Button();
             this.lblDangNhap = new System.Windows.Forms.Label();
             this.pbUserIcon = new System.Windows.Forms.PictureBox();
+            this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnDangNhap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTaiKhoan
@@ -162,6 +165,10 @@
             this.pbUserIcon.TabIndex = 10;
             this.pbUserIcon.TabStop = false;
             // 
+            // errProvider
+            // 
+            this.errProvider.ContainerControl = this;
+            // 
             // FrmDangNhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -180,6 +187,7 @@
             this.pnDangNhap.ResumeLayout(false);
             this.pnDangNhap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,6 +204,7 @@
         private System.Windows.Forms.Panel pnDangNhap;
         private System.Windows.Forms.Label lblDangNhap;
         private System.Windows.Forms.PictureBox pbUserIcon;
+        private System.Windows.Forms.ErrorProvider errProvider;
     }
 }
 
