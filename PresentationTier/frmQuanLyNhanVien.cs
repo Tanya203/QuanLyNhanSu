@@ -27,7 +27,7 @@ namespace QuanLyNhanSu.PresentationTier
         private IEnumerable<NhanVienViewModel> danhSachNhanVien;
         private IEnumerable<NhanVienViewModel> danhSachNhanVienTimKiem;
         private readonly IEnumerable<PhanQuyen> phanQuyen;
-        private readonly List<ThaoTac> listThaoTac;
+        private readonly IEnumerable<ThaoTac> listThaoTac;
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
         private readonly string maNV;
@@ -137,7 +137,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value)
         {
-            List<object> listButtons = new List<object>() { btnThem, btnSua, btnXoa, btnHuy, btnMoKhoa, cbHienThiMatKhau };
+            List<object> listButtons = new List<object>() { btnThem, btnSua, btnXoa, btnHuy, btnMoKhoa, btnKhoa, cbHienThiMatKhau, rbNam };
             if (!value)
                 listButtons.Add(btnThemPhuCap);
             for (int i = 0; i < listButtons.Count; i++)
@@ -151,9 +151,14 @@ namespace QuanLyNhanSu.PresentationTier
                 }
                 else if (listButtons[i] is CheckBox)
                 {
-                    typeof(RadioButton).GetProperty("Visible").SetValue(listButtons[i], value);
+                    typeof(CheckBox).GetProperty("Visible").SetValue(listButtons[i], value);
                     continue;
                 }               
+                else if(listButtons[i] is RadioButton)
+                {
+                    typeof(RadioButton).GetProperty("Checked").SetValue(listButtons[i], true);
+                    continue;
+                }
             }
         }
         private void LoadNhanVien()
@@ -293,7 +298,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             List<object> listInput = new List<object> { cmbChucVu, cmbLoaiHopDong, cmbPhongBan, txtTaiKhoan, txtMatKhau, txtNhapLaiMatKhau,
                                                         txtCCCD, txtHo, txtTenLot, txtTen, dtpNTNS, txtSoNha, txtDuong, txtPhuong_Xa, txtQuan_Huyen,
-                                                        txtTinh_ThanhPho, rbNam, rbNu, rbKhac, txtSDT, txtEmail, txtTrinhDoHocVan, dtpNgayVaoLam, dtpThoiHanHopDong,
+                                                        txtTinh_ThanhPho, rbNam, txtSDT, txtEmail, txtTrinhDoHocVan, dtpNgayVaoLam, dtpThoiHanHopDong,
                                                         txtTinhTrang, txtSoNgayPhep, txtLuongCoBan, txtMaNV, txtPhuCap, txtNgayKhoa, txtSoTienNo,
                                                         btnThem, btnSua, btnXoa, btnHuy, btnMoKhoa, btnChonHinh, btnThemPhuCap ,cbHienThiMatKhau};
             for(int i = 0; i < listInput.Count; i++)
@@ -310,7 +315,7 @@ namespace QuanLyNhanSu.PresentationTier
                 }
                 else if (listInput[i] is RadioButton)
                 {
-                    typeof(RadioButton).GetProperty("Checked").SetValue(listInput[i], false);
+                    typeof(RadioButton).GetProperty("Checked").SetValue(listInput[i], true);
                     continue;
                 }
                 else if (listInput[i] is DateTimePicker)
@@ -338,20 +343,12 @@ namespace QuanLyNhanSu.PresentationTier
             frmOpen.FormClosed += CloseForm;
         }
         ///////////////////////////////////////////////////////////////////////////////////////
-        private string CheckMatKhau(string matKhau)
+        private bool CheckMatKhau(string matKhau)
         {
             Regex passCheck = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
             if (!passCheck.IsMatch(matKhau) || matKhau.Length > 20)
-            {
-                MessageBox.Show("Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-            if (txtNhapLaiMatKhau.Text != matKhau)
-            {
-                MessageBox.Show("Mật khẩu nhập lại không khớp", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-            return matKhau;
+                return false;
+            return true;
         }
         private string ChonGioiTinh()
         {
@@ -362,37 +359,28 @@ namespace QuanLyNhanSu.PresentationTier
             else
                 return rbKhac.Text;
         }
-        private string CheckSDT(string sdt)
+        private bool CheckSDT(string sdt)
         {
             Regex sdtCheck = new Regex(@"(84|0[3|5|7|8|9])+([0-9]{8})\b");
             if (!sdtCheck.IsMatch(sdt))
-            {
-                MessageBox.Show("Định dạng số điện thoại không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-            return sdt;
+                return false;
+            return true;
         }
-        private string CheckEmail(string email)
+        private bool CheckEmail(string email)
         {
             Regex emailCheck = new Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
             if (!emailCheck.IsMatch(email))
-            {
-                MessageBox.Show("Định dạng email không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-            return email;
+                return false;
+            return true;                    
         }
-        private string CheckCCCD(string cccd)
+        private bool CheckCCCD(string cccd)
         {
             Regex cccdCheck = new Regex(@"^(001|002|004|006|008|010|011|012|014|015|017|019|020|022|024|025|026|027|030|031|033|034|035|036|037|
                                         038|040|042|044|045|046|048|049|051|052|054|056|058|060|062|064|066|067|068|070|072|074|075|077|079|080|
                                         082|083|084|086|087|089|091|092|093|094|095|096)[02-3][0-9]{2}[0-9]{6}$");
             if (!cccdCheck.IsMatch(cccd))
-            {
-                MessageBox.Show("Định dạng CCCD/CMND không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-            return cccd;
+                return false;
+            return true;
         }
         private void CheckChonGioiTinh(object sender, EventArgs e)
         {
@@ -424,22 +412,143 @@ namespace QuanLyNhanSu.PresentationTier
             }
             return true;
         }
-        private bool CheckChonGioiTinh()
+
+        private bool CheckInputError(Button button)
         {
-            if (!rbNam.Checked && !rbNu.Checked && !rbKhac.Checked)
-                return false;
-            return true;
+            bool flag = true;
+            errProvider.Clear();
+            var validationRules = new Dictionary<Control, Func<bool>>
+            {
+                { dtpNgayVaoLam, () => DateTime.Parse(dtpNgayVaoLam.Value.ToString(formatDate)) < DateTime.Parse(DateTime.Now.ToString(formatDate)) },
+                { txtCCCD, () => !CheckCCCD(txtCCCD.Text) },
+                { dtpNTNS, () => DateTime.Now.Year - dtpNTNS.Value.Year < 18 },
+                { txtSDT, () => !CheckSDT(txtSDT.Text) },
+                { txtEmail, () => !CheckEmail(txtEmail.Text) },
+                { dtpThoiHanHopDong, () => dtpThoiHanHopDong.Value <= dtpNgayVaoLam.Value }
+            };
+            if (button == btnThem)
+            {
+                validationRules.Add(txtTaiKhoan, () => nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.TaiKhoan == txtTaiKhoan.Text) != null || txtTaiKhoan.Text.Length < 5);
+                validationRules.Add(txtMatKhau, () => !CheckMatKhau(txtMatKhau.Text));
+                validationRules.Add(txtNhapLaiMatKhau, () => txtMatKhau.Text != txtNhapLaiMatKhau.Text);
+            }
+            var errorMessages = new Dictionary<Control, string>
+            {
+                { txtTaiKhoan, "Tài khoản đã tồn tại hoặc ít hơn 5 ký tự" },
+                { txtMatKhau, "Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!" },
+                { txtNhapLaiMatKhau, "Mật khẩu nhập lại không khớp" },
+                { dtpNgayVaoLam, "Ngày vào làm không thể nhỏ hơn ngày hiện tại" },
+                { txtCCCD, "Căn cước công dân không đúng định dạng" },
+                { dtpNTNS, "Tuổi phải lớn hơn hoặc bằng 18" },
+                { txtSDT, "Số điện thoại không đúng định dạng" },
+                { txtEmail, "Email không đúng định dạng" },
+                { dtpThoiHanHopDong, "Thời hạn hợp đồng phải lớn hơn ngày vào làm" }
+            };             
+            foreach (var rule in validationRules)
+            {
+                var control = rule.Key;
+                var validate = rule.Value;
+                if (control is DateTimePicker &&  button == btnSua )
+                {
+                    if (validate() && dtpNgayVaoLam.Value.ToString(formatDate) != nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text).NgayVaoLam.ToString(formatDate))
+                    {
+                        errProvider.SetError(control, errorMessages[control]);
+                        flag = false;
+                    }
+                }
+                else
+                {
+                    if (validate())
+                    {
+                        errProvider.SetError(control, errorMessages[control]);
+                        flag = false;
+                    }
+                }
+            }
+            if(flag)
+                return true;
+            return false;
+            /*errProvider.Clear();
+            if(button == btnThem)
+            {
+                errProvider.SetError(txtTaiKhoan, nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.TaiKhoan == txtTaiKhoan.Text) != null ? "Tài khoản đã tồn tại" : string.Empty);
+                errProvider.SetError(txtMatKhau, CheckMatKhau(txtMatKhau.Text) is false ? "Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!" : string.Empty);
+                errProvider.SetError(txtNhapLaiMatKhau, txtMatKhau.Text != txtNhapLaiMatKhau.Text ? "Mật khẩu nhập lại không khớp" : string.Empty);
+                errProvider.SetError(dtpNgayVaoLam, DateTime.Parse(dtpNgayVaoLam.Value.ToString(formatDate)) < DateTime.Parse(DateTime.Now.ToString(formatDate)) ? "Ngày vào làm không thể nhỏ hơn ngày hiện tại" : string.Empty);
+            }
+            else
+                errProvider.SetError(dtpNgayVaoLam, DateTime.Parse(dtpNgayVaoLam.Value.ToString(formatDate)) < DateTime.Parse(DateTime.Now.ToString(formatDate)) && dtpNgayVaoLam.Value.ToString(formatDate) != nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text).NgayVaoLam.ToString(formatDate) 
+                            ? "Ngày vào làm không thể nhỏ hơn ngày hiện tại" : string.Empty);
+            errProvider.SetError(txtCCCD, CheckCCCD(txtCCCD.Text) is false ? "Căn cước công dân không đúng định dạng" : string.Empty);
+            errProvider.SetError(dtpNTNS, DateTime.Now.Year - dtpNTNS.Value.Year < 18 ? "Tuổi phải lớn hơn hoặc bằng 18" : string.Empty);
+            errProvider.SetError(txtSDT, CheckSDT(txtSDT.Text) is false ? "Số điện thoại không đúng định dạng" : string.Empty);
+            errProvider.SetError(txtEmail, CheckEmail(txtEmail.Text) is false ? "Email không đúng định dạng" : string.Empty);            
+            errProvider.SetError(dtpThoiHanHopDong, dtpThoiHanHopDong.Value <= dtpNgayVaoLam.Value ? "Thời hạn hợp đồng phải lớn hơn ngày vào làm" : string.Empty);
+            List<Control> controlsToCheck = new List<Control> { txtTaiKhoan, txtMatKhau, txtNhapLaiMatKhau, txtCCCD, dtpNTNS, txtSDT, txtEmail, dtpNgayVaoLam, dtpThoiHanHopDong };
+            foreach (Control control in controlsToCheck)
+            {
+                if (errProvider.GetError(control) != string.Empty)
+                    return false;
+            }
+            return true;*/
+        }
+        private string GetValueAsString(NhanVien nhanVien, string propertyName)
+        {
+            object value;
+            if (propertyName.Contains("."))
+            {
+                string[] propertyNames = propertyName.Split('.');
+                value = nhanVien;
+                foreach (string name in propertyNames)
+                {
+                    value = value?.GetType().GetProperty(name)?.GetValue(value);
+                    if (value == null)
+                        break;
+                }
+                return value?.ToString() ?? string.Empty;
+            }
+            if (propertyName == "NTNS" || propertyName == "NgayVaoLam" || propertyName == "ThoiHanHopDong")
+            {
+                value = typeof(NhanVien).GetProperty(propertyName)?.GetValue(nhanVien);
+                DateTime dateValue = (DateTime)value;
+                return dateValue.ToString("yyyy-MM-dd");
+            }
+            else
+                value = typeof(NhanVien).GetProperty(propertyName)?.GetValue(nhanVien);
+            return value?.ToString() ?? string.Empty;
+        }
+        private string CheckChange()
+        {            
+            List<string> changes = new List<string>();
+            NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);
+            string[] properties = { "ChucVu.PhongBan.TenPhongBan", "ChucVu.TenChucVu", "LoaiHopDong.TenLoaiHopDong", "CCCD", "Ho", "TenLot", "Ten", "NTNS", "GioiTinh", "SDT", "Email", "TrinhDoHocVan", "NgayVaoLam", "ThoiHanHopDong", "TinhTrang", "SoNgayPhep", "LuongCoBan" };
+            string[] labels = { "Chức vụ", "Phòng ban", "Loại hợp đồng", "CCCD", "Họ", "Tên lót", "Tên", "NTNS", "Giới tính", "SDT", "Email", "Trình độ học vấn", "Ngày vào làm", "Thời hạn hợp đồng", "Tình trạng", "Số ngày phép", "Lương cơ bản" };
+            string[] values = { cmbPhongBan.Text, cmbChucVu.Text, cmbLoaiHopDong.Text, txtCCCD.Text, txtHo.Text, txtTenLot.Text, txtTen.Text, dtpNTNS.Text, ChonGioiTinh(), txtSDT.Text, txtEmail.Text, txtTrinhDoHocVan.Text, dtpNgayVaoLam.Text, dtpThoiHanHopDong.Text, txtTinhTrang.Text, txtSoNgayPhep.Text, txtLuongCoBan.Text };
+            for (int i = 0; i < properties.Length; i++)
+            {
+                string currentValue = GetValueAsString(nhanVien, properties[i]);
+                if (values[i] != currentValue)
+                {
+                    if (properties[i] == "LuongCoBan")
+                        changes.Add($"- {labels[i]}: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(currentValue))} -> {labels[i]}: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(values[i]))}");
+                    else
+                        changes.Add($"- {labels[i]}: {currentValue} -> {labels[i]}: {values[i]}");
+                }
+
+            }
+            return string.Join("\n", changes);
         }
         private void BatTatNut()
         {
             bool check;
-            if (string.IsNullOrEmpty(txtMaNV.Text) && CheckChonGioiTinh())
+            if (string.IsNullOrEmpty(txtMaNV.Text))
             {
                 cbHienThiMatKhau.Enabled = true;
                 btnThemPhuCap.Enabled = false;
                 btnSua.Enabled = false;
                 btnXoa.Enabled = false;
                 btnMoKhoa.Enabled = false;
+                btnKhoa.Enabled = false;
                 txtMatKhau.Enabled = true;
                 txtNhapLaiMatKhau.Enabled = true;
                 txtTaiKhoan.ReadOnly = false;
@@ -460,7 +569,15 @@ namespace QuanLyNhanSu.PresentationTier
                 txtTaiKhoan.ReadOnly = true;
                 check = false;
                 if (!string.IsNullOrEmpty(txtNgayKhoa.Text))
+                {
                     btnMoKhoa.Enabled = true;
+                    btnKhoa.Enabled = false;
+                }
+                if (string.IsNullOrEmpty(txtNgayKhoa.Text))
+                {
+                    btnMoKhoa.Enabled = false;
+                    btnKhoa.Enabled = true;
+                }
                 if (CheckEmptyText(check))
                 {
                     btnSua.Enabled = true;
@@ -474,6 +591,7 @@ namespace QuanLyNhanSu.PresentationTier
                 return;
             BatTatNut();            
         }
+        ///////////////////////////////////////////////////////////////////////////////////////
         private void txtNgayKhoa_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtNgayKhoa.Text))
@@ -487,7 +605,6 @@ namespace QuanLyNhanSu.PresentationTier
                 return;
             }
         }
-        ///////////////////////////////////////////////////////////////////////////////////////
         private void txtSoNgayPhep_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -524,6 +641,13 @@ namespace QuanLyNhanSu.PresentationTier
                 e.Handled = true;
             }
         }
+        private void OnlyCharHoTen(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {                
+                e.Handled = true;
+            }
+        }
         ///////////////////////////////////////////////////////////////////////////////////////        
         private void LichSuThaoTac(string thaoTac, string maTT)
         {
@@ -536,65 +660,15 @@ namespace QuanLyNhanSu.PresentationTier
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
-        private string GetValueAsString(NhanVien nhanVien, string propertyName)
-        {
-            object value;
-            if (propertyName.Contains("."))
-            {
-                string[] propertyNames = propertyName.Split('.');
-                value = nhanVien;
-                foreach (string name in propertyNames)
-                {
-                    value = value?.GetType().GetProperty(name)?.GetValue(value);
-                    if (value == null)
-                        break;
-                }
-                return value?.ToString() ?? string.Empty;
-            }
-            if (propertyName == "NTNS" || propertyName == "NgayVaoLam" || propertyName == "ThoiHanHopDong")
-            {
-                value = typeof(NhanVien).GetProperty(propertyName)?.GetValue(nhanVien);
-                DateTime dateValue = (DateTime)value;
-                return dateValue.ToString("yyyy-MM-dd");
-            }
-            else
-                value = typeof(NhanVien).GetProperty(propertyName)?.GetValue(nhanVien);
-            return value?.ToString() ?? string.Empty;
-        }
-        private string CheckChange()
-        {
-            List<string> changes = new List<string>();            
-            NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);
-            string[] properties = { "ChucVu.PhongBan.TenPhongBan", "ChucVu.TenChucVu", "LoaiHopDong.TenLoaiHopDong", "CCCD", "Ho", "TenLot", "Ten", "NTNS", "GioiTinh", "SDT", "Email", "TrinhDoHocVan", "NgayVaoLam", "ThoiHanHopDong", "TinhTrang", "SoNgayPhep", "LuongCoBan" };
-            string[] labels = { "Chức vụ", "Phòng ban", "Loại hợp đồng", "CCCD", "Họ", "Tên lót", "Tên", "NTNS", "Giới tính", "SDT", "Email", "Trình độ học vấn", "Ngày vào làm", "Thời hạn hợp đồng", "Tình trạng", "Số ngày phép", "Lương cơ bản" };
-            string[] values = { cmbPhongBan.Text, cmbChucVu.Text, cmbLoaiHopDong.Text, txtCCCD.Text, txtHo.Text, txtTenLot.Text, txtTen.Text, dtpNTNS.Text, ChonGioiTinh(), txtSDT.Text, txtEmail.Text, txtTrinhDoHocVan.Text, dtpNgayVaoLam.Text, dtpThoiHanHopDong.Text, txtTinhTrang.Text,txtSoNgayPhep.Text, txtLuongCoBan.Text };
-            for (int i = 0; i < properties.Length; i++)
-            {
-                string currentValue = GetValueAsString(nhanVien, properties[i]);
-                if (values[i] != currentValue)
-                {
-                    if (properties[i] == "LuongCoBan")
-                        changes.Add($"- {labels[i]}: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(currentValue))} -> {labels[i]}: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(values[i]))}");
-                    else
-                        changes.Add($"- {labels[i]}: {currentValue} -> {labels[i]}: {values[i]}");
-                }
-                    
-            }
-            return string.Join("\n", changes);
-        }
+        
         private void btnThem_Click(object sender, EventArgs e)
-        {            
-            if (string.IsNullOrEmpty(CheckMatKhau(txtMatKhau.Text)))
-                return;            
-            if (string.IsNullOrEmpty(CheckSDT(txtSDT.Text)))
-                return;            
-            if (string.IsNullOrEmpty(CheckEmail(txtEmail.Text)))
-                return;            
-            if(string.IsNullOrEmpty(CheckCCCD(txtCCCD.Text)))
+        {
+            if (!CheckInputError(btnThem))
+            {
+                MessageBox.Show("Lỗi!","Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
             string gioiTinh = ChonGioiTinh();
-            if (string.IsNullOrEmpty(gioiTinh))
-                return;
             NhanVien newNhanVien = new NhanVien
             {
                 MaNV = "",
@@ -653,18 +727,12 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
-            /*string matKhau = CheckMatKhau(txtMatKhau.Text);//
-            if (string.IsNullOrEmpty(matKhau))//
-                return;//*/
-            if (string.IsNullOrEmpty(CheckSDT(txtSDT.Text)))
+            if (!CheckInputError(btnSua))
+            {
+                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            if (string.IsNullOrEmpty(CheckEmail(txtEmail.Text)))
-                return;
-            if (string.IsNullOrEmpty(CheckCCCD(txtCCCD.Text)))
-                return;
+            }
             string gioiTinh = ChonGioiTinh();
-            if (string.IsNullOrEmpty(gioiTinh))
-                return;
             string chiTietSua = CheckChange();
             NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);                     
             nhanVien.MaCV = cmbChucVu.SelectedValue.ToString();
@@ -751,6 +819,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnHuy_Click(object sender, EventArgs e)
         {
+            errProvider.Clear();
             ClearAllText();
             txtMatKhau.Enabled = txtNhapLaiMatKhau.Enabled = true;
             txtTaiKhoan.ReadOnly = false;
@@ -789,8 +858,7 @@ namespace QuanLyNhanSu.PresentationTier
                 txtMatKhau.UseSystemPasswordChar = txtNhapLaiMatKhau.UseSystemPasswordChar = false;
             else
                 txtMatKhau.UseSystemPasswordChar = txtNhapLaiMatKhau.UseSystemPasswordChar = true;
-        }
-        
+        }        
         private void txtTimKiem_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTimKiem.Text))
@@ -798,6 +866,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void dgvThongTinNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            errProvider.Clear();
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
@@ -842,8 +911,7 @@ namespace QuanLyNhanSu.PresentationTier
                 txtLuongCoBan.Text = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text).LuongCoBan.ToString();
                 txtPhuCap.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(txtMaNV.Text));                
                 txtSoTienNo.Text = dgvThongTinNhanVien.Rows[rowIndex].Cells[26].Value.ToString();
-            }
-            
+            }            
         }
         private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -853,6 +921,17 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Reload();
-        }        
+        }
+        private void btnKhoa_Click(object sender, EventArgs e)
+        {
+            string maNV_Khoa = txtMaNV.Text;
+            if (maNV_Khoa == maNV)
+            {
+                MessageBox.Show($"Không thể khoá tài khoản hiện đang đăng nhập", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            FrmKhoaTaiKhoan open = new FrmKhoaTaiKhoan(maNV, maNV_Khoa);
+            open.ShowDialog();
+        }
     }
 }

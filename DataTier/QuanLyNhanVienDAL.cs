@@ -272,6 +272,7 @@ namespace QuanLyNhanSu.DataTier
                     count++;
                     if (count == 3)
                     {
+                        string maTT = quanLyNhanSu.ThaoTacs.FirstOrDefault(tt => tt.TenThaoTac == "Khoá tài khoản (nhập sai mật khẩu)").MaTT;
                         DateTime lockDate = DateTime.Now.AddMinutes(30);
                         nhanVien.NgayKhoa = lockDate;
                         quanLyNhanSu.SaveChanges();
@@ -281,7 +282,8 @@ namespace QuanLyNhanSu.DataTier
                         {
                             NgayGio = DateTime.Now.ToString(formatDateTime),
                             MaNV = maNV,
-                            ThaoTacThucHien = "Tài khoản " + taiKhoan + " bị khoá đến " + lockDate,
+                            MaTT = maTT,
+                            ThaoTacThucHien = $"Tài khoản {taiKhoan} bị khoá đến {lockDate} (nhập sai mật khẩu 3 lần)",
                         };
                         lichSuThaoTacBUS.Save(newLstt);
                         return false;

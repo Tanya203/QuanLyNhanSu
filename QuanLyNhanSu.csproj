@@ -240,6 +240,12 @@
     <Compile Include="PresentationTier\FrmDangNhap.Designer.cs">
       <DependentUpon>FrmDangNhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationTier\FrmKhoaTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\FrmKhoaTaiKhoan.Designer.cs">
+      <DependentUpon>FrmKhoaTaiKhoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationTier\FrmLichLamViec.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -373,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\FrmDangNhap.resx">
       <DependentUpon>FrmDangNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\FrmKhoaTaiKhoan.resx">
+      <DependentUpon>FrmKhoaTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\FrmLichLamViec.resx">
       <DependentUpon>FrmLichLamViec.cs</DependentUpon>
@@ -589,6 +598,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Icons\unlock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\lock_big.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.Text.Json.6.0.6\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')" />
