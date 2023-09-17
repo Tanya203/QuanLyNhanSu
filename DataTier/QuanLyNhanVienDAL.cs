@@ -150,30 +150,6 @@ namespace QuanLyNhanSu.DataTier
             }
             catch (Exception ex)
             {
-                var errorMessages = new Dictionary<string, string>
-                {
-                    { "UQ_CCCD_CMND", "CCCD/CMND đã tồn tại" },
-                    { "UQ_Email", "Email đã tồn tại" },
-                    { "UQ_SDT", "Số điện thoại đã tồn tại" },
-                    { "UQ_TaiKhoan", "Tài khoản đã tồn tại" },
-                    { "CHECK_CCCD", "Độ dài CCCD phải = 12" },
-                    { "CHECK_GioiTinh", "Giới tính phải là Nam, Nữ hoặc Khác" },
-                    { "CHECK_LuongCoBan", "Lương cơ bản phải >= 0" },
-                    { "CHECK_NgayVaoLam", "Ngày vào làm phải >= ngày hiện tại" },
-                    { "CHECK_NTNS", "Tuổi phải >= 18" },
-                    { "CHECK_SDT", "Độ dài số điện thoại phải = 10" },
-                    { "CHECK_SoNgayPhep", "Số ngày phép phải >= 0" },
-                    { "CHECK_TaiKhoan", "Độ dài tại khoản phải >= 5 và =<15 ký tự" },
-                    { "CHECK_ThoiHanHopDong", "Thời hạn hợp đồng phải lớn hơn ngày vào làm" }
-                };                
-                foreach (var error in errorMessages)
-                {
-                    if (ex.InnerException.ToString().Contains(error.Key))
-                    {
-                        MessageBox.Show(error.Value, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
-                }
                 MessageBoxManager.Yes = "OK";
                 MessageBoxManager.No = "Chi tiết lỗi";
                 DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);

@@ -63,19 +63,6 @@ namespace QuanLyNhanSu.DataTier
             }
             catch (Exception ex)
             {
-                var errorMessages = new Dictionary<string, string>
-                {
-                    { "UQ_TenChucVu", "Tên chức vụ đã tồn tại" },
-                    { "CHECK_LuongKhoiDiem", "Lương khởi điểm phải > 0" },
-                };
-                foreach (var error in errorMessages)
-                {
-                    if (ex.InnerException.ToString().Contains(error.Key))
-                    {
-                        MessageBox.Show(error.Value, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
-                }
                 MessageBoxManager.Yes = "OK";
                 MessageBoxManager.No = "Chi tiết lỗi";
                 DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);

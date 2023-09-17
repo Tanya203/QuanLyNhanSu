@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHeader = new System.Windows.Forms.Panel();
@@ -59,9 +60,11 @@
             this.colTenPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaPB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvThongTinPhongBan = new System.Windows.Forms.DataGridView();
+            this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlHeader.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhongBan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -220,7 +223,7 @@
             this.pnlMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlMenu.Location = new System.Drawing.Point(334, 151);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(1283, 148);
+            this.pnlMenu.Size = new System.Drawing.Size(1320, 148);
             this.pnlMenu.TabIndex = 3;
             // 
             // btnHuy
@@ -298,7 +301,7 @@
             // txtTongSoNhanVien
             // 
             this.txtTongSoNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTongSoNhanVien.Location = new System.Drawing.Point(1029, 27);
+            this.txtTongSoNhanVien.Location = new System.Drawing.Point(1048, 27);
             this.txtTongSoNhanVien.Name = "txtTongSoNhanVien";
             this.txtTongSoNhanVien.Size = new System.Drawing.Size(238, 30);
             this.txtTongSoNhanVien.TabIndex = 5;
@@ -307,7 +310,7 @@
             // 
             this.lblTongSoNhanVien.AutoSize = true;
             this.lblTongSoNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTongSoNhanVien.Location = new System.Drawing.Point(825, 30);
+            this.lblTongSoNhanVien.Location = new System.Drawing.Point(844, 30);
             this.lblTongSoNhanVien.Name = "lblTongSoNhanVien";
             this.lblTongSoNhanVien.Size = new System.Drawing.Size(198, 25);
             this.lblTongSoNhanVien.TabIndex = 11;
@@ -430,6 +433,11 @@
             this.dgvThongTinPhongBan.TabIndex = 11;
             this.dgvThongTinPhongBan.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThongTinPhongBan_CellClick);
             // 
+            // errProvider
+            // 
+            this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errProvider.ContainerControl = this;
+            // 
             // FrmQuanLyPhongBan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -453,6 +461,7 @@
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhongBan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -489,5 +498,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaPB;
         private System.Windows.Forms.DataGridView dgvThongTinPhongBan;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.ErrorProvider errProvider;
     }
 }

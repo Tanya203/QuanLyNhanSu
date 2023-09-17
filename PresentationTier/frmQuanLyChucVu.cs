@@ -7,6 +7,8 @@ using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using WECPOFLogic;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -247,7 +249,7 @@ namespace QuanLyNhanSu.PresentationTier
                     return;
                 }
             }
-        }
+        }        
         /////////////////////////////////////////////////////////////////////////////////////////////
         private void txtLuongKhoiDiem_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -286,58 +288,96 @@ namespace QuanLyNhanSu.PresentationTier
                 changes.Add($"- Lương khởi điểm: : {luongKhoiDiemCu} -> Lương khởi điểm: {luongKhoiDiemMoi}");
             return string.Join("\n", changes);
         }
+        private void ErrorMessage(Exception ex)
+        {
+            MessageBoxManager.Yes = "OK";
+            MessageBoxManager.No = "Chi tiết lỗi";
+            DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (ketQua == DialogResult.No)
+                MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        private bool CheckInputError()
+        {
+            errProvider.Clear();
+            double check;
+            errProvider.SetError(txtTenCV, chucVuBUS.GetChucVu().FirstOrDefault(cv => cv.TenChucVu == txtTenCV.Text && cv.MaCV != txtMaCV.Text) != null ? "Tên chức vụ đã tồn tại" : string.Empty);
+            errProvider.SetError(txtLuongKhoiDiem, double.TryParse(txtLuongKhoiDiem.Text, out check) is false ? "Lương cơ bản không đúng định dạng số" : string.Empty);
+            if (errProvider.GetError(txtTenCV) != string.Empty || errProvider.GetError(txtLuongKhoiDiem) != string.Empty)
+                return false;
+            return true;
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ChucVu chucVu = new ChucVu
+            try
             {
-                MaCV = "",
-                MaPB = cmbPhongBan.SelectedValue.ToString(),
-                TenChucVu = txtTenCV.Text,
-                LuongKhoiDiem = decimal.Parse(txtLuongKhoiDiem.Text),
-            };
-            if (chucVuBUS.Save(chucVu))
-            {
-                string tenChucVu = txtTenCV.Text;
-                string phongBan = cmbPhongBan.Text;
-                string luongKhoiDiem = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongKhoiDiem.Text));
-                string thaoTac = $"Thêm chức vụ: {tenChucVu}\n - Phòng ban: {phongBan}\n - Lương khỏi điểm: {luongKhoiDiem}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                List<PhanQuyen> phanQuyen = new List<PhanQuyen>();
-                ChucVu cv = chucVuBUS.GetChucVu().FirstOrDefault(x => x.TenChucVu == tenChucVu);                
-                foreach(QuyenHan qh in listQuyenHan)
+                if (!CheckInputError())
                 {
-                    PhanQuyen pq = new PhanQuyen
-                    {
-                        MaCV = cv.MaCV,
-                        MaQH = qh.MaQH,
-                        CapQuyen = false,
-                    };
-                    phanQuyen.Add(pq);
+                    MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-                phanQuyenBUS.AddChucVuVaoPhanQuyen(phanQuyen);
+                ChucVu chucVu = new ChucVu
+                {
+                    MaCV = "",
+                    MaPB = cmbPhongBan.SelectedValue.ToString(),
+                    TenChucVu = txtTenCV.Text,
+                    LuongKhoiDiem = decimal.Parse(txtLuongKhoiDiem.Text),
+                };
+                if (chucVuBUS.Save(chucVu))
+                {
+                    string tenChucVu = txtTenCV.Text;
+                    string phongBan = cmbPhongBan.Text;
+                    string luongKhoiDiem = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongKhoiDiem.Text));
+                    string thaoTac = $"Thêm chức vụ: {tenChucVu}\n - Phòng ban: {phongBan}\n - Lương khỏi điểm: {luongKhoiDiem}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    List<PhanQuyen> phanQuyen = new List<PhanQuyen>();
+                    ChucVu cv = chucVuBUS.GetChucVu().FirstOrDefault(x => x.TenChucVu == tenChucVu);
+                    foreach (QuyenHan qh in listQuyenHan)
+                    {
+                        PhanQuyen pq = new PhanQuyen
+                        {
+                            MaCV = cv.MaCV,
+                            MaQH = qh.MaQH,
+                            CapQuyen = false,
+                        };
+                        phanQuyen.Add(pq);
+                    }
+                    phanQuyenBUS.AddChucVuVaoPhanQuyen(phanQuyen);
+                    Reload();
+                }
             }
-            Reload();
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }                    
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
-            string chiTietSua = CheckChange();
-            ChucVu chucVu = new ChucVu
+            try
             {
-                MaCV = txtMaCV.Text,
-                MaPB = cmbPhongBan.ValueMember,
-                TenChucVu = txtTenCV.Text,
-                LuongKhoiDiem = decimal.Parse(txtLuongKhoiDiem.Text),
-            };
-            if (chucVuBUS.Save(chucVu))
+                if (!CheckInputError())
+                {
+                    MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                string chiTietSua = CheckChange();
+                ChucVu chucVu = chucVuBUS.GetChucVu().FirstOrDefault(cv => cv.MaCV == txtMaCV.Text);
+                chucVu.TenChucVu = txtTenCV.Text;
+                chucVu.MaPB = cmbPhongBan.SelectedValue.ToString();                
+                if (chucVuBUS.Save(chucVu))
+                {
+                    string thaoTac = "Sửa chức vụ " + txtMaCV.Text;
+                    if (!string.IsNullOrEmpty(chiTietSua))
+                        thaoTac += ":\n" + chiTietSua;
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
+            }
+            catch(Exception ex)
             {
-                string thaoTac = "Sửa chức vụ " + txtMaCV.Text;
-                if (!string.IsNullOrEmpty(chiTietSua))
-                    thaoTac += ":\n" + chiTietSua;
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                Reload();
-            }                     
+                ErrorMessage(ex);
+            }    
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -365,10 +405,12 @@ namespace QuanLyNhanSu.PresentationTier
         }      
         private void btnHuy_Click(object sender, EventArgs e)
         {
+            errProvider.Clear();
             ClearAllText();
         }
         private void dgvThongTinChucVu_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            errProvider.Clear();
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblThongTinCa = new System.Windows.Forms.Label();
             this.dgvThongTinCa = new System.Windows.Forms.DataGridView();
@@ -62,9 +63,11 @@
             this.btnTroVe = new System.Windows.Forms.Button();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.lblTimKiem = new System.Windows.Forms.Label();
+            this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinCa)).BeginInit();
             this.pnlMenu.SuspendLayout();
             this.pnlHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // lblThongTinCa
@@ -485,6 +488,11 @@
             this.lblTimKiem.TabIndex = 41;
             this.lblTimKiem.Text = "Tìm kiếm:";
             // 
+            // errProvider
+            // 
+            this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errProvider.ContainerControl = this;
+            // 
             // FrmQuanLyCa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -510,6 +518,7 @@
             this.pnlMenu.PerformLayout();
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -550,5 +559,6 @@
         private System.Windows.Forms.Label lblTimKiem;
         private System.Windows.Forms.Button btnQuanLyLoaiCa;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.ErrorProvider errProvider;
     }
 }

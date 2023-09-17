@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using WECPOFLogic;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -250,66 +251,171 @@ namespace QuanLyNhanSu.PresentationTier
                 changes.Add($"- Giờ kết thúc: {ca.GioKetThuc} -> Giờ kết thúc: {gioKetThuc}");
             return string.Join("\n", changes);
         }
-        private void btnThem_Click(object sender, EventArgs e)
-        {            
-            Ca newCa = new Ca
+        private void ErrorMessage(Exception ex)
+        {
+            MessageBoxManager.Yes = "OK";
+            MessageBoxManager.No = "Chi tiết lỗi";
+            DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (ketQua == DialogResult.No)
+                MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        private bool CheckCa()
+        {
+            bool checkGBD = true;
+            bool checkGKT = true;
+            TimeSpan gioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text);
+            TimeSpan gioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text);
+
+            if (gioBatDau == gioKetThuc)
             {
-                MaCa = "",
-                TenCa = txtTenCa.Text,
-                GioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text),
-                GioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text),
-            };
-            if (caBUS.Save(newCa))
-            {
-                string ca = txtTenCa.Text;
-                string gioBatDau = dtpThoiGianBatDau.Text;
-                string gioKetThuc = dtpThoiGianKetThuc.Text;
-                string thaoTac = $"Thêm ca {ca}:\n - Giờ bắt đầu: {gioBatDau}\n - Giờ kết thúc: {gioKetThuc}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
+                errProvider.SetError(dtpThoiGianBatDau, "Giờ bắt đầu và giờ kết thúc trùng nhau");
+                errProvider.SetError(dtpThoiGianKetThuc, "Giờ bắt đầu và giờ kết thúc trùng nhau");
+                return false;
             }
-            Reload();            
+            foreach (Ca ca in caBUS.GetCa().Where(ca => ca.MaCa != txtMaCa.Text))
+            {
+                if (!checkGBD && !checkGKT)
+                    break;
+                if (ca.GioBatDau == gioBatDau && checkGBD)
+                {
+                    checkGBD = false;
+                    errProvider.SetError(dtpThoiGianBatDau, $"Giờ bắt đầu trùng với ca {ca.TenCa}");
+                }
+                if (ca.GioKetThuc == gioKetThuc && checkGKT)
+                {
+                    checkGKT = false;
+                    errProvider.SetError(dtpThoiGianKetThuc, $"Giờ kết thúc trùng với ca {ca.TenCa}");
+                }
+                if (gioBatDau > ca.GioBatDau && gioBatDau < ca.GioKetThuc && checkGBD)
+                {
+                    checkGBD = false;
+                    errProvider.SetError(dtpThoiGianBatDau, $"Giờ bắt đầu nằm giữa ca {ca.TenCa}");
+                }
+                if (gioKetThuc > ca.GioBatDau && gioKetThuc < ca.GioKetThuc && checkGKT)
+                {
+                    checkGKT = false;
+                    errProvider.SetError(dtpThoiGianKetThuc, $"Giờ kết thúc nằm giữa ca {ca.TenCa}");
+                }
+                if ((ca.GioBatDau < ca.GioKetThuc && gioBatDau < ca.GioBatDau && gioKetThuc > ca.GioKetThuc) ||
+                    (ca.GioBatDau > ca.GioKetThuc && checkGBD && checkGKT &&
+                     ((gioBatDau > gioKetThuc) ||
+                      (gioBatDau > ca.GioBatDau && gioKetThuc > ca.GioBatDau) ||
+                      (gioBatDau < ca.GioKetThuc && gioKetThuc < ca.GioKetThuc) ||
+                      (gioBatDau < ca.GioKetThuc && gioKetThuc > ca.GioKetThuc))))
+                {
+                    checkGBD = checkGKT = false;
+                    errProvider.SetError(dtpThoiGianBatDau, $"Giờ bắt đầu và kết thúc chồng qua ca {ca.TenCa}");
+                    errProvider.SetError(dtpThoiGianKetThuc, $"Giờ bắt đầu và kết thúc chồng qua ca {ca.TenCa}");
+                    break;
+                }
+            }
+
+            if (!checkGBD || !checkGKT)
+                return false;
+
+            return true;
+        }
+        private bool CheckErrorInput()
+        {
+            errProvider.Clear();
+            errProvider.SetError(txtTenCa, caBUS.GetCa().FirstOrDefault(ca => ca.TenCa == txtTenCa.Text && ca.MaCa != txtMaCa.Text) != null ? "Tên ca đã tồn tại" : string.Empty);
+            if (errProvider.GetError(txtTenCa) != string.Empty || !CheckCa())
+                return false;
+            return true;
+        }
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!CheckErrorInput())
+                {
+                    MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                Ca newCa = new Ca
+                {
+                    MaCa = "",
+                    TenCa = txtTenCa.Text,
+                    GioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text),
+                    GioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text),
+                };
+                if (caBUS.Save(newCa))
+                {
+                    string ca = txtTenCa.Text;
+                    string gioBatDau = dtpThoiGianBatDau.Text;
+                    string gioKetThuc = dtpThoiGianKetThuc.Text;
+                    string thaoTac = $"Thêm ca {ca}:\n - Giờ bắt đầu: {gioBatDau}\n - Giờ kết thúc: {gioKetThuc}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }
+             
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
-            string chiTietSua = CheckChange();
-            Ca newCa = new Ca
+            try
             {
-                MaCa = txtMaCa.Text,
-                TenCa = txtTenCa.Text,
-                GioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text),
-                GioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text),
-            };
-            if (caBUS.Save(newCa))
+                if (!CheckErrorInput())
+                {
+                    MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                string chiTietSua = CheckChange();
+                Ca newCa = new Ca
+                {
+                    MaCa = txtMaCa.Text,
+                    TenCa = txtTenCa.Text,
+                    GioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text),
+                    GioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text),
+                };
+                if (caBUS.Save(newCa))
+                {
+                    string thaoTac = "Sửa ca " + txtMaCa.Text;
+                    if (!string.IsNullOrEmpty(chiTietSua))
+                        thaoTac += ":\n" + chiTietSua;
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
+            }
+            catch(Exception ex)
             {
-                string thaoTac = "Sửa ca " + txtMaCa.Text;
-                if(!string.IsNullOrEmpty(chiTietSua))
-                    thaoTac += ":\n" + chiTietSua;
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                Reload();
-            }                      
+                ErrorMessage(ex);
+            }
+                                 
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            
-            Ca ca = new Ca
+            try
             {
-                MaCa = txtMaCa.Text,
-            };
-            if (caBUS.Delete(ca))
+                Ca ca = new Ca
+                {
+                    MaCa = txtMaCa.Text,
+                };
+                if (caBUS.Delete(ca))
+                {
+                    string tenCa = txtTenCa.Text;
+                    string gioBatDau = dtpThoiGianBatDau.Text;
+                    string gioKetThuc = dtpThoiGianKetThuc.Text;
+                    string thaoTac = $"Xoá ca {tenCa}:\n - Giờ bắt đầu: {gioBatDau}\n - Giờ kết thúc: {gioKetThuc}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
+            }
+            catch (Exception ex)
             {
-                string tenCa = txtTenCa.Text;
-                string gioBatDau = dtpThoiGianBatDau.Text;
-                string gioKetThuc = dtpThoiGianKetThuc.Text;
-                string thaoTac = $"Xoá ca {tenCa}:\n - Giờ bắt đầu: {gioBatDau}\n - Giờ kết thúc: {gioKetThuc}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                Reload();
-            }                    
+                ErrorMessage(ex);
+            }                              
         }
         private void btnHuy_Click(object sender, EventArgs e)
         {
+            errProvider.Clear();
             ClearAllText();
         }
         private void btnQuanLyLoaiCa_Click(object sender, EventArgs e)
@@ -333,6 +439,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void dgvThongTinCa_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            errProvider.Clear();
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;

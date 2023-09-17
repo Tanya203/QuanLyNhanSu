@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using WECPOFLogic;
+
 namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmQuanLyPhongBan : Form
@@ -193,6 +195,7 @@ namespace QuanLyNhanSu.PresentationTier
                 }
             }
         }
+        
         //////////////////////////////////////////////////////////////////////////////////////////////////
         private void LichSuThaoTac(string thaoTac, string maTT)
         {
@@ -214,56 +217,101 @@ namespace QuanLyNhanSu.PresentationTier
                 changes.Add($"- Tên phòng ban {phongBan.TenPhongBan} -> Tên phòng ban: {tenPhongBan}");
             return string.Join("\n", changes);
         }
+        private void ErrorMessage(Exception ex)
+        {
+            MessageBoxManager.Yes = "OK";
+            MessageBoxManager.No = "Chi tiết lỗi";
+            DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (ketQua == DialogResult.No)
+                MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        private bool CheckErrorInput()
+        {
+            errProvider.Clear();
+            errProvider.SetError(txtTenPB, phongBanBUS.GetPhongBan().FirstOrDefault(pb => pb.TenPhongBan == txtTenPB.Text && pb.MaPB != txtMaPB.Text) != null ? "Tên phòng ban đã tồn tại" : string.Empty);
+            if (errProvider.GetError(txtTenPB) != string.Empty)
+                return false;
+            return true;
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            PhongBan newPhongBan = new PhongBan
+            try
             {
-                MaPB = "",
-                TenPhongBan = txtTenPB.Text
-            };
-            if (phongBanBUS.Save(newPhongBan))
-            {
-                string thaoTac = $"Thêm phòng ban {txtTenPB.Text}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
+                if (!CheckErrorInput())
+                {
+                    MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                PhongBan newPhongBan = new PhongBan
+                {
+                    MaPB = "",
+                    TenPhongBan = txtTenPB.Text
+                };
+                if (phongBanBUS.Save(newPhongBan))
+                {
+                    string thaoTac = $"Thêm phòng ban {txtTenPB.Text}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }                
             }
-            Reload();
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }            
         }
         private void btnHuy_Click(object sender, EventArgs e)
         {
+            errProvider.Clear();
             ClearAllText();
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
-            string chiTietSua = CheckChange();
-            PhongBan newPhongBan = new PhongBan
+            try
             {
-                MaPB = txtMaPB.Text,
-                TenPhongBan = txtTenPB.Text
-            };
-            if(phongBanBUS.Save(newPhongBan))
+                if(!CheckErrorInput())
+                {
+                    MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                string chiTietSua = CheckChange();
+                PhongBan phongBan = phongBanBUS.GetPhongBan().FirstOrDefault(pb => pb.MaPB == txtMaPB.Text);
+                phongBan.TenPhongBan = txtTenPB.Text;
+                if (phongBanBUS.Save(phongBan))
+                {
+                    string thaoTac = $"Sửa phòng ban {txtMaPB.Text}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
+                    if (!string.IsNullOrEmpty(chiTietSua))
+                        thaoTac += $":\n{chiTietSua}";
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
+            }
+            catch(Exception ex)
             {
-                string thaoTac = $"Sửa phòng ban {txtMaPB.Text}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
-                if (!string.IsNullOrEmpty(chiTietSua))
-                    thaoTac += $":\n{chiTietSua}";
-                LichSuThaoTac(thaoTac, maTT);
-                Reload();
-            }                      
+                ErrorMessage(ex);
+            }                          
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            PhongBan phongBan = new PhongBan
+            try
             {
-                MaPB = txtMaPB.Text
-            };
-            if (phongBanBUS.Delete(phongBan))
+                PhongBan phongBan = new PhongBan
+                {
+                    MaPB = txtMaPB.Text
+                };
+                if (phongBanBUS.Delete(phongBan))
+                {
+                    string thaoTac = $"Xoá phòng ban {txtTenPB.Text}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
+            }
+            catch(Exception ex)
             {
-                string thaoTac = $"Xoá phòng ban {txtTenPB.Text}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                Reload();
-            }            
+                ErrorMessage(ex);
+            }                    
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
@@ -275,6 +323,7 @@ namespace QuanLyNhanSu.PresentationTier
 
         private void dgvThongTinPhongBan_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            errProvider.Clear();
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
