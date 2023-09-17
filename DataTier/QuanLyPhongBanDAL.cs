@@ -39,7 +39,7 @@ namespace QuanLyNhanSu.DataTier.Models
             }).Where(pb => pb.TenPhongBan.Contains(timKiem) ||
                      pb.MaPB.Contains(timKiem)).OrderBy(pb => pb.MaPB);
             return danhSachPhongBan;
-        }        
+        }
         public bool Save(PhongBan phongBan)
         {
             try
@@ -48,30 +48,21 @@ namespace QuanLyNhanSu.DataTier.Models
                 quanLyNhanSu.SaveChanges();
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
-            }            
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-                if (ex.InnerException.ToString().Contains("UQ_TenPhongBan"))
+                MessageBoxManager.Yes = "OK";
+                MessageBoxManager.No = "Chi tiết lỗi";
+                DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (ketQua == DialogResult.No)
                 {
-                    MessageBox.Show("Tên phòng ban đã tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
+                    if (!string.IsNullOrEmpty(ex.InnerException.ToString()))
+                        MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                        MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else
-                {
-                    MessageBoxManager.Yes = "OK";
-                    MessageBoxManager.No = "Chi tiết lỗi";
-                    DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                    if (ketQua == DialogResult.No)
-                    {
-                        if (!string.IsNullOrEmpty(ex.InnerException.ToString()))
-                            MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        else
-                            MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    return false;
-                }
-                    
-            }            
+                return false;
+            }
         }
         public bool Delete(string maPB)
         {

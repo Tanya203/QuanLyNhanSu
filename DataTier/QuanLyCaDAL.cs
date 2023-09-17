@@ -57,21 +57,6 @@ namespace QuanLyNhanSu.DataTier
             }
             catch (Exception ex)
             {
-                var errorMessages = new Dictionary<string, string>
-                {
-                    { "UQ_GioBatDau", "Giờ bắt đầu đã tồn tại"},
-                    { "UQ_GioKetThuc", "Giờ kết thúc đã tồn tại" },
-                    { "UQ_TenCa", "Tên ca đã tồn tại" },
-                    { "TIME_CHECK_ERROR", "Giờ bắt đầu hoặc giờ kết thúc đã trùng hoặc chồng qua các ca khác"},
-                };
-                foreach (var error in errorMessages)
-                {
-                    if (ex.InnerException.ToString().Contains(error.Key))
-                    {
-                        MessageBox.Show(error.Value, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
-                }
                 MessageBoxManager.Yes = "OK";
                 MessageBoxManager.No = "Chi tiết lỗi";
                 DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);

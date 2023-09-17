@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using WECPOFLogic;
@@ -411,87 +412,7 @@ namespace QuanLyNhanSu.PresentationTier
                 }                   
             }
             return true;
-        }
-
-        private bool CheckInputError(Button button)
-        {
-            bool flag = true;
-            errProvider.Clear();
-            var validationRules = new Dictionary<Control, Func<bool>>
-            {
-                { dtpNgayVaoLam, () => DateTime.Parse(dtpNgayVaoLam.Value.ToString(formatDate)) < DateTime.Parse(DateTime.Now.ToString(formatDate)) },
-                { txtCCCD, () => !CheckCCCD(txtCCCD.Text) },
-                { dtpNTNS, () => DateTime.Now.Year - dtpNTNS.Value.Year < 18 },
-                { txtSDT, () => !CheckSDT(txtSDT.Text) },
-                { txtEmail, () => !CheckEmail(txtEmail.Text) },
-                { dtpThoiHanHopDong, () => dtpThoiHanHopDong.Value <= dtpNgayVaoLam.Value }
-            };
-            if (button == btnThem)
-            {
-                validationRules.Add(txtTaiKhoan, () => nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.TaiKhoan == txtTaiKhoan.Text) != null || txtTaiKhoan.Text.Length < 5);
-                validationRules.Add(txtMatKhau, () => !CheckMatKhau(txtMatKhau.Text));
-                validationRules.Add(txtNhapLaiMatKhau, () => txtMatKhau.Text != txtNhapLaiMatKhau.Text);
-            }
-            var errorMessages = new Dictionary<Control, string>
-            {
-                { txtTaiKhoan, "Tài khoản đã tồn tại hoặc ít hơn 5 ký tự" },
-                { txtMatKhau, "Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!" },
-                { txtNhapLaiMatKhau, "Mật khẩu nhập lại không khớp" },
-                { dtpNgayVaoLam, "Ngày vào làm không thể nhỏ hơn ngày hiện tại" },
-                { txtCCCD, "Căn cước công dân không đúng định dạng" },
-                { dtpNTNS, "Tuổi phải lớn hơn hoặc bằng 18" },
-                { txtSDT, "Số điện thoại không đúng định dạng" },
-                { txtEmail, "Email không đúng định dạng" },
-                { dtpThoiHanHopDong, "Thời hạn hợp đồng phải lớn hơn ngày vào làm" }
-            };             
-            foreach (var rule in validationRules)
-            {
-                var control = rule.Key;
-                var validate = rule.Value;
-                if (control is DateTimePicker &&  button == btnSua )
-                {
-                    if (validate() && dtpNgayVaoLam.Value.ToString(formatDate) != nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text).NgayVaoLam.ToString(formatDate))
-                    {
-                        errProvider.SetError(control, errorMessages[control]);
-                        flag = false;
-                    }
-                }
-                else
-                {
-                    if (validate())
-                    {
-                        errProvider.SetError(control, errorMessages[control]);
-                        flag = false;
-                    }
-                }
-            }
-            if(flag)
-                return true;
-            return false;
-            /*errProvider.Clear();
-            if(button == btnThem)
-            {
-                errProvider.SetError(txtTaiKhoan, nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.TaiKhoan == txtTaiKhoan.Text) != null ? "Tài khoản đã tồn tại" : string.Empty);
-                errProvider.SetError(txtMatKhau, CheckMatKhau(txtMatKhau.Text) is false ? "Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!" : string.Empty);
-                errProvider.SetError(txtNhapLaiMatKhau, txtMatKhau.Text != txtNhapLaiMatKhau.Text ? "Mật khẩu nhập lại không khớp" : string.Empty);
-                errProvider.SetError(dtpNgayVaoLam, DateTime.Parse(dtpNgayVaoLam.Value.ToString(formatDate)) < DateTime.Parse(DateTime.Now.ToString(formatDate)) ? "Ngày vào làm không thể nhỏ hơn ngày hiện tại" : string.Empty);
-            }
-            else
-                errProvider.SetError(dtpNgayVaoLam, DateTime.Parse(dtpNgayVaoLam.Value.ToString(formatDate)) < DateTime.Parse(DateTime.Now.ToString(formatDate)) && dtpNgayVaoLam.Value.ToString(formatDate) != nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text).NgayVaoLam.ToString(formatDate) 
-                            ? "Ngày vào làm không thể nhỏ hơn ngày hiện tại" : string.Empty);
-            errProvider.SetError(txtCCCD, CheckCCCD(txtCCCD.Text) is false ? "Căn cước công dân không đúng định dạng" : string.Empty);
-            errProvider.SetError(dtpNTNS, DateTime.Now.Year - dtpNTNS.Value.Year < 18 ? "Tuổi phải lớn hơn hoặc bằng 18" : string.Empty);
-            errProvider.SetError(txtSDT, CheckSDT(txtSDT.Text) is false ? "Số điện thoại không đúng định dạng" : string.Empty);
-            errProvider.SetError(txtEmail, CheckEmail(txtEmail.Text) is false ? "Email không đúng định dạng" : string.Empty);            
-            errProvider.SetError(dtpThoiHanHopDong, dtpThoiHanHopDong.Value <= dtpNgayVaoLam.Value ? "Thời hạn hợp đồng phải lớn hơn ngày vào làm" : string.Empty);
-            List<Control> controlsToCheck = new List<Control> { txtTaiKhoan, txtMatKhau, txtNhapLaiMatKhau, txtCCCD, dtpNTNS, txtSDT, txtEmail, dtpNgayVaoLam, dtpThoiHanHopDong };
-            foreach (Control control in controlsToCheck)
-            {
-                if (errProvider.GetError(control) != string.Empty)
-                    return false;
-            }
-            return true;*/
-        }
+        }        
         private string GetValueAsString(NhanVien nhanVien, string propertyName)
         {
             object value;
@@ -587,6 +508,15 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void EnableButtons(object sender, EventArgs e)
         {
+            /*TextBox check = sender as TextBox;
+            string clipBroad = Clipboard.GetText();
+            string originalText = txtLuongCoBan.Text;
+            double test;
+            if(sender == txtLuongCoBan && !string.IsNullOrEmpty(txtLuongCoBan.Text))
+            {
+                if (double.TryParse(txtLuongCoBan.Text, out test) is false*//* && txtLuongCoBan.Text.Contains(clipBroad)*//*)                                  
+                    txtLuongCoBan.Text = originalText.Replace(clipBroad, string.Empty);                
+            }*/
             if (!checkThaoTac)
                 return;
             BatTatNut();            
@@ -647,8 +577,9 @@ namespace QuanLyNhanSu.PresentationTier
             {                
                 e.Handled = true;
             }
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////        
+        }       
+       
+        ///////////////////////////////////////////////////////////////////////////////////////      
         private void LichSuThaoTac(string thaoTac, string maTT)
         {
             LichSuThaoTac newLstt = new LichSuThaoTac
@@ -660,155 +591,266 @@ namespace QuanLyNhanSu.PresentationTier
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
-        
+        private void ErrorMessage(Exception ex)
+        {
+            MessageBoxManager.Yes = "OK";
+            MessageBoxManager.No = "Chi tiết lỗi";
+            DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (ketQua == DialogResult.No)
+                MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        private bool CheckInputError(Button button)
+        {
+            bool flag = true;
+            double check;
+            errProvider.Clear();
+            var validationRules = new Dictionary<Control, Func<bool>>
+            {
+                { dtpNgayVaoLam, () => DateTime.Parse(dtpNgayVaoLam.Value.ToString(formatDate)) < DateTime.Parse(DateTime.Now.ToString(formatDate)) },
+                { txtCCCD, () => !CheckCCCD(txtCCCD.Text) || nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.CCCD == txtCCCD.Text && nv.MaNV != txtMaNV.Text) != null},
+                { dtpNTNS, () => DateTime.Now.Year - dtpNTNS.Value.Year < 18 },
+                { txtSDT, () => !CheckSDT(txtSDT.Text) || nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.SDT == txtSDT.Text && nv.MaNV != txtMaNV.Text) != null},
+                { txtEmail, () => !CheckEmail(txtEmail.Text) || nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.Email == txtEmail.Text && nv.MaNV != txtMaNV.Text) != null},
+                { txtLuongCoBan, () => double.TryParse(txtLuongCoBan.Text, out check) is false },
+                { dtpThoiHanHopDong, () => dtpThoiHanHopDong.Value <= dtpNgayVaoLam.Value },
+            };
+            if (button == btnThem)
+            {
+                validationRules.Add(txtTaiKhoan, () => nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.TaiKhoan == txtTaiKhoan.Text) != null || txtTaiKhoan.Text.Length < 5);
+                validationRules.Add(txtMatKhau, () => !CheckMatKhau(txtMatKhau.Text));
+                validationRules.Add(txtNhapLaiMatKhau, () => txtMatKhau.Text != txtNhapLaiMatKhau.Text);
+            }
+            var errorMessages = new Dictionary<Control, string>
+            {
+                { txtTaiKhoan, "Tài khoản đã tồn tại hoặc ít hơn 5 ký tự" },
+                { txtMatKhau, "Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!" },
+                { txtNhapLaiMatKhau, "Mật khẩu nhập lại không khớp" },
+                { dtpNgayVaoLam, "Ngày vào làm không thể nhỏ hơn ngày hiện tại" },
+                { txtCCCD, "Căn cước công dân không đúng định dạng hoặc đã tồn tại" },
+                { dtpNTNS, "Tuổi phải lớn hơn hoặc bằng 18" },
+                { txtSDT, "Số điện thoại không đúng định dạng hoặc đã tồn tại" },
+                { txtEmail, "Email không đúng định dạng hoặc đã tồn tại" },
+                { dtpThoiHanHopDong, "Thời hạn hợp đồng phải lớn hơn ngày vào làm" },
+                { txtLuongCoBan, "Lương cơ bản không đúng định dạng số" }
+            };
+            foreach (var rule in validationRules)
+            {
+                var control = rule.Key;
+                var validate = rule.Value;
+                if (control is DateTimePicker && button == btnSua)
+                {
+                    if (validate() && dtpNgayVaoLam.Value.ToString(formatDate) != nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text).NgayVaoLam.ToString(formatDate))
+                    {
+                        errProvider.SetError(control, errorMessages[control]);
+                        flag = false;
+                    }
+                }
+                else
+                {
+                    if (validate())
+                    {
+                        errProvider.SetError(control, errorMessages[control]);
+                        flag = false;
+                    }
+                }
+            }
+            if (flag)
+                return true;
+            return false;
+            /*errProvider.Clear();
+            if(button == btnThem)
+            {
+                errProvider.SetError(txtTaiKhoan, nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.TaiKhoan == txtTaiKhoan.Text) != null ? "Tài khoản đã tồn tại" : string.Empty);
+                errProvider.SetError(txtMatKhau, CheckMatKhau(txtMatKhau.Text) is false ? "Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!" : string.Empty);
+                errProvider.SetError(txtNhapLaiMatKhau, txtMatKhau.Text != txtNhapLaiMatKhau.Text ? "Mật khẩu nhập lại không khớp" : string.Empty);
+                errProvider.SetError(dtpNgayVaoLam, DateTime.Parse(dtpNgayVaoLam.Value.ToString(formatDate)) < DateTime.Parse(DateTime.Now.ToString(formatDate)) ? "Ngày vào làm không thể nhỏ hơn ngày hiện tại" : string.Empty);
+            }
+            else
+                errProvider.SetError(dtpNgayVaoLam, DateTime.Parse(dtpNgayVaoLam.Value.ToString(formatDate)) < DateTime.Parse(DateTime.Now.ToString(formatDate)) && dtpNgayVaoLam.Value.ToString(formatDate) != nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text).NgayVaoLam.ToString(formatDate) 
+                            ? "Ngày vào làm không thể nhỏ hơn ngày hiện tại" : string.Empty);
+            errProvider.SetError(txtCCCD, CheckCCCD(txtCCCD.Text) is false ? "Căn cước công dân không đúng định dạng" : string.Empty);
+            errProvider.SetError(dtpNTNS, DateTime.Now.Year - dtpNTNS.Value.Year < 18 ? "Tuổi phải lớn hơn hoặc bằng 18" : string.Empty);
+            errProvider.SetError(txtSDT, CheckSDT(txtSDT.Text) is false ? "Số điện thoại không đúng định dạng" : string.Empty);
+            errProvider.SetError(txtEmail, CheckEmail(txtEmail.Text) is false ? "Email không đúng định dạng" : string.Empty);            
+            errProvider.SetError(dtpThoiHanHopDong, dtpThoiHanHopDong.Value <= dtpNgayVaoLam.Value ? "Thời hạn hợp đồng phải lớn hơn ngày vào làm" : string.Empty);
+            List<Control> controlsToCheck = new List<Control> { txtTaiKhoan, txtMatKhau, txtNhapLaiMatKhau, txtCCCD, dtpNTNS, txtSDT, txtEmail, dtpNgayVaoLam, dtpThoiHanHopDong };
+            foreach (Control control in controlsToCheck)
+            {
+                if (errProvider.GetError(control) != string.Empty)
+                    return false;
+            }
+            return true;*/
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (!CheckInputError(btnThem))
+            try
             {
-                MessageBox.Show("Lỗi!","Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (!CheckInputError(btnThem))
+                {
+                    MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                string gioiTinh = ChonGioiTinh();
+                NhanVien newNhanVien = new NhanVien
+                {
+                    MaNV = "",
+                    MaCV = cmbChucVu.SelectedValue.ToString(),
+                    MaLHD = cmbLoaiHopDong.SelectedValue.ToString(),
+                    TaiKhoan = txtTaiKhoan.Text,
+                    MatKhau = txtMatKhau.Text,
+                    CCCD = txtCCCD.Text,
+                    Ho = txtHo.Text,
+                    TenLot = txtTenLot.Text,
+                    Ten = txtTen.Text,
+                    NTNS = dtpNTNS.Value,
+                    SoNha = txtSoNha.Text,
+                    TenDuong = txtDuong.Text,
+                    Phuong_Xa = txtPhuong_Xa.Text,
+                    Quan_Huyen = txtQuan_Huyen.Text,
+                    Tinh_ThanhPho = txtTinh_ThanhPho.Text,
+                    GioiTinh = gioiTinh,
+                    SDT = txtSDT.Text,
+                    Email = txtEmail.Text,
+                    TrinhDoHocVan = txtTrinhDoHocVan.Text,
+                    NgayVaoLam = dtpNgayVaoLam.Value,
+                    ThoiHanHopDong = dtpThoiHanHopDong.Value,
+                    TinhTrang = txtTinhTrang.Text,
+                    SoNgayPhep = int.Parse(txtSoNgayPhep.Text),
+                    LuongCoBan = decimal.Parse(txtLuongCoBan.Text),
+                    //hinh
+                };
+                if (nhanVienBUS.Save(newNhanVien))
+                {
+                    string thaoTac = $"Thêm nhân viên {txtHo.Text} {txtHo.Text} {txtTen.Text}:\n" +
+                                    $"- Phòng ban: {cmbPhongBan.Text}\n" +
+                                    $"- Chức vụ: {cmbChucVu.Text}\n" +
+                                    $"- Loại hợp đồng: {cmbLoaiHopDong.Text}\n" +
+                                    $"- Tài khoản: {txtTaiKhoan.Text}\n" +
+                                    $"- CCCD: {txtCCCD.Text}\n" +
+                                    $"- NTNS: {dtpNTNS.Text}\n" +
+                                    $"- Số nhà: {txtSoNha.Text}\n" +
+                                    $"- Đường: {txtDuong.Text}\n" +
+                                    $"- Phường/xã: {txtPhuong_Xa.Text}\n" +
+                                    $"- Quận/huyện: {txtQuan_Huyen.Text}\n" +
+                                    $"- Tỉnh/Thành Phố: {txtTinh_ThanhPho.Text}\n" +
+                                    $"- Giới tính: {ChonGioiTinh()}\n" +
+                                    $"- Số điện thoại: {txtSDT.Text}\n" +
+                                    $"- Email: {txtEmail.Text}\n" +
+                                    $"- Trình độ học vấn: {txtTrinhDoHocVan.Text}\n" +
+                                    $"- Ngày vào làm: {dtpNgayVaoLam.Text}\n" +
+                                    $"- Thời hạn hợp đồng: {dtpThoiHanHopDong.Text}\n" +
+                                    $"- Tình trạng: {txtTinhTrang.Text}\n" +
+                                    $"- Số ngày phép: {txtSoNgayPhep.Text}\n" +
+                                    $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongCoBan.Text))}\n";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }                
             }
-            string gioiTinh = ChonGioiTinh();
-            NhanVien newNhanVien = new NhanVien
+            catch(Exception ex)
             {
-                MaNV = "",
-                MaCV = cmbChucVu.SelectedValue.ToString(),
-                MaLHD = cmbLoaiHopDong.SelectedValue.ToString(),
-                TaiKhoan = txtTaiKhoan.Text,
-                MatKhau = txtMatKhau.Text,
-                CCCD = txtCCCD.Text,
-                Ho = txtHo.Text,
-                TenLot = txtTenLot.Text,
-                Ten = txtTen.Text,
-                NTNS = dtpNTNS.Value,
-                SoNha = txtSoNha.Text,
-                TenDuong = txtDuong.Text,
-                Phuong_Xa = txtPhuong_Xa.Text,
-                Quan_Huyen = txtQuan_Huyen.Text,
-                Tinh_ThanhPho = txtTinh_ThanhPho.Text,
-                GioiTinh = gioiTinh,
-                SDT = txtSDT.Text,
-                Email = txtEmail.Text,
-                TrinhDoHocVan = txtTrinhDoHocVan.Text,
-                NgayVaoLam = dtpNgayVaoLam.Value,
-                ThoiHanHopDong = dtpThoiHanHopDong.Value,
-                TinhTrang = txtTinhTrang.Text,
-                SoNgayPhep = int.Parse(txtSoNgayPhep.Text),
-                LuongCoBan = decimal.Parse(txtLuongCoBan.Text),
-                //hinh
-            };
-            if (nhanVienBUS.Save(newNhanVien))
-            {
-                string thaoTac = $"Thêm nhân viên {txtHo.Text} {txtHo.Text} {txtTen.Text}:\n" +
-                                $"- Phòng ban: {cmbPhongBan.Text}\n" +
-                                $"- Chức vụ: {cmbChucVu.Text}\n" +
-                                $"- Loại hợp đồng: {cmbLoaiHopDong.Text}\n" +
-                                $"- Tài khoản: {txtTaiKhoan.Text}\n" +
-                                $"- CCCD: {txtCCCD.Text}\n" +
-                                $"- NTNS: {dtpNTNS.Text}\n" +
-                                $"- Số nhà: {txtSoNha.Text}\n" +
-                                $"- Đường: {txtDuong.Text}\n" +
-                                $"- Phường/xã: {txtPhuong_Xa.Text}\n" +
-                                $"- Quận/huyện: {txtQuan_Huyen.Text}\n" +
-                                $"- Tỉnh/Thành Phố: {txtTinh_ThanhPho.Text}\n" +
-                                $"- Giới tính: {ChonGioiTinh()}\n" +
-                                $"- Số điện thoại: {txtSDT.Text}\n" +
-                                $"- Email: {txtEmail.Text}\n" +
-                                $"- Trình độ học vấn: {txtTrinhDoHocVan.Text}\n" +
-                                $"- Ngày vào làm: {dtpNgayVaoLam.Text}\n" +
-                                $"- Thời hạn hợp đồng: {dtpThoiHanHopDong.Text}\n" +
-                                $"- Tình trạng: {txtTinhTrang.Text}\n" +
-                                $"- Số ngày phép: {txtSoNgayPhep.Text}\n" +
-                                $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongCoBan.Text))}\n";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-            }
-            Reload();
+                ErrorMessage(ex);
+            }           
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if (!CheckInputError(btnSua))
+            try
             {
-                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (!CheckInputError(btnSua))
+                {
+                    MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                string gioiTinh = ChonGioiTinh();
+                string chiTietSua = CheckChange();
+                NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);
+                nhanVien.MaCV = cmbChucVu.SelectedValue.ToString();
+                nhanVien.MaLHD = cmbLoaiHopDong.SelectedValue.ToString();
+                /*nhanVien.MatKhau = matKhau;//*/
+                nhanVien.CCCD = txtCCCD.Text;
+                nhanVien.Ho = txtHo.Text;
+                nhanVien.TenLot = txtTenLot.Text;
+                nhanVien.Ten = txtTen.Text;
+                nhanVien.NTNS = dtpNTNS.Value;
+                nhanVien.SoNha = txtSoNha.Text;
+                nhanVien.TenDuong = txtDuong.Text;
+                nhanVien.Phuong_Xa = txtPhuong_Xa.Text;
+                nhanVien.Quan_Huyen = txtQuan_Huyen.Text;
+                nhanVien.Tinh_ThanhPho = txtTinh_ThanhPho.Text;
+                nhanVien.GioiTinh = gioiTinh;
+                nhanVien.SDT = txtSDT.Text;
+                nhanVien.Email = txtEmail.Text;
+                nhanVien.TrinhDoHocVan = txtTrinhDoHocVan.Text;
+                nhanVien.NgayVaoLam = dtpNgayVaoLam.Value;
+                nhanVien.ThoiHanHopDong = dtpThoiHanHopDong.Value;
+                nhanVien.TinhTrang = txtTinhTrang.Text;
+                nhanVien.SoNgayPhep = int.Parse(txtSoNgayPhep.Text);
+                nhanVien.LuongCoBan = decimal.Parse(txtLuongCoBan.Text);
+                //hinh
+                if (nhanVienBUS.Save(nhanVien))
+                {
+                    string thaoTac = $"Sửa nhân viên {txtMaNV.Text}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
+                    if (!string.IsNullOrEmpty(chiTietSua))
+                        thaoTac += $":\n{chiTietSua}";
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
             }
-            string gioiTinh = ChonGioiTinh();
-            string chiTietSua = CheckChange();
-            NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);                     
-            nhanVien.MaCV = cmbChucVu.SelectedValue.ToString();
-            nhanVien.MaLHD = cmbLoaiHopDong.SelectedValue.ToString();
-            /*nhanVien.MatKhau = matKhau;//*/
-            nhanVien.CCCD = txtCCCD.Text;
-            nhanVien.Ho = txtHo.Text;
-            nhanVien.TenLot = txtTenLot.Text;
-            nhanVien.Ten = txtTen.Text;
-            nhanVien.NTNS = dtpNTNS.Value;
-            nhanVien.SoNha = txtSoNha.Text;
-            nhanVien.TenDuong = txtDuong.Text;
-            nhanVien.Phuong_Xa = txtPhuong_Xa.Text;
-            nhanVien.Quan_Huyen = txtQuan_Huyen.Text;
-            nhanVien.Tinh_ThanhPho = txtTinh_ThanhPho.Text;
-            nhanVien.GioiTinh = gioiTinh;
-            nhanVien.SDT = txtSDT.Text;
-            nhanVien.Email = txtEmail.Text;
-            nhanVien.TrinhDoHocVan = txtTrinhDoHocVan.Text;
-            nhanVien.NgayVaoLam = dtpNgayVaoLam.Value;
-            nhanVien.ThoiHanHopDong = dtpThoiHanHopDong.Value;
-            nhanVien.TinhTrang = txtTinhTrang.Text;
-            nhanVien.SoNgayPhep = int.Parse(txtSoNgayPhep.Text);
-            nhanVien.LuongCoBan = decimal.Parse(txtLuongCoBan.Text);
-            //hinh
-            if (nhanVienBUS.Save(nhanVien))
+            catch(Exception ex)
             {
-                string thaoTac = $"Sửa nhân viên {txtMaNV.Text}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
-                if (!string.IsNullOrEmpty(chiTietSua))
-                    thaoTac += $":\n{chiTietSua}";
-                LichSuThaoTac(thaoTac, maTT);
-                Reload();
-            }                      
+                ErrorMessage(ex);
+            }
+                      
         }      
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (txtMaNV.Text == maNV)
+            try
             {
-                MessageBox.Show("Không thể xoá tài khoản đang đăng nhập", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                ClearAllText();
-                return;
-            }                
-            NhanVien newNhanVien = new NhanVien
-            {
-                MaNV = txtMaNV.Text,                
-            };
-            if (nhanVienBUS.Delete(newNhanVien.MaNV))
-            {
-                string thaoTac = $"Xoá nhân viên {txtHo.Text} {txtHo.Text} {txtTen.Text}:\n" +
-                                $"- Phòng ban: {cmbPhongBan.Text}\n" +
-                                $"- Chức vụ: {cmbChucVu.Text}\n" +
-                                $"- Loại hợp đồng: {cmbLoaiHopDong.Text}\n" +
-                                $"- Tài khoản: {txtTaiKhoan.Text}\n" +
-                                $"- CCCD: {txtCCCD.Text}\n" +
-                                $"- NTNS: {dtpNTNS.Text}\n" +
-                                $"- Số nhà: {txtSoNha.Text}\n" +
-                                $"- Đường: {txtDuong.Text}\n" +
-                                $"- Phường/xã: {txtPhuong_Xa.Text}\n" +
-                                $"- Quận/huyện: {txtQuan_Huyen.Text}\n" +
-                                $"- Tỉnh/Thành Phố: {txtTinh_ThanhPho.Text}\n" +
-                                $"- Giới tính: {ChonGioiTinh()}\n" +
-                                $"- Số điện thoại: {txtSDT.Text}\n" +
-                                $"- Email: {txtEmail.Text}\n" +
-                                $"- Trình độ học vấn: {txtTrinhDoHocVan.Text}\n" +
-                                $"- Ngày vào làm: {dtpNgayVaoLam.Text}\n" +
-                                $"- Thời hạn hợp đồng: {dtpThoiHanHopDong.Text}\n" +
-                                $"- Tình trạng: {txtTinhTrang.Text}\n" +
-                                $"- Số ngày phép: {txtSoNgayPhep.Text}\n" +
-                                $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongCoBan.Text))}\n" +
-                                $"- Phụ cấp: {String.Format(fVND, "{0:N3} ₫", txtPhuCap.Text)}\n" +
-                                $"- Số tiền nợ: {String.Format(fVND, "{0:N3} ₫", txtSoTienNo.Text)}\n";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                Reload();
+                if (txtMaNV.Text == maNV)
+                {
+                    MessageBox.Show("Không thể xoá tài khoản đang đăng nhập", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ClearAllText();
+                    return;
+                }
+                NhanVien newNhanVien = new NhanVien
+                {
+                    MaNV = txtMaNV.Text,
+                };
+                if (nhanVienBUS.Delete(newNhanVien.MaNV))
+                {
+                    string thaoTac = $"Xoá nhân viên {txtHo.Text} {txtHo.Text} {txtTen.Text}:\n" +
+                                    $"- Phòng ban: {cmbPhongBan.Text}\n" +
+                                    $"- Chức vụ: {cmbChucVu.Text}\n" +
+                                    $"- Loại hợp đồng: {cmbLoaiHopDong.Text}\n" +
+                                    $"- Tài khoản: {txtTaiKhoan.Text}\n" +
+                                    $"- CCCD: {txtCCCD.Text}\n" +
+                                    $"- NTNS: {dtpNTNS.Text}\n" +
+                                    $"- Số nhà: {txtSoNha.Text}\n" +
+                                    $"- Đường: {txtDuong.Text}\n" +
+                                    $"- Phường/xã: {txtPhuong_Xa.Text}\n" +
+                                    $"- Quận/huyện: {txtQuan_Huyen.Text}\n" +
+                                    $"- Tỉnh/Thành Phố: {txtTinh_ThanhPho.Text}\n" +
+                                    $"- Giới tính: {ChonGioiTinh()}\n" +
+                                    $"- Số điện thoại: {txtSDT.Text}\n" +
+                                    $"- Email: {txtEmail.Text}\n" +
+                                    $"- Trình độ học vấn: {txtTrinhDoHocVan.Text}\n" +
+                                    $"- Ngày vào làm: {dtpNgayVaoLam.Text}\n" +
+                                    $"- Thời hạn hợp đồng: {dtpThoiHanHopDong.Text}\n" +
+                                    $"- Tình trạng: {txtTinhTrang.Text}\n" +
+                                    $"- Số ngày phép: {txtSoNgayPhep.Text}\n" +
+                                    $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongCoBan.Text))}\n" +
+                                    $"- Phụ cấp: {String.Format(fVND, "{0:N3} ₫", txtPhuCap.Text)}\n" +
+                                    $"- Số tiền nợ: {String.Format(fVND, "{0:N3} ₫", txtSoTienNo.Text)}\n";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
             }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }            
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
@@ -833,24 +875,32 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnMoKhoa_Click(object sender, EventArgs e)
         {
-            string hoTen = txtHo.Text + " " + txtTenLot.Text + " " + txtTen.Text;
-            NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);
-            nhanVien.NgayKhoa = null;
-            MessageBoxManager.Yes = "Có";
-            MessageBoxManager.No = "Không";
-            DialogResult ketQua = MessageBox.Show("Xác nhận mở khoá tài khoản của " + txtMaNV.Text + " - " + hoTen + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (ketQua == DialogResult.Yes)
+            try
             {
-                if (nhanVienBUS.Save(nhanVien))
+                string hoTen = txtHo.Text + " " + txtTenLot.Text + " " + txtTen.Text;
+                NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);
+                nhanVien.NgayKhoa = null;
+                MessageBoxManager.Yes = "Có";
+                MessageBoxManager.No = "Không";
+                DialogResult ketQua = MessageBox.Show("Xác nhận mở khoá tài khoản của " + txtMaNV.Text + " - " + hoTen + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (ketQua == DialogResult.Yes)
                 {
-                    string thaoTac = $"Mở khoá tài khoản của nhân viên {txtMaNV.Text}";
-                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Mở khoá")).MaTT;
-                    LichSuThaoTac(thaoTac, maTT);
-                    Reload();
+                    if (nhanVienBUS.Save(nhanVien))
+                    {
+                        string thaoTac = $"Mở khoá tài khoản của nhân viên {txtMaNV.Text}";
+                        string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Mở khoá")).MaTT;
+                        LichSuThaoTac(thaoTac, maTT);
+                        Reload();
+                    }
                 }
+                else
+                    return;
             }
-            else
-                return;            
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }
+                       
         }
         private void cbHienThiMatKhau_CheckedChanged(object sender, EventArgs e)
         {
@@ -924,14 +974,21 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnKhoa_Click(object sender, EventArgs e)
         {
-            string maNV_Khoa = txtMaNV.Text;
-            if (maNV_Khoa == maNV)
+            try
             {
-                MessageBox.Show($"Không thể khoá tài khoản hiện đang đăng nhập", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                string maNV_Khoa = txtMaNV.Text;
+                if (maNV_Khoa == maNV)
+                {
+                    MessageBox.Show($"Không thể khoá tài khoản hiện đang đăng nhập", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                FrmKhoaTaiKhoan open = new FrmKhoaTaiKhoan(maNV, maNV_Khoa);
+                open.ShowDialog();
             }
-            FrmKhoaTaiKhoan open = new FrmKhoaTaiKhoan(maNV, maNV_Khoa);
-            open.ShowDialog();
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }            
         }
     }
 }
