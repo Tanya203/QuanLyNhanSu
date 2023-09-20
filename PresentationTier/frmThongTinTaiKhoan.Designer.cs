@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.lblChucVuNV_DN = new System.Windows.Forms.Label();
@@ -109,10 +110,12 @@
             this.lblMaNhanVien = new System.Windows.Forms.Label();
             this.lblPhongBan = new System.Windows.Forms.Label();
             this.lblChucVu = new System.Windows.Forms.Label();
+            this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbAnhNV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -398,7 +401,7 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Location = new System.Drawing.Point(906, 253);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(580, 324);
+            this.panel1.Size = new System.Drawing.Size(600, 324);
             this.panel1.TabIndex = 27;
             // 
             // txtMatKhauCu
@@ -490,7 +493,7 @@
             this.pnlMenu.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.pnlMenu.Location = new System.Drawing.Point(198, 178);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(1511, 843);
+            this.pnlMenu.Size = new System.Drawing.Size(1529, 843);
             this.pnlMenu.TabIndex = 38;
             // 
             // txtThoiHanHopDong
@@ -1053,6 +1056,11 @@
             this.lblChucVu.TabIndex = 2;
             this.lblChucVu.Text = "Chức vụ:";
             // 
+            // errProvider
+            // 
+            this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errProvider.ContainerControl = this;
+            // 
             // FrmThongTinTaiKhoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -1074,6 +1082,7 @@
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbAnhNV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1162,5 +1171,6 @@
         private System.Windows.Forms.TextBox txtHo;
         private System.Windows.Forms.TextBox txtCCCD;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.ErrorProvider errProvider;
     }
 }

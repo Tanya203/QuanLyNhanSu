@@ -7,7 +7,9 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
+using WECPOFLogic;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -381,71 +383,113 @@ namespace QuanLyNhanSu.PresentationTier
                 changes.Add($"- Ghi chú: {nhanVien.GhiChu} -> Ghi chú: {rtxtGhiChu.Text}");  
             return string.Join("\n", changes);
         }
+        private bool CheckErrorInput()
+        {
+            errProvider.Clear();
+            errProvider.SetError(txtSoTien, double.TryParse(txtSoTien.Text, out double check) is false ? "Định dạng tiền không hợp lệ" : string.Empty);
+            if (errProvider.GetError(txtSoTien) != string.Empty)
+                return false;
+            return true;
+        }
+        private void ErrorMessage(Exception ex)
+        {
+            MessageBoxManager.Yes = "OK";
+            MessageBoxManager.No = "Chi tiết lỗi";
+            DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (ketQua == DialogResult.No)
+                MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
+            if (!CheckErrorInput())
             {
-                MaP = maP,                
-                MaNV = cmbNhanVien.SelectedValue.ToString(),
-                SoTien = decimal.Parse(txtSoTien.Text),
-                GhiChu = rtxtGhiChu.Text,
-            };
-            if (chiTietPhieuBus.Save(newChiTietPhieu))
-            {
-                string soTien = string.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
-                string maNV = cmbNhanVien.SelectedValue.ToString();
-                string thaoTac = $"Thêm nhân viên {maNV} vào {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {rtxtGhiChu.Text}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
+                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            if(phieu.LoaiPhieu.MaLP == "LP0000000003")
+            try
             {
-                List<NhanVien> listNhanVien = new List<NhanVien>();
-                NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == cmbNhanVien.SelectedValue.ToString());  
-                if(nhanVien.SoTienNo == null)
-                    nhanVien.SoTienNo = decimal.Parse(txtSoTien.Text);
-                else
-                    nhanVien.SoTienNo += decimal.Parse(txtSoTien.Text);
-                listNhanVien.Add(nhanVien);
-                nhanVienBUS.CapNhatSoTienNo(listNhanVien);
-            }
-            Reload();
-        }
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-            string chiTietSua = CheckChange();
-            decimal soTienNoCu = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(ctp => ctp.MaP == this.phieu.MaP && ctp.MaNV == txtMaNV_Sua.Text).SoTien;
-            decimal soTienNoMoi = decimal.Parse(txtSoTien.Text);
-            ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
-            {
-                MaP = maP,
-                MaNV = txtMaNV_Sua.Text,
-                SoTien = decimal.Parse(txtSoTien.Text),
-                GhiChu = rtxtGhiChu.Text,
-            };            
-            if (chiTietPhieuBus.Save(newChiTietPhieu))
-            {
-                string maNV = txtMaNV_Sua.Text;
-                string thaoTac = $"Sửa nhân viên {maNV} trong {txtLoaiPhieu.Text} {maP}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
-                if (!string.IsNullOrEmpty(chiTietSua))
-                    thaoTac += $":\n{chiTietSua}";
-                LichSuThaoTac(thaoTac, maTT);               
-                if (this.phieu.LoaiPhieu.MaLP == "LP0000000003" && soTienNoCu != soTienNoMoi)
+                ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
+                {
+                    MaP = maP,
+                    MaNV = cmbNhanVien.SelectedValue.ToString(),
+                    SoTien = decimal.Parse(txtSoTien.Text),
+                    GhiChu = rtxtGhiChu.Text,
+                };
+                if (chiTietPhieuBus.Save(newChiTietPhieu))
+                {
+                    string soTien = string.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
+                    string maNV = cmbNhanVien.SelectedValue.ToString();
+                    string thaoTac = $"Thêm nhân viên {maNV} vào {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {rtxtGhiChu.Text}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                }
+                if (phieu.LoaiPhieu.MaLP == "LP0000000003")
                 {
                     List<NhanVien> listNhanVien = new List<NhanVien>();
-                    NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV_Sua.Text);
-                    if (nhanVien.SoTienNo == soTienNoCu)
-                        nhanVien.SoTienNo = soTienNoMoi;
-                    else if (soTienNoCu > soTienNoMoi)
-                        nhanVien.SoTienNo -= (soTienNoCu - soTienNoMoi);
-                    else if (soTienNoCu < soTienNoMoi)
-                        nhanVien.SoTienNo += (soTienNoMoi - soTienNoCu);
+                    NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == cmbNhanVien.SelectedValue.ToString());
+                    if (nhanVien.SoTienNo == null)
+                        nhanVien.SoTienNo = decimal.Parse(txtSoTien.Text);
+                    else
+                        nhanVien.SoTienNo += decimal.Parse(txtSoTien.Text);
                     listNhanVien.Add(nhanVien);
                     nhanVienBUS.CapNhatSoTienNo(listNhanVien);
                 }
                 Reload();
-            }          
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }
+            
+        }
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            if (!CheckErrorInput())
+            {
+                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            try
+            {
+                string chiTietSua = CheckChange();
+                decimal soTienNoCu = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(ctp => ctp.MaP == this.phieu.MaP && ctp.MaNV == txtMaNV_Sua.Text).SoTien;
+                decimal soTienNoMoi = decimal.Parse(txtSoTien.Text);
+                ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
+                {
+                    MaP = maP,
+                    MaNV = txtMaNV_Sua.Text,
+                    SoTien = decimal.Parse(txtSoTien.Text),
+                    GhiChu = rtxtGhiChu.Text,
+                };
+                if (chiTietPhieuBus.Save(newChiTietPhieu))
+                {
+                    string maNV = txtMaNV_Sua.Text;
+                    string thaoTac = $"Sửa nhân viên {maNV} trong {txtLoaiPhieu.Text} {maP}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
+                    if (!string.IsNullOrEmpty(chiTietSua))
+                        thaoTac += $":\n{chiTietSua}";
+                    LichSuThaoTac(thaoTac, maTT);
+                    if (this.phieu.LoaiPhieu.MaLP == "LP0000000003" && soTienNoCu != soTienNoMoi)
+                    {
+                        List<NhanVien> listNhanVien = new List<NhanVien>();
+                        NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV_Sua.Text);
+                        if (nhanVien.SoTienNo == soTienNoCu)
+                            nhanVien.SoTienNo = soTienNoMoi;
+                        else if (soTienNoCu > soTienNoMoi)
+                            nhanVien.SoTienNo -= (soTienNoCu - soTienNoMoi);
+                        else if (soTienNoCu < soTienNoMoi)
+                            nhanVien.SoTienNo += (soTienNoMoi - soTienNoCu);
+                        listNhanVien.Add(nhanVien);
+                        nhanVienBUS.CapNhatSoTienNo(listNhanVien);
+                    }
+                    Reload();
+                }
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }
+                    
         }
         private void XoaButton()
         {
@@ -465,31 +509,38 @@ namespace QuanLyNhanSu.PresentationTier
             }            
         }
         public void XoaNhanVien()
-        {            
-            decimal soTienNo = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(ctp => ctp.MaP == this.phieu.MaP && ctp.MaNV == txtMaNV_Sua.Text).SoTien;
-            ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
+        {
+            try
             {
-                MaP = txtMaP.Text,
-                MaNV = txtMaNV_Sua.Text,
-            };
-            if (chiTietPhieuBus.Delete(newChiTietPhieu))
-            {
-                string maNV = txtMaNV_Sua.Text;
-                string soTien = string.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
-                string ghiChu = rtxtGhiChu.Text;
-                string thaoTac = $"Xoá nhân viên {maNV} khỏi {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {ghiChu}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);               
-                if (this.phieu.LoaiPhieu.MaLP == "LP0000000003")
+                decimal soTienNo = chiTietPhieuBus.GetChiTietPhieu().FirstOrDefault(ctp => ctp.MaP == this.phieu.MaP && ctp.MaNV == txtMaNV_Sua.Text).SoTien;
+                ChiTietPhieu newChiTietPhieu = new ChiTietPhieu
                 {
-                    List<NhanVien> listNhanVien = new List<NhanVien>();
-                    NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV_Sua.Text);                   
-                    nhanVien.SoTienNo -= soTienNo;
-                    listNhanVien.Add(nhanVien);
-                    nhanVienBUS.CapNhatSoTienNo(listNhanVien);
+                    MaP = txtMaP.Text,
+                    MaNV = txtMaNV_Sua.Text,
+                };
+                if (chiTietPhieuBus.Delete(newChiTietPhieu))
+                {
+                    string maNV = txtMaNV_Sua.Text;
+                    string soTien = string.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
+                    string ghiChu = rtxtGhiChu.Text;
+                    string thaoTac = $"Xoá nhân viên {maNV} khỏi {txtLoaiPhieu.Text} {maP}:\n - Số tiền: {soTien}\n - Ghi chú: {ghiChu}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    if (this.phieu.LoaiPhieu.MaLP == "LP0000000003")
+                    {
+                        List<NhanVien> listNhanVien = new List<NhanVien>();
+                        NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV_Sua.Text);
+                        nhanVien.SoTienNo -= soTienNo;
+                        listNhanVien.Add(nhanVien);
+                        nhanVienBUS.CapNhatSoTienNo(listNhanVien);
+                    }
+                    Reload();
                 }
-                Reload();
-            }                      
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }      
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
@@ -500,6 +551,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnHuy_Click(object sender, EventArgs e)
         {
+            errProvider.Clear();
             ClearAllText();
         }
 

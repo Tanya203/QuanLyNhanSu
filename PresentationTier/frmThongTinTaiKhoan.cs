@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using WECPOFLogic;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace QuanLyNhanSu.PresentationTier
@@ -125,59 +126,39 @@ namespace QuanLyNhanSu.PresentationTier
             frmOpen.FormClosed += CloseForm;
         }
         //////////////////////////////////////////////////////////////////////////////
-        private void ClearMatKhauText()
+        private bool CheckMatKhau()
         {
-            txtMatKhauCu.Text = string.Empty;
-            txtMatKhauMoi.Text = string.Empty;
-            txtNhapLaiMatKhau.Text = string.Empty;
-        }
-        //////////////////////////////////////////////////////////////////////////////
-        private string CheckMatKhau(string matKhau)
-        {
+            errProvider.Clear();
             Regex passCheck = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
-            if (!passCheck.IsMatch(matKhau) || matKhau.Length > 20)
-            {
-                MessageBox.Show("Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-            if (txtNhapLaiMatKhau.Text != matKhau)
-            {
-                MessageBox.Show("Mật khẩu nhập lại không khớp", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-            return matKhau;
+            errProvider.SetError(txtMatKhauCu, !BCrypt.Net.BCrypt.Verify(txtMatKhauMoi.Text, nv.MatKhau) ? "Mật khẩu cũ không hợp lệ" : string.Empty);
+            errProvider.SetError(txtMatKhauMoi, !passCheck.IsMatch(txtMatKhauMoi.Text) || txtMatKhauMoi.Text.Length > 20 ? "Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!" : string.Empty);
+            errProvider.SetError(txtNhapLaiMatKhau, txtNhapLaiMatKhau.Text != txtMatKhauMoi.Text ? "Mật khẩu nhập lại không khớp" : string.Empty);
+            if (errProvider.GetError(txtMatKhauMoi) != string.Empty || errProvider.GetError(txtNhapLaiMatKhau) != string.Empty || errProvider.GetError(txtMatKhauCu) != string.Empty)
+                return false;
+            return true;
         }
-        private string CheckSDT(string sdt)
+        private bool CheckSDT(string sdt)
         {
             Regex sdtCheck = new Regex(@"(84|0[3|5|7|8|9])+([0-9]{8})\b");
             if (!sdtCheck.IsMatch(sdt))
-            {
-                MessageBox.Show("Định dạng số điện thoại không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-            return sdt;
+                return false;
+            return true;
         }
-        private string CheckEmail(string email)
+        private bool CheckEmail(string email)
         {
             Regex emailCheck = new Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
             if (!emailCheck.IsMatch(email))
-            {
-                MessageBox.Show("Định dạng email không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-            return email;
+                return false;
+            return true;
         }
-        private string CheckCCCD(string cccd)
+        private bool CheckCCCD(string cccd)
         {
             Regex cccdCheck = new Regex(@"^(001|002|004|006|008|010|011|012|014|015|017|019|020|022|024|025|026|027|030|031|033|034|035|036|037|
                                         038|040|042|044|045|046|048|049|051|052|054|056|058|060|062|064|066|067|068|070|072|074|075|077|079|080|
                                         082|083|084|086|087|089|091|092|093|094|095|096)[02-3][0-9]{2}[0-9]{6}$");
             if (!cccdCheck.IsMatch(cccd))
-            {
-                MessageBox.Show("Định dạng CCCD không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-            return cccd;
+                return false;
+            return true;
         }
         private void CheckTextMatKhau(object sender, EventArgs e)
         {
@@ -185,17 +166,7 @@ namespace QuanLyNhanSu.PresentationTier
                 btnDoiMatKhau.Enabled = false;
             else
                 btnDoiMatKhau.Enabled = true;
-        }        
-        private bool XacNhanMatKhau(string matKhau)
-        {
-            if (!BCrypt.Net.BCrypt.Verify(matKhau, nv.MatKhau))
-            {
-                MessageBox.Show("Mật khẩu cũ không khớp", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            else
-                return true;               
-        }
+        }   
         //////////////////////////////////////////////////////////////////////////////
         private void txtCCCD_CMND_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -280,42 +251,88 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnDatLaiThongTin_Click(object sender, EventArgs e)
         {
+            errProvider.Clear();
             LoadThongTinTaiKhoan();
+        }
+        private bool CheckInputError()
+        {
+            bool flag = true;
+            errProvider.Clear();
+            var validationRules = new Dictionary<Control, Func<bool>>
+            {
+                { txtCCCD, () => !CheckCCCD(txtCCCD.Text) || nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.CCCD == txtCCCD.Text && nv.MaNV != txtMaNV.Text) != null},
+                { dtpNTNS, () => DateTime.Now.Year - dtpNTNS.Value.Year < 18 },
+                { txtSDT, () => !CheckSDT(txtSDT.Text) || nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.SDT == txtSDT.Text && nv.MaNV != txtMaNV.Text) != null},
+                { txtEmail, () => !CheckEmail(txtEmail.Text) || nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.Email == txtEmail.Text && nv.MaNV != txtMaNV.Text) != null},               
+            };
+            var errorMessages = new Dictionary<Control, string>
+            {               
+                { txtCCCD, "Căn cước công dân không đúng định dạng hoặc đã tồn tại" },
+                { dtpNTNS, "Tuổi phải lớn hơn hoặc bằng 18" },
+                { txtSDT, "Số điện thoại không đúng định dạng hoặc đã tồn tại" },
+                { txtEmail, "Email không đúng định dạng hoặc đã tồn tại" },
+               
+            };
+            foreach (var rule in validationRules)
+            {
+                var control = rule.Key;
+                var validate = rule.Value;
+                if (validate())
+                {
+                    errProvider.SetError(control, errorMessages[control]);
+                    flag = false;
+                }                
+            }
+            if (flag)
+                return true;
+            return false;
+        }
+        private void ErrorMessage(Exception ex)
+        {
+            MessageBoxManager.Yes = "OK";
+            MessageBoxManager.No = "Chi tiết lỗi";
+            DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (ketQua == DialogResult.No)
+                MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(CheckSDT(txtSDT.Text)))
-                return;
-            if (string.IsNullOrEmpty(CheckEmail(txtEmail.Text)))
-                return;
-            if (string.IsNullOrEmpty(CheckCCCD(txtCCCD.Text)))
-                return;
-            string gioiTinh = ChonGioiTinh();
-            if (string.IsNullOrEmpty(gioiTinh))
-                return;
-            string chiTietSua = CheckChange();
-            nv.CCCD = txtCCCD.Text;
-            nv.Ho = txtHo.Text;
-            nv.TenLot = txtTenLot.Text;
-            nv.Ten = txtTen.Text;
-            nv.NTNS = DateTime.Parse(dtpNTNS.Text);
-            nv.SoNha = txtSoNha.Text;
-            nv.TenDuong = txtDuong.Text;
-            nv.Phuong_Xa = txtPhuong_Xa.Text;
-            nv.Quan_Huyen = txtQuan_Huyen.Text;
-            nv.Tinh_ThanhPho = txtTinh_ThanhPho.Text;
-            nv.GioiTinh = gioiTinh;
-            nv.SDT = txtSDT.Text;
-            nv.Email = txtEmail.Text;
-            if (nhanVienBUS.Save(nv))
+            if (!CheckInputError())
             {
-                string thaoTac = "Cập nhật thông tin cá nhân";
-                if (!string.IsNullOrEmpty(chiTietSua))
-                    thaoTac += $":\n{chiTietSua}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
+                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            Reload();
+            try
+            {
+                string gioiTinh = ChonGioiTinh();
+                string chiTietSua = CheckChange();
+                nv.CCCD = txtCCCD.Text;
+                nv.Ho = txtHo.Text;
+                nv.TenLot = txtTenLot.Text;
+                nv.Ten = txtTen.Text;
+                nv.NTNS = DateTime.Parse(dtpNTNS.Text);
+                nv.SoNha = txtSoNha.Text;
+                nv.TenDuong = txtDuong.Text;
+                nv.Phuong_Xa = txtPhuong_Xa.Text;
+                nv.Quan_Huyen = txtQuan_Huyen.Text;
+                nv.Tinh_ThanhPho = txtTinh_ThanhPho.Text;
+                nv.GioiTinh = gioiTinh;
+                nv.SDT = txtSDT.Text;
+                nv.Email = txtEmail.Text;
+                if (nhanVienBUS.Save(nv))
+                {
+                    string thaoTac = "Cập nhật thông tin cá nhân";
+                    if (!string.IsNullOrEmpty(chiTietSua))
+                        thaoTac += $":\n{chiTietSua}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }
         }
         private void cbHienThiMatKhau_CheckedChanged(object sender, EventArgs e)
         {
@@ -334,23 +351,30 @@ namespace QuanLyNhanSu.PresentationTier
         }        
         private void btnDoiMatKhau_Click(object sender, EventArgs e)
         {
-            if (!XacNhanMatKhau(txtMatKhauCu.Text))
-                return;
-            string matKhau = CheckMatKhau(txtMatKhauMoi.Text);
-            if (matKhau == null)
-                return;
-            NhanVien nhanVien = new NhanVien
+            if (!CheckMatKhau())
             {
-                MaNV = txtMaNV.Text,
-                MatKhau = matKhau,
-            };
-            if (nhanVienBUS.Save(nhanVien))
+                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }                
+            try
             {
-                string thaoTac = $"Nhân viên {txtMaNV.Text} đổi mật khẩu";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Đổi mật khẩu")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                DangXuat();
+                NhanVien nhanVien = new NhanVien
+                {
+                    MaNV = txtMaNV.Text,
+                    MatKhau = txtMatKhauMoi.Text,
+                };
+                if (nhanVienBUS.Save(nhanVien))
+                {
+                    string thaoTac = $"Nhân viên {txtMaNV.Text} đổi mật khẩu";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Đổi mật khẩu")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    DangXuat();
+                }
             }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }            
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {

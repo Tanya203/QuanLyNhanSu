@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using WECPOFLogic;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -213,29 +214,37 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void XoaPhieu(string maP, string loaiPhieu, string ngayLap)
         {
-            string maLoaiPhieu = phieuBus.GetPhieu().FirstOrDefault(p => p.MaP == maP).MaLP;
-            List<ChiTietPhieu> listChiTietPhieu = chiTietPhieuBUS.GetChiTietPhieu().Where(ctp => ctp.MaP == maP).ToList();
-            List<NhanVien> listNhanVien = new List<NhanVien>();           
-            Phieu phieu = new Phieu()
+            try
             {
-                MaP = maP,
-            };
-            if (phieuBus.Delete(phieu))
-            {
-                string thaoTac = $"Xoá {loaiPhieu} được lập ngày {ngayLap}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                if (maLoaiPhieu == "LP0000000003")
+                string maLoaiPhieu = phieuBus.GetPhieu().FirstOrDefault(p => p.MaP == maP).MaLP;
+                List<ChiTietPhieu> listChiTietPhieu = chiTietPhieuBUS.GetChiTietPhieu().Where(ctp => ctp.MaP == maP).ToList();
+                List<NhanVien> listNhanVien = new List<NhanVien>();
+                Phieu phieu = new Phieu()
                 {
-                    foreach (ChiTietPhieu nv in listChiTietPhieu)
+                    MaP = maP,
+                };
+                if (phieuBus.Delete(phieu))
+                {
+                    string thaoTac = $"Xoá {loaiPhieu} được lập ngày {ngayLap}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    if (maLoaiPhieu == "LP0000000003")
                     {
-                        nv.NhanVien.SoTienNo -= nv.SoTien;
-                        listNhanVien.Add(nv.NhanVien);
+                        foreach (ChiTietPhieu nv in listChiTietPhieu)
+                        {
+                            nv.NhanVien.SoTienNo -= nv.SoTien;
+                            listNhanVien.Add(nv.NhanVien);
+                        }
+                        nhanVienBUS.CapNhatSoTienNo(listNhanVien);
                     }
-                    nhanVienBUS.CapNhatSoTienNo(listNhanVien);
+                    Reload();
                 }
-                Reload();
             }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }
+            
         }
         //////////////////////////////////////////////////////////////////////////////
         private void Reload()
@@ -267,22 +276,38 @@ namespace QuanLyNhanSu.PresentationTier
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
+        private void ErrorMessage(Exception ex)
+        {
+            MessageBoxManager.Yes = "OK";
+            MessageBoxManager.No = "Chi tiết lỗi";
+            DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (ketQua == DialogResult.No)
+                MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            Phieu newPhieu = new Phieu
+            try
             {
-                MaP = "",
-                MaLP = cmbLoaiPhieu.SelectedValue.ToString(),
-                MaNV = maNV,
-                NgayLap = DateTime.Now,
-            };
-            if (phieuBus.Save(newPhieu))
-            {
-                string thaoTac = $"Thêm {cmbLoaiPhieu.Text}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
+                Phieu newPhieu = new Phieu
+                {
+                    MaP = "",
+                    MaLP = cmbLoaiPhieu.SelectedValue.ToString(),
+                    MaNV = maNV,
+                    NgayLap = DateTime.Now,
+                };
+                if (phieuBus.Save(newPhieu))
+                {
+                    string thaoTac = $"Thêm {cmbLoaiPhieu.Text}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                }
+                Reload();
             }
-            Reload();            
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }
+                        
         }       
         private void dgvThongTinPhieuThuong_CellClick(object sender, DataGridViewCellEventArgs e)
         {

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using WECPOFLogic;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -258,62 +259,110 @@ namespace QuanLyNhanSu.PresentationTier
                 changes.Add($"- Hình thức chấm công: {lhd.HinhThucChamCong.TenHinhThucChamCong} -> Hình thức chấm công: {hinhThucChamCong}");
             return string.Join("\n", changes);
         }
+        private bool CheckErrorInput()
+        {
+            errProvider.Clear();
+            errProvider.SetError(txtTenLHD, loaiHopDongBUS.GetLoaiHopDong().FirstOrDefault(lhd => lhd.TenLoaiHopDong == txtTenLHD.Text) != null ? "Tên loại hợp đồng đã tồn tại" : string.Empty);
+            if (errProvider.GetError(txtTenLHD) != string.Empty)
+                return false;
+            return true;
+        }
+        private void ErrorMessage(Exception ex)
+        {
+            MessageBoxManager.Yes = "OK";
+            MessageBoxManager.No = "Chi tiết lỗi";
+            DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (ketQua == DialogResult.No)
+                MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            LoaiHopDong newLoaiHopDong = new LoaiHopDong
+            if (!CheckErrorInput())
             {
-                MaLHD = "",
-                TenLoaiHopDong = txtTenLHD.Text,
-                MaHTCC = cmbHinhThucChamCong.SelectedValue.ToString(),
-            };
-            if (loaiHopDongBUS.Save(newLoaiHopDong))
-            {
-                string tenLoaiHopDong = txtTenLHD.Text;
-                string hinhThucChamCong = cmbHinhThucChamCong.Text;
-                string thaoTac = $"Thêm loại hợp đông {tenLoaiHopDong}: \n  - Hình thức chấm công: {hinhThucChamCong}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
+                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            Reload();
-        }
-        private void btnHuy_Click(object sender, EventArgs e)
-        {
-            ClearAllText();
+            try
+            {
+                LoaiHopDong newLoaiHopDong = new LoaiHopDong
+                {
+                    MaLHD = "",
+                    TenLoaiHopDong = txtTenLHD.Text,
+                    MaHTCC = cmbHinhThucChamCong.SelectedValue.ToString(),
+                };
+                if (loaiHopDongBUS.Save(newLoaiHopDong))
+                {
+                    string tenLoaiHopDong = txtTenLHD.Text;
+                    string hinhThucChamCong = cmbHinhThucChamCong.Text;
+                    string thaoTac = $"Thêm loại hợp đông {tenLoaiHopDong}: \n  - Hình thức chấm công: {hinhThucChamCong}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }                    
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }            
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
-            string chiTietSua = CheckChange();
-            LoaiHopDong newLoaiHopDong = new LoaiHopDong
+            if (!CheckErrorInput())
             {
-                MaLHD = txtMaLHD.Text,
-                TenLoaiHopDong = txtTenLHD.Text,
-                MaHTCC = cmbHinhThucChamCong.SelectedValue.ToString(),
-            };
-            if (loaiHopDongBUS.Save(newLoaiHopDong))
+                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            try
             {
-                string thaoTac = $"Sửa loại hợp đồng {txtMaLHD.Text}";                
-                if (!string.IsNullOrEmpty(chiTietSua))
-                    thaoTac += $":\n{chiTietSua}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                Reload();
-            }            
+                string chiTietSua = CheckChange();
+                LoaiHopDong newLoaiHopDong = new LoaiHopDong
+                {
+                    MaLHD = txtMaLHD.Text,
+                    TenLoaiHopDong = txtTenLHD.Text,
+                    MaHTCC = cmbHinhThucChamCong.SelectedValue.ToString(),
+                };
+                if (loaiHopDongBUS.Save(newLoaiHopDong))
+                {
+                    string thaoTac = $"Sửa loại hợp đồng {txtMaLHD.Text}";
+                    if (!string.IsNullOrEmpty(chiTietSua))
+                        thaoTac += $":\n{chiTietSua}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex);
+            }
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            LoaiHopDong loaiHopDong = new LoaiHopDong
+            try
             {
-                MaLHD = txtMaLHD.Text
-            };
-            if (loaiHopDongBUS.Delete(loaiHopDong))
+                LoaiHopDong loaiHopDong = new LoaiHopDong
+                {
+                    MaLHD = txtMaLHD.Text
+                };
+                if (loaiHopDongBUS.Delete(loaiHopDong))
+                {
+                    string tenLoaiHopDong = txtTenLHD.Text;
+                    string hinhThucChamCong = cmbHinhThucChamCong.Text;
+                    string thaoTac = $"Xoá loại hợp đồng {tenLoaiHopDong}:\n    - Hình thức chấm công: {hinhThucChamCong}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
+            }
+            catch(Exception ex)
             {
-                string tenLoaiHopDong = txtTenLHD.Text;
-                string hinhThucChamCong = cmbHinhThucChamCong.Text;
-                string thaoTac = $"Xoá loại hợp đồng {tenLoaiHopDong}:\n    - Hình thức chấm công: {hinhThucChamCong}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                Reload();
-            }            
+                ErrorMessage(ex);
+            }     
+        }
+        private void btnHuy_Click(object sender, EventArgs e)
+        {
+            errProvider.Clear();
+            ClearAllText();
         }
         private void btnTroVe_Click(object sender, EventArgs e)
         {
@@ -324,6 +373,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void dgvThongTinLoaiHopDong_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            errProvider.Clear();
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;

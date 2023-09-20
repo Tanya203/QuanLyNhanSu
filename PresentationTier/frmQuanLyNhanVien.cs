@@ -508,15 +508,6 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void EnableButtons(object sender, EventArgs e)
         {
-            /*TextBox check = sender as TextBox;
-            string clipBroad = Clipboard.GetText();
-            string originalText = txtLuongCoBan.Text;
-            double test;
-            if(sender == txtLuongCoBan && !string.IsNullOrEmpty(txtLuongCoBan.Text))
-            {
-                if (double.TryParse(txtLuongCoBan.Text, out test) is false*//* && txtLuongCoBan.Text.Contains(clipBroad)*//*)                                  
-                    txtLuongCoBan.Text = originalText.Replace(clipBroad, string.Empty);                
-            }*/
             if (!checkThaoTac)
                 return;
             BatTatNut();            
