@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -63,9 +64,11 @@
             this.colSoLuongNhanVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.lblTimKiem = new System.Windows.Forms.Label();
+            this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlHeader.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinLoaiHopDong)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -313,7 +316,7 @@
             // 
             this.lblHinhThucChamCong.AutoSize = true;
             this.lblHinhThucChamCong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHinhThucChamCong.Location = new System.Drawing.Point(488, 29);
+            this.lblHinhThucChamCong.Location = new System.Drawing.Point(507, 29);
             this.lblHinhThucChamCong.Name = "lblHinhThucChamCong";
             this.lblHinhThucChamCong.Size = new System.Drawing.Size(221, 25);
             this.lblHinhThucChamCong.TabIndex = 50;
@@ -324,7 +327,7 @@
             this.cmbHinhThucChamCong.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbHinhThucChamCong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbHinhThucChamCong.FormattingEnabled = true;
-            this.cmbHinhThucChamCong.Location = new System.Drawing.Point(725, 26);
+            this.cmbHinhThucChamCong.Location = new System.Drawing.Point(744, 26);
             this.cmbHinhThucChamCong.Name = "cmbHinhThucChamCong";
             this.cmbHinhThucChamCong.Size = new System.Drawing.Size(241, 33);
             this.cmbHinhThucChamCong.TabIndex = 49;
@@ -332,7 +335,7 @@
             // txtSoLuongNhanVien
             // 
             this.txtSoLuongNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSoLuongNhanVien.Location = new System.Drawing.Point(725, 81);
+            this.txtSoLuongNhanVien.Location = new System.Drawing.Point(744, 81);
             this.txtSoLuongNhanVien.Name = "txtSoLuongNhanVien";
             this.txtSoLuongNhanVien.Size = new System.Drawing.Size(241, 30);
             this.txtSoLuongNhanVien.TabIndex = 5;
@@ -341,7 +344,7 @@
             // 
             this.lblSoLuongNhanVien.AutoSize = true;
             this.lblSoLuongNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSoLuongNhanVien.Location = new System.Drawing.Point(488, 83);
+            this.lblSoLuongNhanVien.Location = new System.Drawing.Point(507, 83);
             this.lblSoLuongNhanVien.Name = "lblSoLuongNhanVien";
             this.lblSoLuongNhanVien.Size = new System.Drawing.Size(205, 25);
             this.lblSoLuongNhanVien.TabIndex = 48;
@@ -476,6 +479,11 @@
             this.lblTimKiem.TabIndex = 43;
             this.lblTimKiem.Text = "Tìm kiếm:";
             // 
+            // errProvider
+            // 
+            this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errProvider.ContainerControl = this;
+            // 
             // FrmQuanLyLoaiHopDong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -498,6 +506,7 @@
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinLoaiHopDong)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -537,5 +546,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTenLoaiHopDong;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHinhThucChamCong;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSoLuongNhanVien;
+        private System.Windows.Forms.ErrorProvider errProvider;
     }
 }

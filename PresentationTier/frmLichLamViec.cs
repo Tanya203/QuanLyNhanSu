@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using WECPOFLogic;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -208,36 +209,59 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void XoaLichLamViec(string maLLV, string phongBan, string ngayLam)
         {
-            LichLamViec lichLamViec = new LichLamViec
+            try
             {
-                MaLLV = maLLV,
-            };
-            if (lichLamViecBUS.Delete(lichLamViec))
-            {
-                string thaoTac = $"Xoá lịch làm việc ngày {ngayLam} - phòng ban {phongBan}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                Reload();
+                LichLamViec lichLamViec = new LichLamViec
+                {
+                    MaLLV = maLLV,
+                };
+                if (lichLamViecBUS.Delete(lichLamViec))
+                {
+                    string thaoTac = $"Xoá lịch làm việc ngày {ngayLam} - phòng ban {phongBan}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
             }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }            
         }
         /////////////////////////////////////////////////////////////////////////////////////////
+        private void ErrorMessage(Exception ex)
+        {
+            MessageBoxManager.Yes = "OK";
+            MessageBoxManager.No = "Chi tiết lỗi";
+            DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (ketQua == DialogResult.No)
+                MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            LichLamViec lichLamViec = new LichLamViec
+            try
             {
-                MaLLV = "",
-                MaNV = maNV,                
-                NgayLam = dtpNgayLam.Value,
-            };
-            if (lichLamViecBUS.Save(lichLamViec))
-            {
-                string ngayLam = dtpNgayLam.Text;
-                string phongBan = nv.ChucVu.PhongBan.TenPhongBan;
-                string thaoTac = $"Thêm lịch làm việc ngày {ngayLam} - phòng ban {phongBan}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
+                LichLamViec lichLamViec = new LichLamViec
+                {
+                    MaLLV = "",
+                    MaNV = maNV,
+                    NgayLam = dtpNgayLam.Value,
+                };
+                if (lichLamViecBUS.Save(lichLamViec))
+                {
+                    string ngayLam = dtpNgayLam.Text;
+                    string phongBan = nv.ChucVu.PhongBan.TenPhongBan;
+                    string thaoTac = $"Thêm lịch làm việc ngày {ngayLam} - phòng ban {phongBan}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                }
+                Reload();
             }
-            Reload();
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }
+            
         }
         private void dgvThongTinLichLamViec_CellClick(object sender, DataGridViewCellEventArgs e)
         {

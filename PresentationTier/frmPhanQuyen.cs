@@ -206,24 +206,38 @@ namespace QuanLyNhanSu.PresentationTier
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
+        private void ErrorMessage(Exception ex)
+        {
+            MessageBoxManager.Yes = "OK";
+            MessageBoxManager.No = "Chi tiết lỗi";
+            DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (ketQua == DialogResult.No)
+                MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         private void CapNhatQuyenHan(string maCV, string maQH, bool capQuyen, string thaoTac, string maTT)
         {
-            PhanQuyen capNhat = new PhanQuyen
+            try
             {
-                MaCV = maCV,
-                MaQH = maQH,
-                CapQuyen = capQuyen,
-            };
-            if (phanQuyenBUS.Save(capNhat))
-            {
-                LichSuThaoTac(thaoTac, maTT);
+                PhanQuyen capNhat = new PhanQuyen
+                {
+                    MaCV = maCV,
+                    MaQH = maQH,
+                    CapQuyen = capQuyen,
+                };
+                if (phanQuyenBUS.Save(capNhat))
+                {
+                    LichSuThaoTac(thaoTac, maTT);
+                }
+                if (string.IsNullOrEmpty(txtTimKiem.Text))
+                    LoadDanhSachPhanQuyen();
+                else
+                    LoadDanhSachPhanQuyenTimKiem(txtTimKiem.Text);
             }
-            if (string.IsNullOrEmpty(txtTimKiem.Text))
-                LoadDanhSachPhanQuyen();
-            else
-                LoadDanhSachPhanQuyenTimKiem(txtTimKiem.Text);
-        }  
-        
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }
+        }          
         private void btnTroVe_Click(object sender, EventArgs e)
         {
             FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
@@ -274,9 +288,7 @@ namespace QuanLyNhanSu.PresentationTier
                     if (ketQua == DialogResult.Yes)
                         CapNhatQuyenHan(maCV, maQH, capQuyen, thaoTac, maTT);
                     else
-                    {
                         return;
-                    }
                 }
             }
         }

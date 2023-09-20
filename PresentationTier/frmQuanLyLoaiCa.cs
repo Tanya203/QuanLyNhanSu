@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using WECPOFLogic;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -230,57 +231,105 @@ namespace QuanLyNhanSu.PresentationTier
                 changes.Add($"- Hệ số lương: {loaiCa.HeSoLuong} -> Hệ số lương: {heSoLuong}");
             return string.Join("\n", changes);
         }
+        private bool CheckErrorInput()
+        {
+            errProvider.Clear();
+            errProvider.SetError(txtTenLC, loaiCaBUS.GetLoaiCa().FirstOrDefault(lc => lc.TenLoaiCa == txtTenLC.Text && lc.MaLC != txtMaLC.Text) != null ? "Tên loại ca đã tồn tại" : string.Empty);
+            errProvider.SetError(txtHeSoLuong, double.TryParse(txtHeSoLuong.Text, out double check) is false ? "Hệ số lương không đúng định dạng số" : string.Empty);
+            if(errProvider.GetError(txtTenLC) != string.Empty || errProvider.GetError(txtHeSoLuong) != string.Empty)
+                return false;
+            return true;
+        }
+        private void ErrorMessage(Exception ex)
+        {
+            MessageBoxManager.Yes = "OK";
+            MessageBoxManager.No = "Chi tiết lỗi";
+            DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (ketQua == DialogResult.No)
+                MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            LoaiCa newLoaiCa = new LoaiCa
+            if (!CheckErrorInput())
             {
-                MaLC = "",
-                TenLoaiCa = txtTenLC.Text,
-                HeSoLuong = decimal.Parse(txtHeSoLuong.Text)
-            };
-            if (loaiCaBUS.Save(newLoaiCa))
-            {
-                string loaiCa = txtTenLC.Text;
-                decimal heSoLuong = decimal.Parse(txtHeSoLuong.Text);
-                string thaoTac = $"Thêm loại ca {loaiCa}\n - Hệ số lương: {heSoLuong}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
+                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            Reload();          
+            try
+            {
+                LoaiCa newLoaiCa = new LoaiCa
+                {
+                    MaLC = "",
+                    TenLoaiCa = txtTenLC.Text,
+                    HeSoLuong = decimal.Parse(txtHeSoLuong.Text)
+                };
+                if (loaiCaBUS.Save(newLoaiCa))
+                {
+                    string loaiCa = txtTenLC.Text;
+                    decimal heSoLuong = decimal.Parse(txtHeSoLuong.Text);
+                    string thaoTac = $"Thêm loại ca {loaiCa}\n - Hệ số lương: {heSoLuong}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }                
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }                    
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
-            string chiTietSua = CheckChange();
-            LoaiCa newLoaiCa = new LoaiCa
+            if (!CheckErrorInput())
             {
-                MaLC = txtMaLC.Text,
-                TenLoaiCa = txtTenLC.Text,
-                HeSoLuong = decimal.Parse(txtHeSoLuong.Text)
-            };
-            if (loaiCaBUS.Save(newLoaiCa))
-            {
-                string thaoTac = $"Sửa loại ca {txtMaLC.Text}";                
-                if (!string.IsNullOrEmpty(chiTietSua))
-                    thaoTac += ":\n" + chiTietSua;
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                Reload();
+                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            try
+            {
+                string chiTietSua = CheckChange();
+                LoaiCa newLoaiCa = new LoaiCa
+                {
+                    MaLC = txtMaLC.Text,
+                    TenLoaiCa = txtTenLC.Text,
+                    HeSoLuong = decimal.Parse(txtHeSoLuong.Text)
+                };
+                if (loaiCaBUS.Save(newLoaiCa))
+                {
+                    string thaoTac = $"Sửa loại ca {txtMaLC.Text}";
+                    if (!string.IsNullOrEmpty(chiTietSua))
+                        thaoTac += ":\n" + chiTietSua;
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }            
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            LoaiCa loaiCa = new LoaiCa
+            try
             {
-                MaLC = txtMaLC.Text                
-            };
-            if (loaiCaBUS.Delete(loaiCa))
+                LoaiCa loaiCa = new LoaiCa
+                {
+                    MaLC = txtMaLC.Text
+                };
+                if (loaiCaBUS.Delete(loaiCa))
+                {
+                    string tenLoaiCa = txtTenLC.Text;
+                    string heSoLuong = txtHeSoLuong.Text;
+                    string thaoTac = $"Xoá loại ca {tenLoaiCa}\n    - Hệ số lương: {heSoLuong}";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
+            }
+            catch(Exception ex)
             {
-                string tenLoaiCa = txtTenLC.Text;
-                string heSoLuong = txtHeSoLuong.Text;
-                string thaoTac = $"Xoá loại ca {tenLoaiCa}\n    - Hệ số lương: {heSoLuong}";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                Reload();
+                ErrorMessage(ex);
             }
         }
         private void btnTroVe_Click(object sender, EventArgs e)
@@ -292,6 +341,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void dgvThongTinLoaiCa_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            errProvider.Clear();
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
@@ -301,6 +351,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnHuy_Click(object sender, EventArgs e)
         {
+            errProvider.Clear();
             ClearAllText();
         }       
         private void TimKiem(object sender, EventArgs e)

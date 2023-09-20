@@ -311,24 +311,39 @@ namespace QuanLyNhanSu.PresentationTier
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
+        private void ErrorMessage(Exception ex)
+        {
+            MessageBoxManager.Yes = "OK";
+            MessageBoxManager.No = "Chi tiết lỗi";
+            DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (ketQua == DialogResult.No)
+                MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ChamCong newChamCong = new ChamCong
+            try
             {
-                MaLLV = maLLV,
-                MaNV = cmbNhanVien.SelectedValue.ToString(),
-                MaCa = cmbCa.SelectedValue.ToString(),
-                MaLC = cmbLoaiCa.SelectedValue.ToString(),
-                Phep = false,
-            };
-            if (chiTietLichLamViecBUS.Save(newChamCong))
-            {
-                string maNV = cmbNhanVien.SelectedValue.ToString();
-                string thaoTac = $"Thêm nhân viên {maNV} vào";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm nhân viên")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
+                ChamCong newChamCong = new ChamCong
+                {
+                    MaLLV = maLLV,
+                    MaNV = cmbNhanVien.SelectedValue.ToString(),
+                    MaCa = cmbCa.SelectedValue.ToString(),
+                    MaLC = cmbLoaiCa.SelectedValue.ToString(),
+                    Phep = false,
+                };
+                if (chiTietLichLamViecBUS.Save(newChamCong))
+                {
+                    string maNV = cmbNhanVien.SelectedValue.ToString();
+                    string thaoTac = $"Thêm nhân viên {maNV} vào";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm nhân viên")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                }
+                Reload();
             }
-            Reload();
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
+            }
         }
         private void XoaButton()
         {
@@ -349,17 +364,24 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void XoaNhanVien()
         {
-            ChamCong newChamCong = new ChamCong
+            try
             {
-                MaLLV = maLLV,
-                MaNV = maNV_Chon,
-            };
-            if (chiTietLichLamViecBUS.Delete(newChamCong))
-            {                
-                string thaoTac = $"Xoá nhân viên {maNV_Chon} khỏi";
-                string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá nhân viên")).MaTT;
-                LichSuThaoTac(thaoTac, maTT);
-                Reload();
+                ChamCong newChamCong = new ChamCong
+                {
+                    MaLLV = maLLV,
+                    MaNV = maNV_Chon,
+                };
+                if (chiTietLichLamViecBUS.Delete(newChamCong))
+                {
+                    string thaoTac = $"Xoá nhân viên {maNV_Chon} khỏi";
+                    string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá nhân viên")).MaTT;
+                    LichSuThaoTac(thaoTac, maTT);
+                    Reload();
+                }
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex);
             }
         }
         private void dgvChiTietLichLamViec_CellClick(object sender, DataGridViewCellEventArgs e)
