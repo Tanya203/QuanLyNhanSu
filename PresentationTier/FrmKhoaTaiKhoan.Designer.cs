@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.lblChucVuNV_DN = new System.Windows.Forms.Label();
-            this.lblChucVuDN = new System.Windows.Forms.Label();
-            this.lblPhongBanNV_DN = new System.Windows.Forms.Label();
-            this.lblPhongBanDN = new System.Windows.Forms.Label();
-            this.lblHoTenNV_DN = new System.Windows.Forms.Label();
-            this.lblHoTenDN = new System.Windows.Forms.Label();
-            this.lblMaNV_DN = new System.Windows.Forms.Label();
-            this.lblMaNhanVienDN = new System.Windows.Forms.Label();
-            this.btnTroVe = new System.Windows.Forms.Button();
-            this.lblKhoaTaiKhoan = new System.Windows.Forms.Label();
-            this.dtpNgayKhoa = new System.Windows.Forms.DateTimePicker();
+            this.lblPositionLoginValue = new System.Windows.Forms.Label();
+            this.lblPositionLogin = new System.Windows.Forms.Label();
+            this.lblDepartmentLoginValue = new System.Windows.Forms.Label();
+            this.lblDepartmentLogin = new System.Windows.Forms.Label();
+            this.lblFullNameLoginValue = new System.Windows.Forms.Label();
+            this.lblFullNameLogin = new System.Windows.Forms.Label();
+            this.lblStaffIDLoginValue = new System.Windows.Forms.Label();
+            this.lblStaffIDLogin = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.lblLockAccount = new System.Windows.Forms.Label();
+            this.dtpLockDate = new System.Windows.Forms.DateTimePicker();
             this.pnlMenu = new System.Windows.Forms.Panel();
-            this.lblChonThoiGianKhoa = new System.Windows.Forms.Label();
-            this.btnKhoaTaiKhoan = new System.Windows.Forms.Button();
+            this.lblChooseLockTime = new System.Windows.Forms.Label();
+            this.btnLockAccount = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             this.SuspendLayout();
@@ -50,181 +50,181 @@
             // pnlHeader
             // 
             this.pnlHeader.BackColor = System.Drawing.SystemColors.Info;
-            this.pnlHeader.Controls.Add(this.lblChucVuNV_DN);
-            this.pnlHeader.Controls.Add(this.lblChucVuDN);
-            this.pnlHeader.Controls.Add(this.lblPhongBanNV_DN);
-            this.pnlHeader.Controls.Add(this.lblPhongBanDN);
-            this.pnlHeader.Controls.Add(this.lblHoTenNV_DN);
-            this.pnlHeader.Controls.Add(this.lblHoTenDN);
-            this.pnlHeader.Controls.Add(this.lblMaNV_DN);
-            this.pnlHeader.Controls.Add(this.lblMaNhanVienDN);
-            this.pnlHeader.Controls.Add(this.btnTroVe);
+            this.pnlHeader.Controls.Add(this.lblPositionLoginValue);
+            this.pnlHeader.Controls.Add(this.lblPositionLogin);
+            this.pnlHeader.Controls.Add(this.lblDepartmentLoginValue);
+            this.pnlHeader.Controls.Add(this.lblDepartmentLogin);
+            this.pnlHeader.Controls.Add(this.lblFullNameLoginValue);
+            this.pnlHeader.Controls.Add(this.lblFullNameLogin);
+            this.pnlHeader.Controls.Add(this.lblStaffIDLoginValue);
+            this.pnlHeader.Controls.Add(this.lblStaffIDLogin);
+            this.pnlHeader.Controls.Add(this.btnBack);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(993, 106);
             this.pnlHeader.TabIndex = 1;
             // 
-            // lblChucVuNV_DN
+            // lblPositionLoginValue
             // 
-            this.lblChucVuNV_DN.AutoSize = true;
-            this.lblChucVuNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuNV_DN.Location = new System.Drawing.Point(669, 72);
-            this.lblChucVuNV_DN.Name = "lblChucVuNV_DN";
-            this.lblChucVuNV_DN.Size = new System.Drawing.Size(30, 25);
-            this.lblChucVuNV_DN.TabIndex = 8;
-            this.lblChucVuNV_DN.Text = "...";
+            this.lblPositionLoginValue.AutoSize = true;
+            this.lblPositionLoginValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPositionLoginValue.Location = new System.Drawing.Point(669, 72);
+            this.lblPositionLoginValue.Name = "lblPositionLoginValue";
+            this.lblPositionLoginValue.Size = new System.Drawing.Size(30, 25);
+            this.lblPositionLoginValue.TabIndex = 8;
+            this.lblPositionLoginValue.Text = "...";
             // 
-            // lblChucVuDN
+            // lblPositionLogin
             // 
-            this.lblChucVuDN.AutoSize = true;
-            this.lblChucVuDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuDN.Location = new System.Drawing.Point(549, 72);
-            this.lblChucVuDN.Name = "lblChucVuDN";
-            this.lblChucVuDN.Size = new System.Drawing.Size(99, 25);
-            this.lblChucVuDN.TabIndex = 7;
-            this.lblChucVuDN.Text = "Chức vụ:";
+            this.lblPositionLogin.AutoSize = true;
+            this.lblPositionLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPositionLogin.Location = new System.Drawing.Point(549, 72);
+            this.lblPositionLogin.Name = "lblPositionLogin";
+            this.lblPositionLogin.Size = new System.Drawing.Size(99, 25);
+            this.lblPositionLogin.TabIndex = 7;
+            this.lblPositionLogin.Text = "Chức vụ:";
             // 
-            // lblPhongBanNV_DN
+            // lblDepartmentLoginValue
             // 
-            this.lblPhongBanNV_DN.AutoSize = true;
-            this.lblPhongBanNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanNV_DN.Location = new System.Drawing.Point(669, 9);
-            this.lblPhongBanNV_DN.Name = "lblPhongBanNV_DN";
-            this.lblPhongBanNV_DN.Size = new System.Drawing.Size(30, 25);
-            this.lblPhongBanNV_DN.TabIndex = 6;
-            this.lblPhongBanNV_DN.Text = "...";
+            this.lblDepartmentLoginValue.AutoSize = true;
+            this.lblDepartmentLoginValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDepartmentLoginValue.Location = new System.Drawing.Point(669, 9);
+            this.lblDepartmentLoginValue.Name = "lblDepartmentLoginValue";
+            this.lblDepartmentLoginValue.Size = new System.Drawing.Size(30, 25);
+            this.lblDepartmentLoginValue.TabIndex = 6;
+            this.lblDepartmentLoginValue.Text = "...";
             // 
-            // lblPhongBanDN
+            // lblDepartmentLogin
             // 
-            this.lblPhongBanDN.AutoSize = true;
-            this.lblPhongBanDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanDN.Location = new System.Drawing.Point(549, 9);
-            this.lblPhongBanDN.Name = "lblPhongBanDN";
-            this.lblPhongBanDN.Size = new System.Drawing.Size(123, 25);
-            this.lblPhongBanDN.TabIndex = 5;
-            this.lblPhongBanDN.Text = "Phòng ban:";
+            this.lblDepartmentLogin.AutoSize = true;
+            this.lblDepartmentLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDepartmentLogin.Location = new System.Drawing.Point(549, 9);
+            this.lblDepartmentLogin.Name = "lblDepartmentLogin";
+            this.lblDepartmentLogin.Size = new System.Drawing.Size(123, 25);
+            this.lblDepartmentLogin.TabIndex = 5;
+            this.lblDepartmentLogin.Text = "Phòng ban:";
             // 
-            // lblHoTenNV_DN
+            // lblFullNameLoginValue
             // 
-            this.lblHoTenNV_DN.AutoSize = true;
-            this.lblHoTenNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHoTenNV_DN.Location = new System.Drawing.Point(312, 72);
-            this.lblHoTenNV_DN.Name = "lblHoTenNV_DN";
-            this.lblHoTenNV_DN.Size = new System.Drawing.Size(30, 25);
-            this.lblHoTenNV_DN.TabIndex = 4;
-            this.lblHoTenNV_DN.Text = "...";
-            this.lblHoTenNV_DN.UseMnemonic = false;
+            this.lblFullNameLoginValue.AutoSize = true;
+            this.lblFullNameLoginValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullNameLoginValue.Location = new System.Drawing.Point(312, 72);
+            this.lblFullNameLoginValue.Name = "lblFullNameLoginValue";
+            this.lblFullNameLoginValue.Size = new System.Drawing.Size(30, 25);
+            this.lblFullNameLoginValue.TabIndex = 4;
+            this.lblFullNameLoginValue.Text = "...";
+            this.lblFullNameLoginValue.UseMnemonic = false;
             // 
-            // lblHoTenDN
+            // lblFullNameLogin
             // 
-            this.lblHoTenDN.AutoSize = true;
-            this.lblHoTenDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHoTenDN.Location = new System.Drawing.Point(157, 72);
-            this.lblHoTenDN.Name = "lblHoTenDN";
-            this.lblHoTenDN.Size = new System.Drawing.Size(82, 25);
-            this.lblHoTenDN.TabIndex = 3;
-            this.lblHoTenDN.Text = "Họ tên:";
+            this.lblFullNameLogin.AutoSize = true;
+            this.lblFullNameLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullNameLogin.Location = new System.Drawing.Point(157, 72);
+            this.lblFullNameLogin.Name = "lblFullNameLogin";
+            this.lblFullNameLogin.Size = new System.Drawing.Size(82, 25);
+            this.lblFullNameLogin.TabIndex = 3;
+            this.lblFullNameLogin.Text = "Họ tên:";
             // 
-            // lblMaNV_DN
+            // lblStaffIDLoginValue
             // 
-            this.lblMaNV_DN.AutoSize = true;
-            this.lblMaNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaNV_DN.Location = new System.Drawing.Point(312, 9);
-            this.lblMaNV_DN.Name = "lblMaNV_DN";
-            this.lblMaNV_DN.Size = new System.Drawing.Size(30, 25);
-            this.lblMaNV_DN.TabIndex = 2;
-            this.lblMaNV_DN.Text = "...";
-            this.lblMaNV_DN.UseMnemonic = false;
+            this.lblStaffIDLoginValue.AutoSize = true;
+            this.lblStaffIDLoginValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffIDLoginValue.Location = new System.Drawing.Point(312, 9);
+            this.lblStaffIDLoginValue.Name = "lblStaffIDLoginValue";
+            this.lblStaffIDLoginValue.Size = new System.Drawing.Size(30, 25);
+            this.lblStaffIDLoginValue.TabIndex = 2;
+            this.lblStaffIDLoginValue.Text = "...";
+            this.lblStaffIDLoginValue.UseMnemonic = false;
             // 
-            // lblMaNhanVienDN
+            // lblStaffIDLogin
             // 
-            this.lblMaNhanVienDN.AutoSize = true;
-            this.lblMaNhanVienDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaNhanVienDN.Location = new System.Drawing.Point(157, 9);
-            this.lblMaNhanVienDN.Name = "lblMaNhanVienDN";
-            this.lblMaNhanVienDN.Size = new System.Drawing.Size(149, 25);
-            this.lblMaNhanVienDN.TabIndex = 1;
-            this.lblMaNhanVienDN.Text = "Mã nhân viên:";
+            this.lblStaffIDLogin.AutoSize = true;
+            this.lblStaffIDLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffIDLogin.Location = new System.Drawing.Point(157, 9);
+            this.lblStaffIDLogin.Name = "lblStaffIDLogin";
+            this.lblStaffIDLogin.Size = new System.Drawing.Size(149, 25);
+            this.lblStaffIDLogin.TabIndex = 1;
+            this.lblStaffIDLogin.Text = "Mã nhân viên:";
             // 
-            // btnTroVe
+            // btnBack
             // 
-            this.btnTroVe.AutoSize = true;
-            this.btnTroVe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnTroVe.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnTroVe.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTroVe.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnTroVe.FlatAppearance.BorderSize = 0;
-            this.btnTroVe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTroVe.Image = global::QuanLyNhanSu.Properties.Resources._return;
-            this.btnTroVe.Location = new System.Drawing.Point(0, 0);
-            this.btnTroVe.Name = "btnTroVe";
-            this.btnTroVe.Size = new System.Drawing.Size(142, 106);
-            this.btnTroVe.TabIndex = 1;
-            this.btnTroVe.Text = "Trở về";
-            this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTroVe.UseVisualStyleBackColor = false;
-            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
+            this.btnBack.AutoSize = true;
+            this.btnBack.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBack.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Image = global::QuanLyNhanSu.Properties.Resources._return;
+            this.btnBack.Location = new System.Drawing.Point(0, 0);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(142, 106);
+            this.btnBack.TabIndex = 1;
+            this.btnBack.Text = "Trở về";
+            this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // lblKhoaTaiKhoan
+            // lblLockAccount
             // 
-            this.lblKhoaTaiKhoan.AutoSize = true;
-            this.lblKhoaTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKhoaTaiKhoan.Location = new System.Drawing.Point(216, 109);
-            this.lblKhoaTaiKhoan.Name = "lblKhoaTaiKhoan";
-            this.lblKhoaTaiKhoan.Size = new System.Drawing.Size(359, 32);
-            this.lblKhoaTaiKhoan.TabIndex = 2;
-            this.lblKhoaTaiKhoan.Text = "Khoá tài khoản nhân viên";
+            this.lblLockAccount.AutoSize = true;
+            this.lblLockAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLockAccount.Location = new System.Drawing.Point(340, 109);
+            this.lblLockAccount.Name = "lblLockAccount";
+            this.lblLockAccount.Size = new System.Drawing.Size(359, 32);
+            this.lblLockAccount.TabIndex = 2;
+            this.lblLockAccount.Text = "Khoá tài khoản nhân viên";
             // 
-            // dtpNgayKhoa
+            // dtpLockDate
             // 
-            this.dtpNgayKhoa.CustomFormat = "HH:mm:ss dd/MM/yyyy";
-            this.dtpNgayKhoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpNgayKhoa.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgayKhoa.Location = new System.Drawing.Point(144, 59);
-            this.dtpNgayKhoa.Name = "dtpNgayKhoa";
-            this.dtpNgayKhoa.Size = new System.Drawing.Size(349, 41);
-            this.dtpNgayKhoa.TabIndex = 3;
+            this.dtpLockDate.CustomFormat = "HH:mm:ss dd/MM/yyyy";
+            this.dtpLockDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpLockDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpLockDate.Location = new System.Drawing.Point(144, 59);
+            this.dtpLockDate.Name = "dtpLockDate";
+            this.dtpLockDate.Size = new System.Drawing.Size(349, 41);
+            this.dtpLockDate.TabIndex = 3;
             // 
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.SystemColors.Info;
-            this.pnlMenu.Controls.Add(this.lblChonThoiGianKhoa);
-            this.pnlMenu.Controls.Add(this.btnKhoaTaiKhoan);
-            this.pnlMenu.Controls.Add(this.dtpNgayKhoa);
+            this.pnlMenu.Controls.Add(this.lblChooseLockTime);
+            this.pnlMenu.Controls.Add(this.btnLockAccount);
+            this.pnlMenu.Controls.Add(this.dtpLockDate);
             this.pnlMenu.Location = new System.Drawing.Point(194, 144);
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(621, 221);
             this.pnlMenu.TabIndex = 37;
             // 
-            // lblChonThoiGianKhoa
+            // lblChooseLockTime
             // 
-            this.lblChonThoiGianKhoa.AutoSize = true;
-            this.lblChonThoiGianKhoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChonThoiGianKhoa.Location = new System.Drawing.Point(185, 13);
-            this.lblChonThoiGianKhoa.Name = "lblChonThoiGianKhoa";
-            this.lblChonThoiGianKhoa.Size = new System.Drawing.Size(286, 32);
-            this.lblChonThoiGianKhoa.TabIndex = 37;
-            this.lblChonThoiGianKhoa.Text = "Chọn thời gian khoá";
+            this.lblChooseLockTime.AutoSize = true;
+            this.lblChooseLockTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChooseLockTime.Location = new System.Drawing.Point(185, 13);
+            this.lblChooseLockTime.Name = "lblChooseLockTime";
+            this.lblChooseLockTime.Size = new System.Drawing.Size(286, 32);
+            this.lblChooseLockTime.TabIndex = 37;
+            this.lblChooseLockTime.Text = "Chọn thời gian khoá";
             // 
-            // btnKhoaTaiKhoan
+            // btnLockAccount
             // 
-            this.btnKhoaTaiKhoan.AutoSize = true;
-            this.btnKhoaTaiKhoan.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnKhoaTaiKhoan.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnKhoaTaiKhoan.FlatAppearance.BorderSize = 0;
-            this.btnKhoaTaiKhoan.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnKhoaTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKhoaTaiKhoan.Image = global::QuanLyNhanSu.Properties.Resources.lock_big;
-            this.btnKhoaTaiKhoan.Location = new System.Drawing.Point(173, 117);
-            this.btnKhoaTaiKhoan.Name = "btnKhoaTaiKhoan";
-            this.btnKhoaTaiKhoan.Size = new System.Drawing.Size(276, 81);
-            this.btnKhoaTaiKhoan.TabIndex = 36;
-            this.btnKhoaTaiKhoan.Text = "Khoá tài khoản";
-            this.btnKhoaTaiKhoan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnKhoaTaiKhoan.UseVisualStyleBackColor = false;
-            this.btnKhoaTaiKhoan.Click += new System.EventHandler(this.btnKhoaTaiKhoan_Click);
+            this.btnLockAccount.AutoSize = true;
+            this.btnLockAccount.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnLockAccount.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLockAccount.FlatAppearance.BorderSize = 0;
+            this.btnLockAccount.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLockAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLockAccount.Image = global::QuanLyNhanSu.Properties.Resources.lock_big;
+            this.btnLockAccount.Location = new System.Drawing.Point(173, 117);
+            this.btnLockAccount.Name = "btnLockAccount";
+            this.btnLockAccount.Size = new System.Drawing.Size(276, 81);
+            this.btnLockAccount.TabIndex = 36;
+            this.btnLockAccount.Text = "Khoá tài khoản";
+            this.btnLockAccount.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLockAccount.UseVisualStyleBackColor = false;
+            this.btnLockAccount.Click += new System.EventHandler(this.btnLockAccount_Click);
             // 
             // FrmKhoaTaiKhoan
             // 
@@ -233,7 +233,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(993, 394);
             this.Controls.Add(this.pnlMenu);
-            this.Controls.Add(this.lblKhoaTaiKhoan);
+            this.Controls.Add(this.lblLockAccount);
             this.Controls.Add(this.pnlHeader);
             this.MaximizeBox = false;
             this.Name = "FrmKhoaTaiKhoan";
@@ -252,19 +252,19 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Label lblChucVuNV_DN;
-        private System.Windows.Forms.Label lblChucVuDN;
-        private System.Windows.Forms.Label lblPhongBanNV_DN;
-        private System.Windows.Forms.Label lblPhongBanDN;
-        private System.Windows.Forms.Label lblHoTenNV_DN;
-        private System.Windows.Forms.Label lblHoTenDN;
-        private System.Windows.Forms.Label lblMaNV_DN;
-        private System.Windows.Forms.Label lblMaNhanVienDN;
-        private System.Windows.Forms.Button btnTroVe;
-        private System.Windows.Forms.Label lblKhoaTaiKhoan;
-        private System.Windows.Forms.DateTimePicker dtpNgayKhoa;
-        private System.Windows.Forms.Button btnKhoaTaiKhoan;
+        private System.Windows.Forms.Label lblPositionLoginValue;
+        private System.Windows.Forms.Label lblPositionLogin;
+        private System.Windows.Forms.Label lblDepartmentLoginValue;
+        private System.Windows.Forms.Label lblDepartmentLogin;
+        private System.Windows.Forms.Label lblFullNameLoginValue;
+        private System.Windows.Forms.Label lblFullNameLogin;
+        private System.Windows.Forms.Label lblStaffIDLoginValue;
+        private System.Windows.Forms.Label lblStaffIDLogin;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Label lblLockAccount;
+        private System.Windows.Forms.DateTimePicker dtpLockDate;
+        private System.Windows.Forms.Button btnLockAccount;
         private System.Windows.Forms.Panel pnlMenu;
-        private System.Windows.Forms.Label lblChonThoiGianKhoa;
+        private System.Windows.Forms.Label lblChooseLockTime;
     }
 }

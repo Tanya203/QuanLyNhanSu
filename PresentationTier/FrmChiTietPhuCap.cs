@@ -62,12 +62,12 @@ namespace QuanLyNhanSu.PresentationTier
 
         private void FrmChiTietPhuCap_Load(object sender, EventArgs e)
         {
-            cmbPhongBan.DisplayMember = "TenPhongBan";
-            cmbPhongBan.ValueMember = "MaPB";
-            cmbChucVu.DisplayMember = "TenChucVu";
-            cmbChucVu.ValueMember = "MaCV";
-            cmbNhanVien.DisplayMember = "MaNV";
-            cmbNhanVien.ValueMember = "MaNV";            
+            cmbDepartment.DisplayMember = "TenPhongBan";
+            cmbDepartment.ValueMember = "MaPB";
+            cmbPosition.DisplayMember = "TenChucVu";
+            cmbPosition.ValueMember = "MaCV";
+            cmbStaffID.DisplayMember = "MaNV";
+            cmbStaffID.ValueMember = "MaNV";            
             LoadThongTinDangNhap();
             LoadThongTinPhuCap();
             DisableTextBox();
@@ -76,20 +76,20 @@ namespace QuanLyNhanSu.PresentationTier
             if (checkThaoTac)
             {
                 LoadPhongBan();
-                LoadChucVuTheoPhongBan(cmbPhongBan.SelectedValue.ToString());
-                LoadNhanVienTheoChucVu(cmbChucVu.SelectedValue.ToString());
+                LoadChucVuTheoPhongBan(cmbDepartment.SelectedValue.ToString());
+                LoadNhanVienTheoChucVu(cmbPosition.SelectedValue.ToString());
             }            
             LoadThongTinChiTietMotPhuCap();
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV_DN.Text = nv.MaNV;
+            lblStaffIDLoginValue.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblDepartmentLoginValue.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblPositionLoginValue.Text = nv.ChucVu.TenChucVu;
         }
         private void PhanQuyen()
         {
@@ -106,7 +106,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void InputStatus(bool value)
         {
             ButtonStatus(value);
-            List<ComboBox> listComboBox = new List<ComboBox> { cmbChucVu, cmbNhanVien, cmbPhongBan};
+            List<ComboBox> listComboBox = new List<ComboBox> { cmbPosition, cmbStaffID, cmbDepartment};
             for(int i = 0; i < listComboBox.Count; i++)
             {
                 typeof(ComboBox).GetProperty("Enabled").SetValue(listComboBox[i], value);
@@ -114,7 +114,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value)
         {
-            List<Button> listButton = new List<Button> { btnThem};
+            List<Button> listButton = new List<Button> { btnAdd};
             if (value)
                 XoaButton();
             for(int i = 0; i < listButton.Count; i++)
@@ -125,7 +125,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void DisableTextBox()
         {
-            List<TextBox> listTextBox = new List<TextBox> { txtMaPC, txtTenPhuCap, txtTienPhuCap, txtSoLuongNhanVien, txtTongTien, txtHoTenNV};
+            List<TextBox> listTextBox = new List<TextBox> { txtAllowanceID, txtAllowamceName, txtAmount, txtStaffAmount, txtTotalAmount, txtFullName};
             for(int i = 0; i < listTextBox.Count; i++)
             {
                 typeof(TextBox).GetProperty("ReadOnly").SetValue(listTextBox[i],true);
@@ -133,61 +133,60 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadThongTinPhuCap()
         {
-            txtMaPC.Text = maPC;
-            txtTenPhuCap.Text = phuCap.TenPhuCap;
-            txtTienPhuCap.Text = String.Format(fVND, "{0:N3} ₫", phuCap.TienPhuCap);
-            txtSoLuongNhanVien.Text = chiTietPhuCapBUS.TongSoNhanVienTrongPhuCap(maPC).ToString();
-            txtTongTien.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongTienMotPhuCap(maPC)); 
+            txtAllowanceID.Text = maPC;
+            txtAllowamceName.Text = phuCap.TenPhuCap;
+            txtAmount.Text = String.Format(fVND, "{0:N3} ₫", phuCap.TienPhuCap);
+            txtStaffAmount.Text = chiTietPhuCapBUS.TongSoNhanVienTrongPhuCap(maPC).ToString();
+            txtTotalAmount.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongTienMotPhuCap(maPC)); 
         }
         private void LoadPhongBan()
         {
-            cmbPhongBan.DataSource = phongBanBUS.GetPhongBan();
-            AutoAdjustComboBox(cmbPhongBan);
+            cmbDepartment.DataSource = phongBanBUS.GetPhongBan();
+            AutoAdjustComboBox(cmbDepartment);
         }
         private void LoadChucVuTheoPhongBan(string maPB)
         {
-            cmbChucVu.DataSource = chucVuBUS.GetChucVu().Where(cv => cv.MaPB == maPB).ToList();
-            AutoAdjustComboBox(cmbChucVu);
+            cmbPosition.DataSource = chucVuBUS.GetChucVu().Where(cv => cv.MaPB == maPB).ToList();
+            AutoAdjustComboBox(cmbPosition);
         }
         private void LoadNhanVienTheoChucVu(string maCV)
         {
             List<NhanVien> nhanVienList = nhanVienBUS.GetNhanVien().Where(nv => nv.MaCV == maCV).ToList();
             foreach (var pt in chiTietPhuCap)
                 nhanVienList = nhanVienList.Where(nv => nv.MaNV != pt.MaNV).ToList();
-            cmbNhanVien.DataSource = nhanVienList;
-            if (string.IsNullOrEmpty(cmbNhanVien.Text))
+            cmbStaffID.DataSource = nhanVienList;
+            if (string.IsNullOrEmpty(cmbStaffID.Text))
             {
-                cmbNhanVien.Enabled = false;
-                txtHoTenNV.Text = string.Empty;
+                cmbStaffID.Enabled = false;
+                txtFullName.Text = string.Empty;
             }
             else
-                cmbNhanVien.Enabled = true;
-            AutoAdjustComboBox(cmbNhanVien);
+                cmbStaffID.Enabled = true;
+            AutoAdjustComboBox(cmbStaffID);
         }
-        private void cmbChucVu_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbPositionSelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadNhanVienTheoChucVu(cmbChucVu.SelectedValue.ToString());
+            LoadNhanVienTheoChucVu(cmbPosition.SelectedValue.ToString());
         }
 
-        private void cmbPhongBan_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadChucVuTheoPhongBan(cmbPhongBan.SelectedValue.ToString());
+            LoadChucVuTheoPhongBan(cmbDepartment.SelectedValue.ToString());
         }
-        private void cmbNhanVien_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbStaffID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadNhanVienTheoChucVu(cmbChucVu.SelectedValue.ToString());
-            if (string.IsNullOrEmpty(cmbNhanVien.Text))
+            LoadNhanVienTheoChucVu(cmbPosition.SelectedValue.ToString());
+            if (string.IsNullOrEmpty(cmbStaffID.Text))
             {
-                btnThem.Enabled = false;
-                txtHoTenNV.Text = string.Empty;
+                btnAdd.Enabled = false;
+                txtFullName.Text = string.Empty;
             }
             else
             {
-                btnThem.Enabled = true;
-                NhanVien nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nhanVien => nhanVien.MaNV == cmbNhanVien.Text);
-                txtHoTenNV.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            }
-                
+                btnAdd.Enabled = true;
+                NhanVien nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nhanVien => nhanVien.MaNV == cmbStaffID.Text);
+                txtFullName.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            }                
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void AutoAdjustComboBox(ComboBox comboBox)
@@ -216,34 +215,34 @@ namespace QuanLyNhanSu.PresentationTier
         private void LoadThongTinChiTietMotPhuCap()
         {
             Enabled = false;
-            dgvChiTietMotPhuCap.Rows.Clear();
+            dgvAllowanceDetail.Rows.Clear();
             danhSachchiTietPhuCap = chiTietPhuCapBUS.GetAllChiTietPhuCap(maPC);
             int row;
             foreach(ChiTietPhuCapViewModels nv in danhSachchiTietPhuCap)
             {
-                row = dgvChiTietMotPhuCap.Rows.Add();
-                dgvChiTietMotPhuCap.Rows[row].Cells[0].Value = nv.MaPC;
-                dgvChiTietMotPhuCap.Rows[row].Cells[1].Value = nv.MaNV;
-                dgvChiTietMotPhuCap.Rows[row].Cells[2].Value = nv.HoTen;
-                dgvChiTietMotPhuCap.Rows[row].Cells[3].Value = nv.PhongBan;
-                dgvChiTietMotPhuCap.Rows[row].Cells[4].Value = nv.ChucVu;
+                row = dgvAllowanceDetail.Rows.Add();
+                dgvAllowanceDetail.Rows[row].Cells[0].Value = nv.MaPC;
+                dgvAllowanceDetail.Rows[row].Cells[1].Value = nv.MaNV;
+                dgvAllowanceDetail.Rows[row].Cells[2].Value = nv.HoTen;
+                dgvAllowanceDetail.Rows[row].Cells[3].Value = nv.PhongBan;
+                dgvAllowanceDetail.Rows[row].Cells[4].Value = nv.ChucVu;
             };
             Enabled = true;
         }
         private void LoadThongTinChiTietMotPhuCapTimKiem(string timKiem)
         {
             Enabled = false;
-            dgvChiTietMotPhuCap.Rows.Clear();
+            dgvAllowanceDetail.Rows.Clear();
             danhSachchiTietPhuCapTimKiem = chiTietPhuCapBUS.SearchChiTietPhuCap(maPC, timKiem);
             int row;
             foreach (ChiTietPhuCapViewModels nv in danhSachchiTietPhuCapTimKiem)
             {
-                row = dgvChiTietMotPhuCap.Rows.Add();
-                dgvChiTietMotPhuCap.Rows[row].Cells[0].Value = nv.MaPC;
-                dgvChiTietMotPhuCap.Rows[row].Cells[1].Value = nv.MaNV;
-                dgvChiTietMotPhuCap.Rows[row].Cells[2].Value = nv.HoTen;
-                dgvChiTietMotPhuCap.Rows[row].Cells[3].Value = nv.PhongBan;
-                dgvChiTietMotPhuCap.Rows[row].Cells[4].Value = nv.ChucVu;
+                row = dgvAllowanceDetail.Rows.Add();
+                dgvAllowanceDetail.Rows[row].Cells[0].Value = nv.MaPC;
+                dgvAllowanceDetail.Rows[row].Cells[1].Value = nv.MaNV;
+                dgvAllowanceDetail.Rows[row].Cells[2].Value = nv.HoTen;
+                dgvAllowanceDetail.Rows[row].Cells[3].Value = nv.PhongBan;
+                dgvAllowanceDetail.Rows[row].Cells[4].Value = nv.ChucVu;
             };
             Enabled = true;
         }
@@ -259,16 +258,16 @@ namespace QuanLyNhanSu.PresentationTier
             };
             lichSuThaoTacBUS.Save(newLstt);
         }
-        private void btnThem_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             ChiTietPhuCap chiTietPhuCap = new ChiTietPhuCap
             {
                 MaPC = maPC,
-                MaNV = cmbNhanVien.SelectedValue.ToString(),
+                MaNV = cmbStaffID.SelectedValue.ToString(),
             };
             if (chiTietPhuCapBUS.Save(chiTietPhuCap))
             {
-                string thaoTac = $"Thêm phụ cấp {phuCap.TenPhuCap} cho nhân viên {cmbNhanVien.SelectedValue}";
+                string thaoTac = $"Thêm phụ cấp {phuCap.TenPhuCap} cho nhân viên {cmbStaffID.SelectedValue}";
                 string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
                 LichSuThaoTac(thaoTac, maTT);
             }
@@ -288,7 +287,7 @@ namespace QuanLyNhanSu.PresentationTier
                     Alignment = DataGridViewContentAlignment.MiddleCenter
                 };
                 btnXoa.DefaultCellStyle = buttonCellStyle;
-                dgvChiTietMotPhuCap.Columns.Add(btnXoa);
+                dgvAllowanceDetail.Columns.Add(btnXoa);
             }
         }
         private void XoaNhanVien(string maNV)
@@ -302,23 +301,23 @@ namespace QuanLyNhanSu.PresentationTier
                 Reload();
             }
         }
-        private void dgvChiTietMotPhuCap_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvCardDetail_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
             if (row < 0)
                 return;
-            string maNV = dgvChiTietMotPhuCap.Rows[row].Cells[1].Value.ToString();
+            string maNV = dgvAllowanceDetail.Rows[row].Cells[1].Value.ToString();
             if (e.ColumnIndex == 5)
                 XoaNhanVien(maNV);
         }
-        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                LoadThongTinChiTietMotPhuCapTimKiem(txtTimKiem.Text);
+                LoadThongTinChiTietMotPhuCapTimKiem(txtSearch.Text);
             }
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             FrmQuanLyPhuCap frmOpen = new FrmQuanLyPhuCap(maNV);
             frmOpen.Show();

@@ -66,9 +66,9 @@ namespace QuanLyNhanSu.PresentationTier
         private void InputStatus(bool value)
         {
             ButtonStatus(value);
-            List<TextBox> listTextBox = new List<TextBox> { txtTenLC, txtHeSoLuong };
+            List<TextBox> listTextBox = new List<TextBox> { txtShiftTypeName, txtSalaryCoefficient };
             if (!value)
-                listTextBox.Add(txtMaLC);
+                listTextBox.Add(txtShiftTypeID);
             for(int i = 0; i< listTextBox.Count; i++)
             {
                 typeof(TextBox).GetProperty("ReadOnly").SetValue(listTextBox[i], !value);
@@ -77,58 +77,58 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value)
         {
-            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy };
+            List<Button> listButtons = new List<Button> { btnAdd, btnEdit, btnDelete, btnCancel };
             for (int i = 0; i < listButtons.Count; i++)
             {
                 typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
-                if (value && listButtons[i] != btnHuy)
+                if (value && listButtons[i] != btnCancel)
                     typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
             }
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV_DN.Text = nv.MaNV;
+            lblStaffIDLoginValue.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblDepartmentLoginValue.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblPositionLoginValue.Text = nv.ChucVu.TenChucVu;
         }
         private void LoadLoaiCa()
         {
             Enabled = false;
-            dgvThongTinLoaiCa.Rows.Clear();
+            dgvShiftType.Rows.Clear();
             danhSachLoaiCa = loaiCaBUS.GetAllLoaiCa();
             int rowAdd;
             foreach (var lc in danhSachLoaiCa)
             {
-                rowAdd = dgvThongTinLoaiCa.Rows.Add();
-                dgvThongTinLoaiCa.Rows[rowAdd].Cells[0].Value = lc.MaLoaiCa;
-                dgvThongTinLoaiCa.Rows[rowAdd].Cells[1].Value = lc.TenLoaiCa;
-                dgvThongTinLoaiCa.Rows[rowAdd].Cells[2].Value = lc.HeSoLuong;
+                rowAdd = dgvShiftType.Rows.Add();
+                dgvShiftType.Rows[rowAdd].Cells[0].Value = lc.MaLoaiCa;
+                dgvShiftType.Rows[rowAdd].Cells[1].Value = lc.TenLoaiCa;
+                dgvShiftType.Rows[rowAdd].Cells[2].Value = lc.HeSoLuong;
             }
             Enabled = true;
         }
         private void LoadLoaiCaTimKiem(string timKiem)
         {            
             Enabled = false;
-            dgvThongTinLoaiCa.Rows.Clear();
+            dgvShiftType.Rows.Clear();
             danhSachLoaiCaTimKiem = loaiCaBUS.SearchLoaiCa(timKiem);
             int rowAdd;
             foreach (var lc in danhSachLoaiCaTimKiem)
             {
-                rowAdd = dgvThongTinLoaiCa.Rows.Add();
-                dgvThongTinLoaiCa.Rows[rowAdd].Cells[0].Value = lc.MaLoaiCa;
-                dgvThongTinLoaiCa.Rows[rowAdd].Cells[1].Value = lc.TenLoaiCa;
-                dgvThongTinLoaiCa.Rows[rowAdd].Cells[2].Value = lc.HeSoLuong;
+                rowAdd = dgvShiftType.Rows.Add();
+                dgvShiftType.Rows[rowAdd].Cells[0].Value = lc.MaLoaiCa;
+                dgvShiftType.Rows[rowAdd].Cells[1].Value = lc.TenLoaiCa;
+                dgvShiftType.Rows[rowAdd].Cells[2].Value = lc.HeSoLuong;
             }
             Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void ClearAllText()
         {
-            List<TextBox> listTextBox = new List<TextBox> { txtMaLC, txtTenLC, txtHeSoLuong };
+            List<TextBox> listTextBox = new List<TextBox> { txtShiftTypeID, txtShiftTypeName, txtSalaryCoefficient };
             for(int i = 0; i < listTextBox.Count; i++)
             {
                 typeof(TextBox).GetProperty("Text").SetValue(listTextBox[i], string.Empty);
@@ -149,19 +149,19 @@ namespace QuanLyNhanSu.PresentationTier
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         private bool CheckEmptyText(bool check)
         {
-            List<TextBox> listTextBox = new List<TextBox> { txtTenLC, txtHeSoLuong };
+            List<TextBox> listTextBox = new List<TextBox> { txtShiftTypeName, txtSalaryCoefficient };
             for (int i = 0; i < listTextBox.Count; i++)
             {
                 if (string.IsNullOrEmpty(listTextBox[i].Text))
                 {
                     if (check)
                     {
-                        btnThem.Enabled = false;
+                        btnAdd.Enabled = false;
                         return false;
                     }
                     else
                     {
-                        btnSua.Enabled = false;
+                        btnEdit.Enabled = false;
                         return false;
                     }
                 }
@@ -173,30 +173,30 @@ namespace QuanLyNhanSu.PresentationTier
             if (!checkThaoTac)
                 return;
             bool check;
-            if (string.IsNullOrEmpty(txtMaLC.Text))
+            if (string.IsNullOrEmpty(txtShiftTypeID.Text))
             {
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
                 check = true;
                 if (CheckEmptyText(check))
                 {
-                    btnThem.Enabled = true;
+                    btnAdd.Enabled = true;
                     return;
                 }
             }
             else
             {
-                btnThem.Enabled = false;
-                btnXoa.Enabled = true;
+                btnAdd.Enabled = false;
+                btnDelete.Enabled = true;
                 check = false;
                 if (CheckEmptyText(check))
                 {
-                    btnSua.Enabled = true;
+                    btnEdit.Enabled = true;
                     return;
                 }
             }
         }
-        private void txtHeSoLuong_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtSalaryCoefficient_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
@@ -222,21 +222,21 @@ namespace QuanLyNhanSu.PresentationTier
         private string CheckChange()
         {
             List<string> changes = new List<string>();
-            LoaiCa loaiCa = loaiCaBUS.GetLoaiCa().FirstOrDefault(lc => lc.MaLC == txtMaLC.Text);
-            string tenLoaiCa = txtTenLC.Text;
-            string heSoLuong = txtHeSoLuong.Text;
+            LoaiCa loaiCa = loaiCaBUS.GetLoaiCa().FirstOrDefault(lc => lc.MaLC == txtShiftTypeID.Text);
+            string tenLoaiCa = txtShiftTypeName.Text;
+            string heSoLuong = txtSalaryCoefficient.Text;
             if (tenLoaiCa != loaiCa.TenLoaiCa)
                 changes.Add($"- Tên loại ca: {loaiCa.TenLoaiCa} -> Tên loại ca: {tenLoaiCa}");
-            if (decimal.Parse(txtHeSoLuong.Text) != loaiCa.HeSoLuong)
+            if (decimal.Parse(txtSalaryCoefficient.Text) != loaiCa.HeSoLuong)
                 changes.Add($"- Hệ số lương: {loaiCa.HeSoLuong} -> Hệ số lương: {heSoLuong}");
             return string.Join("\n", changes);
         }
         private bool CheckErrorInput()
         {
             errProvider.Clear();
-            errProvider.SetError(txtTenLC, loaiCaBUS.GetLoaiCa().FirstOrDefault(lc => lc.TenLoaiCa == txtTenLC.Text && lc.MaLC != txtMaLC.Text) != null ? "Tên loại ca đã tồn tại" : string.Empty);
-            errProvider.SetError(txtHeSoLuong, double.TryParse(txtHeSoLuong.Text, out double check) is false ? "Hệ số lương không đúng định dạng số" : string.Empty);
-            if(errProvider.GetError(txtTenLC) != string.Empty || errProvider.GetError(txtHeSoLuong) != string.Empty)
+            errProvider.SetError(txtShiftTypeName, loaiCaBUS.GetLoaiCa().FirstOrDefault(lc => lc.TenLoaiCa == txtShiftTypeName.Text && lc.MaLC != txtShiftTypeID.Text) != null ? "Tên loại ca đã tồn tại" : string.Empty);
+            errProvider.SetError(txtSalaryCoefficient, double.TryParse(txtSalaryCoefficient.Text, out double check) is false ? "Hệ số lương không đúng định dạng số" : string.Empty);
+            if(errProvider.GetError(txtShiftTypeName) != string.Empty || errProvider.GetError(txtSalaryCoefficient) != string.Empty)
                 return false;
             return true;
         }
@@ -248,7 +248,7 @@ namespace QuanLyNhanSu.PresentationTier
             if (ketQua == DialogResult.No)
                 MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        private void btnThem_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             if (!CheckErrorInput())
             {
@@ -260,13 +260,13 @@ namespace QuanLyNhanSu.PresentationTier
                 LoaiCa newLoaiCa = new LoaiCa
                 {
                     MaLC = "",
-                    TenLoaiCa = txtTenLC.Text,
-                    HeSoLuong = decimal.Parse(txtHeSoLuong.Text)
+                    TenLoaiCa = txtShiftTypeName.Text,
+                    HeSoLuong = decimal.Parse(txtSalaryCoefficient.Text)
                 };
                 if (loaiCaBUS.Save(newLoaiCa))
                 {
-                    string loaiCa = txtTenLC.Text;
-                    decimal heSoLuong = decimal.Parse(txtHeSoLuong.Text);
+                    string loaiCa = txtShiftTypeName.Text;
+                    decimal heSoLuong = decimal.Parse(txtSalaryCoefficient.Text);
                     string thaoTac = $"Thêm loại ca {loaiCa}\n - Hệ số lương: {heSoLuong}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
                     LichSuThaoTac(thaoTac, maTT);
@@ -278,7 +278,7 @@ namespace QuanLyNhanSu.PresentationTier
                 ErrorMessage(ex);
             }                    
         }
-        private void btnSua_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
             if (!CheckErrorInput())
             {
@@ -290,13 +290,13 @@ namespace QuanLyNhanSu.PresentationTier
                 string chiTietSua = CheckChange();
                 LoaiCa newLoaiCa = new LoaiCa
                 {
-                    MaLC = txtMaLC.Text,
-                    TenLoaiCa = txtTenLC.Text,
-                    HeSoLuong = decimal.Parse(txtHeSoLuong.Text)
+                    MaLC = txtShiftTypeID.Text,
+                    TenLoaiCa = txtShiftTypeName.Text,
+                    HeSoLuong = decimal.Parse(txtSalaryCoefficient.Text)
                 };
                 if (loaiCaBUS.Save(newLoaiCa))
                 {
-                    string thaoTac = $"Sửa loại ca {txtMaLC.Text}";
+                    string thaoTac = $"Sửa loại ca {txtShiftTypeID.Text}";
                     if (!string.IsNullOrEmpty(chiTietSua))
                         thaoTac += ":\n" + chiTietSua;
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
@@ -309,18 +309,18 @@ namespace QuanLyNhanSu.PresentationTier
                 ErrorMessage(ex);
             }            
         }
-        private void btnXoa_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
                 LoaiCa loaiCa = new LoaiCa
                 {
-                    MaLC = txtMaLC.Text
+                    MaLC = txtShiftTypeID.Text
                 };
                 if (loaiCaBUS.Delete(loaiCa))
                 {
-                    string tenLoaiCa = txtTenLC.Text;
-                    string heSoLuong = txtHeSoLuong.Text;
+                    string tenLoaiCa = txtShiftTypeName.Text;
+                    string heSoLuong = txtSalaryCoefficient.Text;
                     string thaoTac = $"Xoá loại ca {tenLoaiCa}\n    - Hệ số lương: {heSoLuong}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
                     LichSuThaoTac(thaoTac, maTT);
@@ -332,37 +332,37 @@ namespace QuanLyNhanSu.PresentationTier
                 ErrorMessage(ex);
             }
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             FrmQuanLyCa frmOpen = new FrmQuanLyCa(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void dgvThongTinLoaiCa_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvShiftType_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             errProvider.Clear();
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
-            txtMaLC.Text = dgvThongTinLoaiCa.Rows[rowIndex].Cells[0].Value.ToString();
-            txtTenLC.Text = dgvThongTinLoaiCa.Rows[rowIndex].Cells[1].Value.ToString();
-            txtHeSoLuong.Text = dgvThongTinLoaiCa.Rows[rowIndex].Cells[2].Value.ToString();
+            txtShiftTypeID.Text = dgvShiftType.Rows[rowIndex].Cells[0].Value.ToString();
+            txtShiftTypeName.Text = dgvShiftType.Rows[rowIndex].Cells[1].Value.ToString();
+            txtSalaryCoefficient.Text = dgvShiftType.Rows[rowIndex].Cells[2].Value.ToString();
         }
-        private void btnHuy_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             errProvider.Clear();
             ClearAllText();
         }       
-        private void TimKiem(object sender, EventArgs e)
+        private void txtSearch_TextChange(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTimKiem.Text))            
+            if (string.IsNullOrEmpty(txtSearch.Text))            
                 LoadLoaiCa();
         }
-        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
-                LoadLoaiCaTimKiem(txtTimKiem.Text);
+                LoadLoaiCaTimKiem(txtSearch.Text);
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {

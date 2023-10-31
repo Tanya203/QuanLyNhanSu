@@ -12,7 +12,7 @@ namespace QuanLyNhanSu
     public partial class FrmDangNhap : Form
     {
         private readonly QuanLyNhanVienBUS nhanVienBUS;
-        private readonly LichSuThaoTacBUS lichSuThaoTacBUS;       
+        private readonly LichSuThaoTacBUS lichSuThaoTacBUS;
         private readonly List<ThaoTac> listThaoTac;
         private readonly ThaoTacBUS thaoTacBUS;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
@@ -23,22 +23,23 @@ namespace QuanLyNhanSu
             lichSuThaoTacBUS = new LichSuThaoTacBUS();
             thaoTacBUS = new ThaoTacBUS();
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.GiaoDien.TenGiaoDien == "Đăng nhập").ToList();
-            btnDangNhap.Enabled = false;
-            txtTaiKhoan.Text = "TK001";
-            txtMatKhau.Text = "Aa@12345";
+            btnLogin.Enabled = false;
+            txtAccount.Text = "TK001";
+            txtPassword.Text = "Aa@12345";
+            KeyPreview = true;
         }
-        private void llblQuenMatKhau_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void llblForgotPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmQuenMatKhau frmOpen = new FrmQuenMatKhau();
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnDangNhap_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-            if(nhanVienBUS.LoginVerify(txtTaiKhoan.Text, txtMatKhau.Text))
-            {                                 
-                NhanVien nv = nhanVienBUS.GetNhanVien().Where(nhanVien => nhanVien.TaiKhoan == txtTaiKhoan.Text).FirstOrDefault();
+            if (nhanVienBUS.LoginVerify(txtAccount.Text, txtPassword.Text))
+            {
+                NhanVien nv = nhanVienBUS.GetNhanVien().Where(nhanVien => nhanVien.TaiKhoan == txtAccount.Text).FirstOrDefault();
                 string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac == "Đăng nhập").MaTT;
                 LichSuThaoTac newLstt = new LichSuThaoTac
                 {
@@ -52,31 +53,36 @@ namespace QuanLyNhanSu
                 frmOpen.Show();
                 this.Hide();
                 frmOpen.FormClosed += CloseForm;
-            }            
+            }
         }
         private void CloseForm(object sender, FormClosedEventArgs e)
         {
             this.Close();
         }
 
-        private void cbHienThiMatKhau_CheckedChanged(object sender, EventArgs e)
+        private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbHienThiMatKhau.Checked == true)            
-                txtMatKhau.UseSystemPasswordChar = false;            
-            else            
-                txtMatKhau.UseSystemPasswordChar = true;            
+            if (cbShowpassword.Checked == true)
+                txtPassword.UseSystemPasswordChar = false;
+            else
+                txtPassword.UseSystemPasswordChar = true;
         }
         private void EnableButtons(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTaiKhoan.Text) || string.IsNullOrEmpty(txtMatKhau.Text))
-                btnDangNhap.Enabled = false;
+            if (string.IsNullOrEmpty(txtAccount.Text) || string.IsNullOrEmpty(txtPassword.Text))
+                btnLogin.Enabled = false;
             else
-                btnDangNhap.Enabled = true;
+                btnLogin.Enabled = true;
         }
 
-        private void FrmDangNhap_Load(object sender, EventArgs e)
+        private void FrmDangNhap_KeyPress(object sender, KeyPressEventArgs e)
         {
 
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                btnLogin.PerformClick(); 
+                e.Handled = true;
+            }
         }
     }
 }

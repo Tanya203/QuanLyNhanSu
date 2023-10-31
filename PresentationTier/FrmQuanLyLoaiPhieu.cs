@@ -52,13 +52,13 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV_DN.Text = nv.MaNV;
+            lblStaffIDLoginValue.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblDepartmentLoginValue.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblPositionLoginValue.Text = nv.ChucVu.TenChucVu;
         }
         private void PhanQuyen()
         {
@@ -75,9 +75,9 @@ namespace QuanLyNhanSu.PresentationTier
         private void InputStatus(bool value)
         {
             ButtonStatus(value);
-            List<TextBox> listTextBox = new List<TextBox> { txtTenLoaiPhieu };
+            List<TextBox> listTextBox = new List<TextBox> { txtCardTypeName };
             if(!value)
-                listTextBox.AddRange(new List<TextBox> { txtMaLP, txtSoLuongPhieuLap});
+                listTextBox.AddRange(new List<TextBox> { txtCardTypeID, txtCardTypeCreateAmount});
             for(int i = 0; i < listTextBox.Count; i++)
             {
                 typeof(TextBox).GetProperty("ReadOnly").SetValue(listTextBox[i], !value);
@@ -85,59 +85,54 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value)
         {
-            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy };
+            List<Button> listButtons = new List<Button> { btnAdd, btnEdit, btnDelete, btnCancel };
             for (int i = 0; i < listButtons.Count; i++)
             {
                 typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
-                if (value && listButtons[i] != btnHuy)
+                if (value && listButtons[i] != btnCancel)
                     typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
             }
         }
         private void LoadLoaiPhieu()
         {
             Enabled = false;
-            dgvThongTinLoaiPhieu.Rows.Clear();
+            dgvCardType.Rows.Clear();
             danhSachLoaiPhieu = loaiPhieuBUS.GetAllLoaiPhieu();
             int rowAdd;
             foreach (var lp in danhSachLoaiPhieu)
             {
-                rowAdd = dgvThongTinLoaiPhieu.Rows.Add();
-                dgvThongTinLoaiPhieu.Rows[rowAdd].Cells[0].Value = lp.MaLP;
-                dgvThongTinLoaiPhieu.Rows[rowAdd].Cells[1].Value = lp.TenLoaiPhieu;
-                dgvThongTinLoaiPhieu.Rows[rowAdd].Cells[2].Value = loaiPhieuBUS.SoLuongPhieuLap(lp.MaLP).ToString();
+                rowAdd = dgvCardType.Rows.Add();
+                dgvCardType.Rows[rowAdd].Cells[0].Value = lp.MaLP;
+                dgvCardType.Rows[rowAdd].Cells[1].Value = lp.TenLoaiPhieu;
+                dgvCardType.Rows[rowAdd].Cells[2].Value = loaiPhieuBUS.SoLuongPhieuLap(lp.MaLP).ToString();
             }
             Enabled = true;
         }
         private void LoadLoaiPhieuTimKiem(string timKiem)
         {
             Enabled = false;
-            dgvThongTinLoaiPhieu.Rows.Clear();
+            dgvCardType.Rows.Clear();
             danhSachLoaiPhieuTimKiem = loaiPhieuBUS.SearchLoaiPhieu(timKiem);
             int rowAdd;
             foreach (var lp in danhSachLoaiPhieuTimKiem)
             {
-                rowAdd = dgvThongTinLoaiPhieu.Rows.Add();
-                dgvThongTinLoaiPhieu.Rows[rowAdd].Cells[0].Value = lp.MaLP;
-                dgvThongTinLoaiPhieu.Rows[rowAdd].Cells[1].Value = lp.TenLoaiPhieu;
-                dgvThongTinLoaiPhieu.Rows[rowAdd].Cells[2].Value = loaiPhieuBUS.SoLuongPhieuLap(lp.MaLP).ToString();
+                rowAdd = dgvCardType.Rows.Add();
+                dgvCardType.Rows[rowAdd].Cells[0].Value = lp.MaLP;
+                dgvCardType.Rows[rowAdd].Cells[1].Value = lp.TenLoaiPhieu;
+                dgvCardType.Rows[rowAdd].Cells[2].Value = loaiPhieuBUS.SoLuongPhieuLap(lp.MaLP).ToString();
             }
             Enabled = true;
         }
         /////////////////////////////////////////////////////////////////////////////////////
         private void ClearAllText()
         {
-            List<TextBox> listTextBox = new List<TextBox> { txtMaLP, txtTenLoaiPhieu, txtTenLoaiPhieu };
+            List<TextBox> listTextBox = new List<TextBox> { txtCardTypeID, txtCardTypeName, txtCardTypeName };
             for (int i = 0; i < listTextBox.Count; i++)
             {
                 typeof(TextBox).GetProperty("Text").SetValue(listTextBox[i], string.Empty);
             }
         }
-        /////////////////////////////////////////////////////////////////////////////////////
-        private void CloseCurrentForm(string maNV)
-        {
-            this.Close();
-            Application.Run(new FrmQuanLyLoaiPhieu(maNV));
-        }
+        /////////////////////////////////////////////////////////////////////////////////////s
         private void Reload()
         {
             FrmQuanLyLoaiPhieu frmOpen = new FrmQuanLyLoaiPhieu(maNV);
@@ -152,19 +147,19 @@ namespace QuanLyNhanSu.PresentationTier
         //////////////////////////////////////////////////////////////////////////////////////////
         private bool CheckEmptyText(bool check)
         {
-            List<TextBox> listTextBox = new List<TextBox> { txtTenLoaiPhieu };
+            List<TextBox> listTextBox = new List<TextBox> { txtCardTypeName };
             for (int i = 0; i < listTextBox.Count; i++)
             {
                 if (string.IsNullOrEmpty(listTextBox[i].Text))
                 {
                     if (check)
                     {
-                        btnThem.Enabled = false;
+                        btnAdd.Enabled = false;
                         return false;
                     }
                     else
                     {
-                        btnSua.Enabled = false;
+                        btnEdit.Enabled = false;
                         return false;
                     }
                 }
@@ -176,32 +171,32 @@ namespace QuanLyNhanSu.PresentationTier
             if (!checkThaoTac)
                 return;
             bool check;
-            if (string.IsNullOrEmpty(txtMaLP.Text))
+            if (string.IsNullOrEmpty(txtCardTypeID.Text))
             {
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
                 check = true;
                 if (CheckEmptyText(check))
                 {
-                    btnThem.Enabled = true;
+                    btnAdd.Enabled = true;
                     return;
                 }
             }
             else
             {
-                btnThem.Enabled = false;
-                btnXoa.Enabled = true;
+                btnAdd.Enabled = false;
+                btnDelete.Enabled = true;
                 check = false;
                 if (CheckEmptyText(check))
                 {
-                    btnSua.Enabled = true;
+                    btnEdit.Enabled = true;
                     return;
                 }
             }
         }
-        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTimKiem.Text))
+            if (string.IsNullOrEmpty(txtSearch.Text))
                 LoadLoaiPhieu();
         }
         //////////////////////////////////////////////////////////////////////////////////////////
@@ -219,38 +214,38 @@ namespace QuanLyNhanSu.PresentationTier
         private string CheckChange()
         {
             List<string> changes = new List<string>();
-            LoaiPhieu loaiPhieu = loaiPhieuBUS.GetLoaiPhieu().FirstOrDefault(lp => lp.MaLP == txtMaLP.Text);
-            string tenLoaiPhieu = txtTenLoaiPhieu.Text;
+            LoaiPhieu loaiPhieu = loaiPhieuBUS.GetLoaiPhieu().FirstOrDefault(lp => lp.MaLP == txtCardTypeID.Text);
+            string tenLoaiPhieu = txtCardTypeName.Text;
             if (tenLoaiPhieu != loaiPhieu.TenLoaiPhieu)
                 changes.Add($"- Tên loại phiếu: {loaiPhieu.TenLoaiPhieu} -> Tên loại phiếu: {tenLoaiPhieu}");
             return string.Join("\n", changes);
         }
-        private void btnThem_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             LoaiPhieu newLoaiPhieu = new LoaiPhieu
             {
                 MaLP = "",
-                TenLoaiPhieu = txtTenLoaiPhieu.Text,   
+                TenLoaiPhieu = txtCardTypeName.Text,   
             };
             if (loaiPhieuBUS.Save(newLoaiPhieu))
             {
-                string thaoTac = $"Thêm loại phiếu {txtTenLoaiPhieu.Text}";
+                string thaoTac = $"Thêm loại phiếu {txtCardTypeName.Text}";
                 string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
                 LichSuThaoTac(thaoTac, maTT);
             }
             Reload();
         }
-        private void btnSua_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
             string chiTietSua = CheckChange();
             LoaiPhieu newLoaiPhieu = new LoaiPhieu
             {
-                MaLP = txtMaLP.Text,
-                TenLoaiPhieu = txtTenLoaiPhieu.Text,
+                MaLP = txtCardTypeID.Text,
+                TenLoaiPhieu = txtCardTypeName.Text,
             };
             if (loaiPhieuBUS.Save(newLoaiPhieu))
             {
-                string thaoTac = $"Sửa loại phiếu {txtMaLP.Text}";
+                string thaoTac = $"Sửa loại phiếu {txtCardTypeID.Text}";
                 string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
                 if (!string.IsNullOrEmpty(chiTietSua))
                     thaoTac += $":\n{chiTietSua}";
@@ -258,45 +253,45 @@ namespace QuanLyNhanSu.PresentationTier
                 Reload();
             }
         }
-        private void btnXoa_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             LoaiPhieu newLoaiPhieu = new LoaiPhieu
             {
-                MaLP = txtMaLP.Text
+                MaLP = txtCardTypeID.Text
             };
             if (loaiPhieuBUS.Delete(newLoaiPhieu))
             {
-                string thaoTac = $"Xoá loại phiếu {txtTenLoaiPhieu.Text}";
+                string thaoTac = $"Xoá loại phiếu {txtCardTypeName.Text}";
                 string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
                 LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }
         }
-        private void btnHuy_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             ClearAllText();
         }
 
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             FrmQuanLyPhieu frmOpen = new FrmQuanLyPhieu(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void dgvThongTinLoaiPhieu_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvCardType_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
-            txtMaLP.Text = dgvThongTinLoaiPhieu.Rows[rowIndex].Cells[0].Value.ToString();
-            txtTenLoaiPhieu.Text = dgvThongTinLoaiPhieu.Rows[rowIndex].Cells[1].Value.ToString();
-            txtSoLuongPhieuLap.Text = dgvThongTinLoaiPhieu.Rows[rowIndex].Cells[2].Value.ToString();
+            txtCardTypeID.Text = dgvCardType.Rows[rowIndex].Cells[0].Value.ToString();
+            txtCardTypeName.Text = dgvCardType.Rows[rowIndex].Cells[1].Value.ToString();
+            txtCardTypeCreateAmount.Text = dgvCardType.Rows[rowIndex].Cells[2].Value.ToString();
         }       
-        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
-                LoadLoaiPhieuTimKiem(txtTimKiem.Text);
+                LoadLoaiPhieuTimKiem(txtSearch.Text);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

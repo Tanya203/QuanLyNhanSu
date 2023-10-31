@@ -29,15 +29,15 @@ namespace QuanLyNhanSu.PresentationTier
         }       
         private void FrmQuenMatKhau_Load(object sender, EventArgs e)
         {
-            txtMatKhau.Enabled = false;
-            txtNhapLaiMatKhau.Enabled = false;
-            cbHienThiMatKhau.Enabled = false;
-            btnXacThucThongTin.Enabled = false;
-            btnDoiMatKhau.Enabled = false;
-            txtMaNhanVien.Text = "NV0000000001";
-            txtTaiKhoan.Text = "TK001";
-            txtCCCD.Text = "079202007088";
-            txtSDT.Text = "0933781574";
+            txtNewPassword.Enabled = false;
+            txtReEnterNewPassword.Enabled = false;
+            cbShowPassword.Enabled = false;
+            btnVerifyInfo.Enabled = false;
+            btnChangePassword.Enabled = false;
+            txtStaffID.Text = "NV0000000001";
+            txtAccount.Text = "TK001";
+            txtIDCard.Text = "079202007088";
+            txtPhone.Text = "0933781574";
             txtEmail.Text = "test1@gmail.com";
         }
         ////////////////////////////////////////////////////////////////////////////////////////
@@ -55,7 +55,7 @@ namespace QuanLyNhanSu.PresentationTier
                 MessageBox.Show("Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            if (txtNhapLaiMatKhau.Text != matKhau)
+            if (txtReEnterNewPassword.Text != matKhau)
             {
                 MessageBox.Show("Mật khẩu nhập lại không khớp", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -63,36 +63,36 @@ namespace QuanLyNhanSu.PresentationTier
             return true;
         }
         ////////////////////////////////////////////////////////////////////////////////////////
-        private void txtMaNhanVien_TextChanged(object sender, EventArgs e)
+        private void VerifyEmptyCheck(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtMaNhanVien.Text) && !string.IsNullOrEmpty(txtTaiKhoan.Text) &&
-               !string.IsNullOrEmpty(txtCCCD.Text) && !string.IsNullOrEmpty(txtSDT.Text) &&
+            if (!string.IsNullOrEmpty(txtStaffID.Text) && !string.IsNullOrEmpty(txtAccount.Text) &&
+               !string.IsNullOrEmpty(txtIDCard.Text) && !string.IsNullOrEmpty(txtPhone.Text) &&
                !string.IsNullOrEmpty(txtEmail.Text))
-                btnXacThucThongTin.Enabled = true;
+                btnVerifyInfo.Enabled = true;
             else
-                btnXacThucThongTin.Enabled = false;
+                btnVerifyInfo.Enabled = false;
         }
-        private void cbHienThiMatKhau_CheckedChanged(object sender, EventArgs e)
+        private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbHienThiMatKhau.Checked)
+            if (cbShowPassword.Checked)
             {
-                txtMatKhau.UseSystemPasswordChar = false;
-                txtNhapLaiMatKhau.UseSystemPasswordChar = false;
+                txtNewPassword.UseSystemPasswordChar = false;
+                txtReEnterNewPassword.UseSystemPasswordChar = false;
             }
             else
             {
-                txtMatKhau.UseSystemPasswordChar = true;
-                txtNhapLaiMatKhau.UseSystemPasswordChar = true;
+                txtNewPassword.UseSystemPasswordChar = true;
+                txtReEnterNewPassword.UseSystemPasswordChar = true;
             }
         }
-        private void txtMatKhau_TextChanged_1(object sender, EventArgs e)
+        private void ChangePasswordEmptyCheck(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtMatKhau.Text) && !string.IsNullOrEmpty(txtNhapLaiMatKhau.Text))
-                btnDoiMatKhau.Enabled = true;
+            if (!string.IsNullOrEmpty(txtNewPassword.Text) && !string.IsNullOrEmpty(txtReEnterNewPassword.Text))
+                btnChangePassword.Enabled = true;
             else
-                btnDoiMatKhau.Enabled = false;
+                btnChangePassword.Enabled = false;
         }
-        private void txtCCCD_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtIDCard_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
@@ -100,47 +100,47 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////
-        private void btnXacThucThongTin_Click(object sender, EventArgs e)
+        private void btnVerfifyInfo_Click(object sender, EventArgs e)
         {
-            if(nhanVienBUS.VerifyInfo(txtMaNhanVien.Text, txtTaiKhoan.Text, txtCCCD.Text, txtSDT.Text, txtEmail.Text))
+            if(nhanVienBUS.VerifyInfo(txtStaffID.Text, txtAccount.Text, txtIDCard.Text, txtPhone.Text, txtEmail.Text))
             {
-                txtMaNhanVien.Enabled = false;
-                txtTaiKhoan.Enabled = false;
-                txtCCCD.Enabled = false;
-                txtSDT.Enabled = false;
+                txtStaffID.Enabled = false;
+                txtAccount.Enabled = false;
+                txtIDCard.Enabled = false;
+                txtPhone.Enabled = false;
                 txtEmail.Enabled = false;
-                btnXacThucThongTin.Enabled = false;
-                txtMatKhau.Enabled = true;
-                txtNhapLaiMatKhau.Enabled = true;
-                cbHienThiMatKhau.Enabled = true;                
+                btnVerifyInfo.Enabled = false;
+                txtNewPassword.Enabled = true;
+                txtReEnterNewPassword.Enabled = true;
+                cbShowPassword.Enabled = true;                
             }
         }
-        private void btnDoiMatKhau_Click(object sender, EventArgs e)
+        private void btnChangePassword_Click(object sender, EventArgs e)
         {
             NhanVien nhanVien = new NhanVien
             {
-                MaNV = txtMaNhanVien.Text,
-                MatKhau = txtMatKhau.Text,
+                MaNV = txtStaffID.Text,
+                MatKhau = txtNewPassword.Text,
             };   
-            if (CheckMatKhau(txtMatKhau.Text))
+            if (CheckMatKhau(txtNewPassword.Text))
             {
-                nhanVien.MatKhau = txtMatKhau.Text;
+                nhanVien.MatKhau = txtNewPassword.Text;
                 string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Quên mật khẩu")).MaTT;
                 if (nhanVienBUS.Save(nhanVien))
                 {
                     LichSuThaoTac newLstt = new LichSuThaoTac
                     {
                         NgayGio = DateTime.Now.ToString(formatDateTime),
-                        MaNV = txtMaNhanVien.Text,
+                        MaNV = txtStaffID.Text,
                         MaTT = maTT,
-                        ThaoTacThucHien = $"Nhân viên { txtMaNhanVien.Text } quên mật khẩu.",
+                        ThaoTacThucHien = $"Nhân viên { txtStaffID.Text } quên mật khẩu.",
                     };
                     lichSuThaoTacBUS.Save(newLstt);
-                    btnTroVe_Click(sender, e);
+                    btnBack_Click(sender, e);
                 }
             }                    
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             FrmDangNhap frmOpen = new FrmDangNhap();
             frmOpen.Show();

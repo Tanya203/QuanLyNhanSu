@@ -54,8 +54,8 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void FrmPhieuThuong_Load(object sender, EventArgs e)
         {
-            cmbLoaiPhieu.DisplayMember = "TenLoaiPhieu";
-            cmbLoaiPhieu.ValueMember = "MaLP";
+            cmbCardType.DisplayMember = "TenLoaiPhieu";
+            cmbCardType.ValueMember = "MaLP";
             LoadThongTinDangNhap();
             LoadLoaiPhieu();
             InputStatus(false);
@@ -64,13 +64,13 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV_DN.Text = nv.MaNV;
+            lblStaffIDLoginValue.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblDepartmentLoginValue.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblPositionLoginValue.Text = nv.ChucVu.TenChucVu;
         }
         private void PhanQuyen()
         {
@@ -89,7 +89,7 @@ namespace QuanLyNhanSu.PresentationTier
                 }
                 else if (qh.QuyenHan.TenQuyenHan.Contains("Truy cập quản lý loại phiếu") && qh.CapQuyen)
                 {
-                    btnQuanLyLoaiPhieu.Visible = true;
+                    btnCardType.Visible = true;
                     continue;
                 }
             }
@@ -97,7 +97,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void InputStatus(bool value)
         {
             ButtonStatus(value);
-            List<ComboBox> listComboBox = new List<ComboBox> { cmbLoaiPhieu};
+            List<ComboBox> listComboBox = new List<ComboBox> { cmbCardType};
             for(int i = 0; i < listComboBox.Count; i++)
             {
                 typeof(Button).GetProperty("Enabled").SetValue(listComboBox[i], value);
@@ -105,58 +105,58 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value)
         {
-            List<Button> listButton = new List<Button> { btnThem , btnQuanLyLoaiPhieu};
+            List<Button> listButton = new List<Button> { btnAdd , btnCardType};
             if (value)
                 XoaButton();
             for(int i = 0; i <  listButton.Count; i++)
             {
                 typeof(Button).GetProperty("Visible").SetValue(listButton[i], value);
-                if (listButton[i] == btnQuanLyLoaiPhieu)
+                if (listButton[i] == btnCardType)
                     typeof(Button).GetProperty("Visible").SetValue(listButton[i], false);
             }
         }
         private void LoadPhieu()
         {
             Enabled = false;
-            dgvThongTinPhieu.Rows.Clear();
+            dgvCard.Rows.Clear();
             danhSachPhieuThuong = phieuBus.GetAllPhieu();
             int rowAdd;
             foreach(var pt in danhSachPhieuThuong)
             {
-                rowAdd = dgvThongTinPhieu.Rows.Add();
-                dgvThongTinPhieu.Rows[rowAdd].Cells[0].Value = pt.MaP;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[1].Value = pt.TenLoaiPhieu;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[2].Value = pt.MaNV;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[3].Value = pt.HoTen;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[4].Value = pt.PhongBan;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap.ToString(formatDate);
-                dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBUS.TongTienPhieu(pt.MaP));
+                rowAdd = dgvCard.Rows.Add();
+                dgvCard.Rows[rowAdd].Cells[0].Value = pt.MaP;
+                dgvCard.Rows[rowAdd].Cells[1].Value = pt.TenLoaiPhieu;
+                dgvCard.Rows[rowAdd].Cells[2].Value = pt.MaNV;
+                dgvCard.Rows[rowAdd].Cells[3].Value = pt.HoTen;
+                dgvCard.Rows[rowAdd].Cells[4].Value = pt.PhongBan;
+                dgvCard.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
+                dgvCard.Rows[rowAdd].Cells[6].Value = pt.NgayLap.ToString(formatDate);
+                dgvCard.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBUS.TongTienPhieu(pt.MaP));
             }
             Enabled = true;
         }
         private void LoadLoaiPhieu()
         {
-            cmbLoaiPhieu.DataSource = quanLyLoaiPhieuBUS.GetLoaiPhieu();
-            AutoAdjustComboBox(cmbLoaiPhieu);
+            cmbCardType.DataSource = quanLyLoaiPhieuBUS.GetLoaiPhieu();
+            AutoAdjustComboBox(cmbCardType);
         }
         private void LoadPhieuTimKiem(string timKiem)
         {
             Enabled = false;
-            dgvThongTinPhieu.Rows.Clear();
+            dgvCard.Rows.Clear();
             danhSachPhieuThuongTimKiem = phieuBus.SearchPhieu(timKiem);
             int rowAdd;
             foreach (var pt in danhSachPhieuThuongTimKiem)
             {
-                rowAdd = dgvThongTinPhieu.Rows.Add();
-                dgvThongTinPhieu.Rows[rowAdd].Cells[0].Value = pt.MaP;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[1].Value = pt.TenLoaiPhieu;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[2].Value = pt.MaNV;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[3].Value = pt.HoTen;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[4].Value = pt.PhongBan;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
-                dgvThongTinPhieu.Rows[rowAdd].Cells[6].Value = pt.NgayLap.ToString(formatDate);
-                dgvThongTinPhieu.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBUS.TongTienPhieu(pt.MaP));                
+                rowAdd = dgvCard.Rows.Add();
+                dgvCard.Rows[rowAdd].Cells[0].Value = pt.MaP;
+                dgvCard.Rows[rowAdd].Cells[1].Value = pt.TenLoaiPhieu;
+                dgvCard.Rows[rowAdd].Cells[2].Value = pt.MaNV;
+                dgvCard.Rows[rowAdd].Cells[3].Value = pt.HoTen;
+                dgvCard.Rows[rowAdd].Cells[4].Value = pt.PhongBan;
+                dgvCard.Rows[rowAdd].Cells[5].Value = pt.ChucVu;
+                dgvCard.Rows[rowAdd].Cells[6].Value = pt.NgayLap.ToString(formatDate);
+                dgvCard.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", chiTietPhieuBUS.TongTienPhieu(pt.MaP));                
             }
             Enabled = true;
         }
@@ -185,7 +185,7 @@ namespace QuanLyNhanSu.PresentationTier
                     Alignment = DataGridViewContentAlignment.MiddleCenter
                 };
                 btnChiTiet.DefaultCellStyle = buttonCellStyle;
-                dgvThongTinPhieu.Columns.Add(btnChiTiet);                 
+                dgvCard.Columns.Add(btnChiTiet);                 
             }
         }
         private void XoaButton()
@@ -202,7 +202,7 @@ namespace QuanLyNhanSu.PresentationTier
                     Alignment = DataGridViewContentAlignment.MiddleCenter
                 };
                 btnXoa.DefaultCellStyle = buttonCellStyle;
-                dgvThongTinPhieu.Columns.Add(btnXoa);
+                dgvCard.Columns.Add(btnXoa);
             }
         }
         private void OpenChiTietPhieu(string maNV, string maPT)
@@ -259,9 +259,9 @@ namespace QuanLyNhanSu.PresentationTier
             this.Close();
         }
         //////////////////////////////////////////////////////////////////////////////
-        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTimKiem.Text))
+            if (string.IsNullOrEmpty(txtSearch.Text))
                 LoadPhieu();
         }
         //////////////////////////////////////////////////////////////////////////////
@@ -284,20 +284,20 @@ namespace QuanLyNhanSu.PresentationTier
             if (ketQua == DialogResult.No)
                 MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        private void btnThem_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
                 Phieu newPhieu = new Phieu
                 {
                     MaP = "",
-                    MaLP = cmbLoaiPhieu.SelectedValue.ToString(),
+                    MaLP = cmbCardType.SelectedValue.ToString(),
                     MaNV = maNV,
                     NgayLap = DateTime.Now,
                 };
                 if (phieuBus.Save(newPhieu))
                 {
-                    string thaoTac = $"Thêm {cmbLoaiPhieu.Text}";
+                    string thaoTac = $"Thêm {cmbCardType.Text}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
                     LichSuThaoTac(thaoTac, maTT);
                 }
@@ -309,14 +309,14 @@ namespace QuanLyNhanSu.PresentationTier
             }
                         
         }       
-        private void dgvThongTinPhieuThuong_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvCard_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;            
             if (rowIndex < 0)
                 return;
-            string maP = dgvThongTinPhieu.Rows[rowIndex].Cells[0].Value.ToString();
-            string loaiPhieu = dgvThongTinPhieu.Rows[rowIndex].Cells[1].Value.ToString();
-            string ngayLap = dgvThongTinPhieu.Rows[rowIndex].Cells[6].Value.ToString();
+            string maP = dgvCard.Rows[rowIndex].Cells[0].Value.ToString();
+            string loaiPhieu = dgvCard.Rows[rowIndex].Cells[1].Value.ToString();
+            string ngayLap = dgvCard.Rows[rowIndex].Cells[6].Value.ToString();
             if (checkThaoTac)
             {
                 if (e.ColumnIndex == 8)
@@ -330,21 +330,21 @@ namespace QuanLyNhanSu.PresentationTier
                     OpenChiTietPhieu(maNV, maP);
             }
         }
-        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                LoadPhieuTimKiem(txtTimKiem.Text);
+                LoadPhieuTimKiem(txtSearch.Text);
             }
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnQuanLyLoaiPhieu_Click(object sender, EventArgs e)
+        private void btnCardType_Click(object sender, EventArgs e)
         {
             FrmQuanLyLoaiPhieu frmOpen = new FrmQuanLyLoaiPhieu(maNV);
             frmOpen.Show();

@@ -28,122 +28,122 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.grpXacThucThongTin = new System.Windows.Forms.GroupBox();
-            this.btnXacThucThongTin = new System.Windows.Forms.Button();
-            this.txtMaNhanVien = new System.Windows.Forms.TextBox();
-            this.lblTaiKhoan = new System.Windows.Forms.Label();
-            this.txtSDT = new System.Windows.Forms.TextBox();
-            this.lblCMND = new System.Windows.Forms.Label();
-            this.lblMaNhanVien = new System.Windows.Forms.Label();
+            this.grpVerifyInfo = new System.Windows.Forms.GroupBox();
+            this.btnVerifyInfo = new System.Windows.Forms.Button();
+            this.txtStaffID = new System.Windows.Forms.TextBox();
+            this.lblAccount = new System.Windows.Forms.Label();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.lblIDCard = new System.Windows.Forms.Label();
+            this.lblStaffID = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
-            this.lblSoDienThoai = new System.Windows.Forms.Label();
+            this.lblPhone = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
-            this.txtTaiKhoan = new System.Windows.Forms.TextBox();
-            this.txtCCCD = new System.Windows.Forms.TextBox();
-            this.lblQuenMatKhau = new System.Windows.Forms.Label();
-            this.grpDoiMatKhau = new System.Windows.Forms.GroupBox();
-            this.txtMatKhau = new System.Windows.Forms.TextBox();
-            this.txtNhapLaiMatKhau = new System.Windows.Forms.TextBox();
-            this.btnDoiMatKhau = new System.Windows.Forms.Button();
-            this.cbHienThiMatKhau = new System.Windows.Forms.CheckBox();
-            this.lblNhapLaiMatKhauMoi = new System.Windows.Forms.Label();
-            this.lblNhapMatKhauMoi = new System.Windows.Forms.Label();
+            this.txtAccount = new System.Windows.Forms.TextBox();
+            this.txtIDCard = new System.Windows.Forms.TextBox();
+            this.lblForgotPassword = new System.Windows.Forms.Label();
+            this.grpChangePassword = new System.Windows.Forms.GroupBox();
+            this.txtNewPassword = new System.Windows.Forms.TextBox();
+            this.txtReEnterNewPassword = new System.Windows.Forms.TextBox();
+            this.btnChangePassword = new System.Windows.Forms.Button();
+            this.cbShowPassword = new System.Windows.Forms.CheckBox();
+            this.lblReEnterNewPassword = new System.Windows.Forms.Label();
+            this.lblNewPassword = new System.Windows.Forms.Label();
             this.pbPassIcon = new System.Windows.Forms.PictureBox();
             this.pbInfo = new System.Windows.Forms.PictureBox();
             this.pbQuestionIcon = new System.Windows.Forms.PictureBox();
-            this.btnTroVe = new System.Windows.Forms.Button();
-            this.grpXacThucThongTin.SuspendLayout();
-            this.grpDoiMatKhau.SuspendLayout();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.grpVerifyInfo.SuspendLayout();
+            this.grpChangePassword.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPassIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbQuestionIcon)).BeginInit();
             this.SuspendLayout();
             // 
-            // grpXacThucThongTin
+            // grpVerifyInfo
             // 
-            this.grpXacThucThongTin.Controls.Add(this.btnXacThucThongTin);
-            this.grpXacThucThongTin.Controls.Add(this.txtMaNhanVien);
-            this.grpXacThucThongTin.Controls.Add(this.lblTaiKhoan);
-            this.grpXacThucThongTin.Controls.Add(this.txtSDT);
-            this.grpXacThucThongTin.Controls.Add(this.lblCMND);
-            this.grpXacThucThongTin.Controls.Add(this.lblMaNhanVien);
-            this.grpXacThucThongTin.Controls.Add(this.txtEmail);
-            this.grpXacThucThongTin.Controls.Add(this.lblSoDienThoai);
-            this.grpXacThucThongTin.Controls.Add(this.lblEmail);
-            this.grpXacThucThongTin.Controls.Add(this.txtTaiKhoan);
-            this.grpXacThucThongTin.Controls.Add(this.txtCCCD);
-            this.grpXacThucThongTin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpXacThucThongTin.Location = new System.Drawing.Point(50, 140);
-            this.grpXacThucThongTin.Name = "grpXacThucThongTin";
-            this.grpXacThucThongTin.Size = new System.Drawing.Size(550, 372);
-            this.grpXacThucThongTin.TabIndex = 0;
-            this.grpXacThucThongTin.TabStop = false;
-            this.grpXacThucThongTin.Text = "Xác thực thông tin";
+            this.grpVerifyInfo.Controls.Add(this.btnVerifyInfo);
+            this.grpVerifyInfo.Controls.Add(this.txtStaffID);
+            this.grpVerifyInfo.Controls.Add(this.lblAccount);
+            this.grpVerifyInfo.Controls.Add(this.txtPhone);
+            this.grpVerifyInfo.Controls.Add(this.lblIDCard);
+            this.grpVerifyInfo.Controls.Add(this.lblStaffID);
+            this.grpVerifyInfo.Controls.Add(this.txtEmail);
+            this.grpVerifyInfo.Controls.Add(this.lblPhone);
+            this.grpVerifyInfo.Controls.Add(this.lblEmail);
+            this.grpVerifyInfo.Controls.Add(this.txtAccount);
+            this.grpVerifyInfo.Controls.Add(this.txtIDCard);
+            this.grpVerifyInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpVerifyInfo.Location = new System.Drawing.Point(50, 140);
+            this.grpVerifyInfo.Name = "grpVerifyInfo";
+            this.grpVerifyInfo.Size = new System.Drawing.Size(550, 372);
+            this.grpVerifyInfo.TabIndex = 0;
+            this.grpVerifyInfo.TabStop = false;
+            this.grpVerifyInfo.Text = "Xác thực thông tin";
             // 
-            // btnXacThucThongTin
+            // btnVerifyInfo
             // 
-            this.btnXacThucThongTin.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnXacThucThongTin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnXacThucThongTin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnXacThucThongTin.Image = global::QuanLyNhanSu.Properties.Resources.verify;
-            this.btnXacThucThongTin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXacThucThongTin.Location = new System.Drawing.Point(239, 281);
-            this.btnXacThucThongTin.Name = "btnXacThucThongTin";
-            this.btnXacThucThongTin.Size = new System.Drawing.Size(269, 73);
-            this.btnXacThucThongTin.TabIndex = 7;
-            this.btnXacThucThongTin.Text = "Xác thực thông tin";
-            this.btnXacThucThongTin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXacThucThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnXacThucThongTin.UseVisualStyleBackColor = false;
-            this.btnXacThucThongTin.Click += new System.EventHandler(this.btnXacThucThongTin_Click);
+            this.btnVerifyInfo.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnVerifyInfo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVerifyInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnVerifyInfo.Image = global::QuanLyNhanSu.Properties.Resources.verify;
+            this.btnVerifyInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVerifyInfo.Location = new System.Drawing.Point(239, 281);
+            this.btnVerifyInfo.Name = "btnVerifyInfo";
+            this.btnVerifyInfo.Size = new System.Drawing.Size(269, 73);
+            this.btnVerifyInfo.TabIndex = 7;
+            this.btnVerifyInfo.Text = "Xác thực thông tin";
+            this.btnVerifyInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVerifyInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnVerifyInfo.UseVisualStyleBackColor = false;
+            this.btnVerifyInfo.Click += new System.EventHandler(this.btnVerfifyInfo_Click);
             // 
-            // txtMaNhanVien
+            // txtStaffID
             // 
-            this.txtMaNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaNhanVien.Location = new System.Drawing.Point(207, 45);
-            this.txtMaNhanVien.MaxLength = 12;
-            this.txtMaNhanVien.Name = "txtMaNhanVien";
-            this.txtMaNhanVien.Size = new System.Drawing.Size(329, 30);
-            this.txtMaNhanVien.TabIndex = 2;
-            this.txtMaNhanVien.TextChanged += new System.EventHandler(this.txtMaNhanVien_TextChanged);
+            this.txtStaffID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStaffID.Location = new System.Drawing.Point(207, 45);
+            this.txtStaffID.MaxLength = 12;
+            this.txtStaffID.Name = "txtStaffID";
+            this.txtStaffID.Size = new System.Drawing.Size(329, 30);
+            this.txtStaffID.TabIndex = 2;
+            this.txtStaffID.TextChanged += new System.EventHandler(this.VerifyEmptyCheck);
             // 
-            // lblTaiKhoan
+            // lblAccount
             // 
-            this.lblTaiKhoan.AutoSize = true;
-            this.lblTaiKhoan.Location = new System.Drawing.Point(37, 95);
-            this.lblTaiKhoan.Name = "lblTaiKhoan";
-            this.lblTaiKhoan.Size = new System.Drawing.Size(115, 25);
-            this.lblTaiKhoan.TabIndex = 1;
-            this.lblTaiKhoan.Text = "Tài khoản:";
+            this.lblAccount.AutoSize = true;
+            this.lblAccount.Location = new System.Drawing.Point(37, 95);
+            this.lblAccount.Name = "lblAccount";
+            this.lblAccount.Size = new System.Drawing.Size(115, 25);
+            this.lblAccount.TabIndex = 1;
+            this.lblAccount.Text = "Tài khoản:";
             // 
-            // txtSDT
+            // txtPhone
             // 
-            this.txtSDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSDT.Location = new System.Drawing.Point(207, 195);
-            this.txtSDT.MaxLength = 10;
-            this.txtSDT.Name = "txtSDT";
-            this.txtSDT.Size = new System.Drawing.Size(329, 30);
-            this.txtSDT.TabIndex = 5;
-            this.txtSDT.TextChanged += new System.EventHandler(this.txtMaNhanVien_TextChanged);
-            this.txtSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_KeyPress);
+            this.txtPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPhone.Location = new System.Drawing.Point(207, 195);
+            this.txtPhone.MaxLength = 10;
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(329, 30);
+            this.txtPhone.TabIndex = 5;
+            this.txtPhone.TextChanged += new System.EventHandler(this.VerifyEmptyCheck);
+            this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIDCard_KeyPress);
             // 
-            // lblCMND
+            // lblIDCard
             // 
-            this.lblCMND.AutoSize = true;
-            this.lblCMND.Location = new System.Drawing.Point(37, 145);
-            this.lblCMND.Name = "lblCMND";
-            this.lblCMND.Size = new System.Drawing.Size(82, 25);
-            this.lblCMND.TabIndex = 2;
-            this.lblCMND.Text = "CCCD:";
+            this.lblIDCard.AutoSize = true;
+            this.lblIDCard.Location = new System.Drawing.Point(37, 145);
+            this.lblIDCard.Name = "lblIDCard";
+            this.lblIDCard.Size = new System.Drawing.Size(82, 25);
+            this.lblIDCard.TabIndex = 2;
+            this.lblIDCard.Text = "CCCD:";
             // 
-            // lblMaNhanVien
+            // lblStaffID
             // 
-            this.lblMaNhanVien.AutoSize = true;
-            this.lblMaNhanVien.Location = new System.Drawing.Point(37, 50);
-            this.lblMaNhanVien.Name = "lblMaNhanVien";
-            this.lblMaNhanVien.Size = new System.Drawing.Size(149, 25);
-            this.lblMaNhanVien.TabIndex = 0;
-            this.lblMaNhanVien.Text = "Mã nhân viên:";
+            this.lblStaffID.AutoSize = true;
+            this.lblStaffID.Location = new System.Drawing.Point(37, 50);
+            this.lblStaffID.Name = "lblStaffID";
+            this.lblStaffID.Size = new System.Drawing.Size(149, 25);
+            this.lblStaffID.TabIndex = 0;
+            this.lblStaffID.Text = "Mã nhân viên:";
             // 
             // txtEmail
             // 
@@ -153,16 +153,16 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(329, 30);
             this.txtEmail.TabIndex = 6;
-            this.txtEmail.TextChanged += new System.EventHandler(this.txtMaNhanVien_TextChanged);
+            this.txtEmail.TextChanged += new System.EventHandler(this.VerifyEmptyCheck);
             // 
-            // lblSoDienThoai
+            // lblPhone
             // 
-            this.lblSoDienThoai.AutoSize = true;
-            this.lblSoDienThoai.Location = new System.Drawing.Point(37, 195);
-            this.lblSoDienThoai.Name = "lblSoDienThoai";
-            this.lblSoDienThoai.Size = new System.Drawing.Size(146, 25);
-            this.lblSoDienThoai.TabIndex = 3;
-            this.lblSoDienThoai.Text = "Số điện thoại:";
+            this.lblPhone.AutoSize = true;
+            this.lblPhone.Location = new System.Drawing.Point(37, 195);
+            this.lblPhone.Name = "lblPhone";
+            this.lblPhone.Size = new System.Drawing.Size(146, 25);
+            this.lblPhone.TabIndex = 3;
+            this.lblPhone.Text = "Số điện thoại:";
             // 
             // lblEmail
             // 
@@ -173,122 +173,122 @@
             this.lblEmail.TabIndex = 4;
             this.lblEmail.Text = "Email:";
             // 
-            // txtTaiKhoan
+            // txtAccount
             // 
-            this.txtTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTaiKhoan.Location = new System.Drawing.Point(207, 95);
-            this.txtTaiKhoan.MaxLength = 20;
-            this.txtTaiKhoan.Name = "txtTaiKhoan";
-            this.txtTaiKhoan.Size = new System.Drawing.Size(329, 30);
-            this.txtTaiKhoan.TabIndex = 3;
-            this.txtTaiKhoan.TextChanged += new System.EventHandler(this.txtMaNhanVien_TextChanged);
+            this.txtAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAccount.Location = new System.Drawing.Point(207, 95);
+            this.txtAccount.MaxLength = 20;
+            this.txtAccount.Name = "txtAccount";
+            this.txtAccount.Size = new System.Drawing.Size(329, 30);
+            this.txtAccount.TabIndex = 3;
+            this.txtAccount.TextChanged += new System.EventHandler(this.VerifyEmptyCheck);
             // 
-            // txtCCCD
+            // txtIDCard
             // 
-            this.txtCCCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCCCD.Location = new System.Drawing.Point(207, 145);
-            this.txtCCCD.MaxLength = 12;
-            this.txtCCCD.Name = "txtCCCD";
-            this.txtCCCD.Size = new System.Drawing.Size(329, 30);
-            this.txtCCCD.TabIndex = 4;
-            this.txtCCCD.TextChanged += new System.EventHandler(this.txtMaNhanVien_TextChanged);
-            this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_KeyPress);
+            this.txtIDCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIDCard.Location = new System.Drawing.Point(207, 145);
+            this.txtIDCard.MaxLength = 12;
+            this.txtIDCard.Name = "txtIDCard";
+            this.txtIDCard.Size = new System.Drawing.Size(329, 30);
+            this.txtIDCard.TabIndex = 4;
+            this.txtIDCard.TextChanged += new System.EventHandler(this.VerifyEmptyCheck);
+            this.txtIDCard.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIDCard_KeyPress);
             // 
-            // lblQuenMatKhau
+            // lblForgotPassword
             // 
-            this.lblQuenMatKhau.AutoSize = true;
-            this.lblQuenMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuenMatKhau.Location = new System.Drawing.Point(250, 23);
-            this.lblQuenMatKhau.Name = "lblQuenMatKhau";
-            this.lblQuenMatKhau.Size = new System.Drawing.Size(253, 38);
-            this.lblQuenMatKhau.TabIndex = 1;
-            this.lblQuenMatKhau.Text = "Quên mật khẩu";
+            this.lblForgotPassword.AutoSize = true;
+            this.lblForgotPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblForgotPassword.Location = new System.Drawing.Point(250, 23);
+            this.lblForgotPassword.Name = "lblForgotPassword";
+            this.lblForgotPassword.Size = new System.Drawing.Size(253, 38);
+            this.lblForgotPassword.TabIndex = 1;
+            this.lblForgotPassword.Text = "Quên mật khẩu";
             // 
-            // grpDoiMatKhau
+            // grpChangePassword
             // 
-            this.grpDoiMatKhau.Controls.Add(this.txtMatKhau);
-            this.grpDoiMatKhau.Controls.Add(this.txtNhapLaiMatKhau);
-            this.grpDoiMatKhau.Controls.Add(this.btnDoiMatKhau);
-            this.grpDoiMatKhau.Controls.Add(this.cbHienThiMatKhau);
-            this.grpDoiMatKhau.Controls.Add(this.lblNhapLaiMatKhauMoi);
-            this.grpDoiMatKhau.Controls.Add(this.lblNhapMatKhauMoi);
-            this.grpDoiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpDoiMatKhau.Location = new System.Drawing.Point(50, 599);
-            this.grpDoiMatKhau.Name = "grpDoiMatKhau";
-            this.grpDoiMatKhau.Size = new System.Drawing.Size(550, 231);
-            this.grpDoiMatKhau.TabIndex = 2;
-            this.grpDoiMatKhau.TabStop = false;
-            this.grpDoiMatKhau.Text = "Đổi mật khẩu";
+            this.grpChangePassword.Controls.Add(this.txtNewPassword);
+            this.grpChangePassword.Controls.Add(this.txtReEnterNewPassword);
+            this.grpChangePassword.Controls.Add(this.btnChangePassword);
+            this.grpChangePassword.Controls.Add(this.cbShowPassword);
+            this.grpChangePassword.Controls.Add(this.lblReEnterNewPassword);
+            this.grpChangePassword.Controls.Add(this.lblNewPassword);
+            this.grpChangePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpChangePassword.Location = new System.Drawing.Point(50, 599);
+            this.grpChangePassword.Name = "grpChangePassword";
+            this.grpChangePassword.Size = new System.Drawing.Size(550, 231);
+            this.grpChangePassword.TabIndex = 2;
+            this.grpChangePassword.TabStop = false;
+            this.grpChangePassword.Text = "Đổi mật khẩu";
             // 
-            // txtMatKhau
+            // txtNewPassword
             // 
-            this.txtMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMatKhau.Location = new System.Drawing.Point(273, 52);
-            this.txtMatKhau.MaxLength = 20;
-            this.txtMatKhau.Name = "txtMatKhau";
-            this.txtMatKhau.Size = new System.Drawing.Size(263, 27);
-            this.txtMatKhau.TabIndex = 8;
-            this.txtMatKhau.UseSystemPasswordChar = true;
-            this.txtMatKhau.TextChanged += new System.EventHandler(this.txtMatKhau_TextChanged_1);
+            this.txtNewPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNewPassword.Location = new System.Drawing.Point(273, 52);
+            this.txtNewPassword.MaxLength = 20;
+            this.txtNewPassword.Name = "txtNewPassword";
+            this.txtNewPassword.Size = new System.Drawing.Size(263, 27);
+            this.txtNewPassword.TabIndex = 8;
+            this.txtNewPassword.UseSystemPasswordChar = true;
+            this.txtNewPassword.TextChanged += new System.EventHandler(this.ChangePasswordEmptyCheck);
             // 
-            // txtNhapLaiMatKhau
+            // txtReEnterNewPassword
             // 
-            this.txtNhapLaiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNhapLaiMatKhau.Location = new System.Drawing.Point(273, 107);
-            this.txtNhapLaiMatKhau.MaxLength = 20;
-            this.txtNhapLaiMatKhau.Name = "txtNhapLaiMatKhau";
-            this.txtNhapLaiMatKhau.Size = new System.Drawing.Size(263, 27);
-            this.txtNhapLaiMatKhau.TabIndex = 9;
-            this.txtNhapLaiMatKhau.UseSystemPasswordChar = true;
-            this.txtNhapLaiMatKhau.TextChanged += new System.EventHandler(this.txtMatKhau_TextChanged_1);
+            this.txtReEnterNewPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReEnterNewPassword.Location = new System.Drawing.Point(273, 107);
+            this.txtReEnterNewPassword.MaxLength = 20;
+            this.txtReEnterNewPassword.Name = "txtReEnterNewPassword";
+            this.txtReEnterNewPassword.Size = new System.Drawing.Size(263, 27);
+            this.txtReEnterNewPassword.TabIndex = 9;
+            this.txtReEnterNewPassword.UseSystemPasswordChar = true;
+            this.txtReEnterNewPassword.TextChanged += new System.EventHandler(this.ChangePasswordEmptyCheck);
             // 
-            // btnDoiMatKhau
+            // btnChangePassword
             // 
-            this.btnDoiMatKhau.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnDoiMatKhau.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDoiMatKhau.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDoiMatKhau.Image = global::QuanLyNhanSu.Properties.Resources.passchange;
-            this.btnDoiMatKhau.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDoiMatKhau.Location = new System.Drawing.Point(287, 152);
-            this.btnDoiMatKhau.Name = "btnDoiMatKhau";
-            this.btnDoiMatKhau.Size = new System.Drawing.Size(221, 73);
-            this.btnDoiMatKhau.TabIndex = 11;
-            this.btnDoiMatKhau.Text = "Đổi mật khẩu";
-            this.btnDoiMatKhau.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDoiMatKhau.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDoiMatKhau.UseVisualStyleBackColor = false;
-            this.btnDoiMatKhau.Click += new System.EventHandler(this.btnDoiMatKhau_Click);
+            this.btnChangePassword.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnChangePassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnChangePassword.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnChangePassword.Image = global::QuanLyNhanSu.Properties.Resources.passchange;
+            this.btnChangePassword.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnChangePassword.Location = new System.Drawing.Point(287, 152);
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.Size = new System.Drawing.Size(221, 73);
+            this.btnChangePassword.TabIndex = 11;
+            this.btnChangePassword.Text = "Đổi mật khẩu";
+            this.btnChangePassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnChangePassword.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnChangePassword.UseVisualStyleBackColor = false;
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
             // 
-            // cbHienThiMatKhau
+            // cbShowPassword
             // 
-            this.cbHienThiMatKhau.AutoSize = true;
-            this.cbHienThiMatKhau.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbHienThiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbHienThiMatKhau.Location = new System.Drawing.Point(20, 179);
-            this.cbHienThiMatKhau.Name = "cbHienThiMatKhau";
-            this.cbHienThiMatKhau.Size = new System.Drawing.Size(162, 24);
-            this.cbHienThiMatKhau.TabIndex = 10;
-            this.cbHienThiMatKhau.Text = "Hiển thị mật khẩu";
-            this.cbHienThiMatKhau.UseVisualStyleBackColor = true;
-            this.cbHienThiMatKhau.CheckedChanged += new System.EventHandler(this.cbHienThiMatKhau_CheckedChanged);
+            this.cbShowPassword.AutoSize = true;
+            this.cbShowPassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbShowPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbShowPassword.Location = new System.Drawing.Point(20, 179);
+            this.cbShowPassword.Name = "cbShowPassword";
+            this.cbShowPassword.Size = new System.Drawing.Size(162, 24);
+            this.cbShowPassword.TabIndex = 10;
+            this.cbShowPassword.Text = "Hiển thị mật khẩu";
+            this.cbShowPassword.UseVisualStyleBackColor = true;
+            this.cbShowPassword.CheckedChanged += new System.EventHandler(this.cbShowPassword_CheckedChanged);
             // 
-            // lblNhapLaiMatKhauMoi
+            // lblReEnterNewPassword
             // 
-            this.lblNhapLaiMatKhauMoi.AutoSize = true;
-            this.lblNhapLaiMatKhauMoi.Location = new System.Drawing.Point(15, 112);
-            this.lblNhapLaiMatKhauMoi.Name = "lblNhapLaiMatKhauMoi";
-            this.lblNhapLaiMatKhauMoi.Size = new System.Drawing.Size(232, 25);
-            this.lblNhapLaiMatKhauMoi.TabIndex = 1;
-            this.lblNhapLaiMatKhauMoi.Text = "Nhập lại mật khẩu mới:";
+            this.lblReEnterNewPassword.AutoSize = true;
+            this.lblReEnterNewPassword.Location = new System.Drawing.Point(15, 112);
+            this.lblReEnterNewPassword.Name = "lblReEnterNewPassword";
+            this.lblReEnterNewPassword.Size = new System.Drawing.Size(232, 25);
+            this.lblReEnterNewPassword.TabIndex = 1;
+            this.lblReEnterNewPassword.Text = "Nhập lại mật khẩu mới:";
             // 
-            // lblNhapMatKhauMoi
+            // lblNewPassword
             // 
-            this.lblNhapMatKhauMoi.AutoSize = true;
-            this.lblNhapMatKhauMoi.Location = new System.Drawing.Point(15, 55);
-            this.lblNhapMatKhauMoi.Name = "lblNhapMatKhauMoi";
-            this.lblNhapMatKhauMoi.Size = new System.Drawing.Size(204, 25);
-            this.lblNhapMatKhauMoi.TabIndex = 0;
-            this.lblNhapMatKhauMoi.Text = "Nhập mật khẩu mới:";
+            this.lblNewPassword.AutoSize = true;
+            this.lblNewPassword.Location = new System.Drawing.Point(15, 55);
+            this.lblNewPassword.Name = "lblNewPassword";
+            this.lblNewPassword.Size = new System.Drawing.Size(204, 25);
+            this.lblNewPassword.TabIndex = 0;
+            this.lblNewPassword.Text = "Nhập mật khẩu mới:";
             // 
             // pbPassIcon
             // 
@@ -320,23 +320,23 @@
             this.pbQuestionIcon.TabIndex = 4;
             this.pbQuestionIcon.TabStop = false;
             // 
-            // btnTroVe
+            // btnBack
             // 
-            this.btnTroVe.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnTroVe.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTroVe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTroVe.Image = global::QuanLyNhanSu.Properties.Resources.return_small;
-            this.btnTroVe.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTroVe.Location = new System.Drawing.Point(12, 20);
-            this.btnTroVe.Name = "btnTroVe";
-            this.btnTroVe.Size = new System.Drawing.Size(123, 53);
-            this.btnTroVe.TabIndex = 1;
-            this.btnTroVe.Text = "Trở về";
-            this.btnTroVe.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTroVe.UseVisualStyleBackColor = false;
-            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
+            this.btnBack.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Image = global::QuanLyNhanSu.Properties.Resources.return_small;
+            this.btnBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBack.Location = new System.Drawing.Point(12, 20);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(123, 53);
+            this.btnBack.TabIndex = 1;
+            this.btnBack.Text = "Trở về";
+            this.btnBack.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // FrmQuenMatKhau
             // 
@@ -347,10 +347,10 @@
             this.Controls.Add(this.pbPassIcon);
             this.Controls.Add(this.pbInfo);
             this.Controls.Add(this.pbQuestionIcon);
-            this.Controls.Add(this.btnTroVe);
-            this.Controls.Add(this.grpDoiMatKhau);
-            this.Controls.Add(this.lblQuenMatKhau);
-            this.Controls.Add(this.grpXacThucThongTin);
+            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.grpChangePassword);
+            this.Controls.Add(this.lblForgotPassword);
+            this.Controls.Add(this.grpVerifyInfo);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(670, 890);
             this.MinimumSize = new System.Drawing.Size(670, 890);
@@ -358,10 +358,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quên mật khẩu";
             this.Load += new System.EventHandler(this.FrmQuenMatKhau_Load);
-            this.grpXacThucThongTin.ResumeLayout(false);
-            this.grpXacThucThongTin.PerformLayout();
-            this.grpDoiMatKhau.ResumeLayout(false);
-            this.grpDoiMatKhau.PerformLayout();
+            this.grpVerifyInfo.ResumeLayout(false);
+            this.grpVerifyInfo.PerformLayout();
+            this.grpChangePassword.ResumeLayout(false);
+            this.grpChangePassword.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPassIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbQuestionIcon)).EndInit();
@@ -372,27 +372,27 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox grpXacThucThongTin;
+        private System.Windows.Forms.GroupBox grpVerifyInfo;
         private System.Windows.Forms.Label lblEmail;
-        private System.Windows.Forms.Label lblSoDienThoai;
-        private System.Windows.Forms.Label lblCMND;
-        private System.Windows.Forms.Label lblTaiKhoan;
-        private System.Windows.Forms.Label lblMaNhanVien;
-        private System.Windows.Forms.Label lblQuenMatKhau;
-        private System.Windows.Forms.GroupBox grpDoiMatKhau;
-        private System.Windows.Forms.TextBox txtSDT;
+        private System.Windows.Forms.Label lblPhone;
+        private System.Windows.Forms.Label lblIDCard;
+        private System.Windows.Forms.Label lblAccount;
+        private System.Windows.Forms.Label lblStaffID;
+        private System.Windows.Forms.Label lblForgotPassword;
+        private System.Windows.Forms.GroupBox grpChangePassword;
+        private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtTaiKhoan;
-        private System.Windows.Forms.TextBox txtCCCD;
-        private System.Windows.Forms.TextBox txtMaNhanVien;
-        private System.Windows.Forms.Button btnXacThucThongTin;
-        private System.Windows.Forms.TextBox txtMatKhau;
-        private System.Windows.Forms.TextBox txtNhapLaiMatKhau;
-        private System.Windows.Forms.Button btnDoiMatKhau;
-        private System.Windows.Forms.CheckBox cbHienThiMatKhau;
-        private System.Windows.Forms.Label lblNhapLaiMatKhauMoi;
-        private System.Windows.Forms.Label lblNhapMatKhauMoi;
-        private System.Windows.Forms.Button btnTroVe;
+        private System.Windows.Forms.TextBox txtAccount;
+        private System.Windows.Forms.TextBox txtIDCard;
+        private System.Windows.Forms.TextBox txtStaffID;
+        private System.Windows.Forms.Button btnVerifyInfo;
+        private System.Windows.Forms.TextBox txtNewPassword;
+        private System.Windows.Forms.TextBox txtReEnterNewPassword;
+        private System.Windows.Forms.Button btnChangePassword;
+        private System.Windows.Forms.CheckBox cbShowPassword;
+        private System.Windows.Forms.Label lblReEnterNewPassword;
+        private System.Windows.Forms.Label lblNewPassword;
+        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.PictureBox pbQuestionIcon;
         private System.Windows.Forms.PictureBox pbInfo;
         private System.Windows.Forms.PictureBox pbPassIcon;

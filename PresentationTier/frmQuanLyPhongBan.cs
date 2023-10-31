@@ -53,13 +53,13 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV_DN.Text = nv.MaNV;
+            lblStaffIDLoginValue.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblDepartmentLoginValue.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblPositionLoginValue.Text = nv.ChucVu.TenChucVu;
         }
         private void PhanQuyen()
         {
@@ -76,9 +76,9 @@ namespace QuanLyNhanSu.PresentationTier
         private void InputStatus(bool value)
         {
             ButtonStatus(value);
-            List<TextBox> listTextBox = new List<TextBox> { txtTenPB };
+            List<TextBox> listTextBox = new List<TextBox> { txtDepartmentName };
             if (!value)
-                listTextBox.AddRange(new List<TextBox> { txtMaPB, txtTongSoNhanVien});
+                listTextBox.AddRange(new List<TextBox> { txtDepartmentID, txtStaffAmount});
             for (int i = 0; i < listTextBox.Count; i++)
             {
                 typeof(TextBox).GetProperty("ReadOnly").SetValue(listTextBox[i], !value);                
@@ -86,48 +86,48 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value)
         {
-            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy};
+            List<Button> listButtons = new List<Button> { btnAdd, btnEdit, btnDelete, btnCancel};
             for (int i = 0; i < listButtons.Count; i++)
             {
                 typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
-                if (value && listButtons[i] != btnHuy)
+                if (value && listButtons[i] != btnCancel)
                     typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
             }
         }
         private void LoadPhongBan()
         {
             Enabled = false;
-            dgvThongTinPhongBan.Rows.Clear();
+            dgvDepartment.Rows.Clear();
             danhSachPhongBan = phongBanBUS.GetAllPhongBan();           
             int rowAdd;
             foreach (var pb in danhSachPhongBan)
             {
-                rowAdd = dgvThongTinPhongBan.Rows.Add();
-                dgvThongTinPhongBan.Rows[rowAdd].Cells[0].Value = pb.MaPB;
-                dgvThongTinPhongBan.Rows[rowAdd].Cells[1].Value = pb.TenPhongBan;
-                dgvThongTinPhongBan.Rows[rowAdd].Cells[2].Value = phongBanBUS.TongSoLuongNhanVienTrongPhongBan(pb.MaPB).ToString();
+                rowAdd = dgvDepartment.Rows.Add();
+                dgvDepartment.Rows[rowAdd].Cells[0].Value = pb.MaPB;
+                dgvDepartment.Rows[rowAdd].Cells[1].Value = pb.TenPhongBan;
+                dgvDepartment.Rows[rowAdd].Cells[2].Value = phongBanBUS.TongSoLuongNhanVienTrongPhongBan(pb.MaPB).ToString();
             }
             Enabled = true;
         }
         private void LoadPhongBanTimKiem(string timKiem)
         {
             Enabled = false;
-            dgvThongTinPhongBan.Rows.Clear();
+            dgvDepartment.Rows.Clear();
             danhSachPhongBanTimKiem = phongBanBUS.SearchPhongBan(timKiem);
             int rowAdd;
             foreach (var pb in danhSachPhongBanTimKiem)
             {
-                rowAdd = dgvThongTinPhongBan.Rows.Add();
-                dgvThongTinPhongBan.Rows[rowAdd].Cells[0].Value = pb.MaPB;
-                dgvThongTinPhongBan.Rows[rowAdd].Cells[1].Value = pb.TenPhongBan;
-                dgvThongTinPhongBan.Rows[rowAdd].Cells[2].Value = phongBanBUS.TongSoLuongNhanVienTrongPhongBan(pb.MaPB).ToString();
+                rowAdd = dgvDepartment.Rows.Add();
+                dgvDepartment.Rows[rowAdd].Cells[0].Value = pb.MaPB;
+                dgvDepartment.Rows[rowAdd].Cells[1].Value = pb.TenPhongBan;
+                dgvDepartment.Rows[rowAdd].Cells[2].Value = phongBanBUS.TongSoLuongNhanVienTrongPhongBan(pb.MaPB).ToString();
             }
             Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////
         private void ClearAllText()
         {
-            List<TextBox> listTextBox = new List<TextBox> { txtMaPB, txtTenPB, txtTongSoNhanVien };
+            List<TextBox> listTextBox = new List<TextBox> { txtDepartmentID, txtDepartmentName, txtStaffAmount };
             for(int i = 0; i < listTextBox.Count; i++)
             {
                 typeof(TextBox).GetProperty("Text").SetValue(listTextBox[i], string.Empty);
@@ -148,19 +148,19 @@ namespace QuanLyNhanSu.PresentationTier
         //////////////////////////////////////////////////////////////////////////////////////////////////
         private bool CheckEmptyText(bool check)
         {
-            List<TextBox> listTextBox = new List<TextBox> {txtTenPB};
+            List<TextBox> listTextBox = new List<TextBox> {txtDepartmentName};
             for(int i =0; i<listTextBox.Count; i++)
             {
                 if (string.IsNullOrEmpty(listTextBox[i].Text))
                 {
                     if (check)
                     {
-                        btnThem.Enabled = false;
+                        btnAdd.Enabled = false;
                         return false;
                     }
                     else
                     {
-                        btnSua.Enabled = false;
+                        btnEdit.Enabled = false;
                         return false;
                     }
                 }
@@ -172,25 +172,25 @@ namespace QuanLyNhanSu.PresentationTier
             if (!checkThaoTac)
                 return;
             bool check;
-            if (string.IsNullOrEmpty(txtMaPB.Text))
+            if (string.IsNullOrEmpty(txtDepartmentID.Text))
             {
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
                 check = true;
                 if (CheckEmptyText(check))
                 {
-                    btnThem.Enabled = true;
+                    btnAdd.Enabled = true;
                     return;
                 }                    
             }
             else
             {
-                btnThem.Enabled = false;
-                btnXoa.Enabled = true;
+                btnAdd.Enabled = false;
+                btnDelete.Enabled = true;
                 check = false;
                 if (CheckEmptyText(check))
                 {
-                    btnSua.Enabled = true;
+                    btnEdit.Enabled = true;
                     return;
                 }
             }
@@ -211,8 +211,8 @@ namespace QuanLyNhanSu.PresentationTier
         private string CheckChange()
         {
             List<string> changes = new List<string>();
-            PhongBan phongBan = phongBanBUS.GetPhongBan().FirstOrDefault(pb => pb.MaPB == txtMaPB.Text);
-            string tenPhongBan = txtTenPB.Text;
+            PhongBan phongBan = phongBanBUS.GetPhongBan().FirstOrDefault(pb => pb.MaPB == txtDepartmentID.Text);
+            string tenPhongBan = txtDepartmentName.Text;
             if (tenPhongBan != phongBan.TenPhongBan)
                 changes.Add($"- Tên phòng ban {phongBan.TenPhongBan} -> Tên phòng ban: {tenPhongBan}");
             return string.Join("\n", changes);
@@ -228,12 +228,12 @@ namespace QuanLyNhanSu.PresentationTier
         private bool CheckErrorInput()
         {
             errProvider.Clear();
-            errProvider.SetError(txtTenPB, phongBanBUS.GetPhongBan().FirstOrDefault(pb => pb.TenPhongBan == txtTenPB.Text && pb.MaPB != txtMaPB.Text) != null ? "Tên phòng ban đã tồn tại" : string.Empty);
-            if (errProvider.GetError(txtTenPB) != string.Empty)
+            errProvider.SetError(txtDepartmentName, phongBanBUS.GetPhongBan().FirstOrDefault(pb => pb.TenPhongBan == txtDepartmentName.Text && pb.MaPB != txtDepartmentID.Text) != null ? "Tên phòng ban đã tồn tại" : string.Empty);
+            if (errProvider.GetError(txtDepartmentName) != string.Empty)
                 return false;
             return true;
         }
-        private void btnThem_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -245,11 +245,11 @@ namespace QuanLyNhanSu.PresentationTier
                 PhongBan newPhongBan = new PhongBan
                 {
                     MaPB = "",
-                    TenPhongBan = txtTenPB.Text
+                    TenPhongBan = txtDepartmentName.Text
                 };
                 if (phongBanBUS.Save(newPhongBan))
                 {
-                    string thaoTac = $"Thêm phòng ban {txtTenPB.Text}";
+                    string thaoTac = $"Thêm phòng ban {txtDepartmentName.Text}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
                     LichSuThaoTac(thaoTac, maTT);
                     Reload();
@@ -260,12 +260,12 @@ namespace QuanLyNhanSu.PresentationTier
                 ErrorMessage(ex);
             }            
         }
-        private void btnHuy_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             errProvider.Clear();
             ClearAllText();
         }
-        private void btnSua_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
             try
             {
@@ -275,11 +275,11 @@ namespace QuanLyNhanSu.PresentationTier
                     return;
                 }
                 string chiTietSua = CheckChange();
-                PhongBan phongBan = phongBanBUS.GetPhongBan().FirstOrDefault(pb => pb.MaPB == txtMaPB.Text);
-                phongBan.TenPhongBan = txtTenPB.Text;
+                PhongBan phongBan = phongBanBUS.GetPhongBan().FirstOrDefault(pb => pb.MaPB == txtDepartmentID.Text);
+                phongBan.TenPhongBan = txtDepartmentName.Text;
                 if (phongBanBUS.Save(phongBan))
                 {
-                    string thaoTac = $"Sửa phòng ban {txtMaPB.Text}";
+                    string thaoTac = $"Sửa phòng ban {txtDepartmentID.Text}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
                     if (!string.IsNullOrEmpty(chiTietSua))
                         thaoTac += $":\n{chiTietSua}";
@@ -292,17 +292,17 @@ namespace QuanLyNhanSu.PresentationTier
                 ErrorMessage(ex);
             }                          
         }
-        private void btnXoa_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
                 PhongBan phongBan = new PhongBan
                 {
-                    MaPB = txtMaPB.Text
+                    MaPB = txtDepartmentID.Text
                 };
                 if (phongBanBUS.Delete(phongBan))
                 {
-                    string thaoTac = $"Xoá phòng ban {txtTenPB.Text}";
+                    string thaoTac = $"Xoá phòng ban {txtDepartmentName.Text}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
                     LichSuThaoTac(thaoTac, maTT);
                     Reload();
@@ -313,7 +313,7 @@ namespace QuanLyNhanSu.PresentationTier
                 ErrorMessage(ex);
             }                    
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
             frmOpen.Show();
@@ -321,25 +321,25 @@ namespace QuanLyNhanSu.PresentationTier
             frmOpen.FormClosed += CloseForm;
         }
 
-        private void dgvThongTinPhongBan_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvDepartment_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             errProvider.Clear();
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
-            txtMaPB.Text = dgvThongTinPhongBan.Rows[rowIndex].Cells[0].Value.ToString();
-            txtTenPB.Text = dgvThongTinPhongBan.Rows[rowIndex].Cells[1].Value.ToString();
-            txtTongSoNhanVien.Text = dgvThongTinPhongBan.Rows[rowIndex].Cells[2].Value.ToString();
+            txtDepartmentID.Text = dgvDepartment.Rows[rowIndex].Cells[0].Value.ToString();
+            txtDepartmentName.Text = dgvDepartment.Rows[rowIndex].Cells[1].Value.ToString();
+            txtStaffAmount.Text = dgvDepartment.Rows[rowIndex].Cells[2].Value.ToString();
         }        
-        private void TimKiem(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTimKiem.Text))
+            if (string.IsNullOrEmpty(txtSearch.Text))
                 LoadPhongBan();
         }
-        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
-                LoadPhongBanTimKiem(txtTimKiem.Text);
+                LoadPhongBanTimKiem(txtSearch.Text);
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {

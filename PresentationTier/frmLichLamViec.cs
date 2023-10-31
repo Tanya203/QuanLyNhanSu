@@ -62,13 +62,13 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV_DN.Text = nv.MaNV;
+            lblStaffIDLoginValue.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+                lblFullNameValue.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+                lblFullNameValue.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lbllblDeapartmentLoginValue.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblPositionLoginValue.Text = nv.ChucVu.TenChucVu;
         }
         private void PhanQuyen()
         {
@@ -91,7 +91,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value)
         {
-            List<Button> listButtons = new List<Button> { btnThem };
+            List<Button> listButtons = new List<Button> { btnAdd };
             if (!value)
             {
                 pnlMenu.Visible = false;
@@ -109,36 +109,36 @@ namespace QuanLyNhanSu.PresentationTier
         private void LoadLichLamViec()
         {
             Enabled = false;
-            dgvThongTinLichLamViec.Rows.Clear();
+            dgvWorkSchedule.Rows.Clear();
             danhSachLichLamViec = lichLamViecBUS.GetLichLamViecTheoPhongBan(maPB);
             int rowAdd;
             foreach (var llv in danhSachLichLamViec)
             {
-                rowAdd = dgvThongTinLichLamViec.Rows.Add();
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[0].Value = llv.MaLLV;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[1].Value = llv.MaNV;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[2].Value = llv.HoTen;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[3].Value = llv.PhongBan;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[4].Value = llv.ChucVu;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);                
+                rowAdd = dgvWorkSchedule.Rows.Add();
+                dgvWorkSchedule.Rows[rowAdd].Cells[0].Value = llv.MaLLV;
+                dgvWorkSchedule.Rows[rowAdd].Cells[1].Value = llv.MaNV;
+                dgvWorkSchedule.Rows[rowAdd].Cells[2].Value = llv.HoTen;
+                dgvWorkSchedule.Rows[rowAdd].Cells[3].Value = llv.PhongBan;
+                dgvWorkSchedule.Rows[rowAdd].Cells[4].Value = llv.ChucVu;
+                dgvWorkSchedule.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);                
             }
             Enabled = true;
         }
         private void LoadLichLamViecTimKiem(string timKiem)
         {
             Enabled = false;
-            dgvThongTinLichLamViec.Rows.Clear();
+            dgvWorkSchedule.Rows.Clear();
             danhSachLichLamViecTimKiem = lichLamViecBUS.SearchLichLamViecTheoPhongBan(maPB, timKiem);
             int rowAdd;
             foreach (var llv in danhSachLichLamViecTimKiem)
             {
-                rowAdd = dgvThongTinLichLamViec.Rows.Add();
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[0].Value = llv.MaLLV;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[1].Value = llv.MaNV;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[2].Value = llv.HoTen;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[3].Value = llv.PhongBan;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[4].Value = llv.ChucVu;
-                dgvThongTinLichLamViec.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);
+                rowAdd = dgvWorkSchedule.Rows.Add();
+                dgvWorkSchedule.Rows[rowAdd].Cells[0].Value = llv.MaLLV;
+                dgvWorkSchedule.Rows[rowAdd].Cells[1].Value = llv.MaNV;
+                dgvWorkSchedule.Rows[rowAdd].Cells[2].Value = llv.HoTen;
+                dgvWorkSchedule.Rows[rowAdd].Cells[3].Value = llv.PhongBan;
+                dgvWorkSchedule.Rows[rowAdd].Cells[4].Value = llv.ChucVu;
+                dgvWorkSchedule.Rows[rowAdd].Cells[5].Value = llv.NgayLam.ToString(formatDate);
             }
             Enabled = true;
         }
@@ -180,7 +180,7 @@ namespace QuanLyNhanSu.PresentationTier
                     Alignment = DataGridViewContentAlignment.MiddleCenter
                 };
                 btnChiTiet.DefaultCellStyle = buttonCellStyle;
-                dgvThongTinLichLamViec.Columns.Add(btnChiTiet);
+                dgvWorkSchedule.Columns.Add(btnChiTiet);
             }            
         }
         private void XoaButton()
@@ -197,7 +197,7 @@ namespace QuanLyNhanSu.PresentationTier
                     Alignment = DataGridViewContentAlignment.MiddleCenter
                 };
                 btnXoa.DefaultCellStyle = buttonCellStyle;
-                dgvThongTinLichLamViec.Columns.Add(btnXoa);
+                dgvWorkSchedule.Columns.Add(btnXoa);
             }
         }
         private void OpenChiTietLichLamViec(string maNV, string maLLV)
@@ -237,7 +237,7 @@ namespace QuanLyNhanSu.PresentationTier
             if (ketQua == DialogResult.No)
                 MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        private void btnThem_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -245,11 +245,11 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     MaLLV = "",
                     MaNV = maNV,
-                    NgayLam = dtpNgayLam.Value,
+                    NgayLam = dtpWorkDate.Value,
                 };
                 if (lichLamViecBUS.Save(lichLamViec))
                 {
-                    string ngayLam = dtpNgayLam.Text;
+                    string ngayLam = dtpWorkDate.Text;
                     string phongBan = nv.ChucVu.PhongBan.TenPhongBan;
                     string thaoTac = $"Thêm lịch làm việc ngày {ngayLam} - phòng ban {phongBan}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
@@ -263,14 +263,14 @@ namespace QuanLyNhanSu.PresentationTier
             }
             
         }
-        private void dgvThongTinLichLamViec_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvWorkSchedule_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
-            string maLLV = dgvThongTinLichLamViec.Rows[rowIndex].Cells[0].Value.ToString();
-            string phongBan = dgvThongTinLichLamViec.Rows[rowIndex].Cells[3].Value.ToString();
-            string ngayLam = dgvThongTinLichLamViec.Rows[rowIndex].Cells[5].Value.ToString();           
+            string maLLV = dgvWorkSchedule.Rows[rowIndex].Cells[0].Value.ToString();
+            string phongBan = dgvWorkSchedule.Rows[rowIndex].Cells[3].Value.ToString();
+            string ngayLam = dgvWorkSchedule.Rows[rowIndex].Cells[5].Value.ToString();           
             string date = DateTime.Now.ToString(formatDate);
             if (rowIndex < 0)
                 return;
@@ -307,7 +307,7 @@ namespace QuanLyNhanSu.PresentationTier
                 }
             }
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
             frmOpen.Show();
@@ -319,34 +319,34 @@ namespace QuanLyNhanSu.PresentationTier
         {
             Reload();
         }
-        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTimKiem.Text))
+            if (string.IsNullOrEmpty(txtSearch.Text))
                 LoadLichLamViec();
         }
 
-        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                LoadLichLamViecTimKiem(txtTimKiem.Text);
+                LoadLichLamViecTimKiem(txtSearch.Text);
             }
         }
-        private void dtpNgayLam_ValueChanged(object sender, EventArgs e)
+        private void dtpWorkDate_ValueChanged(object sender, EventArgs e)
         {
             int check = 0;
-            DateTime ngayLam = DateTime.Parse(dtpNgayLam.Text);
+            DateTime ngayLam = DateTime.Parse(dtpWorkDate.Text);
             IEnumerable<LichLamViec> locLich = lichLamViecBUS.GetLichLamViec().Where(llv => llv.NhanVien.ChucVu.PhongBan.MaPB == maPB && llv.NgayLam == ngayLam);
             foreach (var nv in locLich)            
-                if (nv.NgayLam.ToString(formatDate) == dtpNgayLam.Text)
+                if (nv.NgayLam.ToString(formatDate) == dtpWorkDate.Text)
                 {
                     check = 1;
                     break;
                 }                                                  
-            if (DateTime.Parse(dtpNgayLam.Text) < DateTime.Parse(now) || check == 1)
-                btnThem.Enabled = false;
+            if (DateTime.Parse(dtpWorkDate.Text) < DateTime.Parse(now) || check == 1)
+                btnAdd.Enabled = false;
             else
-                btnThem.Enabled = true;
+                btnAdd.Enabled = true;
         }
 
     }

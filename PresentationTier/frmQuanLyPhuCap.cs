@@ -75,9 +75,9 @@ namespace QuanLyNhanSu.PresentationTier
         private void InputStatus(bool value)
         {
             ButtonStatus(value);
-            List<TextBox> listTextBox = new List<TextBox> { txtTenPC, txtSoTien};
+            List<TextBox> listTextBox = new List<TextBox> { txtAllowanceName, txtAmount};
             if (!value)
-                listTextBox.AddRange(new List<TextBox> { txtMaPC, txtSoLuongNhanVien });
+                listTextBox.AddRange(new List<TextBox> { txtAllowanceID, txtStaffAmount });
             for(int i = 0; i < listTextBox.Count; i++)
             {
                 typeof(TextBox).GetProperty("ReadOnly").SetValue(listTextBox[i], !value);
@@ -85,60 +85,60 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value)
         {
-            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy };
+            List<Button> listButtons = new List<Button> { btnAdd, btnEdit, btnDelete, btnCancel };
             for (int i = 0; i < listButtons.Count; i++)
             {
                 typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
-                if (value && listButtons[i] != btnHuy)
+                if (value && listButtons[i] != btnCancel)
                     typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
             }
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV_DN.Text = nv.MaNV;
+            lblStaffIDLoginValue.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblDepartmentLoginValue.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblPositionLoginValue.Text = nv.ChucVu.TenChucVu;
         }
         private void LoadPhuCap()
         {
             Enabled = false;
-            dgvThongTinPhuCap.Rows.Clear();
+            dgvAllowance.Rows.Clear();
             danhSachPhuCap = phuCapBUS.GetAllPhuCap();
             int rowAdd;
             foreach (var pc in danhSachPhuCap)
             {
-                rowAdd = dgvThongTinPhuCap.Rows.Add();
-                dgvThongTinPhuCap.Rows[rowAdd].Cells[0].Value = pc.MaPC;
-                dgvThongTinPhuCap.Rows[rowAdd].Cells[1].Value = pc.TenPhuCap;
-                dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = String.Format(fVND, "{0:N3} ₫", pc.TienPhuCap);
-                dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = chiTietPhuCapBUS.TongSoNhanVienTrongPhuCap(pc.MaPC);
+                rowAdd = dgvAllowance.Rows.Add();
+                dgvAllowance.Rows[rowAdd].Cells[0].Value = pc.MaPC;
+                dgvAllowance.Rows[rowAdd].Cells[1].Value = pc.TenPhuCap;
+                dgvAllowance.Rows[rowAdd].Cells[2].Value = String.Format(fVND, "{0:N3} ₫", pc.TienPhuCap);
+                dgvAllowance.Rows[rowAdd].Cells[3].Value = chiTietPhuCapBUS.TongSoNhanVienTrongPhuCap(pc.MaPC);
             }            
             Enabled = true;
         }
         private void LoadPhuCapTimKiem(string timKiem)
         {
             Enabled = false;
-            dgvThongTinPhuCap.Rows.Clear();
+            dgvAllowance.Rows.Clear();
             danhSachPhuCapTimKiem = phuCapBUS.SearchPhuCap(timKiem);
             int rowAdd;
             foreach (var pc in danhSachPhuCapTimKiem)
             {
-                rowAdd = dgvThongTinPhuCap.Rows.Add();
-                dgvThongTinPhuCap.Rows[rowAdd].Cells[0].Value = pc.MaPC;
-                dgvThongTinPhuCap.Rows[rowAdd].Cells[1].Value = pc.TenPhuCap;
-                dgvThongTinPhuCap.Rows[rowAdd].Cells[2].Value = String.Format(fVND, "{0:N3} ₫", pc.TienPhuCap);
-                dgvThongTinPhuCap.Rows[rowAdd].Cells[3].Value = chiTietPhuCapBUS.TongSoNhanVienTrongPhuCap(pc.MaPC).ToString();
+                rowAdd = dgvAllowance.Rows.Add();
+                dgvAllowance.Rows[rowAdd].Cells[0].Value = pc.MaPC;
+                dgvAllowance.Rows[rowAdd].Cells[1].Value = pc.TenPhuCap;
+                dgvAllowance.Rows[rowAdd].Cells[2].Value = String.Format(fVND, "{0:N3} ₫", pc.TienPhuCap);
+                dgvAllowance.Rows[rowAdd].Cells[3].Value = chiTietPhuCapBUS.TongSoNhanVienTrongPhuCap(pc.MaPC).ToString();
             }
             Enabled = true;
         }
         ////////////////////////////////////////////////////////////////////////////////////////
         private void ClearAllText()
         {
-            List<TextBox> listTextBox = new List<TextBox> { txtMaPC, txtTenPC , txtSoTien, txtSoLuongNhanVien };
+            List<TextBox> listTextBox = new List<TextBox> { txtAllowanceID, txtAllowanceName , txtAmount, txtStaffAmount };
             for(int i = 0;  i < listTextBox.Count; i++)
             {
                 typeof(TextBox).GetProperty("Text").SetValue(listTextBox[i], string.Empty);
@@ -159,19 +159,19 @@ namespace QuanLyNhanSu.PresentationTier
         ////////////////////////////////////////////////////////////////////////////////////////
         private bool CheckEmptyText(bool check)
         {
-            List<TextBox> listTextBox = new List<TextBox> { txtTenPC, txtSoTien };
+            List<TextBox> listTextBox = new List<TextBox> { txtAllowanceName, txtAmount };
             for (int i = 0; i < listTextBox.Count; i++)
             {
                 if (string.IsNullOrEmpty(listTextBox[i].Text))
                 {
                     if (check)
                     {
-                        btnThem.Enabled = false;
+                        btnAdd.Enabled = false;
                         return false;
                     }
                     else
                     {
-                        btnSua.Enabled = false;
+                        btnEdit.Enabled = false;
                         return false;
                     }
                 }
@@ -183,30 +183,30 @@ namespace QuanLyNhanSu.PresentationTier
             if (!checkThaoTac)
                 return;
             bool check;
-            if (string.IsNullOrEmpty(txtMaPC.Text))
+            if (string.IsNullOrEmpty(txtAllowanceID.Text))
             {
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
                 check = true;
                 if (CheckEmptyText(check))
                 {
-                    btnThem.Enabled = true;
+                    btnAdd.Enabled = true;
                     return;
                 }
             }
             else
             {
-                btnThem.Enabled = false;
-                btnXoa.Enabled = true;
+                btnAdd.Enabled = false;
+                btnDelete.Enabled = true;
                 check = false;
                 if (CheckEmptyText(check))
                 {
-                    btnSua.Enabled = true;
+                    btnEdit.Enabled = true;
                     return;
                 }
             }
         }
-        private void txtSoTien_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtAmount_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
@@ -232,10 +232,10 @@ namespace QuanLyNhanSu.PresentationTier
         private string CheckChange()
         {
             List<string> changes = new List<string>();
-            PhuCap phuCap = phuCapBUS.GetPhuCap().FirstOrDefault(pc => pc.MaPC == txtMaPC.Text);
-            string tenPhuCap = txtTenPC.Text;
+            PhuCap phuCap = phuCapBUS.GetPhuCap().FirstOrDefault(pc => pc.MaPC == txtAllowanceID.Text);
+            string tenPhuCap = txtAllowanceName.Text;
             string tienPhuCapCu = String.Format(fVND, "{0:N3} ₫", phuCap.TienPhuCap);
-            string tienPhuCapMoi = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
+            string tienPhuCapMoi = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtAmount.Text));
             if (tenPhuCap != phuCap.TenPhuCap)
                 changes.Add($"- Tên phụ cấp: {phuCap.TenPhuCap} -> Tên phụ cấp: {tenPhuCap}");
             if (tienPhuCapCu != tienPhuCapMoi)
@@ -256,7 +256,7 @@ namespace QuanLyNhanSu.PresentationTier
                     Alignment = DataGridViewContentAlignment.MiddleCenter
                 };
                 btnXoa.DefaultCellStyle = buttonCellStyle;
-                dgvThongTinPhuCap.Columns.Add(btnXoa);
+                dgvAllowance.Columns.Add(btnXoa);
             }
         }
         public void ChiTietPhuCap(string maPC)
@@ -266,36 +266,36 @@ namespace QuanLyNhanSu.PresentationTier
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnThem_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             PhuCap newPhuCap = new PhuCap
             {
                 MaPC = "",
-                TenPhuCap = txtTenPC.Text,
-                TienPhuCap = decimal.Parse(txtSoTien.Text)
+                TenPhuCap = txtAllowanceName.Text,
+                TienPhuCap = decimal.Parse(txtAmount.Text)
             };
             if (phuCapBUS.Save(newPhuCap))
             {
-                string tenPhuCap = txtTenPC.Text;
-                string soTien = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
+                string tenPhuCap = txtAllowanceName.Text;
+                string soTien = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtAmount.Text));
                 string thaoTac = $"Thêm {tenPhuCap}:\n  - Số tiền: {soTien}";
                 string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
                 LichSuThaoTac(thaoTac, maTT);
             }
             Reload();
         }
-        private void btnSua_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
             string chiTietSua = CheckChange();
             PhuCap newPhuCap = new PhuCap
             {
-                MaPC = txtMaPC.Text,
-                TenPhuCap = txtTenPC.Text,
-                TienPhuCap = decimal.Parse(txtSoTien.Text)
+                MaPC = txtAllowanceID.Text,
+                TenPhuCap = txtAllowanceName.Text,
+                TienPhuCap = decimal.Parse(txtAmount.Text)
             };
             if (phuCapBUS.Save(newPhuCap))
             {
-                string thaoTac = $"Sửa {txtMaPC.Text}";                
+                string thaoTac = $"Sửa {txtAllowanceID.Text}";                
                 if (!string.IsNullOrEmpty(chiTietSua))
                     thaoTac += $":\n{chiTietSua}";
                 string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
@@ -303,53 +303,53 @@ namespace QuanLyNhanSu.PresentationTier
                 Reload();
             }
         }
-        private void btnXoa_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             PhuCap phuCap = new PhuCap();
-            phuCap.MaPC = txtMaPC.Text;
+            phuCap.MaPC = txtAllowanceID.Text;
             if (phuCapBUS.Delete(phuCap))
             {
-                string tenPhuCap = txtTenPC.Text;
-                string soTien = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtSoTien.Text));
+                string tenPhuCap = txtAllowanceName.Text;
+                string soTien = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtAmount.Text));
                 string thaoTac = $"Xoá {tenPhuCap}:\n  - Số tiền: {soTien}";
                 string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
                 LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }
         }
-        private void btnHuy_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             ClearAllText();
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void dgvThongTinPhuCap_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvAllowance_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
-            txtMaPC.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[0].Value.ToString();
-            txtTenPC.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[1].Value.ToString();
-            txtSoTien.Text = phuCapBUS.ThongTinPhuCap(txtMaPC.Text).TienPhuCap.ToString();
-            txtSoLuongNhanVien.Text = dgvThongTinPhuCap.Rows[rowIndex].Cells[3].Value.ToString();
+            txtAllowanceID.Text = dgvAllowance.Rows[rowIndex].Cells[0].Value.ToString();
+            txtAllowanceName.Text = dgvAllowance.Rows[rowIndex].Cells[1].Value.ToString();
+            txtAmount.Text = phuCapBUS.ThongTinPhuCap(txtAllowanceID.Text).TienPhuCap.ToString();
+            txtStaffAmount.Text = dgvAllowance.Rows[rowIndex].Cells[3].Value.ToString();
             if (e.ColumnIndex == 4)
-                ChiTietPhuCap(txtMaPC.Text);
+                ChiTietPhuCap(txtAllowanceID.Text);
         }
        
-        private void TimKiem(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTimKiem.Text))
+            if (string.IsNullOrEmpty(txtSearch.Text))
                 LoadPhuCap();      
         }
-        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
-                LoadPhuCapTimKiem(txtTimKiem.Text);
+                LoadPhuCapTimKiem(txtSearch.Text);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

@@ -53,25 +53,25 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void FrmPhanQuyen_Load(object sender, EventArgs e)
         {
-            cmbChucVu.DisplayMember = "TenChucVu";
-            cmbChucVu.ValueMember = "MaCV";
-            cmbQuyenHan.DisplayMember = "TenQuyenHan";
-            cmbQuyenHan.ValueMember = "MaQH";
+            cmbPosition.DisplayMember = "TenChucVu";
+            cmbPosition.ValueMember = "MaCV";
+            cmbAuthority.DisplayMember = "TenQuyenHan";
+            cmbAuthority.ValueMember = "MaQH";
             LoadThongTinDangNhap();           
             LoadChucVu();
             LoadQuyenHan();
             PhanQuyen();
-            rbLocTheoChucVu.Checked = true;
+            rbSortByPosition.Checked = true;
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV_DN.Text = nv.MaNV;
+            lblStaffIDLoginValue.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblDepartmentLoginValue.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblPositionLoginValue.Text = nv.ChucVu.TenChucVu;
         }
         private void PhanQuyen()
         {
@@ -86,57 +86,57 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadDanhSachPhanQuyen()
         {
-            if (rbLocTheoChucVu.Checked)
-                loc = cmbChucVu.SelectedValue.ToString();
-            if(rbLocQuyenHan.Checked)
-                loc = cmbQuyenHan.SelectedValue.ToString();
+            if (rbSortByPosition.Checked)
+                loc = cmbPosition.SelectedValue.ToString();
+            if(rbSortByAuthority.Checked)
+                loc = cmbAuthority.SelectedValue.ToString();
             Enabled = false;
-            dgvPhanQuyen.Rows.Clear();
+            dgvAuthorization.Rows.Clear();
             danhSachPhanQuyen = phanQuyenBUS.GetAllPhanQuyen(loc);
             int rowAdd;
             foreach (PhanQuyenViewModels ph in danhSachPhanQuyen)
             {
-                rowAdd = dgvPhanQuyen.Rows.Add();
-                dgvPhanQuyen.Rows[rowAdd].Cells[0].Value = ph.MaQH;
-                dgvPhanQuyen.Rows[rowAdd].Cells[1].Value = ph.MaCV;
-                dgvPhanQuyen.Rows[rowAdd].Cells[2].Value = ph.TenChucVu;
-                dgvPhanQuyen.Rows[rowAdd].Cells[3].Value = ph.GiaoDien;
-                dgvPhanQuyen.Rows[rowAdd].Cells[4].Value = ph.TenQuyenHan;
-                dgvPhanQuyen.Rows[rowAdd].Cells[5].Value = ph.CapQuyen;
+                rowAdd = dgvAuthorization.Rows.Add();
+                dgvAuthorization.Rows[rowAdd].Cells[0].Value = ph.MaQH;
+                dgvAuthorization.Rows[rowAdd].Cells[1].Value = ph.MaCV;
+                dgvAuthorization.Rows[rowAdd].Cells[2].Value = ph.TenChucVu;
+                dgvAuthorization.Rows[rowAdd].Cells[3].Value = ph.GiaoDien;
+                dgvAuthorization.Rows[rowAdd].Cells[4].Value = ph.TenQuyenHan;
+                dgvAuthorization.Rows[rowAdd].Cells[5].Value = ph.CapQuyen;
             }
             Enabled = true;
         }
         private void LoadDanhSachPhanQuyenTimKiem(string timKiem)
         {
-            if (rbLocTheoChucVu.Checked)
-                loc = cmbChucVu.SelectedValue.ToString();
-            if (rbLocQuyenHan.Checked)
-                loc = cmbQuyenHan.SelectedValue.ToString();
+            if (rbSortByPosition.Checked)
+                loc = cmbPosition.SelectedValue.ToString();
+            if (rbSortByAuthority.Checked)
+                loc = cmbAuthority.SelectedValue.ToString();
             Enabled = false;
-            dgvPhanQuyen.Rows.Clear();
+            dgvAuthorization.Rows.Clear();
             danhSachPhanQuyenTimKiem = phanQuyenBUS.GetAllPhanQuyenTimKiem(loc, timKiem);
             int rowAdd;
             foreach (PhanQuyenViewModels ph in danhSachPhanQuyenTimKiem)
             {
-                rowAdd = dgvPhanQuyen.Rows.Add();
-                dgvPhanQuyen.Rows[rowAdd].Cells[0].Value = ph.MaQH;
-                dgvPhanQuyen.Rows[rowAdd].Cells[1].Value = ph.MaCV;
-                dgvPhanQuyen.Rows[rowAdd].Cells[2].Value = ph.TenChucVu;
-                dgvPhanQuyen.Rows[rowAdd].Cells[3].Value = ph.GiaoDien;
-                dgvPhanQuyen.Rows[rowAdd].Cells[4].Value = ph.TenQuyenHan;
-                dgvPhanQuyen.Rows[rowAdd].Cells[5].Value = ph.CapQuyen;
+                rowAdd = dgvAuthorization.Rows.Add();
+                dgvAuthorization.Rows[rowAdd].Cells[0].Value = ph.MaQH;
+                dgvAuthorization.Rows[rowAdd].Cells[1].Value = ph.MaCV;
+                dgvAuthorization.Rows[rowAdd].Cells[2].Value = ph.TenChucVu;
+                dgvAuthorization.Rows[rowAdd].Cells[3].Value = ph.GiaoDien;
+                dgvAuthorization.Rows[rowAdd].Cells[4].Value = ph.TenQuyenHan;
+                dgvAuthorization.Rows[rowAdd].Cells[5].Value = ph.CapQuyen;
             }
             Enabled = true;
         }
         private void LoadChucVu()
         {
-            cmbChucVu.DataSource = chucVuBUS.GetChucVu();
-            AutoAdjustComboBox(cmbChucVu);
+            cmbPosition.DataSource = chucVuBUS.GetChucVu();
+            AutoAdjustComboBox(cmbPosition);
         }
         private void LoadQuyenHan()
         {
-            cmbQuyenHan.DataSource = quyenHanBUS.GetQuyenHans();
-            AutoAdjustComboBox(cmbQuyenHan);
+            cmbAuthority.DataSource = quyenHanBUS.GetQuyenHans();
+            AutoAdjustComboBox(cmbAuthority);
         }
         private void AutoAdjustComboBox(ComboBox comboBox)
         {
@@ -149,27 +149,27 @@ namespace QuanLyNhanSu.PresentationTier
             comboBox.DropDownWidth = maxWidth + SystemInformation.VerticalScrollBarWidth;
         }
         /////////////////////////////////////////////////////////////////////////////////////////    
-        private void rbLocTheoChucVu_CheckedChanged(object sender, EventArgs e)
+        private void rbSortByPosition_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbLocTheoChucVu.Checked)
+            if (rbSortByPosition.Checked)
             {
-                cmbChucVu.Enabled = true;
-                cmbQuyenHan.Enabled = false;
+                cmbPosition.Enabled = true;
+                cmbAuthority.Enabled = false;
                 LoadDanhSachPhanQuyen();
                 return;
             }
         }
-        private void rbLocQuyenHan_CheckedChanged(object sender, EventArgs e)
+        private void rbSortByAuthority_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbLocQuyenHan.Checked)
+            if (rbSortByAuthority.Checked)
             {
-                cmbQuyenHan.Enabled = true;
-                cmbChucVu.Enabled = false;
+                cmbAuthority.Enabled = true;
+                cmbPosition.Enabled = false;
                 LoadDanhSachPhanQuyen();
                 return;
             }
         } 
-        private void cmbGiaoDien_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbCheckChange(object sender, EventArgs e)
         {
             if (check != 2)
             {
@@ -228,17 +228,17 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     LichSuThaoTac(thaoTac, maTT);
                 }
-                if (string.IsNullOrEmpty(txtTimKiem.Text))
+                if (string.IsNullOrEmpty(txtSearch.Text))
                     LoadDanhSachPhanQuyen();
                 else
-                    LoadDanhSachPhanQuyenTimKiem(txtTimKiem.Text);
+                    LoadDanhSachPhanQuyenTimKiem(txtSearch.Text);
             }
             catch(Exception ex)
             {
                 ErrorMessage(ex);
             }
         }          
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
             frmOpen.Show();
@@ -250,7 +250,7 @@ namespace QuanLyNhanSu.PresentationTier
             Reload();
         }
 
-        private void dgvPhanQuyen_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvAuthorization_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
             int column = e.ColumnIndex;
@@ -260,11 +260,11 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 if (column == 5)
                 {
-                    string maQH = dgvPhanQuyen.Rows[row].Cells[0].Value.ToString();
-                    string maCV = dgvPhanQuyen.Rows[row].Cells[1].Value.ToString();
-                    string tenQuyenHan = dgvPhanQuyen.Rows[row].Cells[4].Value.ToString();
-                    string tenChucVu = dgvPhanQuyen.Rows[row].Cells[2].Value.ToString();
-                    bool capQuyen = (bool)dgvPhanQuyen.Rows[row].Cells[5].Value;
+                    string maQH = dgvAuthorization.Rows[row].Cells[0].Value.ToString();
+                    string maCV = dgvAuthorization.Rows[row].Cells[1].Value.ToString();
+                    string tenQuyenHan = dgvAuthorization.Rows[row].Cells[4].Value.ToString();
+                    string tenChucVu = dgvAuthorization.Rows[row].Cells[2].Value.ToString();
+                    bool capQuyen = (bool)dgvAuthorization.Rows[row].Cells[5].Value;
                     string thongBao;
                     string maTT;
                     string thaoTac;
@@ -292,11 +292,11 @@ namespace QuanLyNhanSu.PresentationTier
                 }
             }
         }
-        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                LoadDanhSachPhanQuyenTimKiem(txtTimKiem.Text);
+                LoadDanhSachPhanQuyenTimKiem(txtSearch.Text);
             }
         }
 

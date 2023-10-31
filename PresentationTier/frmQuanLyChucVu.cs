@@ -51,18 +51,18 @@ namespace QuanLyNhanSu.PresentationTier
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             maCV = nv.MaCV;
             phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();
-            txtMaCV.ReadOnly = true;
-            txtTongSoNhanVien.ReadOnly = true;
-            btnThem.Enabled = false;
-            btnSua.Enabled = false;
-            btnXoa.Enabled = false;
+            txtPositionID.ReadOnly = true;
+            txtTotalStaff.ReadOnly = true;
+            btnAdd.Enabled = false;
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
             this.maNV = maNV;
             checkThaoTac = false;
         }
         private void frmQuanLyChucVu_Load(object sender, EventArgs e)
         {
-            cmbPhongBan.DisplayMember = "TenPhongBan";
-            cmbPhongBan.ValueMember = "MaPB";
+            cmbDepartment.DisplayMember = "TenPhongBan";
+            cmbDepartment.ValueMember = "MaPB";
             LoadThongTinDangNhap();
             LoadPhongBan();
             InputStatus(false);
@@ -71,13 +71,13 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV_DN.Text = nv.MaNV;
+            lblStaffIDLoginValue.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblDepartmentLoginValue.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblPositionLoginValue.Text = nv.ChucVu.TenChucVu;
         }
         private void PhanQuyen()
         {
@@ -94,9 +94,9 @@ namespace QuanLyNhanSu.PresentationTier
         private void InputStatus(bool value)
         {
             ButtonStatus(value);
-            List<object> listInput = new List<object> { txtTenCV, txtLuongKhoiDiem, cmbPhongBan };
+            List<object> listInput = new List<object> { txtDepartmentName, txtStartingSalary, cmbDepartment };
             if (!value)
-                listInput.AddRange(new List<TextBox> { txtMaCV, txtTongSoNhanVien });
+                listInput.AddRange(new List<TextBox> { txtPositionID, txtTotalStaff });
             for (int i = 0; i < listInput.Count; i++)
             {
                 if (listInput[i] is TextBox)
@@ -113,52 +113,52 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value)
         {
-            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy };
+            List<Button> listButtons = new List<Button> { btnAdd, btnEdit, btnDelete, btnCancel };
             for (int i = 0; i < listButtons.Count; i++)
             {
                 typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
-                if (value && listButtons[i] != btnHuy)
+                if (value && listButtons[i] != btnCancel)
                     typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
             }
         }
         private void LoadChucVu()
         {
             Enabled = false;
-            dgvThongTinChucVu.Rows.Clear();
+            dgvPosition.Rows.Clear();
             danhSachChucVu = chucVuBUS.GetAllChucVu();
             int rowAdd;
             foreach (var cv in danhSachChucVu)
             {
-                rowAdd = dgvThongTinChucVu.Rows.Add();
-                dgvThongTinChucVu.Rows[rowAdd].Cells[0].Value = cv.MaCV;
-                dgvThongTinChucVu.Rows[rowAdd].Cells[1].Value = cv.TenPhongBan;
-                dgvThongTinChucVu.Rows[rowAdd].Cells[2].Value = cv.TenChucVu;
-                dgvThongTinChucVu.Rows[rowAdd].Cells[3].Value = String.Format(fVND, "{0:N3} ₫", cv.LuongKhoiDiem);
-                dgvThongTinChucVu.Rows[rowAdd].Cells[4].Value = chucVuBUS.TongSoNhanVienThuocChucVu(cv.MaCV);
+                rowAdd = dgvPosition.Rows.Add();
+                dgvPosition.Rows[rowAdd].Cells[0].Value = cv.MaCV;
+                dgvPosition.Rows[rowAdd].Cells[1].Value = cv.TenPhongBan;
+                dgvPosition.Rows[rowAdd].Cells[2].Value = cv.TenChucVu;
+                dgvPosition.Rows[rowAdd].Cells[3].Value = String.Format(fVND, "{0:N3} ₫", cv.LuongKhoiDiem);
+                dgvPosition.Rows[rowAdd].Cells[4].Value = chucVuBUS.TongSoNhanVienThuocChucVu(cv.MaCV);
             }
             Enabled = true;
         }
         private void LoadChucVuTimKiem(string timKiem)
         {    
             Enabled = false;
-            dgvThongTinChucVu.Rows.Clear();
+            dgvPosition.Rows.Clear();
             danhSachChucVuTimKiem = chucVuBUS.SearchChucVu(timKiem);
             int rowAdd;
             foreach (var cv in danhSachChucVuTimKiem)
             {
-                rowAdd = dgvThongTinChucVu.Rows.Add();
-                dgvThongTinChucVu.Rows[rowAdd].Cells[0].Value = cv.MaCV;
-                dgvThongTinChucVu.Rows[rowAdd].Cells[1].Value = cv.TenPhongBan;
-                dgvThongTinChucVu.Rows[rowAdd].Cells[2].Value = cv.TenChucVu;
-                dgvThongTinChucVu.Rows[rowAdd].Cells[3].Value = String.Format(fVND, "{0:N3} ₫", cv.LuongKhoiDiem);
-                dgvThongTinChucVu.Rows[rowAdd].Cells[4].Value = chucVuBUS.TongSoNhanVienThuocChucVu(cv.MaCV);
+                rowAdd = dgvPosition.Rows.Add();
+                dgvPosition.Rows[rowAdd].Cells[0].Value = cv.MaCV;
+                dgvPosition.Rows[rowAdd].Cells[1].Value = cv.TenPhongBan;
+                dgvPosition.Rows[rowAdd].Cells[2].Value = cv.TenChucVu;
+                dgvPosition.Rows[rowAdd].Cells[3].Value = String.Format(fVND, "{0:N3} ₫", cv.LuongKhoiDiem);
+                dgvPosition.Rows[rowAdd].Cells[4].Value = chucVuBUS.TongSoNhanVienThuocChucVu(cv.MaCV);
             }
             Enabled = true;
         }
         private void LoadPhongBan()
         {
-            cmbPhongBan.DataSource = phongBanBUS.GetPhongBan();
-            AutoAdjustComboBox(cmbPhongBan);
+            cmbDepartment.DataSource = phongBanBUS.GetPhongBan();
+            AutoAdjustComboBox(cmbDepartment);
         }
         private void AutoAdjustComboBox(ComboBox comboBox)
         {
@@ -173,7 +173,7 @@ namespace QuanLyNhanSu.PresentationTier
         /////////////////////////////////////////////////////////////////////////////////////////////
         private void ClearAllText()
         {
-            List<object> listInput = new List<object> { txtMaCV, cmbPhongBan, txtTenCV, txtTongSoNhanVien, txtLuongKhoiDiem };
+            List<object> listInput = new List<object> { txtPositionID, cmbDepartment, txtDepartmentName, txtTotalStaff, txtStartingSalary };
             for(int i = 0; i< listInput.Count; i++)
             {
                 if (listInput[i] is TextBox)
@@ -203,19 +203,19 @@ namespace QuanLyNhanSu.PresentationTier
         /////////////////////////////////////////////////////////////////////////////////////////////
         private bool CheckEmptyText(bool check) 
         {
-            List<TextBox> listTextBox = new List<TextBox> { txtTenCV, txtLuongKhoiDiem};
+            List<TextBox> listTextBox = new List<TextBox> { txtDepartmentName, txtStartingSalary};
             for(int i = 0; i < listTextBox.Count; i++)
             {
                 if (string.IsNullOrEmpty(listTextBox[i].Text))
                 {
                     if (check) 
                     {
-                        btnThem.Enabled = false;
+                        btnAdd.Enabled = false;
                         return false;
                     }
                     else
                     {
-                        btnSua.Enabled = false;
+                        btnEdit.Enabled = false;
                         return false;
                     }
                 }
@@ -227,31 +227,31 @@ namespace QuanLyNhanSu.PresentationTier
             if (!checkThaoTac)
                 return;
             bool check;
-            if (string.IsNullOrEmpty(txtMaCV.Text))
+            if (string.IsNullOrEmpty(txtPositionID.Text))
             {
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
                 check = true;
                 if (CheckEmptyText(check))
                 {
-                    btnThem.Enabled = true;
+                    btnAdd.Enabled = true;
                     return; 
                 }
             }
             else
             {
-                btnThem.Enabled = false;
-                btnXoa.Enabled = true;
+                btnAdd.Enabled = false;
+                btnDelete.Enabled = true;
                 check = false;
                 if (CheckEmptyText(check))
                 {
-                    btnSua.Enabled = true;
+                    btnEdit.Enabled = true;
                     return;
                 }
             }
         }        
         /////////////////////////////////////////////////////////////////////////////////////////////
-        private void txtLuongKhoiDiem_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtStartingSalaryKeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
@@ -277,13 +277,13 @@ namespace QuanLyNhanSu.PresentationTier
         private string CheckChange()
         {
             List<string> changes = new List<string>();
-            ChucVu chucVu = chucVuBUS.GetChucVu().Where(cv => cv.MaCV == txtMaCV.Text).FirstOrDefault();
+            ChucVu chucVu = chucVuBUS.GetChucVu().Where(cv => cv.MaCV == txtPositionID.Text).FirstOrDefault();
             string luongKhoiDiemCu = String.Format(fVND, "{0:N3} ₫", chucVu.LuongKhoiDiem);
-            string luongKhoiDiemMoi = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongKhoiDiem.Text));
-            if (txtTenCV.Text != chucVu.TenChucVu)
-                changes.Add($"- Tên chức vụ: {chucVu.TenChucVu} -> Tên chức vụ: {txtTenCV.Text}");
-            if (cmbPhongBan.SelectedValue.ToString() != chucVu.MaPB)
-                changes.Add($"- Phòng ban: {chucVu.PhongBan.TenPhongBan} -> Phòng ban: {cmbPhongBan.Text}");
+            string luongKhoiDiemMoi = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtStartingSalary.Text));
+            if (txtDepartmentName.Text != chucVu.TenChucVu)
+                changes.Add($"- Tên chức vụ: {chucVu.TenChucVu} -> Tên chức vụ: {txtDepartmentName.Text}");
+            if (cmbDepartment.SelectedValue.ToString() != chucVu.MaPB)
+                changes.Add($"- Phòng ban: {chucVu.PhongBan.TenPhongBan} -> Phòng ban: {cmbDepartment.Text}");
             if (luongKhoiDiemCu != luongKhoiDiemMoi)
                 changes.Add($"- Lương khởi điểm: : {luongKhoiDiemCu} -> Lương khởi điểm: {luongKhoiDiemMoi}");
             return string.Join("\n", changes);
@@ -300,13 +300,13 @@ namespace QuanLyNhanSu.PresentationTier
         {
             errProvider.Clear();
             double check;
-            errProvider.SetError(txtTenCV, chucVuBUS.GetChucVu().FirstOrDefault(cv => cv.TenChucVu == txtTenCV.Text && cv.MaCV != txtMaCV.Text) != null ? "Tên chức vụ đã tồn tại" : string.Empty);
-            errProvider.SetError(txtLuongKhoiDiem, double.TryParse(txtLuongKhoiDiem.Text, out check) is false ? "Lương cơ bản không đúng định dạng số" : string.Empty);
-            if (errProvider.GetError(txtTenCV) != string.Empty || errProvider.GetError(txtLuongKhoiDiem) != string.Empty)
+            errProvider.SetError(txtDepartmentName, chucVuBUS.GetChucVu().FirstOrDefault(cv => cv.TenChucVu == txtDepartmentName.Text && cv.MaCV != txtPositionID.Text) != null ? "Tên chức vụ đã tồn tại" : string.Empty);
+            errProvider.SetError(txtStartingSalary, double.TryParse(txtStartingSalary.Text, out check) is false ? "Lương cơ bản không đúng định dạng số" : string.Empty);
+            if (errProvider.GetError(txtDepartmentName) != string.Empty || errProvider.GetError(txtStartingSalary) != string.Empty)
                 return false;
             return true;
         }
-        private void btnThem_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -318,15 +318,15 @@ namespace QuanLyNhanSu.PresentationTier
                 ChucVu chucVu = new ChucVu
                 {
                     MaCV = "",
-                    MaPB = cmbPhongBan.SelectedValue.ToString(),
-                    TenChucVu = txtTenCV.Text,
-                    LuongKhoiDiem = decimal.Parse(txtLuongKhoiDiem.Text),
+                    MaPB = cmbDepartment.SelectedValue.ToString(),
+                    TenChucVu = txtDepartmentName.Text,
+                    LuongKhoiDiem = decimal.Parse(txtStartingSalary.Text),
                 };
                 if (chucVuBUS.Save(chucVu))
                 {
-                    string tenChucVu = txtTenCV.Text;
-                    string phongBan = cmbPhongBan.Text;
-                    string luongKhoiDiem = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongKhoiDiem.Text));
+                    string tenChucVu = txtDepartmentName.Text;
+                    string phongBan = cmbDepartment.Text;
+                    string luongKhoiDiem = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtStartingSalary.Text));
                     string thaoTac = $"Thêm chức vụ: {tenChucVu}\n - Phòng ban: {phongBan}\n - Lương khỏi điểm: {luongKhoiDiem}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
                     LichSuThaoTac(thaoTac, maTT);
@@ -351,7 +351,7 @@ namespace QuanLyNhanSu.PresentationTier
                 ErrorMessage(ex);
             }                    
         }
-        private void btnSua_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
             try
             {
@@ -361,12 +361,12 @@ namespace QuanLyNhanSu.PresentationTier
                     return;
                 }
                 string chiTietSua = CheckChange();
-                ChucVu chucVu = chucVuBUS.GetChucVu().FirstOrDefault(cv => cv.MaCV == txtMaCV.Text);
-                chucVu.TenChucVu = txtTenCV.Text;
-                chucVu.MaPB = cmbPhongBan.SelectedValue.ToString();                
+                ChucVu chucVu = chucVuBUS.GetChucVu().FirstOrDefault(cv => cv.MaCV == txtPositionID.Text);
+                chucVu.TenChucVu = txtDepartmentName.Text;
+                chucVu.MaPB = cmbDepartment.SelectedValue.ToString();                
                 if (chucVuBUS.Save(chucVu))
                 {
-                    string thaoTac = "Sửa chức vụ " + txtMaCV.Text;
+                    string thaoTac = "Sửa chức vụ " + txtPositionID.Text;
                     if (!string.IsNullOrEmpty(chiTietSua))
                         thaoTac += ":\n" + chiTietSua;
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
@@ -379,57 +379,57 @@ namespace QuanLyNhanSu.PresentationTier
                 ErrorMessage(ex);
             }    
         }
-        private void btnXoa_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             ChucVu chucVu = new ChucVu
             {
-                MaCV = txtMaCV.Text                
+                MaCV = txtPositionID.Text                
             };
             if (chucVuBUS.Delete(chucVu))
             {
-                string tenChucVu = txtTenCV.Text;
-                string phongBan = cmbPhongBan.Text;
-                string luongKhoiDiem = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtLuongKhoiDiem.Text));
+                string tenChucVu = txtDepartmentName.Text;
+                string phongBan = cmbDepartment.Text;
+                string luongKhoiDiem = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtStartingSalary.Text));
                 string thaoTac = $"Xoá chức vụ {tenChucVu}:\n - Phòng ban: {phongBan}\n - Lương khởi điểm: {luongKhoiDiem}";
                 string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
                 LichSuThaoTac(thaoTac, maTT);
                 Reload();
             }            
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }      
-        private void btnHuy_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             errProvider.Clear();
             ClearAllText();
         }
-        private void dgvThongTinChucVu_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvPosition_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             errProvider.Clear();
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
-            txtMaCV.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[0].Value.ToString();
-            cmbPhongBan.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[1].Value.ToString();
-            txtTenCV.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[2].Value.ToString();
-            txtLuongKhoiDiem.Text = chucVuBUS.GetLuongCoBanCuaChucVu(txtMaCV.Text).ToString();
-            txtTongSoNhanVien.Text = dgvThongTinChucVu.Rows[rowIndex].Cells[4].Value.ToString();
+            txtPositionID.Text = dgvPosition.Rows[rowIndex].Cells[0].Value.ToString();
+            cmbDepartment.Text = dgvPosition.Rows[rowIndex].Cells[1].Value.ToString();
+            txtDepartmentName.Text = dgvPosition.Rows[rowIndex].Cells[2].Value.ToString();
+            txtStartingSalary.Text = chucVuBUS.GetLuongCoBanCuaChucVu(txtPositionID.Text).ToString();
+            txtTotalStaff.Text = dgvPosition.Rows[rowIndex].Cells[4].Value.ToString();
 
         }       
-        private void TimKiem(object sender, EventArgs e)
+        private void txtSearch_TextChange(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTimKiem.Text))            
+            if (string.IsNullOrEmpty(txtSearch.Text))            
                 LoadChucVu();       
         }
-        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
-                LoadChucVuTimKiem(txtTimKiem.Text);
+                LoadChucVuTimKiem(txtSearch.Text);
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {

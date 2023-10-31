@@ -30,27 +30,31 @@
         {
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.lblChucVuNV_DN = new System.Windows.Forms.Label();
-            this.lblChucVuDN = new System.Windows.Forms.Label();
-            this.lblPhongBanNV_DN = new System.Windows.Forms.Label();
-            this.lblPhongBanDN = new System.Windows.Forms.Label();
-            this.lblHoTenNV_DN = new System.Windows.Forms.Label();
-            this.lblHoTenDN = new System.Windows.Forms.Label();
-            this.lblMaNV_DN = new System.Windows.Forms.Label();
-            this.lblMaNhanVienDN = new System.Windows.Forms.Label();
-            this.btnTroVe = new System.Windows.Forms.Button();
+            this.lblPositionLoginValue = new System.Windows.Forms.Label();
+            this.lblPositionLogin = new System.Windows.Forms.Label();
+            this.lblDepartmentLoginValue = new System.Windows.Forms.Label();
+            this.lblDepartmentLogin = new System.Windows.Forms.Label();
+            this.lblFullNameLoginValue = new System.Windows.Forms.Label();
+            this.lblFullNameLogin = new System.Windows.Forms.Label();
+            this.lblStaffIDLoginValue = new System.Windows.Forms.Label();
+            this.lblStaffIDLogin = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.Button();
             this.tabControlMenu = new System.Windows.Forms.TabControl();
             this.tabPageThongKe = new System.Windows.Forms.TabPage();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.rbPosition = new System.Windows.Forms.RadioButton();
+            this.cmbPosition = new System.Windows.Forms.ComboBox();
+            this.rbDepartment = new System.Windows.Forms.RadioButton();
+            this.rbAllStaff = new System.Windows.Forms.RadioButton();
             this.btnXuatExcel = new System.Windows.Forms.Button();
             this.btnThongKe = new System.Windows.Forms.Button();
             this.btnLuu = new System.Windows.Forms.Button();
-            this.lblThongKeLuong = new System.Windows.Forms.Label();
-            this.txtTimKiem = new System.Windows.Forms.TextBox();
-            this.lblThang = new System.Windows.Forms.Label();
-            this.cmbPhongBan = new System.Windows.Forms.ComboBox();
-            this.dtpThangNam = new System.Windows.Forms.DateTimePicker();
+            this.lblSalaryStatistics = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.lblMonth = new System.Windows.Forms.Label();
+            this.cmbDepartment = new System.Windows.Forms.ComboBox();
+            this.dtpMonth = new System.Windows.Forms.DateTimePicker();
             this.dgvThongKeLuong = new System.Windows.Forms.DataGridView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,11 +66,7 @@
             this.colTongPhuCap = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTienNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTongLuongThang = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rbToanBoNhanVien = new System.Windows.Forms.RadioButton();
-            this.rbPhongBan = new System.Windows.Forms.RadioButton();
-            this.rbChucVu = new System.Windows.Forms.RadioButton();
-            this.cmbChucVu = new System.Windows.Forms.ComboBox();
-            this.lblTimKiem = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pnlHeader.SuspendLayout();
             this.tabControlMenu.SuspendLayout();
             this.tabPageThongKe.SuspendLayout();
@@ -77,15 +77,15 @@
             // 
             this.pnlHeader.BackColor = System.Drawing.SystemColors.Info;
             this.pnlHeader.Controls.Add(this.btnRefresh);
-            this.pnlHeader.Controls.Add(this.lblChucVuNV_DN);
-            this.pnlHeader.Controls.Add(this.lblChucVuDN);
-            this.pnlHeader.Controls.Add(this.lblPhongBanNV_DN);
-            this.pnlHeader.Controls.Add(this.lblPhongBanDN);
-            this.pnlHeader.Controls.Add(this.lblHoTenNV_DN);
-            this.pnlHeader.Controls.Add(this.lblHoTenDN);
-            this.pnlHeader.Controls.Add(this.lblMaNV_DN);
-            this.pnlHeader.Controls.Add(this.lblMaNhanVienDN);
-            this.pnlHeader.Controls.Add(this.btnTroVe);
+            this.pnlHeader.Controls.Add(this.lblPositionLoginValue);
+            this.pnlHeader.Controls.Add(this.lblPositionLogin);
+            this.pnlHeader.Controls.Add(this.lblDepartmentLoginValue);
+            this.pnlHeader.Controls.Add(this.lblDepartmentLogin);
+            this.pnlHeader.Controls.Add(this.lblFullNameLoginValue);
+            this.pnlHeader.Controls.Add(this.lblFullNameLogin);
+            this.pnlHeader.Controls.Add(this.lblStaffIDLoginValue);
+            this.pnlHeader.Controls.Add(this.lblStaffIDLogin);
+            this.pnlHeader.Controls.Add(this.btnBack);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
@@ -110,107 +110,107 @@
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
             // 
-            // lblChucVuNV_DN
+            // lblPositionLoginValue
             // 
-            this.lblChucVuNV_DN.AutoSize = true;
-            this.lblChucVuNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuNV_DN.Location = new System.Drawing.Point(1178, 72);
-            this.lblChucVuNV_DN.Name = "lblChucVuNV_DN";
-            this.lblChucVuNV_DN.Size = new System.Drawing.Size(38, 32);
-            this.lblChucVuNV_DN.TabIndex = 8;
-            this.lblChucVuNV_DN.Text = "...";
+            this.lblPositionLoginValue.AutoSize = true;
+            this.lblPositionLoginValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPositionLoginValue.Location = new System.Drawing.Point(1178, 72);
+            this.lblPositionLoginValue.Name = "lblPositionLoginValue";
+            this.lblPositionLoginValue.Size = new System.Drawing.Size(38, 32);
+            this.lblPositionLoginValue.TabIndex = 8;
+            this.lblPositionLoginValue.Text = "...";
             // 
-            // lblChucVuDN
+            // lblPositionLogin
             // 
-            this.lblChucVuDN.AutoSize = true;
-            this.lblChucVuDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuDN.Location = new System.Drawing.Point(1002, 72);
-            this.lblChucVuDN.Name = "lblChucVuDN";
-            this.lblChucVuDN.Size = new System.Drawing.Size(133, 32);
-            this.lblChucVuDN.TabIndex = 7;
-            this.lblChucVuDN.Text = "Chức vụ:";
+            this.lblPositionLogin.AutoSize = true;
+            this.lblPositionLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPositionLogin.Location = new System.Drawing.Point(1002, 72);
+            this.lblPositionLogin.Name = "lblPositionLogin";
+            this.lblPositionLogin.Size = new System.Drawing.Size(133, 32);
+            this.lblPositionLogin.TabIndex = 7;
+            this.lblPositionLogin.Text = "Chức vụ:";
             // 
-            // lblPhongBanNV_DN
+            // lblDepartmentLoginValue
             // 
-            this.lblPhongBanNV_DN.AutoSize = true;
-            this.lblPhongBanNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanNV_DN.Location = new System.Drawing.Point(1178, 9);
-            this.lblPhongBanNV_DN.Name = "lblPhongBanNV_DN";
-            this.lblPhongBanNV_DN.Size = new System.Drawing.Size(38, 32);
-            this.lblPhongBanNV_DN.TabIndex = 6;
-            this.lblPhongBanNV_DN.Text = "...";
+            this.lblDepartmentLoginValue.AutoSize = true;
+            this.lblDepartmentLoginValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDepartmentLoginValue.Location = new System.Drawing.Point(1178, 9);
+            this.lblDepartmentLoginValue.Name = "lblDepartmentLoginValue";
+            this.lblDepartmentLoginValue.Size = new System.Drawing.Size(38, 32);
+            this.lblDepartmentLoginValue.TabIndex = 6;
+            this.lblDepartmentLoginValue.Text = "...";
             // 
-            // lblPhongBanDN
+            // lblDepartmentLogin
             // 
-            this.lblPhongBanDN.AutoSize = true;
-            this.lblPhongBanDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanDN.Location = new System.Drawing.Point(1002, 9);
-            this.lblPhongBanDN.Name = "lblPhongBanDN";
-            this.lblPhongBanDN.Size = new System.Drawing.Size(170, 32);
-            this.lblPhongBanDN.TabIndex = 5;
-            this.lblPhongBanDN.Text = "Phòng ban:";
+            this.lblDepartmentLogin.AutoSize = true;
+            this.lblDepartmentLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDepartmentLogin.Location = new System.Drawing.Point(1002, 9);
+            this.lblDepartmentLogin.Name = "lblDepartmentLogin";
+            this.lblDepartmentLogin.Size = new System.Drawing.Size(170, 32);
+            this.lblDepartmentLogin.TabIndex = 5;
+            this.lblDepartmentLogin.Text = "Phòng ban:";
             // 
-            // lblHoTenNV_DN
+            // lblFullNameLoginValue
             // 
-            this.lblHoTenNV_DN.AutoSize = true;
-            this.lblHoTenNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHoTenNV_DN.Location = new System.Drawing.Point(529, 72);
-            this.lblHoTenNV_DN.Name = "lblHoTenNV_DN";
-            this.lblHoTenNV_DN.Size = new System.Drawing.Size(38, 32);
-            this.lblHoTenNV_DN.TabIndex = 4;
-            this.lblHoTenNV_DN.Text = "...";
-            this.lblHoTenNV_DN.UseMnemonic = false;
+            this.lblFullNameLoginValue.AutoSize = true;
+            this.lblFullNameLoginValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullNameLoginValue.Location = new System.Drawing.Point(529, 72);
+            this.lblFullNameLoginValue.Name = "lblFullNameLoginValue";
+            this.lblFullNameLoginValue.Size = new System.Drawing.Size(38, 32);
+            this.lblFullNameLoginValue.TabIndex = 4;
+            this.lblFullNameLoginValue.Text = "...";
+            this.lblFullNameLoginValue.UseMnemonic = false;
             // 
-            // lblHoTenDN
+            // lblFullNameLogin
             // 
-            this.lblHoTenDN.AutoSize = true;
-            this.lblHoTenDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHoTenDN.Location = new System.Drawing.Point(318, 72);
-            this.lblHoTenDN.Name = "lblHoTenDN";
-            this.lblHoTenDN.Size = new System.Drawing.Size(112, 32);
-            this.lblHoTenDN.TabIndex = 3;
-            this.lblHoTenDN.Text = "Họ tên:";
+            this.lblFullNameLogin.AutoSize = true;
+            this.lblFullNameLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullNameLogin.Location = new System.Drawing.Point(318, 72);
+            this.lblFullNameLogin.Name = "lblFullNameLogin";
+            this.lblFullNameLogin.Size = new System.Drawing.Size(112, 32);
+            this.lblFullNameLogin.TabIndex = 3;
+            this.lblFullNameLogin.Text = "Họ tên:";
             // 
-            // lblMaNV_DN
+            // lblStaffIDLoginValue
             // 
-            this.lblMaNV_DN.AutoSize = true;
-            this.lblMaNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaNV_DN.Location = new System.Drawing.Point(529, 9);
-            this.lblMaNV_DN.Name = "lblMaNV_DN";
-            this.lblMaNV_DN.Size = new System.Drawing.Size(38, 32);
-            this.lblMaNV_DN.TabIndex = 2;
-            this.lblMaNV_DN.Text = "...";
-            this.lblMaNV_DN.UseMnemonic = false;
+            this.lblStaffIDLoginValue.AutoSize = true;
+            this.lblStaffIDLoginValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffIDLoginValue.Location = new System.Drawing.Point(529, 9);
+            this.lblStaffIDLoginValue.Name = "lblStaffIDLoginValue";
+            this.lblStaffIDLoginValue.Size = new System.Drawing.Size(38, 32);
+            this.lblStaffIDLoginValue.TabIndex = 2;
+            this.lblStaffIDLoginValue.Text = "...";
+            this.lblStaffIDLoginValue.UseMnemonic = false;
             // 
-            // lblMaNhanVienDN
+            // lblStaffIDLogin
             // 
-            this.lblMaNhanVienDN.AutoSize = true;
-            this.lblMaNhanVienDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaNhanVienDN.Location = new System.Drawing.Point(318, 9);
-            this.lblMaNhanVienDN.Name = "lblMaNhanVienDN";
-            this.lblMaNhanVienDN.Size = new System.Drawing.Size(205, 32);
-            this.lblMaNhanVienDN.TabIndex = 1;
-            this.lblMaNhanVienDN.Text = "Mã nhân viên:";
+            this.lblStaffIDLogin.AutoSize = true;
+            this.lblStaffIDLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffIDLogin.Location = new System.Drawing.Point(318, 9);
+            this.lblStaffIDLogin.Name = "lblStaffIDLogin";
+            this.lblStaffIDLogin.Size = new System.Drawing.Size(205, 32);
+            this.lblStaffIDLogin.TabIndex = 1;
+            this.lblStaffIDLogin.Text = "Mã nhân viên:";
             // 
-            // btnTroVe
+            // btnBack
             // 
-            this.btnTroVe.AutoSize = true;
-            this.btnTroVe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnTroVe.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnTroVe.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTroVe.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnTroVe.FlatAppearance.BorderSize = 0;
-            this.btnTroVe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTroVe.Image = global::QuanLyNhanSu.Properties.Resources._return;
-            this.btnTroVe.Location = new System.Drawing.Point(0, 0);
-            this.btnTroVe.Name = "btnTroVe";
-            this.btnTroVe.Size = new System.Drawing.Size(142, 113);
-            this.btnTroVe.TabIndex = 1;
-            this.btnTroVe.Text = "Trở về";
-            this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTroVe.UseVisualStyleBackColor = false;
-            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
+            this.btnBack.AutoSize = true;
+            this.btnBack.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBack.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Image = global::QuanLyNhanSu.Properties.Resources._return;
+            this.btnBack.Location = new System.Drawing.Point(0, 0);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(142, 113);
+            this.btnBack.TabIndex = 1;
+            this.btnBack.Text = "Trở về";
+            this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // tabControlMenu
             // 
@@ -230,19 +230,19 @@
             // tabPageThongKe
             // 
             this.tabPageThongKe.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tabPageThongKe.Controls.Add(this.lblTimKiem);
-            this.tabPageThongKe.Controls.Add(this.rbChucVu);
-            this.tabPageThongKe.Controls.Add(this.cmbChucVu);
-            this.tabPageThongKe.Controls.Add(this.rbPhongBan);
-            this.tabPageThongKe.Controls.Add(this.rbToanBoNhanVien);
+            this.tabPageThongKe.Controls.Add(this.lblSearch);
+            this.tabPageThongKe.Controls.Add(this.rbPosition);
+            this.tabPageThongKe.Controls.Add(this.cmbPosition);
+            this.tabPageThongKe.Controls.Add(this.rbDepartment);
+            this.tabPageThongKe.Controls.Add(this.rbAllStaff);
             this.tabPageThongKe.Controls.Add(this.btnXuatExcel);
             this.tabPageThongKe.Controls.Add(this.btnThongKe);
             this.tabPageThongKe.Controls.Add(this.btnLuu);
-            this.tabPageThongKe.Controls.Add(this.lblThongKeLuong);
-            this.tabPageThongKe.Controls.Add(this.txtTimKiem);
-            this.tabPageThongKe.Controls.Add(this.lblThang);
-            this.tabPageThongKe.Controls.Add(this.cmbPhongBan);
-            this.tabPageThongKe.Controls.Add(this.dtpThangNam);
+            this.tabPageThongKe.Controls.Add(this.lblSalaryStatistics);
+            this.tabPageThongKe.Controls.Add(this.txtSearch);
+            this.tabPageThongKe.Controls.Add(this.lblMonth);
+            this.tabPageThongKe.Controls.Add(this.cmbDepartment);
+            this.tabPageThongKe.Controls.Add(this.dtpMonth);
             this.tabPageThongKe.Controls.Add(this.dgvThongKeLuong);
             this.tabPageThongKe.Location = new System.Drawing.Point(4, 37);
             this.tabPageThongKe.Name = "tabPageThongKe";
@@ -251,6 +251,63 @@
             this.tabPageThongKe.TabIndex = 0;
             this.tabPageThongKe.Text = "Thống kê lương";
             this.tabPageThongKe.Click += new System.EventHandler(this.tabPageThongKeLuong_Click);
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearch.Location = new System.Drawing.Point(392, 133);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(145, 32);
+            this.lblSearch.TabIndex = 84;
+            this.lblSearch.Text = "Tìm kiếm:";
+            this.lblSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // rbPosition
+            // 
+            this.rbPosition.AutoSize = true;
+            this.rbPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbPosition.Location = new System.Drawing.Point(1165, 68);
+            this.rbPosition.Name = "rbPosition";
+            this.rbPosition.Size = new System.Drawing.Size(154, 36);
+            this.rbPosition.TabIndex = 83;
+            this.rbPosition.TabStop = true;
+            this.rbPosition.Text = "Chức vụ:";
+            this.rbPosition.UseVisualStyleBackColor = true;
+            // 
+            // cmbPosition
+            // 
+            this.cmbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPosition.FormattingEnabled = true;
+            this.cmbPosition.Location = new System.Drawing.Point(1325, 74);
+            this.cmbPosition.Name = "cmbPosition";
+            this.cmbPosition.Size = new System.Drawing.Size(244, 33);
+            this.cmbPosition.TabIndex = 82;
+            // 
+            // rbDepartment
+            // 
+            this.rbDepartment.AutoSize = true;
+            this.rbDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbDepartment.Location = new System.Drawing.Point(718, 70);
+            this.rbDepartment.Name = "rbDepartment";
+            this.rbDepartment.Size = new System.Drawing.Size(191, 36);
+            this.rbDepartment.TabIndex = 81;
+            this.rbDepartment.TabStop = true;
+            this.rbDepartment.Text = "Phòng ban:";
+            this.rbDepartment.UseVisualStyleBackColor = true;
+            // 
+            // rbAllStaff
+            // 
+            this.rbAllStaff.AutoSize = true;
+            this.rbAllStaff.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbAllStaff.Location = new System.Drawing.Point(425, 70);
+            this.rbAllStaff.Name = "rbAllStaff";
+            this.rbAllStaff.Size = new System.Drawing.Size(287, 36);
+            this.rbAllStaff.TabIndex = 80;
+            this.rbAllStaff.TabStop = true;
+            this.rbAllStaff.Text = "Toàn bộ nhân viên";
+            this.rbAllStaff.UseVisualStyleBackColor = true;
             // 
             // btnXuatExcel
             // 
@@ -303,55 +360,55 @@
             this.btnLuu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLuu.UseVisualStyleBackColor = false;
             // 
-            // lblThongKeLuong
+            // lblSalaryStatistics
             // 
-            this.lblThongKeLuong.AutoSize = true;
-            this.lblThongKeLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThongKeLuong.Location = new System.Drawing.Point(799, 10);
-            this.lblThongKeLuong.Name = "lblThongKeLuong";
-            this.lblThongKeLuong.Size = new System.Drawing.Size(332, 51);
-            this.lblThongKeLuong.TabIndex = 75;
-            this.lblThongKeLuong.Text = "Thống kê lương";
+            this.lblSalaryStatistics.AutoSize = true;
+            this.lblSalaryStatistics.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSalaryStatistics.Location = new System.Drawing.Point(799, 10);
+            this.lblSalaryStatistics.Name = "lblSalaryStatistics";
+            this.lblSalaryStatistics.Size = new System.Drawing.Size(332, 51);
+            this.lblSalaryStatistics.TabIndex = 75;
+            this.lblSalaryStatistics.Text = "Thống kê lương";
             // 
-            // txtTimKiem
+            // txtSearch
             // 
-            this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimKiem.Location = new System.Drawing.Point(543, 133);
-            this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
-            this.txtTimKiem.TabIndex = 74;
+            this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(543, 133);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(299, 30);
+            this.txtSearch.TabIndex = 74;
             // 
-            // lblThang
+            // lblMonth
             // 
-            this.lblThang.AutoSize = true;
-            this.lblThang.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThang.Location = new System.Drawing.Point(177, 70);
-            this.lblThang.Name = "lblThang";
-            this.lblThang.Size = new System.Drawing.Size(109, 32);
-            this.lblThang.TabIndex = 72;
-            this.lblThang.Text = "Tháng:";
-            this.lblThang.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMonth.AutoSize = true;
+            this.lblMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMonth.Location = new System.Drawing.Point(177, 70);
+            this.lblMonth.Name = "lblMonth";
+            this.lblMonth.Size = new System.Drawing.Size(109, 32);
+            this.lblMonth.TabIndex = 72;
+            this.lblMonth.Text = "Tháng:";
+            this.lblMonth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cmbPhongBan
+            // cmbDepartment
             // 
-            this.cmbPhongBan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbPhongBan.FormattingEnabled = true;
-            this.cmbPhongBan.Location = new System.Drawing.Point(915, 74);
-            this.cmbPhongBan.Name = "cmbPhongBan";
-            this.cmbPhongBan.Size = new System.Drawing.Size(244, 33);
-            this.cmbPhongBan.TabIndex = 70;
+            this.cmbDepartment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDepartment.FormattingEnabled = true;
+            this.cmbDepartment.Location = new System.Drawing.Point(915, 74);
+            this.cmbDepartment.Name = "cmbDepartment";
+            this.cmbDepartment.Size = new System.Drawing.Size(244, 33);
+            this.cmbDepartment.TabIndex = 70;
             // 
-            // dtpThangNam
+            // dtpMonth
             // 
-            this.dtpThangNam.CustomFormat = "MM/yyyy";
-            this.dtpThangNam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpThangNam.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpThangNam.Location = new System.Drawing.Point(292, 72);
-            this.dtpThangNam.Name = "dtpThangNam";
-            this.dtpThangNam.ShowUpDown = true;
-            this.dtpThangNam.Size = new System.Drawing.Size(127, 30);
-            this.dtpThangNam.TabIndex = 69;
+            this.dtpMonth.CustomFormat = "MM/yyyy";
+            this.dtpMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpMonth.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpMonth.Location = new System.Drawing.Point(292, 72);
+            this.dtpMonth.Name = "dtpMonth";
+            this.dtpMonth.ShowUpDown = true;
+            this.dtpMonth.Size = new System.Drawing.Size(127, 30);
+            this.dtpMonth.TabIndex = 69;
             // 
             // dgvThongKeLuong
             // 
@@ -382,16 +439,6 @@
             this.dgvThongKeLuong.RowTemplate.Height = 24;
             this.dgvThongKeLuong.Size = new System.Drawing.Size(1924, 706);
             this.dgvThongKeLuong.TabIndex = 68;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tabPage2.Location = new System.Drawing.Point(4, 37);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1916, 879);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Thống kê chấm công";
             // 
             // colMaNV
             // 
@@ -470,64 +517,17 @@
             this.colTongLuongThang.Name = "colTongLuongThang";
             this.colTongLuongThang.ReadOnly = true;
             // 
-            // rbToanBoNhanVien
+            // tabPage2
             // 
-            this.rbToanBoNhanVien.AutoSize = true;
-            this.rbToanBoNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbToanBoNhanVien.Location = new System.Drawing.Point(425, 70);
-            this.rbToanBoNhanVien.Name = "rbToanBoNhanVien";
-            this.rbToanBoNhanVien.Size = new System.Drawing.Size(287, 36);
-            this.rbToanBoNhanVien.TabIndex = 80;
-            this.rbToanBoNhanVien.TabStop = true;
-            this.rbToanBoNhanVien.Text = "Toàn bộ nhân viên";
-            this.rbToanBoNhanVien.UseVisualStyleBackColor = true;
+            this.tabPage2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage2.Location = new System.Drawing.Point(4, 37);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1916, 879);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Thống kê chấm công";
             // 
-            // rbPhongBan
-            // 
-            this.rbPhongBan.AutoSize = true;
-            this.rbPhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbPhongBan.Location = new System.Drawing.Point(718, 70);
-            this.rbPhongBan.Name = "rbPhongBan";
-            this.rbPhongBan.Size = new System.Drawing.Size(191, 36);
-            this.rbPhongBan.TabIndex = 81;
-            this.rbPhongBan.TabStop = true;
-            this.rbPhongBan.Text = "Phòng ban:";
-            this.rbPhongBan.UseVisualStyleBackColor = true;
-            // 
-            // rbChucVu
-            // 
-            this.rbChucVu.AutoSize = true;
-            this.rbChucVu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbChucVu.Location = new System.Drawing.Point(1165, 68);
-            this.rbChucVu.Name = "rbChucVu";
-            this.rbChucVu.Size = new System.Drawing.Size(154, 36);
-            this.rbChucVu.TabIndex = 83;
-            this.rbChucVu.TabStop = true;
-            this.rbChucVu.Text = "Chức vụ:";
-            this.rbChucVu.UseVisualStyleBackColor = true;
-            // 
-            // cmbChucVu
-            // 
-            this.cmbChucVu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbChucVu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbChucVu.FormattingEnabled = true;
-            this.cmbChucVu.Location = new System.Drawing.Point(1325, 74);
-            this.cmbChucVu.Name = "cmbChucVu";
-            this.cmbChucVu.Size = new System.Drawing.Size(244, 33);
-            this.cmbChucVu.TabIndex = 82;
-            // 
-            // lblTimKiem
-            // 
-            this.lblTimKiem.AutoSize = true;
-            this.lblTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimKiem.Location = new System.Drawing.Point(392, 133);
-            this.lblTimKiem.Name = "lblTimKiem";
-            this.lblTimKiem.Size = new System.Drawing.Size(145, 32);
-            this.lblTimKiem.TabIndex = 84;
-            this.lblTimKiem.Text = "Tìm kiếm:";
-            this.lblTimKiem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // FrmThongKeLuong
+            // FrmThongKe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -536,7 +536,7 @@
             this.Controls.Add(this.tabControlMenu);
             this.Controls.Add(this.pnlHeader);
             this.MinimumSize = new System.Drawing.Size(1918, 1018);
-            this.Name = "FrmThongKeLuong";
+            this.Name = "FrmThongKe";
             this.Text = "frmThongKeLuong";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmThongKeLuong_Load);
@@ -552,26 +552,26 @@
 
         #endregion
         private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Label lblChucVuNV_DN;
-        private System.Windows.Forms.Label lblChucVuDN;
-        private System.Windows.Forms.Label lblPhongBanNV_DN;
-        private System.Windows.Forms.Label lblPhongBanDN;
-        private System.Windows.Forms.Label lblHoTenNV_DN;
-        private System.Windows.Forms.Label lblHoTenDN;
-        private System.Windows.Forms.Label lblMaNV_DN;
-        private System.Windows.Forms.Label lblMaNhanVienDN;
-        private System.Windows.Forms.Button btnTroVe;
+        private System.Windows.Forms.Label lblPositionLoginValue;
+        private System.Windows.Forms.Label lblPositionLogin;
+        private System.Windows.Forms.Label lblDepartmentLoginValue;
+        private System.Windows.Forms.Label lblDepartmentLogin;
+        private System.Windows.Forms.Label lblFullNameLoginValue;
+        private System.Windows.Forms.Label lblFullNameLogin;
+        private System.Windows.Forms.Label lblStaffIDLoginValue;
+        private System.Windows.Forms.Label lblStaffIDLogin;
+        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.TabControl tabControlMenu;
         private System.Windows.Forms.TabPage tabPageThongKe;
         private System.Windows.Forms.Button btnXuatExcel;
         private System.Windows.Forms.Button btnThongKe;
         private System.Windows.Forms.Button btnLuu;
-        private System.Windows.Forms.Label lblThongKeLuong;
-        private System.Windows.Forms.TextBox txtTimKiem;
-        private System.Windows.Forms.Label lblThang;
-        private System.Windows.Forms.ComboBox cmbPhongBan;
-        private System.Windows.Forms.DateTimePicker dtpThangNam;
+        private System.Windows.Forms.Label lblSalaryStatistics;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label lblMonth;
+        private System.Windows.Forms.ComboBox cmbDepartment;
+        private System.Windows.Forms.DateTimePicker dtpMonth;
         private System.Windows.Forms.DataGridView dgvThongKeLuong;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaNV;
@@ -585,10 +585,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTongPhuCap;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTienNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTongLuongThang;
-        private System.Windows.Forms.RadioButton rbChucVu;
-        private System.Windows.Forms.ComboBox cmbChucVu;
-        private System.Windows.Forms.RadioButton rbPhongBan;
-        private System.Windows.Forms.RadioButton rbToanBoNhanVien;
-        private System.Windows.Forms.Label lblTimKiem;
+        private System.Windows.Forms.RadioButton rbPosition;
+        private System.Windows.Forms.ComboBox cmbPosition;
+        private System.Windows.Forms.RadioButton rbDepartment;
+        private System.Windows.Forms.RadioButton rbAllStaff;
+        private System.Windows.Forms.Label lblSearch;
     }
 }
