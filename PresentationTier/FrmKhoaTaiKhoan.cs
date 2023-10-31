@@ -45,17 +45,17 @@ namespace QuanLyNhanSu.PresentationTier
         private void FrmKhoaTaiKhoan_Load(object sender, EventArgs e)
         {
             LoadThongTinDangNhap();
-            lblKhoaTaiKhoan.Text += $" {nvKhoa.MaNV}";
+            lblLockAccount.Text += $" {nvKhoa.MaNV}";
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV_DN.Text = nv.MaNV;
+            lblStaffIDLoginValue.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblDepartmentLoginValue.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblPositionLoginValue.Text = nv.ChucVu.TenChucVu;
         }
         /////////////////////////////////////////////////////////////////////////////////////////////
         private void CloseForm(object sender, FormClosedEventArgs e)
@@ -70,7 +70,7 @@ namespace QuanLyNhanSu.PresentationTier
             frmOpen.FormClosed += CloseForm;
         }
         /////////////////////////////////////////////////////////////////////////////////////////////
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -85,22 +85,22 @@ namespace QuanLyNhanSu.PresentationTier
             };
             lichSuThaoTacBUS.Save(newLichSuThaoTac);
         }
-        private void btnKhoaTaiKhoan_Click(object sender, EventArgs e)
+        private void btnLockAccount_Click(object sender, EventArgs e)
         {
-            if(dtpNgayKhoa.Value < DateTime.Now)
+            if(dtpLockDate.Value < DateTime.Now)
             {
                 MessageBox.Show("Thời gian khoá phải lớn hơn thời gian hiện tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error); 
                 return;
             }
             MessageBoxManager.Yes = "Có";
             MessageBoxManager.No = "Không";
-            DialogResult ketQua = MessageBox.Show($"Xác nhận khoá tài khoản của nhân viên {maNV_Khoa} đến {dtpNgayKhoa.Text}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult ketQua = MessageBox.Show($"Xác nhận khoá tài khoản của nhân viên {maNV_Khoa} đến {dtpLockDate.Text}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (ketQua == DialogResult.Yes)
             {
-                nvKhoa.NgayKhoa = dtpNgayKhoa.Value;
+                nvKhoa.NgayKhoa = dtpLockDate.Value;
                 if (nhanVienBUS.Save(nvKhoa))
                 {
-                    string thaoTac = $"Nhân viên {maNV} khoá tài khoản của nhân viên {maNV_Khoa} đến {dtpNgayKhoa.Text}";
+                    string thaoTac = $"Nhân viên {maNV} khoá tài khoản của nhân viên {maNV_Khoa} đến {dtpLockDate.Text}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Khoá")).MaTT;
                     LichSuThaoTac(thaoTac, maTT);
                     this.Close();

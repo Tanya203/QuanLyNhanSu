@@ -28,69 +28,69 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblChamCong = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtMaNV = new System.Windows.Forms.TextBox();
-            this.btnChamCong = new System.Windows.Forms.Button();
+            this.lbTimeKeeping = new System.Windows.Forms.Label();
+            this.lblEnterStaffID = new System.Windows.Forms.Label();
+            this.txtStaffID = new System.Windows.Forms.TextBox();
+            this.btnTimekeeping = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.pnlMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblChamCong
+            // lbTimeKeeping
             // 
-            this.lblChamCong.AutoSize = true;
-            this.lblChamCong.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lblChamCong.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChamCong.Location = new System.Drawing.Point(97, 59);
-            this.lblChamCong.Name = "lblChamCong";
-            this.lblChamCong.Size = new System.Drawing.Size(297, 51);
-            this.lblChamCong.TabIndex = 0;
-            this.lblChamCong.Text = "CHẤM CÔNG";
+            this.lbTimeKeeping.AutoSize = true;
+            this.lbTimeKeeping.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lbTimeKeeping.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTimeKeeping.Location = new System.Drawing.Point(97, 59);
+            this.lbTimeKeeping.Name = "lbTimeKeeping";
+            this.lbTimeKeeping.Size = new System.Drawing.Size(297, 51);
+            this.lbTimeKeeping.TabIndex = 0;
+            this.lbTimeKeeping.Text = "CHẤM CÔNG";
             // 
-            // label1
+            // lblEnterStaffID
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(52, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(235, 29);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Nhập mã nhân viên";
+            this.lblEnterStaffID.AutoSize = true;
+            this.lblEnterStaffID.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEnterStaffID.Location = new System.Drawing.Point(52, 25);
+            this.lblEnterStaffID.Name = "lblEnterStaffID";
+            this.lblEnterStaffID.Size = new System.Drawing.Size(235, 29);
+            this.lblEnterStaffID.TabIndex = 1;
+            this.lblEnterStaffID.Text = "Nhập mã nhân viên";
             // 
-            // txtMaNV
+            // txtStaffID
             // 
-            this.txtMaNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaNV.Location = new System.Drawing.Point(30, 75);
-            this.txtMaNV.MaxLength = 12;
-            this.txtMaNV.Name = "txtMaNV";
-            this.txtMaNV.Size = new System.Drawing.Size(280, 30);
-            this.txtMaNV.TabIndex = 2;
-            this.txtMaNV.TextChanged += new System.EventHandler(this.txtMaNV_TextChanged);
+            this.txtStaffID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStaffID.Location = new System.Drawing.Point(30, 75);
+            this.txtStaffID.MaxLength = 12;
+            this.txtStaffID.Name = "txtStaffID";
+            this.txtStaffID.Size = new System.Drawing.Size(280, 30);
+            this.txtStaffID.TabIndex = 2;
+            this.txtStaffID.TextChanged += new System.EventHandler(this.txtStaffID_TextChanged);
             // 
-            // btnChamCong
+            // btnTimekeeping
             // 
-            this.btnChamCong.AutoSize = true;
-            this.btnChamCong.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnChamCong.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnChamCong.FlatAppearance.BorderSize = 0;
-            this.btnChamCong.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnChamCong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChamCong.Image = global::QuanLyNhanSu.Properties.Resources.timekeeping;
-            this.btnChamCong.Location = new System.Drawing.Point(79, 124);
-            this.btnChamCong.Name = "btnChamCong";
-            this.btnChamCong.Size = new System.Drawing.Size(182, 73);
-            this.btnChamCong.TabIndex = 34;
-            this.btnChamCong.Text = "Chấm công";
-            this.btnChamCong.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnChamCong.UseVisualStyleBackColor = false;
-            this.btnChamCong.Click += new System.EventHandler(this.btnChamCong_Click);
+            this.btnTimekeeping.AutoSize = true;
+            this.btnTimekeeping.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnTimekeeping.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTimekeeping.FlatAppearance.BorderSize = 0;
+            this.btnTimekeeping.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnTimekeeping.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTimekeeping.Image = global::QuanLyNhanSu.Properties.Resources.timekeeping;
+            this.btnTimekeeping.Location = new System.Drawing.Point(79, 124);
+            this.btnTimekeeping.Name = "btnTimekeeping";
+            this.btnTimekeeping.Size = new System.Drawing.Size(182, 73);
+            this.btnTimekeeping.TabIndex = 34;
+            this.btnTimekeeping.Text = "Chấm công";
+            this.btnTimekeeping.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTimekeeping.UseVisualStyleBackColor = false;
+            this.btnTimekeeping.Click += new System.EventHandler(this.btnTimekeeping_Click);
             // 
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.SystemColors.Info;
-            this.pnlMenu.Controls.Add(this.label1);
-            this.pnlMenu.Controls.Add(this.btnChamCong);
-            this.pnlMenu.Controls.Add(this.txtMaNV);
+            this.pnlMenu.Controls.Add(this.lblEnterStaffID);
+            this.pnlMenu.Controls.Add(this.btnTimekeeping);
+            this.pnlMenu.Controls.Add(this.txtStaffID);
             this.pnlMenu.Location = new System.Drawing.Point(80, 165);
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(340, 220);
@@ -103,7 +103,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(482, 453);
             this.Controls.Add(this.pnlMenu);
-            this.Controls.Add(this.lblChamCong);
+            this.Controls.Add(this.lbTimeKeeping);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(500, 500);
             this.MinimumSize = new System.Drawing.Size(500, 500);
@@ -120,10 +120,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblChamCong;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtMaNV;
-        private System.Windows.Forms.Button btnChamCong;
+        private System.Windows.Forms.Label lbTimeKeeping;
+        private System.Windows.Forms.Label lblEnterStaffID;
+        private System.Windows.Forms.TextBox txtStaffID;
+        private System.Windows.Forms.Button btnTimekeeping;
         private System.Windows.Forms.Panel pnlMenu;
     }
 }

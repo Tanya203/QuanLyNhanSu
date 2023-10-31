@@ -48,8 +48,8 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void frmQuanLyLoaiHopDong_Load(object sender, EventArgs e)
         {
-            cmbHinhThucChamCong.DisplayMember = "TenHinhThucChamCong";
-            cmbHinhThucChamCong.ValueMember = "MaHTCC";            
+            cmbTimekeepingMethod.DisplayMember = "TenHinhThucChamCong";
+            cmbTimekeepingMethod.ValueMember = "MaHTCC";            
             LoadThongTinDangNhap();
             LoadHinhThucChamCong();
             InputStatus(false);
@@ -58,13 +58,13 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV_DN.Text = nv.MaNV;
+            lblStaffIDLoginValue.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblDepartmentLoginValue.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblPositionLoginValue.Text = nv.ChucVu.TenChucVu;
         }
         private void PhanQuyen()
         {
@@ -81,9 +81,9 @@ namespace QuanLyNhanSu.PresentationTier
         private void InputStatus(bool value)
         {
             ButtonStatus(value);
-            List<object> listInput = new List<object> {txtTenLHD, cmbHinhThucChamCong };
+            List<object> listInput = new List<object> {txtContractTypeName, cmbTimekeepingMethod };
             if (!value)
-                listInput.AddRange(new List<object> {txtMaLHD, txtSoLuongNhanVien});
+                listInput.AddRange(new List<object> {txtContractTypeID, txtStaffAmount});
             for(int i = 0; i < listInput.Count; i++)
             {
                 if (listInput[i] is TextBox)
@@ -100,48 +100,48 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value) 
         {
-            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy };
+            List<Button> listButtons = new List<Button> { btnAdd, btnEdit, btnDelete, btnCancel };
             for (int i = 0; i < listButtons.Count; i++)
             {
                 typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
-                if (value && listButtons[i] != btnHuy)
+                if (value && listButtons[i] != btnCancel)
                     typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
             }
         }
         private void LoadLoaiHopDong()
         {
             Enabled = false;
-            dgvThongTinLoaiHopDong.Rows.Clear();
+            dgvContractType.Rows.Clear();
             danhSachLoaiHopDong = loaiHopDongBUS.GetAllLoaiHopDong();
             int rowAdd;
             foreach (var lhd in danhSachLoaiHopDong)
             {
-                rowAdd = dgvThongTinLoaiHopDong.Rows.Add();
-                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[0].Value = lhd.MaLHD;
-                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[1].Value = lhd.TenLoaiHopDong;
-                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[2].Value = lhd.TenHinhThucChamCong;
-                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[3].Value = loaiHopDongBUS.TongSoNhanVienTrongLoaiHopDong(lhd.MaLHD).ToString();
+                rowAdd = dgvContractType.Rows.Add();
+                dgvContractType.Rows[rowAdd].Cells[0].Value = lhd.MaLHD;
+                dgvContractType.Rows[rowAdd].Cells[1].Value = lhd.TenLoaiHopDong;
+                dgvContractType.Rows[rowAdd].Cells[2].Value = lhd.TenHinhThucChamCong;
+                dgvContractType.Rows[rowAdd].Cells[3].Value = loaiHopDongBUS.TongSoNhanVienTrongLoaiHopDong(lhd.MaLHD).ToString();
             }
             Enabled = true;
         }
         private void LoadHinhThucChamCong()
         {
-            cmbHinhThucChamCong.DataSource = hinhThucChamCongBUS.GetAllHinhThucChamCong();
-            AutoAdjustComboBox(cmbHinhThucChamCong);
+            cmbTimekeepingMethod.DataSource = hinhThucChamCongBUS.GetAllHinhThucChamCong();
+            AutoAdjustComboBox(cmbTimekeepingMethod);
         }
         private void LoadLoaiHopDongTimKiem(string timKiem)
         {
             Enabled = false;
-            dgvThongTinLoaiHopDong.Rows.Clear();
+            dgvContractType.Rows.Clear();
             danhSachLoaiHopDongTimKiem = loaiHopDongBUS.SearchLoaiHopDong(timKiem);           
             int rowAdd;
             foreach (var lhd in danhSachLoaiHopDongTimKiem)
             {
-                rowAdd = dgvThongTinLoaiHopDong.Rows.Add();
-                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[0].Value = lhd.MaLHD;
-                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[1].Value = lhd.TenLoaiHopDong;
-                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[2].Value = lhd.TenHinhThucChamCong;
-                dgvThongTinLoaiHopDong.Rows[rowAdd].Cells[3].Value = loaiHopDongBUS.TongSoNhanVienTrongLoaiHopDong(lhd.MaLHD).ToString();
+                rowAdd = dgvContractType.Rows.Add();
+                dgvContractType.Rows[rowAdd].Cells[0].Value = lhd.MaLHD;
+                dgvContractType.Rows[rowAdd].Cells[1].Value = lhd.TenLoaiHopDong;
+                dgvContractType.Rows[rowAdd].Cells[2].Value = lhd.TenHinhThucChamCong;
+                dgvContractType.Rows[rowAdd].Cells[3].Value = loaiHopDongBUS.TongSoNhanVienTrongLoaiHopDong(lhd.MaLHD).ToString();
             }
             Enabled = true;
         }
@@ -158,7 +158,7 @@ namespace QuanLyNhanSu.PresentationTier
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         private void ClearAllText()
         {
-            List<object> listInput = new List<object> { txtMaLHD, txtTenLHD, txtSoLuongNhanVien, cmbHinhThucChamCong};
+            List<object> listInput = new List<object> { txtContractTypeID, txtContractTypeName, txtStaffAmount, cmbTimekeepingMethod};
             for(int i = 0; i < listInput.Count; i++)
             {
                 if (listInput[i] is TextBox)
@@ -188,19 +188,19 @@ namespace QuanLyNhanSu.PresentationTier
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         private bool CheckEmptyText(bool check)
         {
-            List<TextBox> listTextBox = new List<TextBox> { txtTenLHD };
+            List<TextBox> listTextBox = new List<TextBox> { txtContractTypeName };
             for (int i = 0; i < listTextBox.Count; i++)
             {
                 if (string.IsNullOrEmpty(listTextBox[i].Text))
                 {
                     if (check)
                     {
-                        btnThem.Enabled = false;
+                        btnAdd.Enabled = false;
                         return false;
                     }
                     else
                     {
-                        btnSua.Enabled = false;
+                        btnEdit.Enabled = false;
                         return false;
                     }
                 }
@@ -212,25 +212,25 @@ namespace QuanLyNhanSu.PresentationTier
             if (!checkThaoTac)
                 return;
             bool check;
-            if (string.IsNullOrEmpty(txtMaLHD.Text))
+            if (string.IsNullOrEmpty(txtContractTypeID.Text))
             {
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
                 check = true;
                 if (CheckEmptyText(check))
                 {
-                    btnThem.Enabled = true;
+                    btnAdd.Enabled = true;
                     return;
                 }
             }
             else
             {
-                btnThem.Enabled = false;
-                btnXoa.Enabled = true;
+                btnAdd.Enabled = false;
+                btnDelete.Enabled = true;
                 check = false;
                 if (CheckEmptyText(check))
                 {
-                    btnSua.Enabled = true;
+                    btnEdit.Enabled = true;
                     return;
                 }
             }
@@ -250,9 +250,9 @@ namespace QuanLyNhanSu.PresentationTier
         private string CheckChange()
         {
             List<string> changes = new List<string>();
-            LoaiHopDong lhd = loaiHopDongBUS.GetLoaiHopDong().FirstOrDefault(hd => hd.MaLHD == txtMaLHD.Text);
-            string tenLoaiHopDong = txtTenLHD.Text;
-            string hinhThucChamCong = cmbHinhThucChamCong.Text;
+            LoaiHopDong lhd = loaiHopDongBUS.GetLoaiHopDong().FirstOrDefault(hd => hd.MaLHD == txtContractTypeID.Text);
+            string tenLoaiHopDong = txtContractTypeName.Text;
+            string hinhThucChamCong = cmbTimekeepingMethod.Text;
             if (tenLoaiHopDong != lhd.TenLoaiHopDong)
                 changes.Add($"- Tên loại hợp đồng {lhd.TenLoaiHopDong} -> Tên loại hợp đồng: {tenLoaiHopDong}");
             if (hinhThucChamCong != lhd.HinhThucChamCong.TenHinhThucChamCong)
@@ -262,8 +262,8 @@ namespace QuanLyNhanSu.PresentationTier
         private bool CheckErrorInput()
         {
             errProvider.Clear();
-            errProvider.SetError(txtTenLHD, loaiHopDongBUS.GetLoaiHopDong().FirstOrDefault(lhd => lhd.TenLoaiHopDong == txtTenLHD.Text) != null ? "Tên loại hợp đồng đã tồn tại" : string.Empty);
-            if (errProvider.GetError(txtTenLHD) != string.Empty)
+            errProvider.SetError(txtContractTypeName, loaiHopDongBUS.GetLoaiHopDong().FirstOrDefault(lhd => lhd.TenLoaiHopDong == txtContractTypeName.Text) != null ? "Tên loại hợp đồng đã tồn tại" : string.Empty);
+            if (errProvider.GetError(txtContractTypeName) != string.Empty)
                 return false;
             return true;
         }
@@ -275,7 +275,7 @@ namespace QuanLyNhanSu.PresentationTier
             if (ketQua == DialogResult.No)
                 MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        private void btnThem_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             if (!CheckErrorInput())
             {
@@ -287,13 +287,13 @@ namespace QuanLyNhanSu.PresentationTier
                 LoaiHopDong newLoaiHopDong = new LoaiHopDong
                 {
                     MaLHD = "",
-                    TenLoaiHopDong = txtTenLHD.Text,
-                    MaHTCC = cmbHinhThucChamCong.SelectedValue.ToString(),
+                    TenLoaiHopDong = txtContractTypeName.Text,
+                    MaHTCC = cmbTimekeepingMethod.SelectedValue.ToString(),
                 };
                 if (loaiHopDongBUS.Save(newLoaiHopDong))
                 {
-                    string tenLoaiHopDong = txtTenLHD.Text;
-                    string hinhThucChamCong = cmbHinhThucChamCong.Text;
+                    string tenLoaiHopDong = txtContractTypeName.Text;
+                    string hinhThucChamCong = cmbTimekeepingMethod.Text;
                     string thaoTac = $"Thêm loại hợp đông {tenLoaiHopDong}: \n  - Hình thức chấm công: {hinhThucChamCong}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
                     LichSuThaoTac(thaoTac, maTT);
@@ -305,7 +305,7 @@ namespace QuanLyNhanSu.PresentationTier
                 ErrorMessage(ex);
             }            
         }
-        private void btnSua_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
             if (!CheckErrorInput())
             {
@@ -317,13 +317,13 @@ namespace QuanLyNhanSu.PresentationTier
                 string chiTietSua = CheckChange();
                 LoaiHopDong newLoaiHopDong = new LoaiHopDong
                 {
-                    MaLHD = txtMaLHD.Text,
-                    TenLoaiHopDong = txtTenLHD.Text,
-                    MaHTCC = cmbHinhThucChamCong.SelectedValue.ToString(),
+                    MaLHD = txtContractTypeID.Text,
+                    TenLoaiHopDong = txtContractTypeName.Text,
+                    MaHTCC = cmbTimekeepingMethod.SelectedValue.ToString(),
                 };
                 if (loaiHopDongBUS.Save(newLoaiHopDong))
                 {
-                    string thaoTac = $"Sửa loại hợp đồng {txtMaLHD.Text}";
+                    string thaoTac = $"Sửa loại hợp đồng {txtContractTypeID.Text}";
                     if (!string.IsNullOrEmpty(chiTietSua))
                         thaoTac += $":\n{chiTietSua}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
@@ -336,18 +336,18 @@ namespace QuanLyNhanSu.PresentationTier
                 ErrorMessage(ex);
             }
         }
-        private void btnXoa_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
                 LoaiHopDong loaiHopDong = new LoaiHopDong
                 {
-                    MaLHD = txtMaLHD.Text
+                    MaLHD = txtContractTypeID.Text
                 };
                 if (loaiHopDongBUS.Delete(loaiHopDong))
                 {
-                    string tenLoaiHopDong = txtTenLHD.Text;
-                    string hinhThucChamCong = cmbHinhThucChamCong.Text;
+                    string tenLoaiHopDong = txtContractTypeName.Text;
+                    string hinhThucChamCong = cmbTimekeepingMethod.Text;
                     string thaoTac = $"Xoá loại hợp đồng {tenLoaiHopDong}:\n    - Hình thức chấm công: {hinhThucChamCong}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
                     LichSuThaoTac(thaoTac, maTT);
@@ -359,38 +359,38 @@ namespace QuanLyNhanSu.PresentationTier
                 ErrorMessage(ex);
             }     
         }
-        private void btnHuy_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             errProvider.Clear();
             ClearAllText();
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void dgvThongTinLoaiHopDong_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvContractType_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             errProvider.Clear();
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
-            txtMaLHD.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[0].Value.ToString();
-            txtTenLHD.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[1].Value.ToString();
-            cmbHinhThucChamCong.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[2].Value.ToString();
-            txtSoLuongNhanVien.Text = dgvThongTinLoaiHopDong.Rows[rowIndex].Cells[3].Value.ToString();
+            txtContractTypeID.Text = dgvContractType.Rows[rowIndex].Cells[0].Value.ToString();
+            txtContractTypeName.Text = dgvContractType.Rows[rowIndex].Cells[1].Value.ToString();
+            cmbTimekeepingMethod.Text = dgvContractType.Rows[rowIndex].Cells[2].Value.ToString();
+            txtStaffAmount.Text = dgvContractType.Rows[rowIndex].Cells[3].Value.ToString();
         }           
-        private void TimKiem(object sender, EventArgs e)
+        private void txtSearch_TextChange(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTimKiem.Text))
+            if (string.IsNullOrEmpty(txtSearch.Text))
                 LoadLoaiHopDong();
         }
-        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
-                LoadLoaiHopDongTimKiem(txtTimKiem.Text);
+                LoadLoaiHopDongTimKiem(txtSearch.Text);
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {

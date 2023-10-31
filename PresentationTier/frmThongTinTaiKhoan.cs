@@ -37,28 +37,28 @@ namespace QuanLyNhanSu.PresentationTier
             listThaoTac = thaoTacBus.GetThaoTac().Where(tt => tt.MaGD == maGD).ToList();
             this.maNV = maNV;
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
-            btnDoiMatKhau.Enabled = false;
+            btnChangePassword.Enabled = false;
         }
         private void FrmThongTinTaiKhoan_Load(object sender, EventArgs e)
         {
             DisableDisplay();
-            btnDoiMatKhau.Enabled = false;
+            btnChangePassword.Enabled = false;
             LoadThongTinTaiKhoan();
             LoadThongTinDangNhap();
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV_DN.Text = nv.MaNV;
+            lblStaffIDLoginValue.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblDepartmentLoginValue.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblPositionLoginValue.Text = nv.ChucVu.TenChucVu;
         }
         private void DisableDisplay()
         {
-            List<TextBox> listDisplay = new List<TextBox> { txtMaNV, txtPhongBan, txtChucVu, txtLoaiHopDong, txtTaiKhoan, txtTrinhDoHocVan, txtNgayVaoLam, txtThoiHanHopDong, txtTinhTrang, txtSoNgayPhep, txtLuongCoBan, txtPhuCap};
+            List<TextBox> listDisplay = new List<TextBox> { txtStaffID, txtDepartment, txtPosition, txtContractType, txtAccount, txtEducationLevel, txtEntryDate, txtContractDuration, txtStatus, txtDateOffAmount, txtBasicSalary, txtAllowance};
             for(int i =0; i< listDisplay.Count; i++)
             {
                 typeof(TextBox).GetProperty("ReadOnly").SetValue(listDisplay[i], true);
@@ -67,43 +67,43 @@ namespace QuanLyNhanSu.PresentationTier
         private void LoadThongTinTaiKhoan()
         {
             Enabled = false;
-            txtMaNV.Text = nv.MaNV;
-            txtPhongBan.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            txtChucVu.Text = nv.ChucVu.TenChucVu;
-            txtLoaiHopDong.Text = nv.LoaiHopDong.TenLoaiHopDong;
-            txtTaiKhoan.Text = nv.TaiKhoan;
-            txtCCCD.Text = nv.CCCD;
-            txtHo.Text = nv.Ho;
-            txtTenLot.Text = nv.TenLot;
-            txtTen.Text = nv.Ten;
-            dtpNTNS.Text = nv.NTNS.ToString(formatDate);
-            txtSoNha.Text = nv.SoNha;
-            txtDuong.Text = nv.TenDuong;
-            txtPhuong_Xa.Text = nv.Phuong_Xa;
-            txtQuan_Huyen.Text = nv.Quan_Huyen;
-            txtTinh_ThanhPho.Text = nv.Tinh_ThanhPho;
+            txtStaffID.Text = nv.MaNV;
+            txtDepartment.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            txtPosition.Text = nv.ChucVu.TenChucVu;
+            txtContractType.Text = nv.LoaiHopDong.TenLoaiHopDong;
+            txtAccount.Text = nv.TaiKhoan;
+            txtIDCard.Text = nv.CCCD;
+            txtLastName.Text = nv.Ho;
+            txtMiddleName.Text = nv.TenLot;
+            txtFirstName.Text = nv.Ten;
+            dtpBrithday.Text = nv.NTNS.ToString(formatDate);
+            txtHouseNumber.Text = nv.SoNha;
+            txtStreet.Text = nv.TenDuong;
+            txtWard.Text = nv.Phuong_Xa;
+            txtDistrict.Text = nv.Quan_Huyen;
+            txtProvince_City.Text = nv.Tinh_ThanhPho;
             string gioiTinh = nv.GioiTinh;
             switch (gioiTinh)
             {
                 case "Nam":
-                    rbNam.Checked = true;
+                    rbMale.Checked = true;
                     break;
                 case "Nữ":
-                    rbNu.Checked = true;
+                    rbFemale.Checked = true;
                     break;
                 case "Khác":
-                    rbKhac.Checked = true;
+                    rbOthers.Checked = true;
                     break;
             }
-            txtSDT.Text = nv.SDT;
+            txtPhone.Text = nv.SDT;
             txtEmail.Text = nv.Email;
-            txtTrinhDoHocVan.Text = nv.TrinhDoHocVan;
-            txtNgayVaoLam.Text = nv.NgayVaoLam.ToString(formatDate);
-            txtThoiHanHopDong.Text = nv.ThoiHanHopDong.ToString(formatDate);
-            txtTinhTrang.Text = nv.TinhTrang;
-            txtSoNgayPhep.Text = nv.SoNgayPhep.ToString();
-            txtLuongCoBan.Text = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
-            txtPhuCap.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(maNV));
+            txtEducationLevel.Text = nv.TrinhDoHocVan;
+            txtEntryDate.Text = nv.NgayVaoLam.ToString(formatDate);
+            txtContractDuration.Text = nv.ThoiHanHopDong.ToString(formatDate);
+            txtStatus.Text = nv.TinhTrang;
+            txtDateOffAmount.Text = nv.SoNgayPhep.ToString();
+            txtBasicSalary.Text = String.Format(fVND, "{0:N3} ₫", nv.LuongCoBan);
+            txtAllowance.Text = String.Format(fVND, "{0:N3} ₫", chiTietPhuCapBUS.TongPhuCapMotNhanVien(maNV));
             Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////   
@@ -130,10 +130,10 @@ namespace QuanLyNhanSu.PresentationTier
         {
             errProvider.Clear();
             Regex passCheck = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
-            errProvider.SetError(txtMatKhauCu, !BCrypt.Net.BCrypt.Verify(txtMatKhauMoi.Text, nv.MatKhau) ? "Mật khẩu cũ không hợp lệ" : string.Empty);
-            errProvider.SetError(txtMatKhauMoi, !passCheck.IsMatch(txtMatKhauMoi.Text) || txtMatKhauMoi.Text.Length > 20 ? "Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!" : string.Empty);
-            errProvider.SetError(txtNhapLaiMatKhau, txtNhapLaiMatKhau.Text != txtMatKhauMoi.Text ? "Mật khẩu nhập lại không khớp" : string.Empty);
-            if (errProvider.GetError(txtMatKhauMoi) != string.Empty || errProvider.GetError(txtNhapLaiMatKhau) != string.Empty || errProvider.GetError(txtMatKhauCu) != string.Empty)
+            errProvider.SetError(txtOldPassword, !BCrypt.Net.BCrypt.Verify(txtNewPassword.Text, nv.MatKhau) ? "Mật khẩu cũ không hợp lệ" : string.Empty);
+            errProvider.SetError(txtNewPassword, !passCheck.IsMatch(txtNewPassword.Text) || txtNewPassword.Text.Length > 20 ? "Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!" : string.Empty);
+            errProvider.SetError(txtReEnterNewPassword, txtReEnterNewPassword.Text != txtNewPassword.Text ? "Mật khẩu nhập lại không khớp" : string.Empty);
+            if (errProvider.GetError(txtNewPassword) != string.Empty || errProvider.GetError(txtReEnterNewPassword) != string.Empty || errProvider.GetError(txtOldPassword) != string.Empty)
                 return false;
             return true;
         }
@@ -162,20 +162,20 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void CheckTextMatKhau(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(txtMatKhauMoi.Text) || string.IsNullOrEmpty(txtMatKhauMoi.Text) || string.IsNullOrEmpty(txtNhapLaiMatKhau.Text))
-                btnDoiMatKhau.Enabled = false;
+            if(string.IsNullOrEmpty(txtNewPassword.Text) || string.IsNullOrEmpty(txtNewPassword.Text) || string.IsNullOrEmpty(txtReEnterNewPassword.Text))
+                btnChangePassword.Enabled = false;
             else
-                btnDoiMatKhau.Enabled = true;
+                btnChangePassword.Enabled = true;
         }   
         //////////////////////////////////////////////////////////////////////////////
-        private void txtCCCD_CMND_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtIDCard_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
         }
-        private void txtSDT_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
@@ -184,21 +184,21 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private string ChonGioiTinh()
         {
-            if (rbNam.Checked)
-                return rbNam.Text;
-            if (rbNu.Checked)
-                return rbNu.Text;
+            if (rbMale.Checked)
+                return rbMale.Text;
+            if (rbFemale.Checked)
+                return rbFemale.Text;
             else
-                return rbKhac.Text;
+                return rbOthers.Text;
         }
         private bool CheckEmptyText()
         {
-            List<TextBox> listTextBox = new List<TextBox> { txtCCCD, txtHo, txtTen, txtSoNha, txtDuong, txtPhuong_Xa, txtQuan_Huyen, txtTinh_ThanhPho, txtSDT, txtEmail};
+            List<TextBox> listTextBox = new List<TextBox> { txtIDCard, txtLastName, txtFirstName, txtHouseNumber, txtStreet, txtWard, txtDistrict, txtProvince_City, txtPhone, txtEmail};
             for (int i = 0; i < listTextBox.Count; i++)
             {
                 if (string.IsNullOrEmpty(listTextBox[i].Text))
                 {
-                    btnLuu.Enabled = false;
+                    btnSave.Enabled = false;
                     return false;
                 }
             }
@@ -208,7 +208,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             if (CheckEmptyText())
             {
-                btnLuu.Enabled = true;
+                btnSave.Enabled = true;
                 return;
             }
         }
@@ -240,7 +240,7 @@ namespace QuanLyNhanSu.PresentationTier
             NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             string[] properties = { "CCCD", "Ho", "TenLot", "Ten", "NTNS", "GioiTinh", "SDT", "Email" };
             string[] labels = { "CCCD", "Họ", "Tên lót", "Tên", "NTNS", "Giới tính", "SDT", "Email" };
-            string[] values = { txtCCCD.Text, txtHo.Text, txtTenLot.Text, txtTen.Text, dtpNTNS.Text, ChonGioiTinh(), txtSDT.Text, txtEmail.Text };
+            string[] values = { txtIDCard.Text, txtLastName.Text, txtMiddleName.Text, txtFirstName.Text, dtpBrithday.Text, ChonGioiTinh(), txtPhone.Text, txtEmail.Text };
             for (int i = 0; i < properties.Length; i++)
             {
                 string currentValue = GetValueAsString(nhanVien, properties[i]);
@@ -260,16 +260,16 @@ namespace QuanLyNhanSu.PresentationTier
             errProvider.Clear();
             var validationRules = new Dictionary<Control, Func<bool>>
             {
-                { txtCCCD, () => !CheckCCCD(txtCCCD.Text) || nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.CCCD == txtCCCD.Text && nv.MaNV != txtMaNV.Text) != null},
-                { dtpNTNS, () => DateTime.Now.Year - dtpNTNS.Value.Year < 18 },
-                { txtSDT, () => !CheckSDT(txtSDT.Text) || nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.SDT == txtSDT.Text && nv.MaNV != txtMaNV.Text) != null},
-                { txtEmail, () => !CheckEmail(txtEmail.Text) || nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.Email == txtEmail.Text && nv.MaNV != txtMaNV.Text) != null},               
+                { txtIDCard, () => !CheckCCCD(txtIDCard.Text) || nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.CCCD == txtIDCard.Text && nv.MaNV != txtStaffID.Text) != null},
+                { dtpBrithday, () => DateTime.Now.Year - dtpBrithday.Value.Year < 18 },
+                { txtPhone, () => !CheckSDT(txtPhone.Text) || nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.SDT == txtPhone.Text && nv.MaNV != txtStaffID.Text) != null},
+                { txtEmail, () => !CheckEmail(txtEmail.Text) || nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.Email == txtEmail.Text && nv.MaNV != txtStaffID.Text) != null},               
             };
             var errorMessages = new Dictionary<Control, string>
             {               
-                { txtCCCD, "Căn cước công dân không đúng định dạng hoặc đã tồn tại" },
-                { dtpNTNS, "Tuổi phải lớn hơn hoặc bằng 18" },
-                { txtSDT, "Số điện thoại không đúng định dạng hoặc đã tồn tại" },
+                { txtIDCard, "Căn cước công dân không đúng định dạng hoặc đã tồn tại" },
+                { dtpBrithday, "Tuổi phải lớn hơn hoặc bằng 18" },
+                { txtPhone, "Số điện thoại không đúng định dạng hoặc đã tồn tại" },
                 { txtEmail, "Email không đúng định dạng hoặc đã tồn tại" },
                
             };
@@ -295,7 +295,7 @@ namespace QuanLyNhanSu.PresentationTier
             if (ketQua == DialogResult.No)
                 MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        private void btnLuu_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             if (!CheckInputError())
             {
@@ -306,18 +306,18 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 string gioiTinh = ChonGioiTinh();
                 string chiTietSua = CheckChange();
-                nv.CCCD = txtCCCD.Text;
-                nv.Ho = txtHo.Text;
-                nv.TenLot = txtTenLot.Text;
-                nv.Ten = txtTen.Text;
-                nv.NTNS = DateTime.Parse(dtpNTNS.Text);
-                nv.SoNha = txtSoNha.Text;
-                nv.TenDuong = txtDuong.Text;
-                nv.Phuong_Xa = txtPhuong_Xa.Text;
-                nv.Quan_Huyen = txtQuan_Huyen.Text;
-                nv.Tinh_ThanhPho = txtTinh_ThanhPho.Text;
+                nv.CCCD = txtIDCard.Text;
+                nv.Ho = txtLastName.Text;
+                nv.TenLot = txtMiddleName.Text;
+                nv.Ten = txtFirstName.Text;
+                nv.NTNS = DateTime.Parse(dtpBrithday.Text);
+                nv.SoNha = txtHouseNumber.Text;
+                nv.TenDuong = txtStreet.Text;
+                nv.Phuong_Xa = txtWard.Text;
+                nv.Quan_Huyen = txtDistrict.Text;
+                nv.Tinh_ThanhPho = txtProvince_City.Text;
                 nv.GioiTinh = gioiTinh;
-                nv.SDT = txtSDT.Text;
+                nv.SDT = txtPhone.Text;
                 nv.Email = txtEmail.Text;
                 if (nhanVienBUS.Save(nv))
                 {
@@ -334,22 +334,22 @@ namespace QuanLyNhanSu.PresentationTier
                 ErrorMessage(ex);
             }
         }
-        private void cbHienThiMatKhau_CheckedChanged(object sender, EventArgs e)
+        private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
-            if(cbHienThiMatKhau.Checked)
+            if(cbShowPassword.Checked)
             {
-                txtMatKhauCu.UseSystemPasswordChar = false;
-                txtMatKhauMoi.UseSystemPasswordChar = false;
-                txtNhapLaiMatKhau.UseSystemPasswordChar = false;
+                txtOldPassword.UseSystemPasswordChar = false;
+                txtNewPassword.UseSystemPasswordChar = false;
+                txtReEnterNewPassword.UseSystemPasswordChar = false;
             }
             else
             {
-                txtMatKhauCu.UseSystemPasswordChar = true;
-                txtMatKhauMoi.UseSystemPasswordChar = true;
-                txtNhapLaiMatKhau.UseSystemPasswordChar = true;
+                txtOldPassword.UseSystemPasswordChar = true;
+                txtNewPassword.UseSystemPasswordChar = true;
+                txtReEnterNewPassword.UseSystemPasswordChar = true;
             }
         }        
-        private void btnDoiMatKhau_Click(object sender, EventArgs e)
+        private void btnChangePassword_Click(object sender, EventArgs e)
         {
             if (!CheckMatKhau())
             {
@@ -360,12 +360,12 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 NhanVien nhanVien = new NhanVien
                 {
-                    MaNV = txtMaNV.Text,
-                    MatKhau = txtMatKhauMoi.Text,
+                    MaNV = txtStaffID.Text,
+                    MatKhau = txtNewPassword.Text,
                 };
                 if (nhanVienBUS.Save(nhanVien))
                 {
-                    string thaoTac = $"Nhân viên {txtMaNV.Text} đổi mật khẩu";
+                    string thaoTac = $"Nhân viên {txtStaffID.Text} đổi mật khẩu";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Đổi mật khẩu")).MaTT;
                     LichSuThaoTac(thaoTac, maTT);
                     DangXuat();
@@ -380,14 +380,14 @@ namespace QuanLyNhanSu.PresentationTier
         {
             Reload();
         }
-        private void btnThemPhuCap_Click(object sender, EventArgs e)
+        private void btnShowAllowance_Click(object sender, EventArgs e)
         {
             FrmChiTietPhuCapMotNhanVien frmOpen = new FrmChiTietPhuCapMotNhanVien(maNV,maNV,"thongTin");
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
             frmOpen.Show();

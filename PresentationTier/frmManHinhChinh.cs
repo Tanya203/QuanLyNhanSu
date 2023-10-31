@@ -45,38 +45,38 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV.Text = nv.MaNV;
+            lblValueStaffID.Text = nv.MaNV;
             if(string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV.Text = $"{nv.Ho} {nv.Ten}";
+                lblValueFullName.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV.Text = nv.ChucVu.TenChucVu;
-            lblSoNgayPhepConNV.Text = nv.SoNgayPhep.ToString();
+                lblValueFullName.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblValueDepartment.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblValuePosition.Text = nv.ChucVu.TenChucVu;
+            lblValueAbsence.Text = nv.SoNgayPhep.ToString();
         }
         private void LoadLichLamViec()
         {
-            dgvLichLamViec.Rows.Clear();
-            DateTime ngayLam = DateTime.Parse(dtpLichLamViec.Value.ToString(formatDate));
+            dgvWorkSchedule.Rows.Clear();
+            DateTime ngayLam = DateTime.Parse(dtpWorkSchedule.Value.ToString(formatDate));
             lichLamViec = chiTietLichLamViecBUS.GetChiTietLichLamViec().Where(llv => llv.MaNV == maNV && llv.LichLamViec.NgayLam == ngayLam);
             int rowAdd;
             foreach (var nv in lichLamViec)
             {
-                rowAdd = dgvLichLamViec.Rows.Add();
-                dgvLichLamViec.Rows[rowAdd].Cells[0].Value = nv.MaLLV;
-                dgvLichLamViec.Rows[rowAdd].Cells[1].Value = nv.MaNV;
-                dgvLichLamViec.Rows[rowAdd].Cells[2].Value = nv.LichLamViec.NgayLam.ToString(formatDate);
-                dgvLichLamViec.Rows[rowAdd].Cells[3].Value = nv.Ca.TenCa;
-                dgvLichLamViec.Rows[rowAdd].Cells[4].Value = nv.LoaiCa.TenLoaiCa;
-                dgvLichLamViec.Rows[rowAdd].Cells[5].Value = nv.ThoiGianDen;
-                dgvLichLamViec.Rows[rowAdd].Cells[6].Value = nv.ThoiGianVe;
-                dgvLichLamViec.Rows[rowAdd].Cells[7].Value = nv.Phep;
+                rowAdd = dgvWorkSchedule.Rows.Add();
+                dgvWorkSchedule.Rows[rowAdd].Cells[0].Value = nv.MaLLV;
+                dgvWorkSchedule.Rows[rowAdd].Cells[1].Value = nv.MaNV;
+                dgvWorkSchedule.Rows[rowAdd].Cells[2].Value = nv.LichLamViec.NgayLam.ToString(formatDate);
+                dgvWorkSchedule.Rows[rowAdd].Cells[3].Value = nv.Ca.TenCa;
+                dgvWorkSchedule.Rows[rowAdd].Cells[4].Value = nv.LoaiCa.TenLoaiCa;
+                dgvWorkSchedule.Rows[rowAdd].Cells[5].Value = nv.ThoiGianDen;
+                dgvWorkSchedule.Rows[rowAdd].Cells[6].Value = nv.ThoiGianVe;
+                dgvWorkSchedule.Rows[rowAdd].Cells[7].Value = nv.Phep;
             }
         }
         private void PhanQuyen()
         {
             int count = 0;            
-            List<Button> button = new List<Button>{ btnQLNV, btnQLPB, btnQLCV, btnQLC, btnQLLLV, btnQLPC, btnQLP, btnQLTK, btnQLLHD, btnQLPQ, btnLSTT};            
+            List<Button> button = new List<Button>{ btnStaffs, btnDepartment, btnPosition, btnShift, btnWorkSchedule, btnAllowance, btnCard, btnStatistics, btnContractType, btnAuthorization, btnOperateHistory};            
             foreach (PhanQuyen qh in phanQuyen)
             {
                 if(!qh.CapQuyen)
@@ -84,84 +84,84 @@ namespace QuanLyNhanSu.PresentationTier
                 count++;
             }
         }
-        private void btnQLNV_Click(object sender, EventArgs e)
+        private void btnStaffs_Click(object sender, EventArgs e)
         {
             FrmQuanLyNhanVien frmOpen = new FrmQuanLyNhanVien(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }      
-        private void btnQLPB_Click(object sender, EventArgs e)
+        private void btnDepartment_Click(object sender, EventArgs e)
         {
             FrmQuanLyPhongBan frmOpen = new FrmQuanLyPhongBan(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnQLCV_Click(object sender, EventArgs e)
+        private void btnPosition_Click(object sender, EventArgs e)
         {
             FrmQuanLyChucVu frmOpen = new FrmQuanLyChucVu(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnQLC_Click(object sender, EventArgs e)
+        private void btnShift_Click(object sender, EventArgs e)
         {
             FrmQuanLyCa frmOpen = new FrmQuanLyCa(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnQLLLV_Click(object sender, EventArgs e)
+        private void btnWorkSchedule_Click(object sender, EventArgs e)
         {
             FrmLichLamViec frmOpen = new FrmLichLamViec(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnQLPC_Click(object sender, EventArgs e)
+        private void btnAllowance_Click(object sender, EventArgs e)
         {
             FrmQuanLyPhuCap frmOpen = new FrmQuanLyPhuCap(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnQLPT_Click(object sender, EventArgs e)
+        private void btnCard_Click(object sender, EventArgs e)
         {
             FrmQuanLyPhieu frmOpen = new FrmQuanLyPhieu(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnQLTK_Click(object sender, EventArgs e)
+        private void btnStatistics_Click(object sender, EventArgs e)
         {
             FrmThongKe frmOpen = new FrmThongKe(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnQLLHD_Click(object sender, EventArgs e)
+        private void btnContractType_Click(object sender, EventArgs e)
         {
             FrmQuanLyLoaiHopDong frmOpen = new FrmQuanLyLoaiHopDong(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnQLPQ_Click(object sender, EventArgs e)
+        private void btnDecentralization_Click(object sender, EventArgs e)
         {
             FrmPhanQuyen frmOpen = new FrmPhanQuyen(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnLSTT_Click(object sender, EventArgs e)
+        private void btnOperateHistory_Click(object sender, EventArgs e)
         {
             FrmLichSuThaoTac frmOpen = new FrmLichSuThaoTac(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }
-        private void btnTTTK_Click(object sender, EventArgs e)
+        private void btnAccountInfo_Click(object sender, EventArgs e)
         {
             FrmThongTinTaiKhoan frmOpen = new FrmThongTinTaiKhoan(maNV);
             frmOpen.Show();
@@ -172,7 +172,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             this.Close();
         }
-        private void btnDangXuat_Click(object sender, EventArgs e)
+        private void btnLogOut_Click(object sender, EventArgs e)
         {
             MessageBoxManager.Yes = "Có";
             MessageBoxManager.No = "Không";
@@ -185,7 +185,7 @@ namespace QuanLyNhanSu.PresentationTier
                 frmOpen.FormClosed += CloseForm;
             }           
         }
-        private void dtpLichLamViec_ValueChanged(object sender, EventArgs e)
+        private void dtpWorkSchedule_ValueChanged(object sender, EventArgs e)
         {
             LoadLichLamViec();
         }

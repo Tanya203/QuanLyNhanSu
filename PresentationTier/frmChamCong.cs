@@ -16,7 +16,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly QuanLyCaBUS caBUS;
         private readonly QuanLyNhanVienBUS nhanVienBUS;
         private readonly ThaoTacBUS thaoTacBUS;
-        private readonly GiaoDienBUS giaoDienBUS;
         private readonly List<ChamCong> lichLamViec;
         private readonly List<ChamCong> lichCaDem;
         private List<ChamCong> chamCong;
@@ -36,7 +35,6 @@ namespace QuanLyNhanSu.PresentationTier
             caBUS = new QuanLyCaBUS();
             nhanVienBUS = new QuanLyNhanVienBUS();
             thaoTacBUS = new ThaoTacBUS();
-            giaoDienBUS = new GiaoDienBUS();
             chamCong = new List<ChamCong>();
             listThaoTac = thaoTacBUS.GetThaoTac().Where(tt => tt.GiaoDien.TenGiaoDien == "Chấm công").ToList();
             caDau = caBUS.GetCa().OrderBy(ca => ca.TenCa).FirstOrDefault();
@@ -47,7 +45,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void FrmChamCong_Load(object sender, EventArgs e)
         {
-            btnChamCong.Enabled = false;
+            btnTimekeeping.Enabled = false;
         }        
         private void LichSuThaoTac(string maNV, string thaoTac)
         {
@@ -79,7 +77,7 @@ namespace QuanLyNhanSu.PresentationTier
                         if (chamCongBUS.ChamCong(chamCong, thaoTac))
                         {                     
                             LichSuThaoTac(nv.MaNV, thaoTac);
-                            txtMaNV.Text = string.Empty;
+                            txtStaffID.Text = string.Empty;
                             chamCong.Clear();
                             return true;
                         }
@@ -92,7 +90,7 @@ namespace QuanLyNhanSu.PresentationTier
                         if (chamCongBUS.ChamCong(chamCong, thaoTac))
                         {
                             LichSuThaoTac(nv.MaNV, thaoTac);
-                            txtMaNV.Text = string.Empty;
+                            txtStaffID.Text = string.Empty;
                             chamCong.Clear();
                             return true;
                         }
@@ -119,7 +117,7 @@ namespace QuanLyNhanSu.PresentationTier
                     if (chamCongBUS.ChamCong(chamCong, thaoTac))
                     {
                         LichSuThaoTac(nv.MaNV, thaoTac);
-                        txtMaNV.Text = string.Empty;
+                        txtStaffID.Text = string.Empty;
                         chamCong.Clear();
                         count++;
                         return;
@@ -137,7 +135,7 @@ namespace QuanLyNhanSu.PresentationTier
                             if (chamCongBUS.ChamCong(chamCong, thaoTac))                                
                             {
                                 LichSuThaoTac(nv.MaNV, thaoTac);
-                                txtMaNV.Text = string.Empty;
+                                txtStaffID.Text = string.Empty;
                                 chamCong.Clear();
                                 count++;
                                 return;
@@ -152,7 +150,7 @@ namespace QuanLyNhanSu.PresentationTier
                         {                            
                             chamCong.Add(nv);
                             LichSuThaoTac(nv.MaNV, thaoTac);
-                            txtMaNV.Text = string.Empty;
+                            txtStaffID.Text = string.Empty;
                             chamCong.Clear();
                             count++;
                             return;
@@ -161,8 +159,8 @@ namespace QuanLyNhanSu.PresentationTier
                 }
                 count++;
             }
-            MessageBox.Show($"Nhân viên {txtMaNV.Text} đã chấm công hết các ca trong ngày hoặc đã quá giờ chấm công ngày {dateNow}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            txtMaNV.Text = string.Empty;
+            MessageBox.Show($"Nhân viên {txtStaffID.Text} đã chấm công hết các ca trong ngày hoặc đã quá giờ chấm công ngày {dateNow}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            txtStaffID.Text = string.Empty;
             return;            
         }
         private void ChamCongLienCa(List<ChamCong> llv)
@@ -181,7 +179,7 @@ namespace QuanLyNhanSu.PresentationTier
                 if (nv.ThoiGianDen != null && nv.ThoiGianVe == null && timeNow < nv.Ca.GioBatDau)
                 {
                     MessageBox.Show($"Vẫn chưa vào ca {ca}!\n({nv.Ca.GioBatDau} - {nv.Ca.GioKetThuc})", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtMaNV.Text = string.Empty;
+                    txtStaffID.Text = string.Empty;
                     return;
                 }
                 if (nv.ThoiGianDen == null && (timeNow < nv.Ca.GioKetThuc || nv.Ca.GioBatDau > nv.Ca.GioKetThuc))
@@ -194,7 +192,7 @@ namespace QuanLyNhanSu.PresentationTier
                         if (chamCongBUS.ChamCong(chamCong, thaoTac))
                         {
                             LichSuThaoTac(nv.MaNV, thaoTac);
-                            txtMaNV.Text = string.Empty;
+                            txtStaffID.Text = string.Empty;
                             chamCong.Clear();
                             return;
                         }
@@ -211,7 +209,7 @@ namespace QuanLyNhanSu.PresentationTier
                         if(chamCongBUS.ChamCong(chamCong, thaoTac))
                         {
                             LichSuThaoTac(nv.MaNV, thaoTac);
-                            txtMaNV.Text = string.Empty;
+                            txtStaffID.Text = string.Empty;
                             chamCong.Clear();
                             return;
                         }                        
@@ -237,30 +235,30 @@ namespace QuanLyNhanSu.PresentationTier
                         if (chamCongBUS.ChamCong(chamCong, thaoTac))
                         {
                             LichSuThaoTac(nv.MaNV, thaoTac);
-                            txtMaNV.Text = string.Empty;
+                            txtStaffID.Text = string.Empty;
                             chamCong.Clear();
                             return;
                         }
                     }                               
                 }                    
             }
-            MessageBox.Show($"Nhân viên {txtMaNV.Text} đã chấm công hết các ca trong ngày hoặc đã quá giờ chấm công ngày {dateNow}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            txtMaNV.Text = string.Empty;
+            MessageBox.Show($"Nhân viên {txtStaffID.Text} đã chấm công hết các ca trong ngày hoặc đã quá giờ chấm công ngày {dateNow}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            txtStaffID.Text = string.Empty;
             return;
         }
 
-        private void btnChamCong_Click(object sender, EventArgs e)
+        private void btnTimekeeping_Click(object sender, EventArgs e)
         {
-            NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtMaNV.Text);
+            NhanVien nhanVien = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == txtStaffID.Text);
             if(nhanVien == null)
             {
                 MessageBox.Show("Mã nhân viên không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtMaNV.Text = string.Empty;
+                txtStaffID.Text = string.Empty;
                 return;
             }
             else
             {
-                string maNV = txtMaNV.Text;
+                string maNV = txtStaffID.Text;
                 string dateNow = DateTime.Now.ToString(formatDate);
                 List<ChamCong> caDem = lichCaDem.Where(nv => nv.MaNV == maNV).ToList();
                 List<ChamCong> chamCong = lichLamViec.Where(nv => nv.MaNV == maNV).OrderBy(nv => nv.Ca.TenCa).ToList();
@@ -269,7 +267,7 @@ namespace QuanLyNhanSu.PresentationTier
                 if(chamCong.Count == 0)
                 {
                     MessageBox.Show($"Nhân viên {maNV} không có lịch làm việc trong hôm nay {dateNow}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtMaNV.Text = string.Empty;
+                    txtStaffID.Text = string.Empty;
                     return;
                 }
                 if (nhanVien.LoaiHopDong.HinhThucChamCong.TenHinhThucChamCong == "Liên ca") 
@@ -278,12 +276,12 @@ namespace QuanLyNhanSu.PresentationTier
                     ChamCongTungCa(chamCong);               
             }            
         }
-        private void txtMaNV_TextChanged(object sender, EventArgs e)
+        private void txtStaffID_TextChanged(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(txtMaNV.Text))
-                btnChamCong.Enabled = false;
+            if(string.IsNullOrEmpty(txtStaffID.Text))
+                btnTimekeeping.Enabled = false;
             else
-                btnChamCong.Enabled = true;
+                btnTimekeeping.Enabled = true;
         }
     }
 }

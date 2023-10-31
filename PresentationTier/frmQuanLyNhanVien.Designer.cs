@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.lblChucVuNV_DN = new System.Windows.Forms.Label();
-            this.lblChucVuDN = new System.Windows.Forms.Label();
-            this.lblPhongBanNV_DN = new System.Windows.Forms.Label();
-            this.lblPhongBanDN = new System.Windows.Forms.Label();
-            this.lblHoTenNV_DN = new System.Windows.Forms.Label();
-            this.lblHoTenDN = new System.Windows.Forms.Label();
-            this.lblMaNV_DN = new System.Windows.Forms.Label();
-            this.lblMaNhanVienDN = new System.Windows.Forms.Label();
-            this.btnTroVe = new System.Windows.Forms.Button();
-            this.dgvThongTinNhanVien = new System.Windows.Forms.DataGridView();
+            this.lblPositionLoginValue = new System.Windows.Forms.Label();
+            this.lblPositionLogin = new System.Windows.Forms.Label();
+            this.lblDepartmentLoginValue = new System.Windows.Forms.Label();
+            this.lblDepartmentLogin = new System.Windows.Forms.Label();
+            this.lblFullNameLoginValue = new System.Windows.Forms.Label();
+            this.lblFullNameLogin = new System.Windows.Forms.Label();
+            this.lblStaffIDLoginValue = new System.Windows.Forms.Label();
+            this.lblStaffIDLogin = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.dgvStaff = new System.Windows.Forms.DataGridView();
             this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,85 +73,85 @@
             this.colNgayKhoa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSoTienNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlMenu = new System.Windows.Forms.Panel();
-            this.btnKhoa = new System.Windows.Forms.Button();
-            this.txtSoTienNo = new System.Windows.Forms.TextBox();
-            this.lblSoTienNo = new System.Windows.Forms.Label();
-            this.btnMoKhoa = new System.Windows.Forms.Button();
-            this.txtNgayKhoa = new System.Windows.Forms.TextBox();
-            this.lblNgayKhoa = new System.Windows.Forms.Label();
-            this.btnChonHinh = new System.Windows.Forms.Button();
-            this.dtpNTNS = new System.Windows.Forms.DateTimePicker();
-            this.btnHuy = new System.Windows.Forms.Button();
-            this.btnSua = new System.Windows.Forms.Button();
-            this.btnXoa = new System.Windows.Forms.Button();
-            this.cbHienThiMatKhau = new System.Windows.Forms.CheckBox();
-            this.txtNhapLaiMatKhau = new System.Windows.Forms.TextBox();
-            this.lblNhapLaiMatKhau = new System.Windows.Forms.Label();
-            this.btnThemPhuCap = new System.Windows.Forms.Button();
-            this.btnThem = new System.Windows.Forms.Button();
-            this.rbKhac = new System.Windows.Forms.RadioButton();
-            this.rbNu = new System.Windows.Forms.RadioButton();
-            this.rbNam = new System.Windows.Forms.RadioButton();
-            this.dtpThoiHanHopDong = new System.Windows.Forms.DateTimePicker();
-            this.dtpNgayVaoLam = new System.Windows.Forms.DateTimePicker();
-            this.txtPhuCap = new System.Windows.Forms.TextBox();
-            this.txtLuongCoBan = new System.Windows.Forms.TextBox();
-            this.txtSoNgayPhep = new System.Windows.Forms.TextBox();
-            this.txtTinhTrang = new System.Windows.Forms.TextBox();
-            this.txtTrinhDoHocVan = new System.Windows.Forms.TextBox();
+            this.btnLock = new System.Windows.Forms.Button();
+            this.txtDept = new System.Windows.Forms.TextBox();
+            this.lblDept = new System.Windows.Forms.Label();
+            this.btnUnlock = new System.Windows.Forms.Button();
+            this.txtDateLock = new System.Windows.Forms.TextBox();
+            this.lblLockDate = new System.Windows.Forms.Label();
+            this.btnChoosePicture = new System.Windows.Forms.Button();
+            this.dtpBrithday = new System.Windows.Forms.DateTimePicker();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.cbShowPassword = new System.Windows.Forms.CheckBox();
+            this.txtReEnterPassword = new System.Windows.Forms.TextBox();
+            this.lblReEnterPassword = new System.Windows.Forms.Label();
+            this.btnAddAllowance = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.rbOthers = new System.Windows.Forms.RadioButton();
+            this.rbFemale = new System.Windows.Forms.RadioButton();
+            this.rbMale = new System.Windows.Forms.RadioButton();
+            this.dtpContractDuration = new System.Windows.Forms.DateTimePicker();
+            this.dtpEntryDate = new System.Windows.Forms.DateTimePicker();
+            this.txtAllowance = new System.Windows.Forms.TextBox();
+            this.txtBasicSalary = new System.Windows.Forms.TextBox();
+            this.txtDateOffMount = new System.Windows.Forms.TextBox();
+            this.txtStatus = new System.Windows.Forms.TextBox();
+            this.txtEducationLevel = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtSDT = new System.Windows.Forms.TextBox();
-            this.txtTinh_ThanhPho = new System.Windows.Forms.TextBox();
-            this.txtQuan_Huyen = new System.Windows.Forms.TextBox();
-            this.txtPhuong_Xa = new System.Windows.Forms.TextBox();
-            this.txtDuong = new System.Windows.Forms.TextBox();
-            this.txtSoNha = new System.Windows.Forms.TextBox();
-            this.txtTen = new System.Windows.Forms.TextBox();
-            this.txtTenLot = new System.Windows.Forms.TextBox();
-            this.txtHo = new System.Windows.Forms.TextBox();
-            this.txtCCCD = new System.Windows.Forms.TextBox();
-            this.txtMatKhau = new System.Windows.Forms.TextBox();
-            this.txtTaiKhoan = new System.Windows.Forms.TextBox();
-            this.cmbLoaiHopDong = new System.Windows.Forms.ComboBox();
-            this.cmbChucVu = new System.Windows.Forms.ComboBox();
-            this.cmbPhongBan = new System.Windows.Forms.ComboBox();
-            this.txtMaNV = new System.Windows.Forms.TextBox();
-            this.lblHinh = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblLuongCoBan = new System.Windows.Forms.Label();
-            this.pbAnhNV = new System.Windows.Forms.PictureBox();
-            this.lblThoiHanHopDong = new System.Windows.Forms.Label();
-            this.lblTinhTrang = new System.Windows.Forms.Label();
-            this.lblSoNgayPhep = new System.Windows.Forms.Label();
-            this.lblLoaiHopDong = new System.Windows.Forms.Label();
-            this.lblTaiKhoan = new System.Windows.Forms.Label();
-            this.lblMatKhau = new System.Windows.Forms.Label();
-            this.lblTinh_ThanhPho = new System.Windows.Forms.Label();
-            this.lblGioiTinh = new System.Windows.Forms.Label();
-            this.lblSoDienThoai = new System.Windows.Forms.Label();
-            this.lblCCCD = new System.Windows.Forms.Label();
-            this.lblHo = new System.Windows.Forms.Label();
-            this.lblTenLot = new System.Windows.Forms.Label();
-            this.lblTen = new System.Windows.Forms.Label();
-            this.lblNTNS = new System.Windows.Forms.Label();
-            this.lblSoNha = new System.Windows.Forms.Label();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.txtProvince_City = new System.Windows.Forms.TextBox();
+            this.txtDistrict = new System.Windows.Forms.TextBox();
+            this.txtWard = new System.Windows.Forms.TextBox();
+            this.txtStreet = new System.Windows.Forms.TextBox();
+            this.txtHouseNumer = new System.Windows.Forms.TextBox();
+            this.txtFirstName = new System.Windows.Forms.TextBox();
+            this.txtMiddleName = new System.Windows.Forms.TextBox();
+            this.txtLastName = new System.Windows.Forms.TextBox();
+            this.txtIDCard = new System.Windows.Forms.TextBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.txtAccount = new System.Windows.Forms.TextBox();
+            this.cmbContractType = new System.Windows.Forms.ComboBox();
+            this.cmbPosition = new System.Windows.Forms.ComboBox();
+            this.cmbDepartment = new System.Windows.Forms.ComboBox();
+            this.txtStaffID = new System.Windows.Forms.TextBox();
+            this.lblPicture = new System.Windows.Forms.Label();
+            this.lblAllowance = new System.Windows.Forms.Label();
+            this.lblBasicSalary = new System.Windows.Forms.Label();
+            this.pbStaffPicture = new System.Windows.Forms.PictureBox();
+            this.lblContractDuration = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.lblDateOffMount = new System.Windows.Forms.Label();
+            this.lblContractType = new System.Windows.Forms.Label();
+            this.lblAccount = new System.Windows.Forms.Label();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.lblProvince_City = new System.Windows.Forms.Label();
+            this.lblGender = new System.Windows.Forms.Label();
+            this.lblPhone = new System.Windows.Forms.Label();
+            this.lblIDCard = new System.Windows.Forms.Label();
+            this.lblLastName = new System.Windows.Forms.Label();
+            this.lblMiddle = new System.Windows.Forms.Label();
+            this.lblFirstName = new System.Windows.Forms.Label();
+            this.lblBrithday = new System.Windows.Forms.Label();
+            this.lblHouseNumer = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
-            this.lblTrinhDoHocVan = new System.Windows.Forms.Label();
-            this.lblNgayVaoLam = new System.Windows.Forms.Label();
-            this.lblDuong = new System.Windows.Forms.Label();
-            this.lblPhuong_Xa = new System.Windows.Forms.Label();
-            this.lblQuan_Huyen = new System.Windows.Forms.Label();
-            this.lblMaNhanVien = new System.Windows.Forms.Label();
-            this.lblPhongBan = new System.Windows.Forms.Label();
-            this.lblChucVu = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblTimKiem = new System.Windows.Forms.Label();
-            this.txtTimKiem = new System.Windows.Forms.TextBox();
+            this.lblEducationLevel = new System.Windows.Forms.Label();
+            this.lblEntryDate = new System.Windows.Forms.Label();
+            this.lblStreet = new System.Windows.Forms.Label();
+            this.lblWard = new System.Windows.Forms.Label();
+            this.lblDistrict = new System.Windows.Forms.Label();
+            this.lblStaffID = new System.Windows.Forms.Label();
+            this.lblDepartment = new System.Windows.Forms.Label();
+            this.lblPosition = new System.Windows.Forms.Label();
+            this.lblStaff = new System.Windows.Forms.Label();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinNhanVien)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).BeginInit();
             this.pnlMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbAnhNV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStaffPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -159,15 +159,15 @@
             // 
             this.pnlHeader.BackColor = System.Drawing.SystemColors.Info;
             this.pnlHeader.Controls.Add(this.btnRefresh);
-            this.pnlHeader.Controls.Add(this.lblChucVuNV_DN);
-            this.pnlHeader.Controls.Add(this.lblChucVuDN);
-            this.pnlHeader.Controls.Add(this.lblPhongBanNV_DN);
-            this.pnlHeader.Controls.Add(this.lblPhongBanDN);
-            this.pnlHeader.Controls.Add(this.lblHoTenNV_DN);
-            this.pnlHeader.Controls.Add(this.lblHoTenDN);
-            this.pnlHeader.Controls.Add(this.lblMaNV_DN);
-            this.pnlHeader.Controls.Add(this.lblMaNhanVienDN);
-            this.pnlHeader.Controls.Add(this.btnTroVe);
+            this.pnlHeader.Controls.Add(this.lblPositionLoginValue);
+            this.pnlHeader.Controls.Add(this.lblPositionLogin);
+            this.pnlHeader.Controls.Add(this.lblDepartmentLoginValue);
+            this.pnlHeader.Controls.Add(this.lblDepartmentLogin);
+            this.pnlHeader.Controls.Add(this.lblFullNameLoginValue);
+            this.pnlHeader.Controls.Add(this.lblFullNameLogin);
+            this.pnlHeader.Controls.Add(this.lblStaffIDLoginValue);
+            this.pnlHeader.Controls.Add(this.lblStaffIDLogin);
+            this.pnlHeader.Controls.Add(this.btnBack);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
@@ -193,123 +193,123 @@
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // lblChucVuNV_DN
+            // lblPositionLoginValue
             // 
-            this.lblChucVuNV_DN.AutoSize = true;
-            this.lblChucVuNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuNV_DN.Location = new System.Drawing.Point(1151, 72);
-            this.lblChucVuNV_DN.Name = "lblChucVuNV_DN";
-            this.lblChucVuNV_DN.Size = new System.Drawing.Size(38, 32);
-            this.lblChucVuNV_DN.TabIndex = 8;
-            this.lblChucVuNV_DN.Text = "...";
+            this.lblPositionLoginValue.AutoSize = true;
+            this.lblPositionLoginValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPositionLoginValue.Location = new System.Drawing.Point(1151, 72);
+            this.lblPositionLoginValue.Name = "lblPositionLoginValue";
+            this.lblPositionLoginValue.Size = new System.Drawing.Size(38, 32);
+            this.lblPositionLoginValue.TabIndex = 8;
+            this.lblPositionLoginValue.Text = "...";
             // 
-            // lblChucVuDN
+            // lblPositionLogin
             // 
-            this.lblChucVuDN.AutoSize = true;
-            this.lblChucVuDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVuDN.Location = new System.Drawing.Point(975, 72);
-            this.lblChucVuDN.Name = "lblChucVuDN";
-            this.lblChucVuDN.Size = new System.Drawing.Size(133, 32);
-            this.lblChucVuDN.TabIndex = 7;
-            this.lblChucVuDN.Text = "Chức vụ:";
+            this.lblPositionLogin.AutoSize = true;
+            this.lblPositionLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPositionLogin.Location = new System.Drawing.Point(975, 72);
+            this.lblPositionLogin.Name = "lblPositionLogin";
+            this.lblPositionLogin.Size = new System.Drawing.Size(133, 32);
+            this.lblPositionLogin.TabIndex = 7;
+            this.lblPositionLogin.Text = "Chức vụ:";
             // 
-            // lblPhongBanNV_DN
+            // lblDepartmentLoginValue
             // 
-            this.lblPhongBanNV_DN.AutoSize = true;
-            this.lblPhongBanNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanNV_DN.Location = new System.Drawing.Point(1151, 9);
-            this.lblPhongBanNV_DN.Name = "lblPhongBanNV_DN";
-            this.lblPhongBanNV_DN.Size = new System.Drawing.Size(38, 32);
-            this.lblPhongBanNV_DN.TabIndex = 6;
-            this.lblPhongBanNV_DN.Text = "...";
+            this.lblDepartmentLoginValue.AutoSize = true;
+            this.lblDepartmentLoginValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDepartmentLoginValue.Location = new System.Drawing.Point(1151, 9);
+            this.lblDepartmentLoginValue.Name = "lblDepartmentLoginValue";
+            this.lblDepartmentLoginValue.Size = new System.Drawing.Size(38, 32);
+            this.lblDepartmentLoginValue.TabIndex = 6;
+            this.lblDepartmentLoginValue.Text = "...";
             // 
-            // lblPhongBanDN
+            // lblDepartmentLogin
             // 
-            this.lblPhongBanDN.AutoSize = true;
-            this.lblPhongBanDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBanDN.Location = new System.Drawing.Point(975, 9);
-            this.lblPhongBanDN.Name = "lblPhongBanDN";
-            this.lblPhongBanDN.Size = new System.Drawing.Size(170, 32);
-            this.lblPhongBanDN.TabIndex = 5;
-            this.lblPhongBanDN.Text = "Phòng ban:";
+            this.lblDepartmentLogin.AutoSize = true;
+            this.lblDepartmentLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDepartmentLogin.Location = new System.Drawing.Point(975, 9);
+            this.lblDepartmentLogin.Name = "lblDepartmentLogin";
+            this.lblDepartmentLogin.Size = new System.Drawing.Size(170, 32);
+            this.lblDepartmentLogin.TabIndex = 5;
+            this.lblDepartmentLogin.Text = "Phòng ban:";
             // 
-            // lblHoTenNV_DN
+            // lblFullNameLoginValue
             // 
-            this.lblHoTenNV_DN.AutoSize = true;
-            this.lblHoTenNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHoTenNV_DN.Location = new System.Drawing.Point(529, 72);
-            this.lblHoTenNV_DN.Name = "lblHoTenNV_DN";
-            this.lblHoTenNV_DN.Size = new System.Drawing.Size(38, 32);
-            this.lblHoTenNV_DN.TabIndex = 4;
-            this.lblHoTenNV_DN.Text = "...";
-            this.lblHoTenNV_DN.UseMnemonic = false;
+            this.lblFullNameLoginValue.AutoSize = true;
+            this.lblFullNameLoginValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullNameLoginValue.Location = new System.Drawing.Point(529, 72);
+            this.lblFullNameLoginValue.Name = "lblFullNameLoginValue";
+            this.lblFullNameLoginValue.Size = new System.Drawing.Size(38, 32);
+            this.lblFullNameLoginValue.TabIndex = 4;
+            this.lblFullNameLoginValue.Text = "...";
+            this.lblFullNameLoginValue.UseMnemonic = false;
             // 
-            // lblHoTenDN
+            // lblFullNameLogin
             // 
-            this.lblHoTenDN.AutoSize = true;
-            this.lblHoTenDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHoTenDN.Location = new System.Drawing.Point(318, 72);
-            this.lblHoTenDN.Name = "lblHoTenDN";
-            this.lblHoTenDN.Size = new System.Drawing.Size(112, 32);
-            this.lblHoTenDN.TabIndex = 3;
-            this.lblHoTenDN.Text = "Họ tên:";
+            this.lblFullNameLogin.AutoSize = true;
+            this.lblFullNameLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullNameLogin.Location = new System.Drawing.Point(318, 72);
+            this.lblFullNameLogin.Name = "lblFullNameLogin";
+            this.lblFullNameLogin.Size = new System.Drawing.Size(112, 32);
+            this.lblFullNameLogin.TabIndex = 3;
+            this.lblFullNameLogin.Text = "Họ tên:";
             // 
-            // lblMaNV_DN
+            // lblStaffIDLoginValue
             // 
-            this.lblMaNV_DN.AutoSize = true;
-            this.lblMaNV_DN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaNV_DN.Location = new System.Drawing.Point(529, 9);
-            this.lblMaNV_DN.Name = "lblMaNV_DN";
-            this.lblMaNV_DN.Size = new System.Drawing.Size(38, 32);
-            this.lblMaNV_DN.TabIndex = 2;
-            this.lblMaNV_DN.Text = "...";
-            this.lblMaNV_DN.UseMnemonic = false;
+            this.lblStaffIDLoginValue.AutoSize = true;
+            this.lblStaffIDLoginValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffIDLoginValue.Location = new System.Drawing.Point(529, 9);
+            this.lblStaffIDLoginValue.Name = "lblStaffIDLoginValue";
+            this.lblStaffIDLoginValue.Size = new System.Drawing.Size(38, 32);
+            this.lblStaffIDLoginValue.TabIndex = 2;
+            this.lblStaffIDLoginValue.Text = "...";
+            this.lblStaffIDLoginValue.UseMnemonic = false;
             // 
-            // lblMaNhanVienDN
+            // lblStaffIDLogin
             // 
-            this.lblMaNhanVienDN.AutoSize = true;
-            this.lblMaNhanVienDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaNhanVienDN.Location = new System.Drawing.Point(318, 9);
-            this.lblMaNhanVienDN.Name = "lblMaNhanVienDN";
-            this.lblMaNhanVienDN.Size = new System.Drawing.Size(205, 32);
-            this.lblMaNhanVienDN.TabIndex = 1;
-            this.lblMaNhanVienDN.Text = "Mã nhân viên:";
+            this.lblStaffIDLogin.AutoSize = true;
+            this.lblStaffIDLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffIDLogin.Location = new System.Drawing.Point(318, 9);
+            this.lblStaffIDLogin.Name = "lblStaffIDLogin";
+            this.lblStaffIDLogin.Size = new System.Drawing.Size(205, 32);
+            this.lblStaffIDLogin.TabIndex = 1;
+            this.lblStaffIDLogin.Text = "Mã nhân viên:";
             // 
-            // btnTroVe
+            // btnBack
             // 
-            this.btnTroVe.AutoSize = true;
-            this.btnTroVe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnTroVe.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnTroVe.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTroVe.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnTroVe.FlatAppearance.BorderSize = 0;
-            this.btnTroVe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTroVe.Image = global::QuanLyNhanSu.Properties.Resources._return;
-            this.btnTroVe.Location = new System.Drawing.Point(0, 0);
-            this.btnTroVe.Name = "btnTroVe";
-            this.btnTroVe.Size = new System.Drawing.Size(142, 113);
-            this.btnTroVe.TabIndex = 1;
-            this.btnTroVe.Text = "Trở về";
-            this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTroVe.UseVisualStyleBackColor = false;
-            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
+            this.btnBack.AutoSize = true;
+            this.btnBack.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBack.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Image = global::QuanLyNhanSu.Properties.Resources._return;
+            this.btnBack.Location = new System.Drawing.Point(0, 0);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(142, 113);
+            this.btnBack.TabIndex = 1;
+            this.btnBack.Text = "Trở về";
+            this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // dgvThongTinNhanVien
+            // dgvStaff
             // 
-            this.dgvThongTinNhanVien.AllowUserToAddRows = false;
-            this.dgvThongTinNhanVien.AllowUserToDeleteRows = false;
-            this.dgvThongTinNhanVien.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongTinNhanVien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
-            this.dgvThongTinNhanVien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvThongTinNhanVien.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvStaff.AllowUserToAddRows = false;
+            this.dgvStaff.AllowUserToDeleteRows = false;
+            this.dgvStaff.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvStaff.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStaff.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaNV,
             this.colPhongBan,
             this.colChucVu,
@@ -337,33 +337,33 @@
             this.colPhuCap,
             this.colNgayKhoa,
             this.colSoTienNo});
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongTinNhanVien.DefaultCellStyle = dataGridViewCellStyle14;
-            this.dgvThongTinNhanVien.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvThongTinNhanVien.Location = new System.Drawing.Point(0, 533);
-            this.dgvThongTinNhanVien.Name = "dgvThongTinNhanVien";
-            this.dgvThongTinNhanVien.ReadOnly = true;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongTinNhanVien.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
-            this.dgvThongTinNhanVien.RowHeadersVisible = false;
-            this.dgvThongTinNhanVien.RowHeadersWidth = 51;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvThongTinNhanVien.RowsDefaultCellStyle = dataGridViewCellStyle16;
-            this.dgvThongTinNhanVien.RowTemplate.Height = 24;
-            this.dgvThongTinNhanVien.Size = new System.Drawing.Size(1924, 450);
-            this.dgvThongTinNhanVien.TabIndex = 40;
-            this.dgvThongTinNhanVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThongTinNhanVien_CellClick);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvStaff.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvStaff.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvStaff.Location = new System.Drawing.Point(0, 533);
+            this.dgvStaff.Name = "dgvStaff";
+            this.dgvStaff.ReadOnly = true;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvStaff.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvStaff.RowHeadersVisible = false;
+            this.dgvStaff.RowHeadersWidth = 51;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvStaff.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvStaff.RowTemplate.Height = 24;
+            this.dgvStaff.Size = new System.Drawing.Size(1924, 450);
+            this.dgvStaff.TabIndex = 40;
+            this.dgvStaff.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStaff_CellClick);
             // 
             // colMaNV
             // 
@@ -613,413 +613,413 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlMenu.AutoSize = true;
             this.pnlMenu.BackColor = System.Drawing.SystemColors.Info;
-            this.pnlMenu.Controls.Add(this.btnKhoa);
-            this.pnlMenu.Controls.Add(this.txtSoTienNo);
-            this.pnlMenu.Controls.Add(this.lblSoTienNo);
-            this.pnlMenu.Controls.Add(this.btnMoKhoa);
-            this.pnlMenu.Controls.Add(this.txtNgayKhoa);
-            this.pnlMenu.Controls.Add(this.lblNgayKhoa);
-            this.pnlMenu.Controls.Add(this.btnChonHinh);
-            this.pnlMenu.Controls.Add(this.dtpNTNS);
-            this.pnlMenu.Controls.Add(this.btnHuy);
-            this.pnlMenu.Controls.Add(this.btnSua);
-            this.pnlMenu.Controls.Add(this.btnXoa);
-            this.pnlMenu.Controls.Add(this.cbHienThiMatKhau);
-            this.pnlMenu.Controls.Add(this.txtNhapLaiMatKhau);
-            this.pnlMenu.Controls.Add(this.lblNhapLaiMatKhau);
-            this.pnlMenu.Controls.Add(this.btnThemPhuCap);
-            this.pnlMenu.Controls.Add(this.btnThem);
-            this.pnlMenu.Controls.Add(this.rbKhac);
-            this.pnlMenu.Controls.Add(this.rbNu);
-            this.pnlMenu.Controls.Add(this.rbNam);
-            this.pnlMenu.Controls.Add(this.dtpThoiHanHopDong);
-            this.pnlMenu.Controls.Add(this.dtpNgayVaoLam);
-            this.pnlMenu.Controls.Add(this.txtPhuCap);
-            this.pnlMenu.Controls.Add(this.txtLuongCoBan);
-            this.pnlMenu.Controls.Add(this.txtSoNgayPhep);
-            this.pnlMenu.Controls.Add(this.txtTinhTrang);
-            this.pnlMenu.Controls.Add(this.txtTrinhDoHocVan);
+            this.pnlMenu.Controls.Add(this.btnLock);
+            this.pnlMenu.Controls.Add(this.txtDept);
+            this.pnlMenu.Controls.Add(this.lblDept);
+            this.pnlMenu.Controls.Add(this.btnUnlock);
+            this.pnlMenu.Controls.Add(this.txtDateLock);
+            this.pnlMenu.Controls.Add(this.lblLockDate);
+            this.pnlMenu.Controls.Add(this.btnChoosePicture);
+            this.pnlMenu.Controls.Add(this.dtpBrithday);
+            this.pnlMenu.Controls.Add(this.btnCancel);
+            this.pnlMenu.Controls.Add(this.btnEdit);
+            this.pnlMenu.Controls.Add(this.btnDelete);
+            this.pnlMenu.Controls.Add(this.cbShowPassword);
+            this.pnlMenu.Controls.Add(this.txtReEnterPassword);
+            this.pnlMenu.Controls.Add(this.lblReEnterPassword);
+            this.pnlMenu.Controls.Add(this.btnAddAllowance);
+            this.pnlMenu.Controls.Add(this.btnAdd);
+            this.pnlMenu.Controls.Add(this.rbOthers);
+            this.pnlMenu.Controls.Add(this.rbFemale);
+            this.pnlMenu.Controls.Add(this.rbMale);
+            this.pnlMenu.Controls.Add(this.dtpContractDuration);
+            this.pnlMenu.Controls.Add(this.dtpEntryDate);
+            this.pnlMenu.Controls.Add(this.txtAllowance);
+            this.pnlMenu.Controls.Add(this.txtBasicSalary);
+            this.pnlMenu.Controls.Add(this.txtDateOffMount);
+            this.pnlMenu.Controls.Add(this.txtStatus);
+            this.pnlMenu.Controls.Add(this.txtEducationLevel);
             this.pnlMenu.Controls.Add(this.txtEmail);
-            this.pnlMenu.Controls.Add(this.txtSDT);
-            this.pnlMenu.Controls.Add(this.txtTinh_ThanhPho);
-            this.pnlMenu.Controls.Add(this.txtQuan_Huyen);
-            this.pnlMenu.Controls.Add(this.txtPhuong_Xa);
-            this.pnlMenu.Controls.Add(this.txtDuong);
-            this.pnlMenu.Controls.Add(this.txtSoNha);
-            this.pnlMenu.Controls.Add(this.txtTen);
-            this.pnlMenu.Controls.Add(this.txtTenLot);
-            this.pnlMenu.Controls.Add(this.txtHo);
-            this.pnlMenu.Controls.Add(this.txtCCCD);
-            this.pnlMenu.Controls.Add(this.txtMatKhau);
-            this.pnlMenu.Controls.Add(this.txtTaiKhoan);
-            this.pnlMenu.Controls.Add(this.cmbLoaiHopDong);
-            this.pnlMenu.Controls.Add(this.cmbChucVu);
-            this.pnlMenu.Controls.Add(this.cmbPhongBan);
-            this.pnlMenu.Controls.Add(this.txtMaNV);
-            this.pnlMenu.Controls.Add(this.lblHinh);
-            this.pnlMenu.Controls.Add(this.label2);
-            this.pnlMenu.Controls.Add(this.lblLuongCoBan);
-            this.pnlMenu.Controls.Add(this.pbAnhNV);
-            this.pnlMenu.Controls.Add(this.lblThoiHanHopDong);
-            this.pnlMenu.Controls.Add(this.lblTinhTrang);
-            this.pnlMenu.Controls.Add(this.lblSoNgayPhep);
-            this.pnlMenu.Controls.Add(this.lblLoaiHopDong);
-            this.pnlMenu.Controls.Add(this.lblTaiKhoan);
-            this.pnlMenu.Controls.Add(this.lblMatKhau);
-            this.pnlMenu.Controls.Add(this.lblTinh_ThanhPho);
-            this.pnlMenu.Controls.Add(this.lblGioiTinh);
-            this.pnlMenu.Controls.Add(this.lblSoDienThoai);
-            this.pnlMenu.Controls.Add(this.lblCCCD);
-            this.pnlMenu.Controls.Add(this.lblHo);
-            this.pnlMenu.Controls.Add(this.lblTenLot);
-            this.pnlMenu.Controls.Add(this.lblTen);
-            this.pnlMenu.Controls.Add(this.lblNTNS);
-            this.pnlMenu.Controls.Add(this.lblSoNha);
+            this.pnlMenu.Controls.Add(this.txtPhone);
+            this.pnlMenu.Controls.Add(this.txtProvince_City);
+            this.pnlMenu.Controls.Add(this.txtDistrict);
+            this.pnlMenu.Controls.Add(this.txtWard);
+            this.pnlMenu.Controls.Add(this.txtStreet);
+            this.pnlMenu.Controls.Add(this.txtHouseNumer);
+            this.pnlMenu.Controls.Add(this.txtFirstName);
+            this.pnlMenu.Controls.Add(this.txtMiddleName);
+            this.pnlMenu.Controls.Add(this.txtLastName);
+            this.pnlMenu.Controls.Add(this.txtIDCard);
+            this.pnlMenu.Controls.Add(this.txtPassword);
+            this.pnlMenu.Controls.Add(this.txtAccount);
+            this.pnlMenu.Controls.Add(this.cmbContractType);
+            this.pnlMenu.Controls.Add(this.cmbPosition);
+            this.pnlMenu.Controls.Add(this.cmbDepartment);
+            this.pnlMenu.Controls.Add(this.txtStaffID);
+            this.pnlMenu.Controls.Add(this.lblPicture);
+            this.pnlMenu.Controls.Add(this.lblAllowance);
+            this.pnlMenu.Controls.Add(this.lblBasicSalary);
+            this.pnlMenu.Controls.Add(this.pbStaffPicture);
+            this.pnlMenu.Controls.Add(this.lblContractDuration);
+            this.pnlMenu.Controls.Add(this.lblStatus);
+            this.pnlMenu.Controls.Add(this.lblDateOffMount);
+            this.pnlMenu.Controls.Add(this.lblContractType);
+            this.pnlMenu.Controls.Add(this.lblAccount);
+            this.pnlMenu.Controls.Add(this.lblPassword);
+            this.pnlMenu.Controls.Add(this.lblProvince_City);
+            this.pnlMenu.Controls.Add(this.lblGender);
+            this.pnlMenu.Controls.Add(this.lblPhone);
+            this.pnlMenu.Controls.Add(this.lblIDCard);
+            this.pnlMenu.Controls.Add(this.lblLastName);
+            this.pnlMenu.Controls.Add(this.lblMiddle);
+            this.pnlMenu.Controls.Add(this.lblFirstName);
+            this.pnlMenu.Controls.Add(this.lblBrithday);
+            this.pnlMenu.Controls.Add(this.lblHouseNumer);
             this.pnlMenu.Controls.Add(this.lblEmail);
-            this.pnlMenu.Controls.Add(this.lblTrinhDoHocVan);
-            this.pnlMenu.Controls.Add(this.lblNgayVaoLam);
-            this.pnlMenu.Controls.Add(this.lblDuong);
-            this.pnlMenu.Controls.Add(this.lblPhuong_Xa);
-            this.pnlMenu.Controls.Add(this.lblQuan_Huyen);
-            this.pnlMenu.Controls.Add(this.lblMaNhanVien);
-            this.pnlMenu.Controls.Add(this.lblPhongBan);
-            this.pnlMenu.Controls.Add(this.lblChucVu);
+            this.pnlMenu.Controls.Add(this.lblEducationLevel);
+            this.pnlMenu.Controls.Add(this.lblEntryDate);
+            this.pnlMenu.Controls.Add(this.lblStreet);
+            this.pnlMenu.Controls.Add(this.lblWard);
+            this.pnlMenu.Controls.Add(this.lblDistrict);
+            this.pnlMenu.Controls.Add(this.lblStaffID);
+            this.pnlMenu.Controls.Add(this.lblDepartment);
+            this.pnlMenu.Controls.Add(this.lblPosition);
             this.pnlMenu.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.pnlMenu.Location = new System.Drawing.Point(70, 151);
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(1842, 328);
             this.pnlMenu.TabIndex = 23;
             // 
-            // btnKhoa
+            // btnLock
             // 
-            this.btnKhoa.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnKhoa.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnKhoa.FlatAppearance.BorderSize = 0;
-            this.btnKhoa.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnKhoa.Image = global::QuanLyNhanSu.Properties.Resources._lock;
-            this.btnKhoa.Location = new System.Drawing.Point(1207, 232);
-            this.btnKhoa.Name = "btnKhoa";
-            this.btnKhoa.Size = new System.Drawing.Size(39, 40);
-            this.btnKhoa.TabIndex = 64;
-            this.btnKhoa.UseVisualStyleBackColor = false;
-            this.btnKhoa.Click += new System.EventHandler(this.btnKhoa_Click);
+            this.btnLock.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnLock.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLock.FlatAppearance.BorderSize = 0;
+            this.btnLock.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLock.Image = global::QuanLyNhanSu.Properties.Resources._lock;
+            this.btnLock.Location = new System.Drawing.Point(1207, 232);
+            this.btnLock.Name = "btnLock";
+            this.btnLock.Size = new System.Drawing.Size(39, 40);
+            this.btnLock.TabIndex = 64;
+            this.btnLock.UseVisualStyleBackColor = false;
+            this.btnLock.Click += new System.EventHandler(this.btnLock_Click);
             // 
-            // txtSoTienNo
+            // txtDept
             // 
-            this.txtSoTienNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSoTienNo.Location = new System.Drawing.Point(1307, 275);
-            this.txtSoTienNo.MaxLength = 50;
-            this.txtSoTienNo.Name = "txtSoTienNo";
-            this.txtSoTienNo.Size = new System.Drawing.Size(205, 27);
-            this.txtSoTienNo.TabIndex = 63;
+            this.txtDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDept.Location = new System.Drawing.Point(1307, 275);
+            this.txtDept.MaxLength = 50;
+            this.txtDept.Name = "txtDept";
+            this.txtDept.Size = new System.Drawing.Size(205, 27);
+            this.txtDept.TabIndex = 63;
             // 
-            // lblSoTienNo
+            // lblDept
             // 
-            this.lblSoTienNo.AutoSize = true;
-            this.lblSoTienNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSoTienNo.Location = new System.Drawing.Point(1079, 274);
-            this.lblSoTienNo.Name = "lblSoTienNo";
-            this.lblSoTienNo.Size = new System.Drawing.Size(117, 25);
-            this.lblSoTienNo.TabIndex = 62;
-            this.lblSoTienNo.Text = "Số tiền nợ:";
+            this.lblDept.AutoSize = true;
+            this.lblDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDept.Location = new System.Drawing.Point(1079, 274);
+            this.lblDept.Name = "lblDept";
+            this.lblDept.Size = new System.Drawing.Size(117, 25);
+            this.lblDept.TabIndex = 62;
+            this.lblDept.Text = "Số tiền nợ:";
             // 
-            // btnMoKhoa
+            // btnUnlock
             // 
-            this.btnMoKhoa.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnMoKhoa.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMoKhoa.FlatAppearance.BorderSize = 0;
-            this.btnMoKhoa.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMoKhoa.Image = global::QuanLyNhanSu.Properties.Resources.unlock;
-            this.btnMoKhoa.Location = new System.Drawing.Point(1262, 232);
-            this.btnMoKhoa.Name = "btnMoKhoa";
-            this.btnMoKhoa.Size = new System.Drawing.Size(39, 40);
-            this.btnMoKhoa.TabIndex = 60;
-            this.btnMoKhoa.UseVisualStyleBackColor = false;
-            this.btnMoKhoa.Click += new System.EventHandler(this.btnMoKhoa_Click);
+            this.btnUnlock.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnUnlock.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUnlock.FlatAppearance.BorderSize = 0;
+            this.btnUnlock.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnUnlock.Image = global::QuanLyNhanSu.Properties.Resources.unlock;
+            this.btnUnlock.Location = new System.Drawing.Point(1262, 232);
+            this.btnUnlock.Name = "btnUnlock";
+            this.btnUnlock.Size = new System.Drawing.Size(39, 40);
+            this.btnUnlock.TabIndex = 60;
+            this.btnUnlock.UseVisualStyleBackColor = false;
+            this.btnUnlock.Click += new System.EventHandler(this.btnUnlock_Click);
             // 
-            // txtNgayKhoa
+            // txtDateLock
             // 
-            this.txtNgayKhoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNgayKhoa.Location = new System.Drawing.Point(1307, 233);
-            this.txtNgayKhoa.Name = "txtNgayKhoa";
-            this.txtNgayKhoa.Size = new System.Drawing.Size(205, 27);
-            this.txtNgayKhoa.TabIndex = 61;
-            this.txtNgayKhoa.TextChanged += new System.EventHandler(this.txtNgayKhoa_TextChanged);
+            this.txtDateLock.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDateLock.Location = new System.Drawing.Point(1307, 233);
+            this.txtDateLock.Name = "txtDateLock";
+            this.txtDateLock.Size = new System.Drawing.Size(205, 27);
+            this.txtDateLock.TabIndex = 61;
+            this.txtDateLock.TextChanged += new System.EventHandler(this.txtLockDate_TextChanged);
             // 
-            // lblNgayKhoa
+            // lblLockDate
             // 
-            this.lblNgayKhoa.AutoSize = true;
-            this.lblNgayKhoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayKhoa.Location = new System.Drawing.Point(1079, 232);
-            this.lblNgayKhoa.Name = "lblNgayKhoa";
-            this.lblNgayKhoa.Size = new System.Drawing.Size(122, 25);
-            this.lblNgayKhoa.TabIndex = 59;
-            this.lblNgayKhoa.Text = "Ngày khoá:";
+            this.lblLockDate.AutoSize = true;
+            this.lblLockDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLockDate.Location = new System.Drawing.Point(1079, 232);
+            this.lblLockDate.Name = "lblLockDate";
+            this.lblLockDate.Size = new System.Drawing.Size(122, 25);
+            this.lblLockDate.TabIndex = 59;
+            this.lblLockDate.Text = "Ngày khoá:";
             // 
-            // btnChonHinh
+            // btnChoosePicture
             // 
-            this.btnChonHinh.AutoSize = true;
-            this.btnChonHinh.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnChonHinh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnChonHinh.FlatAppearance.BorderSize = 0;
-            this.btnChonHinh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnChonHinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChonHinh.Image = global::QuanLyNhanSu.Properties.Resources.chose_picture;
-            this.btnChonHinh.Location = new System.Drawing.Point(1602, 269);
-            this.btnChonHinh.Name = "btnChonHinh";
-            this.btnChonHinh.Size = new System.Drawing.Size(153, 50);
-            this.btnChonHinh.TabIndex = 34;
-            this.btnChonHinh.Text = "Chọn hình";
-            this.btnChonHinh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnChonHinh.UseVisualStyleBackColor = false;
+            this.btnChoosePicture.AutoSize = true;
+            this.btnChoosePicture.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnChoosePicture.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnChoosePicture.FlatAppearance.BorderSize = 0;
+            this.btnChoosePicture.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnChoosePicture.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChoosePicture.Image = global::QuanLyNhanSu.Properties.Resources.chose_picture;
+            this.btnChoosePicture.Location = new System.Drawing.Point(1602, 269);
+            this.btnChoosePicture.Name = "btnChoosePicture";
+            this.btnChoosePicture.Size = new System.Drawing.Size(153, 50);
+            this.btnChoosePicture.TabIndex = 34;
+            this.btnChoosePicture.Text = "Chọn hình";
+            this.btnChoosePicture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnChoosePicture.UseVisualStyleBackColor = false;
             // 
-            // dtpNTNS
+            // dtpBrithday
             // 
-            this.dtpNTNS.AllowDrop = true;
-            this.dtpNTNS.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtpNTNS.CustomFormat = "yyyy-MM-dd";
-            this.dtpNTNS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpNTNS.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNTNS.Location = new System.Drawing.Point(492, 157);
-            this.dtpNTNS.Name = "dtpNTNS";
-            this.dtpNTNS.Size = new System.Drawing.Size(183, 27);
-            this.dtpNTNS.TabIndex = 15;
+            this.dtpBrithday.AllowDrop = true;
+            this.dtpBrithday.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dtpBrithday.CustomFormat = "yyyy-MM-dd";
+            this.dtpBrithday.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpBrithday.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpBrithday.Location = new System.Drawing.Point(492, 157);
+            this.dtpBrithday.Name = "dtpBrithday";
+            this.dtpBrithday.Size = new System.Drawing.Size(183, 27);
+            this.dtpBrithday.TabIndex = 15;
             // 
-            // btnHuy
+            // btnCancel
             // 
-            this.btnHuy.AutoSize = true;
-            this.btnHuy.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnHuy.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHuy.FlatAppearance.BorderSize = 0;
-            this.btnHuy.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnHuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHuy.Image = global::QuanLyNhanSu.Properties.Resources.cancel;
-            this.btnHuy.Location = new System.Drawing.Point(927, 275);
-            this.btnHuy.Name = "btnHuy";
-            this.btnHuy.Size = new System.Drawing.Size(99, 49);
-            this.btnHuy.TabIndex = 38;
-            this.btnHuy.Text = "Huỷ";
-            this.btnHuy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnHuy.UseVisualStyleBackColor = false;
-            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
+            this.btnCancel.AutoSize = true;
+            this.btnCancel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Image = global::QuanLyNhanSu.Properties.Resources.cancel;
+            this.btnCancel.Location = new System.Drawing.Point(927, 275);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(99, 49);
+            this.btnCancel.TabIndex = 38;
+            this.btnCancel.Text = "Huỷ";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // btnSua
+            // btnEdit
             // 
-            this.btnSua.AutoSize = true;
-            this.btnSua.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnSua.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSua.FlatAppearance.BorderSize = 0;
-            this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSua.Image = global::QuanLyNhanSu.Properties.Resources.fix;
-            this.btnSua.Location = new System.Drawing.Point(647, 275);
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(100, 49);
-            this.btnSua.TabIndex = 36;
-            this.btnSua.Text = "Sửa";
-            this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSua.UseVisualStyleBackColor = false;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
+            this.btnEdit.AutoSize = true;
+            this.btnEdit.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEdit.Image = global::QuanLyNhanSu.Properties.Resources.fix;
+            this.btnEdit.Location = new System.Drawing.Point(647, 275);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(100, 49);
+            this.btnEdit.TabIndex = 36;
+            this.btnEdit.Text = "Sửa";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // btnXoa
+            // btnDelete
             // 
-            this.btnXoa.AutoSize = true;
-            this.btnXoa.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnXoa.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnXoa.FlatAppearance.BorderSize = 0;
-            this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoa.Image = global::QuanLyNhanSu.Properties.Resources.delete;
-            this.btnXoa.Location = new System.Drawing.Point(781, 275);
-            this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(102, 49);
-            this.btnXoa.TabIndex = 37;
-            this.btnXoa.Text = "Xoá";
-            this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnXoa.UseVisualStyleBackColor = false;
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            this.btnDelete.AutoSize = true;
+            this.btnDelete.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Image = global::QuanLyNhanSu.Properties.Resources.delete;
+            this.btnDelete.Location = new System.Drawing.Point(781, 275);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(102, 49);
+            this.btnDelete.TabIndex = 37;
+            this.btnDelete.Text = "Xoá";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // cbHienThiMatKhau
+            // cbShowPassword
             // 
-            this.cbHienThiMatKhau.AutoSize = true;
-            this.cbHienThiMatKhau.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbHienThiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbHienThiMatKhau.Location = new System.Drawing.Point(216, 266);
-            this.cbHienThiMatKhau.Name = "cbHienThiMatKhau";
-            this.cbHienThiMatKhau.Size = new System.Drawing.Size(162, 24);
-            this.cbHienThiMatKhau.TabIndex = 10;
-            this.cbHienThiMatKhau.Text = "Hiển thị mật khẩu";
-            this.cbHienThiMatKhau.UseVisualStyleBackColor = true;
-            this.cbHienThiMatKhau.CheckedChanged += new System.EventHandler(this.cbHienThiMatKhau_CheckedChanged);
+            this.cbShowPassword.AutoSize = true;
+            this.cbShowPassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbShowPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbShowPassword.Location = new System.Drawing.Point(216, 266);
+            this.cbShowPassword.Name = "cbShowPassword";
+            this.cbShowPassword.Size = new System.Drawing.Size(162, 24);
+            this.cbShowPassword.TabIndex = 10;
+            this.cbShowPassword.Text = "Hiển thị mật khẩu";
+            this.cbShowPassword.UseVisualStyleBackColor = true;
+            this.cbShowPassword.CheckedChanged += new System.EventHandler(this.cbShowpassword_CheckedChanged);
             // 
-            // txtNhapLaiMatKhau
+            // txtReEnterPassword
             // 
-            this.txtNhapLaiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNhapLaiMatKhau.Location = new System.Drawing.Point(206, 227);
-            this.txtNhapLaiMatKhau.MaxLength = 20;
-            this.txtNhapLaiMatKhau.Name = "txtNhapLaiMatKhau";
-            this.txtNhapLaiMatKhau.Size = new System.Drawing.Size(181, 27);
-            this.txtNhapLaiMatKhau.TabIndex = 9;
-            this.txtNhapLaiMatKhau.UseSystemPasswordChar = true;
-            this.txtNhapLaiMatKhau.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtReEnterPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReEnterPassword.Location = new System.Drawing.Point(206, 227);
+            this.txtReEnterPassword.MaxLength = 20;
+            this.txtReEnterPassword.Name = "txtReEnterPassword";
+            this.txtReEnterPassword.Size = new System.Drawing.Size(181, 27);
+            this.txtReEnterPassword.TabIndex = 9;
+            this.txtReEnterPassword.UseSystemPasswordChar = true;
+            this.txtReEnterPassword.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
-            // lblNhapLaiMatKhau
+            // lblReEnterPassword
             // 
-            this.lblNhapLaiMatKhau.AutoSize = true;
-            this.lblNhapLaiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNhapLaiMatKhau.Location = new System.Drawing.Point(12, 229);
-            this.lblNhapLaiMatKhau.Name = "lblNhapLaiMatKhau";
-            this.lblNhapLaiMatKhau.Size = new System.Drawing.Size(192, 25);
-            this.lblNhapLaiMatKhau.TabIndex = 58;
-            this.lblNhapLaiMatKhau.Text = "Nhập lại mật khẩu:";
+            this.lblReEnterPassword.AutoSize = true;
+            this.lblReEnterPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReEnterPassword.Location = new System.Drawing.Point(12, 229);
+            this.lblReEnterPassword.Name = "lblReEnterPassword";
+            this.lblReEnterPassword.Size = new System.Drawing.Size(192, 25);
+            this.lblReEnterPassword.TabIndex = 58;
+            this.lblReEnterPassword.Text = "Nhập lại mật khẩu:";
             // 
-            // btnThemPhuCap
+            // btnAddAllowance
             // 
-            this.btnThemPhuCap.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnThemPhuCap.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnThemPhuCap.FlatAppearance.BorderSize = 0;
-            this.btnThemPhuCap.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnThemPhuCap.Image = global::QuanLyNhanSu.Properties.Resources.add_small;
-            this.btnThemPhuCap.Location = new System.Drawing.Point(1262, 188);
-            this.btnThemPhuCap.Name = "btnThemPhuCap";
-            this.btnThemPhuCap.Size = new System.Drawing.Size(39, 38);
-            this.btnThemPhuCap.TabIndex = 32;
-            this.btnThemPhuCap.UseVisualStyleBackColor = false;
-            this.btnThemPhuCap.Click += new System.EventHandler(this.btnThemPhuCap_Click);
+            this.btnAddAllowance.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnAddAllowance.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddAllowance.FlatAppearance.BorderSize = 0;
+            this.btnAddAllowance.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAddAllowance.Image = global::QuanLyNhanSu.Properties.Resources.add_small;
+            this.btnAddAllowance.Location = new System.Drawing.Point(1262, 188);
+            this.btnAddAllowance.Name = "btnAddAllowance";
+            this.btnAddAllowance.Size = new System.Drawing.Size(39, 38);
+            this.btnAddAllowance.TabIndex = 32;
+            this.btnAddAllowance.UseVisualStyleBackColor = false;
+            this.btnAddAllowance.Click += new System.EventHandler(this.btnAddAllowance_Click);
             // 
-            // btnThem
+            // btnAdd
             // 
-            this.btnThem.AutoSize = true;
-            this.btnThem.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnThem.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnThem.FlatAppearance.BorderSize = 0;
-            this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThem.Image = global::QuanLyNhanSu.Properties.Resources.add;
-            this.btnThem.Location = new System.Drawing.Point(477, 275);
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(122, 49);
-            this.btnThem.TabIndex = 35;
-            this.btnThem.Text = "Thêm";
-            this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnThem.UseVisualStyleBackColor = false;
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+            this.btnAdd.AutoSize = true;
+            this.btnAdd.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Image = global::QuanLyNhanSu.Properties.Resources.add;
+            this.btnAdd.Location = new System.Drawing.Point(477, 275);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(122, 49);
+            this.btnAdd.TabIndex = 35;
+            this.btnAdd.Text = "Thêm";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // rbKhac
+            // rbOthers
             // 
-            this.rbKhac.AutoSize = true;
-            this.rbKhac.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rbKhac.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbKhac.Location = new System.Drawing.Point(986, 125);
-            this.rbKhac.Name = "rbKhac";
-            this.rbKhac.Size = new System.Drawing.Size(68, 24);
-            this.rbKhac.TabIndex = 23;
-            this.rbKhac.TabStop = true;
-            this.rbKhac.Text = "Khác";
-            this.rbKhac.UseVisualStyleBackColor = true;
-            this.rbKhac.CheckedChanged += new System.EventHandler(this.CheckChonGioiTinh);
+            this.rbOthers.AutoSize = true;
+            this.rbOthers.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rbOthers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbOthers.Location = new System.Drawing.Point(986, 125);
+            this.rbOthers.Name = "rbOthers";
+            this.rbOthers.Size = new System.Drawing.Size(68, 24);
+            this.rbOthers.TabIndex = 23;
+            this.rbOthers.TabStop = true;
+            this.rbOthers.Text = "Khác";
+            this.rbOthers.UseVisualStyleBackColor = true;
+            this.rbOthers.CheckedChanged += new System.EventHandler(this.CheckChonGioiTinh);
             // 
-            // rbNu
+            // rbFemale
             // 
-            this.rbNu.AutoSize = true;
-            this.rbNu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rbNu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbNu.Location = new System.Drawing.Point(929, 125);
-            this.rbNu.Name = "rbNu";
-            this.rbNu.Size = new System.Drawing.Size(51, 24);
-            this.rbNu.TabIndex = 22;
-            this.rbNu.TabStop = true;
-            this.rbNu.Text = "Nữ";
-            this.rbNu.UseVisualStyleBackColor = true;
-            this.rbNu.CheckedChanged += new System.EventHandler(this.CheckChonGioiTinh);
+            this.rbFemale.AutoSize = true;
+            this.rbFemale.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rbFemale.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbFemale.Location = new System.Drawing.Point(929, 125);
+            this.rbFemale.Name = "rbFemale";
+            this.rbFemale.Size = new System.Drawing.Size(51, 24);
+            this.rbFemale.TabIndex = 22;
+            this.rbFemale.TabStop = true;
+            this.rbFemale.Text = "Nữ";
+            this.rbFemale.UseVisualStyleBackColor = true;
+            this.rbFemale.CheckedChanged += new System.EventHandler(this.CheckChonGioiTinh);
             // 
-            // rbNam
+            // rbMale
             // 
-            this.rbNam.AutoSize = true;
-            this.rbNam.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rbNam.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbNam.Location = new System.Drawing.Point(862, 125);
-            this.rbNam.Name = "rbNam";
-            this.rbNam.Size = new System.Drawing.Size(65, 24);
-            this.rbNam.TabIndex = 21;
-            this.rbNam.TabStop = true;
-            this.rbNam.Text = "Nam";
-            this.rbNam.UseVisualStyleBackColor = true;
-            this.rbNam.CheckedChanged += new System.EventHandler(this.CheckChonGioiTinh);
+            this.rbMale.AutoSize = true;
+            this.rbMale.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rbMale.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbMale.Location = new System.Drawing.Point(862, 125);
+            this.rbMale.Name = "rbMale";
+            this.rbMale.Size = new System.Drawing.Size(65, 24);
+            this.rbMale.TabIndex = 21;
+            this.rbMale.TabStop = true;
+            this.rbMale.Text = "Nam";
+            this.rbMale.UseVisualStyleBackColor = true;
+            this.rbMale.CheckedChanged += new System.EventHandler(this.CheckChonGioiTinh);
             // 
-            // dtpThoiHanHopDong
+            // dtpContractDuration
             // 
-            this.dtpThoiHanHopDong.AllowDrop = true;
-            this.dtpThoiHanHopDong.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtpThoiHanHopDong.CustomFormat = "yyyy-MM-dd";
-            this.dtpThoiHanHopDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpThoiHanHopDong.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpThoiHanHopDong.Location = new System.Drawing.Point(1307, 52);
-            this.dtpThoiHanHopDong.Name = "dtpThoiHanHopDong";
-            this.dtpThoiHanHopDong.Size = new System.Drawing.Size(205, 27);
-            this.dtpThoiHanHopDong.TabIndex = 28;
+            this.dtpContractDuration.AllowDrop = true;
+            this.dtpContractDuration.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dtpContractDuration.CustomFormat = "yyyy-MM-dd";
+            this.dtpContractDuration.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpContractDuration.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpContractDuration.Location = new System.Drawing.Point(1307, 52);
+            this.dtpContractDuration.Name = "dtpContractDuration";
+            this.dtpContractDuration.Size = new System.Drawing.Size(205, 27);
+            this.dtpContractDuration.TabIndex = 28;
             // 
-            // dtpNgayVaoLam
+            // dtpEntryDate
             // 
-            this.dtpNgayVaoLam.AllowDrop = true;
-            this.dtpNgayVaoLam.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtpNgayVaoLam.CustomFormat = "yyyy-MM-dd";
-            this.dtpNgayVaoLam.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpNgayVaoLam.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgayVaoLam.Location = new System.Drawing.Point(1307, 16);
-            this.dtpNgayVaoLam.Name = "dtpNgayVaoLam";
-            this.dtpNgayVaoLam.Size = new System.Drawing.Size(205, 27);
-            this.dtpNgayVaoLam.TabIndex = 27;
+            this.dtpEntryDate.AllowDrop = true;
+            this.dtpEntryDate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dtpEntryDate.CustomFormat = "yyyy-MM-dd";
+            this.dtpEntryDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEntryDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpEntryDate.Location = new System.Drawing.Point(1307, 16);
+            this.dtpEntryDate.Name = "dtpEntryDate";
+            this.dtpEntryDate.Size = new System.Drawing.Size(205, 27);
+            this.dtpEntryDate.TabIndex = 27;
             // 
-            // txtPhuCap
+            // txtAllowance
             // 
-            this.txtPhuCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhuCap.Location = new System.Drawing.Point(1307, 195);
-            this.txtPhuCap.Name = "txtPhuCap";
-            this.txtPhuCap.Size = new System.Drawing.Size(205, 27);
-            this.txtPhuCap.TabIndex = 33;
+            this.txtAllowance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAllowance.Location = new System.Drawing.Point(1307, 195);
+            this.txtAllowance.Name = "txtAllowance";
+            this.txtAllowance.Size = new System.Drawing.Size(205, 27);
+            this.txtAllowance.TabIndex = 33;
             // 
-            // txtLuongCoBan
+            // txtBasicSalary
             // 
-            this.txtLuongCoBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLuongCoBan.Location = new System.Drawing.Point(1307, 161);
-            this.txtLuongCoBan.MaxLength = 50;
-            this.txtLuongCoBan.Name = "txtLuongCoBan";
-            this.txtLuongCoBan.Size = new System.Drawing.Size(205, 27);
-            this.txtLuongCoBan.TabIndex = 31;
-            this.txtLuongCoBan.TextChanged += new System.EventHandler(this.EnableButtons);
-            this.txtLuongCoBan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLuongCoBan_KeyPress);
+            this.txtBasicSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBasicSalary.Location = new System.Drawing.Point(1307, 161);
+            this.txtBasicSalary.MaxLength = 50;
+            this.txtBasicSalary.Name = "txtBasicSalary";
+            this.txtBasicSalary.Size = new System.Drawing.Size(205, 27);
+            this.txtBasicSalary.TabIndex = 31;
+            this.txtBasicSalary.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtBasicSalary.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBasicSalary_KeyPress);
             // 
-            // txtSoNgayPhep
+            // txtDateOffMount
             // 
-            this.txtSoNgayPhep.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSoNgayPhep.Location = new System.Drawing.Point(1307, 125);
-            this.txtSoNgayPhep.MaxLength = 3;
-            this.txtSoNgayPhep.Name = "txtSoNgayPhep";
-            this.txtSoNgayPhep.Size = new System.Drawing.Size(205, 27);
-            this.txtSoNgayPhep.TabIndex = 30;
-            this.txtSoNgayPhep.TextChanged += new System.EventHandler(this.EnableButtons);
-            this.txtSoNgayPhep.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSoNgayPhep_KeyPress);
+            this.txtDateOffMount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDateOffMount.Location = new System.Drawing.Point(1307, 125);
+            this.txtDateOffMount.MaxLength = 3;
+            this.txtDateOffMount.Name = "txtDateOffMount";
+            this.txtDateOffMount.Size = new System.Drawing.Size(205, 27);
+            this.txtDateOffMount.TabIndex = 30;
+            this.txtDateOffMount.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtDateOffMount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDateOffAmount_KeyPress);
             // 
-            // txtTinhTrang
+            // txtStatus
             // 
-            this.txtTinhTrang.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTinhTrang.Location = new System.Drawing.Point(1307, 85);
-            this.txtTinhTrang.MaxLength = 50;
-            this.txtTinhTrang.Name = "txtTinhTrang";
-            this.txtTinhTrang.Size = new System.Drawing.Size(205, 27);
-            this.txtTinhTrang.TabIndex = 29;
-            this.txtTinhTrang.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStatus.Location = new System.Drawing.Point(1307, 85);
+            this.txtStatus.MaxLength = 50;
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(205, 27);
+            this.txtStatus.TabIndex = 29;
+            this.txtStatus.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
-            // txtTrinhDoHocVan
+            // txtEducationLevel
             // 
-            this.txtTrinhDoHocVan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTrinhDoHocVan.Location = new System.Drawing.Point(875, 221);
-            this.txtTrinhDoHocVan.MaxLength = 50;
-            this.txtTrinhDoHocVan.Name = "txtTrinhDoHocVan";
-            this.txtTrinhDoHocVan.Size = new System.Drawing.Size(181, 27);
-            this.txtTrinhDoHocVan.TabIndex = 26;
-            this.txtTrinhDoHocVan.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtEducationLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEducationLevel.Location = new System.Drawing.Point(875, 221);
+            this.txtEducationLevel.MaxLength = 50;
+            this.txtEducationLevel.Name = "txtEducationLevel";
+            this.txtEducationLevel.Size = new System.Drawing.Size(181, 27);
+            this.txtEducationLevel.TabIndex = 26;
+            this.txtEducationLevel.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
             // txtEmail
             // 
@@ -1031,364 +1031,364 @@
             this.txtEmail.TabIndex = 25;
             this.txtEmail.TextChanged += new System.EventHandler(this.EnableButtons);
             // 
-            // txtSDT
-            // 
-            this.txtSDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSDT.Location = new System.Drawing.Point(875, 155);
-            this.txtSDT.MaxLength = 10;
-            this.txtSDT.Name = "txtSDT";
-            this.txtSDT.Size = new System.Drawing.Size(179, 27);
-            this.txtSDT.TabIndex = 24;
-            this.txtSDT.TextChanged += new System.EventHandler(this.EnableButtons);
-            this.txtSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSDT_KeyPress);
-            // 
-            // txtTinh_ThanhPho
-            // 
-            this.txtTinh_ThanhPho.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTinh_ThanhPho.Location = new System.Drawing.Point(875, 87);
-            this.txtTinh_ThanhPho.MaxLength = 100;
-            this.txtTinh_ThanhPho.Name = "txtTinh_ThanhPho";
-            this.txtTinh_ThanhPho.Size = new System.Drawing.Size(181, 27);
-            this.txtTinh_ThanhPho.TabIndex = 20;
-            this.txtTinh_ThanhPho.TextChanged += new System.EventHandler(this.EnableButtons);
-            // 
-            // txtQuan_Huyen
-            // 
-            this.txtQuan_Huyen.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQuan_Huyen.Location = new System.Drawing.Point(875, 52);
-            this.txtQuan_Huyen.MaxLength = 100;
-            this.txtQuan_Huyen.Name = "txtQuan_Huyen";
-            this.txtQuan_Huyen.Size = new System.Drawing.Size(181, 27);
-            this.txtQuan_Huyen.TabIndex = 19;
-            this.txtQuan_Huyen.TextChanged += new System.EventHandler(this.EnableButtons);
-            // 
-            // txtPhuong_Xa
-            // 
-            this.txtPhuong_Xa.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhuong_Xa.Location = new System.Drawing.Point(875, 16);
-            this.txtPhuong_Xa.MaxLength = 100;
-            this.txtPhuong_Xa.Name = "txtPhuong_Xa";
-            this.txtPhuong_Xa.Size = new System.Drawing.Size(181, 27);
-            this.txtPhuong_Xa.TabIndex = 18;
-            this.txtPhuong_Xa.TextChanged += new System.EventHandler(this.EnableButtons);
-            // 
-            // txtDuong
-            // 
-            this.txtDuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDuong.Location = new System.Drawing.Point(492, 230);
-            this.txtDuong.MaxLength = 100;
-            this.txtDuong.Name = "txtDuong";
-            this.txtDuong.Size = new System.Drawing.Size(183, 27);
-            this.txtDuong.TabIndex = 17;
-            this.txtDuong.TextChanged += new System.EventHandler(this.EnableButtons);
-            // 
-            // txtSoNha
-            // 
-            this.txtSoNha.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSoNha.Location = new System.Drawing.Point(492, 195);
-            this.txtSoNha.MaxLength = 20;
-            this.txtSoNha.Name = "txtSoNha";
-            this.txtSoNha.Size = new System.Drawing.Size(183, 27);
-            this.txtSoNha.TabIndex = 16;
-            this.txtSoNha.TextChanged += new System.EventHandler(this.EnableButtons);
-            // 
-            // txtTen
-            // 
-            this.txtTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTen.Location = new System.Drawing.Point(492, 122);
-            this.txtTen.MaxLength = 20;
-            this.txtTen.Name = "txtTen";
-            this.txtTen.Size = new System.Drawing.Size(183, 27);
-            this.txtTen.TabIndex = 14;
-            this.txtTen.TextChanged += new System.EventHandler(this.EnableButtons);
-            this.txtTen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyCharHoTen);
-            // 
-            // txtTenLot
-            // 
-            this.txtTenLot.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTenLot.Location = new System.Drawing.Point(492, 86);
-            this.txtTenLot.MaxLength = 20;
-            this.txtTenLot.Name = "txtTenLot";
-            this.txtTenLot.Size = new System.Drawing.Size(183, 27);
-            this.txtTenLot.TabIndex = 13;
-            this.txtTenLot.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyCharHoTen);
-            // 
-            // txtHo
-            // 
-            this.txtHo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHo.Location = new System.Drawing.Point(493, 47);
-            this.txtHo.MaxLength = 20;
-            this.txtHo.Name = "txtHo";
-            this.txtHo.Size = new System.Drawing.Size(183, 27);
-            this.txtHo.TabIndex = 12;
-            this.txtHo.TextChanged += new System.EventHandler(this.EnableButtons);
-            this.txtHo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyCharHoTen);
-            // 
-            // txtCCCD
-            // 
-            this.txtCCCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCCCD.Location = new System.Drawing.Point(492, 14);
-            this.txtCCCD.MaxLength = 12;
-            this.txtCCCD.Name = "txtCCCD";
-            this.txtCCCD.Size = new System.Drawing.Size(183, 27);
-            this.txtCCCD.TabIndex = 11;
-            this.txtCCCD.TextChanged += new System.EventHandler(this.EnableButtons);
-            this.txtCCCD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCCCD_KeyPress);
-            // 
-            // txtMatKhau
-            // 
-            this.txtMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMatKhau.Location = new System.Drawing.Point(206, 191);
-            this.txtMatKhau.MaxLength = 20;
-            this.txtMatKhau.Name = "txtMatKhau";
-            this.txtMatKhau.Size = new System.Drawing.Size(181, 27);
-            this.txtMatKhau.TabIndex = 8;
-            this.txtMatKhau.UseSystemPasswordChar = true;
-            this.txtMatKhau.TextChanged += new System.EventHandler(this.EnableButtons);
-            // 
-            // txtTaiKhoan
-            // 
-            this.txtTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTaiKhoan.Location = new System.Drawing.Point(206, 155);
-            this.txtTaiKhoan.MaxLength = 20;
-            this.txtTaiKhoan.Name = "txtTaiKhoan";
-            this.txtTaiKhoan.Size = new System.Drawing.Size(181, 27);
-            this.txtTaiKhoan.TabIndex = 7;
-            this.txtTaiKhoan.TextChanged += new System.EventHandler(this.EnableButtons);
-            // 
-            // cmbLoaiHopDong
-            // 
-            this.cmbLoaiHopDong.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbLoaiHopDong.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLoaiHopDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbLoaiHopDong.FormattingEnabled = true;
-            this.cmbLoaiHopDong.Location = new System.Drawing.Point(206, 118);
-            this.cmbLoaiHopDong.Name = "cmbLoaiHopDong";
-            this.cmbLoaiHopDong.Size = new System.Drawing.Size(181, 28);
-            this.cmbLoaiHopDong.TabIndex = 6;
-            // 
-            // cmbChucVu
-            // 
-            this.cmbChucVu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbChucVu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbChucVu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbChucVu.FormattingEnabled = true;
-            this.cmbChucVu.Location = new System.Drawing.Point(206, 82);
-            this.cmbChucVu.Name = "cmbChucVu";
-            this.cmbChucVu.Size = new System.Drawing.Size(181, 28);
-            this.cmbChucVu.TabIndex = 5;
-            this.cmbChucVu.SelectedIndexChanged += new System.EventHandler(this.LoadLuongKhoiDiem);
-            // 
-            // cmbPhongBan
-            // 
-            this.cmbPhongBan.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbPhongBan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbPhongBan.FormattingEnabled = true;
-            this.cmbPhongBan.Location = new System.Drawing.Point(206, 46);
-            this.cmbPhongBan.Name = "cmbPhongBan";
-            this.cmbPhongBan.Size = new System.Drawing.Size(181, 28);
-            this.cmbPhongBan.TabIndex = 4;
-            this.cmbPhongBan.TextChanged += new System.EventHandler(this.LoadChucVu);
-            // 
-            // txtMaNV
-            // 
-            this.txtMaNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaNV.Location = new System.Drawing.Point(206, 11);
-            this.txtMaNV.Name = "txtMaNV";
-            this.txtMaNV.Size = new System.Drawing.Size(181, 27);
-            this.txtMaNV.TabIndex = 3;
-            this.txtMaNV.TextChanged += new System.EventHandler(this.EnableButtons);
-            // 
-            // lblHinh
-            // 
-            this.lblHinh.AutoSize = true;
-            this.lblHinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHinh.Location = new System.Drawing.Point(1647, 13);
-            this.lblHinh.Name = "lblHinh";
-            this.lblHinh.Size = new System.Drawing.Size(63, 25);
-            this.lblHinh.TabIndex = 27;
-            this.lblHinh.Text = "Hình:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1076, 190);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 25);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "Phụ cấp:";
-            // 
-            // lblLuongCoBan
-            // 
-            this.lblLuongCoBan.AutoSize = true;
-            this.lblLuongCoBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLuongCoBan.Location = new System.Drawing.Point(1079, 156);
-            this.lblLuongCoBan.Name = "lblLuongCoBan";
-            this.lblLuongCoBan.Size = new System.Drawing.Size(150, 25);
-            this.lblLuongCoBan.TabIndex = 25;
-            this.lblLuongCoBan.Text = "Lương cơ bản:";
-            // 
-            // pbAnhNV
-            // 
-            this.pbAnhNV.Image = global::QuanLyNhanSu.Properties.Resources.image;
-            this.pbAnhNV.Location = new System.Drawing.Point(1575, 42);
-            this.pbAnhNV.Name = "pbAnhNV";
-            this.pbAnhNV.Size = new System.Drawing.Size(215, 215);
-            this.pbAnhNV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbAnhNV.TabIndex = 24;
-            this.pbAnhNV.TabStop = false;
-            // 
-            // lblThoiHanHopDong
-            // 
-            this.lblThoiHanHopDong.AutoSize = true;
-            this.lblThoiHanHopDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThoiHanHopDong.Location = new System.Drawing.Point(1076, 52);
-            this.lblThoiHanHopDong.Name = "lblThoiHanHopDong";
-            this.lblThoiHanHopDong.Size = new System.Drawing.Size(200, 25);
-            this.lblThoiHanHopDong.TabIndex = 21;
-            this.lblThoiHanHopDong.Text = "Thời hạn hợp đồng:";
-            // 
-            // lblTinhTrang
-            // 
-            this.lblTinhTrang.AutoSize = true;
-            this.lblTinhTrang.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTinhTrang.Location = new System.Drawing.Point(1077, 88);
-            this.lblTinhTrang.Name = "lblTinhTrang";
-            this.lblTinhTrang.Size = new System.Drawing.Size(117, 25);
-            this.lblTinhTrang.TabIndex = 22;
-            this.lblTinhTrang.Text = "Tình trạng:";
-            // 
-            // lblSoNgayPhep
-            // 
-            this.lblSoNgayPhep.AutoSize = true;
-            this.lblSoNgayPhep.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSoNgayPhep.Location = new System.Drawing.Point(1076, 124);
-            this.lblSoNgayPhep.Name = "lblSoNgayPhep";
-            this.lblSoNgayPhep.Size = new System.Drawing.Size(153, 25);
-            this.lblSoNgayPhep.TabIndex = 23;
-            this.lblSoNgayPhep.Text = "Số ngày phép:";
-            // 
-            // lblLoaiHopDong
-            // 
-            this.lblLoaiHopDong.AutoSize = true;
-            this.lblLoaiHopDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLoaiHopDong.Location = new System.Drawing.Point(12, 121);
-            this.lblLoaiHopDong.Name = "lblLoaiHopDong";
-            this.lblLoaiHopDong.Size = new System.Drawing.Size(156, 25);
-            this.lblLoaiHopDong.TabIndex = 18;
-            this.lblLoaiHopDong.Text = "Loại hợp đồng:";
-            // 
-            // lblTaiKhoan
-            // 
-            this.lblTaiKhoan.AutoSize = true;
-            this.lblTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaiKhoan.Location = new System.Drawing.Point(12, 157);
-            this.lblTaiKhoan.Name = "lblTaiKhoan";
-            this.lblTaiKhoan.Size = new System.Drawing.Size(115, 25);
-            this.lblTaiKhoan.TabIndex = 19;
-            this.lblTaiKhoan.Text = "Tài khoản:";
-            // 
-            // lblMatKhau
-            // 
-            this.lblMatKhau.AutoSize = true;
-            this.lblMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatKhau.Location = new System.Drawing.Point(12, 193);
-            this.lblMatKhau.Name = "lblMatKhau";
-            this.lblMatKhau.Size = new System.Drawing.Size(108, 25);
-            this.lblMatKhau.TabIndex = 20;
-            this.lblMatKhau.Text = "Mật khẩu:";
-            // 
-            // lblTinh_ThanhPho
-            // 
-            this.lblTinh_ThanhPho.AutoSize = true;
-            this.lblTinh_ThanhPho.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTinh_ThanhPho.Location = new System.Drawing.Point(700, 86);
-            this.lblTinh_ThanhPho.Name = "lblTinh_ThanhPho";
-            this.lblTinh_ThanhPho.Size = new System.Drawing.Size(173, 25);
-            this.lblTinh_ThanhPho.TabIndex = 15;
-            this.lblTinh_ThanhPho.Text = "Tỉnh/Thành phố:";
-            // 
-            // lblGioiTinh
-            // 
-            this.lblGioiTinh.AutoSize = true;
-            this.lblGioiTinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGioiTinh.Location = new System.Drawing.Point(700, 122);
-            this.lblGioiTinh.Name = "lblGioiTinh";
-            this.lblGioiTinh.Size = new System.Drawing.Size(98, 25);
-            this.lblGioiTinh.TabIndex = 16;
-            this.lblGioiTinh.Text = "Giới tính:";
-            // 
-            // lblSoDienThoai
-            // 
-            this.lblSoDienThoai.AutoSize = true;
-            this.lblSoDienThoai.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSoDienThoai.Location = new System.Drawing.Point(699, 160);
-            this.lblSoDienThoai.Name = "lblSoDienThoai";
-            this.lblSoDienThoai.Size = new System.Drawing.Size(146, 25);
-            this.lblSoDienThoai.TabIndex = 17;
-            this.lblSoDienThoai.Text = "Số điện thoại:";
-            // 
-            // lblCCCD
-            // 
-            this.lblCCCD.AutoSize = true;
-            this.lblCCCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCCCD.Location = new System.Drawing.Point(404, 13);
-            this.lblCCCD.Name = "lblCCCD";
-            this.lblCCCD.Size = new System.Drawing.Size(82, 25);
-            this.lblCCCD.TabIndex = 12;
-            this.lblCCCD.Text = "CCCD:";
-            // 
-            // lblHo
-            // 
-            this.lblHo.AutoSize = true;
-            this.lblHo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHo.Location = new System.Drawing.Point(404, 49);
-            this.lblHo.Name = "lblHo";
-            this.lblHo.Size = new System.Drawing.Size(46, 25);
-            this.lblHo.TabIndex = 13;
-            this.lblHo.Text = "Họ:";
-            // 
-            // lblTenLot
-            // 
-            this.lblTenLot.AutoSize = true;
-            this.lblTenLot.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTenLot.Location = new System.Drawing.Point(404, 85);
-            this.lblTenLot.Name = "lblTenLot";
-            this.lblTenLot.Size = new System.Drawing.Size(86, 25);
-            this.lblTenLot.TabIndex = 14;
-            this.lblTenLot.Text = "Tên lót:";
-            // 
-            // lblTen
-            // 
-            this.lblTen.AutoSize = true;
-            this.lblTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTen.Location = new System.Drawing.Point(404, 119);
-            this.lblTen.Name = "lblTen";
-            this.lblTen.Size = new System.Drawing.Size(57, 25);
-            this.lblTen.TabIndex = 9;
-            this.lblTen.Text = "Tên:";
-            // 
-            // lblNTNS
-            // 
-            this.lblNTNS.AutoSize = true;
-            this.lblNTNS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNTNS.Location = new System.Drawing.Point(404, 155);
-            this.lblNTNS.Name = "lblNTNS";
-            this.lblNTNS.Size = new System.Drawing.Size(78, 25);
-            this.lblNTNS.TabIndex = 10;
-            this.lblNTNS.Text = "NTSN:";
-            // 
-            // lblSoNha
-            // 
-            this.lblSoNha.AutoSize = true;
-            this.lblSoNha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSoNha.Location = new System.Drawing.Point(404, 192);
-            this.lblSoNha.Name = "lblSoNha";
-            this.lblSoNha.Size = new System.Drawing.Size(88, 25);
-            this.lblSoNha.TabIndex = 11;
-            this.lblSoNha.Text = "Số nhà:";
+            // txtPhone
+            // 
+            this.txtPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPhone.Location = new System.Drawing.Point(875, 155);
+            this.txtPhone.MaxLength = 10;
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(179, 27);
+            this.txtPhone.TabIndex = 24;
+            this.txtPhone.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPhone_KeyPress);
+            // 
+            // txtProvince_City
+            // 
+            this.txtProvince_City.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProvince_City.Location = new System.Drawing.Point(875, 87);
+            this.txtProvince_City.MaxLength = 100;
+            this.txtProvince_City.Name = "txtProvince_City";
+            this.txtProvince_City.Size = new System.Drawing.Size(181, 27);
+            this.txtProvince_City.TabIndex = 20;
+            this.txtProvince_City.TextChanged += new System.EventHandler(this.EnableButtons);
+            // 
+            // txtDistrict
+            // 
+            this.txtDistrict.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDistrict.Location = new System.Drawing.Point(875, 52);
+            this.txtDistrict.MaxLength = 100;
+            this.txtDistrict.Name = "txtDistrict";
+            this.txtDistrict.Size = new System.Drawing.Size(181, 27);
+            this.txtDistrict.TabIndex = 19;
+            this.txtDistrict.TextChanged += new System.EventHandler(this.EnableButtons);
+            // 
+            // txtWard
+            // 
+            this.txtWard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtWard.Location = new System.Drawing.Point(875, 16);
+            this.txtWard.MaxLength = 100;
+            this.txtWard.Name = "txtWard";
+            this.txtWard.Size = new System.Drawing.Size(181, 27);
+            this.txtWard.TabIndex = 18;
+            this.txtWard.TextChanged += new System.EventHandler(this.EnableButtons);
+            // 
+            // txtStreet
+            // 
+            this.txtStreet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStreet.Location = new System.Drawing.Point(492, 230);
+            this.txtStreet.MaxLength = 100;
+            this.txtStreet.Name = "txtStreet";
+            this.txtStreet.Size = new System.Drawing.Size(183, 27);
+            this.txtStreet.TabIndex = 17;
+            this.txtStreet.TextChanged += new System.EventHandler(this.EnableButtons);
+            // 
+            // txtHouseNumer
+            // 
+            this.txtHouseNumer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHouseNumer.Location = new System.Drawing.Point(492, 195);
+            this.txtHouseNumer.MaxLength = 20;
+            this.txtHouseNumer.Name = "txtHouseNumer";
+            this.txtHouseNumer.Size = new System.Drawing.Size(183, 27);
+            this.txtHouseNumer.TabIndex = 16;
+            this.txtHouseNumer.TextChanged += new System.EventHandler(this.EnableButtons);
+            // 
+            // txtFirstName
+            // 
+            this.txtFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFirstName.Location = new System.Drawing.Point(492, 122);
+            this.txtFirstName.MaxLength = 20;
+            this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Size = new System.Drawing.Size(183, 27);
+            this.txtFirstName.TabIndex = 14;
+            this.txtFirstName.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtFirstName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyCharHoTen);
+            // 
+            // txtMiddleName
+            // 
+            this.txtMiddleName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMiddleName.Location = new System.Drawing.Point(492, 86);
+            this.txtMiddleName.MaxLength = 20;
+            this.txtMiddleName.Name = "txtMiddleName";
+            this.txtMiddleName.Size = new System.Drawing.Size(183, 27);
+            this.txtMiddleName.TabIndex = 13;
+            this.txtMiddleName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyCharHoTen);
+            // 
+            // txtLastName
+            // 
+            this.txtLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLastName.Location = new System.Drawing.Point(493, 47);
+            this.txtLastName.MaxLength = 20;
+            this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Size = new System.Drawing.Size(183, 27);
+            this.txtLastName.TabIndex = 12;
+            this.txtLastName.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtLastName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyCharHoTen);
+            // 
+            // txtIDCard
+            // 
+            this.txtIDCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIDCard.Location = new System.Drawing.Point(492, 14);
+            this.txtIDCard.MaxLength = 12;
+            this.txtIDCard.Name = "txtIDCard";
+            this.txtIDCard.Size = new System.Drawing.Size(183, 27);
+            this.txtIDCard.TabIndex = 11;
+            this.txtIDCard.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtIDCard.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIDCard_KeyPress);
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Location = new System.Drawing.Point(206, 191);
+            this.txtPassword.MaxLength = 20;
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(181, 27);
+            this.txtPassword.TabIndex = 8;
+            this.txtPassword.UseSystemPasswordChar = true;
+            this.txtPassword.TextChanged += new System.EventHandler(this.EnableButtons);
+            // 
+            // txtAccount
+            // 
+            this.txtAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAccount.Location = new System.Drawing.Point(206, 155);
+            this.txtAccount.MaxLength = 20;
+            this.txtAccount.Name = "txtAccount";
+            this.txtAccount.Size = new System.Drawing.Size(181, 27);
+            this.txtAccount.TabIndex = 7;
+            this.txtAccount.TextChanged += new System.EventHandler(this.EnableButtons);
+            // 
+            // cmbContractType
+            // 
+            this.cmbContractType.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbContractType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbContractType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbContractType.FormattingEnabled = true;
+            this.cmbContractType.Location = new System.Drawing.Point(206, 118);
+            this.cmbContractType.Name = "cmbContractType";
+            this.cmbContractType.Size = new System.Drawing.Size(181, 28);
+            this.cmbContractType.TabIndex = 6;
+            // 
+            // cmbPosition
+            // 
+            this.cmbPosition.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPosition.FormattingEnabled = true;
+            this.cmbPosition.Location = new System.Drawing.Point(206, 82);
+            this.cmbPosition.Name = "cmbPosition";
+            this.cmbPosition.Size = new System.Drawing.Size(181, 28);
+            this.cmbPosition.TabIndex = 5;
+            this.cmbPosition.SelectedIndexChanged += new System.EventHandler(this.LoadLuongKhoiDiem);
+            // 
+            // cmbDepartment
+            // 
+            this.cmbDepartment.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbDepartment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDepartment.FormattingEnabled = true;
+            this.cmbDepartment.Location = new System.Drawing.Point(206, 46);
+            this.cmbDepartment.Name = "cmbDepartment";
+            this.cmbDepartment.Size = new System.Drawing.Size(181, 28);
+            this.cmbDepartment.TabIndex = 4;
+            this.cmbDepartment.TextChanged += new System.EventHandler(this.LoadChucVu);
+            // 
+            // txtStaffID
+            // 
+            this.txtStaffID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStaffID.Location = new System.Drawing.Point(206, 11);
+            this.txtStaffID.Name = "txtStaffID";
+            this.txtStaffID.Size = new System.Drawing.Size(181, 27);
+            this.txtStaffID.TabIndex = 3;
+            this.txtStaffID.TextChanged += new System.EventHandler(this.EnableButtons);
+            // 
+            // lblPicture
+            // 
+            this.lblPicture.AutoSize = true;
+            this.lblPicture.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPicture.Location = new System.Drawing.Point(1647, 13);
+            this.lblPicture.Name = "lblPicture";
+            this.lblPicture.Size = new System.Drawing.Size(63, 25);
+            this.lblPicture.TabIndex = 27;
+            this.lblPicture.Text = "Hình:";
+            // 
+            // lblAllowance
+            // 
+            this.lblAllowance.AutoSize = true;
+            this.lblAllowance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAllowance.Location = new System.Drawing.Point(1076, 190);
+            this.lblAllowance.Name = "lblAllowance";
+            this.lblAllowance.Size = new System.Drawing.Size(98, 25);
+            this.lblAllowance.TabIndex = 26;
+            this.lblAllowance.Text = "Phụ cấp:";
+            // 
+            // lblBasicSalary
+            // 
+            this.lblBasicSalary.AutoSize = true;
+            this.lblBasicSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBasicSalary.Location = new System.Drawing.Point(1079, 156);
+            this.lblBasicSalary.Name = "lblBasicSalary";
+            this.lblBasicSalary.Size = new System.Drawing.Size(150, 25);
+            this.lblBasicSalary.TabIndex = 25;
+            this.lblBasicSalary.Text = "Lương cơ bản:";
+            // 
+            // pbStaffPicture
+            // 
+            this.pbStaffPicture.Image = global::QuanLyNhanSu.Properties.Resources.image;
+            this.pbStaffPicture.Location = new System.Drawing.Point(1575, 42);
+            this.pbStaffPicture.Name = "pbStaffPicture";
+            this.pbStaffPicture.Size = new System.Drawing.Size(215, 215);
+            this.pbStaffPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbStaffPicture.TabIndex = 24;
+            this.pbStaffPicture.TabStop = false;
+            // 
+            // lblContractDuration
+            // 
+            this.lblContractDuration.AutoSize = true;
+            this.lblContractDuration.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblContractDuration.Location = new System.Drawing.Point(1076, 52);
+            this.lblContractDuration.Name = "lblContractDuration";
+            this.lblContractDuration.Size = new System.Drawing.Size(200, 25);
+            this.lblContractDuration.TabIndex = 21;
+            this.lblContractDuration.Text = "Thời hạn hợp đồng:";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Location = new System.Drawing.Point(1077, 88);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(117, 25);
+            this.lblStatus.TabIndex = 22;
+            this.lblStatus.Text = "Tình trạng:";
+            // 
+            // lblDateOffMount
+            // 
+            this.lblDateOffMount.AutoSize = true;
+            this.lblDateOffMount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDateOffMount.Location = new System.Drawing.Point(1076, 124);
+            this.lblDateOffMount.Name = "lblDateOffMount";
+            this.lblDateOffMount.Size = new System.Drawing.Size(153, 25);
+            this.lblDateOffMount.TabIndex = 23;
+            this.lblDateOffMount.Text = "Số ngày phép:";
+            // 
+            // lblContractType
+            // 
+            this.lblContractType.AutoSize = true;
+            this.lblContractType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblContractType.Location = new System.Drawing.Point(12, 121);
+            this.lblContractType.Name = "lblContractType";
+            this.lblContractType.Size = new System.Drawing.Size(156, 25);
+            this.lblContractType.TabIndex = 18;
+            this.lblContractType.Text = "Loại hợp đồng:";
+            // 
+            // lblAccount
+            // 
+            this.lblAccount.AutoSize = true;
+            this.lblAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAccount.Location = new System.Drawing.Point(12, 157);
+            this.lblAccount.Name = "lblAccount";
+            this.lblAccount.Size = new System.Drawing.Size(115, 25);
+            this.lblAccount.TabIndex = 19;
+            this.lblAccount.Text = "Tài khoản:";
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.Location = new System.Drawing.Point(12, 193);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(108, 25);
+            this.lblPassword.TabIndex = 20;
+            this.lblPassword.Text = "Mật khẩu:";
+            // 
+            // lblProvince_City
+            // 
+            this.lblProvince_City.AutoSize = true;
+            this.lblProvince_City.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProvince_City.Location = new System.Drawing.Point(700, 86);
+            this.lblProvince_City.Name = "lblProvince_City";
+            this.lblProvince_City.Size = new System.Drawing.Size(173, 25);
+            this.lblProvince_City.TabIndex = 15;
+            this.lblProvince_City.Text = "Tỉnh/Thành phố:";
+            // 
+            // lblGender
+            // 
+            this.lblGender.AutoSize = true;
+            this.lblGender.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGender.Location = new System.Drawing.Point(700, 122);
+            this.lblGender.Name = "lblGender";
+            this.lblGender.Size = new System.Drawing.Size(98, 25);
+            this.lblGender.TabIndex = 16;
+            this.lblGender.Text = "Giới tính:";
+            // 
+            // lblPhone
+            // 
+            this.lblPhone.AutoSize = true;
+            this.lblPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPhone.Location = new System.Drawing.Point(699, 160);
+            this.lblPhone.Name = "lblPhone";
+            this.lblPhone.Size = new System.Drawing.Size(146, 25);
+            this.lblPhone.TabIndex = 17;
+            this.lblPhone.Text = "Số điện thoại:";
+            // 
+            // lblIDCard
+            // 
+            this.lblIDCard.AutoSize = true;
+            this.lblIDCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIDCard.Location = new System.Drawing.Point(404, 13);
+            this.lblIDCard.Name = "lblIDCard";
+            this.lblIDCard.Size = new System.Drawing.Size(82, 25);
+            this.lblIDCard.TabIndex = 12;
+            this.lblIDCard.Text = "CCCD:";
+            // 
+            // lblLastName
+            // 
+            this.lblLastName.AutoSize = true;
+            this.lblLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastName.Location = new System.Drawing.Point(404, 49);
+            this.lblLastName.Name = "lblLastName";
+            this.lblLastName.Size = new System.Drawing.Size(46, 25);
+            this.lblLastName.TabIndex = 13;
+            this.lblLastName.Text = "Họ:";
+            // 
+            // lblMiddle
+            // 
+            this.lblMiddle.AutoSize = true;
+            this.lblMiddle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMiddle.Location = new System.Drawing.Point(404, 85);
+            this.lblMiddle.Name = "lblMiddle";
+            this.lblMiddle.Size = new System.Drawing.Size(86, 25);
+            this.lblMiddle.TabIndex = 14;
+            this.lblMiddle.Text = "Tên lót:";
+            // 
+            // lblFirstName
+            // 
+            this.lblFirstName.AutoSize = true;
+            this.lblFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFirstName.Location = new System.Drawing.Point(404, 119);
+            this.lblFirstName.Name = "lblFirstName";
+            this.lblFirstName.Size = new System.Drawing.Size(57, 25);
+            this.lblFirstName.TabIndex = 9;
+            this.lblFirstName.Text = "Tên:";
+            // 
+            // lblBrithday
+            // 
+            this.lblBrithday.AutoSize = true;
+            this.lblBrithday.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBrithday.Location = new System.Drawing.Point(404, 155);
+            this.lblBrithday.Name = "lblBrithday";
+            this.lblBrithday.Size = new System.Drawing.Size(78, 25);
+            this.lblBrithday.TabIndex = 10;
+            this.lblBrithday.Text = "NTSN:";
+            // 
+            // lblHouseNumer
+            // 
+            this.lblHouseNumer.AutoSize = true;
+            this.lblHouseNumer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHouseNumer.Location = new System.Drawing.Point(404, 192);
+            this.lblHouseNumer.Name = "lblHouseNumer";
+            this.lblHouseNumer.Size = new System.Drawing.Size(88, 25);
+            this.lblHouseNumer.TabIndex = 11;
+            this.lblHouseNumer.Text = "Số nhà:";
             // 
             // lblEmail
             // 
@@ -1400,116 +1400,116 @@
             this.lblEmail.TabIndex = 6;
             this.lblEmail.Text = "Email:";
             // 
-            // lblTrinhDoHocVan
+            // lblEducationLevel
             // 
-            this.lblTrinhDoHocVan.AutoSize = true;
-            this.lblTrinhDoHocVan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTrinhDoHocVan.Location = new System.Drawing.Point(696, 225);
-            this.lblTrinhDoHocVan.Name = "lblTrinhDoHocVan";
-            this.lblTrinhDoHocVan.Size = new System.Drawing.Size(181, 25);
-            this.lblTrinhDoHocVan.TabIndex = 7;
-            this.lblTrinhDoHocVan.Text = "Trình độ học vấn:";
+            this.lblEducationLevel.AutoSize = true;
+            this.lblEducationLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEducationLevel.Location = new System.Drawing.Point(696, 225);
+            this.lblEducationLevel.Name = "lblEducationLevel";
+            this.lblEducationLevel.Size = new System.Drawing.Size(181, 25);
+            this.lblEducationLevel.TabIndex = 7;
+            this.lblEducationLevel.Text = "Trình độ học vấn:";
             // 
-            // lblNgayVaoLam
+            // lblEntryDate
             // 
-            this.lblNgayVaoLam.AutoSize = true;
-            this.lblNgayVaoLam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayVaoLam.Location = new System.Drawing.Point(1076, 16);
-            this.lblNgayVaoLam.Name = "lblNgayVaoLam";
-            this.lblNgayVaoLam.Size = new System.Drawing.Size(150, 25);
-            this.lblNgayVaoLam.TabIndex = 8;
-            this.lblNgayVaoLam.Text = "Ngày vào làm:";
+            this.lblEntryDate.AutoSize = true;
+            this.lblEntryDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEntryDate.Location = new System.Drawing.Point(1076, 16);
+            this.lblEntryDate.Name = "lblEntryDate";
+            this.lblEntryDate.Size = new System.Drawing.Size(150, 25);
+            this.lblEntryDate.TabIndex = 8;
+            this.lblEntryDate.Text = "Ngày vào làm:";
             // 
-            // lblDuong
+            // lblStreet
             // 
-            this.lblDuong.AutoSize = true;
-            this.lblDuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDuong.Location = new System.Drawing.Point(404, 227);
-            this.lblDuong.Name = "lblDuong";
-            this.lblDuong.Size = new System.Drawing.Size(82, 25);
-            this.lblDuong.TabIndex = 3;
-            this.lblDuong.Text = "Đường:";
+            this.lblStreet.AutoSize = true;
+            this.lblStreet.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStreet.Location = new System.Drawing.Point(404, 227);
+            this.lblStreet.Name = "lblStreet";
+            this.lblStreet.Size = new System.Drawing.Size(82, 25);
+            this.lblStreet.TabIndex = 3;
+            this.lblStreet.Text = "Đường:";
             // 
-            // lblPhuong_Xa
+            // lblWard
             // 
-            this.lblPhuong_Xa.AutoSize = true;
-            this.lblPhuong_Xa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhuong_Xa.Location = new System.Drawing.Point(700, 15);
-            this.lblPhuong_Xa.Name = "lblPhuong_Xa";
-            this.lblPhuong_Xa.Size = new System.Drawing.Size(127, 25);
-            this.lblPhuong_Xa.TabIndex = 4;
-            this.lblPhuong_Xa.Text = "Phường/Xã:";
+            this.lblWard.AutoSize = true;
+            this.lblWard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWard.Location = new System.Drawing.Point(700, 15);
+            this.lblWard.Name = "lblWard";
+            this.lblWard.Size = new System.Drawing.Size(127, 25);
+            this.lblWard.TabIndex = 4;
+            this.lblWard.Text = "Phường/Xã:";
             // 
-            // lblQuan_Huyen
+            // lblDistrict
             // 
-            this.lblQuan_Huyen.AutoSize = true;
-            this.lblQuan_Huyen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuan_Huyen.Location = new System.Drawing.Point(700, 51);
-            this.lblQuan_Huyen.Name = "lblQuan_Huyen";
-            this.lblQuan_Huyen.Size = new System.Drawing.Size(141, 25);
-            this.lblQuan_Huyen.TabIndex = 5;
-            this.lblQuan_Huyen.Text = "Quận/Huyện:";
+            this.lblDistrict.AutoSize = true;
+            this.lblDistrict.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDistrict.Location = new System.Drawing.Point(700, 51);
+            this.lblDistrict.Name = "lblDistrict";
+            this.lblDistrict.Size = new System.Drawing.Size(141, 25);
+            this.lblDistrict.TabIndex = 5;
+            this.lblDistrict.Text = "Quận/Huyện:";
             // 
-            // lblMaNhanVien
+            // lblStaffID
             // 
-            this.lblMaNhanVien.AutoSize = true;
-            this.lblMaNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaNhanVien.Location = new System.Drawing.Point(12, 13);
-            this.lblMaNhanVien.Name = "lblMaNhanVien";
-            this.lblMaNhanVien.Size = new System.Drawing.Size(149, 25);
-            this.lblMaNhanVien.TabIndex = 0;
-            this.lblMaNhanVien.Text = "Mã nhân viên:";
+            this.lblStaffID.AutoSize = true;
+            this.lblStaffID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffID.Location = new System.Drawing.Point(12, 13);
+            this.lblStaffID.Name = "lblStaffID";
+            this.lblStaffID.Size = new System.Drawing.Size(149, 25);
+            this.lblStaffID.TabIndex = 0;
+            this.lblStaffID.Text = "Mã nhân viên:";
             // 
-            // lblPhongBan
+            // lblDepartment
             // 
-            this.lblPhongBan.AutoSize = true;
-            this.lblPhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhongBan.Location = new System.Drawing.Point(12, 49);
-            this.lblPhongBan.Name = "lblPhongBan";
-            this.lblPhongBan.Size = new System.Drawing.Size(123, 25);
-            this.lblPhongBan.TabIndex = 1;
-            this.lblPhongBan.Text = "Phòng ban:";
+            this.lblDepartment.AutoSize = true;
+            this.lblDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDepartment.Location = new System.Drawing.Point(12, 49);
+            this.lblDepartment.Name = "lblDepartment";
+            this.lblDepartment.Size = new System.Drawing.Size(123, 25);
+            this.lblDepartment.TabIndex = 1;
+            this.lblDepartment.Text = "Phòng ban:";
             // 
-            // lblChucVu
+            // lblPosition
             // 
-            this.lblChucVu.AutoSize = true;
-            this.lblChucVu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChucVu.Location = new System.Drawing.Point(12, 85);
-            this.lblChucVu.Name = "lblChucVu";
-            this.lblChucVu.Size = new System.Drawing.Size(99, 25);
-            this.lblChucVu.TabIndex = 2;
-            this.lblChucVu.Text = "Chức vụ:";
+            this.lblPosition.AutoSize = true;
+            this.lblPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPosition.Location = new System.Drawing.Point(12, 85);
+            this.lblPosition.Name = "lblPosition";
+            this.lblPosition.Size = new System.Drawing.Size(99, 25);
+            this.lblPosition.TabIndex = 2;
+            this.lblPosition.Text = "Chức vụ:";
             // 
-            // label1
+            // lblStaff
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(843, 116);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(283, 32);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "Thông tin nhân viên";
+            this.lblStaff.AutoSize = true;
+            this.lblStaff.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaff.Location = new System.Drawing.Point(843, 116);
+            this.lblStaff.Name = "lblStaff";
+            this.lblStaff.Size = new System.Drawing.Size(283, 32);
+            this.lblStaff.TabIndex = 24;
+            this.lblStaff.Text = "Thông tin nhân viên";
             // 
-            // lblTimKiem
+            // lblSearch
             // 
-            this.lblTimKiem.AutoSize = true;
-            this.lblTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimKiem.Location = new System.Drawing.Point(812, 498);
-            this.lblTimKiem.Name = "lblTimKiem";
-            this.lblTimKiem.Size = new System.Drawing.Size(145, 32);
-            this.lblTimKiem.TabIndex = 25;
-            this.lblTimKiem.Text = "Tìm kiếm:";
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearch.Location = new System.Drawing.Point(812, 498);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(145, 32);
+            this.lblSearch.TabIndex = 25;
+            this.lblSearch.Text = "Tìm kiếm:";
             // 
-            // txtTimKiem
+            // txtSearch
             // 
-            this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimKiem.Location = new System.Drawing.Point(963, 497);
-            this.txtTimKiem.MaxLength = 50;
-            this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(299, 30);
-            this.txtTimKiem.TabIndex = 39;
-            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
-            this.txtTimKiem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimKiem_KeyPress);
+            this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(963, 497);
+            this.txtSearch.MaxLength = 50;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(299, 30);
+            this.txtSearch.TabIndex = 39;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
+            this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
             // 
             // errProvider
             // 
@@ -1522,11 +1522,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1924, 983);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtTimKiem);
-            this.Controls.Add(this.lblTimKiem);
+            this.Controls.Add(this.lblStaff);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.pnlMenu);
-            this.Controls.Add(this.dgvThongTinNhanVien);
+            this.Controls.Add(this.dgvStaff);
             this.Controls.Add(this.pnlHeader);
             this.MinimumSize = new System.Drawing.Size(1518, 1018);
             this.Name = "FrmQuanLyNhanVien";
@@ -1534,10 +1534,10 @@
             this.Load += new System.EventHandler(this.frmQuanLyNhanVien_Load);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinNhanVien)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).EndInit();
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbAnhNV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStaffPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1547,91 +1547,91 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Button btnTroVe;
-        private System.Windows.Forms.Label lblChucVuNV_DN;
-        private System.Windows.Forms.Label lblChucVuDN;
-        private System.Windows.Forms.Label lblPhongBanNV_DN;
-        private System.Windows.Forms.Label lblPhongBanDN;
-        private System.Windows.Forms.Label lblHoTenNV_DN;
-        private System.Windows.Forms.Label lblHoTenDN;
-        private System.Windows.Forms.Label lblMaNV_DN;
-        private System.Windows.Forms.Label lblMaNhanVienDN;
-        private System.Windows.Forms.DataGridView dgvThongTinNhanVien;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Label lblPositionLoginValue;
+        private System.Windows.Forms.Label lblPositionLogin;
+        private System.Windows.Forms.Label lblDepartmentLoginValue;
+        private System.Windows.Forms.Label lblDepartmentLogin;
+        private System.Windows.Forms.Label lblFullNameLoginValue;
+        private System.Windows.Forms.Label lblFullNameLogin;
+        private System.Windows.Forms.Label lblStaffIDLoginValue;
+        private System.Windows.Forms.Label lblStaffIDLogin;
+        private System.Windows.Forms.DataGridView dgvStaff;
         private System.Windows.Forms.Panel pnlMenu;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pbAnhNV;
-        private System.Windows.Forms.Label lblThoiHanHopDong;
-        private System.Windows.Forms.Label lblTinhTrang;
-        private System.Windows.Forms.Label lblSoNgayPhep;
-        private System.Windows.Forms.Label lblLoaiHopDong;
-        private System.Windows.Forms.Label lblTaiKhoan;
-        private System.Windows.Forms.Label lblMatKhau;
-        private System.Windows.Forms.Label lblTinh_ThanhPho;
-        private System.Windows.Forms.Label lblGioiTinh;
-        private System.Windows.Forms.Label lblSoDienThoai;
-        private System.Windows.Forms.Label lblCCCD;
-        private System.Windows.Forms.Label lblHo;
-        private System.Windows.Forms.Label lblTenLot;
-        private System.Windows.Forms.Label lblTen;
-        private System.Windows.Forms.Label lblNTNS;
-        private System.Windows.Forms.Label lblSoNha;
+        private System.Windows.Forms.Label lblStaff;
+        private System.Windows.Forms.PictureBox pbStaffPicture;
+        private System.Windows.Forms.Label lblContractDuration;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label lblDateOffMount;
+        private System.Windows.Forms.Label lblContractType;
+        private System.Windows.Forms.Label lblAccount;
+        private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.Label lblProvince_City;
+        private System.Windows.Forms.Label lblGender;
+        private System.Windows.Forms.Label lblPhone;
+        private System.Windows.Forms.Label lblIDCard;
+        private System.Windows.Forms.Label lblLastName;
+        private System.Windows.Forms.Label lblMiddle;
+        private System.Windows.Forms.Label lblFirstName;
+        private System.Windows.Forms.Label lblBrithday;
+        private System.Windows.Forms.Label lblHouseNumer;
         private System.Windows.Forms.Label lblEmail;
-        private System.Windows.Forms.Label lblTrinhDoHocVan;
-        private System.Windows.Forms.Label lblNgayVaoLam;
-        private System.Windows.Forms.Label lblDuong;
-        private System.Windows.Forms.Label lblPhuong_Xa;
-        private System.Windows.Forms.Label lblQuan_Huyen;
-        private System.Windows.Forms.Label lblMaNhanVien;
-        private System.Windows.Forms.Label lblPhongBan;
-        private System.Windows.Forms.Label lblChucVu;
-        private System.Windows.Forms.Label lblLuongCoBan;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblHinh;
-        private System.Windows.Forms.ComboBox cmbPhongBan;
-        private System.Windows.Forms.TextBox txtMaNV;
-        private System.Windows.Forms.TextBox txtTrinhDoHocVan;
+        private System.Windows.Forms.Label lblEducationLevel;
+        private System.Windows.Forms.Label lblEntryDate;
+        private System.Windows.Forms.Label lblStreet;
+        private System.Windows.Forms.Label lblWard;
+        private System.Windows.Forms.Label lblDistrict;
+        private System.Windows.Forms.Label lblStaffID;
+        private System.Windows.Forms.Label lblDepartment;
+        private System.Windows.Forms.Label lblPosition;
+        private System.Windows.Forms.Label lblBasicSalary;
+        private System.Windows.Forms.Label lblAllowance;
+        private System.Windows.Forms.Label lblPicture;
+        private System.Windows.Forms.ComboBox cmbDepartment;
+        private System.Windows.Forms.TextBox txtStaffID;
+        private System.Windows.Forms.TextBox txtEducationLevel;
         private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtSDT;
-        private System.Windows.Forms.TextBox txtTinh_ThanhPho;
-        private System.Windows.Forms.TextBox txtQuan_Huyen;
-        private System.Windows.Forms.TextBox txtPhuong_Xa;
-        private System.Windows.Forms.TextBox txtDuong;
-        private System.Windows.Forms.TextBox txtSoNha;
-        private System.Windows.Forms.TextBox txtTen;
-        private System.Windows.Forms.TextBox txtTenLot;
-        private System.Windows.Forms.TextBox txtHo;
-        private System.Windows.Forms.TextBox txtCCCD;
-        private System.Windows.Forms.TextBox txtMatKhau;
-        private System.Windows.Forms.TextBox txtTaiKhoan;
-        private System.Windows.Forms.ComboBox cmbLoaiHopDong;
-        private System.Windows.Forms.ComboBox cmbChucVu;
-        private System.Windows.Forms.DateTimePicker dtpNgayVaoLam;
-        private System.Windows.Forms.TextBox txtPhuCap;
-        private System.Windows.Forms.TextBox txtLuongCoBan;
-        private System.Windows.Forms.TextBox txtSoNgayPhep;
-        private System.Windows.Forms.TextBox txtTinhTrang;
-        private System.Windows.Forms.RadioButton rbKhac;
-        private System.Windows.Forms.RadioButton rbNu;
-        private System.Windows.Forms.RadioButton rbNam;
-        private System.Windows.Forms.DateTimePicker dtpThoiHanHopDong;
-        private System.Windows.Forms.Button btnThemPhuCap;
-        private System.Windows.Forms.Button btnThem;
-        private System.Windows.Forms.TextBox txtNhapLaiMatKhau;
-        private System.Windows.Forms.Label lblNhapLaiMatKhau;
-        private System.Windows.Forms.CheckBox cbHienThiMatKhau;
-        private System.Windows.Forms.Button btnHuy;
-        private System.Windows.Forms.Button btnSua;
-        private System.Windows.Forms.Button btnXoa;
-        private System.Windows.Forms.DateTimePicker dtpNTNS;
-        private System.Windows.Forms.Label lblTimKiem;
-        private System.Windows.Forms.TextBox txtTimKiem;
-        private System.Windows.Forms.Button btnChonHinh;
+        private System.Windows.Forms.TextBox txtPhone;
+        private System.Windows.Forms.TextBox txtProvince_City;
+        private System.Windows.Forms.TextBox txtDistrict;
+        private System.Windows.Forms.TextBox txtWard;
+        private System.Windows.Forms.TextBox txtStreet;
+        private System.Windows.Forms.TextBox txtHouseNumer;
+        private System.Windows.Forms.TextBox txtFirstName;
+        private System.Windows.Forms.TextBox txtMiddleName;
+        private System.Windows.Forms.TextBox txtLastName;
+        private System.Windows.Forms.TextBox txtIDCard;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.TextBox txtAccount;
+        private System.Windows.Forms.ComboBox cmbContractType;
+        private System.Windows.Forms.ComboBox cmbPosition;
+        private System.Windows.Forms.DateTimePicker dtpEntryDate;
+        private System.Windows.Forms.TextBox txtAllowance;
+        private System.Windows.Forms.TextBox txtBasicSalary;
+        private System.Windows.Forms.TextBox txtDateOffMount;
+        private System.Windows.Forms.TextBox txtStatus;
+        private System.Windows.Forms.RadioButton rbOthers;
+        private System.Windows.Forms.RadioButton rbFemale;
+        private System.Windows.Forms.RadioButton rbMale;
+        private System.Windows.Forms.DateTimePicker dtpContractDuration;
+        private System.Windows.Forms.Button btnAddAllowance;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.TextBox txtReEnterPassword;
+        private System.Windows.Forms.Label lblReEnterPassword;
+        private System.Windows.Forms.CheckBox cbShowPassword;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.DateTimePicker dtpBrithday;
+        private System.Windows.Forms.Label lblSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnChoosePicture;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Button btnMoKhoa;
-        private System.Windows.Forms.TextBox txtNgayKhoa;
-        private System.Windows.Forms.Label lblNgayKhoa;
-        private System.Windows.Forms.TextBox txtSoTienNo;
-        private System.Windows.Forms.Label lblSoTienNo;
+        private System.Windows.Forms.Button btnUnlock;
+        private System.Windows.Forms.TextBox txtDateLock;
+        private System.Windows.Forms.Label lblLockDate;
+        private System.Windows.Forms.TextBox txtDept;
+        private System.Windows.Forms.Label lblDept;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaNV;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhongBan;
         private System.Windows.Forms.DataGridViewTextBoxColumn colChucVu;
@@ -1660,6 +1660,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colNgayKhoa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSoTienNo;
         private System.Windows.Forms.ErrorProvider errProvider;
-        private System.Windows.Forms.Button btnKhoa;
+        private System.Windows.Forms.Button btnLock;
     }
 }

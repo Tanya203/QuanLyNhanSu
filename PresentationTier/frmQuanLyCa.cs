@@ -41,8 +41,8 @@ namespace QuanLyNhanSu.PresentationTier
             nv = nhanVienBUS.GetNhanVien().FirstOrDefault(nv => nv.MaNV == maNV);
             maCV = nv.MaCV;
             phanQuyen = phanQuyenBUS.GetPhanQuyens().Where(pq => pq.QuyenHan.GiaoDien.MaGD == maGD && pq.MaCV == maCV).ToList();            
-            dtpThoiGianBatDau.Text = "00:00";
-            dtpThoiGianKetThuc.Text = "00:00";
+            dtpStartTime.Text = "00:00";
+            dtpEndTime.Text = "00:00";
             this.maNV = maNV;
             checkThaoTac = false;
 
@@ -56,13 +56,13 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadThongTinDangNhap()
         {
-            lblMaNV_DN.Text = nv.MaNV;
+            lblStaffIDLoginValue.Text = nv.MaNV;
             if (string.IsNullOrEmpty(nv.TenLot))
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.Ten}";
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.Ten}";
             else
-                lblHoTenNV_DN.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
-            lblPhongBanNV_DN.Text = nv.ChucVu.PhongBan.TenPhongBan;
-            lblChucVuNV_DN.Text = nv.ChucVu.TenChucVu;
+                lblFullNameLoginValue.Text = $"{nv.Ho} {nv.TenLot} {nv.Ten}";
+            lblDepartmentLoginValue.Text = nv.ChucVu.PhongBan.TenPhongBan;
+            lblPositionLoginValue.Text = nv.ChucVu.TenChucVu;
         }
         private void PhanQuyen()
         {
@@ -76,7 +76,7 @@ namespace QuanLyNhanSu.PresentationTier
                 }
                 else if(qh.QuyenHan.TenQuyenHan.Contains("Truy cập") && qh.CapQuyen)
                 {
-                    btnQuanLyLoaiCa.Visible = true;
+                    btnShiftType.Visible = true;
                     continue;
                 }
             }
@@ -84,9 +84,9 @@ namespace QuanLyNhanSu.PresentationTier
         private void InputStatus(bool value)
         {
             ButtonStatus(value);    
-            List<object> listInput = new List<object> { txtTenCa, dtpThoiGianBatDau, dtpThoiGianKetThuc};
+            List<object> listInput = new List<object> { txtShiftName, dtpStartTime, dtpEndTime};
             if (!value)
-                listInput.Add(txtMaCa);
+                listInput.Add(txtShiftID);
             for(int i = 0; i < listInput.Count; i++)
             {
                 if (listInput[i] is TextBox)
@@ -103,52 +103,52 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value)
         {
-            List<Button> listButtons = new List<Button> { btnThem, btnSua, btnXoa, btnHuy };
+            List<Button> listButtons = new List<Button> { btnAdd, btnEdit, btnDelete, btnCancel };
             if (!value)
-                listButtons.Add(btnQuanLyLoaiCa);
+                listButtons.Add(btnShiftType);
             for (int i = 0; i < listButtons.Count; i++)
             {
                 typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
-                if (value && listButtons[i] != btnHuy && listButtons[i] != btnQuanLyLoaiCa)
+                if (value && listButtons[i] != btnCancel && listButtons[i] != btnShiftType)
                     typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
             }
         }
         private void LoadCa()
         {
             Enabled = false;
-            dgvThongTinCa.Rows.Clear();
+            dgvShift.Rows.Clear();
             danhSachCa = caBUS.GetAllCa();
             int rowAdd;
             foreach (var ca in danhSachCa)
             {
-                rowAdd = dgvThongTinCa.Rows.Add();
-                dgvThongTinCa.Rows[rowAdd].Cells[0].Value = ca.MaCa;
-                dgvThongTinCa.Rows[rowAdd].Cells[1].Value = ca.TenCa;
-                dgvThongTinCa.Rows[rowAdd].Cells[2].Value = ca.GioBatDau;
-                dgvThongTinCa.Rows[rowAdd].Cells[3].Value = ca.GioKetThuc;
+                rowAdd = dgvShift.Rows.Add();
+                dgvShift.Rows[rowAdd].Cells[0].Value = ca.MaCa;
+                dgvShift.Rows[rowAdd].Cells[1].Value = ca.TenCa;
+                dgvShift.Rows[rowAdd].Cells[2].Value = ca.GioBatDau;
+                dgvShift.Rows[rowAdd].Cells[3].Value = ca.GioKetThuc;
             }
             Enabled = true;
         }
         private void LoadCaTimKiem(string timKiem)
         {
             Enabled = false;
-            dgvThongTinCa.Rows.Clear();
+            dgvShift.Rows.Clear();
             danhSachCaTimKiem = caBUS.SearchCa(timKiem);
             int rowAdd;
             foreach (var ca in danhSachCaTimKiem)
             {
-                rowAdd = dgvThongTinCa.Rows.Add();
-                dgvThongTinCa.Rows[rowAdd].Cells[0].Value = ca.MaCa;
-                dgvThongTinCa.Rows[rowAdd].Cells[1].Value = ca.TenCa;
-                dgvThongTinCa.Rows[rowAdd].Cells[2].Value = ca.GioBatDau;
-                dgvThongTinCa.Rows[rowAdd].Cells[3].Value = ca.GioKetThuc;
+                rowAdd = dgvShift.Rows.Add();
+                dgvShift.Rows[rowAdd].Cells[0].Value = ca.MaCa;
+                dgvShift.Rows[rowAdd].Cells[1].Value = ca.TenCa;
+                dgvShift.Rows[rowAdd].Cells[2].Value = ca.GioBatDau;
+                dgvShift.Rows[rowAdd].Cells[3].Value = ca.GioKetThuc;
             }
             Enabled = true;
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         private void ClearAllText()
         {
-            List<object> listInput = new List<object> { txtMaCa, txtTenCa, dtpThoiGianBatDau, dtpThoiGianKetThuc };
+            List<object> listInput = new List<object> { txtShiftID, txtShiftName, dtpStartTime, dtpEndTime };
             for(int i = 0; i < listInput.Count; i++)
             {
                 if (listInput[i] is TextBox)
@@ -178,19 +178,19 @@ namespace QuanLyNhanSu.PresentationTier
         ///////////////////////////////////////////////////////////////////////////////////////
         private bool CheckEmptyText(bool check)
         {
-            List<TextBox> listTextBox = new List<TextBox> { txtTenCa };
+            List<TextBox> listTextBox = new List<TextBox> { txtShiftName };
             for (int i = 0; i < listTextBox.Count; i++)
             {
                 if (string.IsNullOrEmpty(listTextBox[i].Text))
                 {
                     if (check)
                     {
-                        btnThem.Enabled = false;
+                        btnAdd.Enabled = false;
                         return false;
                     }
                     else
                     {
-                        btnSua.Enabled = false;
+                        btnEdit.Enabled = false;
                         return false;
                     }
                 }
@@ -202,25 +202,25 @@ namespace QuanLyNhanSu.PresentationTier
             if (!checkThaoTac)
                 return;
             bool check;
-            if (string.IsNullOrEmpty(txtMaCa.Text))
+            if (string.IsNullOrEmpty(txtShiftID.Text))
             {
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
                 check = true;
                 if (CheckEmptyText(check))
                 {
-                    btnThem.Enabled = true;
+                    btnAdd.Enabled = true;
                     return;
                 }
             }
             else
             {
-                btnThem.Enabled = false;
-                btnXoa.Enabled = true;
+                btnAdd.Enabled = false;
+                btnDelete.Enabled = true;
                 check = false;
                 if (CheckEmptyText(check))
                 {
-                    btnSua.Enabled = true;
+                    btnEdit.Enabled = true;
                     return;
                 }
             }
@@ -240,11 +240,11 @@ namespace QuanLyNhanSu.PresentationTier
         private string CheckChange()
         {
             List<string> changes = new List<string>();
-            Ca ca = caBUS.GetCa().FirstOrDefault(c => c.MaCa == txtMaCa.Text);
-            TimeSpan gioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text);
-            TimeSpan gioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text);
-            if (txtTenCa.Text != ca.TenCa)
-                changes.Add($"- Tên ca: {ca.TenCa} -> Tên ca: {txtTenCa.Text}");           
+            Ca ca = caBUS.GetCa().FirstOrDefault(c => c.MaCa == txtShiftID.Text);
+            TimeSpan gioBatDau = TimeSpan.Parse(dtpStartTime.Text);
+            TimeSpan gioKetThuc = TimeSpan.Parse(dtpEndTime.Text);
+            if (txtShiftName.Text != ca.TenCa)
+                changes.Add($"- Tên ca: {ca.TenCa} -> Tên ca: {txtShiftName.Text}");           
             if (gioBatDau != ca.GioBatDau)
                 changes.Add($"- Giờ bắt đầu: {ca.GioBatDau} -> Giờ bắt đầu: {gioBatDau}");            
             if (gioKetThuc != ca.GioKetThuc)
@@ -263,38 +263,38 @@ namespace QuanLyNhanSu.PresentationTier
         {
             bool checkGBD = true;
             bool checkGKT = true;
-            TimeSpan gioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text);
-            TimeSpan gioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text);
+            TimeSpan gioBatDau = TimeSpan.Parse(dtpStartTime.Text);
+            TimeSpan gioKetThuc = TimeSpan.Parse(dtpEndTime.Text);
 
             if (gioBatDau == gioKetThuc)
             {
-                errProvider.SetError(dtpThoiGianBatDau, "Giờ bắt đầu và giờ kết thúc trùng nhau");
-                errProvider.SetError(dtpThoiGianKetThuc, "Giờ bắt đầu và giờ kết thúc trùng nhau");
+                errProvider.SetError(dtpStartTime, "Giờ bắt đầu và giờ kết thúc trùng nhau");
+                errProvider.SetError(dtpEndTime, "Giờ bắt đầu và giờ kết thúc trùng nhau");
                 return false;
             }
-            foreach (Ca ca in caBUS.GetCa().Where(ca => ca.MaCa != txtMaCa.Text))
+            foreach (Ca ca in caBUS.GetCa().Where(ca => ca.MaCa != txtShiftID.Text))
             {
                 if (!checkGBD && !checkGKT)
                     break;
                 if (ca.GioBatDau == gioBatDau && checkGBD)
                 {
                     checkGBD = false;
-                    errProvider.SetError(dtpThoiGianBatDau, $"Giờ bắt đầu trùng với ca {ca.TenCa}");
+                    errProvider.SetError(dtpStartTime, $"Giờ bắt đầu trùng với ca {ca.TenCa}");
                 }
                 if (ca.GioKetThuc == gioKetThuc && checkGKT)
                 {
                     checkGKT = false;
-                    errProvider.SetError(dtpThoiGianKetThuc, $"Giờ kết thúc trùng với ca {ca.TenCa}");
+                    errProvider.SetError(dtpEndTime, $"Giờ kết thúc trùng với ca {ca.TenCa}");
                 }
                 if (gioBatDau > ca.GioBatDau && gioBatDau < ca.GioKetThuc && checkGBD)
                 {
                     checkGBD = false;
-                    errProvider.SetError(dtpThoiGianBatDau, $"Giờ bắt đầu nằm giữa ca {ca.TenCa}");
+                    errProvider.SetError(dtpStartTime, $"Giờ bắt đầu nằm giữa ca {ca.TenCa}");
                 }
                 if (gioKetThuc > ca.GioBatDau && gioKetThuc < ca.GioKetThuc && checkGKT)
                 {
                     checkGKT = false;
-                    errProvider.SetError(dtpThoiGianKetThuc, $"Giờ kết thúc nằm giữa ca {ca.TenCa}");
+                    errProvider.SetError(dtpEndTime, $"Giờ kết thúc nằm giữa ca {ca.TenCa}");
                 }
                 if ((ca.GioBatDau < ca.GioKetThuc && gioBatDau < ca.GioBatDau && gioKetThuc > ca.GioKetThuc) ||
                     (ca.GioBatDau > ca.GioKetThuc && checkGBD && checkGKT &&
@@ -304,8 +304,8 @@ namespace QuanLyNhanSu.PresentationTier
                       (gioBatDau < ca.GioKetThuc && gioKetThuc > ca.GioKetThuc))))
                 {
                     checkGBD = checkGKT = false;
-                    errProvider.SetError(dtpThoiGianBatDau, $"Giờ bắt đầu và kết thúc chồng qua ca {ca.TenCa}");
-                    errProvider.SetError(dtpThoiGianKetThuc, $"Giờ bắt đầu và kết thúc chồng qua ca {ca.TenCa}");
+                    errProvider.SetError(dtpStartTime, $"Giờ bắt đầu và kết thúc chồng qua ca {ca.TenCa}");
+                    errProvider.SetError(dtpEndTime, $"Giờ bắt đầu và kết thúc chồng qua ca {ca.TenCa}");
                     break;
                 }
             }
@@ -318,12 +318,12 @@ namespace QuanLyNhanSu.PresentationTier
         private bool CheckErrorInput()
         {
             errProvider.Clear();
-            errProvider.SetError(txtTenCa, caBUS.GetCa().FirstOrDefault(ca => ca.TenCa == txtTenCa.Text && ca.MaCa != txtMaCa.Text) != null ? "Tên ca đã tồn tại" : string.Empty);
-            if (errProvider.GetError(txtTenCa) != string.Empty || !CheckCa())
+            errProvider.SetError(txtShiftName, caBUS.GetCa().FirstOrDefault(ca => ca.TenCa == txtShiftName.Text && ca.MaCa != txtShiftID.Text) != null ? "Tên ca đã tồn tại" : string.Empty);
+            if (errProvider.GetError(txtShiftName) != string.Empty || !CheckCa())
                 return false;
             return true;
         }
-        private void btnThem_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -335,15 +335,15 @@ namespace QuanLyNhanSu.PresentationTier
                 Ca newCa = new Ca
                 {
                     MaCa = "",
-                    TenCa = txtTenCa.Text,
-                    GioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text),
-                    GioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text),
+                    TenCa = txtShiftName.Text,
+                    GioBatDau = TimeSpan.Parse(dtpStartTime.Text),
+                    GioKetThuc = TimeSpan.Parse(dtpEndTime.Text),
                 };
                 if (caBUS.Save(newCa))
                 {
-                    string ca = txtTenCa.Text;
-                    string gioBatDau = dtpThoiGianBatDau.Text;
-                    string gioKetThuc = dtpThoiGianKetThuc.Text;
+                    string ca = txtShiftName.Text;
+                    string gioBatDau = dtpStartTime.Text;
+                    string gioKetThuc = dtpEndTime.Text;
                     string thaoTac = $"Thêm ca {ca}:\n - Giờ bắt đầu: {gioBatDau}\n - Giờ kết thúc: {gioKetThuc}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Thêm")).MaTT;
                     LichSuThaoTac(thaoTac, maTT);
@@ -356,7 +356,7 @@ namespace QuanLyNhanSu.PresentationTier
             }
              
         }
-        private void btnSua_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
             try
             {
@@ -368,14 +368,14 @@ namespace QuanLyNhanSu.PresentationTier
                 string chiTietSua = CheckChange();
                 Ca newCa = new Ca
                 {
-                    MaCa = txtMaCa.Text,
-                    TenCa = txtTenCa.Text,
-                    GioBatDau = TimeSpan.Parse(dtpThoiGianBatDau.Text),
-                    GioKetThuc = TimeSpan.Parse(dtpThoiGianKetThuc.Text),
+                    MaCa = txtShiftID.Text,
+                    TenCa = txtShiftName.Text,
+                    GioBatDau = TimeSpan.Parse(dtpStartTime.Text),
+                    GioKetThuc = TimeSpan.Parse(dtpEndTime.Text),
                 };
                 if (caBUS.Save(newCa))
                 {
-                    string thaoTac = "Sửa ca " + txtMaCa.Text;
+                    string thaoTac = "Sửa ca " + txtShiftID.Text;
                     if (!string.IsNullOrEmpty(chiTietSua))
                         thaoTac += ":\n" + chiTietSua;
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Sửa")).MaTT;
@@ -389,19 +389,19 @@ namespace QuanLyNhanSu.PresentationTier
             }
                                  
         }
-        private void btnXoa_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
                 Ca ca = new Ca
                 {
-                    MaCa = txtMaCa.Text,
+                    MaCa = txtShiftID.Text,
                 };
                 if (caBUS.Delete(ca))
                 {
-                    string tenCa = txtTenCa.Text;
-                    string gioBatDau = dtpThoiGianBatDau.Text;
-                    string gioKetThuc = dtpThoiGianKetThuc.Text;
+                    string tenCa = txtShiftName.Text;
+                    string gioBatDau = dtpStartTime.Text;
+                    string gioKetThuc = dtpEndTime.Text;
                     string thaoTac = $"Xoá ca {tenCa}:\n - Giờ bắt đầu: {gioBatDau}\n - Giờ kết thúc: {gioKetThuc}";
                     string maTT = listThaoTac.FirstOrDefault(tt => tt.TenThaoTac.Contains("Xoá")).MaTT;
                     LichSuThaoTac(thaoTac, maTT);
@@ -413,47 +413,47 @@ namespace QuanLyNhanSu.PresentationTier
                 ErrorMessage(ex);
             }                              
         }
-        private void btnHuy_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             errProvider.Clear();
             ClearAllText();
         }
-        private void btnQuanLyLoaiCa_Click(object sender, EventArgs e)
+        private void btnShiftType_Click(object sender, EventArgs e)
         {
             FrmQuanLyLoaiCa frm = new FrmQuanLyLoaiCa(maNV);
             frm.Show();
             this.Hide();
             frm.FormClosed += CloseForm;
         }
-        private void btnTroVe_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             FrmManHinhChinh frmOpen = new FrmManHinhChinh(maNV);
             frmOpen.Show();
             this.Hide();
             frmOpen.FormClosed += CloseForm;
         }       
-        private void TimKiem(object sender, EventArgs e)
+        private void txtSearch_TextChange(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTimKiem.Text))            
+            if (string.IsNullOrEmpty(txtSearch.Text))            
                 LoadCa();                      
         }
-        private void dgvThongTinCa_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvShift_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             errProvider.Clear();
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
-            txtMaCa.Text = dgvThongTinCa.Rows[rowIndex].Cells[0].Value.ToString();
-            txtTenCa.Text = dgvThongTinCa.Rows[rowIndex].Cells[1].Value.ToString();
-            dtpThoiGianBatDau.Text = dgvThongTinCa.Rows[rowIndex].Cells[2].Value.ToString();
-            dtpThoiGianKetThuc.Text = dgvThongTinCa.Rows[rowIndex].Cells[3].Value.ToString();
+            txtShiftID.Text = dgvShift.Rows[rowIndex].Cells[0].Value.ToString();
+            txtShiftName.Text = dgvShift.Rows[rowIndex].Cells[1].Value.ToString();
+            dtpStartTime.Text = dgvShift.Rows[rowIndex].Cells[2].Value.ToString();
+            dtpEndTime.Text = dgvShift.Rows[rowIndex].Cells[3].Value.ToString();
         }
 
-        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                LoadCaTimKiem(txtTimKiem.Text);
+                LoadCaTimKiem(txtSearch.Text);
             }
         }
         private void btnRefresh_Click(object sender, EventArgs e)
