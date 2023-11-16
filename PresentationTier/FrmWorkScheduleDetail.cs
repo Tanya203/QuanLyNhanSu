@@ -122,13 +122,15 @@ namespace QuanLyNhanSu.PresentationTier
             cmbStaffID.DisplayMember = "StaffID";
             cmbStaffID.ValueMember = "StaffID";
             int maxShift = shiftBUS.GetShift().Count();
+            int countShift = 0;
             List<Staff> staffList = staffBUS.GetStaff().Where(s => s.Position.Department.DP_ID == staff.Position.DP_ID).ToList();
-            foreach (var s in staffList)
+            foreach (TimeKeeping s in timeKeepings)
             {
-                int countShift = timeKeepings.Where(staff => staff.StaffID == s.StaffID).Count();
+                countShift++;
                 if (countShift == maxShift)
-                    staffList.RemoveAll(staff => staff.StaffID == s.StaffID);
+                    staffList.RemoveAll(staff => staff.StaffID == s.StaffID);                
             }
+                
             cmbStaffID.DataSource = staffList;
             if (string.IsNullOrEmpty(cmbStaffID.Text))
             {

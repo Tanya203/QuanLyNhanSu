@@ -96,7 +96,7 @@
             this.pnlMenu.Size = new System.Drawing.Size(340, 220);
             this.pnlMenu.TabIndex = 35;
             // 
-            // FrmChamCong
+            // FrmTimeKeeping
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -107,10 +107,11 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(500, 500);
             this.MinimumSize = new System.Drawing.Size(500, 500);
-            this.Name = "FrmChamCong";
+            this.Name = "FrmTimeKeeping";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmChamCong";
             this.Load += new System.EventHandler(this.FrmChamCong_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FrmTimeKeeping_KeyPress);
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             this.ResumeLayout(false);
