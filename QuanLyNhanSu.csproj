@@ -148,291 +148,309 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTier\ChamCongDAL.cs" />
-    <Compile Include="DataTier\ChiTietLichLamViecDAL.cs" />
-    <Compile Include="DataTier\ChiTietPhieuDAL.cs" />
-    <Compile Include="DataTier\ChiTietPhuCapDAL.cs" />
-    <Compile Include="DataTier\GiaoDienDAL.cs" />
-    <Compile Include="DataTier\HinhThucChamCongDAL.cs" />
-    <Compile Include="DataTier\LichLamViecDAL.cs" />
-    <Compile Include="DataTier\LichSuThaoTacDAL.cs" />
-    <Compile Include="DataTier\Models\Ca.cs" />
-    <Compile Include="DataTier\Models\ChamCong.cs" />
-    <Compile Include="DataTier\Models\ChiTietLuongThang.cs" />
-    <Compile Include="DataTier\Models\ChiTietPhieu.cs" />
-    <Compile Include="DataTier\Models\ChiTietPhuCap.cs" />
-    <Compile Include="DataTier\Models\ChucVu.cs" />
-    <Compile Include="DataTier\Models\GiaoDien.cs" />
-    <Compile Include="DataTier\Models\HinhThucChamCong.cs" />
-    <Compile Include="DataTier\Models\LichLamViec.cs" />
-    <Compile Include="DataTier\Models\LichSuThaoTac.cs" />
-    <Compile Include="DataTier\Models\LoaiCa.cs" />
-    <Compile Include="DataTier\Models\LoaiHopDong.cs" />
-    <Compile Include="DataTier\Models\LoaiPhieu.cs" />
-    <Compile Include="DataTier\Models\LuongThang.cs" />
-    <Compile Include="DataTier\Models\NhanVien.cs" />
-    <Compile Include="DataTier\Models\PhanQuyen.cs" />
-    <Compile Include="DataTier\Models\Phieu.cs" />
-    <Compile Include="DataTier\Models\PhongBan.cs" />
-    <Compile Include="DataTier\Models\PhuCap.cs" />
+    <Compile Include="DataTier\Models\Allowance.cs" />
+    <Compile Include="DataTier\Models\AllowanceDetail.cs" />
+    <Compile Include="DataTier\Models\Authority.cs" />
+    <Compile Include="DataTier\Models\Authorization.cs" />
+    <Compile Include="DataTier\Models\Card.cs" />
+    <Compile Include="DataTier\Models\CardDetail.cs" />
+    <Compile Include="DataTier\Models\CardType.cs" />
+    <Compile Include="DataTier\Models\ContractType.cs" />
+    <Compile Include="DataTier\Models\Department.cs" />
+    <Compile Include="DataTier\Models\Interface.cs" />
+    <Compile Include="DataTier\Models\Month.cs" />
+    <Compile Include="DataTier\Models\MonthSalaryDetail.cs" />
+    <Compile Include="DataTier\Models\OperateHistory.cs" />
+    <Compile Include="DataTier\Models\Operation.cs" />
+    <Compile Include="DataTier\Models\Position.cs" />
     <Compile Include="DataTier\Models\QuanLyNhanSuContextDB.cs" />
-    <Compile Include="DataTier\Models\QuyenHan.cs" />
-    <Compile Include="DataTier\Models\ThaoTac.cs" />
-    <Compile Include="DataTier\PhanQuyenDAL.cs" />
-    <Compile Include="DataTier\PhieuDAL.cs" />
-    <Compile Include="DataTier\QuanLyCaDAL.cs" />
-    <Compile Include="DataTier\QuanLyChucVuDAL.cs" />
-    <Compile Include="DataTier\QuanLyLoaiCaDAL.cs" />
-    <Compile Include="DataTier\QuanLyLoaiPhieuDAL.cs" />
-    <Compile Include="DataTier\QuanLyPhuCapDAL.cs" />
-    <Compile Include="DataTier\QuanLyLoaiHopDongDAL.cs" />
-    <Compile Include="DataTier\QuanLyPhongBanDAL.cs" />
-    <Compile Include="DataTier\QuanLyNhanVienDAL.cs" />
-    <Compile Include="DataTier\QuyenHanDAL.cs" />
-    <Compile Include="DataTier\ThaoTacDAL.cs" />
-    <Compile Include="LogicTier\ChamCongBUS.cs" />
-    <Compile Include="LogicTier\ChiTietLichLamViecBUS.cs" />
-    <Compile Include="LogicTier\ChiTietPhieuBUS.cs" />
-    <Compile Include="LogicTier\ChiTietPhuCapBUS.cs" />
-    <Compile Include="LogicTier\GiaoDienBUS.cs" />
-    <Compile Include="LogicTier\HinhThucChamCongBUS.cs" />
-    <Compile Include="LogicTier\LichLamViecBUS.cs" />
-    <Compile Include="LogicTier\LichSuThaoTacBUS.cs" />
-    <Compile Include="LogicTier\PhanQuyenBUS.cs" />
-    <Compile Include="LogicTier\PhieuBUS.cs" />
-    <Compile Include="LogicTier\QuanLyCaBUS.cs" />
-    <Compile Include="LogicTier\QuanLyChucVuBUS.cs" />
-    <Compile Include="LogicTier\QuanLyLoaiCaBUS.cs" />
-    <Compile Include="LogicTier\QuanLyLoaiHopDongBUS.cs" />
-    <Compile Include="LogicTier\QuanLyLoaiPhieuBUS.cs" />
-    <Compile Include="LogicTier\QuanLyNhanVienBUS.cs" />
-    <Compile Include="LogicTier\QuanLyPhongBanBUS.cs" />
-    <Compile Include="LogicTier\QuanLyPhuCapBUS.cs" />
-    <Compile Include="LogicTier\QuyenHanBUS.cs" />
-    <Compile Include="LogicTier\ThaoTacBUS.cs" />
-    <Compile Include="PresentationTier\FrmChamCong.cs">
+    <Compile Include="DataTier\Models\Shift.cs" />
+    <Compile Include="DataTier\Models\ShiftType.cs" />
+    <Compile Include="DataTier\Models\Staff.cs" />
+    <Compile Include="DataTier\Models\TimeKeeping.cs" />
+    <Compile Include="DataTier\Models\TimeKeepingMethod.cs" />
+    <Compile Include="DataTier\Models\WorkSchedule.cs" />
+    <Compile Include="DataTier\TimeKeepingDAL.cs" />
+    <Compile Include="DataTier\WorkScheduleDetailDAL.cs" />
+    <Compile Include="DataTier\CardDetailDAL.cs" />
+    <Compile Include="DataTier\AllowanceDetailDAL.cs" />
+    <Compile Include="DataTier\InterfaceDAL.cs" />
+    <Compile Include="DataTier\TimeKeepingMethodDAL.cs" />
+    <Compile Include="DataTier\WorkScheduleDAL.cs" />
+    <Compile Include="DataTier\OperateHistoryDAL.cs" />
+    <Compile Include="DataTier\AuthorizationDAL.cs" />
+    <Compile Include="DataTier\CardDAL.cs" />
+    <Compile Include="DataTier\ShiftDAL.cs" />
+    <Compile Include="DataTier\PositionDAL.cs" />
+    <Compile Include="DataTier\ShiftTypeDAL.cs" />
+    <Compile Include="DataTier\CardTypeDAL.cs" />
+    <Compile Include="DataTier\AllowanceDAL.cs" />
+    <Compile Include="DataTier\ContractTypeDAL.cs" />
+    <Compile Include="DataTier\DepartmentDAL.cs" />
+    <Compile Include="DataTier\StaffDAL.cs" />
+    <Compile Include="DataTier\AuthorityDAL.cs" />
+    <Compile Include="DataTier\OperationDAL.cs" />
+    <Compile Include="Functions\Authorizations.cs" />
+    <Compile Include="Functions\AutoAdjustComboBox.cs" />
+    <Compile Include="Functions\CustomMessage.cs" />
+    <Compile Include="Functions\ImageHandle.cs" />
+    <Compile Include="Functions\InputCheck.cs" />
+    <Compile Include="Functions\LoadHeader.cs" />
+    <Compile Include="Functions\FormHandle.cs" />
+    <Compile Include="Functions\SaveOperateHistory.cs" />
+    <Compile Include="LogicTier\TimeKeepingBUS.cs" />
+    <Compile Include="LogicTier\WorkScheduleDetailBUS.cs" />
+    <Compile Include="LogicTier\CardDetailBUS.cs" />
+    <Compile Include="LogicTier\AllowanceDetailBUS.cs" />
+    <Compile Include="LogicTier\InterfaceBUS.cs" />
+    <Compile Include="LogicTier\TimeKeepingMethodBUS.cs" />
+    <Compile Include="LogicTier\WorkScheduleBUS.cs" />
+    <Compile Include="LogicTier\OperateHistoryBUS.cs" />
+    <Compile Include="LogicTier\AuthorizationBUS.cs" />
+    <Compile Include="LogicTier\CardBUS.cs" />
+    <Compile Include="LogicTier\ShiftBUS.cs" />
+    <Compile Include="LogicTier\PositionBUS.cs" />
+    <Compile Include="LogicTier\ShiftTypeBUS.cs" />
+    <Compile Include="LogicTier\ContractTypeBUS.cs" />
+    <Compile Include="LogicTier\CardTypeBUS.cs" />
+    <Compile Include="LogicTier\StaffBUS.cs" />
+    <Compile Include="LogicTier\DepartmentBUS.cs" />
+    <Compile Include="LogicTier\AllowanceBUS.cs" />
+    <Compile Include="LogicTier\AuthorityBUS.cs" />
+    <Compile Include="LogicTier\OperationBUS.cs" />
+    <Compile Include="PresentationTier\FrmConfirmPassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmChamCong.Designer.cs">
-      <DependentUpon>FrmChamCong.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmConfirmPassword.Designer.cs">
+      <DependentUpon>FrmConfirmPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmChiTietLichLamViec.cs">
+    <Compile Include="PresentationTier\FrmTimeKeeping.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmChiTietLichLamViec.Designer.cs">
-      <DependentUpon>FrmChiTietLichLamViec.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmTimeKeeping.Designer.cs">
+      <DependentUpon>FrmTimeKeeping.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmChiTietPhieu.cs">
+    <Compile Include="PresentationTier\FrmWorkScheduleDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmChiTietPhieu.Designer.cs">
-      <DependentUpon>FrmChiTietPhieu.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmWorkScheduleDetail.Designer.cs">
+      <DependentUpon>FrmWorkScheduleDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmChiTietPhuCap.cs">
+    <Compile Include="PresentationTier\FrmCardDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmChiTietPhuCap.Designer.cs">
-      <DependentUpon>FrmChiTietPhuCap.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmCardDetail.Designer.cs">
+      <DependentUpon>FrmCardDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmDangNhap.cs">
+    <Compile Include="PresentationTier\FrmAllowanceDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmDangNhap.Designer.cs">
-      <DependentUpon>FrmDangNhap.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmAllowanceDetail.Designer.cs">
+      <DependentUpon>FrmAllowanceDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmKhoaTaiKhoan.cs">
+    <Compile Include="PresentationTier\FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmKhoaTaiKhoan.Designer.cs">
-      <DependentUpon>FrmKhoaTaiKhoan.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmLichLamViec.cs">
+    <Compile Include="PresentationTier\FrmLockAccount.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmLichLamViec.Designer.cs">
-      <DependentUpon>FrmLichLamViec.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmLockAccount.Designer.cs">
+      <DependentUpon>FrmLockAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmLichSuThaoTac.cs">
+    <Compile Include="PresentationTier\FrmWorkSchedule.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmLichSuThaoTac.Designer.cs">
-      <DependentUpon>FrmLichSuThaoTac.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmWorkSchedule.Designer.cs">
+      <DependentUpon>FrmWorkSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmManHinhChinh.cs">
+    <Compile Include="PresentationTier\FrmOperateHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmManHinhChinh.Designer.cs">
-      <DependentUpon>FrmManHinhChinh.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmOperateHistory.Designer.cs">
+      <DependentUpon>FrmOperateHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmPhanQuyen.cs">
+    <Compile Include="PresentationTier\FrmMainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmPhanQuyen.Designer.cs">
-      <DependentUpon>FrmPhanQuyen.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmMainMenu.Designer.cs">
+      <DependentUpon>FrmMainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyPhieu.cs">
+    <Compile Include="PresentationTier\FrmAuthorization.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyPhieu.Designer.cs">
-      <DependentUpon>FrmQuanLyPhieu.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmAuthorization.Designer.cs">
+      <DependentUpon>FrmAuthorization.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyCa.cs">
+    <Compile Include="PresentationTier\FrmCard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyCa.Designer.cs">
-      <DependentUpon>FrmQuanLyCa.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmCard.Designer.cs">
+      <DependentUpon>FrmCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyChucVu.cs">
+    <Compile Include="PresentationTier\FrmShift.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyChucVu.Designer.cs">
-      <DependentUpon>FrmQuanLyChucVu.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmShift.Designer.cs">
+      <DependentUpon>FrmShift.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyLoaiCa.cs">
+    <Compile Include="PresentationTier\FrmPosition.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyLoaiCa.Designer.cs">
-      <DependentUpon>FrmQuanLyLoaiCa.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmPosition.Designer.cs">
+      <DependentUpon>FrmPosition.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyLoaiHopDong.cs">
+    <Compile Include="PresentationTier\FrmShiftType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyLoaiHopDong.Designer.cs">
-      <DependentUpon>FrmQuanLyLoaiHopDong.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmShiftType.Designer.cs">
+      <DependentUpon>FrmShiftType.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyLoaiPhieu.cs">
+    <Compile Include="PresentationTier\FrmContractType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyLoaiPhieu.Designer.cs">
-      <DependentUpon>FrmQuanLyLoaiPhieu.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmContractType.Designer.cs">
+      <DependentUpon>FrmContractType.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyNhanVien.cs">
+    <Compile Include="PresentationTier\FrmCardType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyNhanVien.Designer.cs">
-      <DependentUpon>FrmQuanLyNhanVien.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmCardType.Designer.cs">
+      <DependentUpon>FrmCardType.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyPhongBan.cs">
+    <Compile Include="PresentationTier\FrmStaff.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyPhongBan.Designer.cs">
-      <DependentUpon>FrmQuanLyPhongBan.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmStaff.Designer.cs">
+      <DependentUpon>FrmStaff.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyPhuCap.cs">
+    <Compile Include="PresentationTier\FrmDepartment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuanLyPhuCap.Designer.cs">
-      <DependentUpon>FrmQuanLyPhuCap.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmDepartment.Designer.cs">
+      <DependentUpon>FrmDepartment.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuenMatKhau.cs">
+    <Compile Include="PresentationTier\FrmAllowance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmQuenMatKhau.Designer.cs">
-      <DependentUpon>FrmQuenMatKhau.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmAllowance.Designer.cs">
+      <DependentUpon>FrmAllowance.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmThongKe.cs">
+    <Compile Include="PresentationTier\FrmForgotPassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmThongKe.Designer.cs">
-      <DependentUpon>FrmThongKe.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmForgotPassword.Designer.cs">
+      <DependentUpon>FrmForgotPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmThongTinTaiKhoan.cs">
+    <Compile Include="PresentationTier\FrmStatistic.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmThongTinTaiKhoan.Designer.cs">
-      <DependentUpon>FrmThongTinTaiKhoan.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmStatistic.Designer.cs">
+      <DependentUpon>FrmStatistic.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationTier\FrmChiTietPhuCapMotNhanVien.cs">
+    <Compile Include="PresentationTier\FrmAccountInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationTier\FrmChiTietPhuCapMotNhanVien.Designer.cs">
-      <DependentUpon>FrmChiTietPhuCapMotNhanVien.cs</DependentUpon>
+    <Compile Include="PresentationTier\FrmAccountInfo.Designer.cs">
+      <DependentUpon>FrmAccountInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationTier\FrmStaffAllowanceDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\FrmStaffAllowanceDetail.Designer.cs">
+      <DependentUpon>FrmStaffAllowanceDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\CaViewModels.cs" />
-    <Compile Include="ViewModels\ChiTietLichLamViecViewModels.cs" />
-    <Compile Include="ViewModels\ChiTietPhieuViewModels.cs" />
-    <Compile Include="ViewModels\ChucVuViewModels.cs" />
-    <Compile Include="ViewModels\LichLamViecViewModels.cs" />
-    <Compile Include="ViewModels\LichSuThaoTacViewModels.cs" />
-    <Compile Include="ViewModels\LoaiCaViewModels.cs" />
-    <Compile Include="ViewModels\LoaiHopDongViewModels.cs" />
-    <Compile Include="ViewModels\LoaiPhieuViewModels.cs" />
-    <Compile Include="ViewModels\NhanVienViewModel.cs" />
-    <Compile Include="ViewModels\PhanQuyenViewModels.cs" />
-    <Compile Include="ViewModels\PhieuViewModels.cs" />
-    <Compile Include="ViewModels\PhongBanViewModels.cs" />
-    <Compile Include="ViewModels\PhuCapViewMModels.cs" />
-    <Compile Include="ViewModels\ChiTietPhuCapViewModels.cs" />
-    <EmbeddedResource Include="PresentationTier\FrmChamCong.resx">
-      <DependentUpon>FrmChamCong.cs</DependentUpon>
+    <Compile Include="Functions\StringAdjust.cs" />
+    <Compile Include="ViewModels\ShiftViewModels.cs" />
+    <Compile Include="ViewModels\WorkScheduleDetailViewModels.cs" />
+    <Compile Include="ViewModels\CardDetailViewModels.cs" />
+    <Compile Include="ViewModels\PositionViewModels.cs" />
+    <Compile Include="ViewModels\WorkScheduleViewModels.cs" />
+    <Compile Include="ViewModels\OperateHistoryViewModels.cs" />
+    <Compile Include="ViewModels\ShiftTypeViewModels.cs" />
+    <Compile Include="ViewModels\ContractTypeViewModels.cs" />
+    <Compile Include="ViewModels\CardTypeViewModels.cs" />
+    <Compile Include="ViewModels\StaffViewModel.cs" />
+    <Compile Include="ViewModels\AuthorizationViewModels.cs" />
+    <Compile Include="ViewModels\CardViewModels.cs" />
+    <Compile Include="ViewModels\DepartmentViewModels.cs" />
+    <Compile Include="ViewModels\AllowanceViewModels.cs" />
+    <Compile Include="ViewModels\AllowanceDetailViewModels.cs" />
+    <EmbeddedResource Include="PresentationTier\FrmConfirmPassword.resx">
+      <DependentUpon>FrmConfirmPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmChiTietLichLamViec.resx">
-      <DependentUpon>FrmChiTietLichLamViec.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmTimeKeeping.resx">
+      <DependentUpon>FrmTimeKeeping.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmChiTietPhieu.resx">
-      <DependentUpon>FrmChiTietPhieu.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmWorkScheduleDetail.resx">
+      <DependentUpon>FrmWorkScheduleDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmChiTietPhuCap.resx">
-      <DependentUpon>FrmChiTietPhuCap.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmCardDetail.resx">
+      <DependentUpon>FrmCardDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmDangNhap.resx">
-      <DependentUpon>FrmDangNhap.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmAllowanceDetail.resx">
+      <DependentUpon>FrmAllowanceDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmKhoaTaiKhoan.resx">
-      <DependentUpon>FrmKhoaTaiKhoan.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmLichLamViec.resx">
-      <DependentUpon>FrmLichLamViec.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmLockAccount.resx">
+      <DependentUpon>FrmLockAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmLichSuThaoTac.resx">
-      <DependentUpon>FrmLichSuThaoTac.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmWorkSchedule.resx">
+      <DependentUpon>FrmWorkSchedule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmManHinhChinh.resx">
-      <DependentUpon>FrmManHinhChinh.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmOperateHistory.resx">
+      <DependentUpon>FrmOperateHistory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmPhanQuyen.resx">
-      <DependentUpon>FrmPhanQuyen.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmMainMenu.resx">
+      <DependentUpon>FrmMainMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmQuanLyPhieu.resx">
-      <DependentUpon>FrmQuanLyPhieu.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmAuthorization.resx">
+      <DependentUpon>FrmAuthorization.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmQuanLyCa.resx">
-      <DependentUpon>FrmQuanLyCa.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmCard.resx">
+      <DependentUpon>FrmCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmQuanLyChucVu.resx">
-      <DependentUpon>FrmQuanLyChucVu.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmShift.resx">
+      <DependentUpon>FrmShift.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmQuanLyLoaiCa.resx">
-      <DependentUpon>FrmQuanLyLoaiCa.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmPosition.resx">
+      <DependentUpon>FrmPosition.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmQuanLyLoaiHopDong.resx">
-      <DependentUpon>FrmQuanLyLoaiHopDong.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmShiftType.resx">
+      <DependentUpon>FrmShiftType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmQuanLyLoaiPhieu.resx">
-      <DependentUpon>FrmQuanLyLoaiPhieu.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmContractType.resx">
+      <DependentUpon>FrmContractType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmQuanLyNhanVien.resx">
-      <DependentUpon>FrmQuanLyNhanVien.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmCardType.resx">
+      <DependentUpon>FrmCardType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmQuanLyPhongBan.resx">
-      <DependentUpon>FrmQuanLyPhongBan.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmStaff.resx">
+      <DependentUpon>FrmStaff.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmQuanLyPhuCap.resx">
-      <DependentUpon>FrmQuanLyPhuCap.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmDepartment.resx">
+      <DependentUpon>FrmDepartment.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmQuenMatKhau.resx">
-      <DependentUpon>FrmQuenMatKhau.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmAllowance.resx">
+      <DependentUpon>FrmAllowance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmThongKe.resx">
-      <DependentUpon>FrmThongKe.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmForgotPassword.resx">
+      <DependentUpon>FrmForgotPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmThongTinTaiKhoan.resx">
-      <DependentUpon>FrmThongTinTaiKhoan.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmStatistic.resx">
+      <DependentUpon>FrmStatistic.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationTier\FrmChiTietPhuCapMotNhanVien.resx">
-      <DependentUpon>FrmChiTietPhuCapMotNhanVien.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationTier\FrmAccountInfo.resx">
+      <DependentUpon>FrmAccountInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationTier\FrmStaffAllowanceDetail.resx">
+      <DependentUpon>FrmStaffAllowanceDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
