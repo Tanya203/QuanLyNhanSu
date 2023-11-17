@@ -29,6 +29,7 @@ namespace QuanLyNhanSu.DataTier
                 Position = x.Staff.Position.PositionName,
                 Department = x.Staff.Position.Department.DepartmentName,
                 Amount = x.Amount,
+                Deliver = x.Deliver,
                 Note = x.Note,
             }).Where(c => c.CardID == cardID).OrderBy(c => c.CardID);
             return listCardDetail;
@@ -44,6 +45,7 @@ namespace QuanLyNhanSu.DataTier
                 Position = x.Staff.Position.PositionName,
                 Department = x.Staff.Position.Department.DepartmentName,
                 Amount = x.Amount,
+                Deliver = x.Deliver,
                 Note = x.Note,
             }).Where(c => c.CardID == cardID && (
                      c.CardTypeName.Contains(search) ||
@@ -52,6 +54,7 @@ namespace QuanLyNhanSu.DataTier
                      c.Position.Contains(search) ||
                      c.Department.Contains(search) ||
                      c.Amount.ToString().Contains(search) ||
+                     c.Deliver.ToString().Contains(search) ||
                      c.Note.Contains(search))).OrderBy(c => c.StaffID);
             return listCardDetailSearch;
         }
@@ -60,6 +63,13 @@ namespace QuanLyNhanSu.DataTier
             CardDetail cardDetail = quanLyNhanSu.CardDetails.Where(staff => staff.StaffID == staffID && staff.CardID == cardID).FirstOrDefault();
             if(cardDetail != null)
                 return cardDetail.Amount;
+            return 0;
+        }
+        public decimal StaffDeliver(string staffID, string cardID)
+        {
+            CardDetail cardDetail = quanLyNhanSu.CardDetails.Where(staff => staff.StaffID == staffID && staff.CardID == cardID).FirstOrDefault();
+            if (cardDetail != null)
+                return cardDetail.Deliver;
             return 0;
         }
         public IEnumerable<CardDetail> GetCardDetail()
@@ -112,6 +122,13 @@ namespace QuanLyNhanSu.DataTier
             List<CardDetail> cardDetail = quanLyNhanSu.CardDetails.Where(c => c.CardID == cardID).ToList();
             if (cardDetail != null)
                 return cardDetail.Sum(c => c.Amount);
+            return 0;
+        }
+        public decimal TotalDeliver(string cardID)
+        {
+            List<CardDetail> cardDetail = quanLyNhanSu.CardDetails.Where(c => c.CardID == cardID).ToList();
+            if (cardDetail != null)
+                return cardDetail.Sum(c => c.Deliver);
             return 0;
         }
     }

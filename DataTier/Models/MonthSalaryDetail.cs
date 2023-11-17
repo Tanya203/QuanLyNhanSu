@@ -21,7 +21,7 @@ namespace QuanLyNhanSu.DataTier.Models
 
         public decimal? TotalWorkHours { get; set; }
 
-        public decimal? TotalSalaryHours { get; set; }
+        public decimal? BasicSalary { get; set; }
 
         public decimal? TotalBonus { get; set; }
 

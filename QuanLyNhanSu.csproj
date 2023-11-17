@@ -170,6 +170,7 @@
     <Compile Include="DataTier\Models\TimeKeeping.cs" />
     <Compile Include="DataTier\Models\TimeKeepingMethod.cs" />
     <Compile Include="DataTier\Models\WorkSchedule.cs" />
+    <Compile Include="DataTier\MonthDAL.cs" />
     <Compile Include="DataTier\TimeKeepingDAL.cs" />
     <Compile Include="DataTier\WorkScheduleDetailDAL.cs" />
     <Compile Include="DataTier\CardDetailDAL.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Functions\LoadHeader.cs" />
     <Compile Include="Functions\FormHandle.cs" />
     <Compile Include="Functions\SaveOperateHistory.cs" />
+    <Compile Include="LogicTier\MonthBUS.cs" />
     <Compile Include="LogicTier\TimeKeepingBUS.cs" />
     <Compile Include="LogicTier\WorkScheduleDetailBUS.cs" />
     <Compile Include="LogicTier\CardDetailBUS.cs" />

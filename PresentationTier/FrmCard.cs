@@ -96,6 +96,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvCard.Rows[rowAdd].Cells[5].Value = c.Position;
                 dgvCard.Rows[rowAdd].Cells[6].Value = c.CreateDate.ToString(formatDate);
                 dgvCard.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", cardDetailBUS.TotalAmount(c.CardID));
+                dgvCard.Rows[rowAdd].Cells[8].Value = String.Format(fVND, "{0:N3} ₫", cardDetailBUS.TotalDeliver(c.CardID));
             }
             Enabled = true;
         }        
@@ -116,6 +117,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvCard.Rows[rowAdd].Cells[5].Value = c.Position;
                 dgvCard.Rows[rowAdd].Cells[6].Value = c.CreateDate.ToString(formatDate);
                 dgvCard.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", cardDetailBUS.TotalAmount(c.CardID));
+                dgvCard.Rows[rowAdd].Cells[8].Value = String.Format(fVND, "{0:N3} ₫", cardDetailBUS.TotalDeliver(c.CardID));
             }
             Enabled = true;
         }
@@ -244,9 +246,9 @@ namespace QuanLyNhanSu.PresentationTier
             string cardID = dgvCard.Rows[rowIndex].Cells[0].Value.ToString();
             string cardType = dgvCard.Rows[rowIndex].Cells[1].Value.ToString();
             string dateCreate = dgvCard.Rows[rowIndex].Cells[6].Value.ToString();
-            if (e.ColumnIndex == 8)
-                OpenCardDetail(staff.StaffID, cardID);
             if (e.ColumnIndex == 9)
+                OpenCardDetail(staff.StaffID, cardID);
+            if (e.ColumnIndex == 10)
                 DeleteCard(cardID, cardType, dateCreate);
             
         }

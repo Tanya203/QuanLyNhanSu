@@ -97,6 +97,10 @@ namespace QuanLyNhanSu.DataTier.Models
                 .Property(e => e.Amount)
                 .HasPrecision(38, 3);
 
+            modelBuilder.Entity<CardDetail>()
+                .Property(e => e.Deliver)
+                .HasPrecision(38, 3);
+
             modelBuilder.Entity<CardType>()
                 .Property(e => e.CT_ID)
                 .IsUnicode(false);
@@ -152,10 +156,10 @@ namespace QuanLyNhanSu.DataTier.Models
 
             modelBuilder.Entity<MonthSalaryDetail>()
                 .Property(e => e.TotalWorkHours)
-                .HasPrecision(38, 2);
+                .HasPrecision(38, 3);
 
             modelBuilder.Entity<MonthSalaryDetail>()
-                .Property(e => e.TotalSalaryHours)
+                .Property(e => e.BasicSalary)
                 .HasPrecision(38, 3);
 
             modelBuilder.Entity<MonthSalaryDetail>()

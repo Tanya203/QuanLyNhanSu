@@ -40,7 +40,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void DisableDisplay()
         {
-            List<TextBox> listDisplay = new List<TextBox> { txtStaffID, txtDepartment, txtPosition, txtContractType, txtAccount, txtEducationLevel, txtEntryDate, txtContractDuration, txtStatus, txtDateOffAmount, txtBasicSalary, txtAllowance };
+            List<TextBox> listDisplay = new List<TextBox> { txtStaffID, txtDepartment, txtPosition, txtContractType, txtAccount, txtEducationLevel, txtEntryDate, txtContractDuration, txtStatus, txtDateOffAmount, txtBasicSalary, txtAllowance, txtDept };
             for (int i = 0; i < listDisplay.Count; i++)
             {
                 typeof(TextBox).GetProperty("ReadOnly").SetValue(listDisplay[i], true);
@@ -85,6 +85,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtDateOffAmount.Text = staff.DayOffAmount.ToString();
             txtBasicSalary.Text = String.Format(fVND, "{0:N3} ₫", staff.BasicSalary);
             txtAllowance.Text = String.Format(fVND, "{0:N3} ₫", allowanceDetailBUS.StaffTotalAllowance(staff.StaffID));
+            txtDept.Text = String.Format(fVND, "{0:N3} ₫", staff.Dept);
             ImageHandle.LoadImage(pbStaffPicture, staff.Picture);
             Enabled = true;
         }

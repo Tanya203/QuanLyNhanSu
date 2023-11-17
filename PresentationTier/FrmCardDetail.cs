@@ -55,7 +55,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private bool Authorizations()
         {
-            List<object> input = new List<object> { cmbPosition, cmbStaff, cmbDepartment, txtAmount, rtxtNote };
+            List<object> input = new List<object> { cmbPosition, cmbStaff, cmbDepartment, txtAmount, rtxtNote, txtDeliver };
             List<object> function = new List<object> { btnAdd, btnEdit, btnCancel };
             if (authorizations.AuthorizeForm(input, function) == "operate")
                 return true;
@@ -64,7 +64,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void InputStatus(bool value)
         {
             ButtonStatus(value);
-            List<object> listInput = new List<object> { cmbDepartment, cmbPosition, cmbStaff, txtAmount, rtxtNote };
+            List<object> listInput = new List<object> { cmbDepartment, cmbPosition, cmbStaff, txtAmount, rtxtNote, txtDeliver };
             for (int i = 0; i < listInput.Count; i++)
             {
                 if (listInput[i] is ComboBox)
@@ -96,7 +96,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void DisableDisplay()
         {
-            List<object> listDisplay = new List<object> { txtCardID, txtCardType, txtFullNameCreate, txtPosition, txtPosition, dtpDateCreate, txtTotalAmount, txtStaffIDEdit, txtFullName, txtStaffIDCreate, txtDepartment };
+            List<object> listDisplay = new List<object> { txtCardID, txtCardType, txtFullNameCreate, txtPosition, txtPosition, dtpDateCreate, txtTotalAmount, txtStaffIDEdit, txtFullName, txtStaffIDCreate, txtDepartment, txtTotalDeliver };
             for (int i = 0; i < listDisplay.Count; i++)
             {
                 if (listDisplay[i] is TextBox)
@@ -168,6 +168,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtPosition.Text = card.Staff.Position.PositionName;
             dtpDateCreate.Text = card.DateCreated.ToString();
             txtTotalAmount.Text = String.Format(fVND, "{0:N3} ₫", cardDetailBUS.TotalAmount(card.CardID));
+            txtTotalDeliver.Text = String.Format(fVND, "{0:N3} ₫", cardDetailBUS.TotalDeliver(card.CardID));
         }
         private void LoadCardDetail()
         {
@@ -185,7 +186,8 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvCardDetail.Rows[rowAdd].Cells[4].Value = c.Department;
                 dgvCardDetail.Rows[rowAdd].Cells[5].Value = c.Position;
                 dgvCardDetail.Rows[rowAdd].Cells[6].Value = String.Format(fVND, "{0:N3} ₫", c.Amount);
-                dgvCardDetail.Rows[rowAdd].Cells[7].Value = c.Note;
+                dgvCardDetail.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", c.Deliver);
+                dgvCardDetail.Rows[rowAdd].Cells[8].Value = c.Note;
             }
             Enabled = true;
         }
@@ -205,7 +207,8 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvCardDetail.Rows[rowAdd].Cells[4].Value = c.Department;
                 dgvCardDetail.Rows[rowAdd].Cells[5].Value = c.Position;
                 dgvCardDetail.Rows[rowAdd].Cells[6].Value = String.Format(fVND, "{0:N3} ₫", c.Amount);
-                dgvCardDetail.Rows[rowAdd].Cells[7].Value = c.Note;
+                dgvCardDetail.Rows[rowAdd].Cells[7].Value = String.Format(fVND, "{0:N3} ₫", c.Deliver);
+                dgvCardDetail.Rows[rowAdd].Cells[8].Value = c.Note;
             }
             Enabled = true;
         }
@@ -224,6 +227,10 @@ namespace QuanLyNhanSu.PresentationTier
             else
             {
                 Staff staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == cmbStaff.Text);
+                txtStaffIDEdit.Text = string.Empty;
+                txtAmount.Text = string.Empty;
+                rtxtNote.Text = string.Empty;
+                txtDeliver.Text = string.Empty;
                 txtFullName.Text = StringAdjust.AddSpacesBetweenUppercaseLetters($"{staff.LastName}{staff.MiddleName}{staff.FirstName}");
                 ImageHandle.LoadImage(pbStaffPicture, staff.Picture);
             }
@@ -263,11 +270,9 @@ namespace QuanLyNhanSu.PresentationTier
             txtFullName.Text = dgvCardDetail.Rows[rowIndex].Cells[3].Value.ToString();
             txtStaffIDEdit.Text = dgvCardDetail.Rows[rowIndex].Cells[2].Value.ToString();
             txtAmount.Text = cardDetailBUS.StaffAmount(txtStaffIDEdit.Text, txtCardID.Text).ToString();
-            if (dgvCardDetail.Rows[rowIndex].Cells[7].Value is null)
-                rtxtNote.Text = string.Empty;
-            else
-                rtxtNote.Text = dgvCardDetail.Rows[rowIndex].Cells[7].Value.ToString();
-            if (e.ColumnIndex == 8)
+            txtDeliver.Text = cardDetailBUS.StaffDeliver(txtStaffIDEdit.Text, txtCardID.Text).ToString();
+            rtxtNote.Text = dgvCardDetail.Rows[rowIndex].Cells[8].Value is null ? string.Empty : dgvCardDetail.Rows[rowIndex].Cells[8].Value.ToString();
+            if (e.ColumnIndex == 9)
                 DeleteStaff(txtStaffIDEdit.Text);
             byte[] imageBytes = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == txtStaffIDEdit.Text).Picture;
             ImageHandle.LoadImage(pbStaffPicture, imageBytes);
@@ -276,7 +281,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void ClearAllText()
         {
             pbStaffPicture.Image = Properties.Resources.image;
-            List<object> listInput = new List<object> { txtAmount, txtFullName, rtxtNote, cmbDepartment, txtStaffIDEdit };
+            List<object> listInput = new List<object> { txtAmount, txtFullName, rtxtNote, cmbDepartment, txtStaffIDEdit, txtDeliver };
             for (int i = 0; i < listInput.Count; i++)
             {
                 if (listInput[i] is TextBox)
@@ -307,6 +312,10 @@ namespace QuanLyNhanSu.PresentationTier
         {
             InputCheck.OnlyRealNumber(sender, e);
         }
+        private void txtDeliver_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            InputCheck.OnlyRealNumber(sender, e);
+        }
         ///////////////////////////////////////////////////////////////////////////////////////////
         private string CheckChange()
         {
@@ -314,17 +323,26 @@ namespace QuanLyNhanSu.PresentationTier
             CardDetail staff = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.StaffID == txtStaffIDEdit.Text && c.CardID == card.CardID);
             string oldAmount = string.Format(fVND, "{0:N3} ₫", staff.Amount);
             string newAmount = string.Format(fVND, "{0:N3} ₫", decimal.Parse(txtAmount.Text));
+            string oldDeliver = string.Format(fVND, "{0:N3} ₫", staff.Deliver);
+            string newDeliver  = string.IsNullOrEmpty(txtDeliver.Text) ? string.Format(fVND, "{0:N3} ₫", 0) : string.Format(fVND, "{0:N3} ₫", txtDeliver.Text);
             if (oldAmount != newAmount)
                 changes.Add($"- Số tiền: {oldAmount} -> Số tiền: {newAmount}");
             if (rtxtNote.Text != staff.Note)
                 changes.Add($"- Ghi chú: {staff.Note} -> Ghi chú: {rtxtNote.Text}");
+            if(oldDeliver != txtDeliver.Text)
+                changes.Add($"- Đã giao: {oldDeliver} -> Đã giao: {rtxtNote.Text}");
             return string.Join("\n", changes);
         }
         private bool CheckErrorInput()
         {
             errProvider.Clear();
+            decimal deliver = decimal.TryParse(txtDeliver.Text, out _) ? decimal.Parse(txtDeliver.Text) : 0;
+            decimal amount = decimal.TryParse(txtAmount.Text, out _) ? decimal.Parse(txtAmount.Text) : 0;
             errProvider.SetError(txtAmount, double.TryParse(txtAmount.Text, out _) is false ? "Định dạng tiền không hợp lệ" : string.Empty);
-            if (errProvider.GetError(txtAmount) != string.Empty)
+            errProvider.SetError(txtDeliver, double.TryParse(txtDeliver.Text, out _) is false && string.IsNullOrEmpty(txtTotalDeliver.Text) ? "Định dạng tiền không hợp lệ" : string.Empty);
+            errProvider.SetError(txtDeliver, deliver > amount ? "Tiền nhận phải nhở hơn hoặc bằng số tiền nhận" : string.Empty);
+            errProvider.SetError(txtAmount, amount <= 0 ? "Số tiền phải lớn hơn 0" : string.Empty);
+            if (errProvider.GetError(txtAmount) != string.Empty || errProvider.GetError(txtDeliver) != string.Empty)
                 return false;
             return true;
         }
@@ -337,11 +355,13 @@ namespace QuanLyNhanSu.PresentationTier
             }
             try
             {
+                decimal deliver = string.IsNullOrEmpty(txtDeliver.Text) ? 0 : decimal.Parse(txtDeliver.Text);
                 CardDetail cardDetail = new CardDetail
                 {
                     CardID = card.CardID,
                     StaffID = cmbStaff.SelectedValue.ToString(),
                     Amount = decimal.Parse(txtAmount.Text),
+                    Deliver = deliver,
                     Note = rtxtNote.Text,
                 };
                 if (cardDetailBUS.Save(cardDetail))
@@ -384,11 +404,13 @@ namespace QuanLyNhanSu.PresentationTier
                 string editDetail = CheckChange();
                 decimal oldDept = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == card.CardID && c.StaffID == txtStaffIDEdit.Text).Amount;
                 decimal newDept = decimal.Parse(txtAmount.Text);
+                decimal deliver =  string.IsNullOrEmpty(txtDeliver.Text) ? 0 : decimal.Parse(txtDeliver.Text);
                 CardDetail cardDetail = new CardDetail
                 {
                     CardID = card.CardID,
                     StaffID = txtStaffIDEdit.Text,
                     Amount = decimal.Parse(txtAmount.Text),
+                    Deliver = deliver,
                     Note = rtxtNote.Text,
                 };
                 if (cardDetailBUS.Save(cardDetail))
@@ -497,5 +519,6 @@ namespace QuanLyNhanSu.PresentationTier
             Reload();
         }
 
+        
     }
 }

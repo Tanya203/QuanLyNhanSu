@@ -32,6 +32,10 @@ namespace QuanLyNhanSu.LogicTier
         {
             return cardDetailDAL.TotalAmount(cardID);
         }
+        public decimal TotalDeliver(string cardID)
+        {
+            return cardDetailDAL.TotalDeliver(cardID);
+        }
         public IEnumerable<CardDetail> GetCardDetail()
         {
             return cardDetailDAL.GetCardDetail();
@@ -39,6 +43,10 @@ namespace QuanLyNhanSu.LogicTier
         public decimal StaffAmount(string staffID, string cardID)
         {
             return cardDetailDAL.StaffAmount(staffID, cardID);
+        }
+        public decimal StaffDeliver(string staffID, string cardID)
+        {
+            return cardDetailDAL.StaffDeliver(staffID, cardID);
         }
     }
 }
