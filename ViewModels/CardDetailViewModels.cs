@@ -6,6 +6,7 @@
         public string StaffID { get; set; }
         public string CardTypeName { get; set; }
         public decimal Amount { get; set; }
+        public decimal Deliver { get; set; }
         public string Note { get; set; }
         public string Position { get; set; }
         public string Department { get; set;}

@@ -111,6 +111,8 @@
             this.lblDepartment = new System.Windows.Forms.Label();
             this.lblPosition = new System.Windows.Forms.Label();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtDept = new System.Windows.Forms.TextBox();
+            this.lblDept = new System.Windows.Forms.Label();
             this.pnlHeader.SuspendLayout();
             this.pnlChangePassword.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -431,6 +433,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlMenu.BackColor = System.Drawing.SystemColors.Info;
+            this.pnlMenu.Controls.Add(this.txtDept);
+            this.pnlMenu.Controls.Add(this.lblDept);
             this.pnlMenu.Controls.Add(this.txtContractDuration);
             this.pnlMenu.Controls.Add(this.txtEntryDate);
             this.pnlMenu.Controls.Add(this.txtContractType);
@@ -545,7 +549,7 @@
             this.btnChoosePicture.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnChoosePicture.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChoosePicture.Image = global::QuanLyNhanSu.Properties.Resources.chose_picture;
-            this.btnChoosePicture.Location = new System.Drawing.Point(466, 276);
+            this.btnChoosePicture.Location = new System.Drawing.Point(464, 334);
             this.btnChoosePicture.Name = "btnChoosePicture";
             this.btnChoosePicture.Size = new System.Drawing.Size(153, 50);
             this.btnChoosePicture.TabIndex = 31;
@@ -573,7 +577,7 @@
             this.btnShowAllowance.FlatAppearance.BorderSize = 0;
             this.btnShowAllowance.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnShowAllowance.Image = global::QuanLyNhanSu.Properties.Resources.add_small;
-            this.btnShowAllowance.Location = new System.Drawing.Point(598, 153);
+            this.btnShowAllowance.Location = new System.Drawing.Point(598, 190);
             this.btnShowAllowance.Name = "btnShowAllowance";
             this.btnShowAllowance.Size = new System.Drawing.Size(39, 37);
             this.btnShowAllowance.TabIndex = 29;
@@ -622,7 +626,7 @@
             // txtAllowance
             // 
             this.txtAllowance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAllowance.Location = new System.Drawing.Point(643, 157);
+            this.txtAllowance.Location = new System.Drawing.Point(643, 194);
             this.txtAllowance.Name = "txtAllowance";
             this.txtAllowance.Size = new System.Drawing.Size(215, 27);
             this.txtAllowance.TabIndex = 30;
@@ -791,7 +795,7 @@
             // 
             this.lblHinh.AutoSize = true;
             this.lblHinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHinh.Location = new System.Drawing.Point(439, 231);
+            this.lblHinh.Location = new System.Drawing.Point(437, 289);
             this.lblHinh.Name = "lblHinh";
             this.lblHinh.Size = new System.Drawing.Size(63, 25);
             this.lblHinh.TabIndex = 27;
@@ -801,7 +805,7 @@
             // 
             this.lblAllowance.AutoSize = true;
             this.lblAllowance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAllowance.Location = new System.Drawing.Point(438, 159);
+            this.lblAllowance.Location = new System.Drawing.Point(438, 196);
             this.lblAllowance.Name = "lblAllowance";
             this.lblAllowance.Size = new System.Drawing.Size(98, 25);
             this.lblAllowance.TabIndex = 26;
@@ -820,7 +824,7 @@
             // pbStaffPicture
             // 
             this.pbStaffPicture.Image = global::QuanLyNhanSu.Properties.Resources.image;
-            this.pbStaffPicture.Location = new System.Drawing.Point(645, 195);
+            this.pbStaffPicture.Location = new System.Drawing.Point(643, 253);
             this.pbStaffPicture.Name = "pbStaffPicture";
             this.pbStaffPicture.Size = new System.Drawing.Size(215, 215);
             this.pbStaffPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1062,6 +1066,24 @@
             this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errProvider.ContainerControl = this;
             // 
+            // txtDept
+            // 
+            this.txtDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDept.Location = new System.Drawing.Point(643, 158);
+            this.txtDept.Name = "txtDept";
+            this.txtDept.Size = new System.Drawing.Size(215, 27);
+            this.txtDept.TabIndex = 40;
+            // 
+            // lblDept
+            // 
+            this.lblDept.AutoSize = true;
+            this.lblDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDept.Location = new System.Drawing.Point(438, 157);
+            this.lblDept.Name = "lblDept";
+            this.lblDept.Size = new System.Drawing.Size(46, 25);
+            this.lblDept.TabIndex = 39;
+            this.lblDept.Text = "Nợ:";
+            // 
             // FrmAccountInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -1173,5 +1195,7 @@
         private System.Windows.Forms.TextBox txtIDCard;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ErrorProvider errProvider;
+        private System.Windows.Forms.TextBox txtDept;
+        private System.Windows.Forms.Label lblDept;
     }
 }

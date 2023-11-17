@@ -21,6 +21,8 @@ namespace QuanLyNhanSu.DataTier.Models
 
         public decimal Amount { get; set; }
 
+        public decimal Deliver { get; set; }
+
         [StringLength(500)]
         public string Note { get; set; }
 
