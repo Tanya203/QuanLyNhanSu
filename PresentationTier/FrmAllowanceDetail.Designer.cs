@@ -487,7 +487,7 @@
             this.colPhongBan,
             this.colChucVu});
             this.dgvAllowanceDetail.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvAllowanceDetail.Location = new System.Drawing.Point(0, 418);
+            this.dgvAllowanceDetail.Location = new System.Drawing.Point(0, 406);
             this.dgvAllowanceDetail.Name = "dgvAllowanceDetail";
             this.dgvAllowanceDetail.ReadOnly = true;
             this.dgvAllowanceDetail.RowHeadersVisible = false;
@@ -495,7 +495,7 @@
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvAllowanceDetail.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvAllowanceDetail.RowTemplate.Height = 24;
-            this.dgvAllowanceDetail.Size = new System.Drawing.Size(1924, 585);
+            this.dgvAllowanceDetail.Size = new System.Drawing.Size(1924, 597);
             this.dgvAllowanceDetail.TabIndex = 78;
             this.dgvAllowanceDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCardDetail_CellClick);
             // 

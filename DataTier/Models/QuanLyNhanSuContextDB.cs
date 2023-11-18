@@ -137,17 +137,16 @@ namespace QuanLyNhanSu.DataTier.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Month>()
-                .Property(e => e.Month1)
+                .Property(e => e.MonthID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Month>()
                 .HasMany(e => e.MonthSalaryDetails)
-                .WithRequired(e => e.Month1)
-                .HasForeignKey(e => e.Month)
+                .WithRequired(e => e.Month)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<MonthSalaryDetail>()
-                .Property(e => e.Month)
+                .Property(e => e.MonthID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<MonthSalaryDetail>()
@@ -167,11 +166,15 @@ namespace QuanLyNhanSu.DataTier.Models
                 .HasPrecision(38, 3);
 
             modelBuilder.Entity<MonthSalaryDetail>()
-                .Property(e => e.TotalFine)
+                .Property(e => e.TotalAllowance)
                 .HasPrecision(38, 3);
 
             modelBuilder.Entity<MonthSalaryDetail>()
-                .Property(e => e.TotalAllowance)
+                .Property(e => e.TotalDebt)
+                .HasPrecision(38, 3);
+
+            modelBuilder.Entity<MonthSalaryDetail>()
+                .Property(e => e.TotalDebtPaid)
                 .HasPrecision(38, 3);
 
             modelBuilder.Entity<OperateHistory>()
@@ -275,10 +278,6 @@ namespace QuanLyNhanSu.DataTier.Models
 
             modelBuilder.Entity<Staff>()
                 .Property(e => e.BasicSalary)
-                .HasPrecision(38, 3);
-
-            modelBuilder.Entity<Staff>()
-                .Property(e => e.Dept)
                 .HasPrecision(38, 3);
 
             modelBuilder.Entity<Staff>()

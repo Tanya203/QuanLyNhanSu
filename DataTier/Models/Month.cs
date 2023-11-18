@@ -15,10 +15,8 @@ namespace QuanLyNhanSu.DataTier.Models
             MonthSalaryDetails = new HashSet<MonthSalaryDetail>();
         }
 
-        [Key]
-        [Column("Month")]
         [StringLength(20)]
-        public string Month1 { get; set; }
+        public string MonthID { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MonthSalaryDetail> MonthSalaryDetails { get; set; }

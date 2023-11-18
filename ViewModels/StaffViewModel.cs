@@ -31,7 +31,6 @@ namespace QuanLyNhanSu.ViewModels
         public string DepartmentName { get; set; }
         public string PositionName { get; set; }
         public string ContractTypeName { get; set; }
-        public decimal? Dept { get; set; }
         public DateTime? LockDate { get; set; }
     }
 }

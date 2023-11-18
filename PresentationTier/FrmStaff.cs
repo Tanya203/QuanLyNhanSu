@@ -25,7 +25,9 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly PositionBUS positionBUS;
         private readonly ContractTypeBUS contractTypeBUS;
         private readonly AllowanceDetailBUS allowanceDetailBUS;
+        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly string formatDate = "yyyy-MM-dd";
+        private readonly string formatMonth = "MM/yyyy";
         private Staff staff;
         public FrmStaff(string staffID)
         {
@@ -37,6 +39,7 @@ namespace QuanLyNhanSu.PresentationTier
             positionBUS = new PositionBUS();
             contractTypeBUS = new ContractTypeBUS();
             allowanceDetailBUS = new AllowanceDetailBUS();
+            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Nhân viên",staff);            
         }
@@ -66,7 +69,7 @@ namespace QuanLyNhanSu.PresentationTier
             List<object> listInput = new List<object> { txtStaffID ,cmbPosition, cmbContractType, cmbDepartment, txtAccount, txtPassword, txtReEnterPassword,
                                                         txtIDCard, txtLastName, txtMiddleName, txtFirstName, dtpBrithday, txtHouseNumer, txtStreet, txtWard, txtDistrict,
                                                         txtProvince_City, rbMale, rbFemale, rbOthers, txtPhone, txtEmail, txtEducationLevel, dtpEntryDate, dtpContractDuration,
-                                                        txtStatus, txtDateOffMount, txtBasicSalary, txtStaffID, txtAllowance, txtDateLock, txtDept};
+                                                        txtStatus, txtDateOffMount, txtBasicSalary, txtStaffID, txtAllowance, txtDateLock, txtDebt};
             for (int i = 0; i < listInput.Count; i++)
             {
                 if (listInput[i] is TextBox)
@@ -148,7 +151,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvStaff.Rows[rowAdd].Cells[25].Value = s.LockDate.ToString();            
                 dgvStaff.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", s.BasicSalary);
                 dgvStaff.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", allowanceDetailBUS.StaffTotalAllowance(s.StaffID));
-                dgvStaff.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", staff.Dept);
+                dgvStaff.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", monthSalaryDetailBUS.GetStaffMonthTotalDebt(s.StaffID, DateTime.Now.ToString(formatMonth)));
                 
             }
             Enabled = true;
@@ -188,7 +191,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvStaff.Rows[rowAdd].Cells[25].Value = s.LockDate.ToString();
                 dgvStaff.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", s.BasicSalary);
                 dgvStaff.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", allowanceDetailBUS.StaffTotalAllowance(s.StaffID));
-                dgvStaff.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", staff.Dept);
+                dgvStaff.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", monthSalaryDetailBUS.GetStaffMonthTotalDebt(s.StaffID, DateTime.Now.ToString(formatMonth)));
 
             }
             Enabled = true;
@@ -224,7 +227,7 @@ namespace QuanLyNhanSu.PresentationTier
             List<object> listInput = new List<object> { cmbPosition, cmbContractType, cmbDepartment, txtAccount, txtPassword, txtReEnterPassword,
                                                         txtIDCard, txtLastName, txtMiddleName, txtFirstName, dtpBrithday, txtHouseNumer, txtStreet, txtWard, txtDistrict,
                                                         txtProvince_City, rbMale, txtPhone, txtEmail, txtEducationLevel, dtpEntryDate, dtpContractDuration,
-                                                        txtStatus, txtDateOffMount, txtBasicSalary, txtStaffID, txtAllowance, txtDateLock, txtDept};
+                                                        txtStatus, txtDateOffMount, txtBasicSalary, txtStaffID, txtAllowance, txtDateLock, txtDebt};
             for (int i = 0; i < listInput.Count; i++)
             {
                 if (listInput[i] is TextBox)
@@ -540,7 +543,6 @@ namespace QuanLyNhanSu.PresentationTier
                     Status = txtStatus.Text,
                     DayOffAmount = int.Parse(txtDateOffMount.Text),
                     BasicSalary = decimal.Parse(txtBasicSalary.Text),
-                    Dept = 0,
                     Picture = ImageHandle.GetImageBytes(pbStaffPicture)
                 };
                 if (staffBUS.Save(staff))
@@ -675,7 +677,7 @@ namespace QuanLyNhanSu.PresentationTier
                                             $"- Số ngày phép: {txtDateOffMount.Text}\n" +
                                             $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtBasicSalary.Text))}\n" +
                                             $"- Phụ cấp: {String.Format(fVND, "{0:N3} ₫", txtAllowance.Text)}\n" +
-                                            $"- Số tiền nợ: {String.Format(fVND, "{0:N3} ₫", txtDept.Text)}\n";
+                                            $"- Số tiền nợ: {String.Format(fVND, "{0:N3} ₫", txtDebt.Text)}\n";
                             history.Save(staff.StaffID, operate, operationDetail);
                             Reload();
                         }                        
@@ -794,7 +796,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtBasicSalary.Text = double.Parse(StringAdjust.AdjustNumber(dgvStaff.Rows[rowIndex].Cells[23].Value.ToString())).ToString("F3");
             txtAllowance.Text = double.Parse(StringAdjust.AdjustNumber(dgvStaff.Rows[rowIndex].Cells[24].Value.ToString())).ToString("F3");
             txtDateLock.Text = dgvStaff.Rows[rowIndex].Cells[25].Value.ToString();            
-            txtDept.Text = double.Parse(StringAdjust.AdjustNumber(dgvStaff.Rows[rowIndex].Cells[26].Value.ToString())).ToString("F3");
+            txtDebt.Text = monthSalaryDetailBUS.GetStaffMonthTotalDebt(txtStaffID.Text, DateTime.Now.ToString(formatMonth)).ToString("F3");
             byte[] image = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == txtStaffID.Text).Picture;
             if (image != null)
             {

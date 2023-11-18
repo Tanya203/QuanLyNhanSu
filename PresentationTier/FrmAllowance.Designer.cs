@@ -471,7 +471,7 @@
             this.dgvAllowance.TabIndex = 12;
             this.dgvAllowance.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAllowance_CellClick);
             // 
-            // FrmQuanLyPhuCap
+            // FrmAllowance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -485,7 +485,7 @@
             this.Controls.Add(this.pnlHeader);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MinimumSize = new System.Drawing.Size(1918, 1018);
-            this.Name = "FrmQuanLyPhuCap";
+            this.Name = "FrmAllowance";
             this.Text = "frmQuanLyPhuCap";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmQuanLyPhuCap_Load);

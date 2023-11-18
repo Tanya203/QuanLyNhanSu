@@ -25,10 +25,6 @@ namespace QuanLyNhanSu.LogicTier
         {
             return staffDAL.GetAllStaffSearch(search);
         }
-        public bool UpdateDept(List<Staff> staff)
-        {
-            return staffDAL.UpdateDept(staff);
-        }
         public bool Save(Staff staff)
         {
             Staff s = staffDAL.GetStaff().FirstOrDefault(x => x.StaffID == staff.StaffID);            

@@ -104,8 +104,6 @@ namespace QuanLyNhanSu.DataTier.Models
 
         public DateTime? LockDate { get; set; }
 
-        public decimal? Dept { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AllowanceDetail> AllowanceDetails { get; set; }
 

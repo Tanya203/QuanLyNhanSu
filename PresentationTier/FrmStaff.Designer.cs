@@ -74,8 +74,8 @@
             this.colSoTienNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.btnLock = new System.Windows.Forms.Button();
-            this.txtDept = new System.Windows.Forms.TextBox();
-            this.lblDept = new System.Windows.Forms.Label();
+            this.txtDebt = new System.Windows.Forms.TextBox();
+            this.lblDebt = new System.Windows.Forms.Label();
             this.btnUnlock = new System.Windows.Forms.Button();
             this.txtDateLock = new System.Windows.Forms.TextBox();
             this.lblLockDate = new System.Windows.Forms.Label();
@@ -614,8 +614,8 @@
             this.pnlMenu.AutoSize = true;
             this.pnlMenu.BackColor = System.Drawing.SystemColors.Info;
             this.pnlMenu.Controls.Add(this.btnLock);
-            this.pnlMenu.Controls.Add(this.txtDept);
-            this.pnlMenu.Controls.Add(this.lblDept);
+            this.pnlMenu.Controls.Add(this.txtDebt);
+            this.pnlMenu.Controls.Add(this.lblDebt);
             this.pnlMenu.Controls.Add(this.btnUnlock);
             this.pnlMenu.Controls.Add(this.txtDateLock);
             this.pnlMenu.Controls.Add(this.lblLockDate);
@@ -687,7 +687,7 @@
             this.pnlMenu.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.pnlMenu.Location = new System.Drawing.Point(70, 151);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(1842, 328);
+            this.pnlMenu.Size = new System.Drawing.Size(1842, 340);
             this.pnlMenu.TabIndex = 23;
             // 
             // btnLock
@@ -704,24 +704,24 @@
             this.btnLock.UseVisualStyleBackColor = false;
             this.btnLock.Click += new System.EventHandler(this.btnLock_Click);
             // 
-            // txtDept
+            // txtDebt
             // 
-            this.txtDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDept.Location = new System.Drawing.Point(1307, 275);
-            this.txtDept.MaxLength = 50;
-            this.txtDept.Name = "txtDept";
-            this.txtDept.Size = new System.Drawing.Size(205, 27);
-            this.txtDept.TabIndex = 63;
+            this.txtDebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDebt.Location = new System.Drawing.Point(1307, 275);
+            this.txtDebt.MaxLength = 50;
+            this.txtDebt.Name = "txtDebt";
+            this.txtDebt.Size = new System.Drawing.Size(205, 27);
+            this.txtDebt.TabIndex = 63;
             // 
-            // lblDept
+            // lblDebt
             // 
-            this.lblDept.AutoSize = true;
-            this.lblDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDept.Location = new System.Drawing.Point(1079, 274);
-            this.lblDept.Name = "lblDept";
-            this.lblDept.Size = new System.Drawing.Size(117, 25);
-            this.lblDept.TabIndex = 62;
-            this.lblDept.Text = "Số tiền nợ:";
+            this.lblDebt.AutoSize = true;
+            this.lblDebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDebt.Location = new System.Drawing.Point(1079, 274);
+            this.lblDebt.Name = "lblDebt";
+            this.lblDebt.Size = new System.Drawing.Size(117, 25);
+            this.lblDebt.TabIndex = 62;
+            this.lblDebt.Text = "Số tiền nợ:";
             // 
             // btnUnlock
             // 
@@ -1630,8 +1630,8 @@
         private System.Windows.Forms.Button btnUnlock;
         private System.Windows.Forms.TextBox txtDateLock;
         private System.Windows.Forms.Label lblLockDate;
-        private System.Windows.Forms.TextBox txtDept;
-        private System.Windows.Forms.Label lblDept;
+        private System.Windows.Forms.TextBox txtDebt;
+        private System.Windows.Forms.Label lblDebt;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaNV;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhongBan;
         private System.Windows.Forms.DataGridViewTextBoxColumn colChucVu;

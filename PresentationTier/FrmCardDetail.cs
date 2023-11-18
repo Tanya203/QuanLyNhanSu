@@ -18,6 +18,7 @@ namespace QuanLyNhanSu.PresentationTier
     public partial class FrmCardDetail : Form
     {
         private readonly CultureInfo fVND = CultureInfo.GetCultureInfo("vi-VN");
+        private readonly string formatMonth = "MM/yyyy"; 
         private readonly Authorizations authorizations;
         private readonly SaveOperateHistory history;
         private readonly FormHandle redirect;
@@ -26,6 +27,9 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly PositionBUS positionBUS;
         private readonly CardBUS cardBUS;
         private readonly CardDetailBUS cardDetailBUS;
+        private readonly MonthBUS monthBUS;
+        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
+        private readonly AllowanceDetailBUS allowanceDetailBUS;
         private Staff staff;
         private Card card;
         public FrmCardDetail(string staffID, string cardID)
@@ -38,6 +42,9 @@ namespace QuanLyNhanSu.PresentationTier
             cardDetailBUS = new CardDetailBUS();
             departmentBUS = new DepartmentBUS();
             positionBUS = new PositionBUS();
+            monthBUS = new MonthBUS();
+            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
+            allowanceDetailBUS = new AllowanceDetailBUS();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             card = cardBUS.GetCard().FirstOrDefault(c => c.CardID == cardID);
             authorizations = new Authorizations("Chi tiết phiếu", staff);
@@ -371,20 +378,51 @@ namespace QuanLyNhanSu.PresentationTier
                     string operate = "Thêm";
                     string operationDetail = $"Thêm nhân viên {staffID} vào {txtCardType.Text} {card.CardID}:\n - Số tiền: {amount}\n - Ghi chú: {rtxtNote.Text}";
                     history.Save(staff.StaffID, operate, operationDetail);
+                    string month = DateTime.Now.ToString(formatMonth);
+                    if (monthBUS.GetMonth().FirstOrDefault(m => m.MonthID == month) == null)
+                        monthBUS.AddMonth(month);
+                    MonthSalaryDetail salaryDetail = monthSalaryDetailBUS.GetMonthSalaryDetails().FirstOrDefault(s => s.MonthID == month && s.StaffID == staffID);
+                    decimal basicSalary = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID).BasicSalary;
+                    decimal lastMonthDebt = monthSalaryDetailBUS.GetStaffMonthTotalDebt(staffID, DateTime.Now.AddMonths(-1).ToString(formatMonth));
+                    if (card.CardType.CaculateMethod == "Cộng")
+                    {
+                        if(salaryDetail != null)
+                            salaryDetail.TotalBonus += cardDetail.Amount;
+                        else if(salaryDetail == null)                        
+                        {
+                            salaryDetail.MonthID = month;
+                            salaryDetail.StaffID = staffID;
+                            salaryDetail.TotalWorkHours = 0;
+                            salaryDetail.BasicSalary = basicSalary;
+                            salaryDetail.TotalBonus = cardDetail.Amount;
+                            salaryDetail.TotalDebt = lastMonthDebt;
+                            salaryDetail.TotalDebtPaid = 0;
+                            salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staffID);
+                        }
+                    }
+                    else if (card.CardType.CaculateMethod == "Trừ")
+                    {
+                        decimal debt = cardDetail.Amount - cardDetail.Deliver;
+                        if (salaryDetail != null)
+                        {
+                            salaryDetail.TotalDebt += cardDetail.Amount;
+                            salaryDetail.TotalDebtPaid += cardDetail.Deliver;
+                        }
+                        else if (salaryDetail == null)
+                        {
+                            salaryDetail.MonthID = month;
+                            salaryDetail.StaffID = staffID;
+                            salaryDetail.TotalWorkHours = 0;
+                            salaryDetail.BasicSalary = basicSalary;
+                            salaryDetail.TotalBonus = 0;
+                            salaryDetail.TotalDebt = lastMonthDebt + cardDetail.Amount;
+                            salaryDetail.TotalDebtPaid = cardDetail.Deliver;
+                            salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staffID);
+                        }
+                    }
+                    monthSalaryDetailBUS.Save(salaryDetail);
                     Reload();
                 }
-                if (card.CardType.CaculateMethod == "Trừ")
-                {
-                    List<Staff> staffList = new List<Staff>();
-                    Staff staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == cmbStaff.SelectedValue.ToString());
-                    if (staff.Dept == null)
-                        staff.Dept = decimal.Parse(txtAmount.Text);
-                    else
-                        staff.Dept += decimal.Parse(txtAmount.Text);
-                    staffList.Add(staff);
-                    staffBUS.UpdateDept(staffList);
-                }
-                Reload();
             }
             catch (Exception ex)
             {
@@ -402,9 +440,11 @@ namespace QuanLyNhanSu.PresentationTier
             try
             {
                 string editDetail = CheckChange();
-                decimal oldDept = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == card.CardID && c.StaffID == txtStaffIDEdit.Text).Amount;
-                decimal newDept = decimal.Parse(txtAmount.Text);
-                decimal deliver =  string.IsNullOrEmpty(txtDeliver.Text) ? 0 : decimal.Parse(txtDeliver.Text);
+                decimal oldAmount = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == card.CardID && c.StaffID == txtStaffIDEdit.Text).Amount;
+                decimal oldDeliver = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == card.CardID && c.StaffID == txtStaffIDEdit.Text).Deliver;
+                decimal newAmount = decimal.Parse(txtAmount.Text);
+                decimal newDeliver = decimal.Parse(txtDeliver.Text);
+                decimal deliver = string.IsNullOrEmpty(txtDeliver.Text) ? 0 : decimal.Parse(txtDeliver.Text);
                 CardDetail cardDetail = new CardDetail
                 {
                     CardID = card.CardID,
@@ -416,23 +456,40 @@ namespace QuanLyNhanSu.PresentationTier
                 if (cardDetailBUS.Save(cardDetail))
                 {
                     string operate = "Sửa";
-                    string operationDetail = $"Sửa nhân viên {txtStaffIDEdit.Text} trong {txtCardType.Text} {card.CardID}";
+                    string operationDetail = $"Sửa nhân viên {cardDetail.StaffID} trong {txtCardType.Text} {card.CardID}";
                     if (!string.IsNullOrEmpty(editDetail))
                         operationDetail += $":\n{editDetail}";
                     history.Save(staff.StaffID, operate, operationDetail);
-                    if (card.CardType.CaculateMethod == "Trừ" && oldDept != newDept)
+                    string month = DateTime.Now.ToString(formatMonth);
+                    MonthSalaryDetail salaryDetail = monthSalaryDetailBUS.GetMonthSalaryDetails().FirstOrDefault(s => s.MonthID == month && s.StaffID == cardDetail.StaffID);
+                    if (card.CardType.CaculateMethod == "Cộng")
                     {
-                        List<Staff> staffList = new List<Staff>();
-                        Staff staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == txtStaffIDEdit.Text);
-                        if (staff.Dept == oldDept)
-                            staff.Dept = newDept;
-                        else if (oldDept > newDept)
-                            staff.Dept -= (oldDept - newDept);
-                        else if (oldDept < newDept)
-                            staff.Dept += (newDept - oldDept);
-                        staffList.Add(staff);
-                        staffBUS.UpdateDept(staffList);
+                        if (oldAmount != newAmount)
+                        {
+                            if (oldAmount > newAmount)
+                                salaryDetail.TotalBonus -= oldAmount - newAmount;
+                            else if (oldAmount < newAmount)
+                                salaryDetail.TotalBonus += newAmount - oldAmount;
+                        }
                     }
+                    else if (card.CardType.CaculateMethod == "Trừ")
+                    {
+                        if (oldAmount != newAmount)
+                        {
+                            if (oldAmount > newAmount)
+                                salaryDetail.TotalDebt -= oldAmount - newAmount;
+                            else if (oldAmount < newAmount)
+                                salaryDetail.TotalDebt += newAmount - oldAmount;
+                        }
+                        if(oldDeliver != newDeliver)
+                        {
+                            if(oldDeliver > newDeliver)
+                                salaryDetail.TotalDebtPaid -= oldDeliver - newDeliver;
+                            else if(oldDeliver < newDeliver)
+                                salaryDetail.TotalDebtPaid += newDeliver - oldDeliver;
+                        }
+                    }
+                    monthSalaryDetailBUS.Save(salaryDetail);
                     Reload();
                 }
             }
@@ -462,7 +519,8 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
-                decimal dept = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == card.CardID && c.StaffID == txtStaffIDEdit.Text).Amount;
+                decimal amount = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == card.CardID && c.StaffID == txtStaffIDEdit.Text).Amount;
+                decimal deliver = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == card.CardID && c.StaffID == txtStaffIDEdit.Text).Deliver;
                 CardDetail cardDetail = new CardDetail()
                 {
                     CardID = txtCardID.Text,
@@ -470,18 +528,20 @@ namespace QuanLyNhanSu.PresentationTier
                 };
                 if (cardDetailBUS.Delete(cardDetail))
                 {
-                    string amount = string.Format(fVND, "{0:N3} ₫", decimal.Parse(txtAmount.Text));
+                    string amountString = string.Format(fVND, "{0:N3} ₫", amount);
                     string operate = "Xoá";
-                    string operationDetail = $"Xoá nhân viên {staffID} khỏi {txtCardType.Text} {card.CardID}:\n - Số tiền: {amount}\n - Ghi chú: {rtxtNote.Text}";
+                    string operationDetail = $"Xoá nhân viên {staffID} khỏi {txtCardType.Text} {card.CardID}:\n - Số tiền: {amountString}\n - Ghi chú: {rtxtNote.Text}";
                     history.Save(staff.StaffID, operate, operationDetail);
+                    string month = DateTime.Now.ToString(formatMonth);
+                    MonthSalaryDetail salaryDetail = monthSalaryDetailBUS.GetMonthSalaryDetails().FirstOrDefault(s => s.MonthID == month && s.StaffID == cardDetail.StaffID);
+                    if (card.CardType.CaculateMethod == "Cộng")
+                        salaryDetail.TotalBonus -= amount;
                     if (card.CardType.CaculateMethod == "Trừ")
                     {
-                        List<Staff> staffList = new List<Staff>();
-                        Staff staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
-                        staff.Dept -= dept;
-                        staffList.Add(staff);
-                        staffBUS.UpdateDept(staffList);
+                        salaryDetail.TotalDebt -= amount;
+                        salaryDetail.TotalDebtPaid -= deliver;
                     }
+                    monthSalaryDetailBUS.Save(salaryDetail);
                     Reload();
                 }
             }
