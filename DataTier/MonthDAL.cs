@@ -15,13 +15,17 @@ namespace QuanLyNhanSu.DataTier
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
         }
+        public IEnumerable<Month> GetMonth()
+        {
+            return quanLyNhanSu.Months.OrderBy(m => m.MonthID);
+        }
         public bool AddMonth(string month)
         {
             try
             {
                 Month newMonth = new Month
                 {
-                    Month1 = month,
+                    MonthID = month,
                 };
                 quanLyNhanSu.Months.Add(newMonth);
                 quanLyNhanSu.SaveChanges();

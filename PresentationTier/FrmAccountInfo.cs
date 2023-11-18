@@ -9,17 +9,20 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using WECPOFLogic;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace QuanLyNhanSu.PresentationTier
 {
     public partial class FrmAccountInfo : Form
     {
-        private readonly CultureInfo fVND = CultureInfo.GetCultureInfo("vi-VN");
+        private readonly CultureInfo fVND = CultureInfo.GetCultureInfo("vi-VN");       
         private readonly SaveOperateHistory history;
         private readonly FormHandle redirect;
         private readonly AllowanceDetailBUS allowanceDetailBUS;
         private readonly StaffBUS staffBUS;
+        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private Staff staff;
+        private readonly string formatMonth = "MM/yyyy";
         private readonly string formatDate = "dd/MM/yyyy";
         public FrmAccountInfo(string staffID)
         {
@@ -28,6 +31,7 @@ namespace QuanLyNhanSu.PresentationTier
             history = new SaveOperateHistory("Tài khoản");
             redirect = new FormHandle();
             allowanceDetailBUS = new AllowanceDetailBUS();
+            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             btnChangePassword.Enabled = false;
         }
@@ -40,7 +44,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void DisableDisplay()
         {
-            List<TextBox> listDisplay = new List<TextBox> { txtStaffID, txtDepartment, txtPosition, txtContractType, txtAccount, txtEducationLevel, txtEntryDate, txtContractDuration, txtStatus, txtDateOffAmount, txtBasicSalary, txtAllowance, txtDept };
+            List<TextBox> listDisplay = new List<TextBox> { txtStaffID, txtDepartment, txtPosition, txtContractType, txtAccount, txtEducationLevel, txtEntryDate, txtContractDuration, txtStatus, txtDateOffAmount, txtBasicSalary, txtAllowance, txtDebt };
             for (int i = 0; i < listDisplay.Count; i++)
             {
                 typeof(TextBox).GetProperty("ReadOnly").SetValue(listDisplay[i], true);
@@ -85,7 +89,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtDateOffAmount.Text = staff.DayOffAmount.ToString();
             txtBasicSalary.Text = String.Format(fVND, "{0:N3} ₫", staff.BasicSalary);
             txtAllowance.Text = String.Format(fVND, "{0:N3} ₫", allowanceDetailBUS.StaffTotalAllowance(staff.StaffID));
-            txtDept.Text = String.Format(fVND, "{0:N3} ₫", staff.Dept);
+            txtDebt.Text  = String.Format(fVND, "{0:N3} ₫", monthSalaryDetailBUS.GetStaffMonthTotalDebt(staff.StaffID, DateTime.Now.ToString(formatMonth)));
             ImageHandle.LoadImage(pbStaffPicture, staff.Picture);
             Enabled = true;
         }

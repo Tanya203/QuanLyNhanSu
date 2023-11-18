@@ -12,24 +12,26 @@ namespace QuanLyNhanSu.DataTier.Models
         [Key]
         [Column(Order = 0)]
         [StringLength(20)]
-        public string Month { get; set; }
+        public string MonthID { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [StringLength(15)]
         public string StaffID { get; set; }
 
-        public decimal? TotalWorkHours { get; set; }
+        public decimal TotalWorkHours { get; set; }
 
-        public decimal? BasicSalary { get; set; }
+        public decimal BasicSalary { get; set; }
 
-        public decimal? TotalBonus { get; set; }
+        public decimal TotalBonus { get; set; }
 
-        public decimal? TotalFine { get; set; }
+        public decimal TotalAllowance { get; set; }
 
-        public decimal? TotalAllowance { get; set; }
+        public decimal TotalDebt { get; set; }
 
-        public virtual Month Month1 { get; set; }
+        public decimal TotalDebtPaid { get; set; }
+
+        public virtual Month Month { get; set; }
 
         public virtual Staff Staff { get; set; }
     }

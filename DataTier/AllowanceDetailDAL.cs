@@ -73,7 +73,7 @@ namespace QuanLyNhanSu.DataTier
             try
             {
                 quanLyNhanSu.AllowanceDetails.Add(allowanceDetail);
-                quanLyNhanSu.SaveChanges();
+                quanLyNhanSu.SaveChanges();                
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
             }
@@ -111,21 +111,20 @@ namespace QuanLyNhanSu.DataTier
         }
         public int AllowanceTotalStaff(string al_ID)
         {
-            int amount = quanLyNhanSu.AllowanceDetails.Where(al => al.AL_ID == al_ID).Count();
-            return amount;
+            return quanLyNhanSu.AllowanceDetails.Where(al => al.AL_ID == al_ID).Count();
         }
         public decimal StaffTotalAllowance(string staffID)
-        {            
+        {
             List<AllowanceDetail> allowanceDetails = quanLyNhanSu.AllowanceDetails.Where(al => al.StaffID == staffID).ToList();
-            if (allowanceDetails != null)
-                return allowanceDetails.Sum(pc => pc.Allowance.Amount);
+            if (allowanceDetails.Count != 0)
+                return allowanceDetails.Sum(al => al.Allowance.Amount);
             return 0;
         }
         public decimal AllowanceTotalAmount(string al_ID)
         {
             List<AllowanceDetail> allowanceDetails = quanLyNhanSu.AllowanceDetails.Where(al => al.AL_ID == al_ID).ToList();
-            if (allowanceDetails != null)
-                return allowanceDetails.Sum(pc => pc.Allowance.Amount);
+            if (allowanceDetails.Count != 0)
+                return allowanceDetails.Sum(al => al.Allowance.Amount);
             return 0;
         }
     }

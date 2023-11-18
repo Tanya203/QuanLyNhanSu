@@ -54,6 +54,8 @@
             this.txtOldPassword = new System.Windows.Forms.TextBox();
             this.lblOldPassword = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.txtDebt = new System.Windows.Forms.TextBox();
+            this.lblDebt = new System.Windows.Forms.Label();
             this.txtContractDuration = new System.Windows.Forms.TextBox();
             this.txtEntryDate = new System.Windows.Forms.TextBox();
             this.txtContractType = new System.Windows.Forms.TextBox();
@@ -111,8 +113,6 @@
             this.lblDepartment = new System.Windows.Forms.Label();
             this.lblPosition = new System.Windows.Forms.Label();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtDept = new System.Windows.Forms.TextBox();
-            this.lblDept = new System.Windows.Forms.Label();
             this.pnlHeader.SuspendLayout();
             this.pnlChangePassword.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -433,8 +433,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlMenu.BackColor = System.Drawing.SystemColors.Info;
-            this.pnlMenu.Controls.Add(this.txtDept);
-            this.pnlMenu.Controls.Add(this.lblDept);
+            this.pnlMenu.Controls.Add(this.txtDebt);
+            this.pnlMenu.Controls.Add(this.lblDebt);
             this.pnlMenu.Controls.Add(this.txtContractDuration);
             this.pnlMenu.Controls.Add(this.txtEntryDate);
             this.pnlMenu.Controls.Add(this.txtContractType);
@@ -499,6 +499,24 @@
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(1529, 843);
             this.pnlMenu.TabIndex = 38;
+            // 
+            // txtDebt
+            // 
+            this.txtDebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDebt.Location = new System.Drawing.Point(643, 158);
+            this.txtDebt.Name = "txtDebt";
+            this.txtDebt.Size = new System.Drawing.Size(215, 27);
+            this.txtDebt.TabIndex = 40;
+            // 
+            // lblDebt
+            // 
+            this.lblDebt.AutoSize = true;
+            this.lblDebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDebt.Location = new System.Drawing.Point(438, 157);
+            this.lblDebt.Name = "lblDebt";
+            this.lblDebt.Size = new System.Drawing.Size(46, 25);
+            this.lblDebt.TabIndex = 39;
+            this.lblDebt.Text = "Nợ:";
             // 
             // txtContractDuration
             // 
@@ -1066,24 +1084,6 @@
             this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errProvider.ContainerControl = this;
             // 
-            // txtDept
-            // 
-            this.txtDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDept.Location = new System.Drawing.Point(643, 158);
-            this.txtDept.Name = "txtDept";
-            this.txtDept.Size = new System.Drawing.Size(215, 27);
-            this.txtDept.TabIndex = 40;
-            // 
-            // lblDept
-            // 
-            this.lblDept.AutoSize = true;
-            this.lblDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDept.Location = new System.Drawing.Point(438, 157);
-            this.lblDept.Name = "lblDept";
-            this.lblDept.Size = new System.Drawing.Size(46, 25);
-            this.lblDept.TabIndex = 39;
-            this.lblDept.Text = "Nợ:";
-            // 
             // FrmAccountInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -1195,7 +1195,7 @@
         private System.Windows.Forms.TextBox txtIDCard;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ErrorProvider errProvider;
-        private System.Windows.Forms.TextBox txtDept;
-        private System.Windows.Forms.Label lblDept;
+        private System.Windows.Forms.TextBox txtDebt;
+        private System.Windows.Forms.Label lblDebt;
     }
 }

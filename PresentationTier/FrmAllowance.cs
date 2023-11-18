@@ -21,6 +21,8 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly StaffBUS staffBUS;
         private readonly AllowanceBUS allowanceBUS;
         private readonly AllowanceDetailBUS allowanceDetailBUS;
+        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
+        private readonly string formatMonth = "MM/yyyy";
         private Staff staff;
         public FrmAllowance(string staffID)
         {
@@ -29,6 +31,7 @@ namespace QuanLyNhanSu.PresentationTier
             redirect = new FormHandle();
             allowanceBUS = new AllowanceBUS();
             allowanceDetailBUS = new AllowanceDetailBUS();
+            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
             staffBUS = new StaffBUS();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Phụ cấp", staff);
@@ -221,10 +224,12 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnEdit_Click(object sender, EventArgs e)
         {            
+            decimal oldAmount = allowanceBUS.GetAllowance().FirstOrDefault(al => al.AL_ID == txtAllowanceID.Text).Amount;
+            decimal newAmount = decimal.Parse(txtAmount.Text);
             Allowance allowance = new Allowance
             {
                 AL_ID = txtAllowanceID.Text,
-                AllowanceName = txtAllowanceName.Text,
+                AllowanceName = txtAllowanceName.Text,               
                 Amount = decimal.Parse(txtAmount.Text)
             };
             string editDetail = CheckChange();
@@ -235,6 +240,18 @@ namespace QuanLyNhanSu.PresentationTier
                 if (!string.IsNullOrEmpty(editDetail))
                     operationDetail += $":\n{editDetail}";
                 history.Save(staff.StaffID, operate, operationDetail);
+                if(oldAmount != newAmount)
+                {
+                    List<MonthSalaryDetail> salaryDetails = monthSalaryDetailBUS.GetMonthSalaryDetails().Where(m => m.MonthID == DateTime.Now.ToString(formatMonth)).ToList();
+                    if(salaryDetails.Count() != 0)
+                    {
+                        foreach(MonthSalaryDetail staff in salaryDetails)
+                        {
+                            staff.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staff.StaffID);
+                            monthSalaryDetailBUS.Save(staff);
+                        }
+                    }
+                }
                 Reload();
             }
         }
@@ -250,7 +267,16 @@ namespace QuanLyNhanSu.PresentationTier
                 string amount = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtAmount.Text));
                 string operationDetail = $"Xoá phụ cấp {txtAllowanceName.Text}:\n  - Số tiền: {amount}";
                 history.Save(staff.StaffID, operate, operationDetail);
-                Reload();
+                List<MonthSalaryDetail> salaryDetails = monthSalaryDetailBUS.GetMonthSalaryDetails().Where(m => m.MonthID == DateTime.Now.ToString(formatMonth)).ToList();
+                if (salaryDetails.Count() != 0)
+                {
+                    foreach (MonthSalaryDetail staff in salaryDetails)
+                    {
+                        staff.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staff.StaffID);
+                        monthSalaryDetailBUS.Save(staff);
+                    }
+                    Reload();
+                }
             }
         }
         private void btnCancel_Click(object sender, EventArgs e)

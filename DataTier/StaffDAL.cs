@@ -54,7 +54,6 @@ namespace QuanLyNhanSu.DataTier
                 PositionName = s.Position.PositionName,
                 ContractTypeName = s.ContractType.ContractTypeName,
                 LockDate = s.LockDate,
-                Dept = s.Dept,
             }).OrderBy(s => s.StaffID);                                   
             return staffList;
         }
@@ -90,7 +89,6 @@ namespace QuanLyNhanSu.DataTier
                 PositionName = s.Position.PositionName,
                 ContractTypeName = s.ContractType.ContractTypeName,
                 LockDate = s.LockDate,
-                Dept = s.Dept,
             }).Where(s => s.StaffID.Contains(search) ||
                 s.DepartmentName.Contains(search) ||
                 s.PositionName.Contains(search) ||
@@ -115,8 +113,7 @@ namespace QuanLyNhanSu.DataTier
                 s.Status.Contains(search) ||
                 s.DayOffAmount.ToString().Contains(search) ||
                 s.BasicSalary.ToString().Contains(search) ||
-                s.LockDate.ToString().Contains(search) ||
-                s.Dept.ToString().Contains(search)).OrderBy(s => s.StaffID);
+                s.LockDate.ToString().Contains(search));
             return staffList;
         }
         public IEnumerable<Staff> GetStaff()
@@ -156,23 +153,6 @@ namespace QuanLyNhanSu.DataTier
                     }
                 }
                 return false;
-            }
-            catch (Exception ex)
-            {
-                CustomMessage.ExecptionCustom(ex);
-                return false;
-            }
-        }
-        public bool UpdateDept(List<Staff> staff)
-        {
-            try
-            {
-                foreach (Staff s in staff)
-                {
-                    quanLyNhanSu.Staffs.AddOrUpdate(s);
-                    quanLyNhanSu.SaveChanges();
-                }
-                return true;
             }
             catch (Exception ex)
             {
