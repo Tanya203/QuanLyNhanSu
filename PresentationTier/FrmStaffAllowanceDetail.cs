@@ -21,9 +21,12 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly StaffBUS staffBUS;
         private readonly AllowanceBUS allowanceBUS;
         private readonly AllowanceDetailBUS allowanceDetailBUS;
+        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
+        private readonly SalaryHandle salary;
         private Staff staff;
         private string staffID_AL;
         private string check;
+        private readonly string formatMonth = "MM/yyyy";
         public FrmStaffAllowanceDetail(string staffID, string staffID_AL, string check)
         {
             InitializeComponent();
@@ -32,6 +35,8 @@ namespace QuanLyNhanSu.PresentationTier
             allowanceBUS = new AllowanceBUS();
             allowanceDetailBUS = new AllowanceDetailBUS();
             staffBUS = new StaffBUS();
+            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
+            salary = new SalaryHandle();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             this.check = check;
             this.staffID_AL = staffID_AL;
@@ -115,9 +120,14 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (allowanceDetailBUS.Save(allowanceDetail))
             {
+                allowanceDetail.Allowance = allowanceBUS.GetAllowance().FirstOrDefault(al => al.AL_ID == cmbAllowance.SelectedValue.ToString());
                 string operate = "Thêm";
                 string operationDetail = $"Thêm phụ cấp {cmbAllowance.Text} cho nhân viên {staffID_AL}";
                 history.Save(staff.StaffID, operate, operationDetail);
+                string month = DateTime.Now.ToString(formatMonth);
+                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(allowanceDetail.StaffID, month);
+                salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(allowanceDetail.StaffID);
+                monthSalaryDetailBUS.Save(salaryDetail);
                 Reload();
             }
             txtAmount.Text = string.Empty;           
@@ -152,6 +162,10 @@ namespace QuanLyNhanSu.PresentationTier
                 string operate = "Xoá";
                 string operationDetail = $"Xoá phụ cấp {alName} của nhân viên {staffID_AL}";
                 history.Save(staff.StaffID, operate, operationDetail);
+                string month = DateTime.Now.ToString(formatMonth);
+                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID, month);
+                salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staff.StaffID);
+                monthSalaryDetailBUS.Save(salaryDetail);
                 Reload();
             }
         }

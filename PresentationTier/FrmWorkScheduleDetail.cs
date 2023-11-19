@@ -23,6 +23,8 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly ShiftBUS shiftBUS;
         private readonly ShiftTypeBUS shiftTypeBUS;
         private readonly StaffBUS staffBUS;
+        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
+        private readonly SalaryHandle salary;
         private Staff staff;
         private WorkSchedule workSchedule;
         private readonly List<TimeKeeping> timeKeepings;
@@ -39,6 +41,8 @@ namespace QuanLyNhanSu.PresentationTier
             workScheduleDetailBUS = new WorkScheduleDetailBUS();
             shiftBUS = new ShiftBUS();
             shiftTypeBUS = new ShiftTypeBUS();
+            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
+            salary = new SalaryHandle();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             workSchedule = workScheduleBUS.GetWorkSchedule().FirstOrDefault(ws => ws.WS_ID == wsID);
             timeKeepings = workScheduleDetailBUS.GetWorkSchduleDetail().Where(ws => ws.WS_ID == wsID).ToList();
@@ -346,7 +350,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void UpdateAbsence(string staffID)
         {
-            TimeKeeping staff = timeKeepings.Where(s => s.StaffID == staffID).FirstOrDefault();
+            TimeKeeping staff = timeKeepings.FirstOrDefault(s => s.StaffID == staffID);
             string announce;
             if (!staff.AbsenceUse)
             {
@@ -366,18 +370,29 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     string operate;
                     string operationDetail;
+                    string month = DateTime.Now.ToString("MM/yyyy");
+                    TimeSpan hour;
+                    decimal totalHours = 0;
+                    if(staff.Shift.BeginTime > staff.Shift.EndTime)
+                        hour = staff.Shift.EndTime.Add(new TimeSpan(24, 0, 0)) - staff.Shift.BeginTime;
+                    else 
+                        hour = staff.Shift.EndTime - staff.Shift.BeginTime;
+                    totalHours = (decimal)hour.TotalHours * staff.ShiftType.SalaryCoefficient * (decimal)0.8;
+                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staffID, month);
                     if (announce.Contains("Thêm"))
                     {
                         operate = "Thêm phép";
                         operationDetail = $"Thêm phép cho nhân viên {staffID} ngày {dtpWorkDate.Text} - phòng ban {txtDepartment.Text}";
+                        salaryDetail.TotalWorkHours += totalHours;
                     }
                     else
                     {
                         operate = "Xoá phép";
                         operationDetail = $"Xoá phép cho nhân viên {staffID} ngày {dtpWorkDate.Text} - phòng ban {txtDepartment.Text}";
+                        salaryDetail.TotalWorkHours -= totalHours;
                     }
-                        
                     history.Save(staff.StaffID, operate, operationDetail);
+                    monthSalaryDetailBUS.Save(salaryDetail);
                     Reload();
                 }
             }

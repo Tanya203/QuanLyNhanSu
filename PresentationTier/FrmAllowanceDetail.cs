@@ -26,6 +26,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly AllowanceDetailBUS allowanceDetailBUS;
         private readonly MonthBUS monthBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
+        private readonly SalaryHandle salary;
         private readonly string formatMonth = "MM/yyyy";
         private Staff staff;
         private Allowance allowance;
@@ -42,6 +43,7 @@ namespace QuanLyNhanSu.PresentationTier
             staffBUS = new StaffBUS();
             monthBUS = new MonthBUS();
             monthSalaryDetailBUS = new MonthSalaryDetailBUS();
+            salary = new SalaryHandle();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             allowance = allowanceBUS.GetAllowance().FirstOrDefault(al => al.AL_ID == alID);
             authorizations = new Authorizations("Chi tiết phụ cấp", staff);
@@ -214,34 +216,11 @@ namespace QuanLyNhanSu.PresentationTier
                 string operationDetail = $"Thêm phụ cấp {allowance.AllowanceName} cho nhân viên {cmbStaffID.SelectedValue}";
                 history.Save(staff.StaffID, operate, operationDetail);
                 string month = DateTime.Now.ToString(formatMonth);
-                decimal basicSalary = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == allowanceDetail.StaffID).BasicSalary;
-                decimal lastMonthDebt = monthSalaryDetailBUS.GetStaffMonthTotalDebt(allowanceDetail.StaffID, DateTime.Now.AddMonths(-1).ToString(formatMonth));
-                if (monthBUS.GetMonth().FirstOrDefault(m => m.MonthID == month) == null)
-                    monthBUS.AddMonth(month);
-                MonthSalaryDetail salaryDetail = monthSalaryDetailBUS.GetMonthSalaryDetails().FirstOrDefault(s => s.StaffID == allowanceDetail.StaffID && s.MonthID == DateTime.Now.ToString(formatMonth));
-                if (salaryDetail != null)
-                {
-                    salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(allowanceDetail.StaffID);
-                    monthSalaryDetailBUS.Save(salaryDetail);
-                }
-                else
-                {
-                    MonthSalaryDetail newSalary = new MonthSalaryDetail()
-                    {
-                        MonthID = month,
-                        StaffID = allowanceDetail.StaffID,
-                        TotalWorkHours = 0,
-                        BasicSalary = basicSalary,
-                        TotalBonus = 0,
-                        TotalDebt = lastMonthDebt,
-                        TotalDebtPaid = 0,
-                        TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(allowanceDetail.StaffID)
-                    };
-                    monthSalaryDetailBUS.Save(newSalary);
-                }
-                
-                Reload();
+                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(allowanceDetail.StaffID, month); 
+                salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(allowanceDetail.StaffID);
+                monthSalaryDetailBUS.Save(salaryDetail);
             }
+            Reload();
             
         }
         private void DeleteButton()
@@ -270,16 +249,9 @@ namespace QuanLyNhanSu.PresentationTier
                 string operationDetail = $"Xoá phụ cấp {allowance.AllowanceName} của nhân viên {staff.StaffID}";
                 history.Save(staff.StaffID, operate, operationDetail);
                 string month = DateTime.Now.ToString(formatMonth);
-                decimal basicSalary = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID).BasicSalary;
-                decimal lastMonthDebt = monthSalaryDetailBUS.GetStaffMonthTotalDebt(staffID, DateTime.Now.AddMonths(-1).ToString(formatMonth));
-                if (monthBUS.GetMonth().FirstOrDefault(m => m.MonthID == month) == null)
-                    monthBUS.AddMonth(month);
-                MonthSalaryDetail salaryDetail = monthSalaryDetailBUS.GetMonthSalaryDetails().FirstOrDefault(s => s.StaffID == staffID && s.MonthID == DateTime.Now.ToString(formatMonth));
-                if (salaryDetail != null)
-                {
-                    salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staffID);
-                    monthSalaryDetailBUS.Save(salaryDetail);
-                }
+                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID, month);
+                salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staff.StaffID);
+                monthSalaryDetailBUS.Save(salaryDetail);
                 Reload();
             }
         }
