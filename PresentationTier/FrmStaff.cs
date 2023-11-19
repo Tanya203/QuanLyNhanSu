@@ -26,6 +26,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly ContractTypeBUS contractTypeBUS;
         private readonly AllowanceDetailBUS allowanceDetailBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
+        private readonly SalaryHandle salary;
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatMonth = "MM/yyyy";
         private Staff staff;
@@ -40,6 +41,7 @@ namespace QuanLyNhanSu.PresentationTier
             contractTypeBUS = new ContractTypeBUS();
             allowanceDetailBUS = new AllowanceDetailBUS();
             monthSalaryDetailBUS = new MonthSalaryDetailBUS();
+            salary = new SalaryHandle();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Nhân viên",staff);            
         }
@@ -620,6 +622,13 @@ namespace QuanLyNhanSu.PresentationTier
                     if (!string.IsNullOrEmpty(editDetail))
                         operationDetail += $":\n{editDetail}";
                     history.Save(this.staff.StaffID, operate, operationDetail);
+                    if (operationDetail.Contains("Lương cơ bản"))
+                    {
+                        string month = DateTime.Now.ToString(formatMonth);
+                        MonthSalaryDetail monthSalary = salary.GetStaffMonthSalary(staff.StaffID, month);
+                        monthSalary.BasicSalary = staff.BasicSalary;
+                        monthSalaryDetailBUS.Save(monthSalary);
+                    }
                     Reload();
                 }
             }

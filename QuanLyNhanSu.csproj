@@ -199,6 +199,7 @@
     <Compile Include="Functions\InputCheck.cs" />
     <Compile Include="Functions\LoadHeader.cs" />
     <Compile Include="Functions\FormHandle.cs" />
+    <Compile Include="Functions\SalaryHandle.cs" />
     <Compile Include="Functions\SaveOperateHistory.cs" />
     <Compile Include="LogicTier\MonthBUS.cs" />
     <Compile Include="LogicTier\MonthSalaryDetailBUS.cs" />

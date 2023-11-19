@@ -1,5 +1,6 @@
 ﻿using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.Functions;
+using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.utils;
 using QuanLyNhanSu.ViewModels;
 using System;
@@ -14,9 +15,13 @@ namespace QuanLyNhanSu.DataTier
     internal class WorkScheduleDetailDAL
     {
         private readonly QuanLyNhanSuContextDB quanLyNhanSu;
+        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
+        private readonly SalaryHandle salary;
         public WorkScheduleDetailDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
+            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
+            salary = new SalaryHandle();
         }
         public IEnumerable<WorkScheduleDetailViewModels> GetAllWorkSchduleDetail(string ws_ID)
         {
@@ -71,14 +76,30 @@ namespace QuanLyNhanSu.DataTier
         {
             try
             {
-                TimeKeeping staff = quanLyNhanSu.TimeKeepings.Where(id => id.WS_ID == timeKeeping.WS_ID && id.StaffID == timeKeeping.StaffID && id.ShiftID == timeKeeping.ShiftID).FirstOrDefault();
+                TimeKeeping staff = quanLyNhanSu.TimeKeepings.Where(id => id.WS_ID == timeKeeping.WS_ID && id.StaffID == timeKeeping.StaffID).FirstOrDefault();
                 if(staff != null)
                 {
                     List<TimeKeeping> absence = quanLyNhanSu.TimeKeepings.Where(id => id.WS_ID == timeKeeping.WS_ID && id.StaffID == timeKeeping.StaffID).ToList();
-                    foreach (var staffID in absence)
-                        staffID.AbsenceUse = staff.AbsenceUse;
                     int soNgayPhep = staff.Staff.DayOffAmount;
-                    if(soNgayPhep > 0)
+                    string month = DateTime.Now.ToString("MM/yyyy");
+                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID, month);
+                    foreach (var staffID in absence)
+                    {
+                        staffID.AbsenceUse = timeKeeping.AbsenceUse;
+                        TimeSpan hour;
+                        decimal totalHours = 0;
+                        if (staffID.Shift.BeginTime > staffID.Shift.EndTime)
+                            hour = staffID.Shift.EndTime.Add(new TimeSpan(24, 0, 0)) - staffID.Shift.BeginTime;
+                        else
+                            hour = staffID.Shift.EndTime - staffID.Shift.BeginTime;
+                        totalHours = (decimal)hour.TotalHours * staffID.ShiftType.SalaryCoefficient * (decimal)0.8;
+                        if (staffID.AbsenceUse)
+                            salaryDetail.TotalWorkHours += totalHours;
+                        else
+                            salaryDetail.TotalWorkHours -= totalHours;
+                        monthSalaryDetailBUS.Save(salaryDetail);
+                    }
+                    if (soNgayPhep > 0)
                     {
                         if (staff.AbsenceUse)                        
                             staff.Staff.DayOffAmount -= 1;                        
@@ -91,8 +112,8 @@ namespace QuanLyNhanSu.DataTier
                         return false;
                     }
                 }
-                else
-                    quanLyNhanSu.TimeKeepings.AddOrUpdate(timeKeeping);
+
+                quanLyNhanSu.TimeKeepings.AddOrUpdate(timeKeeping);
                 quanLyNhanSu.SaveChanges();
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;

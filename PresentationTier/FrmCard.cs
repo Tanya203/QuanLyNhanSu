@@ -25,6 +25,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly CardTypeBUS cardTypeBUS;
         private readonly CardDetailBUS cardDetailBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
+        private readonly SalaryHandle salary;
         private Staff staff;
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatMonth = "MM/yyyy";
@@ -38,6 +39,7 @@ namespace QuanLyNhanSu.PresentationTier
             cardTypeBUS = new CardTypeBUS();
             cardDetailBUS = new CardDetailBUS();
             monthSalaryDetailBUS = new MonthSalaryDetailBUS();
+            salary = new SalaryHandle();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Phiếu", staff);
         }
@@ -188,7 +190,7 @@ namespace QuanLyNhanSu.PresentationTier
                     history.Save(staff.StaffID, operate, operateDetail);                    
                     foreach(CardDetail staff in cardDetails)
                     {
-                        MonthSalaryDetail salaryDetail = monthSalaryDetailBUS.GetMonthSalaryDetails().FirstOrDefault(s => s.StaffID == staff.StaffID && s.MonthID == DateTime.Now.ToString(formatMonth));
+                        MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID, DateTime.Now.ToString(formatMonth));
                         if (caculate == "Cộng")
                         {
                             salaryDetail.TotalBonus -= staff.Amount;   
