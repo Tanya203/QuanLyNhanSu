@@ -362,7 +362,7 @@
             // 
             // dtpDate
             // 
-            this.dtpDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpDate.CustomFormat = "yyyy-MM-dd";
             this.dtpDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDate.Location = new System.Drawing.Point(123, 62);
@@ -373,7 +373,7 @@
             // 
             // dtpMonth
             // 
-            this.dtpMonth.CustomFormat = "MM/yyyy";
+            this.dtpMonth.CustomFormat = "yyyyy-MM";
             this.dtpMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpMonth.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpMonth.Location = new System.Drawing.Point(416, 63);
@@ -579,7 +579,7 @@
             this.lblSortByInterface.TabIndex = 63;
             this.lblSortByInterface.Text = "Lọc theo giao diện";
             // 
-            // FrmLichSuThaoTac
+            // FrmOperateHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -594,7 +594,7 @@
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.txtSearch);
             this.MinimumSize = new System.Drawing.Size(1918, 1018);
-            this.Name = "FrmLichSuThaoTac";
+            this.Name = "FrmOperateHistory";
             this.Text = "frmLichSuThaoTac";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmLichSuThaoTac_Load);

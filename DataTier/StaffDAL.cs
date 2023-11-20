@@ -160,7 +160,7 @@ namespace QuanLyNhanSu.DataTier
                 return false;
             }
         }
-        public bool LoginVerify(string account, string password)
+        public Staff LoginVerify(string account, string password)
         {
             var staff = quanLyNhanSu.Staffs.Where(x => x.Account == account).FirstOrDefault();            
             try
@@ -168,14 +168,14 @@ namespace QuanLyNhanSu.DataTier
                 if(staff == null)
                 {
                     MessageBox.Show("Tài khoản không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
+                    return null;
                 }
                 string staffID = staff.StaffID;
                 string lockDate = staff.LockDate.ToString();
                 if (staff.LockDate != null && staff.LockDate > DateTime.Now)
                 {                    
                     MessageBox.Show($"Tài khoản {account} của nhân viên {staffID} đã bị khoá đến {lockDate}! Liên hệ phòng kỹ thuật để biết thêm chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
+                    return null;
                 }
                 if(staff != null && !BCrypt.Net.BCrypt.Verify(password, staff.Password))
                 {
@@ -195,12 +195,12 @@ namespace QuanLyNhanSu.DataTier
                             DetailOperation = $"Tài khoản {account} bị khoá đến {staff.LockDate} (nhập sai mật khẩu 3 lần)",
                         };
                         operateHistoryBUS.Save(operateHistory);
-                        return false;
+                        return null;
                     }
                     else
                     {
                         MessageBox.Show($"Nhập sai mật khẩu lần thứ {count}! Lần thứ 3 tài khoản sẽ bị khoá!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return false;
+                        return null;
                     }                    
                 }                           
                 else if(staff != null  && BCrypt.Net.BCrypt.Verify(password, staff.Password))
@@ -211,14 +211,14 @@ namespace QuanLyNhanSu.DataTier
                         quanLyNhanSu.SaveChanges();
                     }
                     MessageBox.Show($"Đăng nhập thành công! - {staffID}", "Thông báo", MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    return true;
+                    return staff;
                 }
-                return false;
+                return null;
             }
             catch (Exception ex)
             {
                 CustomMessage.ExecptionCustom(ex);
-                return false;
+                return null;
             }                       
         }
         public bool VerifyInfo(string staffID, string account, string cardID, string phone, string email)

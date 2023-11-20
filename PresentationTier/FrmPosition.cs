@@ -16,7 +16,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly Authorizations authorizations;
         private readonly SaveOperateHistory history;        
         private readonly FormHandle redirect;
-        private readonly LoadHeader loadHeader;
         private readonly StaffBUS staffBUS;
         private readonly AuthorityBUS authorityBUS;
         private readonly PositionBUS positionBUS;
@@ -32,7 +31,6 @@ namespace QuanLyNhanSu.PresentationTier
             staffBUS = new StaffBUS();
             history = new SaveOperateHistory("Chức vụ");
             redirect = new FormHandle();
-            loadHeader = new LoadHeader();
             authorizationBUS = new AuthorizationBUS();
             authorityBUS = new AuthorityBUS();
             authoritiesList = authorityBUS.GetAuthority();
@@ -336,7 +334,5 @@ namespace QuanLyNhanSu.PresentationTier
         {
             Reload();
         }
-
-
     }
 }

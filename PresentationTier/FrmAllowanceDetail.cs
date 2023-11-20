@@ -24,7 +24,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly StaffBUS staffBUS;
         private readonly AllowanceBUS allowanceBUS;
         private readonly AllowanceDetailBUS allowanceDetailBUS;
-        private readonly MonthBUS monthBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly SalaryHandle salary;
         private readonly string formatMonth = "MM/yyyy";
@@ -41,7 +40,6 @@ namespace QuanLyNhanSu.PresentationTier
             departmentBUS = new DepartmentBUS();
             positionBUS = new PositionBUS();
             staffBUS = new StaffBUS();
-            monthBUS = new MonthBUS();
             monthSalaryDetailBUS = new MonthSalaryDetailBUS();
             salary = new SalaryHandle();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);

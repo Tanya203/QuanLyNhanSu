@@ -139,7 +139,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             if (rbYear.Checked)
             {
-                time = dtpYear.Text;
+                time = $"{dtpYear.Text}-";
                 dtpYear.Enabled = true;
                 dtpMonth.Enabled = false;
                 dtpDate.Enabled = false;

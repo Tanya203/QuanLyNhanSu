@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblSearch = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.pnlInfo = new System.Windows.Forms.Panel();
+            this.lblTotalDeliver = new System.Windows.Forms.Label();
+            this.txtTotalDeliver = new System.Windows.Forms.TextBox();
             this.txtCardType = new System.Windows.Forms.TextBox();
             this.lblCardType = new System.Windows.Forms.Label();
             this.lblTotalAmount = new System.Windows.Forms.Label();
@@ -68,9 +70,20 @@
             this.lblStaffLogin = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.dgvCardDetail = new System.Windows.Forms.DataGridView();
+            this.colMaP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLoaiPhieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSoTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDeliver = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGhiChu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtFullName = new System.Windows.Forms.TextBox();
             this.lblFullName = new System.Windows.Forms.Label();
             this.pnlFunction = new System.Windows.Forms.Panel();
+            this.lblDeliver = new System.Windows.Forms.Label();
+            this.txtDeliver = new System.Windows.Forms.TextBox();
             this.pbStaffPicture = new System.Windows.Forms.PictureBox();
             this.lblStaffIDEdit = new System.Windows.Forms.Label();
             this.txtStaffIDEdit = new System.Windows.Forms.TextBox();
@@ -83,19 +96,6 @@
             this.lblAddStaff = new System.Windows.Forms.Label();
             this.lblCardInfo = new System.Windows.Forms.Label();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblDeliver = new System.Windows.Forms.Label();
-            this.txtDeliver = new System.Windows.Forms.TextBox();
-            this.colMaP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLoaiPhieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSoTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeliver = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGhiChu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblTotalDeliver = new System.Windows.Forms.Label();
-            this.txtTotalDeliver = new System.Windows.Forms.TextBox();
             this.pnlInfo.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardDetail)).BeginInit();
@@ -150,6 +150,24 @@
             this.pnlInfo.Name = "pnlInfo";
             this.pnlInfo.Size = new System.Drawing.Size(564, 350);
             this.pnlInfo.TabIndex = 56;
+            // 
+            // lblTotalDeliver
+            // 
+            this.lblTotalDeliver.AutoSize = true;
+            this.lblTotalDeliver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalDeliver.Location = new System.Drawing.Point(19, 305);
+            this.lblTotalDeliver.Name = "lblTotalDeliver";
+            this.lblTotalDeliver.Size = new System.Drawing.Size(146, 25);
+            this.lblTotalDeliver.TabIndex = 77;
+            this.lblTotalDeliver.Text = "Tổng đã giao:";
+            // 
+            // txtTotalDeliver
+            // 
+            this.txtTotalDeliver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalDeliver.Location = new System.Drawing.Point(238, 302);
+            this.txtTotalDeliver.Name = "txtTotalDeliver";
+            this.txtTotalDeliver.Size = new System.Drawing.Size(309, 30);
+            this.txtTotalDeliver.TabIndex = 76;
             // 
             // txtCardType
             // 
@@ -534,12 +552,75 @@
             this.dgvCardDetail.ReadOnly = true;
             this.dgvCardDetail.RowHeadersVisible = false;
             this.dgvCardDetail.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvCardDetail.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvCardDetail.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCardDetail.RowTemplate.Height = 24;
             this.dgvCardDetail.Size = new System.Drawing.Size(1924, 475);
             this.dgvCardDetail.TabIndex = 55;
             this.dgvCardDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCardDetail_CellClick);
+            // 
+            // colMaP
+            // 
+            this.colMaP.HeaderText = "Mã phiếu";
+            this.colMaP.MinimumWidth = 6;
+            this.colMaP.Name = "colMaP";
+            this.colMaP.ReadOnly = true;
+            // 
+            // colLoaiPhieu
+            // 
+            this.colLoaiPhieu.HeaderText = "Loại phiếu";
+            this.colLoaiPhieu.MinimumWidth = 6;
+            this.colLoaiPhieu.Name = "colLoaiPhieu";
+            this.colLoaiPhieu.ReadOnly = true;
+            // 
+            // colMaNV
+            // 
+            this.colMaNV.HeaderText = "Mã nhân viên";
+            this.colMaNV.MinimumWidth = 6;
+            this.colMaNV.Name = "colMaNV";
+            this.colMaNV.ReadOnly = true;
+            // 
+            // colHoTen
+            // 
+            this.colHoTen.HeaderText = "Họ tên";
+            this.colHoTen.MinimumWidth = 6;
+            this.colHoTen.Name = "colHoTen";
+            this.colHoTen.ReadOnly = true;
+            // 
+            // colPhongBan
+            // 
+            this.colPhongBan.HeaderText = "Phòng ban";
+            this.colPhongBan.MinimumWidth = 6;
+            this.colPhongBan.Name = "colPhongBan";
+            this.colPhongBan.ReadOnly = true;
+            // 
+            // colChucVu
+            // 
+            this.colChucVu.HeaderText = "Chức vụ";
+            this.colChucVu.MinimumWidth = 6;
+            this.colChucVu.Name = "colChucVu";
+            this.colChucVu.ReadOnly = true;
+            // 
+            // colSoTien
+            // 
+            this.colSoTien.HeaderText = "Số tiền";
+            this.colSoTien.MinimumWidth = 6;
+            this.colSoTien.Name = "colSoTien";
+            this.colSoTien.ReadOnly = true;
+            // 
+            // colDeliver
+            // 
+            this.colDeliver.HeaderText = "Đã giao";
+            this.colDeliver.MinimumWidth = 6;
+            this.colDeliver.Name = "colDeliver";
+            this.colDeliver.ReadOnly = true;
+            // 
+            // colGhiChu
+            // 
+            this.colGhiChu.HeaderText = "Ghi chú";
+            this.colGhiChu.MinimumWidth = 6;
+            this.colGhiChu.Name = "colGhiChu";
+            this.colGhiChu.ReadOnly = true;
             // 
             // txtFullName
             // 
@@ -586,6 +667,26 @@
             this.pnlFunction.Name = "pnlFunction";
             this.pnlFunction.Size = new System.Drawing.Size(1165, 277);
             this.pnlFunction.TabIndex = 64;
+            // 
+            // lblDeliver
+            // 
+            this.lblDeliver.AutoSize = true;
+            this.lblDeliver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDeliver.Location = new System.Drawing.Point(481, 175);
+            this.lblDeliver.Name = "lblDeliver";
+            this.lblDeliver.Size = new System.Drawing.Size(93, 25);
+            this.lblDeliver.TabIndex = 85;
+            this.lblDeliver.Text = "Đã giao:";
+            // 
+            // txtDeliver
+            // 
+            this.txtDeliver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDeliver.Location = new System.Drawing.Point(670, 172);
+            this.txtDeliver.MaxLength = 42;
+            this.txtDeliver.Name = "txtDeliver";
+            this.txtDeliver.Size = new System.Drawing.Size(268, 30);
+            this.txtDeliver.TabIndex = 84;
+            this.txtDeliver.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDeliver_KeyPress);
             // 
             // pbStaffPicture
             // 
@@ -725,107 +826,6 @@
             // 
             this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errProvider.ContainerControl = this;
-            // 
-            // lblDeliver
-            // 
-            this.lblDeliver.AutoSize = true;
-            this.lblDeliver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeliver.Location = new System.Drawing.Point(481, 178);
-            this.lblDeliver.Name = "lblDeliver";
-            this.lblDeliver.Size = new System.Drawing.Size(93, 25);
-            this.lblDeliver.TabIndex = 85;
-            this.lblDeliver.Text = "Đã giao:";
-            // 
-            // txtDeliver
-            // 
-            this.txtDeliver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDeliver.Location = new System.Drawing.Point(670, 175);
-            this.txtDeliver.MaxLength = 42;
-            this.txtDeliver.Name = "txtDeliver";
-            this.txtDeliver.Size = new System.Drawing.Size(268, 30);
-            this.txtDeliver.TabIndex = 84;
-            this.txtDeliver.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDeliver_KeyPress);
-            // 
-            // colMaP
-            // 
-            this.colMaP.HeaderText = "Mã phiếu";
-            this.colMaP.MinimumWidth = 6;
-            this.colMaP.Name = "colMaP";
-            this.colMaP.ReadOnly = true;
-            // 
-            // colLoaiPhieu
-            // 
-            this.colLoaiPhieu.HeaderText = "Loại phiếu";
-            this.colLoaiPhieu.MinimumWidth = 6;
-            this.colLoaiPhieu.Name = "colLoaiPhieu";
-            this.colLoaiPhieu.ReadOnly = true;
-            // 
-            // colMaNV
-            // 
-            this.colMaNV.HeaderText = "Mã nhân viên";
-            this.colMaNV.MinimumWidth = 6;
-            this.colMaNV.Name = "colMaNV";
-            this.colMaNV.ReadOnly = true;
-            // 
-            // colHoTen
-            // 
-            this.colHoTen.HeaderText = "Họ tên";
-            this.colHoTen.MinimumWidth = 6;
-            this.colHoTen.Name = "colHoTen";
-            this.colHoTen.ReadOnly = true;
-            // 
-            // colPhongBan
-            // 
-            this.colPhongBan.HeaderText = "Phòng ban";
-            this.colPhongBan.MinimumWidth = 6;
-            this.colPhongBan.Name = "colPhongBan";
-            this.colPhongBan.ReadOnly = true;
-            // 
-            // colChucVu
-            // 
-            this.colChucVu.HeaderText = "Chức vụ";
-            this.colChucVu.MinimumWidth = 6;
-            this.colChucVu.Name = "colChucVu";
-            this.colChucVu.ReadOnly = true;
-            // 
-            // colSoTien
-            // 
-            this.colSoTien.HeaderText = "Số tiền";
-            this.colSoTien.MinimumWidth = 6;
-            this.colSoTien.Name = "colSoTien";
-            this.colSoTien.ReadOnly = true;
-            // 
-            // colDeliver
-            // 
-            this.colDeliver.HeaderText = "Đã giao";
-            this.colDeliver.MinimumWidth = 6;
-            this.colDeliver.Name = "colDeliver";
-            this.colDeliver.ReadOnly = true;
-            // 
-            // colGhiChu
-            // 
-            this.colGhiChu.HeaderText = "Ghi chú";
-            this.colGhiChu.MinimumWidth = 6;
-            this.colGhiChu.Name = "colGhiChu";
-            this.colGhiChu.ReadOnly = true;
-            // 
-            // lblTotalDeliver
-            // 
-            this.lblTotalDeliver.AutoSize = true;
-            this.lblTotalDeliver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalDeliver.Location = new System.Drawing.Point(19, 305);
-            this.lblTotalDeliver.Name = "lblTotalDeliver";
-            this.lblTotalDeliver.Size = new System.Drawing.Size(146, 25);
-            this.lblTotalDeliver.TabIndex = 77;
-            this.lblTotalDeliver.Text = "Tổng đã giao:";
-            // 
-            // txtTotalDeliver
-            // 
-            this.txtTotalDeliver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalDeliver.Location = new System.Drawing.Point(238, 302);
-            this.txtTotalDeliver.Name = "txtTotalDeliver";
-            this.txtTotalDeliver.Size = new System.Drawing.Size(309, 30);
-            this.txtTotalDeliver.TabIndex = 76;
             // 
             // FrmCardDetail
             // 

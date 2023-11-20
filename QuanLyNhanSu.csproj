@@ -148,6 +148,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTier\BonusDebtDAL.cs" />
     <Compile Include="DataTier\Models\Allowance.cs" />
     <Compile Include="DataTier\Models\AllowanceDetail.cs" />
     <Compile Include="DataTier\Models\Authority.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Functions\FormHandle.cs" />
     <Compile Include="Functions\SalaryHandle.cs" />
     <Compile Include="Functions\SaveOperateHistory.cs" />
+    <Compile Include="LogicTier\BonusDebtBUS.cs" />
     <Compile Include="LogicTier\MonthBUS.cs" />
     <Compile Include="LogicTier\MonthSalaryDetailBUS.cs" />
     <Compile Include="LogicTier\TimeKeepingBUS.cs" />
@@ -223,6 +225,12 @@
     <Compile Include="LogicTier\AllowanceBUS.cs" />
     <Compile Include="LogicTier\AuthorityBUS.cs" />
     <Compile Include="LogicTier\OperationBUS.cs" />
+    <Compile Include="PresentationTier\FrmBonusDebt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationTier\FrmBonusDebt.Designer.cs">
+      <DependentUpon>FrmBonusDebt.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationTier\FrmConfirmPassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -370,6 +378,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Functions\StringAdjust.cs" />
+    <Compile Include="ViewModels\BonusDebtViewModels.cs" />
     <Compile Include="ViewModels\ShiftViewModels.cs" />
     <Compile Include="ViewModels\WorkScheduleDetailViewModels.cs" />
     <Compile Include="ViewModels\CardDetailViewModels.cs" />
@@ -385,6 +394,9 @@
     <Compile Include="ViewModels\DepartmentViewModels.cs" />
     <Compile Include="ViewModels\AllowanceViewModels.cs" />
     <Compile Include="ViewModels\AllowanceDetailViewModels.cs" />
+    <EmbeddedResource Include="PresentationTier\FrmBonusDebt.resx">
+      <DependentUpon>FrmBonusDebt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationTier\FrmConfirmPassword.resx">
       <DependentUpon>FrmConfirmPassword.cs</DependentUpon>
     </EmbeddedResource>

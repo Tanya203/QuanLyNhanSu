@@ -70,7 +70,7 @@ namespace QuanLyNhanSu.PresentationTier
                 if (value && listButtons[i] != btnCancel)
                     typeof(Button).GetProperty("Enabled").SetValue(listButtons[i], !value);
             }
-        }
+        }        
         private void LoadAllowance()
         {
             Enabled = false;

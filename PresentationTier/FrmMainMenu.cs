@@ -39,7 +39,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value)
         {
-            List<Button> listButtons = new List<Button> { btnStaffs, btnDepartment, btnPosition, btnShift, btnWorkSchedule, btnAllowance, btnCard, btnStatistics, btnContractType, btnAuthorization, btnOperateHistory };
+            List<Button> listButtons = new List<Button> { btnStaffs, btnDepartment, btnPosition, btnShift, btnWorkSchedule, btnAllowance, btnCard, btnBonusDept ,btnStatistics, btnContractType, btnAuthorization, btnOperateHistory };
             for (int i = 0; i < listButtons.Count; i++)
             {
                 typeof(Button).GetProperty("Visible").SetValue(listButtons[i], value);
@@ -67,7 +67,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void Authorize()
         {                       
-            List<object> button = new List<object> { btnStaffs, btnDepartment, btnPosition, btnShift, btnWorkSchedule, btnAllowance, btnCard, btnStatistics, btnContractType, btnAuthorization, btnOperateHistory};
+            List<object> button = new List<object> { btnStaffs, btnDepartment, btnPosition, btnShift, btnWorkSchedule, btnAllowance, btnCard, btnBonusDept, btnStatistics, btnContractType, btnAuthorization, btnOperateHistory};
             authorization.AuthorizeMainMenu(button);
         }
         private void btnStaffs_Click(object sender, EventArgs e)
@@ -145,7 +145,16 @@ namespace QuanLyNhanSu.PresentationTier
         {
             LoadLichLamViec();
         }
+        private void btnBonusDept_Click(object sender, EventArgs e)
+        {
+            FrmBonusDebt opem = new FrmBonusDebt(staff.StaffID);
+            redirect.RedirectForm(opem);
+        }
 
-
+        private void btnBonusDept_Click_1(object sender, EventArgs e)
+        {
+            FrmBonusDebt open = new FrmBonusDebt(staff.StaffID);
+            redirect.RedirectForm(open);
+        }
     }
 }
