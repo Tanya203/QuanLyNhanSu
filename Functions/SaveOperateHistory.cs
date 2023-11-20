@@ -13,7 +13,7 @@ namespace QuanLyNhanSu.Functions
         private readonly OperationBUS operationBUS;
         private readonly List<Operation> operations;
         private string opID;
-        private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
+        private readonly string formatDateTime = "HH:mm:ss.ffffff | yyyy-MM-dd";
         public SaveOperateHistory(string form)
         {
             operateHistoryBUS = new OperateHistoryBUS();

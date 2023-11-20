@@ -44,14 +44,6 @@
             this.lblStaffIDLogin = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.dgvCard = new System.Windows.Forms.DataGridView();
-            this.lblCard = new System.Windows.Forms.Label();
-            this.pnlMenu = new System.Windows.Forms.Panel();
-            this.btnCardType = new System.Windows.Forms.Button();
-            this.cmbCardType = new System.Windows.Forms.ComboBox();
-            this.lblCardType = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.lblSearch = new System.Windows.Forms.Label();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.colMaPT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLoaiPhieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +53,14 @@
             this.colNgayLap = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colToltalDeliver = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblCard = new System.Windows.Forms.Label();
+            this.pnlMenu = new System.Windows.Forms.Panel();
+            this.btnCardType = new System.Windows.Forms.Button();
+            this.cmbCardType = new System.Windows.Forms.ComboBox();
+            this.lblCardType = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCard)).BeginInit();
             this.pnlMenu.SuspendLayout();
@@ -259,6 +259,69 @@
             this.dgvCard.TabIndex = 7;
             this.dgvCard.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCard_CellClick);
             // 
+            // colMaPT
+            // 
+            this.colMaPT.HeaderText = "Mã phiếu thưởng";
+            this.colMaPT.MinimumWidth = 6;
+            this.colMaPT.Name = "colMaPT";
+            this.colMaPT.ReadOnly = true;
+            // 
+            // colLoaiPhieu
+            // 
+            this.colLoaiPhieu.HeaderText = "Loại phiếu";
+            this.colLoaiPhieu.MinimumWidth = 6;
+            this.colLoaiPhieu.Name = "colLoaiPhieu";
+            this.colLoaiPhieu.ReadOnly = true;
+            // 
+            // colMaNV
+            // 
+            this.colMaNV.HeaderText = "Nhân viên lập phiếu";
+            this.colMaNV.MinimumWidth = 6;
+            this.colMaNV.Name = "colMaNV";
+            this.colMaNV.ReadOnly = true;
+            // 
+            // colHoTen
+            // 
+            this.colHoTen.HeaderText = "Họ tên";
+            this.colHoTen.MinimumWidth = 6;
+            this.colHoTen.Name = "colHoTen";
+            this.colHoTen.ReadOnly = true;
+            // 
+            // colPhongBan
+            // 
+            this.colPhongBan.HeaderText = "Phòng ban";
+            this.colPhongBan.MinimumWidth = 6;
+            this.colPhongBan.Name = "colPhongBan";
+            this.colPhongBan.ReadOnly = true;
+            // 
+            // colChucVu
+            // 
+            this.colChucVu.HeaderText = "Chức vụ";
+            this.colChucVu.MinimumWidth = 6;
+            this.colChucVu.Name = "colChucVu";
+            this.colChucVu.ReadOnly = true;
+            // 
+            // colNgayLap
+            // 
+            this.colNgayLap.HeaderText = "Ngày lập";
+            this.colNgayLap.MinimumWidth = 6;
+            this.colNgayLap.Name = "colNgayLap";
+            this.colNgayLap.ReadOnly = true;
+            // 
+            // colTongTien
+            // 
+            this.colTongTien.HeaderText = "Tổng tiền";
+            this.colTongTien.MinimumWidth = 6;
+            this.colTongTien.Name = "colTongTien";
+            this.colTongTien.ReadOnly = true;
+            // 
+            // colToltalDeliver
+            // 
+            this.colToltalDeliver.HeaderText = "Tổng đã giao";
+            this.colToltalDeliver.MinimumWidth = 6;
+            this.colToltalDeliver.Name = "colToltalDeliver";
+            this.colToltalDeliver.ReadOnly = true;
+            // 
             // lblCard
             // 
             this.lblCard.AutoSize = true;
@@ -359,69 +422,6 @@
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
-            // 
-            // colMaPT
-            // 
-            this.colMaPT.HeaderText = "Mã phiếu thưởng";
-            this.colMaPT.MinimumWidth = 6;
-            this.colMaPT.Name = "colMaPT";
-            this.colMaPT.ReadOnly = true;
-            // 
-            // colLoaiPhieu
-            // 
-            this.colLoaiPhieu.HeaderText = "Loại phiếu";
-            this.colLoaiPhieu.MinimumWidth = 6;
-            this.colLoaiPhieu.Name = "colLoaiPhieu";
-            this.colLoaiPhieu.ReadOnly = true;
-            // 
-            // colMaNV
-            // 
-            this.colMaNV.HeaderText = "Nhân viên lập phiếu";
-            this.colMaNV.MinimumWidth = 6;
-            this.colMaNV.Name = "colMaNV";
-            this.colMaNV.ReadOnly = true;
-            // 
-            // colHoTen
-            // 
-            this.colHoTen.HeaderText = "Họ tên";
-            this.colHoTen.MinimumWidth = 6;
-            this.colHoTen.Name = "colHoTen";
-            this.colHoTen.ReadOnly = true;
-            // 
-            // colPhongBan
-            // 
-            this.colPhongBan.HeaderText = "Phòng ban";
-            this.colPhongBan.MinimumWidth = 6;
-            this.colPhongBan.Name = "colPhongBan";
-            this.colPhongBan.ReadOnly = true;
-            // 
-            // colChucVu
-            // 
-            this.colChucVu.HeaderText = "Chức vụ";
-            this.colChucVu.MinimumWidth = 6;
-            this.colChucVu.Name = "colChucVu";
-            this.colChucVu.ReadOnly = true;
-            // 
-            // colNgayLap
-            // 
-            this.colNgayLap.HeaderText = "Ngày lập";
-            this.colNgayLap.MinimumWidth = 6;
-            this.colNgayLap.Name = "colNgayLap";
-            this.colNgayLap.ReadOnly = true;
-            // 
-            // colTongTien
-            // 
-            this.colTongTien.HeaderText = "Tổng tiền";
-            this.colTongTien.MinimumWidth = 6;
-            this.colTongTien.Name = "colTongTien";
-            this.colTongTien.ReadOnly = true;
-            // 
-            // colToltalDeliver
-            // 
-            this.colToltalDeliver.HeaderText = "Tổng đã giao";
-            this.colToltalDeliver.MinimumWidth = 6;
-            this.colToltalDeliver.Name = "colToltalDeliver";
-            this.colToltalDeliver.ReadOnly = true;
             // 
             // FrmCard
             // 

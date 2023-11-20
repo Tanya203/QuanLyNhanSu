@@ -33,13 +33,13 @@ namespace QuanLyNhanSu
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (staffBUS.LoginVerify(txtAccount.Text, txtPassword.Text))
+            Staff staff = staffBUS.LoginVerify(txtAccount.Text, txtPassword.Text);
+            if (staff != null)
             {
-                string staffID = staffBUS.GetStaff().FirstOrDefault(s => s.Account == txtAccount.Text).StaffID;
                 string operate = "Đăng nhập";
                 string operationDetail = "Đăng nhập";
-                history.Save(staffID, operate, operationDetail);
-                FrmMainMenu open = new FrmMainMenu(staffID);
+                history.Save(staff.StaffID, operate, operationDetail);
+                FrmMainMenu open = new FrmMainMenu(staff.StaffID);
                 redirect.RedirectForm(open);  
             }
         }

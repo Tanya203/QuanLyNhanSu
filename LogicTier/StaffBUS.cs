@@ -42,7 +42,7 @@ namespace QuanLyNhanSu.LogicTier
         {
             return staffDAL.Delete(staff.StaffID);
         }
-        public bool LoginVerify(string account, string password)
+        public Staff LoginVerify(string account, string password)
         {            
             return staffDAL.LoginVerify(account, password);
         }
