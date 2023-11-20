@@ -62,7 +62,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtLastName.Text = staff.LastName;
             txtMiddleName.Text = staff.MiddleName;
             txtFirstName.Text = staff.FirstName;
-            dtpBrithday.Text = staff.Brithday.ToString(formatDate);
+            dtpBrithday.Value = staff.Brithday;
             txtHouseNumber.Text = staff.HouseNumber;
             txtStreet.Text = staff.Street;
             txtWard.Text = staff.Ward;
