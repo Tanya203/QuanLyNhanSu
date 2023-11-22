@@ -130,7 +130,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmShift open = new FrmShift(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         private bool CheckEmptyText(bool check)
@@ -348,13 +348,13 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnShiftType_Click(object sender, EventArgs e)
         {
             FrmShiftType open = new FrmShiftType(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
             staff = null;
         }
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
             staff = null;
         }
         private void txtSearch_TextChange(object sender, EventArgs e)

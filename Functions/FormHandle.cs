@@ -10,12 +10,12 @@ namespace QuanLyNhanSu.Functions
     public class FormHandle
     {
         private Form open;
-        public bool RedirectForm(Form open)
+        public bool RedirectForm(Form open, Form close)
         {
             try
             {
                 this.open = open;
-                Application.ExitThread();
+                close.Close();
                 Thread newThread = new Thread(OpenForm);
                 newThread.SetApartmentState(ApartmentState.STA);
                 newThread.Start();
@@ -29,7 +29,9 @@ namespace QuanLyNhanSu.Functions
         }
         private void OpenForm()
         {
-            open.ShowDialog();
+            Form form = new Form();
+            form = open;
+            Application.Run(form);
         }       
     }    
 }

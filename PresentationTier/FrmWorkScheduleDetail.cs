@@ -246,7 +246,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmWorkScheduleDetail open = new FrmWorkScheduleDetail(staff.StaffID, workSchedule.WS_ID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         //////////////////////////////////////////////////////////////////////////////////////
         private void btnAdd_Click(object sender, EventArgs e)
@@ -328,8 +328,8 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnBack_Click(object sender, EventArgs e)
         {
-            FrmWorkSchedule opem = new FrmWorkSchedule(staff.StaffID);
-            redirect.RedirectForm(opem);
+            FrmWorkSchedule open = new FrmWorkSchedule(staff.StaffID);
+            redirect.RedirectForm(open, this);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

@@ -233,13 +233,13 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmOperateHistory open = new FrmOperateHistory(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         /////////////////////////////////////////////////////////////////////////////////////////
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void txtSearchTextChanged(object sender, EventArgs e)
         {

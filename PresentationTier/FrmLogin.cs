@@ -29,7 +29,7 @@ namespace QuanLyNhanSu
         private void llblForgotPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmForgotPassword open = new FrmForgotPassword();
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -40,7 +40,7 @@ namespace QuanLyNhanSu
                 string operationDetail = "Đăng nhập";
                 history.Save(staff.StaffID, operate, operationDetail);
                 FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-                redirect.RedirectForm(open);  
+                redirect.RedirectForm(open, this);  
             }
         }
         private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
@@ -66,7 +66,5 @@ namespace QuanLyNhanSu
                 e.Handled = true;
             }
         }
-
-        
     }
 }
