@@ -29,9 +29,7 @@ namespace QuanLyNhanSu.Functions
         }
         private void OpenForm()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(open);
+            open.ShowDialog();
         }       
     }    
 }

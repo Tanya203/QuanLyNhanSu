@@ -349,7 +349,7 @@ namespace QuanLyNhanSu.PresentationTier
             decimal amount = decimal.TryParse(txtAmount.Text, out _) ? decimal.Parse(txtAmount.Text) : 0;
             errProvider.SetError(txtAmount, double.TryParse(txtAmount.Text, out _) is false ? "Định dạng tiền không hợp lệ" : string.Empty);
             errProvider.SetError(txtDeliver, double.TryParse(txtDeliver.Text, out _) is false && string.IsNullOrEmpty(txtTotalDeliver.Text) ? "Định dạng tiền không hợp lệ" : string.Empty);
-            errProvider.SetError(txtDeliver, deliver > amount ? "Tiền nhận phải nhở hơn hoặc bằng số tiền nhận" : string.Empty);
+            errProvider.SetError(txtDeliver, deliver > amount ? "Tiền giao phải nhỏ hơn hoặc bằng số tiền trong phiếu" : string.Empty);
             errProvider.SetError(txtAmount, amount <= 0 ? "Số tiền phải lớn hơn 0" : string.Empty);
             if (errProvider.GetError(txtAmount) != string.Empty || errProvider.GetError(txtDeliver) != string.Empty)
                 return false;
