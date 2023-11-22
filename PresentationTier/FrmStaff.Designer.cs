@@ -346,7 +346,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvStaff.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvStaff.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvStaff.Location = new System.Drawing.Point(0, 533);
+            this.dgvStaff.Location = new System.Drawing.Point(0, 542);
             this.dgvStaff.Name = "dgvStaff";
             this.dgvStaff.ReadOnly = true;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -361,7 +361,7 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvStaff.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvStaff.RowTemplate.Height = 24;
-            this.dgvStaff.Size = new System.Drawing.Size(1924, 450);
+            this.dgvStaff.Size = new System.Drawing.Size(1924, 441);
             this.dgvStaff.TabIndex = 40;
             this.dgvStaff.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStaff_CellClick);
             // 
@@ -1494,7 +1494,7 @@
             // 
             this.lblSearch.AutoSize = true;
             this.lblSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearch.Location = new System.Drawing.Point(812, 498);
+            this.lblSearch.Location = new System.Drawing.Point(814, 507);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(145, 32);
             this.lblSearch.TabIndex = 25;
@@ -1503,7 +1503,7 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(963, 497);
+            this.txtSearch.Location = new System.Drawing.Point(965, 506);
             this.txtSearch.MaxLength = 50;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(299, 30);

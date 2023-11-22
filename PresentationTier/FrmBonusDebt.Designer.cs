@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.lblPositionLoginValue = new System.Windows.Forms.Label();
@@ -72,17 +73,18 @@
             this.colStaffID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCardID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCardType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCaculate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliver = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlHeader.SuspendLayout();
             this.pnlFunction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbStaffPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBonusDebt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -121,6 +123,7 @@
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // lblPositionLoginValue
             // 
@@ -222,6 +225,7 @@
             this.btnTroVe.Text = "Trở về";
             this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTroVe.UseVisualStyleBackColor = false;
+            this.btnTroVe.Click += new System.EventHandler(this.btnTroVe_Click);
             // 
             // lblBonusFine
             // 
@@ -342,6 +346,7 @@
             this.txtDeliver.Name = "txtDeliver";
             this.txtDeliver.Size = new System.Drawing.Size(268, 30);
             this.txtDeliver.TabIndex = 84;
+            this.txtDeliver.TextChanged += new System.EventHandler(this.OnOffButton);
             this.txtDeliver.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MoneyInput);
             // 
             // pbStaffPicture
@@ -502,6 +507,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(299, 30);
             this.txtSearch.TabIndex = 66;
+            this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
             // 
             // lblSearch
             // 
@@ -519,20 +525,19 @@
             this.dgvBonusDebt.AllowUserToDeleteRows = false;
             this.dgvBonusDebt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvBonusDebt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBonusDebt.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBonusDebt.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvBonusDebt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBonusDebt.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colStaffID,
             this.colCardID,
             this.colCardType,
-            this.colCaculate,
             this.colDepartment,
             this.colPosition,
             this.colFullName,
@@ -543,17 +548,17 @@
             this.dgvBonusDebt.Location = new System.Drawing.Point(0, 499);
             this.dgvBonusDebt.Name = "dgvBonusDebt";
             this.dgvBonusDebt.ReadOnly = true;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBonusDebt.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBonusDebt.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvBonusDebt.RowHeadersVisible = false;
             this.dgvBonusDebt.RowHeadersWidth = 51;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvBonusDebt.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvBonusDebt.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvBonusDebt.RowTemplate.Height = 24;
             this.dgvBonusDebt.Size = new System.Drawing.Size(1924, 474);
             this.dgvBonusDebt.TabIndex = 67;
@@ -579,13 +584,6 @@
             this.colCardType.MinimumWidth = 6;
             this.colCardType.Name = "colCardType";
             this.colCardType.ReadOnly = true;
-            // 
-            // colCaculate
-            // 
-            this.colCaculate.HeaderText = "Hình thức tính";
-            this.colCaculate.MinimumWidth = 6;
-            this.colCaculate.Name = "colCaculate";
-            this.colCaculate.ReadOnly = true;
             // 
             // colDepartment
             // 
@@ -629,6 +627,11 @@
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             // 
+            // errProvider
+            // 
+            this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errProvider.ContainerControl = this;
+            // 
             // FrmBonusDebt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -651,6 +654,7 @@
             this.pnlFunction.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbStaffPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBonusDebt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -696,10 +700,10 @@
         private System.Windows.Forms.TextBox txtCardType;
         private System.Windows.Forms.Label lblCardID;
         private System.Windows.Forms.TextBox txtCardID;
+        private System.Windows.Forms.ErrorProvider errProvider;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStaffID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCardID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCardType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaculate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDepartment;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;

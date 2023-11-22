@@ -41,7 +41,7 @@ namespace QuanLyNhanSu.PresentationTier
             positionBUS = new PositionBUS();
             departmentBUS = new DepartmentBUS();
             bonusDebtBUS = new BonusDebtBUS();
-            history = new SaveOperateHistory(staffID);
+            history = new SaveOperateHistory("Thưởng - nợ");
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Thưởng - nợ", staff);
             checkLoad = false;
@@ -96,7 +96,7 @@ namespace QuanLyNhanSu.PresentationTier
             for (int i = 0; i < listDisplay.Count; i++)
             {
                 if (listDisplay[i] is TextBox)
-                    typeof(TextBox).GetProperty("ReadOnly").SetValue(listDisplay[i], false);
+                    typeof(TextBox).GetProperty("ReadOnly").SetValue(listDisplay[i], true);
             }
         }
         private void LoadBonusDebtStaff(string staffID, string type)
@@ -141,10 +141,16 @@ namespace QuanLyNhanSu.PresentationTier
             }
             Enabled = true;
         }
+        private void Reload()
+        {
+            FrmBonusDebt open = new FrmBonusDebt(staff.StaffID);
+            redirect.RedirectForm(open);
+        }
         private void LoadType()
         {
             cmbType.Items.Add("Cộng");
             cmbType.Items.Add("Trừ");
+            cmbType.SelectedIndex = 0;
         }
         private void LoadDepartment()
         {
@@ -164,29 +170,8 @@ namespace QuanLyNhanSu.PresentationTier
         {
             cmbStaff.DisplayMember = "StaffID";
             cmbStaff.ValueMember = "StaffID";
-            cmbStaff.DataSource = staffBUS.GetStaff().Where(s => s.PS_ID == psID);
-            AutoAdjustComboBox.Adjust(cmbStaff);
-        }
-
-        private void cmbType_TextChanged(object sender, EventArgs e)
-        {
-            if(checkLoad)
-                LoadBonusDebtStaff(cmbStaff.Text, cmbType.Text);
-        }
-        private void cmbDepartment_TextChanged(object sender, EventArgs e)
-        {
-            LoadPositionByDepartment(cmbDepartment.SelectedValue.ToString());
-        }
-
-        private void cmbPosition_TextChanged(object sender, EventArgs e)
-        {
-            LoadStaffByPosition(cmbPosition.SelectedValue.ToString());
-        }
-
-        private void cmbStaff_TextChanged(object sender, EventArgs e)
-        {
+            cmbStaff.DataSource = staffBUS.GetStaff().Where(s => s.PS_ID == psID).ToList();
             pbStaffPicture.Image = Properties.Resources.image;
-            LoadBonusDebtStaff(cmbStaff.Text, cmbType.Text);
             if (string.IsNullOrEmpty(cmbStaff.Text))
             {
                 cmbStaff.Enabled = false;
@@ -199,26 +184,75 @@ namespace QuanLyNhanSu.PresentationTier
                 txtFullName.Text = StringAdjust.AddSpacesBetweenUppercaseLetters($"{staff.LastName}{staff.MiddleName}{staff.FirstName}");
                 ImageHandle.LoadImage(pbStaffPicture, staff.Picture);
             }
+            LoadBonusDebtStaff(cmbStaff.Text, cmbType.Text);
+            AutoAdjustComboBox.Adjust(cmbStaff);
+        }
+        private void cmbType_TextChanged(object sender, EventArgs e)
+        {
+            ClearText();
+            if (checkLoad)
+                LoadBonusDebtStaff(cmbStaff.Text, cmbType.Text);
+            else
+                checkLoad = true;
+        }
+        private void cmbDepartment_TextChanged(object sender, EventArgs e)
+        {
+            errProvider.Clear();
+            ClearText();
+            LoadPositionByDepartment(cmbDepartment.SelectedValue.ToString());
+        }
+
+        private void cmbPosition_TextChanged(object sender, EventArgs e)
+        {
+            errProvider.Clear();
+            ClearText();
+            LoadStaffByPosition(cmbPosition.SelectedValue.ToString());
+        }
+
+        private void cmbStaff_TextChanged(object sender, EventArgs e)
+        {
+            errProvider.Clear();
+            ClearText();
+            pbStaffPicture.Image = Properties.Resources.image;
+            LoadBonusDebtStaff(cmbStaff.Text, cmbType.Text);
         }
         private void MoneyInput(object sender, KeyPressEventArgs e)
         {
             InputCheck.OnlyRealNumber(sender, e);
+        }
+        public void ClearText()
+        {
+            txtCardID.Text = string.Empty;
+            txtCardType.Text = string.Empty;
+            txtAmount.Text = string.Empty;
+            txtDeliver.Text = string.Empty;
         }
         private string CheckChange()
         {
             List<string> changes = new List<string>();
             CardDetail cardDetail = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == txtCardID.Text && c.StaffID == cmbStaff.Text);
             string oldDeliver = String.Format(fVND, "{0:N3} ₫", cardDetail.Deliver);
-            string newDeliver = String.Format(fVND, "{0:N3} ₫", txtDeliver.Text);
+            string newDeliver = String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtDeliver.Text));
             if (oldDeliver != newDeliver)
                 changes.Add($"- Đã giao: {oldDeliver} -> Đã giao : {newDeliver}");
             if (cardDetail.Note != rtxtNote.Text)
                 changes.Add($"- Ghi chú: {cardDetail.Note} -> Ghi chú : {rtxtNote.Text}");
             return string.Join("\n", changes);
         }
-
+        private bool CheckErrorInput()
+        {
+            errProvider.Clear();
+            decimal deliver = decimal.TryParse(txtDeliver.Text, out _) ? decimal.Parse(txtDeliver.Text) : 0;
+            decimal amount = decimal.Parse(txtAmount.Text);
+            errProvider.SetError(txtDeliver, double.TryParse(txtDeliver.Text, out _) is false && string.IsNullOrEmpty(txtDeliver.Text) ? "Định dạng tiền không hợp lệ" : string.Empty);
+            errProvider.SetError(txtDeliver, deliver > amount ? "Tiền giao phải nhỏ hơn hoặc bằng số tiền trong phiếu" : string.Empty);
+            if (errProvider.GetError(txtDeliver) != string.Empty)
+                return false;
+            return true;
+        }
         private void dgvBonusDebt_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            errProvider.Clear();
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;
@@ -238,11 +272,16 @@ namespace QuanLyNhanSu.PresentationTier
         {
             if (CheckEmptyText())
                 btnUpdate.Enabled = true;
-            btnUpdate.Enabled = false;
+            else
+                btnUpdate.Enabled = false;
         }
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            if (!CheckErrorInput())
+            {
+                MessageBox.Show("Lỗi","Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 CardDetail cardDetail = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == txtCardID.Text && c.StaffID == cmbStaff.Text);
@@ -271,6 +310,7 @@ namespace QuanLyNhanSu.PresentationTier
                             monthSalaryDetailBUS.Save(salaryDetails);
                         }
                     }
+                    Reload();
                 }
             }
             catch(Exception ex)
@@ -278,5 +318,23 @@ namespace QuanLyNhanSu.PresentationTier
                 CustomMessage.ExecptionCustom(ex);
             }
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reload();
+        }
+
+        private void btnTroVe_Click(object sender, EventArgs e)
+        {
+            FrmMainMenu open = new FrmMainMenu(staff.StaffID);
+            redirect.RedirectForm(open);
+        }
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                LoadBonusDebtStaffSearch(cmbStaff.SelectedValue.ToString(), cmbType.Text, txtSearch.Text);
+        }
+
+        
     }
 }

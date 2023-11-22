@@ -21,13 +21,18 @@ namespace QuanLyNhanSu.Functions
             itID = interfaceBUS.GetInterface().FirstOrDefault(it => it.InterfaceName == form).IT_ID;
             authorizations = authorizationBUS.GetAuthorizations().Where(au => au.Authority.Interface.IT_ID == itID && au.Position.Department.DP_ID == staff.Position.Department.DP_ID && au.PS_ID == staff.PS_ID).ToList();
         }
-        public void AuthorizeMainMenu(List<object> listObject)
+        public void AuthorizeMainMenu(Dictionary<object, object> button)
         {
-            int count = 0;
             foreach (Authorization au in authorizations)
             {
-                typeof(Button).GetProperty("Visible").SetValue(listObject[count], au.Authorize);
-                count++;
+                foreach(var x in button)
+                {
+                    if(au.Authority.AuthorityName.Contains(x.Key.ToString()))
+                    {
+                        typeof(Button).GetProperty("Visible").SetValue(x.Value, au.Authorize);
+                        break;
+                    }
+                }
             }
         }
         public string AuthorizeForm(List<object> input, List<object> function)

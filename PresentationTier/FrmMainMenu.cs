@@ -66,8 +66,22 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
         private void Authorize()
-        {                       
-            List<object> button = new List<object> { btnStaffs, btnDepartment, btnPosition, btnShift, btnWorkSchedule, btnAllowance, btnCard, btnBonusDept, btnStatistics, btnContractType, btnAuthorization, btnOperateHistory};
+        {
+            Dictionary<object, object> button = new Dictionary<object, object>
+            {
+                { "nhân viên", btnStaffs },
+                { "chức vụ", btnDepartment },
+                { "phòng ban", btnPosition },
+                { "ca", btnShift },
+                { "lịch làm việc", btnWorkSchedule },
+                { "phụ cấp", btnAllowance },
+                { "phiếu", btnCard },
+                { "thưởng - nợ", btnBonusDept },
+                { "thống kê", btnStatistics },
+                { "loại hợp đồng", btnContractType },
+                { "phân quyền", btnAuthorization },
+                { "lịch sử thao tác", btnOperateHistory }
+            };
             authorization.AuthorizeMainMenu(button);
         }
         private void btnStaffs_Click(object sender, EventArgs e)
@@ -108,7 +122,9 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnStatistics_Click(object sender, EventArgs e)
         {
-            
+            FrmStatistic open = new FrmStatistic(staff.StaffID);
+            open.Show();
+            //redirect.RedirectForm(open);
         }
         private void btnContractType_Click(object sender, EventArgs e)
         {

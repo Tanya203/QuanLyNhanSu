@@ -112,6 +112,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadStaffByPosition(string psID)
         {
+            pbStaffPicture.Image = Properties.Resources.image;
             cmbStaffID.DisplayMember = "StaffID";
             cmbStaffID.ValueMember = "StaffID";
             List<Staff> staffList = staffBUS.GetStaff().Where(s => s.PS_ID == psID).ToList();
