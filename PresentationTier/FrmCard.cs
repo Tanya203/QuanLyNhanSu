@@ -171,7 +171,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void OpenCardDetail(string staffID, string cardID)
         {
             FrmCardDetail open = new FrmCardDetail(staffID, cardID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void DeleteCard(string cardID, string cardType, string dateCreate)
         {
@@ -214,7 +214,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmCard open = new FrmCard(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         ///////////////////////////////////////////////////////////////////////
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -271,12 +271,12 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnCardType_Click(object sender, EventArgs e)
         {
             FrmCardType open = new FrmCardType(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -294,7 +294,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBonusDebt_Click(object sender, EventArgs e)
         {
             FrmBonusDebt open = new FrmBonusDebt(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
     }
 }

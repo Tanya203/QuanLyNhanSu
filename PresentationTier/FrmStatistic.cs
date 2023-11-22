@@ -73,7 +73,6 @@ namespace QuanLyNhanSu.PresentationTier
             rptSalary.SetDisplayMode(DisplayMode.PrintLayout);
             rptSalary.ZoomMode = ZoomMode.Percent;
             rptSalary.ZoomPercent = 100;
-            
             rptSalary.RefreshReport();
         }
         private void LoadDepartment()
@@ -90,14 +89,18 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void Reload()
         {
-            FrmStatistic open = new FrmStatistic(staff.StaffID);
-            redirect.RedirectForm(open);
+            Close();
+            Thread thread = new Thread(OpenStatistisc);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+            /*FrmStatistic open = new FrmStatistic(staff.StaffID);
+            redirect.RedirectForm(open, this);*/
         }
         //////////////////////////////////////////////////////////////////////////////
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void RadioCheckChange(object sender, EventArgs e)
         {
@@ -148,6 +151,11 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Reload();
+        }
+        private void OpenStatistisc()
+        {
+            FrmStatistic open = new FrmStatistic(staff.StaffID);
+            Application.Run(open);
         }
     }
 }
