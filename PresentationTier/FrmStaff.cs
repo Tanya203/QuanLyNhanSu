@@ -28,7 +28,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly SalaryHandle salary;
         private readonly string formatDate = "yyyy-MM-dd";
-        private readonly string formatMonth = "MM/yyyy";
+        private readonly string formatMonth = "yyyy-MM";
         private Staff staff;
         public FrmStaff(string staffID)
         {
@@ -624,8 +624,7 @@ namespace QuanLyNhanSu.PresentationTier
                     history.Save(this.staff.StaffID, operate, operationDetail);
                     if (operationDetail.Contains("Lương cơ bản"))
                     {
-                        string month = DateTime.Now.ToString(formatMonth);
-                        MonthSalaryDetail monthSalary = salary.GetStaffMonthSalary(staff.StaffID, month);
+                        MonthSalaryDetail monthSalary = salary.GetStaffMonthSalary(staff.StaffID);
                         monthSalary.BasicSalary = staff.BasicSalary;
                         monthSalaryDetailBUS.Save(monthSalary);
                     }

@@ -26,7 +26,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly AllowanceDetailBUS allowanceDetailBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly SalaryHandle salary;
-        private readonly string formatMonth = "MM/yyyy";
+        private readonly string formatMonth = "yyyy-MM";
         private Staff staff;
         private Allowance allowance;
 
@@ -214,8 +214,7 @@ namespace QuanLyNhanSu.PresentationTier
                 string operate = "Thêm";
                 string operationDetail = $"Thêm phụ cấp {allowance.AllowanceName} cho nhân viên {cmbStaffID.SelectedValue}";
                 history.Save(staff.StaffID, operate, operationDetail);
-                string month = DateTime.Now.ToString(formatMonth);
-                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(allowanceDetail.StaffID, month); 
+                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(allowanceDetail.StaffID); 
                 salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(allowanceDetail.StaffID);
                 monthSalaryDetailBUS.Save(salaryDetail);
             }
@@ -247,8 +246,7 @@ namespace QuanLyNhanSu.PresentationTier
                 string operate = "Xoá";
                 string operationDetail = $"Xoá phụ cấp {allowance.AllowanceName} của nhân viên {staff.StaffID}";
                 history.Save(staff.StaffID, operate, operationDetail);
-                string month = DateTime.Now.ToString(formatMonth);
-                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID, month);
+                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID);
                 salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staff.StaffID);
                 monthSalaryDetailBUS.Save(salaryDetail);
                 Reload();

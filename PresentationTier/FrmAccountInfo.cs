@@ -22,7 +22,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly StaffBUS staffBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private Staff staff;
-        private readonly string formatMonth = "MM/yyyy";
+        private readonly string formatMonth = "yyyy-MM";
         private readonly string formatDate = "dd/MM/yyyy";
         public FrmAccountInfo(string staffID)
         {

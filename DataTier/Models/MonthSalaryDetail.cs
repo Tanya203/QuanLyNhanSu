@@ -23,9 +23,9 @@ namespace QuanLyNhanSu.DataTier.Models
 
         public decimal BasicSalary { get; set; }
 
-        public decimal TotalBonus { get; set; }
-
         public decimal TotalAllowance { get; set; }
+
+        public decimal TotalBonus { get; set; }
 
         public decimal TotalDebt { get; set; }
 

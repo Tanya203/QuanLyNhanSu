@@ -28,8 +28,7 @@ namespace QuanLyNhanSu.DataTier
         {
             try
             {
-                string month = DateTime.Now.ToString("MM/yyyy");
-                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff[0].StaffID, month);
+                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff[0].StaffID);
                 foreach (TimeKeeping s in staff)
                 {
                     quanLyNhanSu.TimeKeepings.AddOrUpdate(s);
