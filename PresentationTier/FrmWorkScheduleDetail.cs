@@ -370,7 +370,6 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     string operate;
                     string operationDetail;
-                    string month = DateTime.Now.ToString("MM/yyyy");
                     TimeSpan hour;
                     decimal totalHours = 0;
                     if(staff.Shift.BeginTime > staff.Shift.EndTime)
@@ -378,7 +377,7 @@ namespace QuanLyNhanSu.PresentationTier
                     else 
                         hour = staff.Shift.EndTime - staff.Shift.BeginTime;
                     totalHours = (decimal)hour.TotalHours * staff.ShiftType.SalaryCoefficient * (decimal)0.8;
-                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staffID, month);
+                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staffID);
                     if (announce.Contains("Thêm"))
                     {
                         operate = "Thêm phép";

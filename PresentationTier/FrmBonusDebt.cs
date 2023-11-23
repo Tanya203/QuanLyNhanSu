@@ -30,7 +30,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly BonusDebtBUS bonusDebtBUS;
         private Staff staff;
         private bool checkLoad;
-        private readonly string formatMonth = "MM/yyyy";
+        private readonly string formatMonth = "yyyy-MM";
         public FrmBonusDebt(string staffID)
         {
             InitializeComponent();
@@ -184,7 +184,6 @@ namespace QuanLyNhanSu.PresentationTier
                 txtFullName.Text = StringAdjust.AddSpacesBetweenUppercaseLetters($"{staff.LastName}{staff.MiddleName}{staff.FirstName}");
                 ImageHandle.LoadImage(pbStaffPicture, staff.Picture);
             }
-            LoadBonusDebtStaff(cmbStaff.Text, cmbType.Text);
             AutoAdjustComboBox.Adjust(cmbStaff);
         }
         private void cmbType_TextChanged(object sender, EventArgs e)
@@ -284,13 +283,13 @@ namespace QuanLyNhanSu.PresentationTier
             }
             try
             {
+                string editDetail = CheckChange();
                 CardDetail cardDetail = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == txtCardID.Text && c.StaffID == cmbStaff.Text);
                 decimal oldDeliver = cardDetail.Deliver;
                 decimal newDeliver = decimal.Parse(txtDeliver.Text);
                 cardDetail.Amount = decimal.Parse(txtAmount.Text);
                 cardDetail.Deliver = decimal.Parse(txtDeliver.Text);
                 cardDetail.Note = rtxtNote.Text;
-                string editDetail = CheckChange();
                 if (cardDetailBUS.Save(cardDetail))
                 {
                     string operate = "Cập nhật";

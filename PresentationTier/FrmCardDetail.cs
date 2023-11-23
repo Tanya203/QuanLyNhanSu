@@ -18,7 +18,6 @@ namespace QuanLyNhanSu.PresentationTier
     public partial class FrmCardDetail : Form
     {
         private readonly CultureInfo fVND = CultureInfo.GetCultureInfo("vi-VN");
-        private readonly string formatMonth = "MM/yyyy"; 
         private readonly Authorizations authorizations;
         private readonly SaveOperateHistory history;
         private readonly FormHandle redirect;
@@ -27,9 +26,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly PositionBUS positionBUS;
         private readonly CardBUS cardBUS;
         private readonly CardDetailBUS cardDetailBUS;
-        private readonly MonthBUS monthBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
-        private readonly AllowanceDetailBUS allowanceDetailBUS;
         private readonly SalaryHandle salary;
         private Staff staff;
         private Card card;
@@ -43,9 +40,7 @@ namespace QuanLyNhanSu.PresentationTier
             cardDetailBUS = new CardDetailBUS();
             departmentBUS = new DepartmentBUS();
             positionBUS = new PositionBUS();
-            monthBUS = new MonthBUS();
             monthSalaryDetailBUS = new MonthSalaryDetailBUS();
-            allowanceDetailBUS = new AllowanceDetailBUS();
             salary = new SalaryHandle();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             card = cardBUS.GetCard().FirstOrDefault(c => c.CardID == cardID);
@@ -380,8 +375,7 @@ namespace QuanLyNhanSu.PresentationTier
                     string operate = "Thêm";
                     string operationDetail = $"Thêm nhân viên {staffID} vào {txtCardType.Text} {card.CardID}:\n - Số tiền: {amount}\n - Ghi chú: {rtxtNote.Text}";
                     history.Save(staff.StaffID, operate, operationDetail);
-                    string month = DateTime.Now.ToString(formatMonth);
-                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staffID, DateTime.Now.ToString(formatMonth));
+                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staffID);
                     if (card.CardType.CaculateMethod == "Cộng")
                             salaryDetail.TotalBonus += cardDetail.Amount;
                     else if (card.CardType.CaculateMethod == "Trừ")
@@ -430,8 +424,7 @@ namespace QuanLyNhanSu.PresentationTier
                     if (!string.IsNullOrEmpty(editDetail))
                         operationDetail += $":\n{editDetail}";
                     history.Save(staff.StaffID, operate, operationDetail);
-                    string month = DateTime.Now.ToString(formatMonth);
-                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(cardDetail.StaffID, DateTime.Now.ToString(formatMonth)); ;
+                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(cardDetail.StaffID); ;
                     if (card.CardType.CaculateMethod == "Cộng")
                     {
                         if (oldAmount != newAmount)
@@ -502,8 +495,7 @@ namespace QuanLyNhanSu.PresentationTier
                     string operate = "Xoá";
                     string operationDetail = $"Xoá nhân viên {staffID} khỏi {txtCardType.Text} {card.CardID}:\n - Số tiền: {amountString}\n - Ghi chú: {rtxtNote.Text}";
                     history.Save(staff.StaffID, operate, operationDetail);
-                    string month = DateTime.Now.ToString(formatMonth);
-                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(cardDetail.StaffID, DateTime.Now.ToString(formatMonth)); ;
+                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(cardDetail.StaffID); ;
                     if (card.CardType.CaculateMethod == "Cộng")
                         salaryDetail.TotalBonus -= amount;
                     if (card.CardType.CaculateMethod == "Trừ")

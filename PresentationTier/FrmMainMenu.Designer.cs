@@ -129,7 +129,7 @@
             this.btnAccountInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAccountInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAccountInfo.Image = global::QuanLyNhanSu.Properties.Resources.info_small;
-            this.btnAccountInfo.Location = new System.Drawing.Point(1307, 0);
+            this.btnAccountInfo.Location = new System.Drawing.Point(1256, 0);
             this.btnAccountInfo.Name = "btnAccountInfo";
             this.btnAccountInfo.Size = new System.Drawing.Size(100, 100);
             this.btnAccountInfo.TabIndex = 13;
@@ -149,7 +149,7 @@
             this.btnOperateHistory.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOperateHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOperateHistory.Image = global::QuanLyNhanSu.Properties.Resources.history;
-            this.btnOperateHistory.Location = new System.Drawing.Point(1152, 0);
+            this.btnOperateHistory.Location = new System.Drawing.Point(1101, 0);
             this.btnOperateHistory.Name = "btnOperateHistory";
             this.btnOperateHistory.Size = new System.Drawing.Size(155, 100);
             this.btnOperateHistory.TabIndex = 12;
@@ -169,7 +169,7 @@
             this.btnAuthorization.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAuthorization.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAuthorization.Image = global::QuanLyNhanSu.Properties.Resources.decentralization;
-            this.btnAuthorization.Location = new System.Drawing.Point(1036, 0);
+            this.btnAuthorization.Location = new System.Drawing.Point(985, 0);
             this.btnAuthorization.Name = "btnAuthorization";
             this.btnAuthorization.Size = new System.Drawing.Size(116, 100);
             this.btnAuthorization.TabIndex = 11;
@@ -189,7 +189,7 @@
             this.btnContractType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnContractType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnContractType.Image = global::QuanLyNhanSu.Properties.Resources.contract;
-            this.btnContractType.Location = new System.Drawing.Point(899, 0);
+            this.btnContractType.Location = new System.Drawing.Point(848, 0);
             this.btnContractType.Name = "btnContractType";
             this.btnContractType.Size = new System.Drawing.Size(137, 100);
             this.btnContractType.TabIndex = 10;
@@ -209,7 +209,7 @@
             this.btnStatistics.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStatistics.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStatistics.Image = global::QuanLyNhanSu.Properties.Resources.chart;
-            this.btnStatistics.Location = new System.Drawing.Point(804, 0);
+            this.btnStatistics.Location = new System.Drawing.Point(753, 0);
             this.btnStatistics.Name = "btnStatistics";
             this.btnStatistics.Size = new System.Drawing.Size(95, 100);
             this.btnStatistics.TabIndex = 9;
@@ -229,11 +229,11 @@
             this.btnBonusDept.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnBonusDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBonusDept.Image = global::QuanLyNhanSu.Properties.Resources.bonus;
-            this.btnBonusDept.Location = new System.Drawing.Point(669, 0);
+            this.btnBonusDept.Location = new System.Drawing.Point(634, 0);
             this.btnBonusDept.Name = "btnBonusDept";
-            this.btnBonusDept.Size = new System.Drawing.Size(135, 100);
+            this.btnBonusDept.Size = new System.Drawing.Size(119, 100);
             this.btnBonusDept.TabIndex = 15;
-            this.btnBonusDept.Text = "Thưởng - phạt";
+            this.btnBonusDept.Text = "Thưởng - nợ";
             this.btnBonusDept.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnBonusDept.UseVisualStyleBackColor = true;
             this.btnBonusDept.Click += new System.EventHandler(this.btnBonusDept_Click_1);
@@ -251,9 +251,9 @@
             this.btnCard.Image = global::QuanLyNhanSu.Properties.Resources.card;
             this.btnCard.Location = new System.Drawing.Point(568, 0);
             this.btnCard.Name = "btnCard";
-            this.btnCard.Size = new System.Drawing.Size(101, 100);
+            this.btnCard.Size = new System.Drawing.Size(66, 100);
             this.btnCard.TabIndex = 8;
-            this.btnCard.Text = "Lập phiếu";
+            this.btnCard.Text = "Phiếu";
             this.btnCard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCard.UseVisualStyleBackColor = true;
             this.btnCard.Click += new System.EventHandler(this.btnCard_Click);

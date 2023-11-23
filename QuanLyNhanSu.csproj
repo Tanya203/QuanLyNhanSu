@@ -56,9 +56,8 @@
   <PropertyGroup />
   <PropertyGroup />
   <PropertyGroup />
-  <PropertyGroup>
-    <NoWin32Manifest>true</NoWin32Manifest>
-  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
       <HintPath>packages\BCrypt.Net-Next.4.0.3\lib\net48\BCrypt.Net-Next.dll</HintPath>
@@ -155,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTier\BonusDebtDAL.cs" />
+    <Compile Include="DataTier\BonusDebtSatisticDAL.cs" />
     <Compile Include="DataTier\Models\Allowance.cs" />
     <Compile Include="DataTier\Models\AllowanceDetail.cs" />
     <Compile Include="DataTier\Models\Authority.cs" />
@@ -233,6 +233,7 @@
     <Compile Include="LogicTier\AllowanceBUS.cs" />
     <Compile Include="LogicTier\AuthorityBUS.cs" />
     <Compile Include="LogicTier\OperationBUS.cs" />
+    <Compile Include="LogicTier\BonusDebtStatisticBUS.cs" />
     <Compile Include="PresentationTier\FrmBonusDebt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -387,6 +388,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Functions\StringAdjust.cs" />
     <Compile Include="ViewModels\BonusDebtViewModels.cs" />
+    <Compile Include="ViewModels\MonthBonusDebtViewModels.cs" />
     <Compile Include="ViewModels\MonthSalaryViewModels.cs" />
     <Compile Include="ViewModels\ShiftViewModels.cs" />
     <Compile Include="ViewModels\WorkScheduleDetailViewModels.cs" />
@@ -488,6 +490,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ReportViewer\RptDebt.rdlc" />
+    <EmbeddedResource Include="ReportViewer\RptBonus.rdlc" />
     <EmbeddedResource Include="ReportViewer\RptSalary.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -499,6 +503,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="ReportViewer\DataSource\QuanLyNhanSu.ViewModels.MonthBonusDebtViewModels.datasource" />
+    <None Include="ReportViewer\DataSource\QuanLyNhanSu.ViewModels.MonthBonusViewModels.datasource" />
     <None Include="ReportViewer\DataSource\QuanLyNhanSu.ViewModels.MonthSalaryViewModels.datasource" />
   </ItemGroup>
   <ItemGroup>

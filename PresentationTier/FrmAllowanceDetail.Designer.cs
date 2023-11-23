@@ -487,7 +487,7 @@
             this.colPhongBan,
             this.colChucVu});
             this.dgvAllowanceDetail.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvAllowanceDetail.Location = new System.Drawing.Point(0, 406);
+            this.dgvAllowanceDetail.Location = new System.Drawing.Point(0, 394);
             this.dgvAllowanceDetail.Name = "dgvAllowanceDetail";
             this.dgvAllowanceDetail.ReadOnly = true;
             this.dgvAllowanceDetail.RowHeadersVisible = false;
@@ -495,7 +495,7 @@
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvAllowanceDetail.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvAllowanceDetail.RowTemplate.Height = 24;
-            this.dgvAllowanceDetail.Size = new System.Drawing.Size(1924, 597);
+            this.dgvAllowanceDetail.Size = new System.Drawing.Size(1924, 589);
             this.dgvAllowanceDetail.TabIndex = 78;
             this.dgvAllowanceDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCardDetail_CellClick);
             // 
@@ -547,7 +547,7 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(852, 370);
+            this.txtSearch.Location = new System.Drawing.Point(852, 358);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(299, 30);
             this.txtSearch.TabIndex = 80;
@@ -557,7 +557,7 @@
             // 
             this.lblSearch.AutoSize = true;
             this.lblSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearch.Location = new System.Drawing.Point(701, 367);
+            this.lblSearch.Location = new System.Drawing.Point(701, 355);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(145, 32);
             this.lblSearch.TabIndex = 81;
@@ -568,7 +568,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1924, 1003);
+            this.ClientSize = new System.Drawing.Size(1924, 983);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.lblAddStaff);

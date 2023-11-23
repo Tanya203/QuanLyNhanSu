@@ -21,8 +21,9 @@ namespace QuanLyNhanSu.Functions
             allowanceDetailBUS = new AllowanceDetailBUS();
             monthBUS = new MonthBUS();
         }
-        public MonthSalaryDetail GetStaffMonthSalary(string staffID, string month)
+        public MonthSalaryDetail GetStaffMonthSalary(string staffID)
         {
+            string month = DateTime.Now.ToString("yyyy-MM");
             Month checkKMonth = monthBUS.GetMonth().FirstOrDefault(m => m.MonthID == month);
             if (checkKMonth == null)
             {

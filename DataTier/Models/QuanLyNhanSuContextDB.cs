@@ -162,11 +162,11 @@ namespace QuanLyNhanSu.DataTier.Models
                 .HasPrecision(38, 3);
 
             modelBuilder.Entity<MonthSalaryDetail>()
-                .Property(e => e.TotalBonus)
+                .Property(e => e.TotalAllowance)
                 .HasPrecision(38, 3);
 
             modelBuilder.Entity<MonthSalaryDetail>()
-                .Property(e => e.TotalAllowance)
+                .Property(e => e.TotalBonus)
                 .HasPrecision(38, 3);
 
             modelBuilder.Entity<MonthSalaryDetail>()

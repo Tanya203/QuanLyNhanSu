@@ -18,28 +18,34 @@ namespace QuanLyNhanSu.PresentationTier
     public partial class FrmStatistic : Form
     {
         private readonly SalaryStatistsicBUS salaryStatistsicBUS;
+        private readonly BonusDebtStatisticBUS bonusDebtStatistsicBUS;
         private readonly FormHandle redirect;
         private readonly StaffBUS staffBUS;
         private readonly DepartmentBUS departmentBUS;
         private readonly PositionBUS positionBUS;
+        private readonly CardTypeBUS cardTypeBUS;
         private Staff staff;
         private string sortValue;
-        
+
         public FrmStatistic(string staffID)
         {
             InitializeComponent();
             salaryStatistsicBUS = new SalaryStatistsicBUS();
+            bonusDebtStatistsicBUS = new BonusDebtStatisticBUS();
             redirect = new FormHandle();
             staffBUS = new StaffBUS();
             departmentBUS = new DepartmentBUS();
             positionBUS = new PositionBUS();
+            cardTypeBUS = new CardTypeBUS();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
         }
         private void FrmThongKeLuong_Load(object sender, EventArgs e)
         {
             LoadHeader.LoadHeaderInfo(lblStaffIDLoginValue, lblFullNameLoginValue, lblDepartmentLoginValue, lblPositionLoginValue, staff);
+            DisableComboBox();
             LoadDepartment();
             LoadPostion();
+            LoadCardType();
         }
         private void tabControlMenu_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -50,18 +56,99 @@ namespace QuanLyNhanSu.PresentationTier
             Rectangle bounds = e.Bounds;
             e.Graphics.DrawString(tabPage.Text, font, brush, bounds);
         }
-
-        //////////////////////////////////////////////////////////////////////////////
-        public void LoadReportViewer(string sortValue)
+        private void DisableComboBox()
         {
-            List<MonthSalaryViewModels> salary = salaryStatistsicBUS.GetAllMonthSalary(dtpMonth.Text, sortValue).ToList();
-            foreach (MonthSalaryViewModels model in salary)
-                model.FullName = StringAdjust.AddSpacesBetweenUppercaseLetters(model.FullName);
+            List<object> input = new List<object> { cmbDepartmentSalary, cmbPositionSalary, cmbDepartmentBonus, cmbPositionBonus, cmbCardTypeBonus, cmbDepartmentDebt, cmbPositionDebt, cmbCardTypeDebt };
+            foreach(object inputItem in input)
+            {
+                if(inputItem is ComboBox)
+                    typeof(ComboBox).GetProperty("Enabled").SetValue(inputItem, false);
+            }
+        }
+        private void LoadDepartment()
+        {
+            cmbDepartmentSalary.DisplayMember = "DepartmentName";
+            cmbDepartmentSalary.ValueMember = "DP_ID";
+            cmbDepartmentBonus.DisplayMember = "DepartmentName";
+            cmbDepartmentBonus.ValueMember = "DP_ID";
+            cmbDepartmentDebt.DisplayMember = "DepartmentName";
+            cmbDepartmentDebt.ValueMember = "DP_ID";
+            List<Department> data = departmentBUS.GetDepartment().ToList();
+            cmbDepartmentSalary.DataSource = data;
+            cmbDepartmentBonus.DataSource = data;
+            cmbDepartmentDebt.DataSource = data;
+            AutoAdjustComboBox.Adjust(cmbDepartmentSalary);
+            AutoAdjustComboBox.Adjust(cmbDepartmentBonus);
+            AutoAdjustComboBox.Adjust(cmbCardTypeDebt);
+        }
+        private void LoadPostion()
+        {
+            cmbPositionSalary.DisplayMember = "PositionName";
+            cmbPositionSalary.ValueMember = "PS_ID";
+            cmbPositionBonus.DisplayMember = "PositionName";
+            cmbPositionBonus.ValueMember = "PS_ID";
+            cmbPositionDebt.DisplayMember = "PositionName";
+            cmbPositionDebt.ValueMember = "PS_ID";
+            List<Position> data = positionBUS.GetPosition().ToList();
+            cmbPositionSalary.DataSource = data;
+            cmbPositionBonus.DataSource = data;
+            cmbPositionDebt.DataSource = data;
+            AutoAdjustComboBox.Adjust(cmbPositionSalary);
+            AutoAdjustComboBox.Adjust(cmbPositionBonus);
+            AutoAdjustComboBox.Adjust(cmbPositionDebt);
+        }
+        private void LoadCardType()
+        {
+            cmbCardTypeBonus.DisplayMember = "CardTypeName";
+            cmbCardTypeBonus.ValueMember = "CT_ID";
+            cmbCardTypeDebt.DisplayMember = "CardTypeName";
+            cmbCardTypeDebt.ValueMember = "CT_ID";
+            List<CardType> data = cardTypeBUS.GetCardType().ToList();
+            cmbCardTypeBonus.DataSource = data.Where(c => c.CaculateMethod == "Cộng").ToList();
+            cmbCardTypeDebt.DataSource = data.Where(c => c.CaculateMethod == "Trừ").ToList();
+            AutoAdjustComboBox.Adjust(cmbCardTypeBonus);
+            AutoAdjustComboBox.Adjust(cmbCardTypeDebt);
+        }
+        private void Reload()
+        {
+            Close();
+            Thread thread = new Thread(OpenStatistisc);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+            /*FrmStatistic open = new FrmStatistic(staff.StaffID);
+            redirect.RedirectForm(open, this);*/
+        }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reload();
+        }
+        private void OpenStatistisc()
+        {
+            FrmStatistic open = new FrmStatistic(staff.StaffID);
+            Application.Run(open);
+        }
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            FrmMainMenu open = new FrmMainMenu(staff.StaffID);
+            redirect.RedirectForm(open, this);
+        }
+        //////////////////////////////////////////////////////////////////////////////
+        ///Salary
+        private void LoadSalaryReportViewer(string sortValue)
+        {
+            decimal total = 0;
+            List<MonthSalaryViewModels> salary = salaryStatistsicBUS.GetAllMonthSalary(dtpMonthSalary.Text, sortValue).ToList();
+            foreach (MonthSalaryViewModels staff in salary)
+            {
+                staff.FullName = StringAdjust.AddSpacesBetweenUppercaseLetters(staff.FullName);
+                total += staff.BasicSalary * staff.TotalWorkHours + staff.TotalBonus + staff.TotalAllownace;
+            }
             ReportDataSource reportDataSource = new ReportDataSource("Salary", salary);
             List<ReportParameter> parameters = new List<ReportParameter>
             {
+                new ReportParameter("Total", total.ToString()),
                 new ReportParameter("DateTime", DateTime.Now.ToString()),
-                new ReportParameter("Month", dtpMonth.Text),
+                new ReportParameter("Month", dtpMonthSalary.Text),
                 new ReportParameter("FullName", StringAdjust.AddSpacesBetweenUppercaseLetters(staff.LastName+staff.MiddleName+staff.FirstName)),
                 new ReportParameter("StaffID", staff.StaffID),
                 new ReportParameter("Department", staff.Position.Department.DepartmentName),
@@ -75,87 +162,226 @@ namespace QuanLyNhanSu.PresentationTier
             rptSalary.ZoomPercent = 100;
             rptSalary.RefreshReport();
         }
-        private void LoadDepartment()
+
+        private void RadioSalaryCheckChange(object sender, EventArgs e)
         {
-            cmbDepartment.DisplayMember = "DepartmentName";
-            cmbDepartment.ValueMember = "DP_ID";
-            cmbDepartment.DataSource = departmentBUS.GetDepartment().ToList();
-        }
-        private void LoadPostion()
-        {
-            cmbPosition.DisplayMember = "PositionName";
-            cmbPosition.ValueMember = "PS_ID";
-            cmbPosition.DataSource = positionBUS.GetPosition().ToList();
-        }
-        private void Reload()
-        {
-            Close();
-            Thread thread = new Thread(OpenStatistisc);
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
-            /*FrmStatistic open = new FrmStatistic(staff.StaffID);
-            redirect.RedirectForm(open, this);*/
-        }
-        //////////////////////////////////////////////////////////////////////////////
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open, this);
-        }
-        private void RadioCheckChange(object sender, EventArgs e)
-        {
-            if (rbAllStaff.Checked)
+            if (rbAllStaffSalary.Checked)
             {
                 sortValue = null;
-                cmbDepartment.Enabled = false;
-                cmbPosition.Enabled = false;
-            }                
-            else if (rbDepartment.Checked)
-            {
-                sortValue = cmbDepartment.SelectedValue.ToString();
-                cmbDepartment.Enabled = true;
-                cmbPosition.Enabled = false;
+                cmbDepartmentSalary.Enabled = false;
+                cmbPositionSalary.Enabled = false;
             }
-                
-            else if (rbPosition.Checked)
+            else if (rbDepartmentSalary.Checked)
             {
-                sortValue = cmbPosition.SelectedValue.ToString();
-                cmbDepartment.Enabled = false;
-                cmbPosition.Enabled = true;
+                sortValue = cmbDepartmentSalary.SelectedValue.ToString();
+                cmbDepartmentSalary.Enabled = true;
+                cmbPositionSalary.Enabled = false;
             }
-            LoadReportViewer(sortValue);
+
+            else if (rbPositionSalary.Checked)
+            {
+                sortValue = cmbPositionSalary.SelectedValue.ToString();
+                cmbDepartmentSalary.Enabled = false;
+                cmbPositionSalary.Enabled = true;
+            }
+            LoadSalaryReportViewer(sortValue);
         }
-        private void dtpMonth_ValueChanged(object sender, EventArgs e)
+        private void dtpMonthSalary_ValueChanged(object sender, EventArgs e)
         {
-            LoadReportViewer(sortValue);
+            LoadSalaryReportViewer(sortValue);
         }
-        private void cmbDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbDepartmentSalary_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (rbDepartment.Checked)
+            if (rbDepartmentSalary.Checked)
             {
-                sortValue = cmbDepartment.SelectedValue.ToString();
-                LoadReportViewer(sortValue);
+                sortValue = cmbDepartmentSalary.SelectedValue.ToString();
+                LoadSalaryReportViewer(sortValue);
             }
-                
         }
-        private void cmbPosition_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbPositionSalary_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (rbPosition.Checked)
+            if (rbPositionSalary.Checked)
             {
-                sortValue = cmbPosition.SelectedValue.ToString();
-                LoadReportViewer(sortValue);
+                sortValue = cmbPositionSalary.SelectedValue.ToString();
+                LoadSalaryReportViewer(sortValue);
             }
-                
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////////ư
+        ///Bonus
+        private void LoadBonusReportViewer(string sortValue)
+        {
+            List<MonthBonusDebtViewModels> bonus = bonusDebtStatistsicBUS.GetAllMonthBonus(dtpMonthBonus.Text, sortValue).ToList();
+            foreach (MonthBonusDebtViewModels staff in bonus)
+                staff.FullName = StringAdjust.AddSpacesBetweenUppercaseLetters(staff.FullName);
+            ReportDataSource reportDataSource = new ReportDataSource("Bonus", bonus);
+            List<ReportParameter> parameters = new List<ReportParameter>
+            {
+                new ReportParameter("DateTime", DateTime.Now.ToString()),
+                new ReportParameter("Month", dtpMonthSalary.Text),
+                new ReportParameter("FullName", StringAdjust.AddSpacesBetweenUppercaseLetters(staff.LastName+staff.MiddleName+staff.FirstName)),
+                new ReportParameter("StaffID", staff.StaffID),
+                new ReportParameter("Department", staff.Position.Department.DepartmentName),
+                new ReportParameter("Position", staff.Position.PositionName),
+            };
+            rptBonus.LocalReport.SetParameters(parameters);
+            rptBonus.LocalReport.DataSources.Clear();
+            rptBonus.LocalReport.DataSources.Add(reportDataSource);
+            rptBonus.SetDisplayMode(DisplayMode.PrintLayout);
+            rptBonus.ZoomMode = ZoomMode.Percent;
+            rptBonus.ZoomPercent = 100;
+            rptBonus.RefreshReport();
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
+        private void dtpMonthBonus_ValueChanged(object sender, EventArgs e)
         {
-            Reload();
+            LoadBonusReportViewer(sortValue);
         }
-        private void OpenStatistisc()
+
+        private void RadioBonusCheckChange(object sender, EventArgs e)
         {
-            FrmStatistic open = new FrmStatistic(staff.StaffID);
-            Application.Run(open);
+            if (rbAllStaffBonus.Checked)
+            {
+                sortValue = null;
+                cmbDepartmentBonus.Enabled = false;
+                cmbPositionBonus.Enabled = false;
+                cmbCardTypeBonus.Enabled = false;
+            }
+            else if (rbDepartmentBonus.Checked)
+            {
+                sortValue = cmbDepartmentBonus.SelectedValue.ToString();
+                cmbDepartmentBonus.Enabled = true;
+                cmbPositionBonus.Enabled = false;
+                cmbCardTypeBonus.Enabled = false;
+            }
+            else if (rbPositionBonus.Checked)
+            {
+                sortValue = cmbPositionBonus.SelectedValue.ToString();
+                cmbDepartmentBonus.Enabled = false;
+                cmbPositionBonus.Enabled = true;
+                cmbCardTypeBonus.Enabled = false;
+            }
+            else if (rbCardTypeBonus.Checked)
+            {
+                sortValue = cmbCardTypeBonus.SelectedValue.ToString();
+                cmbDepartmentBonus.Enabled = false;
+                cmbPositionBonus.Enabled = false;
+                cmbCardTypeBonus.Enabled = true;
+            }
+            LoadBonusReportViewer(sortValue);
+        }
+
+        private void cmbDepartmentBonus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbDepartmentBonus.Checked)
+            {
+                sortValue = cmbDepartmentBonus.SelectedValue.ToString();
+                LoadBonusReportViewer(sortValue);
+            }
+        }
+        private void cmbPositionBonus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbPositionBonus.Checked)
+            {
+                sortValue = cmbPositionBonus.SelectedValue.ToString();
+                LoadBonusReportViewer(sortValue);
+            }
+        }
+
+        private void cmbCardTypeBonus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbCardTypeBonus.Checked)
+            {
+                sortValue = cmbCardTypeBonus.SelectedValue.ToString();
+                LoadBonusReportViewer(sortValue);
+            }
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////////ư
+        ///Debt
+        private void LoadDebtReportViewer(string sortValue)
+        {
+            List<MonthBonusDebtViewModels> debt = bonusDebtStatistsicBUS.GetAllMonthDebt(dtpMonthDebt.Text, sortValue).ToList();
+            foreach (MonthBonusDebtViewModels staff in debt)
+                staff.FullName = StringAdjust.AddSpacesBetweenUppercaseLetters(staff.FullName);
+            ReportDataSource reportDataSource = new ReportDataSource("Debt", debt);
+            List<ReportParameter> parameters = new List<ReportParameter>
+            {
+                new ReportParameter("DateTime", DateTime.Now.ToString()),
+                new ReportParameter("Month", dtpMonthSalary.Text),
+                new ReportParameter("FullName", StringAdjust.AddSpacesBetweenUppercaseLetters(staff.LastName+staff.MiddleName+staff.FirstName)),
+                new ReportParameter("StaffID", staff.StaffID),
+                new ReportParameter("Department", staff.Position.Department.DepartmentName),
+                new ReportParameter("Position", staff.Position.PositionName),
+            };
+            rptDebt.LocalReport.SetParameters(parameters);
+            rptDebt.LocalReport.DataSources.Clear();
+            rptDebt.LocalReport.DataSources.Add(reportDataSource);
+            rptDebt.SetDisplayMode(DisplayMode.PrintLayout);
+            rptDebt.ZoomMode = ZoomMode.Percent;
+            rptDebt.ZoomPercent = 100;
+            rptDebt.RefreshReport();
+        }
+
+        private void dtpMonthDebt_ValueChanged(object sender, EventArgs e)
+        {
+            LoadDebtReportViewer(sortValue);
+        }
+
+        private void RadioDebtCheckChange(object sender, EventArgs e)
+        {
+            if (rbAllStaffDebt.Checked)
+            {
+                sortValue = null;
+                cmbDepartmentDebt.Enabled = false;
+                cmbPositionDebt.Enabled = false;
+                cmbCardTypeDebt.Enabled = false;
+            }
+            else if (rbDepartmentDebt.Checked)
+            {
+                sortValue = cmbDepartmentDebt.SelectedValue.ToString();
+                cmbDepartmentDebt.Enabled = true;
+                cmbPositionDebt.Enabled = false;
+                cmbCardTypeDebt.Enabled = false;
+            }
+            else if (rbPositionDebt.Checked)
+            {
+                sortValue = cmbPositionDebt.SelectedValue.ToString();
+                cmbDepartmentDebt.Enabled = false;
+                cmbPositionDebt.Enabled = true;
+                cmbCardTypeDebt.Enabled = false;
+            }
+            else if (rbCardTypeDebt.Checked)
+            {
+                sortValue = cmbCardTypeDebt.SelectedValue.ToString();
+                cmbDepartmentDebt.Enabled = false;
+                cmbPositionDebt.Enabled = false;
+                cmbCardTypeDebt.Enabled = true;
+            }
+            LoadDebtReportViewer(sortValue);
+        }
+
+        private void cmbDepartmentDebt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbDepartmentDebt.Checked)
+            {
+                sortValue = cmbDepartmentDebt.SelectedValue.ToString();
+                LoadDebtReportViewer(sortValue);
+            }
+        }
+        private void cmbPositionDebt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbPositionDebt.Checked)
+            {
+                sortValue = cmbPositionDebt.SelectedValue.ToString();
+                LoadDebtReportViewer(sortValue);
+            }
+        }
+        private void cmbCardTypeDebt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbCardTypeDebt.Checked)
+            {
+                sortValue = cmbCardTypeDebt.SelectedValue.ToString();
+                LoadDebtReportViewer(sortValue);
+            }
         }
     }
 }

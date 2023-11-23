@@ -28,7 +28,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly SalaryHandle salary;
         private Staff staff;
         private readonly string formatDate = "yyyy-MM-dd";
-        private readonly string formatMonth = "MM/yyyy";
         public FrmCard(string staffID)
         {
             InitializeComponent();
@@ -179,6 +178,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 string caculate = cardTypeBUS.GetCardType().FirstOrDefault(ct => ct.CardTypeName == cardType).CaculateMethod;
                 List<CardDetail> cardDetails = cardDetailBUS.GetCardDetail().Where(cd => cd.CardID == cardID).ToList();
+                DateTime month = cardBUS.GetCard().FirstOrDefault(c => c.CardID == cardID).DateCreated;
                 Card card = new Card()
                 {
                     CardID = cardID,
@@ -187,20 +187,23 @@ namespace QuanLyNhanSu.PresentationTier
                 {
                     string operate = "Xoá";
                     string operateDetail = $"Xoá {cardType} lập ngày {dateCreate}";
-                    history.Save(staff.StaffID, operate, operateDetail);                    
-                    foreach(CardDetail staff in cardDetails)
+                    history.Save(staff.StaffID, operate, operateDetail);
+                    if (month.Month >= DateTime.Now.Month && month.Year >= DateTime.Now.Year) 
                     {
-                        MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID, DateTime.Now.ToString(formatMonth));
-                        if (caculate == "Cộng")
+                        foreach (CardDetail staff in cardDetails)
                         {
-                            salaryDetail.TotalBonus -= staff.Amount;   
+                            MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID);
+                            if (caculate == "Cộng")
+                            {
+                                salaryDetail.TotalBonus -= staff.Amount;
+                            }
+                            else if (caculate == "Trừ")
+                            {
+                                salaryDetail.TotalDebt -= staff.Amount;
+                                salaryDetail.TotalDebtPaid -= staff.Deliver;
+                            }
+                            monthSalaryDetailBUS.Save(salaryDetail);
                         }
-                        else if(caculate == "Trừ")
-                        {
-                            salaryDetail.TotalDebt -= staff.Amount;
-                            salaryDetail.TotalDebtPaid -= staff.Deliver;
-                        }
-                        monthSalaryDetailBUS.Save(salaryDetail);
                     }
                     Reload();
                 }

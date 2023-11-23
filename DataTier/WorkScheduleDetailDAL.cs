@@ -81,8 +81,7 @@ namespace QuanLyNhanSu.DataTier
                 {
                     List<TimeKeeping> absence = quanLyNhanSu.TimeKeepings.Where(id => id.WS_ID == timeKeeping.WS_ID && id.StaffID == timeKeeping.StaffID).ToList();
                     int soNgayPhep = staff.Staff.DayOffAmount;
-                    string month = DateTime.Now.ToString("MM/yyyy");
-                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID, month);
+                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID);
                     foreach (var staffID in absence)
                     {
                         staffID.AbsenceUse = timeKeeping.AbsenceUse;
