@@ -188,23 +188,6 @@ namespace QuanLyNhanSu.PresentationTier
                     string operate = "Xoá";
                     string operateDetail = $"Xoá {cardType} lập ngày {dateCreate}";
                     history.Save(staff.StaffID, operate, operateDetail);
-                    if (month.Month >= DateTime.Now.Month && month.Year >= DateTime.Now.Year) 
-                    {
-                        foreach (CardDetail staff in cardDetails)
-                        {
-                            MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID);
-                            if (caculate == "Cộng")
-                            {
-                                salaryDetail.TotalBonus -= staff.Amount;
-                            }
-                            else if (caculate == "Trừ")
-                            {
-                                salaryDetail.TotalDebt -= staff.Amount;
-                                salaryDetail.TotalDebtPaid -= staff.Deliver;
-                            }
-                            monthSalaryDetailBUS.Save(salaryDetail);
-                        }
-                    }
                     Reload();
                 }
             }

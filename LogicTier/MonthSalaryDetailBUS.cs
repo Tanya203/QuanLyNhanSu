@@ -23,9 +23,5 @@ namespace QuanLyNhanSu.LogicTier
         {
             return monthSalaryDetailDAL.Save(salary);
         }
-        public decimal GetStaffMonthTotalDebt(string staffID, string month)
-        {
-            return monthSalaryDetailDAL.GetStaffMonthTotalDebt(staffID, month);
-        }
     }
 }

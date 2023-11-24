@@ -375,16 +375,6 @@ namespace QuanLyNhanSu.PresentationTier
                     string operate = "Thêm";
                     string operationDetail = $"Thêm nhân viên {staffID} vào {txtCardType.Text} {card.CardID}:\n - Số tiền: {amount}\n - Ghi chú: {rtxtNote.Text}";
                     history.Save(staff.StaffID, operate, operationDetail);
-                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staffID);
-                    if (card.CardType.CaculateMethod == "Cộng")
-                            salaryDetail.TotalBonus += cardDetail.Amount;
-                    else if (card.CardType.CaculateMethod == "Trừ")
-                    {
-                        decimal debt = cardDetail.Amount - cardDetail.Deliver;
-                        salaryDetail.TotalDebt += cardDetail.Amount;
-                        salaryDetail.TotalDebtPaid += cardDetail.Deliver;
-                    }
-                    monthSalaryDetailBUS.Save(salaryDetail);
                     Reload();
                 }
             }
@@ -424,35 +414,6 @@ namespace QuanLyNhanSu.PresentationTier
                     if (!string.IsNullOrEmpty(editDetail))
                         operationDetail += $":\n{editDetail}";
                     history.Save(staff.StaffID, operate, operationDetail);
-                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(cardDetail.StaffID); ;
-                    if (card.CardType.CaculateMethod == "Cộng")
-                    {
-                        if (oldAmount != newAmount)
-                        {
-                            if (oldAmount > newAmount)
-                                salaryDetail.TotalBonus -= oldAmount - newAmount;
-                            else if (oldAmount < newAmount)
-                                salaryDetail.TotalBonus += newAmount - oldAmount;
-                        }
-                    }
-                    else if (card.CardType.CaculateMethod == "Trừ")
-                    {
-                        if (oldAmount != newAmount)
-                        {
-                            if (oldAmount > newAmount)
-                                salaryDetail.TotalDebt -= oldAmount - newAmount;
-                            else if (oldAmount < newAmount)
-                                salaryDetail.TotalDebt += newAmount - oldAmount;
-                        }
-                        if(oldDeliver != newDeliver)
-                        {
-                            if(oldDeliver > newDeliver)
-                                salaryDetail.TotalDebtPaid -= oldDeliver - newDeliver;
-                            else if(oldDeliver < newDeliver)
-                                salaryDetail.TotalDebtPaid += newDeliver - oldDeliver;
-                        }
-                    }
-                    monthSalaryDetailBUS.Save(salaryDetail);
                     Reload();
                 }
             }
@@ -495,15 +456,6 @@ namespace QuanLyNhanSu.PresentationTier
                     string operate = "Xoá";
                     string operationDetail = $"Xoá nhân viên {staffID} khỏi {txtCardType.Text} {card.CardID}:\n - Số tiền: {amountString}\n - Ghi chú: {rtxtNote.Text}";
                     history.Save(staff.StaffID, operate, operationDetail);
-                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(cardDetail.StaffID); ;
-                    if (card.CardType.CaculateMethod == "Cộng")
-                        salaryDetail.TotalBonus -= amount;
-                    if (card.CardType.CaculateMethod == "Trừ")
-                    {
-                        salaryDetail.TotalDebt -= amount;
-                        salaryDetail.TotalDebtPaid -= deliver;
-                    }
-                    monthSalaryDetailBUS.Save(salaryDetail);
                     Reload();
                 }
             }

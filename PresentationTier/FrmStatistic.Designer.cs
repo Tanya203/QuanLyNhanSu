@@ -40,8 +40,6 @@
             this.lblStaffIDLogin = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.tbBonus = new System.Windows.Forms.TabPage();
-            this.rbCardTypeBonus = new System.Windows.Forms.RadioButton();
-            this.cmbCardTypeBonus = new System.Windows.Forms.ComboBox();
             this.rptBonus = new Microsoft.Reporting.WinForms.ReportViewer();
             this.rbPositionBonus = new System.Windows.Forms.RadioButton();
             this.cmbPositionBonus = new System.Windows.Forms.ComboBox();
@@ -63,8 +61,6 @@
             this.cmbDepartmentSalary = new System.Windows.Forms.ComboBox();
             this.dtpMonthSalary = new System.Windows.Forms.DateTimePicker();
             this.tbDebt = new System.Windows.Forms.TabPage();
-            this.rbCardTypeDebt = new System.Windows.Forms.RadioButton();
-            this.cmbCardTypeDebt = new System.Windows.Forms.ComboBox();
             this.rptDebt = new Microsoft.Reporting.WinForms.ReportViewer();
             this.rbPositionDebt = new System.Windows.Forms.RadioButton();
             this.cmbPositionDebt = new System.Windows.Forms.ComboBox();
@@ -224,8 +220,6 @@
             // tbBonus
             // 
             this.tbBonus.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tbBonus.Controls.Add(this.rbCardTypeBonus);
-            this.tbBonus.Controls.Add(this.cmbCardTypeBonus);
             this.tbBonus.Controls.Add(this.rptBonus);
             this.tbBonus.Controls.Add(this.rbPositionBonus);
             this.tbBonus.Controls.Add(this.cmbPositionBonus);
@@ -242,30 +236,6 @@
             this.tbBonus.TabIndex = 1;
             this.tbBonus.Text = "Thống kê thưởng";
             // 
-            // rbCardTypeBonus
-            // 
-            this.rbCardTypeBonus.AutoSize = true;
-            this.rbCardTypeBonus.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbCardTypeBonus.Location = new System.Drawing.Point(1415, 66);
-            this.rbCardTypeBonus.Name = "rbCardTypeBonus";
-            this.rbCardTypeBonus.Size = new System.Drawing.Size(187, 36);
-            this.rbCardTypeBonus.TabIndex = 95;
-            this.rbCardTypeBonus.TabStop = true;
-            this.rbCardTypeBonus.Text = "Loại phiếu:";
-            this.rbCardTypeBonus.UseVisualStyleBackColor = true;
-            this.rbCardTypeBonus.CheckedChanged += new System.EventHandler(this.RadioBonusCheckChange);
-            // 
-            // cmbCardTypeBonus
-            // 
-            this.cmbCardTypeBonus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCardTypeBonus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbCardTypeBonus.FormattingEnabled = true;
-            this.cmbCardTypeBonus.Location = new System.Drawing.Point(1605, 70);
-            this.cmbCardTypeBonus.Name = "cmbCardTypeBonus";
-            this.cmbCardTypeBonus.Size = new System.Drawing.Size(244, 33);
-            this.cmbCardTypeBonus.TabIndex = 94;
-            this.cmbCardTypeBonus.SelectedIndexChanged += new System.EventHandler(this.cmbCardTypeBonus_SelectedIndexChanged);
-            // 
             // rptBonus
             // 
             this.rptBonus.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -281,7 +251,7 @@
             // 
             this.rbPositionBonus.AutoSize = true;
             this.rbPositionBonus.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbPositionBonus.Location = new System.Drawing.Point(1005, 69);
+            this.rbPositionBonus.Location = new System.Drawing.Point(1219, 71);
             this.rbPositionBonus.Name = "rbPositionBonus";
             this.rbPositionBonus.Size = new System.Drawing.Size(154, 36);
             this.rbPositionBonus.TabIndex = 92;
@@ -295,7 +265,7 @@
             this.cmbPositionBonus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPositionBonus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPositionBonus.FormattingEnabled = true;
-            this.cmbPositionBonus.Location = new System.Drawing.Point(1165, 69);
+            this.cmbPositionBonus.Location = new System.Drawing.Point(1379, 71);
             this.cmbPositionBonus.Name = "cmbPositionBonus";
             this.cmbPositionBonus.Size = new System.Drawing.Size(244, 33);
             this.cmbPositionBonus.TabIndex = 91;
@@ -305,7 +275,7 @@
             // 
             this.rbDepartmentBonus.AutoSize = true;
             this.rbDepartmentBonus.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbDepartmentBonus.Location = new System.Drawing.Point(558, 70);
+            this.rbDepartmentBonus.Location = new System.Drawing.Point(773, 71);
             this.rbDepartmentBonus.Name = "rbDepartmentBonus";
             this.rbDepartmentBonus.Size = new System.Drawing.Size(191, 36);
             this.rbDepartmentBonus.TabIndex = 90;
@@ -318,7 +288,7 @@
             // 
             this.rbAllStaffBonus.AutoSize = true;
             this.rbAllStaffBonus.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbAllStaffBonus.Location = new System.Drawing.Point(265, 69);
+            this.rbAllStaffBonus.Location = new System.Drawing.Point(480, 71);
             this.rbAllStaffBonus.Name = "rbAllStaffBonus";
             this.rbAllStaffBonus.Size = new System.Drawing.Size(287, 36);
             this.rbAllStaffBonus.TabIndex = 89;
@@ -341,7 +311,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(17, 71);
+            this.label2.Location = new System.Drawing.Point(232, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 32);
             this.label2.TabIndex = 87;
@@ -353,7 +323,7 @@
             this.cmbDepartmentBonus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDepartmentBonus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDepartmentBonus.FormattingEnabled = true;
-            this.cmbDepartmentBonus.Location = new System.Drawing.Point(755, 72);
+            this.cmbDepartmentBonus.Location = new System.Drawing.Point(970, 73);
             this.cmbDepartmentBonus.Name = "cmbDepartmentBonus";
             this.cmbDepartmentBonus.Size = new System.Drawing.Size(244, 33);
             this.cmbDepartmentBonus.TabIndex = 86;
@@ -364,7 +334,7 @@
             this.dtpMonthBonus.CustomFormat = "yyyy-MM";
             this.dtpMonthBonus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpMonthBonus.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpMonthBonus.Location = new System.Drawing.Point(132, 74);
+            this.dtpMonthBonus.Location = new System.Drawing.Point(347, 75);
             this.dtpMonthBonus.Name = "dtpMonthBonus";
             this.dtpMonthBonus.ShowUpDown = true;
             this.dtpMonthBonus.Size = new System.Drawing.Size(127, 30);
@@ -421,7 +391,7 @@
             // 
             this.rbPositionSalary.AutoSize = true;
             this.rbPositionSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbPositionSalary.Location = new System.Drawing.Point(1165, 68);
+            this.rbPositionSalary.Location = new System.Drawing.Point(1165, 72);
             this.rbPositionSalary.Name = "rbPositionSalary";
             this.rbPositionSalary.Size = new System.Drawing.Size(154, 36);
             this.rbPositionSalary.TabIndex = 83;
@@ -445,7 +415,7 @@
             // 
             this.rbDepartmentSalary.AutoSize = true;
             this.rbDepartmentSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbDepartmentSalary.Location = new System.Drawing.Point(718, 70);
+            this.rbDepartmentSalary.Location = new System.Drawing.Point(718, 71);
             this.rbDepartmentSalary.Name = "rbDepartmentSalary";
             this.rbDepartmentSalary.Size = new System.Drawing.Size(191, 36);
             this.rbDepartmentSalary.TabIndex = 81;
@@ -458,7 +428,7 @@
             // 
             this.rbAllStaffSalary.AutoSize = true;
             this.rbAllStaffSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbAllStaffSalary.Location = new System.Drawing.Point(425, 70);
+            this.rbAllStaffSalary.Location = new System.Drawing.Point(425, 71);
             this.rbAllStaffSalary.Name = "rbAllStaffSalary";
             this.rbAllStaffSalary.Size = new System.Drawing.Size(287, 36);
             this.rbAllStaffSalary.TabIndex = 80;
@@ -481,7 +451,7 @@
             // 
             this.lblMonth.AutoSize = true;
             this.lblMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMonth.Location = new System.Drawing.Point(177, 70);
+            this.lblMonth.Location = new System.Drawing.Point(177, 76);
             this.lblMonth.Name = "lblMonth";
             this.lblMonth.Size = new System.Drawing.Size(109, 32);
             this.lblMonth.TabIndex = 72;
@@ -504,7 +474,7 @@
             this.dtpMonthSalary.CustomFormat = "yyyy-MM";
             this.dtpMonthSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpMonthSalary.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpMonthSalary.Location = new System.Drawing.Point(292, 72);
+            this.dtpMonthSalary.Location = new System.Drawing.Point(292, 78);
             this.dtpMonthSalary.Name = "dtpMonthSalary";
             this.dtpMonthSalary.ShowUpDown = true;
             this.dtpMonthSalary.Size = new System.Drawing.Size(127, 30);
@@ -514,8 +484,6 @@
             // tbDebt
             // 
             this.tbDebt.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tbDebt.Controls.Add(this.rbCardTypeDebt);
-            this.tbDebt.Controls.Add(this.cmbCardTypeDebt);
             this.tbDebt.Controls.Add(this.rptDebt);
             this.tbDebt.Controls.Add(this.rbPositionDebt);
             this.tbDebt.Controls.Add(this.cmbPositionDebt);
@@ -532,29 +500,6 @@
             this.tbDebt.TabIndex = 2;
             this.tbDebt.Text = "Thống kê nợ";
             // 
-            // rbCardTypeDebt
-            // 
-            this.rbCardTypeDebt.AutoSize = true;
-            this.rbCardTypeDebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbCardTypeDebt.Location = new System.Drawing.Point(1415, 64);
-            this.rbCardTypeDebt.Name = "rbCardTypeDebt";
-            this.rbCardTypeDebt.Size = new System.Drawing.Size(187, 36);
-            this.rbCardTypeDebt.TabIndex = 106;
-            this.rbCardTypeDebt.TabStop = true;
-            this.rbCardTypeDebt.Text = "Loại phiếu:";
-            this.rbCardTypeDebt.UseVisualStyleBackColor = true;
-            // 
-            // cmbCardTypeDebt
-            // 
-            this.cmbCardTypeDebt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCardTypeDebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbCardTypeDebt.FormattingEnabled = true;
-            this.cmbCardTypeDebt.Location = new System.Drawing.Point(1605, 68);
-            this.cmbCardTypeDebt.Name = "cmbCardTypeDebt";
-            this.cmbCardTypeDebt.Size = new System.Drawing.Size(244, 33);
-            this.cmbCardTypeDebt.TabIndex = 105;
-            this.cmbCardTypeDebt.SelectedIndexChanged += new System.EventHandler(this.cmbCardTypeDebt_SelectedIndexChanged);
-            // 
             // rptDebt
             // 
             this.rptDebt.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -570,7 +515,7 @@
             // 
             this.rbPositionDebt.AutoSize = true;
             this.rbPositionDebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbPositionDebt.Location = new System.Drawing.Point(1005, 67);
+            this.rbPositionDebt.Location = new System.Drawing.Point(1218, 71);
             this.rbPositionDebt.Name = "rbPositionDebt";
             this.rbPositionDebt.Size = new System.Drawing.Size(154, 36);
             this.rbPositionDebt.TabIndex = 103;
@@ -584,7 +529,7 @@
             this.cmbPositionDebt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPositionDebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPositionDebt.FormattingEnabled = true;
-            this.cmbPositionDebt.Location = new System.Drawing.Point(1165, 67);
+            this.cmbPositionDebt.Location = new System.Drawing.Point(1363, 71);
             this.cmbPositionDebt.Name = "cmbPositionDebt";
             this.cmbPositionDebt.Size = new System.Drawing.Size(244, 33);
             this.cmbPositionDebt.TabIndex = 102;
@@ -594,7 +539,7 @@
             // 
             this.rbDepartmentDebt.AutoSize = true;
             this.rbDepartmentDebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbDepartmentDebt.Location = new System.Drawing.Point(558, 68);
+            this.rbDepartmentDebt.Location = new System.Drawing.Point(785, 72);
             this.rbDepartmentDebt.Name = "rbDepartmentDebt";
             this.rbDepartmentDebt.Size = new System.Drawing.Size(191, 36);
             this.rbDepartmentDebt.TabIndex = 101;
@@ -607,7 +552,7 @@
             // 
             this.rbAllStaffDebt.AutoSize = true;
             this.rbAllStaffDebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbAllStaffDebt.Location = new System.Drawing.Point(265, 67);
+            this.rbAllStaffDebt.Location = new System.Drawing.Point(492, 72);
             this.rbAllStaffDebt.Name = "rbAllStaffDebt";
             this.rbAllStaffDebt.Size = new System.Drawing.Size(287, 36);
             this.rbAllStaffDebt.TabIndex = 100;
@@ -630,7 +575,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(17, 69);
+            this.label3.Location = new System.Drawing.Point(241, 73);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(109, 32);
             this.label3.TabIndex = 98;
@@ -642,7 +587,7 @@
             this.cmbDepartmentDebt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDepartmentDebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDepartmentDebt.FormattingEnabled = true;
-            this.cmbDepartmentDebt.Location = new System.Drawing.Point(755, 70);
+            this.cmbDepartmentDebt.Location = new System.Drawing.Point(968, 71);
             this.cmbDepartmentDebt.Name = "cmbDepartmentDebt";
             this.cmbDepartmentDebt.Size = new System.Drawing.Size(244, 33);
             this.cmbDepartmentDebt.TabIndex = 97;
@@ -653,7 +598,7 @@
             this.dtpMonthDebt.CustomFormat = "yyyy-MM";
             this.dtpMonthDebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpMonthDebt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpMonthDebt.Location = new System.Drawing.Point(132, 72);
+            this.dtpMonthDebt.Location = new System.Drawing.Point(356, 75);
             this.dtpMonthDebt.Name = "dtpMonthDebt";
             this.dtpMonthDebt.ShowUpDown = true;
             this.dtpMonthDebt.Size = new System.Drawing.Size(127, 30);
@@ -709,8 +654,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbDepartmentBonus;
         private System.Windows.Forms.DateTimePicker dtpMonthBonus;
-        private System.Windows.Forms.RadioButton rbCardTypeBonus;
-        private System.Windows.Forms.ComboBox cmbCardTypeBonus;
         private System.Windows.Forms.TabPage tbSalary;
         private Microsoft.Reporting.WinForms.ReportViewer rptSalary;
         private System.Windows.Forms.RadioButton rbPositionSalary;
@@ -722,8 +665,6 @@
         private System.Windows.Forms.ComboBox cmbDepartmentSalary;
         private System.Windows.Forms.DateTimePicker dtpMonthSalary;
         private System.Windows.Forms.TabPage tbDebt;
-        private System.Windows.Forms.RadioButton rbCardTypeDebt;
-        private System.Windows.Forms.ComboBox cmbCardTypeDebt;
         private Microsoft.Reporting.WinForms.ReportViewer rptDebt;
         private System.Windows.Forms.RadioButton rbPositionDebt;
         private System.Windows.Forms.ComboBox cmbPositionDebt;

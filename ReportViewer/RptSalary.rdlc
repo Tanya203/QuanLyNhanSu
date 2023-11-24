@@ -2,18 +2,18 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="QuanLyNhanSuViewModels3">
+    <DataSource Name="QuanLyNhanSuViewModels">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>c0311b18-24b3-4557-96de-4ac32706d1ea</rd:DataSourceID>
+      <rd:DataSourceID>4cb1a206-d8c1-4402-849e-5936f8096a1a</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="Salary">
       <Query>
-        <DataSourceName>QuanLyNhanSuViewModels3</DataSourceName>
+        <DataSourceName>QuanLyNhanSuViewModels</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -23,6 +23,10 @@
         </Field>
         <Field Name="Department">
           <DataField>Department</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DP_ID">
+          <DataField>DP_ID</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="FullName">
@@ -35,6 +39,10 @@
         </Field>
         <Field Name="Position">
           <DataField>Position</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PS_ID">
+          <DataField>PS_ID</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="StaffID">
@@ -656,6 +664,7 @@
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
                                     <FontSize>11pt</FontSize>
+                                    <Format>#,0.000;(#,0.000)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -748,6 +757,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -904,7 +914,7 @@
             </TablixRowHierarchy>
             <DataSetName>Salary</DataSetName>
             <Top>0.13in</Top>
-            <Height>0.88333in</Height>
+            <Height>0.88334in</Height>
             <Width>9.6574in</Width>
             <Style>
               <Border>
