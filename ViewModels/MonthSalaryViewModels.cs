@@ -17,7 +17,7 @@ namespace QuanLyNhanSu.ViewModels
         public string FullName { get; set; }  
         public decimal BasicSalary { get; set; }
         public decimal TotalWorkHours { get; set; }
-        public decimal TotalBonus { get; set; }
         public decimal TotalAllownace { get; set; }
+        public decimal TotalBonus { get; set;}
     }
 }

@@ -17,17 +17,19 @@ namespace QuanLyNhanSu.DataTier
         }
         public IEnumerable<MonthBonusDebtViewModels> GetAllMonthBonus(string month, string sort)
         {
-            var monthBonus = quanLyNhanSu.MonthSalaryDetails.Select(x => new MonthBonusDebtViewModels
+            var monthBonus = quanLyNhanSu.CardDetails.Select(x => new MonthBonusDebtViewModels
             {
-                MonthID = x.MonthID,
+                MonthID = x.Card.DateCreated.ToString(),
                 StaffID = x.StaffID,
                 DP_ID = x.Staff.Position.DP_ID,
                 PS_ID = x.Staff.PS_ID,
+                Caculate = x.Card.CardType.CaculateMethod,
                 FullName = x.Staff.LastName + x.Staff.MiddleName + x.Staff.FirstName,
                 Department = x.Staff.Position.Department.DepartmentName,
                 Position = x.Staff.Position.PositionName,
-                Amount = x.TotalBonus,
-            }).Where(b => b.MonthID.Contains(month));
+                Amount = x.Amount,
+                Deliver = x.Deliver
+            }).Where(b => b.MonthID.Contains(month) && b.Caculate == "Cộng");
             if (sort != null)
             {
                 if (sort.Contains("DP"))
@@ -39,18 +41,19 @@ namespace QuanLyNhanSu.DataTier
         }
         public IEnumerable<MonthBonusDebtViewModels> GetAllMonthDebt(string month, string sort)
         {
-            var monthDebt = quanLyNhanSu.MonthSalaryDetails.Select(x => new MonthBonusDebtViewModels
+            var monthDebt = quanLyNhanSu.CardDetails.Select(x => new MonthBonusDebtViewModels
             {
-                MonthID = x.MonthID,
+                MonthID = x.Card.DateCreated.ToString(),
                 StaffID = x.StaffID,
                 DP_ID = x.Staff.Position.DP_ID,
                 PS_ID = x.Staff.PS_ID,
+                Caculate = x.Card.CardType.CaculateMethod,
                 FullName = x.Staff.LastName + x.Staff.MiddleName + x.Staff.FirstName,
                 Department = x.Staff.Position.Department.DepartmentName,
                 Position = x.Staff.Position.PositionName,
-                Amount = x.TotalDebt,
-                Deliver = x.TotalDebtPaid,
-            }).Where(b => b.MonthID.Contains(month));
+                Amount = x.Amount,
+                Deliver = x.Deliver
+            }).Where(b => b.MonthID.Contains(month) && b.Caculate == "Trừ");
             if (sort != null)
             {
                 if (sort.Contains("DP"))

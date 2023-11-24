@@ -48,5 +48,25 @@ namespace QuanLyNhanSu.LogicTier
         {
             return cardDetailDAL.StaffDeliver(staffID, cardID);
         }
+        public decimal StaffDebt(string staffID)
+        {
+            return cardDetailDAL.StaffDebt(staffID);
+        }
+        public decimal TotalStaffMonthBonus(string staffID, string month)
+        {
+            return cardDetailDAL.TotalStaffMonthBonus(staffID, month);
+        }
+        public decimal TotalStaffMonthDebt(string staffID, string month)
+        {
+            return cardDetailDAL.TotalStaffMonthDebt(staffID, month);
+        }
+        public decimal TotalStaffMonthBonusDeliver(string staffID, string month)
+        {
+            return cardDetailDAL.TotalStaffMonthBonusDeliver(staffID, month);
+        }
+        public decimal TotalStaffMonthDebtDeliver(string staffID, string month)
+        {
+            return cardDetailDAL.TotalStaffMonthDebtDeliver(staffID, month);
+        }
     }
 }

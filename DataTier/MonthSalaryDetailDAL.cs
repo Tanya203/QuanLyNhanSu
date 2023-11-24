@@ -34,12 +34,5 @@ namespace QuanLyNhanSu.DataTier
                 return false;
             }
         }
-        public decimal GetStaffMonthTotalDebt(string staffID, string month)
-        {
-            MonthSalaryDetail staff = quanLyNhanSu.MonthSalaryDetails.FirstOrDefault(s => s.StaffID == staffID && s.MonthID == month && s.MonthID == month);
-            if(staff == null)
-                return 0;
-            return staff.TotalDebt - staff.TotalDebtPaid;
-        }
     }
 }

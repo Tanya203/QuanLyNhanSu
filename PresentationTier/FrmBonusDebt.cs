@@ -285,8 +285,6 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 string editDetail = CheckChange();
                 CardDetail cardDetail = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == txtCardID.Text && c.StaffID == cmbStaff.Text);
-                decimal oldDeliver = cardDetail.Deliver;
-                decimal newDeliver = decimal.Parse(txtDeliver.Text);
                 cardDetail.Amount = decimal.Parse(txtAmount.Text);
                 cardDetail.Deliver = decimal.Parse(txtDeliver.Text);
                 cardDetail.Note = rtxtNote.Text;
@@ -297,18 +295,6 @@ namespace QuanLyNhanSu.PresentationTier
                     if (editDetail != null)
                         operationDetail += $":\n{editDetail}";
                     history.Save(staff.StaffID, operate, operationDetail);
-                    if(oldDeliver != newDeliver)
-                    {
-                        MonthSalaryDetail salaryDetails = monthSalaryDetailBUS.GetMonthSalaryDetails().FirstOrDefault(m => m.MonthID == DateTime.Now.ToString(formatMonth));
-                        if(cmbType.Text == "Trừ")
-                        {
-                            if(oldDeliver > newDeliver)
-                                salaryDetails.TotalDebtPaid -= oldDeliver - newDeliver;
-                            else if(oldDeliver < newDeliver)
-                                salaryDetails.TotalDebtPaid += newDeliver - oldDeliver;
-                            monthSalaryDetailBUS.Save(salaryDetails);
-                        }
-                    }
                     Reload();
                 }
             }
@@ -317,7 +303,6 @@ namespace QuanLyNhanSu.PresentationTier
                 CustomMessage.ExecptionCustom(ex);
             }
         }
-
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Reload();

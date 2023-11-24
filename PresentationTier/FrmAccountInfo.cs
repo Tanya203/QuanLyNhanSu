@@ -21,6 +21,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly AllowanceDetailBUS allowanceDetailBUS;
         private readonly StaffBUS staffBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
+        private readonly CardDetailBUS cardDetailBUS;
         private Staff staff;
         private readonly string formatMonth = "yyyy-MM";
         private readonly string formatDate = "dd/MM/yyyy";
@@ -32,6 +33,7 @@ namespace QuanLyNhanSu.PresentationTier
             redirect = new FormHandle();
             allowanceDetailBUS = new AllowanceDetailBUS();
             monthSalaryDetailBUS = new MonthSalaryDetailBUS();
+            cardDetailBUS = new CardDetailBUS();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             btnChangePassword.Enabled = false;
         }
@@ -89,7 +91,7 @@ namespace QuanLyNhanSu.PresentationTier
             txtDateOffAmount.Text = staff.DayOffAmount.ToString();
             txtBasicSalary.Text = String.Format(fVND, "{0:N3} ₫", staff.BasicSalary);
             txtAllowance.Text = String.Format(fVND, "{0:N3} ₫", allowanceDetailBUS.StaffTotalAllowance(staff.StaffID));
-            txtDebt.Text  = String.Format(fVND, "{0:N3} ₫", monthSalaryDetailBUS.GetStaffMonthTotalDebt(staff.StaffID, DateTime.Now.ToString(formatMonth)));
+            txtDebt.Text  = String.Format(fVND, "{0:N3} ₫", cardDetailBUS.StaffDebt(staff.StaffID));
             ImageHandle.LoadImage(pbStaffPicture, staff.Picture);
             Enabled = true;
         }

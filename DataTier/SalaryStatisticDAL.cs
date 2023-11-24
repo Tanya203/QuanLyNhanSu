@@ -27,7 +27,6 @@ namespace QuanLyNhanSu.DataTier
                 Department = x.Staff.Position.Department.DepartmentName,
                 Position = x.Staff.Position.PositionName,
                 BasicSalary = x.BasicSalary,
-                TotalBonus = x.TotalBonus,
                 TotalAllownace = x.TotalAllowance,
                 TotalWorkHours = x.TotalWorkHours,
             }).Where(x => x.MonthID == month);

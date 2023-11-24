@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using WECPOFLogic;
 
@@ -129,6 +130,41 @@ namespace QuanLyNhanSu.DataTier
             List<CardDetail> cardDetail = quanLyNhanSu.CardDetails.Where(c => c.CardID == cardID).ToList();
             if (cardDetail != null)
                 return cardDetail.Sum(c => c.Deliver);
+            return 0;
+        }
+        public decimal StaffDebt(string staffID)
+        {
+            List<CardDetail> cardDetail = quanLyNhanSu.CardDetails.Where(c => c.StaffID == staffID && c.Card.CardType.CaculateMethod == "Trừ").ToList();
+            if(cardDetail != null)
+                return cardDetail.Sum(s => s.Amount) - cardDetail.Sum(s => s.Deliver);
+            return 0;
+        }
+        public decimal TotalStaffMonthBonus(string staffID, string month)
+        {
+            List<CardDetail> cardDetails = quanLyNhanSu.CardDetails.Where(s => s.StaffID == staffID && s.Card.DateCreated.ToString().Contains(month) && s.Card.CardType.CaculateMethod == "Cộng").ToList();
+            if (cardDetails != null)
+                return cardDetails.Sum(s => s.Amount);
+            return 0;
+        }
+        public decimal TotalStaffMonthDebt(string staffID, string month)
+        {
+            List<CardDetail> cardDetails = quanLyNhanSu.CardDetails.Where(s => s.StaffID == staffID && s.Card.DateCreated.ToString().Contains(month) && s.Card.CardType.CaculateMethod == "Trừ").ToList();
+            if (cardDetails != null)
+                return cardDetails.Sum(s => s.Amount);
+            return 0;
+        }
+        public decimal TotalStaffMonthBonusDeliver(string staffID, string month) 
+        {
+            List<CardDetail> cardDetails = quanLyNhanSu.CardDetails.Where(s => s.StaffID == staffID && s.Card.DateCreated.ToString().Contains(month) && s.Card.CardType.CaculateMethod == "Cộng").ToList();
+            if (cardDetails != null)
+                return cardDetails.Sum(s => s.Deliver);
+            return 0;
+        }
+        public decimal TotalStaffMonthDebtDeliver(string staffID, string month)
+        {
+            List<CardDetail> cardDetails = quanLyNhanSu.CardDetails.Where(s => s.StaffID == staffID && s.Card.DateCreated.ToString().Contains(month) && s.Card.CardType.CaculateMethod == "Trừ").ToList();
+            if (cardDetails != null)
+                return cardDetails.Sum(s => s.Deliver);
             return 0;
         }
     }

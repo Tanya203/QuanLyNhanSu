@@ -25,12 +25,6 @@ namespace QuanLyNhanSu.DataTier.Models
 
         public decimal TotalAllowance { get; set; }
 
-        public decimal TotalBonus { get; set; }
-
-        public decimal TotalDebt { get; set; }
-
-        public decimal TotalDebtPaid { get; set; }
-
         public virtual Month Month { get; set; }
 
         public virtual Staff Staff { get; set; }

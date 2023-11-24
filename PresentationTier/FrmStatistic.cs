@@ -22,6 +22,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly FormHandle redirect;
         private readonly StaffBUS staffBUS;
         private readonly DepartmentBUS departmentBUS;
+        private readonly CardDetailBUS cardDetailBUS;
         private readonly PositionBUS positionBUS;
         private readonly CardTypeBUS cardTypeBUS;
         private Staff staff;
@@ -34,6 +35,7 @@ namespace QuanLyNhanSu.PresentationTier
             bonusDebtStatistsicBUS = new BonusDebtStatisticBUS();
             redirect = new FormHandle();
             staffBUS = new StaffBUS();
+            cardDetailBUS = new CardDetailBUS();
             departmentBUS = new DepartmentBUS();
             positionBUS = new PositionBUS();
             cardTypeBUS = new CardTypeBUS();
@@ -45,7 +47,6 @@ namespace QuanLyNhanSu.PresentationTier
             DisableComboBox();
             LoadDepartment();
             LoadPostion();
-            LoadCardType();
         }
         private void tabControlMenu_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -58,7 +59,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void DisableComboBox()
         {
-            List<object> input = new List<object> { cmbDepartmentSalary, cmbPositionSalary, cmbDepartmentBonus, cmbPositionBonus, cmbCardTypeBonus, cmbDepartmentDebt, cmbPositionDebt, cmbCardTypeDebt };
+            List<object> input = new List<object> { cmbDepartmentSalary, cmbPositionSalary, cmbDepartmentBonus, cmbPositionBonus, cmbDepartmentDebt, cmbPositionDebt };
             foreach(object inputItem in input)
             {
                 if(inputItem is ComboBox)
@@ -79,7 +80,6 @@ namespace QuanLyNhanSu.PresentationTier
             cmbDepartmentDebt.DataSource = data;
             AutoAdjustComboBox.Adjust(cmbDepartmentSalary);
             AutoAdjustComboBox.Adjust(cmbDepartmentBonus);
-            AutoAdjustComboBox.Adjust(cmbCardTypeDebt);
         }
         private void LoadPostion()
         {
@@ -96,18 +96,6 @@ namespace QuanLyNhanSu.PresentationTier
             AutoAdjustComboBox.Adjust(cmbPositionSalary);
             AutoAdjustComboBox.Adjust(cmbPositionBonus);
             AutoAdjustComboBox.Adjust(cmbPositionDebt);
-        }
-        private void LoadCardType()
-        {
-            cmbCardTypeBonus.DisplayMember = "CardTypeName";
-            cmbCardTypeBonus.ValueMember = "CT_ID";
-            cmbCardTypeDebt.DisplayMember = "CardTypeName";
-            cmbCardTypeDebt.ValueMember = "CT_ID";
-            List<CardType> data = cardTypeBUS.GetCardType().ToList();
-            cmbCardTypeBonus.DataSource = data.Where(c => c.CaculateMethod == "Cộng").ToList();
-            cmbCardTypeDebt.DataSource = data.Where(c => c.CaculateMethod == "Trừ").ToList();
-            AutoAdjustComboBox.Adjust(cmbCardTypeBonus);
-            AutoAdjustComboBox.Adjust(cmbCardTypeDebt);
         }
         private void Reload()
         {
@@ -141,7 +129,8 @@ namespace QuanLyNhanSu.PresentationTier
             foreach (MonthSalaryViewModels staff in salary)
             {
                 staff.FullName = StringAdjust.AddSpacesBetweenUppercaseLetters(staff.FullName);
-                total += staff.BasicSalary * staff.TotalWorkHours + staff.TotalBonus + staff.TotalAllownace;
+                staff.TotalBonus = cardDetailBUS.TotalStaffMonthBonus(staff.StaffID, staff.MonthID);
+                total += staff.BasicSalary * staff.TotalWorkHours + staff.TotalAllownace + staff.TotalBonus;
             }
             ReportDataSource reportDataSource = new ReportDataSource("Salary", salary);
             List<ReportParameter> parameters = new List<ReportParameter>
@@ -212,7 +201,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             List<MonthBonusDebtViewModels> bonus = bonusDebtStatistsicBUS.GetAllMonthBonus(dtpMonthBonus.Text, sortValue).ToList();
             foreach (MonthBonusDebtViewModels staff in bonus)
+            {
                 staff.FullName = StringAdjust.AddSpacesBetweenUppercaseLetters(staff.FullName);
+                staff.Amount = cardDetailBUS.TotalStaffMonthBonus(staff.StaffID, staff.MonthID);
+                staff.Deliver = cardDetailBUS.TotalStaffMonthBonusDeliver(staff.StaffID, staff.MonthID);
+            }
             ReportDataSource reportDataSource = new ReportDataSource("Bonus", bonus);
             List<ReportParameter> parameters = new List<ReportParameter>
             {
@@ -244,28 +237,18 @@ namespace QuanLyNhanSu.PresentationTier
                 sortValue = null;
                 cmbDepartmentBonus.Enabled = false;
                 cmbPositionBonus.Enabled = false;
-                cmbCardTypeBonus.Enabled = false;
             }
             else if (rbDepartmentBonus.Checked)
             {
                 sortValue = cmbDepartmentBonus.SelectedValue.ToString();
                 cmbDepartmentBonus.Enabled = true;
                 cmbPositionBonus.Enabled = false;
-                cmbCardTypeBonus.Enabled = false;
             }
             else if (rbPositionBonus.Checked)
             {
                 sortValue = cmbPositionBonus.SelectedValue.ToString();
                 cmbDepartmentBonus.Enabled = false;
                 cmbPositionBonus.Enabled = true;
-                cmbCardTypeBonus.Enabled = false;
-            }
-            else if (rbCardTypeBonus.Checked)
-            {
-                sortValue = cmbCardTypeBonus.SelectedValue.ToString();
-                cmbDepartmentBonus.Enabled = false;
-                cmbPositionBonus.Enabled = false;
-                cmbCardTypeBonus.Enabled = true;
             }
             LoadBonusReportViewer(sortValue);
         }
@@ -283,15 +266,6 @@ namespace QuanLyNhanSu.PresentationTier
             if (rbPositionBonus.Checked)
             {
                 sortValue = cmbPositionBonus.SelectedValue.ToString();
-                LoadBonusReportViewer(sortValue);
-            }
-        }
-
-        private void cmbCardTypeBonus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (rbCardTypeBonus.Checked)
-            {
-                sortValue = cmbCardTypeBonus.SelectedValue.ToString();
                 LoadBonusReportViewer(sortValue);
             }
         }
@@ -333,28 +307,18 @@ namespace QuanLyNhanSu.PresentationTier
                 sortValue = null;
                 cmbDepartmentDebt.Enabled = false;
                 cmbPositionDebt.Enabled = false;
-                cmbCardTypeDebt.Enabled = false;
             }
             else if (rbDepartmentDebt.Checked)
             {
                 sortValue = cmbDepartmentDebt.SelectedValue.ToString();
                 cmbDepartmentDebt.Enabled = true;
                 cmbPositionDebt.Enabled = false;
-                cmbCardTypeDebt.Enabled = false;
             }
             else if (rbPositionDebt.Checked)
             {
                 sortValue = cmbPositionDebt.SelectedValue.ToString();
                 cmbDepartmentDebt.Enabled = false;
                 cmbPositionDebt.Enabled = true;
-                cmbCardTypeDebt.Enabled = false;
-            }
-            else if (rbCardTypeDebt.Checked)
-            {
-                sortValue = cmbCardTypeDebt.SelectedValue.ToString();
-                cmbDepartmentDebt.Enabled = false;
-                cmbPositionDebt.Enabled = false;
-                cmbCardTypeDebt.Enabled = true;
             }
             LoadDebtReportViewer(sortValue);
         }
@@ -374,14 +338,6 @@ namespace QuanLyNhanSu.PresentationTier
                 sortValue = cmbPositionDebt.SelectedValue.ToString();
                 LoadDebtReportViewer(sortValue);
             }
-        }
-        private void cmbCardTypeDebt_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (rbCardTypeDebt.Checked)
-            {
-                sortValue = cmbCardTypeDebt.SelectedValue.ToString();
-                LoadDebtReportViewer(sortValue);
-            }
-        }
+        }        
     }
 }

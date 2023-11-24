@@ -23,12 +23,12 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly StaffBUS staffBUS;
         private readonly DepartmentBUS departmentBUS;
         private readonly PositionBUS positionBUS;
+        private readonly CardDetailBUS cardDetailBUS;
         private readonly ContractTypeBUS contractTypeBUS;
         private readonly AllowanceDetailBUS allowanceDetailBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly SalaryHandle salary;
         private readonly string formatDate = "yyyy-MM-dd";
-        private readonly string formatMonth = "yyyy-MM";
         private Staff staff;
         public FrmStaff(string staffID)
         {
@@ -37,6 +37,7 @@ namespace QuanLyNhanSu.PresentationTier
             history = new SaveOperateHistory("Nhân viên");
             redirect = new FormHandle();
             departmentBUS = new DepartmentBUS();
+            cardDetailBUS = new CardDetailBUS();
             positionBUS = new PositionBUS();
             contractTypeBUS = new ContractTypeBUS();
             allowanceDetailBUS = new AllowanceDetailBUS();
@@ -153,7 +154,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvStaff.Rows[rowAdd].Cells[25].Value = s.LockDate.ToString();            
                 dgvStaff.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", s.BasicSalary);
                 dgvStaff.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", allowanceDetailBUS.StaffTotalAllowance(s.StaffID));
-                dgvStaff.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", monthSalaryDetailBUS.GetStaffMonthTotalDebt(s.StaffID, DateTime.Now.ToString(formatMonth)));
+                dgvStaff.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", cardDetailBUS.StaffDebt(s.StaffID));
                 
             }
             Enabled = true;
@@ -193,7 +194,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvStaff.Rows[rowAdd].Cells[25].Value = s.LockDate.ToString();
                 dgvStaff.Rows[rowAdd].Cells[23].Value = String.Format(fVND, "{0:N3} ₫", s.BasicSalary);
                 dgvStaff.Rows[rowAdd].Cells[24].Value = String.Format(fVND, "{0:N3} ₫", allowanceDetailBUS.StaffTotalAllowance(s.StaffID));
-                dgvStaff.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", monthSalaryDetailBUS.GetStaffMonthTotalDebt(s.StaffID, DateTime.Now.ToString(formatMonth)));
+                dgvStaff.Rows[rowAdd].Cells[26].Value = String.Format(fVND, "{0:N3} ₫", cardDetailBUS.StaffDebt(s.StaffID));
 
             }
             Enabled = true;
@@ -804,12 +805,10 @@ namespace QuanLyNhanSu.PresentationTier
             txtBasicSalary.Text = double.Parse(StringAdjust.AdjustNumber(dgvStaff.Rows[rowIndex].Cells[23].Value.ToString())).ToString("F3");
             txtAllowance.Text = double.Parse(StringAdjust.AdjustNumber(dgvStaff.Rows[rowIndex].Cells[24].Value.ToString())).ToString("F3");
             txtDateLock.Text = dgvStaff.Rows[rowIndex].Cells[25].Value.ToString();            
-            txtDebt.Text = monthSalaryDetailBUS.GetStaffMonthTotalDebt(txtStaffID.Text, DateTime.Now.ToString(formatMonth)).ToString("F3");
+            txtDebt.Text = cardDetailBUS.StaffDebt(txtStaffID.Text).ToString("F3");
             byte[] image = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == txtStaffID.Text).Picture;
             if (image != null)
-            {
                 ImageHandle.LoadImage(pbStaffPicture, image);
-            }            
         }
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
