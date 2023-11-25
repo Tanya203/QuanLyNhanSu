@@ -24,7 +24,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly DepartmentBUS departmentBUS;
         private readonly CardDetailBUS cardDetailBUS;
         private readonly PositionBUS positionBUS;
-        private readonly CardTypeBUS cardTypeBUS;
         private Staff staff;
         private string sortValue;
 
@@ -38,7 +37,6 @@ namespace QuanLyNhanSu.PresentationTier
             cardDetailBUS = new CardDetailBUS();
             departmentBUS = new DepartmentBUS();
             positionBUS = new PositionBUS();
-            cardTypeBUS = new CardTypeBUS();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
         }
         private void FrmThongKeLuong_Load(object sender, EventArgs e)
@@ -80,6 +78,7 @@ namespace QuanLyNhanSu.PresentationTier
             cmbDepartmentDebt.DataSource = data;
             AutoAdjustComboBox.Adjust(cmbDepartmentSalary);
             AutoAdjustComboBox.Adjust(cmbDepartmentBonus);
+            AutoAdjustComboBox.Adjust(cmbDepartmentDebt);
         }
         private void LoadPostion()
         {

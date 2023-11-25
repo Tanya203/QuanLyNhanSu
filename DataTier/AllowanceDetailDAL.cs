@@ -87,8 +87,8 @@ namespace QuanLyNhanSu.DataTier
         {
             try
             {
-                AllowanceDetail allowanceDetail = quanLyNhanSu.AllowanceDetails.Where(al => al.StaffID == staffID && al.AL_ID == al_ID).FirstOrDefault();             
-                if(allowanceDetail != null)
+                AllowanceDetail allowanceDetail = quanLyNhanSu.AllowanceDetails.Where(al => al.StaffID == staffID && al.AL_ID == al_ID).FirstOrDefault(); 
+                if (allowanceDetail != null)
                 {
                     CustomMessage.YesNoCustom("Có", "Không");
                     string allowance = allowanceDetail.Allowance.AllowanceName;

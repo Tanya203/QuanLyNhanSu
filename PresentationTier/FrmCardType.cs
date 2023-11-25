@@ -213,35 +213,49 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            string editDetail = CheckChange();
-            CardType cardType = new CardType
+            try
             {
-                CT_ID = txtCardTypeID.Text,
-                CardTypeName = txtCardTypeName.Text,
-                CaculateMethod = cmbCaculateMethod.Text,
-            };
-            if (cardTypeBUS.Save(cardType))
+                string editDetail = CheckChange();
+                CardType cardType = new CardType
+                {
+                    CT_ID = txtCardTypeID.Text,
+                    CardTypeName = txtCardTypeName.Text,
+                    CaculateMethod = cmbCaculateMethod.Text,
+                };
+                if (cardTypeBUS.Save(cardType))
+                {
+                    string operate = "Sửa";
+                    string operationDetail = $"Sửa loại phiếu {txtCardTypeID.Text}";
+                    if (!string.IsNullOrEmpty(editDetail))
+                        operationDetail += $":\n{editDetail}";
+                    history.Save(staff.StaffID, operate, operationDetail);
+                    Reload();
+                }
+            }
+            catch(Exception ex) 
             {
-                string operate = "Sửa";
-                string operationDetail = $"Sửa loại phiếu {txtCardTypeID.Text}";
-                if (!string.IsNullOrEmpty(editDetail))
-                    operationDetail += $":\n{editDetail}";
-                history.Save(staff.StaffID, operate, operationDetail);
-                Reload();
+                CustomMessage.ExecptionCustom(ex);
             }
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            CardType cardType = new CardType
+            try
             {
-                CT_ID = txtCardTypeID.Text
-            };
-            if (cardTypeBUS.Delete(cardType))
+                CardType cardType = new CardType
+                {
+                    CT_ID = txtCardTypeID.Text
+                };
+                if (cardTypeBUS.Delete(cardType))
+                {
+                    string operate = "Xoá";
+                    string operationDetail = $"Xoá loại phiếu {txtCardTypeName.Text}:\n  - Hình thức tính: {cmbCaculateMethod.Text}";
+                    history.Save(staff.StaffID, operate, operationDetail);
+                    Reload();
+                }
+            }
+            catch(Exception ex)
             {
-                string operate = "Xoá";
-                string operationDetail= $"Xoá loại phiếu {txtCardTypeName.Text}:\n  - Hình thức tính: {cmbCaculateMethod.Text}";
-                history.Save(staff.StaffID, operate, operationDetail);
-                Reload();
+                CustomMessage.ExecptionCustom(ex);
             }
         }
         private void btnCancel_Click(object sender, EventArgs e)

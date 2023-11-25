@@ -77,6 +77,18 @@ namespace QuanLyNhanSu.DataTier
             {
                 WorkSchedule workSchedule = quanLyNhanSu.WorkSchedules.Where(ws => ws.WS_ID == ws_ID).FirstOrDefault();
                 string workDate = workSchedule.WorkDate.ToString(formatDate);
+                List<TimeKeeping> listWorkSchedule = quanLyNhanSu.TimeKeepings.Where(ws => ws.WS_ID == workSchedule.WS_ID).ToList();
+                if(listWorkSchedule.Count > 0) 
+                {
+                    foreach(TimeKeeping staff  in listWorkSchedule) 
+                    {
+                        if(staff.CheckInTime != null)
+                        {
+                            MessageBox.Show("Đã có nhân viên chấm công lịch. Không thể xoá!!!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
+                    }
+                }
                 if (workSchedule != null)
                 {
                     CustomMessage.YesNoCustom("Có", "Không");

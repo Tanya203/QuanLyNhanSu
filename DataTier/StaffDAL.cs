@@ -140,7 +140,7 @@ namespace QuanLyNhanSu.DataTier
             try
             {
                 Staff staff = quanLyNhanSu.Staffs.Where(s => s.StaffID == staffID).FirstOrDefault();
-                if(staff != null)
+                if (staff != null)
                 {
                     CustomMessage.YesNoCustom("Có", "Không");
                     DialogResult ketQua = MessageBox.Show($"Xác nhận xoá nhân viên {staffID}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);

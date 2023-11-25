@@ -20,10 +20,8 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly FormHandle redirect;
         private readonly AllowanceDetailBUS allowanceDetailBUS;
         private readonly StaffBUS staffBUS;
-        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly CardDetailBUS cardDetailBUS;
         private Staff staff;
-        private readonly string formatMonth = "yyyy-MM";
         private readonly string formatDate = "dd/MM/yyyy";
         public FrmAccountInfo(string staffID)
         {
@@ -32,7 +30,6 @@ namespace QuanLyNhanSu.PresentationTier
             history = new SaveOperateHistory("Tài khoản");
             redirect = new FormHandle();
             allowanceDetailBUS = new AllowanceDetailBUS();
-            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
             cardDetailBUS = new CardDetailBUS();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             btnChangePassword.Enabled = false;

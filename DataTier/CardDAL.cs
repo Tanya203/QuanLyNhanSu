@@ -77,7 +77,7 @@ namespace QuanLyNhanSu.DataTier
             try
             {
                 Card card = quanLyNhanSu.Cards.Where(c => c.CardID == cardID).FirstOrDefault();
-                if(card != null)
+                if (card != null)
                 {
                     CustomMessage.YesNoCustom("Có", "Không");
                     string cardType = card.CardType.CardTypeName.ToLower();

@@ -200,9 +200,9 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvAllowance.Columns.Add(btnXoa);
             }
         }
-        public void AllowanceDetailOpen(string AL_ID)
+        public void AllowanceDetailOpen(string al_ID)
         {
-            FrmAllowanceDetail open = new FrmAllowanceDetail(staff.StaffID, AL_ID);
+            FrmAllowanceDetail open = new FrmAllowanceDetail(staff.StaffID, al_ID);
             redirect.RedirectForm(open, this);
             staff = null;
         }
@@ -217,13 +217,13 @@ namespace QuanLyNhanSu.PresentationTier
             if (allowanceBUS.Save(allowance))
             {
                 string operate = "Thêm";
-                string operationDetail = $"Thêm phụ cấp {txtAllowanceName.Text}:\n  - Số tiền: {txtAmount.Text}";
+                string operationDetail = $"Thêm phụ cấp {String.Format(fVND, "{0:N3} ₫",txtAllowanceName.Text)}:\n  - Số tiền: {String.Format(fVND, "{0:N3} ₫",txtAmount.Text)}";
                 history.Save(staff.StaffID, operate, operationDetail);
                 Reload();
             }           
         }
         private void btnEdit_Click(object sender, EventArgs e)
-        {            
+        {
             decimal oldAmount = allowanceBUS.GetAllowance().FirstOrDefault(al => al.AL_ID == txtAllowanceID.Text).Amount;
             decimal newAmount = decimal.Parse(txtAmount.Text);
             Allowance allowance = new Allowance
@@ -257,7 +257,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            Allowance allowance = new Allowance
+            Allowance allowance = new Allowance()
             {
                 AL_ID = txtAllowanceID.Text,
             };

@@ -322,9 +322,7 @@ namespace QuanLyNhanSu.PresentationTier
             if (e.ColumnIndex == 9 && checkOperate)
                 UpdateAbsence(staffID);
             if (e.ColumnIndex == 10)
-            {
                 DeleteStaff(staffID);
-            }
         }
         private void btnBack_Click(object sender, EventArgs e)
         {

@@ -59,9 +59,9 @@ namespace QuanLyNhanSu.DataTier
         }
         public bool Delete(string ct_ID)
         {
-            var contractType = quanLyNhanSu.ContractTypes.Where(ct => ct.CT_ID == ct_ID).FirstOrDefault();
             try
-            {                
+            {
+                ContractType contractType = quanLyNhanSu.ContractTypes.Where(ct => ct.CT_ID == ct_ID).FirstOrDefault();
                 if (contractType != null)
                 {
                     CustomMessage.YesNoCustom("Có", "Không");
@@ -78,7 +78,7 @@ namespace QuanLyNhanSu.DataTier
             }
             catch (Exception ex)
             {
-                if (ex.InnerException.ToString().Contains("FK_NhanVien_LoaiHopDong"))
+                if (ex.InnerException.ToString().Contains("FK"))
                 {
                     MessageBox.Show("Loại hợp đồng vẫn còn nhân viên. Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;

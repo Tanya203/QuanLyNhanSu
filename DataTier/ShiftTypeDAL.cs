@@ -60,9 +60,9 @@ namespace QuanLyNhanSu.DataTier
         }
         public bool Delete(string st_ID)
         {
-            var shiftType = quanLyNhanSu.ShiftTypes.Where(st => st.ST_ID == st_ID).FirstOrDefault();
             try
-            {                
+            {
+                ShiftType shiftType = quanLyNhanSu.ShiftTypes.Where(st => st.ST_ID == st_ID).FirstOrDefault();
                 if (shiftType != null)
                 {
                     CustomMessage.YesNoCustom("Có", "Không");
@@ -79,6 +79,11 @@ namespace QuanLyNhanSu.DataTier
             }
             catch (Exception ex)
             {
+                if (ex.InnerException.ToString().Contains("FK"))
+                {
+                    MessageBox.Show("Loại ca vẫn còn lịch. Không thể xoá!!!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
                 CustomMessage.ExecptionCustom(ex);
                 return false;
             }

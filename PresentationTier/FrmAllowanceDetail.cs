@@ -26,7 +26,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly AllowanceDetailBUS allowanceDetailBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly SalaryHandle salary;
-        private readonly string formatMonth = "yyyy-MM";
         private Staff staff;
         private Allowance allowance;
 
@@ -206,7 +205,7 @@ namespace QuanLyNhanSu.PresentationTier
             AllowanceDetail allowanceDetail = new AllowanceDetail
             {
                 AL_ID = allowance.AL_ID,
-                StaffID = staff.StaffID,
+                StaffID = cmbStaffID.SelectedValue.ToString(),
             };            
             if (allowanceDetailBUS.Save(allowanceDetail))
             {
@@ -219,7 +218,6 @@ namespace QuanLyNhanSu.PresentationTier
                 monthSalaryDetailBUS.Save(salaryDetail);
             }
             Reload();
-            
         }
         private void DeleteButton()
         {
@@ -240,16 +238,33 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void DeleteStaff(string staffID)
         {
-            AllowanceDetail staff = allowanceDetailBUS.GetAllowanceDetail().FirstOrDefault(s => s.AL_ID == allowance.AL_ID && s.StaffID == staffID);
-            if (allowanceDetailBUS.Delete(staff))
+            try
             {
-                string operate = "Xoá";
-                string operationDetail = $"Xoá phụ cấp {allowance.AllowanceName} của nhân viên {staff.StaffID}";
-                history.Save(staff.StaffID, operate, operationDetail);
-                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID);
-                salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staff.StaffID);
-                monthSalaryDetailBUS.Save(salaryDetail);
-                Reload();
+                if (allowanceBUS.GetAllowance().FirstOrDefault(al => al.AL_ID == allowance.AL_ID)  == null)
+                {
+                    MessageBox.Show("Phụ cấp không còn tồn tại trên cơ sở dữ liệu","Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    btnBack.PerformClick();
+                    return;
+                }
+                AllowanceDetail staff = new AllowanceDetail
+                {
+                    AL_ID = allowance.AL_ID,
+                    StaffID = staffID,
+                };
+                if (allowanceDetailBUS.Delete(staff))
+                {
+                    string operate = "Xoá";
+                    string operationDetail = $"Xoá phụ cấp {allowance.AllowanceName} của nhân viên {staff.StaffID}";
+                    history.Save(staff.StaffID, operate, operationDetail);
+                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID);
+                    salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staff.StaffID);
+                    monthSalaryDetailBUS.Save(salaryDetail);
+                    Reload();
+                }
+            }
+            catch (Exception ex)
+            {
+                CustomMessage.ExecptionCustom(ex);
             }
         }
         private void dgvCardDetail_CellClick(object sender, DataGridViewCellEventArgs e)

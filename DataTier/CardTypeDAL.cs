@@ -62,7 +62,7 @@ namespace QuanLyNhanSu.DataTier
         {
             try
             {
-                var cardType = quanLyNhanSu.CardTypes.Where(ct => ct.CT_ID == ct_ID).FirstOrDefault();
+                CardType cardType = quanLyNhanSu.CardTypes.Where(ct => ct.CT_ID == ct_ID).FirstOrDefault();
                 if (cardType != null)
                 {
                     CustomMessage.YesNoCustom("Có", "Không");
@@ -80,9 +80,9 @@ namespace QuanLyNhanSu.DataTier
             }
             catch(Exception ex)
             {
-                if (ex.InnerException.ToString().Contains("FK_Phieu_LoaiPhieu"))
+                if (ex.InnerException.ToString().Contains("FK"))
                 {
-                    MessageBox.Show("Loại phiếu vẫn còn phiếu. Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Loại phiếu vẫn còn phiếu. Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
                 else
