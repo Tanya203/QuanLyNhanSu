@@ -112,23 +112,30 @@ namespace QuanLyNhanSu.PresentationTier
         //////////////////////////////////////////////////////////////////////////////////////
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            AllowanceDetail allowanceDetail = new AllowanceDetail
+            try
             {
-                StaffID = staffID_AL,
-                AL_ID = cmbAllowance.SelectedValue.ToString(),
-            };
-            if (allowanceDetailBUS.Save(allowanceDetail))
-            {
-                allowanceDetail.Allowance = allowanceBUS.GetAllowance().FirstOrDefault(al => al.AL_ID == cmbAllowance.SelectedValue.ToString());
-                string operate = "Thêm";
-                string operationDetail = $"Thêm phụ cấp {cmbAllowance.Text} cho nhân viên {staffID_AL}";
-                history.Save(staff.StaffID, operate, operationDetail);
-                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(allowanceDetail.StaffID);
-                salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(allowanceDetail.StaffID);
-                monthSalaryDetailBUS.Save(salaryDetail);
-                Reload();
+                AllowanceDetail allowanceDetail = new AllowanceDetail
+                {
+                    StaffID = staffID_AL,
+                    AL_ID = cmbAllowance.SelectedValue.ToString(),
+                };
+                if (allowanceDetailBUS.Save(allowanceDetail))
+                {
+                    allowanceDetail.Allowance = allowanceBUS.GetAllowance().FirstOrDefault(al => al.AL_ID == cmbAllowance.SelectedValue.ToString());
+                    string operate = "Thêm";
+                    string operationDetail = $"Thêm phụ cấp {cmbAllowance.Text} cho nhân viên {staffID_AL}";
+                    history.Save(staff.StaffID, operate, operationDetail);
+                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(allowanceDetail.StaffID);
+                    salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(allowanceDetail.StaffID);
+                    monthSalaryDetailBUS.Save(salaryDetail);
+                    Reload();
+                }
+                txtAmount.Text = string.Empty;
             }
-            txtAmount.Text = string.Empty;           
+            catch (Exception ex)
+            {
+                CustomMessage.ExecptionCustom(ex);
+            }
         }
         private void DeleteButton()
         {
@@ -149,21 +156,28 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void DeleteAllowance(string alID, string alName)
         {
-            AllowanceDetail allowanceDetail = new AllowanceDetail
+            try
             {
-                StaffID = staffID_AL,
-                AL_ID = alID,
-            };
-            if (allowanceDetailBUS.Delete(allowanceDetail))
-            {
+                AllowanceDetail allowanceDetail = new AllowanceDetail
+                {
+                    StaffID = staffID_AL,
+                    AL_ID = alID,
+                };
+                if (allowanceDetailBUS.Delete(allowanceDetail))
+                {
 
-                string operate = "Xoá";
-                string operationDetail = $"Xoá phụ cấp {alName} của nhân viên {staffID_AL}";
-                history.Save(staff.StaffID, operate, operationDetail);
-                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID);
-                salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staff.StaffID);
-                monthSalaryDetailBUS.Save(salaryDetail);
-                Reload();
+                    string operate = "Xoá";
+                    string operationDetail = $"Xoá phụ cấp {alName} của nhân viên {staffID_AL}";
+                    history.Save(staff.StaffID, operate, operationDetail);
+                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID);
+                    salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staff.StaffID);
+                    monthSalaryDetailBUS.Save(salaryDetail);
+                    Reload();
+                }
+            }
+            catch(Exception ex)
+            {
+                CustomMessage.ExecptionCustom(ex);
             }
         }
         private void dgvAllowanceDetail_CellClick(object sender, DataGridViewCellEventArgs e)

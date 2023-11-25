@@ -62,9 +62,9 @@ namespace QuanLyNhanSu.DataTier
         }
         public bool Delete(string ps_ID)
         {
-            var position = quanLyNhanSu.Positions.Where(ps => ps.PS_ID == ps_ID).FirstOrDefault();
             try
             {
+                Position position = quanLyNhanSu.Positions.Where(ps => ps.PS_ID == ps_ID).FirstOrDefault();
                 if (position != null)
                 {
                     CustomMessage.YesNoCustom("Có", "Không");
@@ -81,9 +81,9 @@ namespace QuanLyNhanSu.DataTier
             }
             catch (Exception ex)
             {
-                if (ex.InnerException.ToString().Contains("FK_NhanVien_ChucVu"))
+                if (ex.InnerException.ToString().Contains("FK"))
                 {
-                    MessageBox.Show($"Vẫn còn nhân viên thuộc chức vụ {position.PositionName}. Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Vẫn còn nhân viên thuộc chức vụ. Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
                 CustomMessage.ExecptionCustom(ex);

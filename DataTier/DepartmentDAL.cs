@@ -58,10 +58,10 @@ namespace QuanLyNhanSu.DataTier.Models
         }
         public bool Delete(string dpID)
         {
-            var department = quanLyNhanSu.Departments.Where(dp => dp.DP_ID == dpID).FirstOrDefault();
             try
-            {                
-                if(department != null)
+            {
+                Department department = quanLyNhanSu.Departments.Where(dp => dp.DP_ID == dpID).FirstOrDefault();
+                if (department != null)
                 {
                     CustomMessage.YesNoCustom("Có", "Không");
                     DialogResult ketQua = MessageBox.Show($"Xác nhận xoá phòng ban {department.DepartmentName}?", "Thông báo",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
@@ -75,11 +75,11 @@ namespace QuanLyNhanSu.DataTier.Models
                 }
                 return false;
             }
-            catch(SqlException ex)
+            catch(Exception ex)
             {
-                if (ex.InnerException.ToString().Contains("FK_NhanVien_ChucVu"))
+                if (ex.InnerException.ToString().Contains("FK"))
                 {
-                    MessageBox.Show($"Chức vụ thuộc phòng ban {department.DepartmentName} vẫn còn nhân viên. Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Chức vụ thuộc phòng ban vẫn còn nhân viên. Không thể xoá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
                 CustomMessage.ExecptionCustom(ex);

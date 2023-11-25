@@ -63,9 +63,9 @@ namespace QuanLyNhanSu.DataTier
         }
         public bool Delete(string shiftID)
         {
-            Shift shift = quanLyNhanSu.Shifts.Where(c => c.ShiftID == shiftID).FirstOrDefault();
             try
-            {                
+            {
+                Shift shift = quanLyNhanSu.Shifts.Where(c => c.ShiftID == shiftID).FirstOrDefault();
                 if (shift != null)
                 {
                     CustomMessage.YesNoCustom("Có", "Không");
@@ -82,6 +82,11 @@ namespace QuanLyNhanSu.DataTier
             }
             catch (Exception ex)
             {
+                if (ex.InnerException.ToString().Contains("FK"))
+                {
+                    MessageBox.Show("Ca vẫn còn lịch. Không thể xoá!!!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
                 CustomMessage.ExecptionCustom(ex);
                 return false;
             }

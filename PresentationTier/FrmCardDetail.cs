@@ -352,13 +352,13 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (!CheckErrorInput())
-            {
-                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             try
             {
+                if (!CheckErrorInput())
+                {
+                    MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 decimal deliver = string.IsNullOrEmpty(txtDeliver.Text) ? 0 : decimal.Parse(txtDeliver.Text);
                 CardDetail cardDetail = new CardDetail
                 {
@@ -386,13 +386,13 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (!CheckErrorInput())
-            {
-                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             try
             {
+                if (!CheckErrorInput())
+                {
+                    MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 string editDetail = CheckChange();
                 decimal oldAmount = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == card.CardID && c.StaffID == txtStaffIDEdit.Text).Amount;
                 decimal oldDeliver = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == card.CardID && c.StaffID == txtStaffIDEdit.Text).Deliver;

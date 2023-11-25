@@ -5,13 +5,9 @@ using QuanLyNhanSu.utils;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
@@ -27,10 +23,10 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly PositionBUS positionBUS;
         private readonly DepartmentBUS departmentBUS;
+        private readonly CardBUS cardBUS;
         private readonly BonusDebtBUS bonusDebtBUS;
         private Staff staff;
         private bool checkLoad;
-        private readonly string formatMonth = "yyyy-MM";
         public FrmBonusDebt(string staffID)
         {
             InitializeComponent();
@@ -41,6 +37,7 @@ namespace QuanLyNhanSu.PresentationTier
             positionBUS = new PositionBUS();
             departmentBUS = new DepartmentBUS();
             bonusDebtBUS = new BonusDebtBUS();
+            cardBUS = new CardBUS();
             history = new SaveOperateHistory("Thưởng - nợ");
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Thưởng - nợ", staff);
@@ -275,14 +272,14 @@ namespace QuanLyNhanSu.PresentationTier
                 btnUpdate.Enabled = false;
         }
         private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            if (!CheckErrorInput())
-            {
-                MessageBox.Show("Lỗi","Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+        {            
             try
-            {
+            {   
+                if (!CheckErrorInput())
+                {
+                    MessageBox.Show("Lỗi", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 string editDetail = CheckChange();
                 CardDetail cardDetail = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == txtCardID.Text && c.StaffID == cmbStaff.Text);
                 cardDetail.Amount = decimal.Parse(txtAmount.Text);

@@ -236,13 +236,13 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (!CheckErrorInput())
-            {
-                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             try
             {
+                if (!CheckErrorInput())
+                {
+                    MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 string editDetail = CheckChange();
                 ContractType contractType = new ContractType
                 {

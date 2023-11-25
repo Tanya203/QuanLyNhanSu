@@ -202,6 +202,7 @@
     <Compile Include="DataTier\OperationDAL.cs" />
     <Compile Include="Functions\Authorizations.cs" />
     <Compile Include="Functions\AutoAdjustComboBox.cs" />
+    <Compile Include="Functions\CheckExist.cs" />
     <Compile Include="Functions\CustomMessage.cs" />
     <Compile Include="Functions\ImageHandle.cs" />
     <Compile Include="Functions\InputCheck.cs" />

@@ -125,9 +125,14 @@ namespace QuanLyNhanSu.DataTier
         }
         public bool Delete(string ws_ID,string staffID)
         {
-            TimeKeeping timeKeeping = quanLyNhanSu.TimeKeepings.Where(x => x.WS_ID == ws_ID && x.StaffID == staffID).FirstOrDefault();
             try
             {
+                TimeKeeping timeKeeping = quanLyNhanSu.TimeKeepings.Where(x => x.WS_ID == ws_ID && x.StaffID == staffID).FirstOrDefault();
+                if(timeKeeping.CheckInTime != null)
+                {
+                    MessageBox.Show("Nhân viên đã chấm công. Không thể xoá!!!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
                 if (timeKeeping != null)
                 {
                     CustomMessage.YesNoCustom("Có", "Không");

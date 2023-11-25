@@ -286,16 +286,23 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            Position position = new Position
+            try
             {
-                PS_ID = txtPositionID.Text
-            };
-            if (positionBUS.Delete(position))
+                Position position = new Position
+                {
+                    PS_ID = txtPositionID.Text
+                };
+                if (positionBUS.Delete(position))
+                {
+                    string operationDetail = $"Xoá chức vụ {txtPositionName.Text}:\n - Phòng ban: {cmbDepartment.Text}";
+                    string operate = "Xoá";
+                    history.Save(staff.StaffID, operate, operationDetail);
+                    Reload();
+                }
+            }
+            catch(Exception ex)
             {
-                string operationDetail = $"Xoá chức vụ {txtPositionName.Text}:\n - Phòng ban: {cmbDepartment.Text}";
-                string operate = "Xoá";
-                history.Save(staff.StaffID, operate, operationDetail);
-                Reload();
+                CustomMessage.ExecptionCustom(ex);
             }
         }
         private void btnBack_Click(object sender, EventArgs e)

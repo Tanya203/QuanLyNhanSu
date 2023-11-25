@@ -22,6 +22,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly SaveOperateHistory history;
         private readonly Authorizations authorizations;
         private Staff staff;
+        private bool confirmPassoword;
         private int check;
         private bool operate;
         public FrmAuthorization(string staffID)
@@ -36,6 +37,7 @@ namespace QuanLyNhanSu.PresentationTier
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Phân quyền",staff);
             operate = false;
+            confirmPassoword = false;
         }
         private void FrmPhanQuyen_Load(object sender, EventArgs e)
         {
@@ -156,18 +158,31 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
-                DataTier.Models.Authorization authorization = new DataTier.Models.Authorization
+                FrmConfirmPassword open = new FrmConfirmPassword(staff.StaffID);
+                if (!confirmPassoword)
                 {
-                    PS_ID = psID,
-                    AU_ID = auID,
-                    Authorize = authorize,
-                };
-                if (authorizationBUS.Save(authorization))
-                    history.Save(staff.StaffID, operate, operationDetail);
-                if (string.IsNullOrEmpty(txtSearch.Text))
-                    LoadAuthorizations();
-                else
-                    LoadAuthorizationsSearch(txtSearch.Text);
+                    open.ShowDialog();
+                    if (open.Check)
+                    {
+                        confirmPassoword = true;
+                        open.Check = false;
+                    }
+                }
+                if (confirmPassoword)
+                {
+                    DataTier.Models.Authorization authorization = new DataTier.Models.Authorization
+                    {
+                        PS_ID = psID,
+                        AU_ID = auID,
+                        Authorize = authorize,
+                    };
+                    if (authorizationBUS.Save(authorization))
+                        history.Save(staff.StaffID, operate, operationDetail);
+                    if (string.IsNullOrEmpty(txtSearch.Text))
+                        LoadAuthorizations();
+                    else
+                        LoadAuthorizationsSearch(txtSearch.Text);
+                }
             }
             catch (Exception ex)
             {

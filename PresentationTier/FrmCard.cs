@@ -24,8 +24,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly CardBUS cardBUS;
         private readonly CardTypeBUS cardTypeBUS;
         private readonly CardDetailBUS cardDetailBUS;
-        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
-        private readonly SalaryHandle salary;
         private Staff staff;
         private readonly string formatDate = "yyyy-MM-dd";
         public FrmCard(string staffID)
@@ -37,8 +35,6 @@ namespace QuanLyNhanSu.PresentationTier
             cardBUS = new CardBUS();
             cardTypeBUS = new CardTypeBUS();
             cardDetailBUS = new CardDetailBUS();
-            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
-            salary = new SalaryHandle();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Phiếu", staff);
         }
@@ -172,6 +168,7 @@ namespace QuanLyNhanSu.PresentationTier
             FrmCardDetail open = new FrmCardDetail(staffID, cardID);
             redirect.RedirectForm(open, this);
         }
+        
         private void DeleteCard(string cardID, string cardType, string dateCreate)
         {
             try
@@ -223,7 +220,7 @@ namespace QuanLyNhanSu.PresentationTier
                 if (cardBUS.Save(card))
                 {
                     string operate = "Thêm";
-                    string operationDetail = "Thêm phiếu thưởng";
+                    string operationDetail = $"Thêm phiếu {cmbCardType.Text}";
                     history.Save(staff.StaffID, operate, operationDetail);
                     Reload();
                 }                

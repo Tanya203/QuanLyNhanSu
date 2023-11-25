@@ -59,9 +59,9 @@ namespace QuanLyNhanSu.DataTier.Models
         }
         public bool Delete(string alID)
         {
-            var allowance = quanLyNhanSu.Allowances.Where(al => al.AL_ID == alID).FirstOrDefault();
             try
-            {                
+            {
+                Allowance allowance = quanLyNhanSu.Allowances.Where(al => al.AL_ID == alID).FirstOrDefault();
                 if (allowance != null)
                 {
                     CustomMessage.YesNoCustom("Có", "Không");
@@ -78,6 +78,11 @@ namespace QuanLyNhanSu.DataTier.Models
             }
             catch (Exception ex)
             {
+                if (ex.InnerException.ToString().Contains("FK"))
+                {
+                    MessageBox.Show("Phụ cấp vẫn còn nhân viên. Không thể xoá!!!","Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
                 CustomMessage.ExecptionCustom(ex);
                 return false;
             }
