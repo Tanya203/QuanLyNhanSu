@@ -26,8 +26,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly PositionBUS positionBUS;
         private readonly CardBUS cardBUS;
         private readonly CardDetailBUS cardDetailBUS;
-        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
-        private readonly SalaryHandle salary;
+        private readonly CheckExist checkExist;
         private Staff staff;
         private Card card;
         public FrmCardDetail(string staffID, string cardID)
@@ -40,8 +39,7 @@ namespace QuanLyNhanSu.PresentationTier
             cardDetailBUS = new CardDetailBUS();
             departmentBUS = new DepartmentBUS();
             positionBUS = new PositionBUS();
-            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
-            salary = new SalaryHandle();
+            checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             card = cardBUS.GetCard().FirstOrDefault(c => c.CardID == cardID);
             authorizations = new Authorizations("Chi tiết phiếu", staff);
@@ -354,6 +352,16 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckCard(txtCardID.Text))
+                {
+                    btnBack.PerformClick();
+                    return;
+                }
+                if (!checkExist.CheckStaff(cmbStaff.SelectedValue.ToString()) || !checkExist.CheckCardDetailInserted(txtCardID.Text, cmbStaff.SelectedValue.ToString()))
+                {
+                    Reload();
+                    return;
+                }
                 if (!CheckErrorInput())
                 {
                     MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -388,6 +396,16 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckCard(txtCardID.Text))
+                {
+                    btnBack.PerformClick();
+                    return;
+                }
+                if(!checkExist.CheckCardDetail(txtCardID.Text, txtStaffIDEdit.Text))
+                {
+                    Reload();
+                    return;
+                }
                 if (!CheckErrorInput())
                 {
                     MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -443,6 +461,16 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckCard(txtCardID.Text))
+                {
+                    btnBack.PerformClick();
+                    return;
+                }
+                if (!checkExist.CheckCardDetail(txtCardID.Text, txtStaffIDEdit.Text))
+                {
+                    Reload();
+                    return;
+                }
                 decimal amount = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == card.CardID && c.StaffID == txtStaffIDEdit.Text).Amount;
                 decimal deliver = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == card.CardID && c.StaffID == txtStaffIDEdit.Text).Deliver;
                 CardDetail cardDetail = new CardDetail()

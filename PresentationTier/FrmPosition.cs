@@ -21,6 +21,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly PositionBUS positionBUS;
         private readonly DepartmentBUS departmentBUS;       
         private readonly AuthorizationBUS authorizationBUS;
+        private readonly CheckExist checkExist;
         private readonly IEnumerable<Authority> authoritiesList;
         private Staff staff;
         public FrmPosition(string staffID)
@@ -33,6 +34,7 @@ namespace QuanLyNhanSu.PresentationTier
             redirect = new FormHandle();
             authorizationBUS = new AuthorizationBUS();
             authorityBUS = new AuthorityBUS();
+            checkExist = new CheckExist();
             authoritiesList = authorityBUS.GetAuthority();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Chức vụ", staff);
@@ -219,6 +221,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckDepartment(cmbDepartment.SelectedValue.ToString()))
+                {
+                    Reload();
+                    return;
+                }
                 if (!CheckInputError())
                 {
                     MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -260,6 +267,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if(!checkExist.CheckPosition(txtPositionID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 if (!CheckInputError())
                 {
                     MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -288,6 +300,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckPosition(txtPositionID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 Position position = new Position
                 {
                     PS_ID = txtPositionID.Text

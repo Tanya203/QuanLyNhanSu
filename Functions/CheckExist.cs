@@ -1,10 +1,5 @@
-﻿using QuanLyNhanSu.DataTier.Models;
-using QuanLyNhanSu.LogicTier;
-using System;
-using System.Collections.Generic;
+﻿using QuanLyNhanSu.LogicTier;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.Functions
@@ -23,7 +18,6 @@ namespace QuanLyNhanSu.Functions
         private readonly CardTypeBUS cardTypeBUS;
         private readonly WorkScheduleBUS workScheduleBUS;
         private readonly WorkScheduleDetailBUS workScheduleDetailBUS;
-        private readonly TimeKeepingBUS timeKeepingBUS;
         private readonly ContractTypeBUS contractTypeBUS;
         public CheckExist()
         {
@@ -38,7 +32,6 @@ namespace QuanLyNhanSu.Functions
             cardDetailBUS = new CardDetailBUS();
             workScheduleBUS = new WorkScheduleBUS();
             workScheduleDetailBUS = new WorkScheduleDetailBUS();
-            timeKeepingBUS = new TimeKeepingBUS();
             contractTypeBUS = new ContractTypeBUS();
         }
         public bool CheckStaff(string staffID)
@@ -77,11 +70,11 @@ namespace QuanLyNhanSu.Functions
             }
             return true;
         }
-        private bool CheckAllowanceDetail(string alID, string staffID)
+        public bool CheckAllowanceDetail(string alID, string staffID)
         {
             if (allowanceDetailBUS.GetAllowanceDetail().FirstOrDefault(al => al.AL_ID == alID && al.StaffID == staffID) == null)
             {
-                MessageBox.Show("Nhân tồn tại trên cơ sở dữ liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Nhân viên trong phụ cấp không còn tồn tại trên cơ sở dữ liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
@@ -131,7 +124,7 @@ namespace QuanLyNhanSu.Functions
             }
             return true;
         }
-        private bool CheckWorkSchedule(string wsID)
+        public bool CheckWorkSchedule(string wsID)
         {
             if (workScheduleBUS.GetWorkSchedule().FirstOrDefault(ws => ws.WS_ID == wsID) == null)
             {
@@ -140,11 +133,47 @@ namespace QuanLyNhanSu.Functions
             }
             return true;
         }
-        private bool CheckWorkScheduleDetail(string wsID, string staffID)
+        public bool CheckWorkScheduleDetail(string wsID, string staffID)
         {
             if (workScheduleDetailBUS.GetWorkSchduleDetail().FirstOrDefault(s => s.WS_ID == wsID && s.StaffID == staffID) == null)
             {
-                MessageBox.Show("Nhân viên không còn trong lịch tồn tại trên cơ sở dữ liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Nhân viên trong lịch không còn tồn tại trên cơ sở dữ liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+        public bool CheckContractType(string ctID)
+        {
+            if (contractTypeBUS.GetContractType().FirstOrDefault(ct => ct.CT_ID == ctID) == null)
+            {
+                MessageBox.Show("Loại hợp đồng không còn tồn tại trên cơ sở dữ liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+        public bool CheckAllowanceDetailInserted(string alID, string staffID)
+        {
+            if (allowanceDetailBUS.GetAllowanceDetail().FirstOrDefault(al => al.AL_ID == alID && al.StaffID == staffID) != null)
+            {
+                MessageBox.Show("Phụ cấp đã được thêm cho nhân viên trên cơ sở dữ liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+        public bool CheckCardDetailInserted(string cardID, string staffID)
+        {
+            if (cardDetailBUS.GetCardDetail().FirstOrDefault(s => s.CardID == cardID && s.StaffID == staffID) != null)
+            {
+                MessageBox.Show("Nhân viên đã được thêm vào phiếu trên cơ sở dữ liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+        public bool CheckWorkScheduleDetailInserted(string wsID, string staffID, string shiftID)
+        {
+            if (workScheduleDetailBUS.GetWorkSchduleDetail().FirstOrDefault(s => s.WS_ID == wsID && s.StaffID == staffID && s.ShiftID == shiftID) != null)
+            {
+                MessageBox.Show("Nhân viên đã được thêm vào lịch trong ca trên cơ sở dữ liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;

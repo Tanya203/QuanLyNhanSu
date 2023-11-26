@@ -19,6 +19,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly StaffBUS staffBUS;
         private readonly ContractTypeBUS contractTypeBUS;
         private readonly TimeKeepingMethodBUS timeKeepingMethodBUS;
+        private readonly CheckExist checkExist;
         private Staff staff;
         public FrmContractType(string staffID)
         {
@@ -28,6 +29,7 @@ namespace QuanLyNhanSu.PresentationTier
             redirect = new FormHandle();
             contractTypeBUS = new ContractTypeBUS();
             timeKeepingMethodBUS = new TimeKeepingMethodBUS();
+            checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Loại hợp đồng", staff);
         }
@@ -208,13 +210,13 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (!CheckErrorInput())
-            {
-                MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             try
             {
+                if (!CheckErrorInput())
+                {
+                    MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 ContractType contractType = new ContractType
                 {
                     CT_ID = "",
@@ -238,6 +240,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckContractType(txtContractTypeID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 if (!CheckErrorInput())
                 {
                     MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -269,6 +276,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckContractType(txtContractTypeID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 ContractType contractType = new ContractType
                 {
                     CT_ID = txtContractTypeID.Text

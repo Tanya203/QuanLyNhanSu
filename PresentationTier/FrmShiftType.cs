@@ -18,6 +18,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly FormHandle redirect;
         private readonly StaffBUS staffBUS;
         private readonly ShiftTypeBUS shiftTypeBUS;
+        private readonly CheckExist checkExist;
         private Staff staff;
         public FrmShiftType(string staffID)
         {
@@ -26,6 +27,7 @@ namespace QuanLyNhanSu.PresentationTier
             redirect = new FormHandle();
             shiftTypeBUS = new ShiftTypeBUS();
             staffBUS = new StaffBUS();
+            checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Loại ca", staff);
 
@@ -214,6 +216,11 @@ namespace QuanLyNhanSu.PresentationTier
         {            
             try
             {
+                if(!checkExist.CheckShiftType(txtShiftTypeID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 if (!CheckErrorInput())
                 {
                     MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -245,6 +252,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckShiftType(txtShiftTypeID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 ShiftType shiftType = new ShiftType
                 {
                     ST_ID = txtShiftTypeID.Text

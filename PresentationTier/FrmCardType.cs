@@ -15,8 +15,8 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly SaveOperateHistory history;
         private readonly FormHandle redirect;
         private readonly StaffBUS staffBUS;
-        private readonly CardBUS cardBUS;
         private readonly CardTypeBUS cardTypeBUS;
+        private readonly CheckExist checkExist;
         private Staff staff;
         public FrmCardType(string staffID)
         {
@@ -24,8 +24,8 @@ namespace QuanLyNhanSu.PresentationTier
             staffBUS = new StaffBUS();
             history = new SaveOperateHistory("Loại phiếu");
             redirect = new FormHandle();
-            cardBUS = new CardBUS();
             cardTypeBUS = new CardTypeBUS();
+            checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Loại phiếu", staff);
         }
@@ -215,6 +215,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if(!checkExist.CheckCardType(txtCardTypeID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 string editDetail = CheckChange();
                 CardType cardType = new CardType
                 {
@@ -241,6 +246,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckCardType(txtCardTypeID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 CardType cardType = new CardType
                 {
                     CT_ID = txtCardTypeID.Text

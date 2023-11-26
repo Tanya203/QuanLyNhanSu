@@ -411,7 +411,7 @@
             this.colHinhThucChamCong,
             this.colSoLuongNhanVien});
             this.dgvContractType.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvContractType.Location = new System.Drawing.Point(0, 419);
+            this.dgvContractType.Location = new System.Drawing.Point(0, 405);
             this.dgvContractType.Name = "dgvContractType";
             this.dgvContractType.ReadOnly = true;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
@@ -426,7 +426,7 @@
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvContractType.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvContractType.RowTemplate.Height = 24;
-            this.dgvContractType.Size = new System.Drawing.Size(1924, 564);
+            this.dgvContractType.Size = new System.Drawing.Size(1924, 578);
             this.dgvContractType.TabIndex = 11;
             this.dgvContractType.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContractType_CellClick);
             // 
@@ -484,7 +484,7 @@
             this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errProvider.ContainerControl = this;
             // 
-            // FrmQuanLyLoaiHopDong
+            // FrmContractType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -497,7 +497,7 @@
             this.Controls.Add(this.lblContractType);
             this.Controls.Add(this.dgvContractType);
             this.MinimumSize = new System.Drawing.Size(1918, 1018);
-            this.Name = "FrmQuanLyLoaiHopDong";
+            this.Name = "FrmContractType";
             this.Text = "frmQuanLyLoaiHopDong";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmQuanLyLoaiHopDong_Load);
