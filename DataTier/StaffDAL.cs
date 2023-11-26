@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using WECPOFLogic;
 using QuanLyNhanSu.LogicTier;
 using System.Data.Entity.Migrations;
 using QuanLyNhanSu.Functions;

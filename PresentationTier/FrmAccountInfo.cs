@@ -8,8 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
-using WECPOFLogic;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace QuanLyNhanSu.PresentationTier
 {

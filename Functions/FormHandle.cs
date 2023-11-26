@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace QuanLyNhanSu.Functions
 {
-    
+
     public class FormHandle
     {
         private Form open;

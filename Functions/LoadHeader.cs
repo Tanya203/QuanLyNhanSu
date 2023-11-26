@@ -1,6 +1,5 @@
 ﻿using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.utils;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.Functions
