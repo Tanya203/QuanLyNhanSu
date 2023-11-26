@@ -7,11 +7,9 @@ using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Printing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 
 namespace QuanLyNhanSu.PresentationTier
 {

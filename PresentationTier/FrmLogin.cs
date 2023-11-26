@@ -3,10 +3,7 @@ using QuanLyNhanSu.Functions;
 using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.PresentationTier;
 using System;
-using System.Data;
-using System.Linq;
 using System.Windows.Forms;
-using WECPOFLogic;
 
 namespace QuanLyNhanSu
 {

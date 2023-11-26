@@ -308,8 +308,8 @@ namespace QuanLyNhanSu.PresentationTier
                             staff.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staff.StaffID);
                             monthSalaryDetailBUS.Save(staff);
                         }
-                        Reload();
                     }
+                    Reload();
                 }
             }
             catch(Exception ex)

@@ -1,26 +1,22 @@
 ﻿using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.Functions;
 using QuanLyNhanSu.LogicTier;
-using QuanLyNhanSu.utils;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows.Forms;
-using WECPOFLogic;
 
 namespace QuanLyNhanSu.DataTier
 {
     internal class WorkScheduleDetailDAL
     {
         private readonly QuanLyNhanSuContextDB quanLyNhanSu;
-        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly SalaryHandle salary;
         public WorkScheduleDetailDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
-            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
             salary = new SalaryHandle();
         }
         public IEnumerable<WorkScheduleDetailViewModels> GetAllWorkSchduleDetail(string ws_ID)

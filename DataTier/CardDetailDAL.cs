@@ -1,14 +1,11 @@
 ﻿using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.Functions;
-using QuanLyNhanSu.utils;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
-using WECPOFLogic;
 
 namespace QuanLyNhanSu.DataTier
 {

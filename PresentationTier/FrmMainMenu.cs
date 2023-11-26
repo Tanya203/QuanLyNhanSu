@@ -6,9 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading;
-using System.Web.Services.Description;
 using System.Windows.Forms;
-using WECPOFLogic;
 
 namespace QuanLyNhanSu.PresentationTier
 {

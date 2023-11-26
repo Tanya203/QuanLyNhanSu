@@ -9,9 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
-using WECPOFLogic;
 
 namespace QuanLyNhanSu.PresentationTier
 {

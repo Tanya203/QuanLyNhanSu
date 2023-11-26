@@ -1,8 +1,5 @@
-﻿using QuanLyNhanSu.DataTier.Models;
-using QuanLyNhanSu.Functions;
-using QuanLyNhanSu.LogicTier;
+﻿using QuanLyNhanSu.LogicTier;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier

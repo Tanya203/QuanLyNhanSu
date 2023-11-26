@@ -3,10 +3,8 @@ using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
-using WECPOFLogic;
 
 
 namespace QuanLyNhanSu.DataTier.Models

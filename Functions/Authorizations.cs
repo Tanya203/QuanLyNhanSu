@@ -1,8 +1,6 @@
 ﻿using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.LogicTier;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Mapping;
 using System.Linq;
 using System.Windows.Forms;
 
