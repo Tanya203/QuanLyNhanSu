@@ -25,11 +25,13 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly StaffBUS staffBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly SalaryHandle salary;
+        private readonly CheckExist checkExist;
         private Staff staff;
         private WorkSchedule workSchedule;
         private readonly List<TimeKeeping> timeKeepings;
         private bool checkOperate;
         private readonly string formatDate = "yyyy-MM-dd";
+        private readonly string formatHour = "HH:mm:ss";
 
         public FrmWorkScheduleDetail(string staffID, string wsID)
         {
@@ -43,6 +45,7 @@ namespace QuanLyNhanSu.PresentationTier
             shiftTypeBUS = new ShiftTypeBUS();
             monthSalaryDetailBUS = new MonthSalaryDetailBUS();
             salary = new SalaryHandle();
+            checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             workSchedule = workScheduleBUS.GetWorkSchedule().FirstOrDefault(ws => ws.WS_ID == wsID);
             timeKeepings = workScheduleDetailBUS.GetWorkSchduleDetail().Where(ws => ws.WS_ID == wsID).ToList();
@@ -127,14 +130,17 @@ namespace QuanLyNhanSu.PresentationTier
             cmbStaffID.ValueMember = "StaffID";
             int maxShift = shiftBUS.GetShift().Count();
             int countShift = 0;
+            string check = null;
             List<Staff> staffList = staffBUS.GetStaff().Where(s => s.Position.Department.DP_ID == staff.Position.DP_ID).ToList();
             foreach (TimeKeeping s in timeKeepings)
             {
-                countShift++;
+                if (check == null || check != s.StaffID)
+                    countShift = 1;
+                else
+                    countShift++;
                 if (countShift == maxShift)
                     staffList.RemoveAll(staff => staff.StaffID == s.StaffID);                
             }
-                
             cmbStaffID.DataSource = staffList;
             if (string.IsNullOrEmpty(cmbStaffID.Text))
             {
@@ -158,6 +164,11 @@ namespace QuanLyNhanSu.PresentationTier
             else
                 foreach(TimeKeeping s in staffWorkSchedule)
                     shifts.RemoveAll(shift => shift.ShiftID == s.ShiftID);
+            if(DateTime.Parse(dtpWorkDate.Text) == DateTime.Now.Date)
+            {
+                TimeSpan now = TimeSpan.Parse(DateTime.Now.ToString(formatHour));
+                shifts = shifts.Where(sh => sh.BeginTime > now || sh.EndTime > now).ToList();
+            }
             cmbShift.DataSource = shifts;
             if (string.IsNullOrEmpty(cmbShift.Text))
             {
@@ -253,6 +264,18 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckWorkSchedule(txtWorkScheduleID.Text))
+                {
+                    btnBack.PerformClick();
+                    return;
+                }
+                if( !checkExist.CheckWorkScheduleDetailInserted(txtWorkScheduleID.Text, cmbStaffID.SelectedValue.ToString(), cmbShift.SelectedValue.ToString())
+                    ||!checkExist.CheckShift(cmbShift.SelectedValue.ToString()) || 
+                    !checkExist.CheckShiftType(cmbShiftType.SelectedValue.ToString()) || !checkExist.CheckStaff(cmbStaffID.SelectedValue.ToString()))
+                {
+                    Reload();
+                    return;
+                }
                 TimeKeeping timeKeeping = new TimeKeeping
                 {
                     WS_ID = workSchedule.WS_ID,
@@ -295,6 +318,16 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckWorkSchedule(txtWorkScheduleID.Text))
+                {
+                    btnBack.PerformClick();
+                    return;
+                }
+                if(!checkExist.CheckWorkScheduleDetail(txtWorkScheduleID.Text, staffID))
+                {
+                    Reload();
+                    return;
+                }
                 TimeKeeping timeKeeping = new TimeKeeping
                 {
                     WS_ID = txtWorkScheduleID.Text,
@@ -348,50 +381,56 @@ namespace QuanLyNhanSu.PresentationTier
         }
         public void UpdateAbsence(string staffID)
         {
-            TimeKeeping staff = timeKeepings.FirstOrDefault(s => s.StaffID == staffID);
-            string announce;
-            if (!staff.AbsenceUse)
+            try
             {
-                staff.AbsenceUse = true;
-                announce = "Thêm phép cho nhân viên";
-            }
-            else
-            {
-                staff.AbsenceUse = false;
-                announce = "Xoá phép của nhân viên";
-            }
-            CustomMessage.YesNoCustom("Xác nhận", "Huỷ");
-            DialogResult ketQua = MessageBox.Show($"{announce} {staffID} ngày {dtpWorkDate.Text}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (ketQua == DialogResult.Yes)
-            {
-                if (workScheduleDetailBUS.Save(staff))
+                if (!checkExist.CheckWorkSchedule(txtWorkScheduleID.Text))
                 {
-                    string operate;
-                    string operationDetail;
-                    TimeSpan hour;
-                    decimal totalHours = 0;
-                    if(staff.Shift.BeginTime > staff.Shift.EndTime)
-                        hour = staff.Shift.EndTime.Add(new TimeSpan(24, 0, 0)) - staff.Shift.BeginTime;
-                    else 
-                        hour = staff.Shift.EndTime - staff.Shift.BeginTime;
-                    totalHours = (decimal)hour.TotalHours * staff.ShiftType.SalaryCoefficient * (decimal)0.8;
-                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staffID);
-                    if (announce.Contains("Thêm"))
-                    {
-                        operate = "Thêm phép";
-                        operationDetail = $"Thêm phép cho nhân viên {staffID} ngày {dtpWorkDate.Text} - phòng ban {txtDepartment.Text}";
-                        salaryDetail.TotalWorkHours += totalHours;
-                    }
-                    else
-                    {
-                        operate = "Xoá phép";
-                        operationDetail = $"Xoá phép cho nhân viên {staffID} ngày {dtpWorkDate.Text} - phòng ban {txtDepartment.Text}";
-                        salaryDetail.TotalWorkHours -= totalHours;
-                    }
-                    history.Save(staff.StaffID, operate, operationDetail);
-                    monthSalaryDetailBUS.Save(salaryDetail);
-                    Reload();
+                    btnBack.PerformClick();
+                    return;
                 }
+                if(!checkExist.CheckWorkScheduleDetail(txtWorkScheduleID.Text, staffID))
+                {
+                    Reload();
+                    return;
+                }
+                TimeKeeping staff = timeKeepings.FirstOrDefault(s => s.StaffID == staffID);
+                string announce;
+                if (!staff.AbsenceUse)
+                {
+                    staff.AbsenceUse = true;
+                    announce = "Thêm phép cho nhân viên";
+                }
+                else
+                {
+                    staff.AbsenceUse = false;
+                    announce = "Xoá phép của nhân viên";
+                }
+                CustomMessage.YesNoCustom("Xác nhận", "Huỷ");
+                DialogResult ketQua = MessageBox.Show($"{announce} {staffID} ngày {dtpWorkDate.Text}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (ketQua == DialogResult.Yes)
+                {
+                    if (workScheduleDetailBUS.Save(staff))
+                    {
+                        string operate;
+                        string operationDetail;
+                        if (announce.Contains("Thêm"))
+                        {
+                            operate = "Thêm phép";
+                            operationDetail = $"Thêm phép cho nhân viên {staffID} ngày {dtpWorkDate.Text} - phòng ban {txtDepartment.Text}";
+                        }
+                        else
+                        {
+                            operate = "Xoá phép";
+                            operationDetail = $"Xoá phép cho nhân viên {staffID} ngày {dtpWorkDate.Text} - phòng ban {txtDepartment.Text}";
+                        }
+                        history.Save(staff.StaffID, operate, operationDetail);
+                        Reload();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                CustomMessage.ExecptionCustom(ex);
             }
         }
     }

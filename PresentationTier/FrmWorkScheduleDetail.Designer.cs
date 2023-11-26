@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblPositionLoginValue = new System.Windows.Forms.Label();
             this.lblPositionLogin = new System.Windows.Forms.Label();
             this.lblDepartmentLoginValue = new System.Windows.Forms.Label();
@@ -256,7 +256,7 @@
             this.cmbStaffID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStaffID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStaffID.FormattingEnabled = true;
-            this.cmbStaffID.Location = new System.Drawing.Point(607, 16);
+            this.cmbStaffID.Location = new System.Drawing.Point(607, 21);
             this.cmbStaffID.Name = "cmbStaffID";
             this.cmbStaffID.Size = new System.Drawing.Size(255, 33);
             this.cmbStaffID.TabIndex = 7;
@@ -284,7 +284,7 @@
             // 
             this.lblStaffID.AutoSize = true;
             this.lblStaffID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStaffID.Location = new System.Drawing.Point(419, 19);
+            this.lblStaffID.Location = new System.Drawing.Point(419, 26);
             this.lblStaffID.Name = "lblStaffID";
             this.lblStaffID.Size = new System.Drawing.Size(149, 25);
             this.lblStaffID.TabIndex = 53;
@@ -435,8 +435,8 @@
             this.dgvWorkScheduleDetail.ReadOnly = true;
             this.dgvWorkScheduleDetail.RowHeadersVisible = false;
             this.dgvWorkScheduleDetail.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvWorkScheduleDetail.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvWorkScheduleDetail.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvWorkScheduleDetail.RowTemplate.Height = 24;
             this.dgvWorkScheduleDetail.Size = new System.Drawing.Size(1924, 556);
             this.dgvWorkScheduleDetail.TabIndex = 15;

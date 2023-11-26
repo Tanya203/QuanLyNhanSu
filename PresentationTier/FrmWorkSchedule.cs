@@ -20,6 +20,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly FormHandle redirect;
         private readonly WorkScheduleBUS workScheduleBUS;
         private readonly StaffBUS staffBUS;
+        private readonly CheckExist checkExist;
         private Staff staff;
         private readonly string formatDate = "yyyy-MM-dd";
         public FrmWorkSchedule(string staffID)
@@ -29,6 +30,7 @@ namespace QuanLyNhanSu.PresentationTier
             history = new SaveOperateHistory("Lịch làm việc");
             redirect = new FormHandle();
             workScheduleBUS = new WorkScheduleBUS();
+            checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Lịch làm việc", staff);
         }
@@ -142,6 +144,11 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void OpenWorkScheduleDetail(string staffID, string wsID)
         {
+            if (!checkExist.CheckWorkSchedule(wsID))
+            {
+                Reload();
+                return;
+            }
             FrmWorkScheduleDetail open = new FrmWorkScheduleDetail(staffID, wsID);
             redirect.RedirectForm(open, this);
         }
@@ -149,6 +156,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckWorkSchedule(wsID))
+                {
+                    Reload();
+                    return;
+                }
                 WorkSchedule workSchedule = new WorkSchedule
                 {
                     WS_ID = wsID,

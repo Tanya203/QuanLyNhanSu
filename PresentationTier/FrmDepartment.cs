@@ -17,6 +17,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly SaveOperateHistory history;
         private readonly FormHandle redirect;
         private readonly StaffBUS staffBUS;
+        private readonly CheckExist checkExist;
         private Staff staff;
         public FrmDepartment(string staffID)
         {
@@ -24,7 +25,8 @@ namespace QuanLyNhanSu.PresentationTier
             departmentBUS = new DepartmentBUS();
             history = new SaveOperateHistory("Phòng ban");
             redirect = new FormHandle();           
-            staffBUS = new StaffBUS();          
+            staffBUS = new StaffBUS();
+            checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Phòng ban", staff);
         }
@@ -213,6 +215,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if(!checkExist.CheckDepartment(txtDepartmentID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 if (!CheckErrorInput())
                 {
                     MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -240,6 +247,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckDepartment(txtDepartmentID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 Department department = new Department
                 {
                     DP_ID = txtDepartmentID.Text

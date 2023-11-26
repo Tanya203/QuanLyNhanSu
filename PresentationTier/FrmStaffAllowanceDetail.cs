@@ -22,6 +22,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly AllowanceBUS allowanceBUS;
         private readonly AllowanceDetailBUS allowanceDetailBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
+        private readonly CheckExist checkExist;
         private readonly SalaryHandle salary;
         private Staff staff;
         private string staffID_AL;
@@ -36,6 +37,7 @@ namespace QuanLyNhanSu.PresentationTier
             staffBUS = new StaffBUS();
             monthSalaryDetailBUS = new MonthSalaryDetailBUS();
             salary = new SalaryHandle();
+            checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             this.check = check;
             this.staffID_AL = staffID_AL;
@@ -114,6 +116,16 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckStaff(staffID_AL))
+                {
+                    btnBack.PerformClick();
+                    return;
+                }
+                if(!checkExist.CheckAllowance(cmbAllowance.SelectedValue.ToString()) || !checkExist.CheckAllowanceDetailInserted(cmbAllowance.SelectedValue.ToString(), staffID_AL))
+                {
+                    Reload();
+                    return;
+                }
                 AllowanceDetail allowanceDetail = new AllowanceDetail
                 {
                     StaffID = staffID_AL,
@@ -158,6 +170,16 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckStaff(staffID_AL))
+                {
+                    btnBack.PerformClick();
+                    return;
+                }
+                if (!checkExist.CheckAllowanceDetail(alID ,staffID_AL))
+                {
+                    Reload();
+                    return;
+                }
                 AllowanceDetail allowanceDetail = new AllowanceDetail
                 {
                     StaffID = staffID_AL,

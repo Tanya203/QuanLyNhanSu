@@ -17,6 +17,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly FormHandle redirect;
         private readonly StaffBUS staffBUS;
         private readonly ShiftBUS shiftBUS;
+        private readonly CheckExist checkExist;
         private Staff staff;
         public FrmShift(string staffID)
         {
@@ -25,6 +26,7 @@ namespace QuanLyNhanSu.PresentationTier
             redirect = new FormHandle();
             shiftBUS = new ShiftBUS();
             staffBUS = new StaffBUS();
+            checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Ca", staff);
             dtpStartTime.Text = "00:00";
@@ -291,6 +293,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckShift(txtShiftID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 if (!CheckErrorInput())
                 {
                     MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -323,6 +330,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckShift(txtShiftID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 Shift shift = new Shift
                 {
                     ShiftID = txtShiftID.Text,

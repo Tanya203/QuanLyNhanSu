@@ -63,7 +63,7 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(884, 370);
+            this.txtSearch.Location = new System.Drawing.Point(896, 301);
             this.txtSearch.MaxLength = 50;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(299, 30);
@@ -75,7 +75,7 @@
             // 
             this.lblWorkSchedule.AutoSize = true;
             this.lblWorkSchedule.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWorkSchedule.Location = new System.Drawing.Point(822, 116);
+            this.lblWorkSchedule.Location = new System.Drawing.Point(823, 119);
             this.lblWorkSchedule.Name = "lblWorkSchedule";
             this.lblWorkSchedule.Size = new System.Drawing.Size(318, 32);
             this.lblWorkSchedule.TabIndex = 57;
@@ -88,7 +88,7 @@
             this.pnlMenu.Controls.Add(this.lblWorkDate);
             this.pnlMenu.Controls.Add(this.btnAdd);
             this.pnlMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlMenu.Location = new System.Drawing.Point(668, 193);
+            this.pnlMenu.Location = new System.Drawing.Point(671, 154);
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(581, 141);
             this.pnlMenu.TabIndex = 56;
@@ -147,7 +147,7 @@
             this.colChucVu,
             this.colNgaylam});
             this.dgvWorkSchedule.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvWorkSchedule.Location = new System.Drawing.Point(0, 406);
+            this.dgvWorkSchedule.Location = new System.Drawing.Point(0, 334);
             this.dgvWorkSchedule.Name = "dgvWorkSchedule";
             this.dgvWorkSchedule.ReadOnly = true;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -162,7 +162,7 @@
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvWorkSchedule.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvWorkSchedule.RowTemplate.Height = 24;
-            this.dgvWorkSchedule.Size = new System.Drawing.Size(1924, 577);
+            this.dgvWorkSchedule.Size = new System.Drawing.Size(1924, 649);
             this.dgvWorkSchedule.TabIndex = 55;
             this.dgvWorkSchedule.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWorkSchedule_CellClick);
             // 
@@ -294,7 +294,7 @@
             // 
             this.lblSearch.AutoSize = true;
             this.lblSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearch.Location = new System.Drawing.Point(733, 368);
+            this.lblSearch.Location = new System.Drawing.Point(745, 299);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(145, 32);
             this.lblSearch.TabIndex = 58;

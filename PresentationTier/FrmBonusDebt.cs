@@ -20,11 +20,10 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly FormHandle redirect;
         private readonly StaffBUS staffBUS;
         private readonly CardDetailBUS cardDetailBUS;
-        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly PositionBUS positionBUS;
         private readonly DepartmentBUS departmentBUS;
-        private readonly CardBUS cardBUS;
         private readonly BonusDebtBUS bonusDebtBUS;
+        private readonly CheckExist checkExist;
         private Staff staff;
         private bool checkLoad;
         public FrmBonusDebt(string staffID)
@@ -33,11 +32,10 @@ namespace QuanLyNhanSu.PresentationTier
             redirect = new FormHandle();
             staffBUS = new StaffBUS();
             cardDetailBUS = new CardDetailBUS();
-            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
             positionBUS = new PositionBUS();
             departmentBUS = new DepartmentBUS();
             bonusDebtBUS = new BonusDebtBUS();
-            cardBUS = new CardBUS();
+            checkExist = new CheckExist();
             history = new SaveOperateHistory("Thưởng - nợ");
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Thưởng - nợ", staff);
@@ -275,6 +273,11 @@ namespace QuanLyNhanSu.PresentationTier
         {            
             try
             {   
+                if(!checkExist.CheckCardDetail(txtCardID.Text, cmbStaff.SelectedValue.ToString()) || !checkExist.CheckCard(txtCardID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 if (!CheckErrorInput())
                 {
                     MessageBox.Show("Lỗi", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);

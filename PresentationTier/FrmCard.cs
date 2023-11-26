@@ -24,6 +24,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly CardBUS cardBUS;
         private readonly CardTypeBUS cardTypeBUS;
         private readonly CardDetailBUS cardDetailBUS;
+        private readonly CheckExist checkExist;
         private Staff staff;
         private readonly string formatDate = "yyyy-MM-dd";
         public FrmCard(string staffID)
@@ -35,6 +36,7 @@ namespace QuanLyNhanSu.PresentationTier
             cardBUS = new CardBUS();
             cardTypeBUS = new CardTypeBUS();
             cardDetailBUS = new CardDetailBUS();
+            checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Phiếu", staff);
         }
@@ -165,6 +167,11 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void OpenCardDetail(string staffID, string cardID)
         {
+            if (!checkExist.CheckCard(cardID))
+            {
+                Reload();
+                return;
+            }
             FrmCardDetail open = new FrmCardDetail(staffID, cardID);
             redirect.RedirectForm(open, this);
         }
@@ -173,6 +180,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckCard(cardID))
+                {
+                    Reload();
+                    return;
+                }
                 string caculate = cardTypeBUS.GetCardType().FirstOrDefault(ct => ct.CardTypeName == cardType).CaculateMethod;
                 List<CardDetail> cardDetails = cardDetailBUS.GetCardDetail().Where(cd => cd.CardID == cardID).ToList();
                 DateTime month = cardBUS.GetCard().FirstOrDefault(c => c.CardID == cardID).DateCreated;
@@ -210,6 +222,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckCardType(cmbCardType.SelectedValue.ToString()))
+                {
+                    Reload();
+                    return;
+                }
                 Card card = new Card
                 {
                     CardID = "",

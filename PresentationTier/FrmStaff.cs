@@ -26,6 +26,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly CardDetailBUS cardDetailBUS;
         private readonly ContractTypeBUS contractTypeBUS;
         private readonly AllowanceDetailBUS allowanceDetailBUS;
+        private readonly CheckExist checkExist;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly SalaryHandle salary;
         private readonly string formatDate = "yyyy-MM-dd";
@@ -42,6 +43,7 @@ namespace QuanLyNhanSu.PresentationTier
             contractTypeBUS = new ContractTypeBUS();
             allowanceDetailBUS = new AllowanceDetailBUS();
             monthSalaryDetailBUS = new MonthSalaryDetailBUS();
+            checkExist = new CheckExist();
             salary = new SalaryHandle();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Nhân viên",staff);            
@@ -514,6 +516,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if(!checkExist.CheckPosition(cmbPosition.SelectedValue.ToString()) || !checkExist.CheckContractType(cmbContractType.SelectedValue.ToString()))
+                {
+                    Reload();
+                    return;
+                }
                 if (!CheckInputError(btnAdd))
                 {
                     MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -586,6 +593,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckStaff(txtStaffID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 if (!CheckInputError(btnEdit))
                 {
                     MessageBox.Show("Lỗi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -641,6 +653,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckStaff(txtStaffID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 if (txtStaffID.Text == staff.StaffID)
                 {
                     MessageBox.Show("Không thể xoá tài khoản đang đăng nhập", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -713,6 +730,11 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnAddAllowance_Click(object sender, EventArgs e)
         {
+            if (!checkExist.CheckStaff(txtStaffID.Text))
+            {
+                Reload();
+                return;
+            }
             FrmStaffAllowanceDetail open = new FrmStaffAllowanceDetail(staff.StaffID, txtStaffID.Text, "Nhân viên");
             redirect.RedirectForm(open, this);
         }
@@ -720,6 +742,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckStaff(txtStaffID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 FrmConfirmPassword open = new FrmConfirmPassword(staff.StaffID);
                 open.ShowDialog();
                 if (open.Check == true)
@@ -823,6 +850,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckStaff(txtStaffID.Text))
+                {
+                    Reload();
+                    return;
+                }
                 FrmConfirmPassword open = new FrmConfirmPassword(staff.StaffID);
                 open.ShowDialog();
                 if (open.Check == true)

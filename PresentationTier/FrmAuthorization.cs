@@ -21,6 +21,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly AuthorityBUS authorityBUS;
         private readonly SaveOperateHistory history;
         private readonly Authorizations authorizations;
+        private readonly CheckExist checkExist;
         private Staff staff;
         private bool confirmPassoword;
         private int check;
@@ -33,6 +34,7 @@ namespace QuanLyNhanSu.PresentationTier
             positionBUS = new PositionBUS();
             authorityBUS = new AuthorityBUS();
             authorizationBUS = new AuthorizationBUS();
+            checkExist = new CheckExist();
             history = new SaveOperateHistory("Phân quyền");
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Phân quyền",staff);
@@ -158,6 +160,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!checkExist.CheckPosition(psID))
+                {
+                    Reload();
+                    return;
+                }
                 FrmConfirmPassword open = new FrmConfirmPassword(staff.StaffID);
                 if (!confirmPassoword)
                 {

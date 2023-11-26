@@ -26,6 +26,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly AllowanceDetailBUS allowanceDetailBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly SalaryHandle salary;
+        private readonly CheckExist checkExist;
         private Staff staff;
         private Allowance allowance;
 
@@ -41,6 +42,7 @@ namespace QuanLyNhanSu.PresentationTier
             staffBUS = new StaffBUS();
             monthSalaryDetailBUS = new MonthSalaryDetailBUS();
             salary = new SalaryHandle();
+            checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             allowance = allowanceBUS.GetAllowance().FirstOrDefault(al => al.AL_ID == alID);
             authorizations = new Authorizations("Chi tiết phụ cấp", staff);
@@ -202,22 +204,39 @@ namespace QuanLyNhanSu.PresentationTier
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            AllowanceDetail allowanceDetail = new AllowanceDetail
+            try
             {
-                AL_ID = allowance.AL_ID,
-                StaffID = cmbStaffID.SelectedValue.ToString(),
-            };            
-            if (allowanceDetailBUS.Save(allowanceDetail))
-            {
-                allowanceDetail.Allowance = allowance;
-                string operate = "Thêm";
-                string operationDetail = $"Thêm phụ cấp {allowance.AllowanceName} cho nhân viên {cmbStaffID.SelectedValue}";
-                history.Save(staff.StaffID, operate, operationDetail);
-                MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(allowanceDetail.StaffID); 
-                salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(allowanceDetail.StaffID);
-                monthSalaryDetailBUS.Save(salaryDetail);
+                if (!checkExist.CheckAllowance(txtAllowanceID.Text))
+                {
+                    btnBack.PerformClick();
+                    return;
+                }
+                else if (!checkExist.CheckStaff(cmbStaffID.SelectedValue.ToString()) || !checkExist.CheckAllowanceDetailInserted(txtAllowanceID.Text, cmbStaffID.SelectedValue.ToString()))
+                {
+                    Reload();
+                    return;
+                }
+                AllowanceDetail allowanceDetail = new AllowanceDetail
+                {
+                    AL_ID = allowance.AL_ID,
+                    StaffID = cmbStaffID.SelectedValue.ToString(),
+                };
+                if (allowanceDetailBUS.Save(allowanceDetail))
+                {
+                    allowanceDetail.Allowance = allowance;
+                    string operate = "Thêm";
+                    string operationDetail = $"Thêm phụ cấp {allowance.AllowanceName} cho nhân viên {cmbStaffID.SelectedValue}";
+                    history.Save(staff.StaffID, operate, operationDetail);
+                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(allowanceDetail.StaffID);
+                    salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(allowanceDetail.StaffID);
+                    monthSalaryDetailBUS.Save(salaryDetail);
+                }
+                Reload();
             }
-            Reload();
+            catch(Exception ex)
+            {
+                CustomMessage.ExecptionCustom(ex);
+            }
         }
         private void DeleteButton()
         {
@@ -240,10 +259,14 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
-                if (allowanceBUS.GetAllowance().FirstOrDefault(al => al.AL_ID == allowance.AL_ID)  == null)
+                if (!checkExist.CheckAllowance(txtAllowanceID.Text))
                 {
-                    MessageBox.Show("Phụ cấp không còn tồn tại trên cơ sở dữ liệu","Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     btnBack.PerformClick();
+                    return;
+                }
+                else if(!checkExist.CheckAllowanceDetail(txtAllowanceID.Text, staffID))
+                {
+                    Reload();
                     return;
                 }
                 AllowanceDetail staff = new AllowanceDetail
