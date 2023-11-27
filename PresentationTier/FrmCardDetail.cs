@@ -305,7 +305,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmCardDetail open = new FrmCardDetail(staff.StaffID, card.CardID);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         ///////////////////////////////////////////////////////////////////////////////////////////
         private void txtAmount_KeyPress(object sender, KeyPressEventArgs e)
@@ -493,7 +493,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmCard open = new FrmCard(staff.StaffID);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {

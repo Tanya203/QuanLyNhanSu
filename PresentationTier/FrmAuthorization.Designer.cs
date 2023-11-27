@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAuthorization));
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.dgvAuthorization = new System.Windows.Forms.DataGridView();
@@ -386,7 +387,7 @@
             this.pnlMenu.Size = new System.Drawing.Size(1073, 87);
             this.pnlMenu.TabIndex = 51;
             // 
-            // FrmPhanQuyen
+            // FrmAuthorization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -398,9 +399,9 @@
             this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.dgvAuthorization);
             this.Controls.Add(this.pnlHeader);
-            this.MinimumSize = new System.Drawing.Size(1918, 1018);
-            this.Name = "FrmPhanQuyen";
-            this.Text = "frmPhanQuyen";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "FrmAuthorization";
+            this.Text = "Phân quyền";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmPhanQuyen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAuthorization)).EndInit();

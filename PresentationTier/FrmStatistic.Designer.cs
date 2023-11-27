@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmStatistic));
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.lblPositionLoginValue = new System.Windows.Forms.Label();
@@ -613,9 +614,9 @@
             this.ClientSize = new System.Drawing.Size(1924, 983);
             this.Controls.Add(this.tabControlMenu);
             this.Controls.Add(this.pnlHeader);
-            this.MinimumSize = new System.Drawing.Size(1918, 1018);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmStatistic";
-            this.Text = "frmThongKeLuong";
+            this.Text = "Thống kê";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmThongKeLuong_Load);
             this.pnlHeader.ResumeLayout(false);

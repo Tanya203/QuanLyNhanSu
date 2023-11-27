@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmConfirmPassword));
             this.lblConfirmPassword = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnConfirmPassoword = new System.Windows.Forms.Button();
@@ -100,12 +101,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(645, 256);
+            this.ClientSize = new System.Drawing.Size(642, 253);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblConfirmPassword);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(660, 300);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(660, 300);
             this.Name = "FrmConfirmPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmConfirmPassword";
+            this.Text = "Xác nhận mật khẩu";
             this.Load += new System.EventHandler(this.FrmConfirmPassword_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FrmConfirmPassword_KeyPress);
             this.panel1.ResumeLayout(false);

@@ -106,7 +106,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmLogin frmOpen = new FrmLogin();
-            redirect.RedirectForm(frmOpen, this);
+            redirect.RedirectForm(frmOpen);
         }
     }
 }

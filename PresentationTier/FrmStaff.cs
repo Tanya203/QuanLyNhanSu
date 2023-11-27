@@ -265,7 +265,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmStaff open = new FrmStaff(staff.StaffID);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         private string ChooseGender()
@@ -717,7 +717,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
             staff = null;
         }
         private void btnCancel_Click(object sender, EventArgs e)
@@ -735,7 +735,7 @@ namespace QuanLyNhanSu.PresentationTier
                 return;
             }
             FrmStaffAllowanceDetail open = new FrmStaffAllowanceDetail(staff.StaffID, txtStaffID.Text, "Nhân viên");
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         private void btnUnlock_Click(object sender, EventArgs e)
         {

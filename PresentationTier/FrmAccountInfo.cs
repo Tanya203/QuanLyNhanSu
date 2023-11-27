@@ -1,4 +1,5 @@
-﻿using QuanLyNhanSu.DataTier.Models;
+﻿using Microsoft.Reporting.Map.WebForms.BingMaps;
+using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.Functions;
 using QuanLyNhanSu.LogicTier;
 using System;
@@ -94,12 +95,12 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmAccountInfo open = new FrmAccountInfo(staff.StaffID);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         private void LogOut()
         {
             FrmLogin open = new FrmLogin();
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
             staff = null;
         }
         //////////////////////////////////////////////////////////////////////////////
@@ -328,12 +329,12 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnShowAllowance_Click(object sender, EventArgs e)
         {
             FrmStaffAllowanceDetail open = new FrmStaffAllowanceDetail(staff.StaffID, staff.StaffID, "Tài khoản");
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
 
         private void btnChoosePicture_Click(object sender, EventArgs e)

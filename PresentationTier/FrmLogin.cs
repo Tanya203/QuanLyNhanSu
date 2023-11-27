@@ -9,13 +9,11 @@ namespace QuanLyNhanSu
 {
     public partial class FrmLogin : Form
     {
-        private readonly StaffBUS staffBUS;        
         private readonly SaveOperateHistory history;
         private readonly FormHandle redirect;
         public FrmLogin()
         {
             InitializeComponent();
-            staffBUS = new StaffBUS();
             redirect = new FormHandle();
             history = new SaveOperateHistory("Đăng nhập");
             btnLogin.Enabled = false;
@@ -26,10 +24,11 @@ namespace QuanLyNhanSu
         private void llblForgotPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmForgotPassword open = new FrmForgotPassword();
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            StaffBUS staffBUS = new StaffBUS();
             Staff staff = staffBUS.LoginVerify(txtAccount.Text, txtPassword.Text);
             if (staff != null)
             {
@@ -37,7 +36,7 @@ namespace QuanLyNhanSu
                 string operationDetail = "Đăng nhập";
                 history.Save(staff.StaffID, operate, operationDetail);
                 FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-                redirect.RedirectForm(open, this);  
+                redirect.RedirectForm(open);  
             }
         }
         private void cbShowPassword_CheckedChanged(object sender, EventArgs e)

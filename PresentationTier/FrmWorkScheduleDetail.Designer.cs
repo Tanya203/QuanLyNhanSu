@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmWorkScheduleDetail));
             this.lblPositionLoginValue = new System.Windows.Forms.Label();
             this.lblPositionLogin = new System.Windows.Forms.Label();
             this.lblDepartmentLoginValue = new System.Windows.Forms.Label();
@@ -617,9 +618,9 @@
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.dgvWorkScheduleDetail);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MinimumSize = new System.Drawing.Size(1918, 1018);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmWorkScheduleDetail";
-            this.Text = "frmChiTietLichLamViec";
+            this.Text = "Chi tiết lịch làm việc";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmChiTietLichLamViec_Load);
             this.pnlFunction.ResumeLayout(false);

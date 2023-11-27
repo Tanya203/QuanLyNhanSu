@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmForgotPassword));
             this.grpVerifyInfo = new System.Windows.Forms.GroupBox();
             this.btnVerifyInfo = new System.Windows.Forms.Button();
             this.txtStaffID = new System.Windows.Forms.TextBox();
@@ -358,6 +359,7 @@
             this.Controls.Add(this.grpChangePassword);
             this.Controls.Add(this.lblForgotPassword);
             this.Controls.Add(this.grpVerifyInfo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(670, 890);
             this.MinimumSize = new System.Drawing.Size(670, 890);

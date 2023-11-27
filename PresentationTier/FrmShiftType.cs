@@ -29,7 +29,6 @@ namespace QuanLyNhanSu.PresentationTier
             checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Loại ca", staff);
-
         }
         private void frmQuanLyLoaiCa_Load(object sender, EventArgs e)
         {
@@ -109,7 +108,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmShiftType open = new FrmShiftType(staff.StaffID);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         private bool CheckEmptyText(bool check)
@@ -276,7 +275,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmShift open = new FrmShift(staff.StaffID);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         private void dgvShiftType_CellClick(object sender, DataGridViewCellEventArgs e)
         {

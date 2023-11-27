@@ -139,7 +139,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmBonusDebt open = new FrmBonusDebt(staff.StaffID);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         private void LoadType()
         {
@@ -311,7 +311,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnTroVe_Click(object sender, EventArgs e)
         {
             FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {

@@ -37,7 +37,7 @@ namespace QuanLyNhanSu.PresentationTier
             staffBUS = new StaffBUS();
             monthSalaryDetailBUS = new MonthSalaryDetailBUS();
             salary = new SalaryHandle();
-            checkExist = new CheckExist();
+            checkExist = new CheckExist();;
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             this.check = check;
             this.staffID_AL = staffID_AL;
@@ -97,7 +97,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmStaffAllowanceDetail open = new FrmStaffAllowanceDetail(staff.StaffID, staffID_AL, check);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         //////////////////////////////////////////////////////////////////////////////////////
         private void cmbAllowance_TextChanged(object sender, EventArgs e)
@@ -219,12 +219,12 @@ namespace QuanLyNhanSu.PresentationTier
             if (check == "Tài khoản")
             {
                 FrmAccountInfo open = new FrmAccountInfo(staff.StaffID);
-                redirect.RedirectForm(open, this);
+                redirect.RedirectForm(open);
             }
             else
             {
                 FrmStaff open = new FrmStaff(staff.StaffID);
-                redirect.RedirectForm(open, this);
+                redirect.RedirectForm(open);
             }
         }
         private void btnRefresh_Click(object sender, EventArgs e)
