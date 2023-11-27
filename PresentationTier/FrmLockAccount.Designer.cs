@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLockAccount));
             this.lblLockAccount = new System.Windows.Forms.Label();
             this.dtpLockDate = new System.Windows.Forms.DateTimePicker();
             this.pnlMenu = new System.Windows.Forms.Panel();
@@ -100,13 +101,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(700, 291);
+            this.ClientSize = new System.Drawing.Size(702, 293);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.lblLockAccount);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(720, 340);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(720, 340);
             this.Name = "FrmLockAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmKhoaTaiKhoan";
+            this.Text = "Khoá tài khoản";
             this.Load += new System.EventHandler(this.FrmKhoaTaiKhoan_Load);
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();

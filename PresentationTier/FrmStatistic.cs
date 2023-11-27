@@ -96,7 +96,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void Reload()
         {
-            Close();
+            Application.ExitThread();
             Thread thread = new Thread(OpenStatistisc);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
@@ -115,7 +115,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         //////////////////////////////////////////////////////////////////////////////
         ///Salary

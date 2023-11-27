@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOperateHistory));
             this.lblFullNameLogin = new System.Windows.Forms.Label();
             this.lblPositionLoginValue = new System.Windows.Forms.Label();
             this.lblPositionLogin = new System.Windows.Forms.Label();
@@ -593,9 +594,9 @@
             this.Controls.Add(this.dgvOperateHistory);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.txtSearch);
-            this.MinimumSize = new System.Drawing.Size(1918, 1018);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmOperateHistory";
-            this.Text = "frmLichSuThaoTac";
+            this.Text = "Lịch sử thao tác";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmLichSuThaoTac_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperateHistory)).EndInit();

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLogin));
             this.lblAccount = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.cbShowpassword = new System.Windows.Forms.CheckBox();
@@ -178,6 +179,7 @@
             this.Controls.Add(this.pbUserIcon);
             this.Controls.Add(this.lblLogin);
             this.Controls.Add(this.pnlLogin);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(650, 650);
             this.MinimumSize = new System.Drawing.Size(650, 650);

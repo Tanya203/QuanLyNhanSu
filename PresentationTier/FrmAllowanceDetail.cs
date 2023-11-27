@@ -164,7 +164,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmAllowanceDetail open = new FrmAllowanceDetail(staff.StaffID, allowance.AL_ID);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void LoadAllowanceDetail()
@@ -309,7 +309,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmAllowance open = new FrmAllowance(staff.StaffID);
-            redirect.RedirectForm(open, this);
+            redirect.RedirectForm(open);
             staff = null;
             allowance = null;
         }
