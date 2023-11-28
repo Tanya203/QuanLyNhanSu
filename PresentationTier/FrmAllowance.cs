@@ -108,6 +108,7 @@ namespace QuanLyNhanSu.PresentationTier
         ////////////////////////////////////////////////////////////////////////////////////////
         private void ClearAllText()
         {
+            errProvider.Clear();
             List<TextBox> listTextBox = new List<TextBox> { txtAllowanceID, txtAllowanceName, txtAmount, txtStaffAmount };
             for (int i = 0; i < listTextBox.Count; i++)
             {
@@ -144,6 +145,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void EnableButtons(object sender, EventArgs e)
         {
+            errProvider.Clear();
             bool check;
             if (string.IsNullOrEmpty(txtAllowanceID.Text))
             {
@@ -173,6 +175,15 @@ namespace QuanLyNhanSu.PresentationTier
             InputCheck.OnlyRealNumber(sender, e);
         }
         ////////////////////////////////////////////////////////////////////////////////////////
+        private bool CheckErrorInput()
+        {
+            errProvider.Clear();
+            errProvider.SetError(txtAllowanceName, allowanceBUS.GetAllowance().FirstOrDefault(al => al.AllowanceName == txtAllowanceName.Text && al.AL_ID != txtAllowanceID.Text) != null ? "Tên phụ cấp đã tồn tại" : string.Empty);
+            errProvider.SetError(txtAmount, double.TryParse(txtAmount.Text, out _) is false || string.IsNullOrEmpty(txtAmount.Text) ? "Định dạng tiền không hợp lệ" : string.Empty);
+            if (errProvider.GetError(txtAmount) != string.Empty || errProvider.GetError(txtAllowanceName) != string.Empty)
+                return false;
+            return true;
+        }
         private string CheckChange()
         {
             List<string> changes = new List<string>();
@@ -217,6 +228,11 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                if (!CheckErrorInput()) 
+                {
+                    MessageBox.Show("Lỗi", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 Allowance allowance = new Allowance
                 {
                     AL_ID = "",
@@ -243,6 +259,11 @@ namespace QuanLyNhanSu.PresentationTier
                 if (!checkExist.CheckAllowance(txtAllowanceID.Text))
                 {
                     Reload();
+                    return;
+                }
+                if (!CheckErrorInput())
+                {
+                    MessageBox.Show("Lỗi", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 decimal oldAmount = allowanceBUS.GetAllowance().FirstOrDefault(al => al.AL_ID == txtAllowanceID.Text).Amount;
@@ -319,6 +340,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            errProvider.Clear();
             ClearAllText();
         }
         private void btnBack_Click(object sender, EventArgs e)
@@ -329,6 +351,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void dgvAllowance_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            errProvider.Clear();
             int rowIndex = e.RowIndex;
             if (rowIndex < 0)
                 return;

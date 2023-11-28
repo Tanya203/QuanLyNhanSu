@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -64,9 +65,11 @@
             this.colTenPhuCap = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvAllowance = new System.Windows.Forms.DataGridView();
+            this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlMenu.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllowance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAmount
@@ -472,6 +475,11 @@
             this.dgvAllowance.TabIndex = 12;
             this.dgvAllowance.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAllowance_CellClick);
             // 
+            // errProvider
+            // 
+            this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errProvider.ContainerControl = this;
+            // 
             // FrmAllowance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -495,6 +503,7 @@
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllowance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -534,5 +543,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaPC;
         private System.Windows.Forms.DataGridView dgvAllowance;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.ErrorProvider errProvider;
     }
 }

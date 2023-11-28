@@ -97,7 +97,7 @@
             this.dtpEntryDate = new System.Windows.Forms.DateTimePicker();
             this.txtAllowance = new System.Windows.Forms.TextBox();
             this.txtBasicSalary = new System.Windows.Forms.TextBox();
-            this.txtDateOffMount = new System.Windows.Forms.TextBox();
+            this.txtDayOffMount = new System.Windows.Forms.TextBox();
             this.txtStatus = new System.Windows.Forms.TextBox();
             this.txtEducationLevel = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
@@ -637,7 +637,7 @@
             this.pnlMenu.Controls.Add(this.dtpEntryDate);
             this.pnlMenu.Controls.Add(this.txtAllowance);
             this.pnlMenu.Controls.Add(this.txtBasicSalary);
-            this.pnlMenu.Controls.Add(this.txtDateOffMount);
+            this.pnlMenu.Controls.Add(this.txtDayOffMount);
             this.pnlMenu.Controls.Add(this.txtStatus);
             this.pnlMenu.Controls.Add(this.txtEducationLevel);
             this.pnlMenu.Controls.Add(this.txtEmail);
@@ -992,16 +992,16 @@
             this.txtBasicSalary.TextChanged += new System.EventHandler(this.EnableButtons);
             this.txtBasicSalary.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBasicSalary_KeyPress);
             // 
-            // txtDateOffMount
+            // txtDayOffMount
             // 
-            this.txtDateOffMount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDateOffMount.Location = new System.Drawing.Point(1307, 125);
-            this.txtDateOffMount.MaxLength = 3;
-            this.txtDateOffMount.Name = "txtDateOffMount";
-            this.txtDateOffMount.Size = new System.Drawing.Size(205, 27);
-            this.txtDateOffMount.TabIndex = 30;
-            this.txtDateOffMount.TextChanged += new System.EventHandler(this.EnableButtons);
-            this.txtDateOffMount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDateOffAmount_KeyPress);
+            this.txtDayOffMount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDayOffMount.Location = new System.Drawing.Point(1307, 125);
+            this.txtDayOffMount.MaxLength = 3;
+            this.txtDayOffMount.Name = "txtDayOffMount";
+            this.txtDayOffMount.Size = new System.Drawing.Size(205, 27);
+            this.txtDayOffMount.TabIndex = 30;
+            this.txtDayOffMount.TextChanged += new System.EventHandler(this.EnableButtons);
+            this.txtDayOffMount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDateOffAmount_KeyPress);
             // 
             // txtStatus
             // 
@@ -1610,7 +1610,7 @@
         private System.Windows.Forms.DateTimePicker dtpEntryDate;
         private System.Windows.Forms.TextBox txtAllowance;
         private System.Windows.Forms.TextBox txtBasicSalary;
-        private System.Windows.Forms.TextBox txtDateOffMount;
+        private System.Windows.Forms.TextBox txtDayOffMount;
         private System.Windows.Forms.TextBox txtStatus;
         private System.Windows.Forms.RadioButton rbOthers;
         private System.Windows.Forms.RadioButton rbFemale;

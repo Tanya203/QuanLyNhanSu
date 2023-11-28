@@ -29,6 +29,7 @@ namespace QuanLyNhanSu.Functions
             shiftBUS = new ShiftBUS();
             shiftTypeBUS = new ShiftTypeBUS();
             cardBUS = new CardBUS();
+            cardTypeBUS = new CardTypeBUS();
             cardDetailBUS = new CardDetailBUS();
             workScheduleBUS = new WorkScheduleBUS();
             workScheduleDetailBUS = new WorkScheduleDetailBUS();

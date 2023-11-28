@@ -238,8 +238,9 @@ namespace QuanLyNhanSu.PresentationTier
             errProvider.Clear();
             decimal deliver = decimal.TryParse(txtDeliver.Text, out _) ? decimal.Parse(txtDeliver.Text) : 0;
             decimal amount = decimal.Parse(txtAmount.Text);
-            errProvider.SetError(txtDeliver, double.TryParse(txtDeliver.Text, out _) is false && string.IsNullOrEmpty(txtDeliver.Text) ? "Định dạng tiền không hợp lệ" : string.Empty);
-            errProvider.SetError(txtDeliver, deliver > amount ? "Tiền giao phải nhỏ hơn hoặc bằng số tiền trong phiếu" : string.Empty);
+            errProvider.SetError(txtDeliver, double.TryParse(txtDeliver.Text, out _) is false || string.IsNullOrEmpty(txtDeliver.Text) ? "Định dạng tiền không hợp lệ" : string.Empty);
+            if (errProvider.GetError(txtDeliver) == string.Empty)
+                errProvider.SetError(txtDeliver, deliver > amount ? "Tiền giao phải nhỏ hơn hoặc bằng số tiền trong phiếu" : string.Empty);
             if (errProvider.GetError(txtDeliver) != string.Empty)
                 return false;
             return true;
@@ -264,6 +265,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void OnOffButton(object sender, EventArgs e)
         {
+            errProvider.Clear();
             if (CheckEmptyText())
                 btnUpdate.Enabled = true;
             else

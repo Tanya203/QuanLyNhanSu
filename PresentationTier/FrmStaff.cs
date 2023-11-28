@@ -5,6 +5,7 @@ using QuanLyNhanSu.utils;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -63,7 +64,7 @@ namespace QuanLyNhanSu.PresentationTier
             List<object> input = new List<object> { cmbPosition, cmbContractType, cmbDepartment, txtAccount, txtPassword, txtReEnterPassword,
                                                     txtIDCard, txtLastName, txtMiddleName, txtFirstName, dtpBrithday, txtHouseNumer, txtStreet, txtWard, txtDistrict,
                                                     txtProvince_City, rbMale, rbFemale, rbOthers, txtPhone, txtEmail, txtEducationLevel, dtpEntryDate, dtpContractDuration,
-                                                    txtStatus, txtDateOffMount, txtBasicSalary};
+                                                    txtStatus, txtDayOffMount, txtBasicSalary};
             List<object> function = new List<object> { btnAdd, btnEdit, btnDelete, btnCancel, btnUnlock, btnLock, btnAddAllowance, btnChoosePicture, cbShowPassword };
             authorizations.AuthorizeForm(input, function);
         }
@@ -73,7 +74,7 @@ namespace QuanLyNhanSu.PresentationTier
             List<object> listInput = new List<object> { txtStaffID ,cmbPosition, cmbContractType, cmbDepartment, txtAccount, txtPassword, txtReEnterPassword,
                                                         txtIDCard, txtLastName, txtMiddleName, txtFirstName, dtpBrithday, txtHouseNumer, txtStreet, txtWard, txtDistrict,
                                                         txtProvince_City, rbMale, rbFemale, rbOthers, txtPhone, txtEmail, txtEducationLevel, dtpEntryDate, dtpContractDuration,
-                                                        txtStatus, txtDateOffMount, txtBasicSalary, txtStaffID, txtAllowance, txtDateLock, txtDebt};
+                                                        txtStatus, txtDayOffMount, txtBasicSalary, txtStaffID, txtAllowance, txtDateLock, txtDebt};
             for (int i = 0; i < listInput.Count; i++)
             {
                 if (listInput[i] is TextBox)
@@ -231,7 +232,7 @@ namespace QuanLyNhanSu.PresentationTier
             List<object> listInput = new List<object> { cmbPosition, cmbContractType, cmbDepartment, txtAccount, txtPassword, txtReEnterPassword,
                                                         txtIDCard, txtLastName, txtMiddleName, txtFirstName, dtpBrithday, txtHouseNumer, txtStreet, txtWard, txtDistrict,
                                                         txtProvince_City, rbMale, txtPhone, txtEmail, txtEducationLevel, dtpEntryDate, dtpContractDuration,
-                                                        txtStatus, txtDateOffMount, txtBasicSalary, txtStaffID, txtAllowance, txtDateLock, txtDebt};
+                                                        txtStatus, txtDayOffMount, txtBasicSalary, txtStaffID, txtAllowance, txtDateLock, txtDebt};
             for (int i = 0; i < listInput.Count; i++)
             {
                 if (listInput[i] is TextBox)
@@ -284,7 +285,7 @@ namespace QuanLyNhanSu.PresentationTier
         private bool CheckEmptyText(bool check)
         {
             List<TextBox> listTextBox = new List<TextBox> {  txtIDCard, txtLastName, txtFirstName, txtHouseNumer, txtStreet, txtWard, txtDistrict, txtProvince_City,
-                                                              txtPhone, txtEmail, txtEducationLevel, txtStatus, txtDateOffMount, txtBasicSalary};
+                                                              txtPhone, txtEmail, txtEducationLevel, txtStatus, txtDayOffMount, txtBasicSalary};
             if (check)
                 listTextBox.AddRange(new List<TextBox> { txtAccount, txtPassword, txtReEnterPassword });
             for (int i = 0; i < listTextBox.Count; i++)
@@ -346,7 +347,7 @@ namespace QuanLyNhanSu.PresentationTier
             Staff staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == txtStaffID.Text);
             string[] properties = { "Position.Department.DepartmentName", "Position.PositionName", "ContractType.ContractTypeName", "CardID", "LastName", "MiddleName", "FirstName", "Brithday", "Gender", "Phone", "Email", "EducationLevel", "EntryDate", "ContractDuration", "Status", "DayOffAmount", "BasicSalary", "Picture" };
             string[] labels = { "Chức vụ", "Phòng ban", "Loại hợp đồng", "CCCD", "Họ", "Tên lót", "Tên", "NTNS", "Giới tính", "SDT", "Email", "Trình độ học vấn", "Ngày vào làm", "Thời hạn hợp đồng", "Tình trạng", "Số ngày phép", "Lương cơ bản"};
-            string[] values = { cmbDepartment.Text, cmbPosition.Text, cmbContractType.Text, txtIDCard.Text, txtLastName.Text, txtMiddleName.Text, txtFirstName.Text, dtpBrithday.Text, ChooseGender(), txtPhone.Text, txtEmail.Text, txtEducationLevel.Text, dtpEntryDate.Text, dtpContractDuration.Text, txtStatus.Text, txtDateOffMount.Text, txtBasicSalary.Text, System.Text.Encoding.UTF8.GetString(ImageHandle.GetImageBytes(pbStaffPicture)) };
+            string[] values = { cmbDepartment.Text, cmbPosition.Text, cmbContractType.Text, txtIDCard.Text, txtLastName.Text, txtMiddleName.Text, txtFirstName.Text, dtpBrithday.Text, ChooseGender(), txtPhone.Text, txtEmail.Text, txtEducationLevel.Text, dtpEntryDate.Text, dtpContractDuration.Text, txtStatus.Text, txtDayOffMount.Text, txtBasicSalary.Text, System.Text.Encoding.UTF8.GetString(ImageHandle.GetImageBytes(pbStaffPicture)) };
             for (int i = 0; i < properties.Length; i++)
             {
                 string currentValue = GetValueAsString(staff, properties[i]);
@@ -455,7 +456,6 @@ namespace QuanLyNhanSu.PresentationTier
         private bool CheckInputError(Button button)
         {
             bool flag = true;
-            double check;
             errProvider.Clear();
             var validationRules = new Dictionary<Control, Func<bool>>
             {
@@ -464,8 +464,9 @@ namespace QuanLyNhanSu.PresentationTier
                 { dtpBrithday, () => DateTime.Now.Year - dtpBrithday.Value.Year < 18 },
                 { txtPhone, () => !InputCheck.CheckPhone(txtPhone.Text) || staffBUS.GetStaff().FirstOrDefault(s => s.Phone == txtPhone.Text && s.StaffID != txtStaffID.Text) != null},
                 { txtEmail, () => !InputCheck.CheckEmail(txtEmail.Text) || staffBUS.GetStaff().FirstOrDefault(s => s.Email == txtEmail.Text && s.StaffID != txtStaffID.Text) != null},
-                { txtBasicSalary, () => double.TryParse(txtBasicSalary.Text, out check) is false },
+                { txtBasicSalary, () => double.TryParse(txtBasicSalary.Text, out _) is false },
                 { dtpContractDuration, () => dtpContractDuration.Value <= dtpEntryDate.Value },
+                { txtDayOffMount, () => int.TryParse(txtDayOffMount.Text, out _) is false }
             };
             if (button == btnAdd)
             {
@@ -484,7 +485,8 @@ namespace QuanLyNhanSu.PresentationTier
                 { txtPhone, "Số điện thoại không đúng định dạng hoặc đã tồn tại" },
                 { txtEmail, "Email không đúng định dạng hoặc đã tồn tại" },
                 { dtpContractDuration, "Thời hạn hợp đồng phải lớn hơn ngày vào làm" },
-                { txtBasicSalary, "Lương cơ bản không đúng định dạng số" }
+                { txtBasicSalary, "Lương cơ bản không đúng định dạng số" },
+                { txtDayOffMount, "Số ngày phép không đúng định dạng số" }
             };
             foreach (var rule in validationRules)
             {
@@ -550,7 +552,7 @@ namespace QuanLyNhanSu.PresentationTier
                     EntryDate = dtpEntryDate.Value,
                     ContractDuration = dtpContractDuration.Value,
                     Status = txtStatus.Text,
-                    DayOffAmount = int.Parse(txtDateOffMount.Text),
+                    DayOffAmount = int.Parse(txtDayOffMount.Text),
                     BasicSalary = decimal.Parse(txtBasicSalary.Text),
                     Picture = ImageHandle.GetImageBytes(pbStaffPicture)
                 };
@@ -577,7 +579,7 @@ namespace QuanLyNhanSu.PresentationTier
                                     $"- Ngày vào làm: {dtpEntryDate.Text}\n" +
                                     $"- Thời hạn hợp đồng: {dtpContractDuration.Text}\n" +
                                     $"- Tình trạng: {txtStatus.Text}\n" +
-                                    $"- Số ngày phép: {txtDateOffMount.Text}\n" +
+                                    $"- Số ngày phép: {txtDayOffMount.Text}\n" +
                                     $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtBasicSalary.Text))}\n";                    
                     history.Save(this.staff.StaffID, operate, operationDetail);                    
                     Reload();
@@ -624,7 +626,7 @@ namespace QuanLyNhanSu.PresentationTier
                 staff.EntryDate = dtpEntryDate.Value;
                 staff.ContractDuration = dtpContractDuration.Value;
                 staff.Status = txtStatus.Text;
-                staff.DayOffAmount = int.Parse(txtDateOffMount.Text);
+                staff.DayOffAmount = int.Parse(txtDayOffMount.Text);
                 staff.BasicSalary = decimal.Parse(txtBasicSalary.Text);
                 staff.Picture = ImageHandle.GetImageBytes(pbStaffPicture);
                 if (staffBUS.Save(staff))
@@ -699,7 +701,7 @@ namespace QuanLyNhanSu.PresentationTier
                                             $"- Ngày vào làm: {dtpEntryDate.Text}\n" +
                                             $"- Thời hạn hợp đồng: {dtpContractDuration.Text}\n" +
                                             $"- Tình trạng: {txtStatus.Text}\n" +
-                                            $"- Số ngày phép: {txtDateOffMount.Text}\n" +
+                                            $"- Số ngày phép: {txtDayOffMount.Text}\n" +
                                             $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtBasicSalary.Text))}\n" +
                                             $"- Phụ cấp: {String.Format(fVND, "{0:N3} ₫", txtAllowance.Text)}\n" +
                                             $"- Số tiền nợ: {String.Format(fVND, "{0:N3} ₫", txtDebt.Text)}\n";
@@ -827,7 +829,7 @@ namespace QuanLyNhanSu.PresentationTier
             dtpEntryDate.Text = dgvStaff.Rows[rowIndex].Cells[19].Value.ToString();
             dtpContractDuration.Text = dgvStaff.Rows[rowIndex].Cells[20].Value.ToString();
             txtStatus.Text = dgvStaff.Rows[rowIndex].Cells[21].Value.ToString();
-            txtDateOffMount.Text = dgvStaff.Rows[rowIndex].Cells[22].Value.ToString();
+            txtDayOffMount.Text = dgvStaff.Rows[rowIndex].Cells[22].Value.ToString();
             txtBasicSalary.Text = double.Parse(StringAdjust.AdjustNumber(dgvStaff.Rows[rowIndex].Cells[23].Value.ToString())).ToString("F3");
             txtAllowance.Text = double.Parse(StringAdjust.AdjustNumber(dgvStaff.Rows[rowIndex].Cells[24].Value.ToString())).ToString("F3");
             txtDateLock.Text = dgvStaff.Rows[rowIndex].Cells[25].Value.ToString();            
