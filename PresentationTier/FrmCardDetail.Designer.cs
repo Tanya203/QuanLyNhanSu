@@ -326,7 +326,6 @@
             this.cmbStaff.Size = new System.Drawing.Size(263, 33);
             this.cmbStaff.TabIndex = 13;
             this.cmbStaff.SelectedIndexChanged += new System.EventHandler(this.cmbStaffID_SelectedIndexChanged);
-            this.cmbStaff.TextChanged += new System.EventHandler(this.OnOffButton);
             // 
             // lblNote
             // 
@@ -687,6 +686,7 @@
             this.txtDeliver.Name = "txtDeliver";
             this.txtDeliver.Size = new System.Drawing.Size(268, 30);
             this.txtDeliver.TabIndex = 84;
+            this.txtDeliver.TextChanged += new System.EventHandler(this.OnOffButton);
             this.txtDeliver.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDeliver_KeyPress);
             // 
             // pbStaffPicture
@@ -717,6 +717,7 @@
             this.txtStaffIDEdit.Name = "txtStaffIDEdit";
             this.txtStaffIDEdit.Size = new System.Drawing.Size(263, 30);
             this.txtStaffIDEdit.TabIndex = 15;
+            this.txtStaffIDEdit.TextChanged += new System.EventHandler(this.OnOffButton);
             // 
             // btnEdit
             // 
