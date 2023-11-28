@@ -47,7 +47,7 @@ namespace QuanLyNhanSu.Functions
                 if (staff == null)
                 {
                     RedirectForm();
-                    MessageBox.Show($"Tài khoản của bạn không còn tồn tại trên. Liên hệ phòng kỹ thuật để biết thêm chi tiết", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Tài khoản của bạn không còn tồn tại trên cơ sở dữ liệu. Liên hệ phòng kỹ thuật để biết thêm chi tiết", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     backgroundTask.Wait();
                     Stop();
                 }
