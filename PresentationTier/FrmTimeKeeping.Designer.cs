@@ -42,7 +42,7 @@
             this.lbTimeKeeping.AutoSize = true;
             this.lbTimeKeeping.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lbTimeKeeping.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTimeKeeping.Location = new System.Drawing.Point(97, 59);
+            this.lbTimeKeeping.Location = new System.Drawing.Point(100, 42);
             this.lbTimeKeeping.Name = "lbTimeKeeping";
             this.lbTimeKeeping.Size = new System.Drawing.Size(297, 51);
             this.lbTimeKeeping.TabIndex = 0;
@@ -92,7 +92,7 @@
             this.pnlMenu.Controls.Add(this.lblEnterStaffID);
             this.pnlMenu.Controls.Add(this.btnTimekeeping);
             this.pnlMenu.Controls.Add(this.txtStaffID);
-            this.pnlMenu.Location = new System.Drawing.Point(80, 165);
+            this.pnlMenu.Location = new System.Drawing.Point(79, 96);
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(340, 220);
             this.pnlMenu.TabIndex = 35;
@@ -102,13 +102,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(482, 453);
+            this.ClientSize = new System.Drawing.Size(482, 353);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.lbTimeKeeping);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(500, 500);
-            this.MinimumSize = new System.Drawing.Size(500, 500);
+            this.MaximumSize = new System.Drawing.Size(500, 400);
+            this.MinimumSize = new System.Drawing.Size(500, 400);
             this.Name = "FrmTimeKeeping";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chấm công";
