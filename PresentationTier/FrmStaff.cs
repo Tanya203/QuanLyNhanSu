@@ -580,8 +580,12 @@ namespace QuanLyNhanSu.PresentationTier
                                     $"- Thời hạn hợp đồng: {dtpContractDuration.Text}\n" +
                                     $"- Tình trạng: {txtStatus.Text}\n" +
                                     $"- Số ngày phép: {txtDayOffMount.Text}\n" +
-                                    $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtBasicSalary.Text))}\n";                    
-                    history.Save(this.staff.StaffID, operate, operationDetail);                    
+                                    $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtBasicSalary.Text))}";                    
+                    history.Save(this.staff.StaffID, operate, operationDetail);
+                    string staffID = staffBUS.GetStaff().FirstOrDefault(s => s.CardID == staff.CardID).StaffID;
+                    MonthSalaryDetail monthSalary = salary.GetStaffMonthSalary(staffID);
+                    monthSalary.BasicSalary = staff.BasicSalary;
+                    monthSalaryDetailBUS.Save(monthSalary);
                     Reload();
                 }
             }

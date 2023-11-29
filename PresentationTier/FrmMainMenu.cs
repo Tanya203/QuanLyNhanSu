@@ -17,7 +17,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly FormHandle redirect;
         private readonly StaffBUS staffBUS;
         private readonly string formatDate = "yyyy-MM-dd";
-        private readonly CheckAccountStatus status;
+        private CheckAccountStatus status;
         private Staff staff;
         public FrmMainMenu(string staffID)
         {
@@ -165,6 +165,7 @@ namespace QuanLyNhanSu.PresentationTier
                 staff = null;
                 FrmLogin open = new FrmLogin();
                 status.Stop();
+                status = null;
                 redirect.RedirectForm(open);
             }           
         }

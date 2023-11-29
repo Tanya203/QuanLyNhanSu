@@ -14,17 +14,7 @@ namespace QuanLyNhanSu.Functions
         }
         public static void ExecptionCustom(Exception ex)
         {
-            MessageBoxManager.Yes = "OK";
-            MessageBoxManager.No = "Chi tiết lỗi";
-            MessageBoxManager.Register_OnceOnly();
-            DialogResult ketQua = MessageBox.Show("UNEXPECTED ERROR!!!", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-            if (ketQua == DialogResult.No)
-            {
-                if (!string.IsNullOrEmpty(ex.InnerException.ToString()))
-                    MessageBox.Show(ex.InnerException.ToString(), "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else
-                    MessageBox.Show(ex.Message, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            MessageBox.Show($"UNEXPECTED ERROR!!!\n{ex.Message}", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
         }
     }
 }

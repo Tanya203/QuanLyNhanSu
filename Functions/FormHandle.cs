@@ -13,7 +13,7 @@ namespace QuanLyNhanSu.Functions
             try
             {
                 this.open = open;
-                Application.ExitThread();
+                Application.Exit();
                 Thread newThread = new Thread(OpenForm);
                 newThread.SetApartmentState(ApartmentState.STA);
                 newThread.Start();  return true;
