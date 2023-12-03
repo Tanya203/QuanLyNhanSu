@@ -35,7 +35,7 @@ namespace QuanLyNhanSu.PresentationTier
         private bool TimeKeepingNightShift(List<TimeKeeping> nightShift)
         {
             TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString(formatTime));
-            String dateNow = DateTime.Now.ToString(formatDate);
+            string dateNow = DateTime.Now.ToString(formatDate);
             if (nightShift != null)
             {
                 foreach (TimeKeeping staff in nightShift)
