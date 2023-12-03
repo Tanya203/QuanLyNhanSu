@@ -62,18 +62,19 @@ namespace QuanLyNhanSu.DataTier.Models
                 if (department != null)
                 {
                     CustomMessage.YesNoCustom("Có", "Không");
-                    DialogResult ketQua = MessageBox.Show($"Xác nhận xoá phòng ban {department.DepartmentName}?", "Thông báo",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-                    if(ketQua == DialogResult.Yes)
+                    DialogResult ketQua = MessageBox.Show($"Xác nhận xoá phòng ban {department.DepartmentName}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (ketQua == DialogResult.Yes)
                     {
                         quanLyNhanSu.Departments.Remove(department);
                         quanLyNhanSu.SaveChanges();
                         MessageBox.Show($"Đã xoá phòng ban {department.DepartmentName}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
-                    }                    
+                    }
                 }
                 return false;
             }
-            catch(Exception ex)
+
+            catch (Exception ex)
             {
                 if (ex.InnerException.ToString().Contains("FK"))
                 {

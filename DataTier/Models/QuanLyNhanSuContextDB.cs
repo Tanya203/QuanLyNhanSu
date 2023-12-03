@@ -65,6 +65,11 @@ namespace QuanLyNhanSu.DataTier.Models
                 .Property(e => e.IT_ID)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Authority>()
+                .HasMany(e => e.Authorizations)
+                .WithRequired(e => e.Authority)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Authorization>()
                 .Property(e => e.PS_ID)
                 .IsUnicode(false);
@@ -268,26 +273,6 @@ namespace QuanLyNhanSu.DataTier.Models
                 .Property(e => e.BasicSalary)
                 .HasPrecision(38, 3);
 
-            modelBuilder.Entity<Staff>()
-                .HasMany(e => e.AllowanceDetails)
-                .WithRequired(e => e.Staff)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Staff>()
-                .HasMany(e => e.CardDetails)
-                .WithRequired(e => e.Staff)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Staff>()
-                .HasMany(e => e.MonthSalaryDetails)
-                .WithRequired(e => e.Staff)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Staff>()
-                .HasMany(e => e.TimeKeepings)
-                .WithRequired(e => e.Staff)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<TimeKeeping>()
                 .Property(e => e.WS_ID)
                 .IsUnicode(false);
@@ -323,11 +308,6 @@ namespace QuanLyNhanSu.DataTier.Models
             modelBuilder.Entity<WorkSchedule>()
                 .Property(e => e.StaffID)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<WorkSchedule>()
-                .HasMany(e => e.TimeKeepings)
-                .WithRequired(e => e.WorkSchedule)
-                .WillCascadeOnDelete(false);
         }
     }
 }

@@ -58,14 +58,14 @@ namespace QuanLyNhanSu.DataTier
                 operateHistorySearch = operateHistorySearch.Where(lstt => lstt.DateTime.Contains(time) && lstt.Operation == operation && lstt.Interface == form);
             else
                 operateHistorySearch = operateHistorySearch.Where(lstt => lstt.DateTime.Contains(time));
-            operateHistorySearch = operateHistorySearch.Where(oh => oh.DateTime.Contains(time) && (oh.DateTime.Contains(time) ||
+            operateHistorySearch = operateHistorySearch.Where(oh => oh.DateTime.Contains(search) ||
                      oh.StaffID.Contains(search) ||
                      oh.FullName.Contains(search) ||
                      oh.Department.Contains(search) ||
                      oh.Position.Contains(search) ||
                      oh.Interface.Contains(search) ||
                      oh.Operation.Contains(search) ||
-                     oh.OperationDetail.Contains(search))).OrderBy(oh => oh.DateTime);            
+                     oh.OperationDetail.Contains(search)).OrderBy(oh => oh.DateTime);            
             return operateHistorySearch;
         }
         public bool Save(OperateHistory operateHistory)
