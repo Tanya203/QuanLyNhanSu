@@ -150,7 +150,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmAuthorization open = new FrmAuthorization(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         /////////////////////////////////////////////////////////////////////////////////////////
         private void UpdateAuthority(string psID, string auID, bool authorize, string operate, string operationDetail)
@@ -196,7 +196,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {

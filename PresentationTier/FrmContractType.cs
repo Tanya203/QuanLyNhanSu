@@ -135,7 +135,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmContractType open = new FrmContractType(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         private bool CheckEmptyText(bool check)
@@ -304,7 +304,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
             staff = null;
         }
         private void dgvContractType_CellClick(object sender, DataGridViewCellEventArgs e)

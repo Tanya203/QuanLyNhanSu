@@ -113,7 +113,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmCardType open = new FrmCardType(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         //////////////////////////////////////////////////////////////////////////////////////////
         private bool CheckEmptyText(bool check)
@@ -276,7 +276,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmCard open = new FrmCard(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void dgvCardType_CellClick(object sender, DataGridViewCellEventArgs e)
         {

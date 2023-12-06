@@ -39,10 +39,10 @@ namespace QuanLyNhanSu.Functions
                 {
                     MonthID = month,
                     StaffID = staffID,
-                    TotalWorkHours = 0,
                     BasicSalary = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID).BasicSalary,
                     TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staffID),
                 };
+                monthSalaryDetailBUS.Save(addMonthSalary);
                 return addMonthSalary;
             }
         }

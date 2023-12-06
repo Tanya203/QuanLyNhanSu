@@ -97,7 +97,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmStaffAllowanceDetail open = new FrmStaffAllowanceDetail(staff.StaffID, staffID_AL, check);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         //////////////////////////////////////////////////////////////////////////////////////
         private void cmbAllowance_TextChanged(object sender, EventArgs e)
@@ -219,12 +219,12 @@ namespace QuanLyNhanSu.PresentationTier
             if (check == "Tài khoản")
             {
                 FrmAccountInfo open = new FrmAccountInfo(staff.StaffID);
-                redirect.RedirectForm(open);
+                redirect.RedirectForm(open, this);
             }
             else
             {
                 FrmStaff open = new FrmStaff(staff.StaffID);
-                redirect.RedirectForm(open);
+                redirect.RedirectForm(open, this);
             }
         }
         private void btnRefresh_Click(object sender, EventArgs e)

@@ -20,5 +20,9 @@ namespace QuanLyNhanSu.LogicTier
         {
             return timeKeepingDAL.TimeKeeping(staff, operation);
         }
+        public decimal GetStaffMonthTotalWorkHour(string staffID, string month) 
+        { 
+            return timeKeepingDAL.GetStaffMonthTotalWorkHour(staffID, month);
+        }
     }
 }

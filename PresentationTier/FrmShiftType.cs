@@ -108,7 +108,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmShiftType open = new FrmShiftType(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         private bool CheckEmptyText(bool check)
@@ -275,7 +275,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmShift open = new FrmShift(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void dgvShiftType_CellClick(object sender, DataGridViewCellEventArgs e)
         {
