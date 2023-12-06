@@ -37,7 +37,6 @@ namespace QuanLyNhanSu.PresentationTier
             ButtonStatus(false);
             LoadLichLamViec();
             Authorize();
-
         }
         private void ButtonStatus(bool value)
         {
