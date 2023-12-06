@@ -8,15 +8,17 @@ namespace QuanLyNhanSu.Functions
     public class FormHandle
     {
         private Form open;
-        public bool RedirectForm(Form open)
+        public bool RedirectForm(Form open, Form close)
         {
             try
             {
                 this.open = open;
-                Application.Exit();
+                close.Close();
+                Application.ExitThread();
                 Thread newThread = new Thread(OpenForm);
                 newThread.SetApartmentState(ApartmentState.STA);
-                newThread.Start();  return true;
+                newThread.Start();  
+                return true;
             }
             catch (Exception ex)
             {

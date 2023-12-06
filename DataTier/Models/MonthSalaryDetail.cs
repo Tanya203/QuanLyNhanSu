@@ -1,8 +1,11 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace QuanLyNhanSu.DataTier.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
     [Table("MonthSalaryDetail")]
     public partial class MonthSalaryDetail
     {
@@ -15,8 +18,6 @@ namespace QuanLyNhanSu.DataTier.Models
         [Column(Order = 1)]
         [StringLength(15)]
         public string StaffID { get; set; }
-
-        public decimal TotalWorkHours { get; set; }
 
         public decimal BasicSalary { get; set; }
 

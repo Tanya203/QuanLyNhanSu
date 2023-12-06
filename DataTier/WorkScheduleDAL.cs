@@ -13,12 +13,10 @@ namespace QuanLyNhanSu.DataTier
     internal class WorkScheduleDAL
     {
         private readonly QuanLyNhanSuContextDB quanLyNhanSu;
-        private readonly SalaryHandle salary;
         private readonly string formatDate = "yyyy-MM-dd";
         public WorkScheduleDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
-            salary = new SalaryHandle();
             MessageBoxManager.Register_OnceOnly();
         }
         public IEnumerable<WorkScheduleViewModels> GetAllWorkScheduleDepartment(string dp_ID)
@@ -62,7 +60,6 @@ namespace QuanLyNhanSu.DataTier
         {
             try
             {
-
                 quanLyNhanSu.WorkSchedules.Add(workSchedule);
                 quanLyNhanSu.SaveChanges();
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -110,16 +107,6 @@ namespace QuanLyNhanSu.DataTier
                                         check = staff.StaffID;
                                         staff.Staff.DayOffAmount += 1;
                                     }
-                                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID);
-                                    TimeSpan hour;
-                                    decimal totalHours = 0;
-                                    if (staff.Shift.BeginTime > staff.Shift.EndTime)
-                                        hour = staff.Shift.EndTime.Add(new TimeSpan(24, 0, 0)) - staff.Shift.BeginTime;
-                                    else
-                                        hour = staff.Shift.EndTime - staff.Shift.BeginTime;
-                                    totalHours = (decimal)hour.TotalHours * staff.ShiftType.SalaryCoefficient * (decimal)0.8;
-                                    salaryDetail.TotalWorkHours -= totalHours;
-                                    quanLyNhanSu.MonthSalaryDetails.AddOrUpdate(salaryDetail);
                                 }
                             }
                         }

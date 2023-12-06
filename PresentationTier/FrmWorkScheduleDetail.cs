@@ -22,7 +22,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly ShiftBUS shiftBUS;
         private readonly ShiftTypeBUS shiftTypeBUS;
         private readonly StaffBUS staffBUS;
-        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly SalaryHandle salary;
         private readonly CheckExist checkExist;
         private Staff staff;
@@ -42,7 +41,6 @@ namespace QuanLyNhanSu.PresentationTier
             workScheduleDetailBUS = new WorkScheduleDetailBUS();
             shiftBUS = new ShiftBUS();
             shiftTypeBUS = new ShiftTypeBUS();
-            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
             salary = new SalaryHandle();
             checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
@@ -256,7 +254,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmWorkScheduleDetail open = new FrmWorkScheduleDetail(staff.StaffID, workSchedule.WS_ID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         //////////////////////////////////////////////////////////////////////////////////////
         private void btnAdd_Click(object sender, EventArgs e)
@@ -285,6 +283,7 @@ namespace QuanLyNhanSu.PresentationTier
                 };
                 if (workScheduleDetailBUS.Save(timeKeeping))
                 {
+                    MonthSalaryDetail monthSalary = salary.GetStaffMonthSalary(timeKeeping.StaffID);
                     string operate = "Thêm nhân viên";
                     string operationDetail = $"Thêm nhân viên {cmbStaffID.Text} vào lịch làm việc ngày {dtpWorkDate.Text} - phòng ban {txtDepartment.Text}";
                     history.Save(staff.StaffID, operate, operationDetail);
@@ -359,7 +358,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmWorkSchedule open = new FrmWorkSchedule(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

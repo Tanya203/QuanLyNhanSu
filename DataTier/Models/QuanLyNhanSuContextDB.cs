@@ -1,4 +1,7 @@
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Linq;
 
 namespace QuanLyNhanSu.DataTier.Models
 {
@@ -154,10 +157,6 @@ namespace QuanLyNhanSu.DataTier.Models
             modelBuilder.Entity<MonthSalaryDetail>()
                 .Property(e => e.StaffID)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<MonthSalaryDetail>()
-                .Property(e => e.TotalWorkHours)
-                .HasPrecision(38, 3);
 
             modelBuilder.Entity<MonthSalaryDetail>()
                 .Property(e => e.BasicSalary)

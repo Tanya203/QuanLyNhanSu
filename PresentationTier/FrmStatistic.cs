@@ -22,6 +22,7 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly DepartmentBUS departmentBUS;
         private readonly CardDetailBUS cardDetailBUS;
         private readonly PositionBUS positionBUS;
+        private readonly TimeKeepingBUS timeKeepingBUS; 
         private Staff staff;
         private string sortValue;
 
@@ -35,6 +36,7 @@ namespace QuanLyNhanSu.PresentationTier
             cardDetailBUS = new CardDetailBUS();
             departmentBUS = new DepartmentBUS();
             positionBUS = new PositionBUS();
+            timeKeepingBUS = new TimeKeepingBUS();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
         }
         private void FrmThongKeLuong_Load(object sender, EventArgs e)
@@ -115,7 +117,7 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         //////////////////////////////////////////////////////////////////////////////
         ///Salary
@@ -127,6 +129,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 staff.FullName = StringAdjust.AddSpacesBetweenUppercaseLetters(staff.FullName);
                 staff.TotalBonus = cardDetailBUS.TotalStaffMonthBonus(staff.StaffID, staff.MonthID);
+                staff.TotalWorkHours = timeKeepingBUS.GetStaffMonthTotalWorkHour(staff.StaffID, staff.MonthID);
                 total += staff.BasicSalary * staff.TotalWorkHours + staff.TotalAllownace + staff.TotalBonus;
             }
             ReportDataSource reportDataSource = new ReportDataSource("Salary", salary);

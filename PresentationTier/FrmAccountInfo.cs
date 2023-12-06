@@ -95,12 +95,12 @@ namespace QuanLyNhanSu.PresentationTier
         private void Reload()
         {
             FrmAccountInfo open = new FrmAccountInfo(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void LogOut()
         {
             FrmLogin open = new FrmLogin();
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
             staff = null;
         }
         //////////////////////////////////////////////////////////////////////////////
@@ -329,12 +329,12 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnShowAllowance_Click(object sender, EventArgs e)
         {
             FrmStaffAllowanceDetail open = new FrmStaffAllowanceDetail(staff.StaffID, staff.StaffID, "Tài khoản");
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
 
         private void btnChoosePicture_Click(object sender, EventArgs e)

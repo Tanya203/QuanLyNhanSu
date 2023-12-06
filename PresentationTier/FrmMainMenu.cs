@@ -89,38 +89,38 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnStaffs_Click(object sender, EventArgs e)
         {
             FrmStaff open = new FrmStaff(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
             
         }      
         private void btnDepartment_Click(object sender, EventArgs e)
         {
             FrmDepartment open = new FrmDepartment(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnPosition_Click(object sender, EventArgs e)
         {
             FrmPosition open = new FrmPosition(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnShift_Click(object sender, EventArgs e)
         {
             FrmShift open = new FrmShift(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnWorkSchedule_Click(object sender, EventArgs e)
         {
             FrmWorkSchedule open = new FrmWorkSchedule(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnAllowance_Click(object sender, EventArgs e)
         {
             FrmAllowance open = new FrmAllowance(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnCard_Click(object sender, EventArgs e)
         {
             FrmCard open = new FrmCard(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnStatistics_Click(object sender, EventArgs e)
         {
@@ -139,22 +139,22 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnContractType_Click(object sender, EventArgs e)
         {
             FrmContractType open = new FrmContractType(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnDecentralization_Click(object sender, EventArgs e)
         {
             FrmAuthorization open = new FrmAuthorization(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnOperateHistory_Click(object sender, EventArgs e)
         {
             FrmOperateHistory open = new FrmOperateHistory(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnAccountInfo_Click(object sender, EventArgs e)
         {
             FrmAccountInfo open = new FrmAccountInfo(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
         private void btnLogOut_Click(object sender, EventArgs e)
         {
@@ -166,7 +166,7 @@ namespace QuanLyNhanSu.PresentationTier
                 FrmLogin open = new FrmLogin();
                 status.Stop();
                 status = null;
-                redirect.RedirectForm(open);
+                redirect.RedirectForm(open, this);
             }           
         }
         private void dtpWorkSchedule_ValueChanged(object sender, EventArgs e)
@@ -176,13 +176,13 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnBonusDept_Click(object sender, EventArgs e)
         {
             FrmBonusDebt open = new FrmBonusDebt(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
 
         private void btnBonusDept_Click_1(object sender, EventArgs e)
         {
             FrmBonusDebt open = new FrmBonusDebt(staff.StaffID);
-            redirect.RedirectForm(open);
+            redirect.RedirectForm(open, this);
         }
     }
 }

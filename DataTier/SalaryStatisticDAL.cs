@@ -25,7 +25,6 @@ namespace QuanLyNhanSu.DataTier
                 Position = x.Staff.Position.PositionName,
                 BasicSalary = x.BasicSalary,
                 TotalAllownace = x.TotalAllowance,
-                TotalWorkHours = x.TotalWorkHours,
             }).Where(x => x.MonthID == month);
             if(sort != null)
             {
