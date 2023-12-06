@@ -60,7 +60,7 @@ namespace QuanLyNhanSu.Functions
                     MessageBox.Show(new Form { TopMost = true }, $"Tài khoản của bạn đã bị khoá đến {staff.LockDate}. Liên hệ phòng kỹ thuật để biết thêm chi tiết", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Stop();
                 }
-                else if(staff.PS_ID != this.staff.PS_ID)
+                else if (staff.PS_ID != this.staff.PS_ID)
                 {
                     RedirectForm("main");
                     Thread.Sleep(100);
@@ -79,6 +79,7 @@ namespace QuanLyNhanSu.Functions
                         backgroundTask.Wait();
                     }
                 }
+                Thread.Sleep(100);
             }
         }
         private void RedirectForm(string form)
