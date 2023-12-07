@@ -97,12 +97,6 @@ namespace QuanLyNhanSu.PresentationTier
             FrmAccountInfo open = new FrmAccountInfo(staff.StaffID);
             redirect.RedirectForm(open, this);
         }
-        private void LogOut()
-        {
-            FrmLogin open = new FrmLogin();
-            redirect.RedirectForm(open, this);
-            staff = null;
-        }
         //////////////////////////////////////////////////////////////////////////////
         private bool CheckPassword()
         {
@@ -314,7 +308,6 @@ namespace QuanLyNhanSu.PresentationTier
                     string operate = "Đổi mật khẩu";
                     string operationDetail = "Đổi mật khẩu";
                     history.Save(staff.StaffID, operate, operationDetail);
-                    LogOut();
                 }
             }
             catch (Exception ex)
