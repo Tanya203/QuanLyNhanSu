@@ -64,6 +64,7 @@ namespace QuanLyNhanSu.Functions
                 {
                     RedirectForm("login");
                     Thread.Sleep(100);
+                    MessageBox.Show(new Form { TopMost = true }, $"Đổi mật khẩu thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Stop();
                 }
                 else if (staff.PS_ID != this.staff.PS_ID)
