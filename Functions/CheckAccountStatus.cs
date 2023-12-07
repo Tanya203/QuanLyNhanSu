@@ -24,7 +24,7 @@ namespace QuanLyNhanSu.Functions
         {
             this.staffID = staffID;
             staffBUS = new StaffBUS();
-            this.staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
+            staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizationBUS = new AuthorizationBUS();
             authorizations = authorizationBUS.GetAuthorizations().Where(au => au.PS_ID == staff.PS_ID).ToList();
         }
@@ -58,6 +58,12 @@ namespace QuanLyNhanSu.Functions
                     RedirectForm("login");
                     Thread.Sleep(100);
                     MessageBox.Show(new Form { TopMost = true }, $"Tài khoản của bạn đã bị khoá đến {staff.LockDate}. Liên hệ phòng kỹ thuật để biết thêm chi tiết", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Stop();
+                }
+                else if(this.staff.Password != staff.Password)
+                {
+                    RedirectForm("login");
+                    Thread.Sleep(100);
                     Stop();
                 }
                 else if (staff.PS_ID != this.staff.PS_ID)
