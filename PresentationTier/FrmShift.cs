@@ -1,4 +1,5 @@
-﻿using QuanLyNhanSu.DataTier.Models;
+﻿using Microsoft.Reporting.Map.WebForms.BingMaps;
+using QuanLyNhanSu.DataTier.Models;
 using QuanLyNhanSu.Functions;
 using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
@@ -223,22 +224,20 @@ namespace QuanLyNhanSu.PresentationTier
                     checkBegin = false;
                     errProvider.SetError(dtpEndTime, $"Giờ kết thúc trùng với ca {shift.ShiftName}");
                 }
-                if (beginTime > shift.BeginTime && beginTime < shift.EndTime && checkBegin)
+                if ((beginTime > shift.BeginTime && beginTime < shift.EndTime ||
+                    shift.BeginTime > shift.EndTime && (beginTime > shift.BeginTime || beginTime < shift.EndTime))&& checkBegin)
                 {
                     checkBegin = false;
                     errProvider.SetError(dtpStartTime, $"Giờ bắt đầu nằm giữa ca {shift.ShiftName}");
                 }
-                if (endTime > shift.BeginTime && endTime < shift.EndTime && checkEnd)
+                if ((endTime > shift.BeginTime && endTime < shift.EndTime ||
+                    shift.BeginTime > shift.EndTime && (endTime > shift.BeginTime || endTime < shift.EndTime)) && checkEnd)
                 {
                     checkEnd = false;
                     errProvider.SetError(dtpEndTime, $"Giờ kết thúc nằm giữa ca {shift.ShiftName}");
                 }
                 if ((shift.BeginTime < shift.EndTime && beginTime < shift.BeginTime && endTime > shift.EndTime) ||
-                    (shift.BeginTime > shift.EndTime && checkBegin && checkEnd &&
-                     ((beginTime > endTime) ||
-                      (beginTime > shift.BeginTime && endTime > shift.BeginTime) ||
-                      (beginTime < shift.EndTime && endTime < shift.EndTime) ||
-                      (endTime < shift.EndTime && endTime > shift.EndTime))))
+                    (shift.BeginTime > shift.EndTime && beginTime > endTime && beginTime < shift.BeginTime && endTime > shift.EndTime))
                 {
                     checkBegin = checkEnd = false;
                     errProvider.SetError(dtpStartTime, $"Giờ bắt đầu và kết thúc chồng qua ca {shift.ShiftName}");
