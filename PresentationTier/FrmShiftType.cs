@@ -178,6 +178,8 @@ namespace QuanLyNhanSu.PresentationTier
             errProvider.Clear();
             errProvider.SetError(txtShiftTypeName, shiftTypeBUS.GetShiftType().FirstOrDefault(st => st.ShiftTypeName == txtShiftTypeName.Text && st.ST_ID != txtShiftTypeID.Text) != null ? "Tên loại ca đã tồn tại" : string.Empty);
             errProvider.SetError(txtSalaryCoefficient, double.TryParse(txtSalaryCoefficient.Text, out double check) is false ? "Hệ số lương không đúng định dạng số" : string.Empty);
+            if (string.IsNullOrEmpty(errProvider.GetError(txtSalaryCoefficient)))
+                errProvider.SetError(txtSalaryCoefficient, double.Parse(txtSalaryCoefficient.Text) < 1 ? "Hệ số lương phải lớn hoặc bằng 1" : string.Empty);
             if (errProvider.GetError(txtShiftTypeName) != string.Empty || errProvider.GetError(txtSalaryCoefficient) != string.Empty)
                 return false;
             return true;

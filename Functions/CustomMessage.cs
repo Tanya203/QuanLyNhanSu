@@ -14,7 +14,7 @@ namespace QuanLyNhanSu.Functions
         }
         public static void ExecptionCustom(Exception ex)
         {
-            MessageBox.Show($"UNEXPECTED ERROR!!!\n{ex.Message}", "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "UNEXPECTED ERROR!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
