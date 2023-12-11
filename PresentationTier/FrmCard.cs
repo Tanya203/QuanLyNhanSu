@@ -288,11 +288,5 @@ namespace QuanLyNhanSu.PresentationTier
             else
                 btnAdd.Enabled = false;
         }
-
-        private void btnBonusDebt_Click(object sender, EventArgs e)
-        {
-            FrmBonusDebt open = new FrmBonusDebt(staff.StaffID);
-            redirect.RedirectForm(open, this);
-        }
     }
 }

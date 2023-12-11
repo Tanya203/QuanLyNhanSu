@@ -48,28 +48,24 @@ namespace QuanLyNhanSu.Functions
                 if (staff == null)
                 {
                     RedirectForm("login");
-                    Thread.Sleep(100);
                     MessageBox.Show(new Form { TopMost = true }, $"Tài khoản của bạn không còn tồn tại trên cơ sở dữ liệu. Liên hệ phòng kỹ thuật để biết thêm chi tiết", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Stop();
                 }
                 else if (staff.LockDate != null)
                 {
                     RedirectForm("login");
-                    Thread.Sleep(100);
                     MessageBox.Show(new Form { TopMost = true }, $"Tài khoản của bạn đã bị khoá đến {staff.LockDate}. Liên hệ phòng kỹ thuật để biết thêm chi tiết", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Stop();
                 }
                 else if(this.staff.Password != staff.Password)
                 {
                     RedirectForm("login");
-                    Thread.Sleep(100);
                     MessageBox.Show(new Form { TopMost = true }, $"Đổi mật khẩu thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Stop();
                 }
                 else if (staff.PS_ID != this.staff.PS_ID)
-                {
+                {                    
                     RedirectForm("main");
-                    Thread.Sleep(100);
                     MessageBox.Show(new Form { TopMost = true }, $"Chức vụ của nhân viên {staff.StaffID} đã được cập nhật", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     backgroundTask.Wait();
                 }
@@ -80,12 +76,11 @@ namespace QuanLyNhanSu.Functions
                     if (authorizations[i].Authorize != update[i].Authorize)
                     {
                         RedirectForm("main");
-                        Thread.Sleep(100);
                         MessageBox.Show(new Form { TopMost = true }, $"Quyền hạn chức vụ {staff.Position.PositionName} đã được cập nhật", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         backgroundTask.Wait();
                     }
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
             }
         }
         private void RedirectForm(string form)
