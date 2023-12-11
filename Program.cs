@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyNhanSu.PresentationTier;
+using System;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu

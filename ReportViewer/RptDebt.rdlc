@@ -303,7 +303,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Đã giao</Value>
+                                  <Value>Đã trả</Value>
                                   <Style>
                                     <FontFamily>Cascadia Code SemiBold</FontFamily>
                                     <FontSize>12pt</FontSize>
