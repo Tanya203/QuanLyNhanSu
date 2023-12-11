@@ -172,15 +172,9 @@ namespace QuanLyNhanSu.PresentationTier
         {
             LoadLichLamViec();
         }
-        private void btnBonusDept_Click(object sender, EventArgs e)
-        {
-            FrmBonusDebt open = new FrmBonusDebt(staff.StaffID);
-            redirect.RedirectForm(open, this);
-        }
-
         private void btnBonusDept_Click_1(object sender, EventArgs e)
         {
-            FrmBonusDebt open = new FrmBonusDebt(staff.StaffID);
+            FrmBonusDebt open = new FrmBonusDebt(staff.StaffID, "Main");
             redirect.RedirectForm(open, this);
         }
     }

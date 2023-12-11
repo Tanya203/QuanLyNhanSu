@@ -25,8 +25,9 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly BonusDebtBUS bonusDebtBUS;
         private readonly CheckExist checkExist;
         private Staff staff;
+        private string form;
         private bool checkLoad;
-        public FrmBonusDebt(string staffID)
+        public FrmBonusDebt(string staffID, string form)
         {
             InitializeComponent();
             redirect = new FormHandle();
@@ -40,16 +41,24 @@ namespace QuanLyNhanSu.PresentationTier
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Thưởng - nợ", staff);
             checkLoad = false;
+            this.form = form;
         }
 
         private void FrmBonusDebt_Load(object sender, EventArgs e)
         {
             LoadHeader.LoadHeaderInfo(lblStaffIDLoginValue, lblFullNameLoginValue, lblDepartmentLoginValue, lblPositionLoginValue, staff);
+            pnlFunction.Visible = false;
             DisableDisplay();
             InputStatus(false);
-            Authorizations();
-            LoadType();
-            LoadDepartment();
+            if (form == "Main")
+            {
+                pnlFunction.Visible = true;
+                Authorizations();
+                LoadType();
+                LoadDepartment();
+            }
+            else
+                LoadBonusDebtStaff(staff.StaffID, "Nợ");
         }
         private bool Authorizations()
         {
@@ -138,7 +147,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void Reload()
         {
-            FrmBonusDebt open = new FrmBonusDebt(staff.StaffID);
+            FrmBonusDebt open = new FrmBonusDebt(staff.StaffID,"Main");
             redirect.RedirectForm(open, this);
         }
         private void LoadType()

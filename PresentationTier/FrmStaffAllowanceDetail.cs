@@ -42,7 +42,7 @@ namespace QuanLyNhanSu.PresentationTier
             this.check = check;
             this.staffID_AL = staffID_AL;
         }
-        private void FrmChiTietPhuCapMotNhanVien_Load(object sender, EventArgs e)
+        private void FrmStaffAllowanceDetail_Load(object sender, EventArgs e)
         {
             LoadHeader.LoadHeaderInfo(lblStaffIDLoginValue, lblFullNameLoginValue, lblDepartmentLoginValue, lblPositionLoginValue, staff);  
             txtStaffID.ReadOnly = true;
