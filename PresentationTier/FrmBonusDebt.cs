@@ -60,6 +60,8 @@ namespace QuanLyNhanSu.PresentationTier
             }
             else
             {
+                lblBonusFine.Text = "Thông tin nợ";
+                lblBonusFine.Location = new Point(700, 100);
                 lblSearch.Location = new Point(600, 150);
                 txtSearch.Location = new Point(715, 150);
                 dgvBonusDebt.Size = new Size(1924, 600);
