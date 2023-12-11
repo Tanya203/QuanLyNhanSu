@@ -334,5 +334,10 @@ namespace QuanLyNhanSu.PresentationTier
         {
             ImageHandle.ChooseIamge(pbStaffPicture);
         }
+        private void btnShowDebt_Click(object sender, EventArgs e)
+        {
+            FrmBonusDebt open = new FrmBonusDebt(staff.StaffID, "Info");
+            redirect.RedirectForm(open, this);
+        }
     }
 }

@@ -47,7 +47,7 @@ namespace QuanLyNhanSu.PresentationTier
             LoadHeader.LoadHeaderInfo(lblStaffIDLoginValue, lblFullNameLoginValue, lblDepartmentLoginValue, lblPositionLoginValue, staff);  
             txtStaffID.ReadOnly = true;
             txtAmount.ReadOnly = true;
-            txtTongPhuCap.ReadOnly = true;
+            txtTotalAllowance.ReadOnly = true;
             pnlMenu.Visible = false;
             lblAllowanceText.Visible = false;
             if (check == "Nhân viên")
@@ -57,7 +57,15 @@ namespace QuanLyNhanSu.PresentationTier
                 pnlMenu.Visible = true;
                 DeleteButton();
             }
-            LoadStaffAllowance();
+            else
+            {
+                lblStaffTotalAllowance.Location = new Point(650, 125);
+                lblTotalAllowance.Location = new Point(1150, 125);
+                txtTotalAllowance.Location = new Point(1300, 125);
+                dgvAllowanceDetail.Size = new Size(1924, 634);
+                LoadStaffAllowance();
+            }
+            
         }
         private void LoadAllowance()
         {
@@ -90,7 +98,7 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvAllowanceDetail.Rows[rowAdd].Cells[6].Value = String.Format(fVND, "{0:N3} ₫", al.Amount);
             }
             txtStaffID.Text = staffID_AL;
-            txtTongPhuCap.Text = String.Format(fVND, "{0:N3} ₫", allowanceDetailBUS.StaffTotalAllowance(staffID_AL));            
+            txtTotalAllowance.Text = String.Format(fVND, "{0:N3} ₫", allowanceDetailBUS.StaffTotalAllowance(staffID_AL));            
             Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////////////        
