@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBonusDebt));
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -232,7 +232,7 @@
             // 
             this.lblBonusFine.AutoSize = true;
             this.lblBonusFine.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBonusFine.Location = new System.Drawing.Point(743, 116);
+            this.lblBonusFine.Location = new System.Drawing.Point(832, 116);
             this.lblBonusFine.Name = "lblBonusFine";
             this.lblBonusFine.Size = new System.Drawing.Size(304, 32);
             this.lblBonusFine.TabIndex = 27;
@@ -526,14 +526,14 @@
             this.dgvBonusDebt.AllowUserToDeleteRows = false;
             this.dgvBonusDebt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvBonusDebt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBonusDebt.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBonusDebt.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvBonusDebt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBonusDebt.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colStaffID,
@@ -549,17 +549,17 @@
             this.dgvBonusDebt.Location = new System.Drawing.Point(0, 499);
             this.dgvBonusDebt.Name = "dgvBonusDebt";
             this.dgvBonusDebt.ReadOnly = true;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBonusDebt.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBonusDebt.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvBonusDebt.RowHeadersVisible = false;
             this.dgvBonusDebt.RowHeadersWidth = 51;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvBonusDebt.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvBonusDebt.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvBonusDebt.RowTemplate.Height = 24;
             this.dgvBonusDebt.Size = new System.Drawing.Size(1924, 474);
             this.dgvBonusDebt.TabIndex = 67;

@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAccountInfo));
             this.pnlHeader = new System.Windows.Forms.Panel();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.lblPositionLoginValue = new System.Windows.Forms.Label();
             this.lblPositionLogin = new System.Windows.Forms.Label();
             this.lblDepartmentLoginValue = new System.Windows.Forms.Label();
@@ -39,6 +40,7 @@
             this.lblFullNameLogin = new System.Windows.Forms.Label();
             this.lblStaffIDLoginValue = new System.Windows.Forms.Label();
             this.lblStaffIDLogin = new System.Windows.Forms.Label();
+            this.btnTroVe = new System.Windows.Forms.Button();
             this.lblAccountInfo = new System.Windows.Forms.Label();
             this.lblChangePassword = new System.Windows.Forms.Label();
             this.txtNewPassword = new System.Windows.Forms.TextBox();
@@ -49,6 +51,7 @@
             this.pnlChangePassword = new System.Windows.Forms.Panel();
             this.txtOldPassword = new System.Windows.Forms.TextBox();
             this.lblOldPassword = new System.Windows.Forms.Label();
+            this.btnChangePassword = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.txtDebt = new System.Windows.Forms.TextBox();
             this.lblDebt = new System.Windows.Forms.Label();
@@ -57,7 +60,11 @@
             this.txtContractType = new System.Windows.Forms.TextBox();
             this.txtPosition = new System.Windows.Forms.TextBox();
             this.txtDepartment = new System.Windows.Forms.TextBox();
+            this.btnChoosePicture = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.dtpBrithday = new System.Windows.Forms.DateTimePicker();
+            this.btnRefreshInfo = new System.Windows.Forms.Button();
+            this.btnShowAllowance = new System.Windows.Forms.Button();
             this.rbOthers = new System.Windows.Forms.RadioButton();
             this.rbFemale = new System.Windows.Forms.RadioButton();
             this.rbMale = new System.Windows.Forms.RadioButton();
@@ -82,6 +89,7 @@
             this.lblHinh = new System.Windows.Forms.Label();
             this.lblAllowance = new System.Windows.Forms.Label();
             this.lblBasicSalary = new System.Windows.Forms.Label();
+            this.pbStaffPicture = new System.Windows.Forms.PictureBox();
             this.lblContractDuration = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblDateOffAmount = new System.Windows.Forms.Label();
@@ -106,19 +114,12 @@
             this.lblDepartment = new System.Windows.Forms.Label();
             this.lblPosition = new System.Windows.Forms.Label();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnChoosePicture = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnRefreshInfo = new System.Windows.Forms.Button();
-            this.btnChangePassword = new System.Windows.Forms.Button();
-            this.btnShowAllowance = new System.Windows.Forms.Button();
-            this.pbStaffPicture = new System.Windows.Forms.PictureBox();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnTroVe = new System.Windows.Forms.Button();
+            this.btnShowDebt = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
             this.pnlChangePassword.SuspendLayout();
             this.pnlMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStaffPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -139,6 +140,25 @@
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(1924, 113);
             this.pnlHeader.TabIndex = 1;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.AutoSize = true;
+            this.btnRefresh.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.Image = global::QuanLyNhanSu.Properties.Resources.refresh;
+            this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(144, 113);
+            this.btnRefresh.TabIndex = 2;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // lblPositionLoginValue
             // 
@@ -221,6 +241,26 @@
             this.lblStaffIDLogin.Size = new System.Drawing.Size(205, 32);
             this.lblStaffIDLogin.TabIndex = 1;
             this.lblStaffIDLogin.Text = "Mã nhân viên:";
+            // 
+            // btnTroVe
+            // 
+            this.btnTroVe.AutoSize = true;
+            this.btnTroVe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnTroVe.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnTroVe.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTroVe.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnTroVe.FlatAppearance.BorderSize = 0;
+            this.btnTroVe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTroVe.Image = global::QuanLyNhanSu.Properties.Resources._return;
+            this.btnTroVe.Location = new System.Drawing.Point(0, 0);
+            this.btnTroVe.Name = "btnTroVe";
+            this.btnTroVe.Size = new System.Drawing.Size(142, 113);
+            this.btnTroVe.TabIndex = 1;
+            this.btnTroVe.Text = "Trở về";
+            this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTroVe.UseVisualStyleBackColor = false;
+            this.btnTroVe.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // lblAccountInfo
             // 
@@ -335,10 +375,29 @@
             this.lblOldPassword.TabIndex = 40;
             this.lblOldPassword.Text = "Nhập mật khẩu cũ:";
             // 
+            // btnChangePassword
+            // 
+            this.btnChangePassword.AutoSize = true;
+            this.btnChangePassword.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnChangePassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnChangePassword.FlatAppearance.BorderSize = 0;
+            this.btnChangePassword.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnChangePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChangePassword.Image = global::QuanLyNhanSu.Properties.Resources.pass_small;
+            this.btnChangePassword.Location = new System.Drawing.Point(324, 234);
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.Size = new System.Drawing.Size(206, 60);
+            this.btnChangePassword.TabIndex = 38;
+            this.btnChangePassword.Text = "Đổi mật khẩu";
+            this.btnChangePassword.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnChangePassword.UseVisualStyleBackColor = false;
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
+            // 
             // pnlMenu
             // 
             this.pnlMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.pnlMenu.BackColor = System.Drawing.SystemColors.Info;
+            this.pnlMenu.Controls.Add(this.btnShowDebt);
             this.pnlMenu.Controls.Add(this.txtDebt);
             this.pnlMenu.Controls.Add(this.lblDebt);
             this.pnlMenu.Controls.Add(this.txtContractDuration);
@@ -464,6 +523,42 @@
             this.txtDepartment.Size = new System.Drawing.Size(212, 27);
             this.txtDepartment.TabIndex = 4;
             // 
+            // btnChoosePicture
+            // 
+            this.btnChoosePicture.AutoSize = true;
+            this.btnChoosePicture.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnChoosePicture.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnChoosePicture.FlatAppearance.BorderSize = 0;
+            this.btnChoosePicture.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnChoosePicture.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChoosePicture.Image = global::QuanLyNhanSu.Properties.Resources.chose_picture;
+            this.btnChoosePicture.Location = new System.Drawing.Point(464, 334);
+            this.btnChoosePicture.Name = "btnChoosePicture";
+            this.btnChoosePicture.Size = new System.Drawing.Size(153, 50);
+            this.btnChoosePicture.TabIndex = 31;
+            this.btnChoosePicture.Text = "Chọn hình";
+            this.btnChoosePicture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnChoosePicture.UseVisualStyleBackColor = false;
+            this.btnChoosePicture.Click += new System.EventHandler(this.btnChoosePicture_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.AutoSize = true;
+            this.btnSave.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Image = global::QuanLyNhanSu.Properties.Resources.save;
+            this.btnSave.Location = new System.Drawing.Point(257, 733);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(100, 60);
+            this.btnSave.TabIndex = 32;
+            this.btnSave.Text = "Lưu";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // dtpBrithday
             // 
             this.dtpBrithday.AllowDrop = true;
@@ -475,6 +570,38 @@
             this.dtpBrithday.Name = "dtpBrithday";
             this.dtpBrithday.Size = new System.Drawing.Size(213, 27);
             this.dtpBrithday.TabIndex = 12;
+            // 
+            // btnRefreshInfo
+            // 
+            this.btnRefreshInfo.AutoSize = true;
+            this.btnRefreshInfo.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnRefreshInfo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefreshInfo.FlatAppearance.BorderSize = 0;
+            this.btnRefreshInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRefreshInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefreshInfo.Image = global::QuanLyNhanSu.Properties.Resources.fix;
+            this.btnRefreshInfo.Location = new System.Drawing.Point(406, 732);
+            this.btnRefreshInfo.Name = "btnRefreshInfo";
+            this.btnRefreshInfo.Size = new System.Drawing.Size(236, 61);
+            this.btnRefreshInfo.TabIndex = 33;
+            this.btnRefreshInfo.Text = "Đặt lại thông tin";
+            this.btnRefreshInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRefreshInfo.UseVisualStyleBackColor = false;
+            this.btnRefreshInfo.Click += new System.EventHandler(this.btnRefreshInfo_Click);
+            // 
+            // btnShowAllowance
+            // 
+            this.btnShowAllowance.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnShowAllowance.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnShowAllowance.FlatAppearance.BorderSize = 0;
+            this.btnShowAllowance.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnShowAllowance.Image = global::QuanLyNhanSu.Properties.Resources.add_small;
+            this.btnShowAllowance.Location = new System.Drawing.Point(599, 194);
+            this.btnShowAllowance.Name = "btnShowAllowance";
+            this.btnShowAllowance.Size = new System.Drawing.Size(39, 37);
+            this.btnShowAllowance.TabIndex = 29;
+            this.btnShowAllowance.UseVisualStyleBackColor = false;
+            this.btnShowAllowance.Click += new System.EventHandler(this.btnShowAllowance_Click);
             // 
             // rbOthers
             // 
@@ -713,6 +840,16 @@
             this.lblBasicSalary.TabIndex = 25;
             this.lblBasicSalary.Text = "Lương cơ bản:";
             // 
+            // pbStaffPicture
+            // 
+            this.pbStaffPicture.Image = global::QuanLyNhanSu.Properties.Resources.image;
+            this.pbStaffPicture.Location = new System.Drawing.Point(643, 253);
+            this.pbStaffPicture.Name = "pbStaffPicture";
+            this.pbStaffPicture.Size = new System.Drawing.Size(215, 215);
+            this.pbStaffPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbStaffPicture.TabIndex = 24;
+            this.pbStaffPicture.TabStop = false;
+            // 
             // lblContractDuration
             // 
             this.lblContractDuration.AutoSize = true;
@@ -948,140 +1085,19 @@
             this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errProvider.ContainerControl = this;
             // 
-            // btnChoosePicture
+            // btnShowDebt
             // 
-            this.btnChoosePicture.AutoSize = true;
-            this.btnChoosePicture.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnChoosePicture.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnChoosePicture.FlatAppearance.BorderSize = 0;
-            this.btnChoosePicture.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnChoosePicture.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChoosePicture.Image = global::QuanLyNhanSu.Properties.Resources.chose_picture;
-            this.btnChoosePicture.Location = new System.Drawing.Point(464, 334);
-            this.btnChoosePicture.Name = "btnChoosePicture";
-            this.btnChoosePicture.Size = new System.Drawing.Size(153, 50);
-            this.btnChoosePicture.TabIndex = 31;
-            this.btnChoosePicture.Text = "Chọn hình";
-            this.btnChoosePicture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnChoosePicture.UseVisualStyleBackColor = false;
-            this.btnChoosePicture.Click += new System.EventHandler(this.btnChoosePicture_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.AutoSize = true;
-            this.btnSave.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Image = global::QuanLyNhanSu.Properties.Resources.save;
-            this.btnSave.Location = new System.Drawing.Point(257, 733);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 60);
-            this.btnSave.TabIndex = 32;
-            this.btnSave.Text = "Lưu";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnRefreshInfo
-            // 
-            this.btnRefreshInfo.AutoSize = true;
-            this.btnRefreshInfo.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnRefreshInfo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefreshInfo.FlatAppearance.BorderSize = 0;
-            this.btnRefreshInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRefreshInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefreshInfo.Image = global::QuanLyNhanSu.Properties.Resources.fix;
-            this.btnRefreshInfo.Location = new System.Drawing.Point(406, 732);
-            this.btnRefreshInfo.Name = "btnRefreshInfo";
-            this.btnRefreshInfo.Size = new System.Drawing.Size(236, 61);
-            this.btnRefreshInfo.TabIndex = 33;
-            this.btnRefreshInfo.Text = "Đặt lại thông tin";
-            this.btnRefreshInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRefreshInfo.UseVisualStyleBackColor = false;
-            this.btnRefreshInfo.Click += new System.EventHandler(this.btnRefreshInfo_Click);
-            // 
-            // btnChangePassword
-            // 
-            this.btnChangePassword.AutoSize = true;
-            this.btnChangePassword.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnChangePassword.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnChangePassword.FlatAppearance.BorderSize = 0;
-            this.btnChangePassword.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnChangePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChangePassword.Image = global::QuanLyNhanSu.Properties.Resources.pass_small;
-            this.btnChangePassword.Location = new System.Drawing.Point(324, 234);
-            this.btnChangePassword.Name = "btnChangePassword";
-            this.btnChangePassword.Size = new System.Drawing.Size(206, 60);
-            this.btnChangePassword.TabIndex = 38;
-            this.btnChangePassword.Text = "Đổi mật khẩu";
-            this.btnChangePassword.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnChangePassword.UseVisualStyleBackColor = false;
-            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
-            // 
-            // btnShowAllowance
-            // 
-            this.btnShowAllowance.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnShowAllowance.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnShowAllowance.FlatAppearance.BorderSize = 0;
-            this.btnShowAllowance.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnShowAllowance.Image = global::QuanLyNhanSu.Properties.Resources.add_small;
-            this.btnShowAllowance.Location = new System.Drawing.Point(598, 190);
-            this.btnShowAllowance.Name = "btnShowAllowance";
-            this.btnShowAllowance.Size = new System.Drawing.Size(39, 37);
-            this.btnShowAllowance.TabIndex = 29;
-            this.btnShowAllowance.UseVisualStyleBackColor = false;
-            this.btnShowAllowance.Click += new System.EventHandler(this.btnShowAllowance_Click);
-            // 
-            // pbStaffPicture
-            // 
-            this.pbStaffPicture.Image = global::QuanLyNhanSu.Properties.Resources.image;
-            this.pbStaffPicture.Location = new System.Drawing.Point(643, 253);
-            this.pbStaffPicture.Name = "pbStaffPicture";
-            this.pbStaffPicture.Size = new System.Drawing.Size(215, 215);
-            this.pbStaffPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbStaffPicture.TabIndex = 24;
-            this.pbStaffPicture.TabStop = false;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.AutoSize = true;
-            this.btnRefresh.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnRefresh.FlatAppearance.BorderSize = 0;
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Image = global::QuanLyNhanSu.Properties.Resources.refresh;
-            this.btnRefresh.Location = new System.Drawing.Point(1780, 0);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(144, 113);
-            this.btnRefresh.TabIndex = 2;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRefresh.UseVisualStyleBackColor = false;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // btnTroVe
-            // 
-            this.btnTroVe.AutoSize = true;
-            this.btnTroVe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnTroVe.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnTroVe.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTroVe.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnTroVe.FlatAppearance.BorderSize = 0;
-            this.btnTroVe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTroVe.Image = global::QuanLyNhanSu.Properties.Resources._return;
-            this.btnTroVe.Location = new System.Drawing.Point(0, 0);
-            this.btnTroVe.Name = "btnTroVe";
-            this.btnTroVe.Size = new System.Drawing.Size(142, 113);
-            this.btnTroVe.TabIndex = 1;
-            this.btnTroVe.Text = "Trở về";
-            this.btnTroVe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTroVe.UseVisualStyleBackColor = false;
-            this.btnTroVe.Click += new System.EventHandler(this.btnBack_Click);
+            this.btnShowDebt.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnShowDebt.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnShowDebt.FlatAppearance.BorderSize = 0;
+            this.btnShowDebt.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnShowDebt.Image = global::QuanLyNhanSu.Properties.Resources.add_small;
+            this.btnShowDebt.Location = new System.Drawing.Point(599, 151);
+            this.btnShowDebt.Name = "btnShowDebt";
+            this.btnShowDebt.Size = new System.Drawing.Size(39, 37);
+            this.btnShowDebt.TabIndex = 41;
+            this.btnShowDebt.UseVisualStyleBackColor = false;
+            this.btnShowDebt.Click += new System.EventHandler(this.btnShowDebt_Click);
             // 
             // FrmAccountInfo
             // 
@@ -1103,8 +1119,8 @@
             this.pnlChangePassword.PerformLayout();
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStaffPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1196,5 +1212,6 @@
         private System.Windows.Forms.ErrorProvider errProvider;
         private System.Windows.Forms.TextBox txtDebt;
         private System.Windows.Forms.Label lblDebt;
+        private System.Windows.Forms.Button btnShowDebt;
     }
 }

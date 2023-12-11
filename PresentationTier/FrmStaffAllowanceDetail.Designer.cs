@@ -58,8 +58,8 @@
             this.colPhuCap = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSoTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblAllowanceText = new System.Windows.Forms.Label();
-            this.txtTongPhuCap = new System.Windows.Forms.TextBox();
-            this.lblTongPhuCap = new System.Windows.Forms.Label();
+            this.txtTotalAllowance = new System.Windows.Forms.TextBox();
+            this.lblTotalAllowance = new System.Windows.Forms.Label();
             this.lblStaffTotalAllowance = new System.Windows.Forms.Label();
             this.pnlHeader.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -382,23 +382,23 @@
             this.lblAllowanceText.TabIndex = 7;
             this.lblAllowanceText.Text = "Phụ cấp";
             // 
-            // txtTongPhuCap
+            // txtTotalAllowance
             // 
-            this.txtTongPhuCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTongPhuCap.Location = new System.Drawing.Point(1666, 313);
-            this.txtTongPhuCap.Name = "txtTongPhuCap";
-            this.txtTongPhuCap.Size = new System.Drawing.Size(246, 30);
-            this.txtTongPhuCap.TabIndex = 8;
+            this.txtTotalAllowance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalAllowance.Location = new System.Drawing.Point(1666, 313);
+            this.txtTotalAllowance.Name = "txtTotalAllowance";
+            this.txtTotalAllowance.Size = new System.Drawing.Size(246, 30);
+            this.txtTotalAllowance.TabIndex = 8;
             // 
-            // lblTongPhuCap
+            // lblTotalAllowance
             // 
-            this.lblTongPhuCap.AutoSize = true;
-            this.lblTongPhuCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTongPhuCap.Location = new System.Drawing.Point(1480, 313);
-            this.lblTongPhuCap.Name = "lblTongPhuCap";
-            this.lblTongPhuCap.Size = new System.Drawing.Size(180, 29);
-            this.lblTongPhuCap.TabIndex = 9;
-            this.lblTongPhuCap.Text = "Tổng phụ cấp:";
+            this.lblTotalAllowance.AutoSize = true;
+            this.lblTotalAllowance.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalAllowance.Location = new System.Drawing.Point(1480, 313);
+            this.lblTotalAllowance.Name = "lblTotalAllowance";
+            this.lblTotalAllowance.Size = new System.Drawing.Size(180, 29);
+            this.lblTotalAllowance.TabIndex = 9;
+            this.lblTotalAllowance.Text = "Tổng phụ cấp:";
             // 
             // lblStaffTotalAllowance
             // 
@@ -416,8 +416,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1924, 983);
-            this.Controls.Add(this.lblTongPhuCap);
-            this.Controls.Add(this.txtTongPhuCap);
+            this.Controls.Add(this.lblTotalAllowance);
+            this.Controls.Add(this.txtTotalAllowance);
             this.Controls.Add(this.lblAllowanceText);
             this.Controls.Add(this.dgvAllowanceDetail);
             this.Controls.Add(this.pnlMenu);
@@ -459,8 +459,8 @@
         private System.Windows.Forms.Label lblAllowance;
         private System.Windows.Forms.Label lblAmount;
         private System.Windows.Forms.TextBox txtAmount;
-        private System.Windows.Forms.TextBox txtTongPhuCap;
-        private System.Windows.Forms.Label lblTongPhuCap;
+        private System.Windows.Forms.TextBox txtTotalAllowance;
+        private System.Windows.Forms.Label lblTotalAllowance;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label lblStaffTotalAllowance;
         private System.Windows.Forms.Button btnRefresh;

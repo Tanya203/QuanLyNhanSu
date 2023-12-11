@@ -6,6 +6,7 @@ using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -58,7 +59,13 @@ namespace QuanLyNhanSu.PresentationTier
                 LoadDepartment();
             }
             else
-                LoadBonusDebtStaff(staff.StaffID, "Nợ");
+            {
+                lblSearch.Location = new Point(600, 150);
+                txtSearch.Location = new Point(715, 150);
+                dgvBonusDebt.Size = new Size(1924, 600);
+                LoadBonusDebtStaff(staff.StaffID, "Trừ");
+            }
+                
         }
         private bool Authorizations()
         {
@@ -256,15 +263,18 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void dgvBonusDebt_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            errProvider.Clear();
-            int rowIndex = e.RowIndex;
-            if (rowIndex < 0)
-                return;
-            txtCardID.Text = dgvBonusDebt.Rows[rowIndex].Cells[1].Value.ToString();
-            txtCardType.Text = dgvBonusDebt.Rows[rowIndex].Cells[2].Value.ToString();
-            txtAmount.Text = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == txtCardID.Text && c.StaffID == cmbStaff.Text).Amount.ToString();
-            txtDeliver.Text = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == txtCardID.Text && c.StaffID == cmbStaff.Text).Deliver.ToString();
-            rtxtNote.Text = dgvBonusDebt.Rows[rowIndex].Cells[8].Value.ToString();
+            if(form == "Main")
+            {
+                errProvider.Clear();
+                int rowIndex = e.RowIndex;
+                if (rowIndex < 0)
+                    return;
+                txtCardID.Text = dgvBonusDebt.Rows[rowIndex].Cells[1].Value.ToString();
+                txtCardType.Text = dgvBonusDebt.Rows[rowIndex].Cells[2].Value.ToString();
+                txtAmount.Text = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == txtCardID.Text && c.StaffID == cmbStaff.Text).Amount.ToString();
+                txtDeliver.Text = cardDetailBUS.GetCardDetail().FirstOrDefault(c => c.CardID == txtCardID.Text && c.StaffID == cmbStaff.Text).Deliver.ToString();
+                rtxtNote.Text = dgvBonusDebt.Rows[rowIndex].Cells[8].Value.ToString();
+            }
         }
         private bool CheckEmptyText()
         {
@@ -321,8 +331,16 @@ namespace QuanLyNhanSu.PresentationTier
 
         private void btnTroVe_Click(object sender, EventArgs e)
         {
-            FrmMainMenu open = new FrmMainMenu(staff.StaffID);
-            redirect.RedirectForm(open, this);
+            if(form == "Main")
+            {
+                FrmMainMenu open = new FrmMainMenu(staff.StaffID);
+                redirect.RedirectForm(open, this);
+            }
+            else
+            {
+                FrmAccountInfo open = new FrmAccountInfo(staff.StaffID);
+                redirect.RedirectForm(open, this);
+            }
         }
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
