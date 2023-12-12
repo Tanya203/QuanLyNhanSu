@@ -327,15 +327,14 @@ namespace QuanLyNhanSu.PresentationTier
                 DateTime dateValue = (DateTime)value;
                 return dateValue.ToString("yyyy-MM-dd");
             }
-            if(propertyName == "Pictrue")
+            if(propertyName == "Picture")
             {
                 value = typeof(Staff).GetProperty(propertyName)?.GetValue(staff);
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(stream, value);
-                    return System.Text.Encoding.UTF8.GetString(stream.ToArray());
-                }               
+                if (value == null)
+                    return null;
+                PictureBox holder = new PictureBox();
+                ImageHandle.LoadImage(holder, (byte[])value);
+                return System.Text.Encoding.UTF8.GetString(ImageHandle.GetImageBytes(holder));
             }                
             else
                 value = typeof(Staff).GetProperty(propertyName)?.GetValue(staff);
@@ -351,7 +350,7 @@ namespace QuanLyNhanSu.PresentationTier
             for (int i = 0; i < properties.Length; i++)
             {
                 string currentValue = GetValueAsString(staff, properties[i]);
-                if (values[i] != currentValue)
+                if (!values[i].Equals(currentValue))
                 {
                     if (properties[i] == "BasicSalary")
                         changes.Add($"- {labels[i]}: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(currentValue))} -> {labels[i]}: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(values[i]))}");
