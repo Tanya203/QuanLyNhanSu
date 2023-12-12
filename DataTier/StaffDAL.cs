@@ -13,13 +13,13 @@ namespace QuanLyNhanSu.DataTier
     internal class StaffDAL
     {
         private readonly QuanLyNhanSuContextDB quanLyNhanSu;
-        private readonly OperateHistoryBUS operateHistoryBUS;
+        private readonly SaveOperateHistory history;
         private readonly string formatDateTime = "HH:mm:ss.ffffff | dd/MM/yyyy";
-        private int count;
+        private static int count = 0;
         public StaffDAL()
         {
             quanLyNhanSu = new QuanLyNhanSuContextDB();
-            operateHistoryBUS = new OperateHistoryBUS();
+            history = new SaveOperateHistory("Đăng nhập");
         }
         public IEnumerable<StaffViewModel> GetAllStaff()
         {
@@ -181,19 +181,13 @@ namespace QuanLyNhanSu.DataTier
                     count++;
                     if (count == 3)
                     {
-                        string op_ID = quanLyNhanSu.Operations.FirstOrDefault(tt => tt.OperationName == "Khoá tài khoản (Sai mật khẩu)").OP_ID;
+                        string operate = "Sai mật khẩu";
+                        string detailOperation = $"Tài khoản {account} bị khoá đến {staff.LockDate} (nhập sai mật khẩu 3 lần)";
                         staff.LockDate = DateTime.Now.AddMinutes(30);
+                        history.Save(staff.StaffID, operate, detailOperation);
                         quanLyNhanSu.SaveChanges();
                         MessageBox.Show($"Nhập sai mật khẩu lần 3! Tài khoản {account} của nhân viên {staffID} đã bị khoá đến {staff.LockDate}! Liên hệ phòng kỹ thuật để biết thêm chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        count = 0;
-                        OperateHistory operateHistory = new OperateHistory()
-                        {
-                            DateTime = DateTime.Now.ToString(formatDateTime),
-                            StaffID = staffID,
-                            OP_ID = op_ID,
-                            DetailOperation = $"Tài khoản {account} bị khoá đến {staff.LockDate} (nhập sai mật khẩu 3 lần)",
-                        };
-                        operateHistoryBUS.Save(operateHistory);
+                        
                         return null;
                     }
                     else
