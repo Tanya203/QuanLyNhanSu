@@ -1237,7 +1237,7 @@
             this.pbStaffPicture.Location = new System.Drawing.Point(1575, 42);
             this.pbStaffPicture.Name = "pbStaffPicture";
             this.pbStaffPicture.Size = new System.Drawing.Size(215, 215);
-            this.pbStaffPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbStaffPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbStaffPicture.TabIndex = 24;
             this.pbStaffPicture.TabStop = false;
             // 
