@@ -740,7 +740,7 @@ namespace QuanLyNhanSu.PresentationTier
                 Reload();
                 return;
             }
-            FrmStaffAllowanceDetail open = new FrmStaffAllowanceDetail(staff.StaffID, txtStaffID.Text, "Nhân viên");
+            FrmStaffAllowanceDetail open = new FrmStaffAllowanceDetail(staff.StaffID, txtStaffID.Text, "Staff");
             redirect.RedirectForm(open, this);
         }
         private void btnUnlock_Click(object sender, EventArgs e)

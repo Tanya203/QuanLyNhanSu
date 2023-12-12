@@ -50,12 +50,13 @@ namespace QuanLyNhanSu.PresentationTier
             txtTotalAllowance.ReadOnly = true;
             pnlMenu.Visible = false;
             lblAllowanceText.Visible = false;
-            if (check == "Nhân viên")
+            if (check == "Staff")
             {
                 LoadAllowance();
                 lblAllowanceText.Visible = false;
                 pnlMenu.Visible = true;
                 DeleteButton();
+                LoadStaffAllowance();
             }
             else
             {

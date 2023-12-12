@@ -156,7 +156,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void Reload()
         {
-            FrmBonusDebt open = new FrmBonusDebt(staff.StaffID,"Main");
+            FrmBonusDebt open = new FrmBonusDebt(staff.StaffID, form);
             redirect.RedirectForm(open, this);
         }
         private void LoadType()
@@ -346,8 +346,16 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
-                LoadBonusDebtStaffSearch(cmbStaff.SelectedValue.ToString(), cmbType.Text, txtSearch.Text);
+            if (form == "Main")
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                    LoadBonusDebtStaffSearch(cmbStaff.SelectedValue.ToString(), cmbType.Text, txtSearch.Text);
+            }
+            else
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                    LoadBonusDebtStaffSearch(staff.StaffID, "Trừ", txtSearch.Text);
+            }
         }
 
         
