@@ -120,6 +120,66 @@ namespace QuanLyNhanSu.PresentationTier
             OnOffButton();
             Enabled = true;
         }
+        private string CheckChange()
+        {
+            AuthorizationBUS authorizationBUS = new AuthorizationBUS();
+            List<DataTier.Models.Authorization> oldAuthorizations = new List<DataTier.Models.Authorization>();
+            bool flag = false;
+            string add = "";
+            string remove = "";
+            string editDetail = "";
+            if (rbSortByPosition.Checked)
+            {
+                oldAuthorizations = authorizationBUS.GetAuthorizations().Where(au => au.PS_ID == cmbPosition.SelectedValue.ToString()).ToList();
+                editDetail = $"Cập nhật quyền hạn chức vụ {cmbPosition.Text}:";
+                add += "\n - Thêm quyền hạn:";
+                remove += "\n - Xoá quyền hạn:";
+                foreach(DataTier.Models.Authorization au in listUpdateAuthorize)
+                {
+                    if(au.Authorize != oldAuthorizations.First(s => s.PS_ID == au.PS_ID && s.AU_ID == au.AU_ID).Authorize)
+                    {
+                        flag = true;
+                        
+               
+                        if (au.Authorize)
+                            add += $"\n    - {au.Authority.AuthorityName}";
+                        else
+                            remove += $"\n    - {au.Authority.AuthorityName}";
+                    }
+                }
+                if (flag)
+                {
+                    string result = editDetail + add + remove;
+                    return result;
+                }
+            }
+            else
+            {
+                oldAuthorizations = authorizationBUS.GetAuthorizations().Where(au => au.AU_ID == cmbAuthority.SelectedValue.ToString()).ToList();
+                editDetail = $"Cập nhật quyền hạn {cmbAuthority.Text}:";
+                add += "\n - Thêm chức vụ:";
+                remove += "\n - Xoá chức vụ:";
+                foreach (DataTier.Models.Authorization au in listUpdateAuthorize)
+                {
+                    if (au.Authorize != oldAuthorizations.First(s => s.PS_ID == au.PS_ID && s.AU_ID == au.AU_ID).Authorize)
+                    {
+                        flag = true;
+                        
+
+                        if (au.Authorize)
+                            add += $"\n    - {au.Position.PositionName}";
+                        else
+                            remove += $"\n    - {au.Position.PositionName}";
+                    }
+                }
+                if (flag)
+                {
+                    string result = editDetail + add + remove;
+                    return result;
+                }
+            }
+            return "";
+        }
         private void LoadPosition()
         {
             cmbPosition.DisplayMember = "PositionName";
@@ -223,6 +283,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
+                
                 foreach(DataTier.Models.Authorization au in listUpdateAuthorize)
                 {
                     if (!checkExist.CheckPosition(au.PS_ID))
@@ -240,9 +301,7 @@ namespace QuanLyNhanSu.PresentationTier
                     if (open.Check)
                     {
                         open.Check = false;
-
-
-                        string operationDetail = "Cập nhật quyền hạn";
+                        string operationDetail = CheckChange();
                         string operate = "Cập nhật";
                         if (authorizationBUS.Save(listUpdateAuthorize))
                         {
