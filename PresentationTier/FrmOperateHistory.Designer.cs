@@ -74,11 +74,14 @@
             this.rbAllInterface = new System.Windows.Forms.RadioButton();
             this.cmbInterface = new System.Windows.Forms.ComboBox();
             this.lblSortByInterface = new System.Windows.Forms.Label();
+            this.nudFontSize = new System.Windows.Forms.NumericUpDown();
+            this.lblFontSỉze = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperateHistory)).BeginInit();
             this.pnlHeader.SuspendLayout();
             this.pnlSortByTime.SuspendLayout();
             this.pnlSortByOperation.SuspendLayout();
             this.pnlSortByInterface.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFullNameLogin
@@ -580,18 +583,39 @@
             this.lblSortByInterface.TabIndex = 63;
             this.lblSortByInterface.Text = "Lọc theo giao diện";
             // 
+            // nudFontSize
+            // 
+            this.nudFontSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudFontSize.Location = new System.Drawing.Point(1848, 288);
+            this.nudFontSize.Name = "nudFontSize";
+            this.nudFontSize.Size = new System.Drawing.Size(64, 30);
+            this.nudFontSize.TabIndex = 65;
+            this.nudFontSize.ValueChanged += new System.EventHandler(this.nudFontSize_ValueChanged);
+            // 
+            // lblFontSỉze
+            // 
+            this.lblFontSỉze.AutoSize = true;
+            this.lblFontSỉze.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFontSỉze.Location = new System.Drawing.Point(1713, 286);
+            this.lblFontSỉze.Name = "lblFontSỉze";
+            this.lblFontSỉze.Size = new System.Drawing.Size(118, 32);
+            this.lblFontSỉze.TabIndex = 66;
+            this.lblFontSỉze.Text = "Cỡ chữ:";
+            // 
             // FrmOperateHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1924, 1033);
+            this.Controls.Add(this.lblFontSỉze);
+            this.Controls.Add(this.nudFontSize);
+            this.Controls.Add(this.dgvOperateHistory);
             this.Controls.Add(this.pnlSortByInterface);
             this.Controls.Add(this.pnlSortByOperation);
             this.Controls.Add(this.pnlSortByTime);
             this.Controls.Add(this.lblOperateHistory);
             this.Controls.Add(this.lblSearch);
-            this.Controls.Add(this.dgvOperateHistory);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.txtSearch);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -608,6 +632,7 @@
             this.pnlSortByOperation.PerformLayout();
             this.pnlSortByInterface.ResumeLayout(false);
             this.pnlSortByInterface.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -656,5 +681,7 @@
         private System.Windows.Forms.RadioButton rbAllInterface;
         private System.Windows.Forms.ComboBox cmbInterface;
         private System.Windows.Forms.Label lblSortByInterface;
+        private System.Windows.Forms.NumericUpDown nudFontSize;
+        private System.Windows.Forms.Label lblFontSỉze;
     }
 }

@@ -5,6 +5,7 @@ using QuanLyNhanSu.utils;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -31,6 +32,7 @@ namespace QuanLyNhanSu.PresentationTier
             operationBUS = new OperationBUS();
             operateHistoryBUS = new OperateHistoryBUS();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
+            nudFontSize.Value = (decimal)dgvOperateHistory.RowsDefaultCellStyle.Font.Size;
 
         }
         private void frmLichSuThaoTac_Load(object sender, EventArgs e)
@@ -253,6 +255,12 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Reload();
+        }
+
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvOperateHistory.RowsDefaultCellStyle.Font = new Font(dgvOperateHistory.Font.FontFamily, fontSize);
         }
     }
 }
