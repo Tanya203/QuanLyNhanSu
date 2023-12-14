@@ -69,11 +69,12 @@ namespace QuanLyNhanSu.DataTier
         {
             return quanLyNhanSu.Authorizations.OrderBy(au => au.PS_ID).ToList();
         }
-        public bool Save(Authorization au)
+        public bool Save(List<Authorization> authorization)
         {
             try
             {
-                quanLyNhanSu.Authorizations.AddOrUpdate(au);
+                foreach (Authorization au in authorization)
+                    quanLyNhanSu.Authorizations.AddOrUpdate(au);               
                 quanLyNhanSu.SaveChanges();
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
