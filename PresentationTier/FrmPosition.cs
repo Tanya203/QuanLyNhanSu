@@ -4,6 +4,7 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -36,6 +37,7 @@ namespace QuanLyNhanSu.PresentationTier
             authoritiesList = authorityBUS.GetAuthority();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Chức vụ", staff);
+            nudFontSize.Value = (decimal)dgvPosition.RowsDefaultCellStyle.Font.Size;
         }
         private void frmQuanLyChucVu_Load(object sender, EventArgs e)
         {            
@@ -355,6 +357,12 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Reload();
+        }
+
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvPosition.RowsDefaultCellStyle.Font = new Font(dgvPosition.Font.FontFamily, fontSize);
         }
     }
 }

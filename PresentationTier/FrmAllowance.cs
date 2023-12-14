@@ -37,6 +37,7 @@ namespace QuanLyNhanSu.PresentationTier
             checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Phụ cấp", staff);
+            nudFontSize.Value = (decimal)dgvAllowance.RowsDefaultCellStyle.Font.Size;
         }
         private void frmQuanLyPhuCap_Load(object sender, EventArgs e)
         {
@@ -378,6 +379,12 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Reload();
+        }
+
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvAllowance.RowsDefaultCellStyle.Font = new Font(dgvAllowance.Font.FontFamily, fontSize);
         }
     }
 }

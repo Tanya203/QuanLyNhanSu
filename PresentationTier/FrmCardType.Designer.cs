@@ -64,9 +64,12 @@
             this.colTenLoaiPhieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaculateMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSoLuongPhieuLap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblFontSỉze = new System.Windows.Forms.Label();
+            this.nudFontSize = new System.Windows.Forms.NumericUpDown();
             this.pnlHeader.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -430,7 +433,7 @@
             this.colCaculateMethod,
             this.colSoLuongPhieuLap});
             this.dgvCardType.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvCardType.Location = new System.Drawing.Point(0, 420);
+            this.dgvCardType.Location = new System.Drawing.Point(0, 424);
             this.dgvCardType.Name = "dgvCardType";
             this.dgvCardType.ReadOnly = true;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
@@ -445,7 +448,7 @@
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvCardType.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCardType.RowTemplate.Height = 24;
-            this.dgvCardType.Size = new System.Drawing.Size(1924, 563);
+            this.dgvCardType.Size = new System.Drawing.Size(1924, 569);
             this.dgvCardType.TabIndex = 11;
             this.dgvCardType.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCardType_CellClick);
             // 
@@ -477,12 +480,43 @@
             this.colSoLuongPhieuLap.Name = "colSoLuongPhieuLap";
             this.colSoLuongPhieuLap.ReadOnly = true;
             // 
+            // lblFontSỉze
+            // 
+            this.lblFontSỉze.AutoSize = true;
+            this.lblFontSỉze.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFontSỉze.Location = new System.Drawing.Point(1724, 389);
+            this.lblFontSỉze.Name = "lblFontSỉze";
+            this.lblFontSỉze.Size = new System.Drawing.Size(118, 32);
+            this.lblFontSỉze.TabIndex = 68;
+            this.lblFontSỉze.Text = "Cỡ chữ:";
+            // 
+            // nudFontSize
+            // 
+            this.nudFontSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudFontSize.Location = new System.Drawing.Point(1848, 388);
+            this.nudFontSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSize.Name = "nudFontSize";
+            this.nudFontSize.Size = new System.Drawing.Size(64, 34);
+            this.nudFontSize.TabIndex = 67;
+            this.nudFontSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSize.ValueChanged += new System.EventHandler(this.nudFontSize_ValueChanged);
+            // 
             // FrmCardType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1924, 983);
+            this.ClientSize = new System.Drawing.Size(1924, 993);
+            this.Controls.Add(this.lblFontSỉze);
+            this.Controls.Add(this.nudFontSize);
             this.Controls.Add(this.dgvCardType);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lblSearch);
@@ -499,6 +533,7 @@
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -538,5 +573,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTenLoaiPhieu;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCaculateMethod;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSoLuongPhieuLap;
+        private System.Windows.Forms.Label lblFontSỉze;
+        private System.Windows.Forms.NumericUpDown nudFontSize;
     }
 }

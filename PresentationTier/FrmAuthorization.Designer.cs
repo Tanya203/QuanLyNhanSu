@@ -61,9 +61,12 @@
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.cbCheckAll = new System.Windows.Forms.CheckBox();
+            this.lblFontSỉze = new System.Windows.Forms.Label();
+            this.nudFontSize = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAuthorization)).BeginInit();
             this.pnlHeader.SuspendLayout();
             this.pnlMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).BeginInit();
             this.SuspendLayout();
             // 
             // txtSearch
@@ -89,6 +92,8 @@
             // 
             this.dgvAuthorization.AllowUserToAddRows = false;
             this.dgvAuthorization.AllowUserToDeleteRows = false;
+            this.dgvAuthorization.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAuthorization.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -114,7 +119,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvAuthorization.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvAuthorization.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvAuthorization.Location = new System.Drawing.Point(0, 313);
+            this.dgvAuthorization.Location = new System.Drawing.Point(0, 302);
             this.dgvAuthorization.Name = "dgvAuthorization";
             this.dgvAuthorization.ReadOnly = true;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -129,7 +134,7 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvAuthorization.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvAuthorization.RowTemplate.Height = 24;
-            this.dgvAuthorization.Size = new System.Drawing.Size(1924, 680);
+            this.dgvAuthorization.Size = new System.Drawing.Size(1924, 691);
             this.dgvAuthorization.TabIndex = 36;
             this.dgvAuthorization.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAuthorization_CellContentClick);
             // 
@@ -140,7 +145,6 @@
             this.colMaQH.MinimumWidth = 6;
             this.colMaQH.Name = "colMaQH";
             this.colMaQH.ReadOnly = true;
-            this.colMaQH.Width = 285;
             // 
             // colMaCV
             // 
@@ -149,7 +153,6 @@
             this.colMaCV.MinimumWidth = 6;
             this.colMaCV.Name = "colMaCV";
             this.colMaCV.ReadOnly = true;
-            this.colMaCV.Width = 313;
             // 
             // colTenChucVu
             // 
@@ -158,7 +161,6 @@
             this.colTenChucVu.MinimumWidth = 6;
             this.colTenChucVu.Name = "colTenChucVu";
             this.colTenChucVu.ReadOnly = true;
-            this.colTenChucVu.Width = 336;
             // 
             // colGiaoDien
             // 
@@ -167,7 +169,6 @@
             this.colGiaoDien.MinimumWidth = 6;
             this.colGiaoDien.Name = "colGiaoDien";
             this.colGiaoDien.ReadOnly = true;
-            this.colGiaoDien.Width = 341;
             // 
             // colTenQuyenHan
             // 
@@ -176,7 +177,6 @@
             this.colTenQuyenHan.MinimumWidth = 6;
             this.colTenQuyenHan.Name = "colTenQuyenHan";
             this.colTenQuyenHan.ReadOnly = true;
-            this.colTenQuyenHan.Width = 326;
             // 
             // colCapQuyen
             // 
@@ -187,7 +187,6 @@
             this.colCapQuyen.ReadOnly = true;
             this.colCapQuyen.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colCapQuyen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colCapQuyen.Width = 320;
             // 
             // pnlHeader
             // 
@@ -421,14 +420,43 @@
             // cbCheckAll
             // 
             this.cbCheckAll.AutoSize = true;
-            this.cbCheckAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbCheckAll.Location = new System.Drawing.Point(1767, 278);
+            this.cbCheckAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCheckAll.Location = new System.Drawing.Point(1747, 267);
             this.cbCheckAll.Name = "cbCheckAll";
-            this.cbCheckAll.Size = new System.Drawing.Size(145, 29);
+            this.cbCheckAll.Size = new System.Drawing.Size(165, 33);
             this.cbCheckAll.TabIndex = 52;
             this.cbCheckAll.Text = "Chọn tất cả";
             this.cbCheckAll.UseVisualStyleBackColor = true;
             this.cbCheckAll.CheckedChanged += new System.EventHandler(this.cbCheckAll_CheckedChanged);
+            // 
+            // lblFontSỉze
+            // 
+            this.lblFontSỉze.AutoSize = true;
+            this.lblFontSỉze.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFontSỉze.Location = new System.Drawing.Point(1520, 268);
+            this.lblFontSỉze.Name = "lblFontSỉze";
+            this.lblFontSỉze.Size = new System.Drawing.Size(118, 32);
+            this.lblFontSỉze.TabIndex = 68;
+            this.lblFontSỉze.Text = "Cỡ chữ:";
+            // 
+            // nudFontSize
+            // 
+            this.nudFontSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudFontSize.Location = new System.Drawing.Point(1644, 265);
+            this.nudFontSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSize.Name = "nudFontSize";
+            this.nudFontSize.Size = new System.Drawing.Size(64, 34);
+            this.nudFontSize.TabIndex = 67;
+            this.nudFontSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSize.ValueChanged += new System.EventHandler(this.nudFontSize_ValueChanged);
             // 
             // FrmAuthorization
             // 
@@ -436,6 +464,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1924, 993);
+            this.Controls.Add(this.lblFontSỉze);
+            this.Controls.Add(this.nudFontSize);
             this.Controls.Add(this.cbCheckAll);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.lblAuthorization);
@@ -453,6 +483,7 @@
             this.pnlHeader.PerformLayout();
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -488,5 +519,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colCapQuyen;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.CheckBox cbCheckAll;
+        private System.Windows.Forms.Label lblFontSỉze;
+        private System.Windows.Forms.NumericUpDown nudFontSize;
     }
 }

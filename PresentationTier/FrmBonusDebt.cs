@@ -43,6 +43,7 @@ namespace QuanLyNhanSu.PresentationTier
             authorizations = new Authorizations("Thưởng - nợ", staff);
             checkLoad = false;
             this.form = form;
+            nudFontSize.Value = (decimal)dgvBonusDebt.RowsDefaultCellStyle.Font.Size;
         }
 
         private void FrmBonusDebt_Load(object sender, EventArgs e)
@@ -64,6 +65,8 @@ namespace QuanLyNhanSu.PresentationTier
                 lblBonusFine.Location = new Point(700, 100);
                 lblSearch.Location = new Point(600, 150);
                 txtSearch.Location = new Point(715, 150);
+                lblFontSỉze.Location = new Point(1350, 150);
+                nudFontSize.Location = new Point(1450, 150);
                 dgvBonusDebt.Size = new Size(1924, 600);
                 LoadBonusDebtStaff(staff.StaffID, "Trừ");
             }
@@ -358,6 +361,10 @@ namespace QuanLyNhanSu.PresentationTier
             }
         }
 
-        
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvBonusDebt.RowsDefaultCellStyle.Font = new Font(dgvBonusDebt.Font.FontFamily, fontSize);
+        }
     }
 }

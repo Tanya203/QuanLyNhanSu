@@ -6,6 +6,7 @@ using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -46,7 +47,8 @@ namespace QuanLyNhanSu.PresentationTier
             checkExist = new CheckExist();
             salary = new SalaryHandle();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
-            authorizations = new Authorizations("Nhân viên",staff);            
+            authorizations = new Authorizations("Nhân viên",staff);
+            nudFontSize.Value = (decimal)dgvStaff.RowsDefaultCellStyle.Font.Size;
         }
         private void frmQuanLyNhanVien_Load(object sender, EventArgs e)
         {
@@ -885,6 +887,12 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnChoosePicture_Click(object sender, EventArgs e)
         {
             ImageHandle.ChooseIamge(pbStaffPicture);
+        }
+
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvStaff.RowsDefaultCellStyle.Font = new Font(dgvStaff.Font.FontFamily, fontSize);
         }
     }
 }

@@ -78,11 +78,14 @@
             this.lblWorkDate = new System.Windows.Forms.Label();
             this.txtWorkScheduleID = new System.Windows.Forms.TextBox();
             this.lblWorkScheduleID = new System.Windows.Forms.Label();
+            this.lblFontSỉze = new System.Windows.Forms.Label();
+            this.nudFontSize = new System.Windows.Forms.NumericUpDown();
             this.pnlFunction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbStaffPicture)).BeginInit();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWorkScheduleDetail)).BeginInit();
             this.pnlInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).BeginInit();
             this.SuspendLayout();
             // 
             // lblPositionLoginValue
@@ -327,7 +330,7 @@
             this.lblSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSearch.AutoSize = true;
             this.lblSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearch.Location = new System.Drawing.Point(769, 389);
+            this.lblSearch.Location = new System.Drawing.Point(765, 386);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(145, 32);
             this.lblSearch.TabIndex = 72;
@@ -337,7 +340,7 @@
             // 
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(920, 391);
+            this.txtSearch.Location = new System.Drawing.Point(916, 388);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(299, 30);
             this.txtSearch.TabIndex = 15;
@@ -431,7 +434,7 @@
             this.colThoiGianVe,
             this.colPhep});
             this.dgvWorkScheduleDetail.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvWorkScheduleDetail.Location = new System.Drawing.Point(0, 427);
+            this.dgvWorkScheduleDetail.Location = new System.Drawing.Point(0, 424);
             this.dgvWorkScheduleDetail.Name = "dgvWorkScheduleDetail";
             this.dgvWorkScheduleDetail.ReadOnly = true;
             this.dgvWorkScheduleDetail.RowHeadersVisible = false;
@@ -439,7 +442,7 @@
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvWorkScheduleDetail.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvWorkScheduleDetail.RowTemplate.Height = 24;
-            this.dgvWorkScheduleDetail.Size = new System.Drawing.Size(1924, 556);
+            this.dgvWorkScheduleDetail.Size = new System.Drawing.Size(1924, 569);
             this.dgvWorkScheduleDetail.TabIndex = 15;
             this.dgvWorkScheduleDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWorkScheduleDetail_CellClick);
             // 
@@ -603,12 +606,43 @@
             this.lblWorkScheduleID.TabIndex = 0;
             this.lblWorkScheduleID.Text = "Mã lịch làm việc:";
             // 
+            // lblFontSỉze
+            // 
+            this.lblFontSỉze.AutoSize = true;
+            this.lblFontSỉze.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFontSỉze.Location = new System.Drawing.Point(1724, 385);
+            this.lblFontSỉze.Name = "lblFontSỉze";
+            this.lblFontSỉze.Size = new System.Drawing.Size(118, 32);
+            this.lblFontSỉze.TabIndex = 79;
+            this.lblFontSỉze.Text = "Cỡ chữ:";
+            // 
+            // nudFontSize
+            // 
+            this.nudFontSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudFontSize.Location = new System.Drawing.Point(1848, 384);
+            this.nudFontSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSize.Name = "nudFontSize";
+            this.nudFontSize.Size = new System.Drawing.Size(64, 34);
+            this.nudFontSize.TabIndex = 78;
+            this.nudFontSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSize.ValueChanged += new System.EventHandler(this.nudFontSize_ValueChanged);
+            // 
             // FrmWorkScheduleDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1924, 983);
+            this.ClientSize = new System.Drawing.Size(1924, 993);
+            this.Controls.Add(this.lblFontSỉze);
+            this.Controls.Add(this.nudFontSize);
             this.Controls.Add(this.pnlInfo);
             this.Controls.Add(this.pnlFunction);
             this.Controls.Add(this.lblWorkScheduleInfo);
@@ -631,6 +665,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvWorkScheduleDetail)).EndInit();
             this.pnlInfo.ResumeLayout(false);
             this.pnlInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -685,5 +720,7 @@
         private System.Windows.Forms.PictureBox pbStaffPicture;
         private System.Windows.Forms.TextBox txtPosition;
         private System.Windows.Forms.Label lblPosition;
+        private System.Windows.Forms.Label lblFontSỉze;
+        private System.Windows.Forms.NumericUpDown nudFontSize;
     }
 }

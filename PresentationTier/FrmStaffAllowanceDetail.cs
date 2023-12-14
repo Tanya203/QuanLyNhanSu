@@ -41,6 +41,7 @@ namespace QuanLyNhanSu.PresentationTier
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             this.check = check;
             this.staffID_AL = staffID_AL;
+            nudFontSize.Value = (decimal)dgvAllowanceDetail.RowsDefaultCellStyle.Font.Size;
         }
         private void FrmStaffAllowanceDetail_Load(object sender, EventArgs e)
         {
@@ -61,8 +62,10 @@ namespace QuanLyNhanSu.PresentationTier
             else
             {
                 lblStaffTotalAllowance.Location = new Point(650, 125);
-                lblTotalAllowance.Location = new Point(1150, 125);
-                txtTotalAllowance.Location = new Point(1300, 125);
+                lblTotalAllowance.Location = new Point(1000, 125);
+                txtTotalAllowance.Location = new Point(1150, 125);
+                lblFontSỉze.Location = new Point(1380, 125);
+                nudFontSize.Location = new Point(1480, 125);
                 dgvAllowanceDetail.Size = new Size(1924, 634);
                 LoadStaffAllowance();
             }
@@ -239,6 +242,12 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Reload();
+        }
+
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvAllowanceDetail.RowsDefaultCellStyle.Font = new Font(dgvAllowanceDetail.Font.FontFamily, fontSize);
         }
     }
 }

@@ -4,6 +4,7 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -30,6 +31,7 @@ namespace QuanLyNhanSu.PresentationTier
             checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Loại hợp đồng", staff);
+            nudFontSize.Value = (decimal)dgvContractType.RowsDefaultCellStyle.Font.Size;
         }
         private void frmQuanLyLoaiHopDong_Load(object sender, EventArgs e)
         {
@@ -331,6 +333,12 @@ namespace QuanLyNhanSu.PresentationTier
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Reload();
+        }
+
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvContractType.RowsDefaultCellStyle.Font = new Font(dgvContractType.Font.FontFamily, fontSize);
         }
     }
 }

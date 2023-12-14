@@ -33,7 +33,6 @@ namespace QuanLyNhanSu.PresentationTier
             operateHistoryBUS = new OperateHistoryBUS();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             nudFontSize.Value = (decimal)dgvOperateHistory.RowsDefaultCellStyle.Font.Size;
-
         }
         private void frmLichSuThaoTac_Load(object sender, EventArgs e)
         {

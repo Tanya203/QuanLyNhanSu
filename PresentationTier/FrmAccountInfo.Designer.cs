@@ -53,6 +53,7 @@
             this.lblOldPassword = new System.Windows.Forms.Label();
             this.btnChangePassword = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.btnShowDebt = new System.Windows.Forms.Button();
             this.txtDebt = new System.Windows.Forms.TextBox();
             this.lblDebt = new System.Windows.Forms.Label();
             this.txtContractDuration = new System.Windows.Forms.TextBox();
@@ -114,7 +115,6 @@
             this.lblDepartment = new System.Windows.Forms.Label();
             this.lblPosition = new System.Windows.Forms.Label();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnShowDebt = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
             this.pnlChangePassword.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -462,8 +462,22 @@
             this.pnlMenu.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.pnlMenu.Location = new System.Drawing.Point(198, 178);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(1529, 843);
+            this.pnlMenu.Size = new System.Drawing.Size(1529, 803);
             this.pnlMenu.TabIndex = 38;
+            // 
+            // btnShowDebt
+            // 
+            this.btnShowDebt.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnShowDebt.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnShowDebt.FlatAppearance.BorderSize = 0;
+            this.btnShowDebt.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnShowDebt.Image = global::QuanLyNhanSu.Properties.Resources.add_small;
+            this.btnShowDebt.Location = new System.Drawing.Point(599, 151);
+            this.btnShowDebt.Name = "btnShowDebt";
+            this.btnShowDebt.Size = new System.Drawing.Size(39, 37);
+            this.btnShowDebt.TabIndex = 41;
+            this.btnShowDebt.UseVisualStyleBackColor = false;
+            this.btnShowDebt.Click += new System.EventHandler(this.btnShowDebt_Click);
             // 
             // txtDebt
             // 
@@ -1085,26 +1099,12 @@
             this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errProvider.ContainerControl = this;
             // 
-            // btnShowDebt
-            // 
-            this.btnShowDebt.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnShowDebt.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnShowDebt.FlatAppearance.BorderSize = 0;
-            this.btnShowDebt.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnShowDebt.Image = global::QuanLyNhanSu.Properties.Resources.add_small;
-            this.btnShowDebt.Location = new System.Drawing.Point(599, 151);
-            this.btnShowDebt.Name = "btnShowDebt";
-            this.btnShowDebt.Size = new System.Drawing.Size(39, 37);
-            this.btnShowDebt.TabIndex = 41;
-            this.btnShowDebt.UseVisualStyleBackColor = false;
-            this.btnShowDebt.Click += new System.EventHandler(this.btnShowDebt_Click);
-            // 
             // FrmAccountInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1924, 1033);
+            this.ClientSize = new System.Drawing.Size(1924, 993);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.lblAccountInfo);
             this.Controls.Add(this.pnlHeader);

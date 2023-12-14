@@ -41,6 +41,7 @@ namespace QuanLyNhanSu.PresentationTier
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             card = cardBUS.GetCard().FirstOrDefault(c => c.CardID == cardID);
             authorizations = new Authorizations("Chi tiết phiếu", staff);
+            nudFontSize.Value = (decimal)dgvCardDetail.RowsDefaultCellStyle.Font.Size;
         }
         private void FrmChiTietPhieuThuong_Load(object sender, EventArgs e)
         {
@@ -521,6 +522,10 @@ namespace QuanLyNhanSu.PresentationTier
             Reload();
         }
 
-       
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvCardDetail.RowsDefaultCellStyle.Font = new Font(dgvCardDetail.Font.FontFamily, fontSize);
+        }
     }
 }

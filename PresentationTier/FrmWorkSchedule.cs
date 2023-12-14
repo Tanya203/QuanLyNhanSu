@@ -32,6 +32,7 @@ namespace QuanLyNhanSu.PresentationTier
             checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Lịch làm việc", staff);
+            nudFontSize.Value = (decimal)dgvWorkSchedule.RowsDefaultCellStyle.Font.Size;
         }
         private void FrmLichLamViec_Load(object sender, EventArgs e)
         {
@@ -263,6 +264,12 @@ namespace QuanLyNhanSu.PresentationTier
                 btnAdd.Enabled = false;
             else
                 btnAdd.Enabled = true;
+        }
+
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvWorkSchedule.RowsDefaultCellStyle.Font = new Font(dgvWorkSchedule.Font.FontFamily, fontSize);
         }
     }
 }
