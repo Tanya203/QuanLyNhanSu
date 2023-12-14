@@ -469,13 +469,13 @@ namespace QuanLyNhanSu.PresentationTier
             };
             if (button == btnAdd)
             {
-                validationRules.Add(txtAccount, () => staffBUS.GetStaff().FirstOrDefault(s => s.Account == txtAccount.Text) != null || txtAccount.Text.Length < 5);
+                validationRules.Add(txtAccount, () => staffBUS.GetStaff().FirstOrDefault(s => s.Account == txtAccount.Text) != null || txtAccount.Text.Length < 5 || txtAccount.Text.Length > 20);
                 validationRules.Add(txtPassword, () => !InputCheck.CheckPassword(txtPassword.Text));
                 validationRules.Add(txtReEnterPassword, () => txtPassword.Text != txtReEnterPassword.Text);
             }
             var errorMessages = new Dictionary<Control, string>
             {
-                { txtAccount, "Tài khoản đã tồn tại hoặc ít hơn 5 ký tự" },
+                { txtAccount, "Tài khoản đã tồn tại hoặc ít hơn 5 ký tự hoặc nhiều hơn 20 ký tự" },
                 { txtPassword, "Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 ký tự đặc biệt, 1 ký tự số và có độ dài >= 8 và =< 20 ký tự!" },
                 { txtReEnterPassword, "Mật khẩu nhập lại không khớp" },
                 { dtpEntryDate, "Ngày vào làm không thể nhỏ hơn ngày hiện tại" },
