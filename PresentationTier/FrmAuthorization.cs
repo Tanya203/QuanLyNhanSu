@@ -185,8 +185,6 @@ namespace QuanLyNhanSu.PresentationTier
         {
             Reload();
         }
-
-       
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -233,24 +231,26 @@ namespace QuanLyNhanSu.PresentationTier
                         return;
                     }
                 }
-                FrmConfirmPassword open = new FrmConfirmPassword(staff.StaffID);
-                open.ShowDialog();
-                if (open.Check)
+                CustomMessage.YesNoCustom("Xác nhận", "Huỷ");
+                DialogResult ketQua = MessageBox.Show("Xác nhận cập nhật quyền hạn?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (ketQua == DialogResult.Yes)
                 {
-                    open.Check = false;
-                    CustomMessage.YesNoCustom("Xác nhận", "Huỷ");
-                    DialogResult ketQua = MessageBox.Show("Xác nhận cập nhật quyền hạn?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (ketQua == DialogResult.Yes)
+                    FrmConfirmPassword open = new FrmConfirmPassword(staff.StaffID);
+                    open.ShowDialog();
+                    if (open.Check)
                     {
-                        
+                        open.Check = false;
+
+
                         string operationDetail = "Cập nhật quyền hạn";
-                        string operate = "Cập nhật"; 
+                        string operate = "Cập nhật";
                         if (authorizationBUS.Save(listUpdateAuthorize))
                         {
                             history.Save(staff.StaffID, operate, operationDetail);
-                            if(listUpdateAuthorize.Where(au => au.PS_ID != staff.PS_ID) == null)
+                            if (listUpdateAuthorize.FirstOrDefault(au => au.PS_ID == staff.PS_ID) == null)
                                 Reload();
                         }
+
                     }
                 }
             }
