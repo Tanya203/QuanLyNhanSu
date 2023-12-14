@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAllowance));
             this.lblAmount = new System.Windows.Forms.Label();
             this.txtAllowanceName = new System.Windows.Forms.TextBox();
@@ -66,10 +65,13 @@
             this.colMaPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvAllowance = new System.Windows.Forms.DataGridView();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblFontSỉze = new System.Windows.Forms.Label();
+            this.nudFontSize = new System.Windows.Forms.NumericUpDown();
             this.pnlMenu.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllowance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAmount
@@ -445,8 +447,6 @@
             // 
             this.dgvAllowance.AllowUserToAddRows = false;
             this.dgvAllowance.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvAllowance.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAllowance.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAllowance.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvAllowance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -456,22 +456,22 @@
             this.colSoTien,
             this.colSoLuongNhanVien});
             this.dgvAllowance.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvAllowance.Location = new System.Drawing.Point(0, 408);
+            this.dgvAllowance.Location = new System.Drawing.Point(0, 404);
             this.dgvAllowance.Name = "dgvAllowance";
             this.dgvAllowance.ReadOnly = true;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAllowance.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAllowance.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAllowance.RowHeadersVisible = false;
             this.dgvAllowance.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvAllowance.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvAllowance.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvAllowance.RowTemplate.Height = 24;
-            this.dgvAllowance.Size = new System.Drawing.Size(1924, 575);
+            this.dgvAllowance.Size = new System.Drawing.Size(1924, 589);
             this.dgvAllowance.TabIndex = 12;
             this.dgvAllowance.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAllowance_CellClick);
             // 
@@ -480,12 +480,43 @@
             this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errProvider.ContainerControl = this;
             // 
+            // lblFontSỉze
+            // 
+            this.lblFontSỉze.AutoSize = true;
+            this.lblFontSỉze.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFontSỉze.Location = new System.Drawing.Point(1724, 365);
+            this.lblFontSỉze.Name = "lblFontSỉze";
+            this.lblFontSỉze.Size = new System.Drawing.Size(118, 32);
+            this.lblFontSỉze.TabIndex = 68;
+            this.lblFontSỉze.Text = "Cỡ chữ:";
+            // 
+            // nudFontSize
+            // 
+            this.nudFontSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudFontSize.Location = new System.Drawing.Point(1848, 364);
+            this.nudFontSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSize.Name = "nudFontSize";
+            this.nudFontSize.Size = new System.Drawing.Size(64, 34);
+            this.nudFontSize.TabIndex = 67;
+            this.nudFontSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSize.ValueChanged += new System.EventHandler(this.nudFontSize_ValueChanged);
+            // 
             // FrmAllowance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1924, 983);
+            this.ClientSize = new System.Drawing.Size(1924, 993);
+            this.Controls.Add(this.lblFontSỉze);
+            this.Controls.Add(this.nudFontSize);
             this.Controls.Add(this.lblAllowance);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.txtSearch);
@@ -504,6 +535,7 @@
             this.pnlHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllowance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -544,5 +576,7 @@
         private System.Windows.Forms.DataGridView dgvAllowance;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ErrorProvider errProvider;
+        private System.Windows.Forms.Label lblFontSỉze;
+        private System.Windows.Forms.NumericUpDown nudFontSize;
     }
 }

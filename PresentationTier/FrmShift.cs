@@ -5,6 +5,7 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -31,6 +32,7 @@ namespace QuanLyNhanSu.PresentationTier
             authorizations = new Authorizations("Ca", staff);
             dtpStartTime.Text = "00:00";
             dtpEndTime.Text = "00:00";
+            nudFontSize.Value = (decimal)dgvShift.RowsDefaultCellStyle.Font.Size;
         }
         private void frmQuanLyCa_Load(object sender, EventArgs e)
         {
@@ -395,5 +397,10 @@ namespace QuanLyNhanSu.PresentationTier
             Reload();
         }
 
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvShift.RowsDefaultCellStyle.Font = new Font(dgvShift.Font.FontFamily, fontSize);
+        }
     }
 }

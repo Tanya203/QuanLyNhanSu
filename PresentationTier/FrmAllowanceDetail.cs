@@ -46,6 +46,7 @@ namespace QuanLyNhanSu.PresentationTier
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             allowance = allowanceBUS.GetAllowance().FirstOrDefault(al => al.AL_ID == alID);
             authorizations = new Authorizations("Chi tiết phụ cấp", staff);
+            nudFontSize.Value = (decimal)dgvAllowanceDetail.RowsDefaultCellStyle.Font.Size;
         }
 
         private void FrmChiTietPhuCap_Load(object sender, EventArgs e)
@@ -318,5 +319,10 @@ namespace QuanLyNhanSu.PresentationTier
             Reload();
         }
 
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvAllowanceDetail.RowsDefaultCellStyle.Font = new Font(dgvAllowanceDetail.Font.FontFamily, fontSize);
+        }
     }
 }

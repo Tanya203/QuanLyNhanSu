@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAllowanceDetail));
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -74,11 +74,14 @@
             this.lblAddStaff = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
+            this.lblFontSỉze = new System.Windows.Forms.Label();
+            this.nudFontSize = new System.Windows.Forms.NumericUpDown();
             this.pnlHeader.SuspendLayout();
             this.pnlFunction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbStaffPicture)).BeginInit();
             this.pnlInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllowanceDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -472,14 +475,14 @@
             this.dgvAllowanceDetail.AllowUserToDeleteRows = false;
             this.dgvAllowanceDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAllowanceDetail.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAllowanceDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAllowanceDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAllowanceDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAllowanceDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaPC,
@@ -493,10 +496,10 @@
             this.dgvAllowanceDetail.ReadOnly = true;
             this.dgvAllowanceDetail.RowHeadersVisible = false;
             this.dgvAllowanceDetail.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvAllowanceDetail.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvAllowanceDetail.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvAllowanceDetail.RowTemplate.Height = 24;
-            this.dgvAllowanceDetail.Size = new System.Drawing.Size(1924, 589);
+            this.dgvAllowanceDetail.Size = new System.Drawing.Size(1924, 599);
             this.dgvAllowanceDetail.TabIndex = 78;
             this.dgvAllowanceDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCardDetail_CellClick);
             // 
@@ -564,12 +567,43 @@
             this.lblSearch.TabIndex = 81;
             this.lblSearch.Text = "Tìm kiếm:";
             // 
+            // lblFontSỉze
+            // 
+            this.lblFontSỉze.AutoSize = true;
+            this.lblFontSỉze.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFontSỉze.Location = new System.Drawing.Point(1724, 357);
+            this.lblFontSỉze.Name = "lblFontSỉze";
+            this.lblFontSỉze.Size = new System.Drawing.Size(118, 32);
+            this.lblFontSỉze.TabIndex = 83;
+            this.lblFontSỉze.Text = "Cỡ chữ:";
+            // 
+            // nudFontSize
+            // 
+            this.nudFontSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudFontSize.Location = new System.Drawing.Point(1848, 356);
+            this.nudFontSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSize.Name = "nudFontSize";
+            this.nudFontSize.Size = new System.Drawing.Size(64, 34);
+            this.nudFontSize.TabIndex = 82;
+            this.nudFontSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSize.ValueChanged += new System.EventHandler(this.nudFontSize_ValueChanged);
+            // 
             // FrmAllowanceDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1924, 983);
+            this.ClientSize = new System.Drawing.Size(1924, 993);
+            this.Controls.Add(this.lblFontSỉze);
+            this.Controls.Add(this.nudFontSize);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.lblAddStaff);
@@ -592,6 +626,7 @@
             this.pnlInfo.ResumeLayout(false);
             this.pnlInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllowanceDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -642,5 +677,7 @@
         private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.PictureBox pbStaffPicture;
+        private System.Windows.Forms.Label lblFontSỉze;
+        private System.Windows.Forms.NumericUpDown nudFontSize;
     }
 }

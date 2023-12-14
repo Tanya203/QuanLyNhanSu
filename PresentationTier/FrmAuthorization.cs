@@ -4,6 +4,7 @@ using QuanLyNhanSu.LogicTier;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
@@ -36,11 +37,13 @@ namespace QuanLyNhanSu.PresentationTier
             history = new SaveOperateHistory("Phân quyền");
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Phân quyền",staff);
+            nudFontSize.Value = (decimal)dgvAuthorization.RowsDefaultCellStyle.Font.Size;
         }
         private void FrmPhanQuyen_Load(object sender, EventArgs e)
         {
             LoadHeader.LoadHeaderInfo(lblStaffIDLoginValue, lblFullNameLoginValue, lblDepartmentLoginValue, lblPositionLoginValue, staff);
             btnUpdate.Visible = false;
+            cbCheckAll.Visible = false;
             dgvAuthorization.ReadOnly = true;
             Authorizations();
             LoadPosition();
@@ -50,7 +53,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void Authorizations()
         {
-            List<object> listFunction = new List<object> { btnUpdate };
+            List<object> listFunction = new List<object> { btnUpdate, cbCheckAll };
             if (authorizations.AuthorizeForm(null, listFunction) == "operate")
                 dgvAuthorization.ReadOnly = false;
         }
@@ -321,6 +324,12 @@ namespace QuanLyNhanSu.PresentationTier
                 row.Cells[5].Value = cbCheckAll.Checked;
             foreach(DataTier.Models.Authorization au in listUpdateAuthorize)
                 au.Authorize = cbCheckAll.Checked;
+        }
+
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvAuthorization.RowsDefaultCellStyle.Font = new Font(dgvAuthorization.Font.FontFamily, fontSize);
         }
     }
 }

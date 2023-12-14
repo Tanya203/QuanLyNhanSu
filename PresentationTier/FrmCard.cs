@@ -37,6 +37,7 @@ namespace QuanLyNhanSu.PresentationTier
             checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Phiếu", staff);
+            nudFontSize.Value = (decimal)dgvCard.RowsDefaultCellStyle.Font.Size;
         }
         private void FrmPhieuThuong_Load(object sender, EventArgs e)
         {
@@ -287,6 +288,12 @@ namespace QuanLyNhanSu.PresentationTier
                 btnAdd.Enabled = true;
             else
                 btnAdd.Enabled = false;
+        }
+
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvCard.RowsDefaultCellStyle.Font = new Font(dgvCard.Font.FontFamily, fontSize);
         }
     }
 }

@@ -48,6 +48,7 @@ namespace QuanLyNhanSu.PresentationTier
             timeKeepings = workScheduleDetailBUS.GetWorkSchduleDetail().Where(ws => ws.WS_ID == wsID).ToList();
             authorizations = new Authorizations("Chi tiết lịch làm việc", staff);
             checkOperate = false;
+            nudFontSize.Value = (decimal)dgvWorkScheduleDetail.RowsDefaultCellStyle.Font.Size;
         }
         private void FrmChiTietLichLamViec_Load(object sender, EventArgs e)
         {
@@ -430,6 +431,12 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 CustomMessage.ExecptionCustom(ex);
             }
+        }
+
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvWorkScheduleDetail.RowsDefaultCellStyle.Font = new Font(dgvWorkScheduleDetail.Font.FontFamily, fontSize);
         }
     }
 }

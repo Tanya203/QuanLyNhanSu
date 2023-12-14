@@ -61,9 +61,12 @@
             this.txtTotalAllowance = new System.Windows.Forms.TextBox();
             this.lblTotalAllowance = new System.Windows.Forms.Label();
             this.lblStaffTotalAllowance = new System.Windows.Forms.Label();
+            this.lblFontSỉze = new System.Windows.Forms.Label();
+            this.nudFontSize = new System.Windows.Forms.NumericUpDown();
             this.pnlHeader.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllowanceDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -319,7 +322,7 @@
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvAllowanceDetail.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAllowanceDetail.RowTemplate.Height = 24;
-            this.dgvAllowanceDetail.Size = new System.Drawing.Size(1924, 634);
+            this.dgvAllowanceDetail.Size = new System.Drawing.Size(1924, 644);
             this.dgvAllowanceDetail.TabIndex = 7;
             this.dgvAllowanceDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAllowanceDetail_CellClick);
             // 
@@ -385,7 +388,7 @@
             // txtTotalAllowance
             // 
             this.txtTotalAllowance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalAllowance.Location = new System.Drawing.Point(1666, 313);
+            this.txtTotalAllowance.Location = new System.Drawing.Point(1470, 313);
             this.txtTotalAllowance.Name = "txtTotalAllowance";
             this.txtTotalAllowance.Size = new System.Drawing.Size(246, 30);
             this.txtTotalAllowance.TabIndex = 8;
@@ -394,7 +397,7 @@
             // 
             this.lblTotalAllowance.AutoSize = true;
             this.lblTotalAllowance.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalAllowance.Location = new System.Drawing.Point(1480, 313);
+            this.lblTotalAllowance.Location = new System.Drawing.Point(1284, 313);
             this.lblTotalAllowance.Name = "lblTotalAllowance";
             this.lblTotalAllowance.Size = new System.Drawing.Size(180, 29);
             this.lblTotalAllowance.TabIndex = 9;
@@ -410,12 +413,43 @@
             this.lblStaffTotalAllowance.TabIndex = 3;
             this.lblStaffTotalAllowance.Text = "Tổng phụ cấp của nhân viên";
             // 
+            // lblFontSỉze
+            // 
+            this.lblFontSỉze.AutoSize = true;
+            this.lblFontSỉze.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFontSỉze.Location = new System.Drawing.Point(1724, 312);
+            this.lblFontSỉze.Name = "lblFontSỉze";
+            this.lblFontSỉze.Size = new System.Drawing.Size(118, 32);
+            this.lblFontSỉze.TabIndex = 68;
+            this.lblFontSỉze.Text = "Cỡ chữ:";
+            // 
+            // nudFontSize
+            // 
+            this.nudFontSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudFontSize.Location = new System.Drawing.Point(1848, 311);
+            this.nudFontSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSize.Name = "nudFontSize";
+            this.nudFontSize.Size = new System.Drawing.Size(64, 34);
+            this.nudFontSize.TabIndex = 67;
+            this.nudFontSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSize.ValueChanged += new System.EventHandler(this.nudFontSize_ValueChanged);
+            // 
             // FrmStaffAllowanceDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1924, 983);
+            this.ClientSize = new System.Drawing.Size(1924, 993);
+            this.Controls.Add(this.lblFontSỉze);
+            this.Controls.Add(this.nudFontSize);
             this.Controls.Add(this.lblTotalAllowance);
             this.Controls.Add(this.txtTotalAllowance);
             this.Controls.Add(this.lblAllowanceText);
@@ -435,6 +469,7 @@
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllowanceDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -473,5 +508,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaPC;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhuCap;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSoTien;
+        private System.Windows.Forms.Label lblFontSỉze;
+        private System.Windows.Forms.NumericUpDown nudFontSize;
     }
 }
