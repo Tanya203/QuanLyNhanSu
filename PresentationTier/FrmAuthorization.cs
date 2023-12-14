@@ -139,8 +139,6 @@ namespace QuanLyNhanSu.PresentationTier
                     if(au.Authorize != oldAuthorizations.First(s => s.PS_ID == au.PS_ID && s.AU_ID == au.AU_ID).Authorize)
                     {
                         flag = true;
-                        
-               
                         if (au.Authorize)
                             add += $"\n    - {au.Authority.AuthorityName}";
                         else
@@ -164,8 +162,6 @@ namespace QuanLyNhanSu.PresentationTier
                     if (au.Authorize != oldAuthorizations.First(s => s.PS_ID == au.PS_ID && s.AU_ID == au.AU_ID).Authorize)
                     {
                         flag = true;
-                        
-
                         if (au.Authorize)
                             add += $"\n    - {au.Position.PositionName}";
                         else

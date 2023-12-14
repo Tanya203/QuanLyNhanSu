@@ -89,8 +89,6 @@
             // 
             this.dgvAuthorization.AllowUserToAddRows = false;
             this.dgvAuthorization.AllowUserToDeleteRows = false;
-            this.dgvAuthorization.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAuthorization.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -137,47 +135,59 @@
             // 
             // colMaQH
             // 
+            this.colMaQH.FillWeight = 89.01614F;
             this.colMaQH.HeaderText = "Mã quyền hạn";
             this.colMaQH.MinimumWidth = 6;
             this.colMaQH.Name = "colMaQH";
             this.colMaQH.ReadOnly = true;
+            this.colMaQH.Width = 285;
             // 
             // colMaCV
             // 
+            this.colMaCV.FillWeight = 97.75209F;
             this.colMaCV.HeaderText = "Mã chức vụ";
             this.colMaCV.MinimumWidth = 6;
             this.colMaCV.Name = "colMaCV";
             this.colMaCV.ReadOnly = true;
+            this.colMaCV.Width = 313;
             // 
             // colTenChucVu
             // 
+            this.colTenChucVu.FillWeight = 104.9646F;
             this.colTenChucVu.HeaderText = "Tên chức vụ";
             this.colTenChucVu.MinimumWidth = 6;
             this.colTenChucVu.Name = "colTenChucVu";
             this.colTenChucVu.ReadOnly = true;
+            this.colTenChucVu.Width = 336;
             // 
             // colGiaoDien
             // 
+            this.colGiaoDien.FillWeight = 106.5138F;
             this.colGiaoDien.HeaderText = "Tên giao diện";
             this.colGiaoDien.MinimumWidth = 6;
             this.colGiaoDien.Name = "colGiaoDien";
             this.colGiaoDien.ReadOnly = true;
+            this.colGiaoDien.Width = 341;
             // 
             // colTenQuyenHan
             // 
+            this.colTenQuyenHan.FillWeight = 101.8007F;
             this.colTenQuyenHan.HeaderText = "Tên quyền hạn";
             this.colTenQuyenHan.MinimumWidth = 6;
             this.colTenQuyenHan.Name = "colTenQuyenHan";
             this.colTenQuyenHan.ReadOnly = true;
+            this.colTenQuyenHan.Width = 326;
             // 
             // colCapQuyen
             // 
+            this.colCapQuyen.FillWeight = 99.95273F;
             this.colCapQuyen.HeaderText = "Cấp quyền";
             this.colCapQuyen.MinimumWidth = 6;
             this.colCapQuyen.Name = "colCapQuyen";
             this.colCapQuyen.ReadOnly = true;
             this.colCapQuyen.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colCapQuyen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colCapQuyen.Width = 320;
             // 
             // pnlHeader
             // 
