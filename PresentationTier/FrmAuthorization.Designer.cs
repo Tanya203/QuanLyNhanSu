@@ -59,6 +59,8 @@
             this.rbSortByAuthority = new System.Windows.Forms.RadioButton();
             this.cmbAuthority = new System.Windows.Forms.ComboBox();
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.cbCheckAll = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAuthorization)).BeginInit();
             this.pnlHeader.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -67,7 +69,7 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(968, 263);
+            this.txtSearch.Location = new System.Drawing.Point(972, 268);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(299, 30);
             this.txtSearch.TabIndex = 38;
@@ -77,7 +79,7 @@
             // 
             this.lblSearch.AutoSize = true;
             this.lblSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearch.Location = new System.Drawing.Point(821, 260);
+            this.lblSearch.Location = new System.Drawing.Point(821, 265);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(145, 32);
             this.lblSearch.TabIndex = 37;
@@ -114,7 +116,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvAuthorization.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvAuthorization.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvAuthorization.Location = new System.Drawing.Point(0, 311);
+            this.dgvAuthorization.Location = new System.Drawing.Point(0, 313);
             this.dgvAuthorization.Name = "dgvAuthorization";
             this.dgvAuthorization.ReadOnly = true;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -129,9 +131,9 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvAuthorization.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvAuthorization.RowTemplate.Height = 24;
-            this.dgvAuthorization.Size = new System.Drawing.Size(1924, 692);
+            this.dgvAuthorization.Size = new System.Drawing.Size(1924, 680);
             this.dgvAuthorization.TabIndex = 36;
-            this.dgvAuthorization.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAuthorization_CellClick);
+            this.dgvAuthorization.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAuthorization_CellContentClick);
             // 
             // colMaQH
             // 
@@ -378,21 +380,53 @@
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.SystemColors.Info;
+            this.pnlMenu.Controls.Add(this.btnUpdate);
             this.pnlMenu.Controls.Add(this.cmbPosition);
             this.pnlMenu.Controls.Add(this.rbSortByPosition);
             this.pnlMenu.Controls.Add(this.cmbAuthority);
             this.pnlMenu.Controls.Add(this.rbSortByAuthority);
             this.pnlMenu.Location = new System.Drawing.Point(424, 170);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(1073, 87);
+            this.pnlMenu.Size = new System.Drawing.Size(1295, 87);
             this.pnlMenu.TabIndex = 51;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.AutoSize = true;
+            this.btnUpdate.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpdate.FlatAppearance.BorderSize = 0;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.Image = global::QuanLyNhanSu.Properties.Resources.save;
+            this.btnUpdate.Location = new System.Drawing.Point(1082, 17);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(158, 60);
+            this.btnUpdate.TabIndex = 52;
+            this.btnUpdate.Text = "Cập nhật";
+            this.btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // cbCheckAll
+            // 
+            this.cbCheckAll.AutoSize = true;
+            this.cbCheckAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCheckAll.Location = new System.Drawing.Point(1767, 278);
+            this.cbCheckAll.Name = "cbCheckAll";
+            this.cbCheckAll.Size = new System.Drawing.Size(145, 29);
+            this.cbCheckAll.TabIndex = 52;
+            this.cbCheckAll.Text = "Chọn tất cả";
+            this.cbCheckAll.UseVisualStyleBackColor = true;
+            this.cbCheckAll.CheckedChanged += new System.EventHandler(this.cbCheckAll_CheckedChanged);
             // 
             // FrmAuthorization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1924, 1003);
+            this.ClientSize = new System.Drawing.Size(1924, 993);
+            this.Controls.Add(this.cbCheckAll);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.lblAuthorization);
             this.Controls.Add(this.txtSearch);
@@ -442,5 +476,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colGiaoDien;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTenQuyenHan;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colCapQuyen;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.CheckBox cbCheckAll;
     }
 }

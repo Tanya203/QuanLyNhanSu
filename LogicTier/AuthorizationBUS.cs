@@ -24,9 +24,9 @@ namespace QuanLyNhanSu.LogicTier
         {
             return authorizationDAL.GetAuthorization();
         }
-        public bool Save(Authorization au)
+        public bool Save(List<Authorization> authorization)
         {
-            return authorizationDAL.Save(au);
+            return authorizationDAL.Save(authorization);
         }
         public bool AddPosition(List<Authorization> authorization)
         {

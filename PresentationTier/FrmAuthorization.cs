@@ -5,6 +5,7 @@ using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.PresentationTier
@@ -19,10 +20,9 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly SaveOperateHistory history;
         private readonly Authorizations authorizations;
         private readonly CheckExist checkExist;
+        private List<DataTier.Models.Authorization> listUpdateAuthorize;
         private Staff staff;
-        private bool confirmPassoword;
         private int check;
-        private bool operate;
         public FrmAuthorization(string staffID)
         {
             InitializeComponent();
@@ -32,15 +32,16 @@ namespace QuanLyNhanSu.PresentationTier
             authorityBUS = new AuthorityBUS();
             authorizationBUS = new AuthorizationBUS();
             checkExist = new CheckExist();
+            listUpdateAuthorize = new List<DataTier.Models.Authorization>();
             history = new SaveOperateHistory("Phân quyền");
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorizations = new Authorizations("Phân quyền",staff);
-            operate = false;
-            confirmPassoword = false;
         }
         private void FrmPhanQuyen_Load(object sender, EventArgs e)
         {
             LoadHeader.LoadHeaderInfo(lblStaffIDLoginValue, lblFullNameLoginValue, lblDepartmentLoginValue, lblPositionLoginValue, staff);
+            btnUpdate.Visible = false;
+            dgvAuthorization.ReadOnly = true;
             Authorizations();
             LoadPosition();
             LoadAuthority();
@@ -49,11 +50,18 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void Authorizations()
         {
-            if(authorizations.AuthorizeForm(null, null) == "operate")
-                operate = true;
+            List<object> listFunction = new List<object> { btnUpdate };
+            if (authorizations.AuthorizeForm(null, listFunction) == "operate")
+                dgvAuthorization.ReadOnly = false;
+        }
+        private void UpdateList(string auID, string psID)
+        {
+            DataTier.Models.Authorization update = authorizationBUS.GetAuthorizations().FirstOrDefault(au => au.AU_ID ==  auID && au.PS_ID == psID);
+            listUpdateAuthorize.Add(update);
         }
         private void LoadAuthorizations()
         {
+            listUpdateAuthorize.Clear();
             string sort = null;
             if (rbSortByPosition.Checked)
                 sort = cmbPosition.SelectedValue.ToString();
@@ -72,11 +80,23 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvAuthorization.Rows[rowAdd].Cells[3].Value = au.Interface;
                 dgvAuthorization.Rows[rowAdd].Cells[4].Value = au.AuthorityName;
                 dgvAuthorization.Rows[rowAdd].Cells[5].Value = au.Authorize;
+                UpdateList(au.AU_ID, au.PS_ID);
             }
+            OnOffButton();
             Enabled = true;
+        }
+        private void OnOffButton()
+        {
+            if(listUpdateAuthorize.Count > 0)
+            {
+                btnUpdate.Enabled = true; 
+                return;
+            }
+            btnUpdate.Enabled = false;
         }
         private void LoadAuthorizationsSearch(string search)
         {
+            listUpdateAuthorize.Clear();
             string sort = null;
             if (rbSortByPosition.Checked)
                 sort = cmbPosition.SelectedValue.ToString();
@@ -95,7 +115,9 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvAuthorization.Rows[rowAdd].Cells[3].Value = au.Interface;
                 dgvAuthorization.Rows[rowAdd].Cells[4].Value = au.AuthorityName;
                 dgvAuthorization.Rows[rowAdd].Cells[5].Value = au.Authorize;
+                UpdateList(au.AU_ID, au.PS_ID);
             }
+            OnOffButton();
             Enabled = true;
         }
         private void LoadPosition()
@@ -145,6 +167,7 @@ namespace QuanLyNhanSu.PresentationTier
                 LoadAuthorizations();
             }
         }
+        
 
         /////////////////////////////////////////////////////////////////////////////////////////        
         private void Reload()
@@ -153,46 +176,6 @@ namespace QuanLyNhanSu.PresentationTier
             redirect.RedirectForm(open, this);
         }
         /////////////////////////////////////////////////////////////////////////////////////////
-        private void UpdateAuthority(string psID, string auID, bool authorize, string operate, string operationDetail)
-        {
-            try
-            {
-                if (!checkExist.CheckPosition(psID))
-                {
-                    Reload();
-                    return;
-                }
-                FrmConfirmPassword open = new FrmConfirmPassword(staff.StaffID);
-                if (!confirmPassoword)
-                {
-                    open.ShowDialog();
-                    if (open.Check)
-                    {
-                        confirmPassoword = true;
-                        open.Check = false;
-                    }
-                }
-                if (confirmPassoword)
-                {
-                    DataTier.Models.Authorization authorization = new DataTier.Models.Authorization
-                    {
-                        PS_ID = psID,
-                        AU_ID = auID,
-                        Authorize = authorize,
-                    };
-                    if (authorizationBUS.Save(authorization))
-                        history.Save(staff.StaffID, operate, operationDetail);
-                    if (string.IsNullOrEmpty(txtSearch.Text))
-                        LoadAuthorizations();
-                    else
-                        LoadAuthorizationsSearch(txtSearch.Text);
-                }
-            }
-            catch (Exception ex)
-            {
-                CustomMessage.ExecptionCustom(ex);
-            }
-        }
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmMainMenu open = new FrmMainMenu(staff.StaffID);
@@ -203,53 +186,86 @@ namespace QuanLyNhanSu.PresentationTier
             Reload();
         }
 
-        private void dgvAuthorization_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int row = e.RowIndex;
-            int column = e.ColumnIndex;
-            if (row < 0)
-                return;
-            else if (operate)
-            {
-                if (column == 5)
-                {
-                    string auID = dgvAuthorization.Rows[row].Cells[0].Value.ToString();
-                    string psID = dgvAuthorization.Rows[row].Cells[1].Value.ToString();
-                    string authorityName = dgvAuthorization.Rows[row].Cells[4].Value.ToString();
-                    string positionName = dgvAuthorization.Rows[row].Cells[2].Value.ToString();
-                    bool authorize = (bool)dgvAuthorization.Rows[row].Cells[5].Value;
-                    string announce;
-                    string operate;
-                    string operationDetail;
-                    if (authorize)
-                    {
-                        authorize = false;
-                        announce = $"Xác nhận xoá quyền hạn {authorityName} của chức vụ {positionName}?";
-                        operate = "Xoá";
-                        operationDetail = $"Xoá quyền hạn {authorityName} của chức vụ {positionName}";
-                    }
-                    else
-                    {
-                        authorize = true;
-                        announce = $"Xác nhận thêm quyền hạn {authorityName} cho chức vụ {positionName}?";
-                        operate = "Thêm";
-                        operationDetail = $"Thêm quyền hạn {authorityName} cho chức vụ {positionName}";
-                    }
-                    CustomMessage.YesNoCustom("Xác nhận", "Huỷ");
-                    DialogResult ketQua = MessageBox.Show(announce, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (ketQua == DialogResult.Yes)
-                        UpdateAuthority(psID, auID, authorize, operate, operationDetail);
-                    else
-                        return;
-                }
-            }
-        }
+       
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
                 LoadAuthorizationsSearch(txtSearch.Text);
             }
+        }
+        private void dgvAuthorization_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int row = e.RowIndex;
+            int column = e.ColumnIndex;
+            bool update = false;
+            if (row < 0)
+                return;
+            if (column == 5)
+            {
+                string auID = dgvAuthorization.Rows[row].Cells[0].Value.ToString();
+                string psID = dgvAuthorization.Rows[row].Cells[1].Value.ToString();
+                var checkBox = dgvAuthorization.Rows[row].Cells[5];
+                if (checkBox is DataGridViewCheckBoxCell checkBoxCell)
+                {
+                    checkBoxCell.Value = !(bool)checkBoxCell.Value;
+                    update = (bool)checkBoxCell.Value;
+                }
+                foreach (var au in listUpdateAuthorize)
+                {
+                    if (au.AU_ID == auID && au.PS_ID == psID)
+                    {
+                        au.Authorize = update;
+                        break;
+                    }
+                }
+            }
+        }
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach(DataTier.Models.Authorization au in listUpdateAuthorize)
+                {
+                    if (!checkExist.CheckPosition(au.PS_ID))
+                    {
+                        Reload();
+                        return;
+                    }
+                }
+                FrmConfirmPassword open = new FrmConfirmPassword(staff.StaffID);
+                open.ShowDialog();
+                if (open.Check)
+                {
+                    open.Check = false;
+                    CustomMessage.YesNoCustom("Xác nhận", "Huỷ");
+                    DialogResult ketQua = MessageBox.Show("Xác nhận cập nhật quyền hạn?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (ketQua == DialogResult.Yes)
+                    {
+                        
+                        string operationDetail = "Cập nhật quyền hạn";
+                        string operate = "Cập nhật"; 
+                        if (authorizationBUS.Save(listUpdateAuthorize))
+                        {
+                            history.Save(staff.StaffID, operate, operationDetail);
+                            if(listUpdateAuthorize.Where(au => au.PS_ID != staff.PS_ID) == null)
+                                Reload();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                CustomMessage.ExecptionCustom(ex);
+            }
+        }
+
+        private void cbCheckAll_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgvAuthorization.Rows)
+                row.Cells[5].Value = cbCheckAll.Checked;
+            foreach(DataTier.Models.Authorization au in listUpdateAuthorize)
+                au.Authorize = cbCheckAll.Checked;
         }
     }
 }
