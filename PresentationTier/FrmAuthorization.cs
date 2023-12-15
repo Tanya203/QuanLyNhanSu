@@ -264,10 +264,7 @@ namespace QuanLyNhanSu.PresentationTier
                 string psID = dgvAuthorization.Rows[row].Cells[1].Value.ToString();
                 var checkBox = dgvAuthorization.Rows[row].Cells[5];
                 if (checkBox is DataGridViewCheckBoxCell checkBoxCell)
-                {
-                    checkBoxCell.Value = !(bool)checkBoxCell.Value;
-                    update = (bool)checkBoxCell.Value;
-                }
+                    update = !(bool)checkBoxCell.Value;
                 foreach (var au in listUpdateAuthorize)
                 {
                     if (au.AU_ID == auID && au.PS_ID == psID)
