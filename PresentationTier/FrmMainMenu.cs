@@ -4,6 +4,7 @@ using QuanLyNhanSu.LogicTier;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -28,6 +29,7 @@ namespace QuanLyNhanSu.PresentationTier
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             authorization = new Authorizations("Màn hình chính", staff);
             status = new CheckAccountStatus(staffID);
+            nudFontSize.Value = (decimal)dgvWorkSchedule.RowsDefaultCellStyle.Font.Size;
         }
         private void frmManHinhChinh_Load(object sender, EventArgs e)
         {
@@ -176,6 +178,12 @@ namespace QuanLyNhanSu.PresentationTier
         {
             FrmBonusDebt open = new FrmBonusDebt(staff.StaffID, "Main");
             redirect.RedirectForm(open, this);
+        }
+
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvWorkSchedule.RowsDefaultCellStyle.Font = new Font(dgvWorkSchedule.Font.FontFamily, fontSize);
         }
     }
 }
