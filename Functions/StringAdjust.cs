@@ -6,9 +6,10 @@ namespace QuanLyNhanSu.utils
     {
         public static string AddSpacesBetweenUppercaseLetters(string input)
         {
+            string removeSpace = Regex.Replace(input, @"\s", "");
             string pattern = @"(?<!^)(?=[A-ZÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬĐÉÈẺẼẸÊẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÚÙỦŨỤƯỨỪỬỮỰÝỲỶỸỴ])";
             string replacement = " ";
-            string result = Regex.Replace(input, pattern, replacement);
+            string result = Regex.Replace(removeSpace, pattern, replacement);
             return result;
         }
         public static string AdjustNumber(string input)
