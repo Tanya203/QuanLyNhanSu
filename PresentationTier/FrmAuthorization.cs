@@ -36,7 +36,7 @@ namespace QuanLyNhanSu.PresentationTier
             listUpdateAuthorize = new List<DataTier.Models.Authorization>();
             history = new SaveOperateHistory("Phân quyền");
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
-            authorizations = new Authorizations("Phân quyền",staff);
+            authorizations = new Authorizations("Phân quyền", staff);
             nudFontSize.Value = (decimal)dgvAuthorization.RowsDefaultCellStyle.Font.Size;
         }
         private void FrmPhanQuyen_Load(object sender, EventArgs e)
@@ -44,22 +44,21 @@ namespace QuanLyNhanSu.PresentationTier
             LoadHeader.LoadHeaderInfo(lblStaffIDLoginValue, lblFullNameLoginValue, lblDepartmentLoginValue, lblPositionLoginValue, staff);
             btnUpdate.Visible = false;
             cbCheckAll.Visible = false;
-            dgvAuthorization.ReadOnly = true;
+            dgvAuthorization.Columns[5].ReadOnly = true;
             Authorizations();
             LoadPosition();
             LoadAuthority();
-            Authorizations();
             rbSortByPosition.Checked = true;
         }
         private void Authorizations()
         {
             List<object> listFunction = new List<object> { btnUpdate, cbCheckAll };
             if (authorizations.AuthorizeForm(null, listFunction) == "operate")
-                dgvAuthorization.ReadOnly = false;
+                dgvAuthorization.Columns[5].ReadOnly = false;
         }
         private void UpdateList(string auID, string psID)
         {
-            DataTier.Models.Authorization update = authorizationBUS.GetAuthorizations().FirstOrDefault(au => au.AU_ID ==  auID && au.PS_ID == psID);
+            DataTier.Models.Authorization update = authorizationBUS.GetAuthorizations().FirstOrDefault(au => au.AU_ID == auID && au.PS_ID == psID);
             listUpdateAuthorize.Add(update);
         }
         private void LoadAuthorizations()
@@ -90,9 +89,9 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void OnOffButton()
         {
-            if(listUpdateAuthorize.Count > 0)
+            if (listUpdateAuthorize.Count > 0)
             {
-                btnUpdate.Enabled = true; 
+                btnUpdate.Enabled = true;
                 return;
             }
             btnUpdate.Enabled = false;
@@ -137,9 +136,9 @@ namespace QuanLyNhanSu.PresentationTier
                 editDetail = $"Cập nhật quyền hạn chức vụ {cmbPosition.Text}:";
                 add += "\n - Thêm quyền hạn:";
                 remove += "\n - Xoá quyền hạn:";
-                foreach(DataTier.Models.Authorization au in listUpdateAuthorize)
+                foreach (DataTier.Models.Authorization au in listUpdateAuthorize)
                 {
-                    if(au.Authorize != oldAuthorizations.First(s => s.PS_ID == au.PS_ID && s.AU_ID == au.AU_ID).Authorize)
+                    if (au.Authorize != oldAuthorizations.First(s => s.PS_ID == au.PS_ID && s.AU_ID == au.AU_ID).Authorize)
                     {
                         flag = true;
                         if (au.Authorize)
@@ -226,7 +225,7 @@ namespace QuanLyNhanSu.PresentationTier
                 LoadAuthorizations();
             }
         }
-        
+
 
         /////////////////////////////////////////////////////////////////////////////////////////        
         private void Reload()
@@ -264,7 +263,7 @@ namespace QuanLyNhanSu.PresentationTier
                 string psID = dgvAuthorization.Rows[row].Cells[1].Value.ToString();
                 var checkBox = dgvAuthorization.Rows[row].Cells[5];
                 if (checkBox is DataGridViewCheckBoxCell checkBoxCell)
-                    update = !(bool)checkBoxCell.Value;
+                    update = (bool)checkBoxCell.EditedFormattedValue;
                 foreach (var au in listUpdateAuthorize)
                 {
                     if (au.AU_ID == auID && au.PS_ID == psID)
@@ -279,8 +278,8 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
-                
-                foreach(DataTier.Models.Authorization au in listUpdateAuthorize)
+
+                foreach (DataTier.Models.Authorization au in listUpdateAuthorize)
                 {
                     if (!checkExist.CheckPosition(au.PS_ID))
                     {
@@ -319,7 +318,7 @@ namespace QuanLyNhanSu.PresentationTier
         {
             foreach (DataGridViewRow row in dgvAuthorization.Rows)
                 row.Cells[5].Value = cbCheckAll.Checked;
-            foreach(DataTier.Models.Authorization au in listUpdateAuthorize)
+            foreach (DataTier.Models.Authorization au in listUpdateAuthorize)
                 au.Authorize = cbCheckAll.Checked;
         }
 

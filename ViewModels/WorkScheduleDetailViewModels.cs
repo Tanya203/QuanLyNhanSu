@@ -15,5 +15,6 @@ namespace QuanLyNhanSu.ViewModels
         public string Shift { get; set; }
         public string ShiftType { get; set; }
         public bool AbsenceUse { get; set; }
+        public int DayOffAmount { get; set; }
     }
 }

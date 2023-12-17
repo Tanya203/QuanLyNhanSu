@@ -38,6 +38,10 @@ namespace QuanLyNhanSu.LogicTier
             staff.Password = BCrypt.Net.BCrypt.HashPassword(staff.Password);
             return staffDAL.Save(staff);
         }
+        public bool UpdateDayOffAmount(Staff staff)
+        {
+            return staffDAL.UpdateDayOffAmount(staff);
+        }
         public bool Delete(Staff staff)
         {
             return staffDAL.Delete(staff.StaffID);

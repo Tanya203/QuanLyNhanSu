@@ -159,6 +159,20 @@ namespace QuanLyNhanSu.DataTier
                 return false;
             }
         }
+        public bool UpdateDayOffAmount(Staff staff)
+        {
+            try
+            {
+                quanLyNhanSu.Staffs.AddOrUpdate(staff);
+                quanLyNhanSu.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                CustomMessage.ExecptionCustom(ex);
+                return false;
+            }
+        }
         public Staff LoginVerify(string account, string password)
         {
             var staff = quanLyNhanSu.Staffs.Where(x => x.Account == account).FirstOrDefault();            

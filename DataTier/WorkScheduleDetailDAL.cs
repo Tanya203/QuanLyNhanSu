@@ -32,6 +32,7 @@ namespace QuanLyNhanSu.DataTier
                 CheckInTime = x.CheckInTime.ToString(),
                 CheckOutTime = x.CheckOutTime.ToString(),
                 AbsenceUse = x.AbsenceUse,
+                DayOffAmount = x.Staff.DayOffAmount,
             }).Where(ws => ws.WS_ID == ws_ID).OrderBy(llv => llv.StaffID);
             return workScheduleDetail;            
         }
@@ -50,6 +51,7 @@ namespace QuanLyNhanSu.DataTier
                 CheckInTime = x.CheckInTime.ToString(),
                 CheckOutTime = x.CheckOutTime.ToString(),
                 AbsenceUse = x.AbsenceUse,
+                DayOffAmount = x.Staff.DayOffAmount,
             }).Where(ws => ws.WS_ID == ws_ID && (ws.StaffID.Contains(search) ||
                      ws.FullName.Contains(search) ||
                      ws.StaffID.Contains(search) ||
@@ -59,38 +61,20 @@ namespace QuanLyNhanSu.DataTier
                      ws.CheckOutTime.Contains(search) ||
                      ws.WorkDate.ToString().Contains(search) ||
                      ws.Shift.Contains(search) ||
-                     ws.ShiftType.Contains(search))).OrderBy(ws => ws.StaffID);
+                     ws.ShiftType.Contains(search) ||
+                     ws.DayOffAmount.ToString().Contains(search))).OrderBy(ws => ws.StaffID);
             return workScheduleDetailSearch;
         }       
         public IEnumerable<TimeKeeping> GetWorkSchduleDetail()
         {
             return quanLyNhanSu.TimeKeepings.OrderBy(c => c.WS_ID).ToList();
         }
-        public bool Save(TimeKeeping timeKeeping)
+        public bool Save(List<TimeKeeping> timeKeeping)
         {
             try
             {
-                TimeKeeping staff = quanLyNhanSu.TimeKeepings.FirstOrDefault(id => id.WS_ID == timeKeeping.WS_ID && id.StaffID == timeKeeping.StaffID && id.ShiftID == timeKeeping.ShiftID);
-                if(staff != null)
-                {
-                    List<TimeKeeping> absence = quanLyNhanSu.TimeKeepings.Where(id => id.WS_ID == timeKeeping.WS_ID && id.StaffID == timeKeeping.StaffID).ToList();
-                    foreach(TimeKeeping s in absence)
-                        s.AbsenceUse = timeKeeping.AbsenceUse;
-                    int absencse = staff.Staff.DayOffAmount;
-                    if (absencse > 0)
-                    {
-                        if (staff.AbsenceUse)
-                            staff.Staff.DayOffAmount -= 1;
-                        else
-                            staff.Staff.DayOffAmount += 1;
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Nhân viên {staff.StaffID} đã hết phép!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return false;
-                    }
-                }
-                quanLyNhanSu.TimeKeepings.AddOrUpdate(timeKeeping);
+                foreach(TimeKeeping staff in timeKeeping)
+                    quanLyNhanSu.TimeKeepings.AddOrUpdate(staff);
                 quanLyNhanSu.SaveChanges();
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
@@ -101,36 +85,17 @@ namespace QuanLyNhanSu.DataTier
                 return false;
             }
         }
-        public bool Delete(string ws_ID,string staffID)
+        public bool Delete(List<TimeKeeping> removeList)
         {
             try
             {
-                TimeKeeping timeKeeping = quanLyNhanSu.TimeKeepings.Where(x => x.WS_ID == ws_ID && x.StaffID == staffID).FirstOrDefault();
-                string shift = timeKeeping.Shift.ShiftName;
-                if (timeKeeping.CheckInTime != null)
+                foreach (TimeKeeping staff in removeList)
                 {
-                    MessageBox.Show("Nhân viên đã chấm công. Không thể xoá!!!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
+                    TimeKeeping remove = quanLyNhanSu.TimeKeepings.FirstOrDefault(s => s.WS_ID == staff.WS_ID && s.StaffID == staff.StaffID && s.ShiftID == staff.ShiftID);
+                    quanLyNhanSu.TimeKeepings.Remove(remove);
                 }
-                if (timeKeeping != null)
-                {
-                    CustomMessage.YesNoCustom("Có", "Không");
-                    DialogResult ketQua = MessageBox.Show($"Xác nhận xoá nhân viên {staffID} khỏi lịch {ws_ID} - ca {timeKeeping.Shift.ShiftName}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (ketQua == DialogResult.Yes)
-                    {
-                        if(timeKeeping.WorkSchedule.WorkDate >= DateTime.Now.Date && timeKeeping.AbsenceUse)
-                        {
-                            List<TimeKeeping> absence = quanLyNhanSu.TimeKeepings.Where(id => id.WS_ID == timeKeeping.WS_ID && id.StaffID == timeKeeping.StaffID).ToList();
-                            if (absence.Count == 1)
-                                timeKeeping.Staff.DayOffAmount += 1;
-                        }
-                        quanLyNhanSu.TimeKeepings.Remove(timeKeeping);
-                        quanLyNhanSu.SaveChanges();
-                        MessageBox.Show($"Đã xoá nhân viên {staffID} khỏi lịch {ws_ID} - ca {shift}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return true;
-                    }
-                }
-                return false;
+                quanLyNhanSu.SaveChanges();
+                return true;
             }
             catch(Exception ex)
             {
