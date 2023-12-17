@@ -359,7 +359,7 @@ namespace QuanLyNhanSu.PresentationTier
                     btnBack.PerformClick();
                     return;
                 }
-                if (!checkExist.CheckStaff(cmbStaff.SelectedValue.ToString()) || !checkExist.CheckCardDetailInserted(txtCardID.Text, cmbStaff.SelectedValue.ToString()))
+                if (!checkExist.CheckStaff(cmbStaff.SelectedValue.ToString()))
                 {
                     Reload();
                     return;

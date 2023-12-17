@@ -59,16 +59,6 @@
             this.lblStaffIDLogin = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.dgvWorkScheduleDetail = new System.Windows.Forms.DataGridView();
-            this.colMaLLV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLoaiCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colThoiGianDen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colThoiGianVe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhep = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.pnlInfo = new System.Windows.Forms.Panel();
             this.txtDepartment = new System.Windows.Forms.TextBox();
             this.lblDepartment = new System.Windows.Forms.Label();
@@ -80,6 +70,18 @@
             this.lblWorkScheduleID = new System.Windows.Forms.Label();
             this.lblFontSỉze = new System.Windows.Forms.Label();
             this.nudFontSize = new System.Windows.Forms.NumericUpDown();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.colMaLLV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLoaiCa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colThoiGianDen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colThoiGianVe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDayOffAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhep = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.pnlFunction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbStaffPicture)).BeginInit();
             this.pnlHeader.SuspendLayout();
@@ -170,6 +172,7 @@
             // pnlFunction
             // 
             this.pnlFunction.BackColor = System.Drawing.SystemColors.Info;
+            this.pnlFunction.Controls.Add(this.btnSave);
             this.pnlFunction.Controls.Add(this.txtPosition);
             this.pnlFunction.Controls.Add(this.lblPosition);
             this.pnlFunction.Controls.Add(this.pbStaffPicture);
@@ -275,7 +278,7 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Image = global::QuanLyNhanSu.Properties.Resources.add;
-            this.btnAdd.Location = new System.Drawing.Point(191, 163);
+            this.btnAdd.Location = new System.Drawing.Point(113, 163);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(109, 44);
             this.btnAdd.TabIndex = 11;
@@ -432,11 +435,11 @@
             this.colLoaiCa,
             this.colThoiGianDen,
             this.colThoiGianVe,
+            this.colDayOffAmount,
             this.colPhep});
             this.dgvWorkScheduleDetail.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvWorkScheduleDetail.Location = new System.Drawing.Point(0, 424);
             this.dgvWorkScheduleDetail.Name = "dgvWorkScheduleDetail";
-            this.dgvWorkScheduleDetail.ReadOnly = true;
             this.dgvWorkScheduleDetail.RowHeadersVisible = false;
             this.dgvWorkScheduleDetail.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -444,77 +447,7 @@
             this.dgvWorkScheduleDetail.RowTemplate.Height = 24;
             this.dgvWorkScheduleDetail.Size = new System.Drawing.Size(1924, 569);
             this.dgvWorkScheduleDetail.TabIndex = 15;
-            this.dgvWorkScheduleDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWorkScheduleDetail_CellClick);
-            // 
-            // colMaLLV
-            // 
-            this.colMaLLV.HeaderText = "Mã lịch làm việc";
-            this.colMaLLV.MinimumWidth = 6;
-            this.colMaLLV.Name = "colMaLLV";
-            this.colMaLLV.ReadOnly = true;
-            // 
-            // colMaNV
-            // 
-            this.colMaNV.HeaderText = "Mã nhân viên";
-            this.colMaNV.MinimumWidth = 6;
-            this.colMaNV.Name = "colMaNV";
-            this.colMaNV.ReadOnly = true;
-            // 
-            // colHoTen
-            // 
-            this.colHoTen.HeaderText = "Họ tên";
-            this.colHoTen.MinimumWidth = 6;
-            this.colHoTen.Name = "colHoTen";
-            this.colHoTen.ReadOnly = true;
-            // 
-            // colPhongBan
-            // 
-            this.colPhongBan.HeaderText = "Phòng ban";
-            this.colPhongBan.MinimumWidth = 6;
-            this.colPhongBan.Name = "colPhongBan";
-            this.colPhongBan.ReadOnly = true;
-            // 
-            // colChucVu
-            // 
-            this.colChucVu.HeaderText = "Chức vụ";
-            this.colChucVu.MinimumWidth = 6;
-            this.colChucVu.Name = "colChucVu";
-            this.colChucVu.ReadOnly = true;
-            // 
-            // colCa
-            // 
-            this.colCa.HeaderText = "Ca";
-            this.colCa.MinimumWidth = 6;
-            this.colCa.Name = "colCa";
-            this.colCa.ReadOnly = true;
-            // 
-            // colLoaiCa
-            // 
-            this.colLoaiCa.HeaderText = "Loại ca";
-            this.colLoaiCa.MinimumWidth = 6;
-            this.colLoaiCa.Name = "colLoaiCa";
-            this.colLoaiCa.ReadOnly = true;
-            // 
-            // colThoiGianDen
-            // 
-            this.colThoiGianDen.HeaderText = "Thời gian đến";
-            this.colThoiGianDen.MinimumWidth = 6;
-            this.colThoiGianDen.Name = "colThoiGianDen";
-            this.colThoiGianDen.ReadOnly = true;
-            // 
-            // colThoiGianVe
-            // 
-            this.colThoiGianVe.HeaderText = "Thời gian về";
-            this.colThoiGianVe.MinimumWidth = 6;
-            this.colThoiGianVe.Name = "colThoiGianVe";
-            this.colThoiGianVe.ReadOnly = true;
-            // 
-            // colPhep
-            // 
-            this.colPhep.HeaderText = "Phép";
-            this.colPhep.MinimumWidth = 6;
-            this.colPhep.Name = "colPhep";
-            this.colPhep.ReadOnly = true;
+            this.dgvWorkScheduleDetail.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWorkScheduleDetail_CellContentClick);
             // 
             // pnlInfo
             // 
@@ -635,6 +568,100 @@
             0});
             this.nudFontSize.ValueChanged += new System.EventHandler(this.nudFontSize_ValueChanged);
             // 
+            // btnSave
+            // 
+            this.btnSave.AutoSize = true;
+            this.btnSave.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Image = global::QuanLyNhanSu.Properties.Resources.save;
+            this.btnSave.Location = new System.Drawing.Point(258, 163);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(100, 44);
+            this.btnSave.TabIndex = 86;
+            this.btnSave.Text = "Lưu";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // colMaLLV
+            // 
+            this.colMaLLV.HeaderText = "Mã lịch làm việc";
+            this.colMaLLV.MinimumWidth = 6;
+            this.colMaLLV.Name = "colMaLLV";
+            this.colMaLLV.ReadOnly = true;
+            // 
+            // colMaNV
+            // 
+            this.colMaNV.HeaderText = "Mã nhân viên";
+            this.colMaNV.MinimumWidth = 6;
+            this.colMaNV.Name = "colMaNV";
+            this.colMaNV.ReadOnly = true;
+            // 
+            // colHoTen
+            // 
+            this.colHoTen.HeaderText = "Họ tên";
+            this.colHoTen.MinimumWidth = 6;
+            this.colHoTen.Name = "colHoTen";
+            this.colHoTen.ReadOnly = true;
+            // 
+            // colPhongBan
+            // 
+            this.colPhongBan.HeaderText = "Phòng ban";
+            this.colPhongBan.MinimumWidth = 6;
+            this.colPhongBan.Name = "colPhongBan";
+            this.colPhongBan.ReadOnly = true;
+            // 
+            // colChucVu
+            // 
+            this.colChucVu.HeaderText = "Chức vụ";
+            this.colChucVu.MinimumWidth = 6;
+            this.colChucVu.Name = "colChucVu";
+            this.colChucVu.ReadOnly = true;
+            // 
+            // colCa
+            // 
+            this.colCa.HeaderText = "Ca";
+            this.colCa.MinimumWidth = 6;
+            this.colCa.Name = "colCa";
+            this.colCa.ReadOnly = true;
+            // 
+            // colLoaiCa
+            // 
+            this.colLoaiCa.HeaderText = "Loại ca";
+            this.colLoaiCa.MinimumWidth = 6;
+            this.colLoaiCa.Name = "colLoaiCa";
+            this.colLoaiCa.ReadOnly = true;
+            // 
+            // colThoiGianDen
+            // 
+            this.colThoiGianDen.HeaderText = "Thời gian đến";
+            this.colThoiGianDen.MinimumWidth = 6;
+            this.colThoiGianDen.Name = "colThoiGianDen";
+            this.colThoiGianDen.ReadOnly = true;
+            // 
+            // colThoiGianVe
+            // 
+            this.colThoiGianVe.HeaderText = "Thời gian về";
+            this.colThoiGianVe.MinimumWidth = 6;
+            this.colThoiGianVe.Name = "colThoiGianVe";
+            this.colThoiGianVe.ReadOnly = true;
+            // 
+            // colDayOffAmount
+            // 
+            this.colDayOffAmount.HeaderText = "Ngày phép còn";
+            this.colDayOffAmount.MinimumWidth = 6;
+            this.colDayOffAmount.Name = "colDayOffAmount";
+            this.colDayOffAmount.ReadOnly = true;
+            // 
+            // colPhep
+            // 
+            this.colPhep.HeaderText = "Phép";
+            this.colPhep.MinimumWidth = 6;
+            this.colPhep.Name = "colPhep";
+            // 
             // FrmWorkScheduleDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -703,16 +730,6 @@
         private System.Windows.Forms.Label lblDepartment;
         private System.Windows.Forms.TextBox txtStaffCreateID;
         private System.Windows.Forms.Label lblStaffCreate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaLLV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaNV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHoTen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPhongBan;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colChucVu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLoaiCa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colThoiGianDen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colThoiGianVe;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colPhep;
         private System.Windows.Forms.ComboBox cmbShiftType;
         private System.Windows.Forms.Label lblShiftType;
         private System.Windows.Forms.ComboBox cmbShift;
@@ -722,5 +739,17 @@
         private System.Windows.Forms.Label lblPosition;
         private System.Windows.Forms.Label lblFontSỉze;
         private System.Windows.Forms.NumericUpDown nudFontSize;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaLLV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaNV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHoTen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPhongBan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colChucVu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLoaiCa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colThoiGianDen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colThoiGianVe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDayOffAmount;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colPhep;
     }
 }

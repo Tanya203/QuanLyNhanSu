@@ -161,23 +161,5 @@ namespace QuanLyNhanSu.Functions
             }
             return true;
         }
-        public bool CheckCardDetailInserted(string cardID, string staffID)
-        {
-            if (cardDetailBUS.GetCardDetail().FirstOrDefault(s => s.CardID == cardID && s.StaffID == staffID) != null)
-            {
-                MessageBox.Show("Nhân viên đã được thêm vào phiếu trên cơ sở dữ liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            return true;
-        }
-        public bool CheckWorkScheduleDetailInserted(string wsID, string staffID, string shiftID)
-        {
-            if (workScheduleDetailBUS.GetWorkSchduleDetail().FirstOrDefault(s => s.WS_ID == wsID && s.StaffID == staffID && s.ShiftID == shiftID) != null)
-            {
-                MessageBox.Show("Nhân viên đã được thêm vào lịch trong ca trên cơ sở dữ liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            return true;
-        }
     }
 }

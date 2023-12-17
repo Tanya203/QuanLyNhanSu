@@ -8,7 +8,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Threading;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace QuanLyNhanSu.PresentationTier
 {
@@ -28,6 +31,8 @@ namespace QuanLyNhanSu.PresentationTier
         private WorkSchedule workSchedule;
         private readonly List<TimeKeeping> timeKeepings;
         private bool checkOperate;
+        private List<TimeKeeping> updateList;
+        private List<TimeKeeping> removeList;
         private readonly string formatDate = "yyyy-MM-dd";
         private readonly string formatHour = "HH:mm:ss";
 
@@ -47,19 +52,24 @@ namespace QuanLyNhanSu.PresentationTier
             workSchedule = workScheduleBUS.GetWorkSchedule().FirstOrDefault(ws => ws.WS_ID == wsID);
             timeKeepings = workScheduleDetailBUS.GetWorkSchduleDetail().Where(ws => ws.WS_ID == wsID).ToList();
             authorizations = new Authorizations("Chi tiết lịch làm việc", staff);
+            updateList = new List<TimeKeeping>();
+            removeList = new List<TimeKeeping>();
             checkOperate = false;
             nudFontSize.Value = (decimal)dgvWorkScheduleDetail.RowsDefaultCellStyle.Font.Size;
         }
         private void FrmChiTietLichLamViec_Load(object sender, EventArgs e)
         {
-            LoadHeader.LoadHeaderInfo(lblStaffIDLoginValue, lblFullNameLoginValue, lblDepartmentLoginValue, lblPositionLoginValue, staff);           
+            LoadHeader.LoadHeaderInfo(lblStaffIDLoginValue, lblFullNameLoginValue, lblDepartmentLoginValue, lblPositionLoginValue, staff);
+            dgvWorkScheduleDetail.Columns[10].ReadOnly = true;
             DisableDisplay();
             InputStatus(false);
             LoadWorkScheduleInfo();
             if (DateTime.Parse(dtpWorkDate.Text) >= DateTime.Parse(DateTime.Now.ToString(formatDate)))
             {
-                Authorizaations();
+               
+                if (Authorizaations())
                 {
+                    dgvWorkScheduleDetail.Columns[10].ReadOnly = false;
                     checkOperate = true;
                     DeleteButton();
                     LoadStaffByDepartment();
@@ -72,7 +82,7 @@ namespace QuanLyNhanSu.PresentationTier
         private bool Authorizaations()
         {
             List<object> input = new List<object> { cmbShift, cmbShiftType, cmbStaffID };
-            List<object> funtion = new List<object> { btnAdd };
+            List<object> funtion = new List<object> { btnAdd, btnSave };
             if (authorizations.AuthorizeForm(input, funtion) == "operate")
                 return true;
             return false;
@@ -88,7 +98,7 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void ButtonStatus(bool value)
         {
-            List<object> listButton = new List<object> { btnAdd };
+            List<object> listButton = new List<object> { btnAdd, btnSave };
             for (int i = 0; i < listButton.Count; i++)
             {
                 if (listButton[i] is Button)
@@ -124,13 +134,14 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void LoadStaffByDepartment()
         {
+            string staffID = cmbStaffID.Text;
             cmbStaffID.DisplayMember = "StaffID";
             cmbStaffID.ValueMember = "StaffID";
             int maxShift = shiftBUS.GetShift().Count();
             int countShift = 0;
             string check = null;
             List<Staff> staffList = staffBUS.GetStaff().Where(s => s.Position.Department.DP_ID == staff.Position.DP_ID).ToList();
-            foreach (TimeKeeping s in timeKeepings)
+            foreach (TimeKeeping s in updateList)
             {
                 if (check == null || check != s.StaffID)
                     countShift = 1;
@@ -149,6 +160,8 @@ namespace QuanLyNhanSu.PresentationTier
             }
             else
                 cmbStaffID.Enabled = true;
+            cmbStaffID.Text = staffID;
+            
             AutoAdjustComboBox.Adjust(cmbStaffID);
         }
         private void LoadShift(string staffID)
@@ -156,7 +169,7 @@ namespace QuanLyNhanSu.PresentationTier
             cmbShift.DisplayMember = "ShiftName";
             cmbShift.ValueMember = "ShiftID";
             List<Shift> shifts = shiftBUS.GetShift().ToList();
-            List<TimeKeeping> staffWorkSchedule = timeKeepings.Where(s => s.StaffID == staffID).ToList();
+            List<TimeKeeping> staffWorkSchedule = updateList.Where(s => s.StaffID == staffID).ToList();
             if (staffWorkSchedule.Count() == 0)
                 cmbShift.DataSource = shifts;
             else
@@ -187,9 +200,25 @@ namespace QuanLyNhanSu.PresentationTier
             cmbShiftType.DataSource = shiftTypeBUS.GetShiftType();
             AutoAdjustComboBox.Adjust(cmbShiftType);
         }
+        private void UpdateList(string wsID, string staffID, string shift, string shiftType, bool absense)
+        {
+            string shiftID = shiftBUS.GetShift().FirstOrDefault(s => s.ShiftName == shift).ShiftID;
+            string stID = shiftTypeBUS.GetShiftType().FirstOrDefault(s => s.ShiftTypeName == shiftType).ST_ID;
+            TimeKeeping add = new TimeKeeping()
+            {
+                WS_ID = wsID,
+                StaffID = staffID,
+                ShiftID = shiftID,
+                ST_ID = stID,
+                AbsenceUse = absense
+            };
+            updateList.Add(add);
+        }
         private void LoadWorkScheduleDetail()
         {
             Enabled = false;
+            updateList.Clear();
+            updateList = new List<TimeKeeping>();
             dgvWorkScheduleDetail.Rows.Clear();
             IEnumerable<WorkScheduleDetailViewModels> worKScheduleDetail = workScheduleDetailBUS.GetAllWorkSchduleDetail(workSchedule.WS_ID);
             int rowAdd;
@@ -205,13 +234,23 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvWorkScheduleDetail.Rows[rowAdd].Cells[6].Value = s.ShiftType;
                 dgvWorkScheduleDetail.Rows[rowAdd].Cells[7].Value = s.CheckInTime;
                 dgvWorkScheduleDetail.Rows[rowAdd].Cells[8].Value = s.CheckOutTime;
-                dgvWorkScheduleDetail.Rows[rowAdd].Cells[9].Value = s.AbsenceUse;
+                dgvWorkScheduleDetail.Rows[rowAdd].Cells[9].Value = s.DayOffAmount;
+                dgvWorkScheduleDetail.Rows[rowAdd].Cells[10].Value = s.AbsenceUse;
+                UpdateList(s.WS_ID, s.StaffID, s.Shift, s.ShiftType, s.AbsenceUse);
             }
+            if (updateList.Count > 0)
+                btnSave.Enabled = true;
+            else
+                btnSave.Enabled = false;
+            if(checkOperate)
+                LoadShift(cmbStaffID.SelectedValue.ToString());
             Enabled = true;
         }
         private void LoadWorkScheduleDetailSearch(string search)
         {
             Enabled = false;
+            updateList.Clear();
+            updateList = new List<TimeKeeping>();
             dgvWorkScheduleDetail.Rows.Clear();
             IEnumerable<WorkScheduleDetailViewModels> worKScheduleDetail = workScheduleDetailBUS.GetAllWorkSchduleDetailSearch(workSchedule.WS_ID, search);
             int rowAdd;
@@ -227,8 +266,16 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvWorkScheduleDetail.Rows[rowAdd].Cells[6].Value = s.ShiftType;
                 dgvWorkScheduleDetail.Rows[rowAdd].Cells[7].Value = s.CheckInTime;
                 dgvWorkScheduleDetail.Rows[rowAdd].Cells[8].Value = s.CheckOutTime;
-                dgvWorkScheduleDetail.Rows[rowAdd].Cells[9].Value = s.AbsenceUse;
+                dgvWorkScheduleDetail.Rows[rowAdd].Cells[9].Value = s.DayOffAmount;
+                dgvWorkScheduleDetail.Rows[rowAdd].Cells[10].Value = s.AbsenceUse;
+                UpdateList(s.WS_ID, s.StaffID, s.Shift, s.ShiftType, s.AbsenceUse);
             }
+            if (updateList.Count > 0)
+                btnSave.Enabled = true;
+            else
+                btnSave.Enabled = false;
+            if(checkOperate)
+                LoadShift(cmbStaffID.SelectedValue.ToString());
             Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////////////
@@ -260,41 +307,46 @@ namespace QuanLyNhanSu.PresentationTier
         //////////////////////////////////////////////////////////////////////////////////////
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
+            TimeKeeping timeKeeping = new TimeKeeping
             {
-                if (!checkExist.CheckWorkSchedule(txtWorkScheduleID.Text))
-                {
-                    btnBack.PerformClick();
-                    return;
-                }
-                if( !checkExist.CheckWorkScheduleDetailInserted(txtWorkScheduleID.Text, cmbStaffID.SelectedValue.ToString(), cmbShift.SelectedValue.ToString())
-                    ||!checkExist.CheckShift(cmbShift.SelectedValue.ToString()) || 
-                    !checkExist.CheckShiftType(cmbShiftType.SelectedValue.ToString()) || !checkExist.CheckStaff(cmbStaffID.SelectedValue.ToString()))
-                {
-                    Reload();
-                    return;
-                }
-                TimeKeeping timeKeeping = new TimeKeeping
-                {
-                    WS_ID = workSchedule.WS_ID,
-                    StaffID = cmbStaffID.SelectedValue.ToString(),
-                    ShiftID = cmbShift.SelectedValue.ToString(),
-                    ST_ID = cmbShiftType.SelectedValue.ToString(),
-                    AbsenceUse = false,
-                };
-                if (workScheduleDetailBUS.Save(timeKeeping))
-                {
-                    MonthSalaryDetail monthSalary = salary.GetStaffMonthSalary(timeKeeping.StaffID);
-                    string operate = "Thêm nhân viên";
-                    string operationDetail = $"Thêm nhân viên {cmbStaffID.Text} vào lịch làm việc ngày {dtpWorkDate.Text} - phòng ban {txtDepartment.Text}";
-                    history.Save(staff.StaffID, operate, operationDetail);
-                    Reload();
-                }                
-            }
-            catch (Exception ex)
+                WS_ID = workSchedule.WS_ID,
+                StaffID = cmbStaffID.SelectedValue.ToString(),
+                ShiftID = cmbShift.SelectedValue.ToString(),
+                ST_ID = cmbShiftType.SelectedValue.ToString(),
+                AbsenceUse = false,
+            };
+            int rowAdd;
+            int dayOffAmount = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == timeKeeping.StaffID).DayOffAmount;
+            rowAdd = dgvWorkScheduleDetail.Rows.Add();
+            dgvWorkScheduleDetail.Rows[rowAdd].Cells[0].Value = timeKeeping.WS_ID;
+            dgvWorkScheduleDetail.Rows[rowAdd].Cells[1].Value = timeKeeping.StaffID;
+            dgvWorkScheduleDetail.Rows[rowAdd].Cells[2].Value = txtFullName.Text;
+            dgvWorkScheduleDetail.Rows[rowAdd].Cells[3].Value = txtDepartment.Text;
+            dgvWorkScheduleDetail.Rows[rowAdd].Cells[4].Value = txtPosition.Text;
+            dgvWorkScheduleDetail.Rows[rowAdd].Cells[5].Value = cmbShift.Text;
+            dgvWorkScheduleDetail.Rows[rowAdd].Cells[6].Value = cmbShiftType.Text;
+            dgvWorkScheduleDetail.Rows[rowAdd].Cells[7].Value = "";
+            dgvWorkScheduleDetail.Rows[rowAdd].Cells[8].Value = "";
+            dgvWorkScheduleDetail.Rows[rowAdd].Cells[9].Value = dayOffAmount;
+            dgvWorkScheduleDetail.Rows[rowAdd].Cells[10].Value = timeKeeping.AbsenceUse;
+            if (dgvWorkScheduleDetail.Rows.Count > 1)
             {
-                CustomMessage.ExecptionCustom(ex);
+                foreach (DataGridViewRow r in dgvWorkScheduleDetail.Rows)
+                {
+                    if (timeKeeping.StaffID == dgvWorkScheduleDetail.Rows[r.Index].Cells[1].Value.ToString())
+                    {
+                        dgvWorkScheduleDetail.Rows[rowAdd].Cells[10].Value = dgvWorkScheduleDetail.Rows[r.Index].Cells[10].Value;
+                        timeKeeping.AbsenceUse = (bool)dgvWorkScheduleDetail.Rows[r.Index].Cells[10].Value;
+                        break;
+                    }
+                }
             }
+            updateList.Add(timeKeeping);
+            LoadStaffByDepartment();
+            if (updateList.Count > 0)
+                btnSave.Enabled = true;
+            else
+                btnSave.Enabled = false;
         }
         private void DeleteButton()
         {
@@ -313,48 +365,98 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvWorkScheduleDetail.Columns.Add(btnXoa);
             }
         }
-        private void DeleteStaff(string staffID)
+        private string CheckChange()
         {
-            try
+            string result = "";
+            string add = " - Thêm nhân viên:";
+            string remove = "\n - Xoá nhân viên:";
+            string absences = "\n - Cập nhật phép:";
+            string check = "";
+            foreach (TimeKeeping staff in updateList)
             {
-                if (!checkExist.CheckWorkSchedule(txtWorkScheduleID.Text))
+                string shift = shiftBUS.GetShift().FirstOrDefault(s => s.ShiftID == staff.ShiftID).ShiftName;
+                if (timeKeepings.FirstOrDefault(s => s.StaffID == staff.StaffID && s.ShiftID == staff.ShiftID) == null)
                 {
-                    btnBack.PerformClick();
-                    return;
+                    add += $"\n    - {staff.StaffID} - ca {shift} - phép : ";
+                    if (staff.AbsenceUse)
+                        add += "Có";
+                    else
+                        add += "Không";
                 }
-                if(!checkExist.CheckWorkScheduleDetail(txtWorkScheduleID.Text, staffID))
+                if(timeKeepings.Count > 0)
                 {
-                    Reload();
-                    return;
-                }
-                TimeKeeping timeKeeping = new TimeKeeping
-                {
-                    WS_ID = txtWorkScheduleID.Text,
-                    StaffID = staffID,
-                };
-                if (workScheduleDetailBUS.Delete(timeKeeping))
-                {
-                    string operate = "Xoá nhân viên";
-                    string operationDetail = $"Xoá nhân viên {staffID} khỏi lịch làm việc ngày {dtpWorkDate.Text} - phòng ban {txtDepartment.Text}";
-                    history.Save(staff.StaffID, operate, operationDetail);
-                    Reload();
+                    if (timeKeepings.FirstOrDefault(s => s.StaffID == staff.StaffID) != null &&
+                    timeKeepings.FirstOrDefault(s => s.StaffID == staff.StaffID).AbsenceUse != staff.AbsenceUse && staff.StaffID != check)
+                    {
+                        check = staff.StaffID;
+                        if (staff.AbsenceUse)
+                            absences += $"\n    - Thêm phép cho nhân viên {staff.StaffID}";
+                        else
+                            absences += $"\n    - Xoá phép của nhân viên {staff.StaffID}";
+                    }
                 }
             }
-            catch (Exception ex)
+            foreach(TimeKeeping staff in timeKeepings)
             {
-                CustomMessage.ExecptionCustom(ex);
+                string shift = shiftBUS.GetShift().FirstOrDefault(s => s.ShiftID == staff.ShiftID).ShiftName;
+                if (updateList.FirstOrDefault(s => s.StaffID == staff.StaffID && s.ShiftID == staff.ShiftID) == null)
+                    remove += $"\n  - {staff.StaffID} - ca {shift}";
             }
+            result = add + remove + absences;
+            return result;
         }
-        private void dgvWorkScheduleDetail_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvWorkScheduleDetail_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            
             int row = e.RowIndex;
             if (row < 0)
                 return;
-            string staffID = dgvWorkScheduleDetail.Rows[row].Cells[1].Value.ToString();
-            if (e.ColumnIndex == 9 && checkOperate)
-                UpdateAbsence(staffID);
             if (e.ColumnIndex == 10)
-                DeleteStaff(staffID);
+            {
+                int dayOffAmount = (int)dgvWorkScheduleDetail.Rows[row].Cells[9].Value;
+                if (dayOffAmount == 0)
+                {
+                    MessageBox.Show("Nhân viên đã hết phép", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                bool absense = false;
+                string staffID = dgvWorkScheduleDetail.Rows[row].Cells[1].Value.ToString();
+                string shift = dgvWorkScheduleDetail.Rows[row].Cells[5].Value.ToString();
+                string shiftID = shiftBUS.GetShift().FirstOrDefault(s => s.ShiftName == shift).ShiftID;
+                var checkBox = dgvWorkScheduleDetail.Rows[row].Cells[10];
+                if (checkBox is DataGridViewCheckBoxCell checkBoxCell)
+                {
+                    absense = (bool)checkBoxCell.EditedFormattedValue;
+                    foreach (DataGridViewRow r in dgvWorkScheduleDetail.Rows)
+                    {
+                        if (dgvWorkScheduleDetail.Rows[r.Index].Cells[1].Value.ToString() == staffID)
+                            dgvWorkScheduleDetail.Rows[r.Index].Cells[10].Value = absense;
+                    }
+                }
+                foreach (TimeKeeping staff in updateList)
+                    if (staff.StaffID == staffID)
+                        staff.AbsenceUse = absense;
+            }
+            if (e.ColumnIndex == 11)
+            {
+                string checkIn = dgvWorkScheduleDetail.Rows[row].Cells[7].Value.ToString();
+                if (!string.IsNullOrEmpty(checkIn))
+                {
+                    MessageBox.Show("Nhân viên đã chấm công! Không thể xoá!!!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                string staffID = dgvWorkScheduleDetail.Rows[row].Cells[1].Value.ToString();
+                string shiftID = shiftBUS.GetShift().FirstOrDefault(s => s.ShiftName == dgvWorkScheduleDetail.Rows[row].Cells[5].Value.ToString()).ShiftID;
+                DataGridViewRow remove = dgvWorkScheduleDetail.Rows[row];
+                dgvWorkScheduleDetail.Rows.Remove(remove);
+                removeList.Add(updateList.FirstOrDefault(s => s.StaffID == staffID && s.ShiftID == shiftID));
+                updateList.RemoveAll(s => s.StaffID == staffID && s.ShiftID == shiftID);
+                LoadStaffByDepartment();
+                if (updateList.Count > 0 || (removeList.Count > 0 && timeKeepings.Count > 0))
+                    btnSave.Enabled = true;
+                else
+                    btnSave.Enabled = false;
+            }
         }
         private void btnBack_Click(object sender, EventArgs e)
         {
@@ -378,7 +480,15 @@ namespace QuanLyNhanSu.PresentationTier
             if (e.KeyChar == (char)Keys.Enter)
                 LoadWorkScheduleDetailSearch(txtSearch.Text);
         }
-        public void UpdateAbsence(string staffID)
+        
+
+        private void nudFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            int fontSize = (int)nudFontSize.Value;
+            dgvWorkScheduleDetail.RowsDefaultCellStyle.Font = new Font(dgvWorkScheduleDetail.Font.FontFamily, fontSize);
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
@@ -387,56 +497,70 @@ namespace QuanLyNhanSu.PresentationTier
                     btnBack.PerformClick();
                     return;
                 }
-                if(!checkExist.CheckWorkScheduleDetail(txtWorkScheduleID.Text, staffID))
+                /*if (!checkExist.CheckShift(cmbShift.SelectedValue.ToString()) ||
+                    !checkExist.CheckShiftType(cmbShiftType.SelectedValue.ToString()) || !checkExist.CheckStaff(cmbStaffID.SelectedValue.ToString()))
                 {
                     Reload();
                     return;
-                }
-                TimeKeeping staff = timeKeepings.FirstOrDefault(s => s.StaffID == staffID);
-                string announce;
-                if (!staff.AbsenceUse)
+                }*/
+                string editDetail = CheckChange();
+                string flag = "";
+                foreach (TimeKeeping staff in updateList)
                 {
-                    staff.AbsenceUse = true;
-                    announce = "Thêm phép cho nhân viên";
-                }
-                else
-                {
-                    staff.AbsenceUse = false;
-                    announce = "Xoá phép của nhân viên";
-                }
-                CustomMessage.YesNoCustom("Xác nhận", "Huỷ");
-                DialogResult ketQua = MessageBox.Show($"{announce} {staffID} ngày {dtpWorkDate.Text}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (ketQua == DialogResult.Yes)
-                {
-                    if (workScheduleDetailBUS.Save(staff))
+                    if (flag != staff.StaffID)
                     {
-                        string operate;
-                        string operationDetail;
-                        if (announce.Contains("Thêm"))
+                        flag = staff.StaffID;
+                        Staff update = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staff.StaffID);
+                        if (timeKeepings.Count > 0)
                         {
-                            operate = "Thêm phép";
-                            operationDetail = $"Thêm phép cho nhân viên {staffID} ngày {dtpWorkDate.Text} - phòng ban {txtDepartment.Text}";
+                            if(timeKeepings.FirstOrDefault(x => x.StaffID == staff.StaffID) != null)
+                            {
+                                if (staff.AbsenceUse != timeKeepings.FirstOrDefault(x => x.StaffID == staff.StaffID).AbsenceUse)
+                                {
+                                    update.DayOffAmount = staff.AbsenceUse ? update.DayOffAmount - 1 : update.DayOffAmount + 1;
+                                    staffBUS.UpdateDayOffAmount(update);
+                                }
+                            }
                         }
-                        else
+                        if (staff.AbsenceUse && timeKeepings.FirstOrDefault(s => s.StaffID == staff.StaffID) == null)
                         {
-                            operate = "Xoá phép";
-                            operationDetail = $"Xoá phép cho nhân viên {staffID} ngày {dtpWorkDate.Text} - phòng ban {txtDepartment.Text}";
+                            update.DayOffAmount -= 1;
+                            staffBUS.UpdateDayOffAmount(update);
                         }
-                        history.Save(staff.StaffID, operate, operationDetail);
-                        Reload();
                     }
                 }
+                if(removeList.Count > 0)
+                {
+                    string check = "";
+                    foreach(TimeKeeping staff in removeList)
+                    {
+                        if(updateList.FirstOrDefault(s => s.StaffID == staff.StaffID) == null && check != staff.StaffID && staff.AbsenceUse)
+                        {
+                            check = staff.StaffID;
+                            Staff update = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staff.StaffID);
+                            update.DayOffAmount += 1;
+                            staffBUS.UpdateDayOffAmount(update);
+                        }
+                    }
+                    workScheduleDetailBUS.Delete(removeList);
+                }
+                if (workScheduleDetailBUS.Save(updateList))
+                {
+                    //MonthSalaryDetail monthSalary = salary.GetStaffMonthSalary(timeKeeping.StaffID);
+                    string operate = $"Cập nhật";
+                    string operationDetail = $"Cập nhật lịch làm việc ngày {dtpWorkDate.Text} - phòng ban {staff.Position.Department.DepartmentName}";
+                    if (!string.IsNullOrEmpty(editDetail))
+                        operationDetail += $":\n{editDetail}";
+                    history.Save(staff.StaffID, operate, operationDetail);
+                    Reload();
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessage.ExecptionCustom(ex);
             }
         }
 
-        private void nudFontSize_ValueChanged(object sender, EventArgs e)
-        {
-            int fontSize = (int)nudFontSize.Value;
-            dgvWorkScheduleDetail.RowsDefaultCellStyle.Font = new Font(dgvWorkScheduleDetail.Font.FontFamily, fontSize);
-        }
+        
     }
 }

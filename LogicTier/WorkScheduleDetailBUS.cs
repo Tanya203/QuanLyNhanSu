@@ -24,13 +24,13 @@ namespace QuanLyNhanSu.LogicTier
         {
             return workScheduleDetailDAL.GetWorkSchduleDetail();
         }
-        public bool Save(TimeKeeping timeKeeping)
+        public bool Save(List<TimeKeeping> timeKeeping)
         {
             return workScheduleDetailDAL.Save(timeKeeping);
         }
-        public bool Delete(TimeKeeping staff)
+        public bool Delete(List<TimeKeeping> removeList)
         {
-            return workScheduleDetailDAL.Delete(staff.WS_ID, staff.StaffID);
+            return workScheduleDetailDAL.Delete(removeList);
         }
     }
 }
