@@ -3,6 +3,7 @@ using QuanLyNhanSu.Functions;
 using QuanLyNhanSu.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -66,11 +67,12 @@ namespace QuanLyNhanSu.DataTier
         {
             return quanLyNhanSu.AllowanceDetails.OrderBy(al => al.AL_ID).ToList();
         }
-        public bool Save(AllowanceDetail allowanceDetail)
+        public bool Save(List<AllowanceDetail> allowanceDetail)
         {
             try
             {
-                quanLyNhanSu.AllowanceDetails.Add(allowanceDetail);
+                foreach(AllowanceDetail staff in allowanceDetail)
+                    quanLyNhanSu.AllowanceDetails.AddOrUpdate(staff);
                 quanLyNhanSu.SaveChanges();                
                 MessageBox.Show("Đã lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
@@ -81,25 +83,17 @@ namespace QuanLyNhanSu.DataTier
                 return false;
             }
         }
-        public bool Delete(string staffID, string al_ID)
+        public bool Delete(List<AllowanceDetail> allowanceDetail)
         {
             try
             {
-                AllowanceDetail allowanceDetail = quanLyNhanSu.AllowanceDetails.Where(al => al.StaffID == staffID && al.AL_ID == al_ID).FirstOrDefault(); 
-                if (allowanceDetail != null)
+               foreach(AllowanceDetail staff in allowanceDetail)
                 {
-                    CustomMessage.YesNoCustom("Có", "Không");
-                    string allowance = allowanceDetail.Allowance.AllowanceName;
-                    DialogResult ketQua = MessageBox.Show($"Xác nhận xoá phụ cấp {allowance} của nhân viên {staffID}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (ketQua == DialogResult.Yes)
-                    {
-                        quanLyNhanSu.AllowanceDetails.Remove(allowanceDetail);
-                        quanLyNhanSu.SaveChanges();
-                        MessageBox.Show($"Đã xoá {allowance} của {staffID}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return true;                                            
-                    }                    
+                    AllowanceDetail remove = quanLyNhanSu.AllowanceDetails.FirstOrDefault(s => s.StaffID == staff.StaffID && s.AL_ID == staff.AL_ID);
+                    quanLyNhanSu.AllowanceDetails.Remove(remove);
                 }
-                return false;
+               quanLyNhanSu.SaveChanges();
+               return true;
             }
             catch(Exception ex)
             {

@@ -9,18 +9,18 @@ namespace QuanLyNhanSu.Functions
     internal class SalaryHandle
     {
         private readonly StaffBUS staffBUS;
-        private readonly AllowanceDetailBUS allowanceDetailBUS;
         private readonly MonthBUS monthBUS;
         private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
+        private readonly AllowanceDetailBUS allowanceDetailBUS;
         public SalaryHandle() 
         {
             
             staffBUS = new StaffBUS();
-            allowanceDetailBUS = new AllowanceDetailBUS();
             monthBUS = new MonthBUS();
+            allowanceDetailBUS = new AllowanceDetailBUS();
             monthSalaryDetailBUS = new MonthSalaryDetailBUS();
         }
-        public MonthSalaryDetail GetStaffMonthSalary(string staffID)
+        public void CheckMonth()
         {
             string month = DateTime.Now.ToString("yyyy-MM");
             Month checkKMonth = monthBUS.GetMonth().FirstOrDefault(m => m.MonthID == month);
@@ -44,8 +44,25 @@ namespace QuanLyNhanSu.Functions
                     monthSalaryDetailBUS.Save(add);
                 }
             }
-            MonthSalaryDetail monthSalaryDetail = monthSalaryDetailBUS.GetMonthSalaryDetails().FirstOrDefault(m => m.StaffID == staffID && m.MonthID == month);
-            return monthSalaryDetail;
+        }
+        public bool UpdateStaffMonthSalary(string staffID)
+        {
+            try
+            {
+                CheckMonth();
+                string month = DateTime.Now.ToString("yyyy-MM");
+                MonthSalaryDetail monthSalaryDetail = monthSalaryDetailBUS.GetMonthSalaryDetails().FirstOrDefault(m => m.StaffID == staffID && m.MonthID == month);
+                monthSalaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(monthSalaryDetail.StaffID);
+                monthSalaryDetail.BasicSalary = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == monthSalaryDetail.StaffID).BasicSalary;
+                monthSalaryDetailBUS.Save(monthSalaryDetail);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                CustomMessage.ExecptionCustom(ex);
+                return false;
+            }
+            
         }
     }
 }

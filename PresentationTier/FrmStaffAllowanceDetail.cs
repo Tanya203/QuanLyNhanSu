@@ -21,7 +21,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly StaffBUS staffBUS;
         private readonly AllowanceBUS allowanceBUS;
         private readonly AllowanceDetailBUS allowanceDetailBUS;
-        private readonly MonthSalaryDetailBUS monthSalaryDetailBUS;
         private readonly CheckExist checkExist;
         private readonly SalaryHandle salary;
         private Staff staff;
@@ -35,7 +34,6 @@ namespace QuanLyNhanSu.PresentationTier
             allowanceBUS = new AllowanceBUS();
             allowanceDetailBUS = new AllowanceDetailBUS();
             staffBUS = new StaffBUS();
-            monthSalaryDetailBUS = new MonthSalaryDetailBUS();
             salary = new SalaryHandle();
             checkExist = new CheckExist();;
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
@@ -133,7 +131,7 @@ namespace QuanLyNhanSu.PresentationTier
                     btnBack.PerformClick();
                     return;
                 }
-                if(!checkExist.CheckAllowance(cmbAllowance.SelectedValue.ToString()) || !checkExist.CheckAllowanceDetailInserted(cmbAllowance.SelectedValue.ToString(), staffID_AL))
+                if(!checkExist.CheckAllowance(cmbAllowance.SelectedValue.ToString()))
                 {
                     Reload();
                     return;
@@ -143,15 +141,14 @@ namespace QuanLyNhanSu.PresentationTier
                     StaffID = staffID_AL,
                     AL_ID = cmbAllowance.SelectedValue.ToString(),
                 };
-                if (allowanceDetailBUS.Save(allowanceDetail))
+                List<AllowanceDetail> allowanceDetails = new List<AllowanceDetail>() { allowanceDetail };
+                if (allowanceDetailBUS.Save(allowanceDetails))
                 {
                     allowanceDetail.Allowance = allowanceBUS.GetAllowance().FirstOrDefault(al => al.AL_ID == cmbAllowance.SelectedValue.ToString());
                     string operate = "Thêm";
                     string operationDetail = $"Thêm phụ cấp {cmbAllowance.Text} cho nhân viên {staffID_AL}";
                     history.Save(staff.StaffID, operate, operationDetail);
-                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(allowanceDetail.StaffID);
-                    salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(allowanceDetail.StaffID);
-                    monthSalaryDetailBUS.Save(salaryDetail);
+                    salary.UpdateStaffMonthSalary(allowanceDetail.StaffID);
                     Reload();
                 }
                 txtAmount.Text = string.Empty;
@@ -197,15 +194,13 @@ namespace QuanLyNhanSu.PresentationTier
                     StaffID = staffID_AL,
                     AL_ID = alID,
                 };
-                if (allowanceDetailBUS.Delete(allowanceDetail))
+                List<AllowanceDetail> allowanceDetails = new List<AllowanceDetail>() { allowanceDetail };
+                if (allowanceDetailBUS.Delete(allowanceDetails))
                 {
-
                     string operate = "Xoá";
                     string operationDetail = $"Xoá phụ cấp {alName} của nhân viên {staffID_AL}";
                     history.Save(staff.StaffID, operate, operationDetail);
-                    MonthSalaryDetail salaryDetail = salary.GetStaffMonthSalary(staff.StaffID);
-                    salaryDetail.TotalAllowance = allowanceDetailBUS.StaffTotalAllowance(staff.StaffID);
-                    monthSalaryDetailBUS.Save(salaryDetail);
+                    salary.UpdateStaffMonthSalary(allowanceDetail.StaffID);
                     Reload();
                 }
             }
@@ -241,6 +236,11 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            if (!checkExist.CheckStaff(txtStaffID.Text))
+            {
+                btnBack.PerformClick();
+                return;
+            }
             Reload();
         }
 

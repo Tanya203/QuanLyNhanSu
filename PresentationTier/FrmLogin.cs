@@ -11,12 +11,14 @@ namespace QuanLyNhanSu
     {
         private readonly SaveOperateHistory history;
         private readonly FormHandle redirect;
+        private readonly SalaryHandle salary;
         public FrmLogin()
         {
             InitializeComponent();
             redirect = new FormHandle();
             history = new SaveOperateHistory("Đăng nhập");
             btnLogin.Enabled = false;
+            salary = new SalaryHandle();
             txtAccount.Text = "TK001";
             txtPassword.Text = "Aa@12345";
             KeyPreview = true;
@@ -35,6 +37,7 @@ namespace QuanLyNhanSu
                 string operate = "Đăng nhập";
                 string operationDetail = "Đăng nhập";
                 history.Save(staff.StaffID, operate, operationDetail);
+                salary.CheckMonth();
                 FrmMainMenu open = new FrmMainMenu(staff.StaffID);
                 redirect.RedirectForm(open, this);  
             }

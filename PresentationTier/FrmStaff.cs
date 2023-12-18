@@ -584,9 +584,7 @@ namespace QuanLyNhanSu.PresentationTier
                                     $"- Lương cơ bản: {String.Format(fVND, "{0:N3} ₫", decimal.Parse(txtBasicSalary.Text))}";                    
                     history.Save(this.staff.StaffID, operate, operationDetail);
                     string staffID = staffBUS.GetStaff().FirstOrDefault(s => s.CardID == staff.CardID).StaffID;
-                    MonthSalaryDetail monthSalary = salary.GetStaffMonthSalary(staffID);
-                    monthSalary.BasicSalary = staff.BasicSalary;
-                    monthSalaryDetailBUS.Save(monthSalary);
+                    salary.UpdateStaffMonthSalary(staffID);
                     Reload();
                 }
             }
@@ -642,11 +640,7 @@ namespace QuanLyNhanSu.PresentationTier
                         operationDetail += $":\n{editDetail}";
                     history.Save(this.staff.StaffID, operate, operationDetail);
                     if (operationDetail.Contains("Lương cơ bản"))
-                    {
-                        MonthSalaryDetail monthSalary = salary.GetStaffMonthSalary(staff.StaffID);
-                        monthSalary.BasicSalary = staff.BasicSalary;
-                        monthSalaryDetailBUS.Save(monthSalary);
-                    }
+                        salary.UpdateStaffMonthSalary(staff.StaffID);
                     Reload();
                 }
             }

@@ -25,7 +25,6 @@ namespace QuanLyNhanSu.PresentationTier
         private readonly ShiftBUS shiftBUS;
         private readonly ShiftTypeBUS shiftTypeBUS;
         private readonly StaffBUS staffBUS;
-        private readonly SalaryHandle salary;
         private readonly CheckExist checkExist;
         private Staff staff;
         private WorkSchedule workSchedule;
@@ -46,7 +45,6 @@ namespace QuanLyNhanSu.PresentationTier
             workScheduleDetailBUS = new WorkScheduleDetailBUS();
             shiftBUS = new ShiftBUS();
             shiftTypeBUS = new ShiftTypeBUS();
-            salary = new SalaryHandle();
             checkExist = new CheckExist();
             staff = staffBUS.GetStaff().FirstOrDefault(s => s.StaffID == staffID);
             workSchedule = workScheduleBUS.GetWorkSchedule().FirstOrDefault(ws => ws.WS_ID == wsID);
@@ -342,6 +340,7 @@ namespace QuanLyNhanSu.PresentationTier
                 }
             }
             updateList.Add(timeKeeping);
+            removeList.RemoveAll(s => s.StaffID == timeKeeping.StaffID && s.ShiftID == timeKeeping.ShiftID);
             LoadStaffByDepartment();
             if (updateList.Count > 0)
                 btnSave.Enabled = true;
@@ -407,7 +406,6 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void dgvWorkScheduleDetail_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
             int row = e.RowIndex;
             if (row < 0)
                 return;
@@ -449,7 +447,8 @@ namespace QuanLyNhanSu.PresentationTier
                 string shiftID = shiftBUS.GetShift().FirstOrDefault(s => s.ShiftName == dgvWorkScheduleDetail.Rows[row].Cells[5].Value.ToString()).ShiftID;
                 DataGridViewRow remove = dgvWorkScheduleDetail.Rows[row];
                 dgvWorkScheduleDetail.Rows.Remove(remove);
-                removeList.Add(updateList.FirstOrDefault(s => s.StaffID == staffID && s.ShiftID == shiftID));
+                if(timeKeepings.FirstOrDefault(s => s.StaffID == staffID && s.ShiftID == shiftID) != null)
+                    removeList.Add(updateList.FirstOrDefault(s => s.StaffID == staffID && s.ShiftID == shiftID));
                 updateList.RemoveAll(s => s.StaffID == staffID && s.ShiftID == shiftID);
                 LoadStaffByDepartment();
                 if (updateList.Count > 0 || (removeList.Count > 0 && timeKeepings.Count > 0))
@@ -466,6 +465,11 @@ namespace QuanLyNhanSu.PresentationTier
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            if (!checkExist.CheckWorkSchedule(txtWorkScheduleID.Text))
+            {
+                btnBack.PerformClick();
+                return;
+            }
             Reload();
         }
 
@@ -497,12 +501,15 @@ namespace QuanLyNhanSu.PresentationTier
                     btnBack.PerformClick();
                     return;
                 }
-                /*if (!checkExist.CheckShift(cmbShift.SelectedValue.ToString()) ||
-                    !checkExist.CheckShiftType(cmbShiftType.SelectedValue.ToString()) || !checkExist.CheckStaff(cmbStaffID.SelectedValue.ToString()))
+                foreach(TimeKeeping staff in updateList)
                 {
-                    Reload();
-                    return;
-                }*/
+                    if (!checkExist.CheckShift(staff.ShiftID) || !checkExist.CheckShiftType(cmbShiftType.SelectedValue.ToString()) 
+                        || !checkExist.CheckStaff(cmbStaffID.SelectedValue.ToString()))
+                    {
+                        Reload();
+                        return;
+                    }
+                }
                 string editDetail = CheckChange();
                 string flag = "";
                 foreach (TimeKeeping staff in updateList)
@@ -531,6 +538,14 @@ namespace QuanLyNhanSu.PresentationTier
                 }
                 if(removeList.Count > 0)
                 {
+                    foreach(TimeKeeping staff in removeList)
+                    {
+                        if (!checkExist.CheckWorkScheduleDetail(staff.WS_ID, staff.StaffID))
+                        {
+                            Reload();
+                            return;
+                        }
+                    }
                     string check = "";
                     foreach(TimeKeeping staff in removeList)
                     {

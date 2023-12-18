@@ -76,6 +76,7 @@
             this.lblSearch = new System.Windows.Forms.Label();
             this.lblFontSỉze = new System.Windows.Forms.Label();
             this.nudFontSize = new System.Windows.Forms.NumericUpDown();
+            this.btnSave = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
             this.pnlFunction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbStaffPicture)).BeginInit();
@@ -227,6 +228,7 @@
             // pnlFunction
             // 
             this.pnlFunction.BackColor = System.Drawing.SystemColors.Info;
+            this.pnlFunction.Controls.Add(this.btnSave);
             this.pnlFunction.Controls.Add(this.pbStaffPicture);
             this.pnlFunction.Controls.Add(this.cmbPosition);
             this.pnlFunction.Controls.Add(this.lblPosition);
@@ -322,7 +324,7 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Image = global::QuanLyNhanSu.Properties.Resources.add;
-            this.btnAdd.Location = new System.Drawing.Point(446, 134);
+            this.btnAdd.Location = new System.Drawing.Point(387, 137);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(109, 49);
             this.btnAdd.TabIndex = 18;
@@ -596,6 +598,24 @@
             0});
             this.nudFontSize.ValueChanged += new System.EventHandler(this.nudFontSize_ValueChanged);
             // 
+            // btnSave
+            // 
+            this.btnSave.AutoSize = true;
+            this.btnSave.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Image = global::QuanLyNhanSu.Properties.Resources.save;
+            this.btnSave.Location = new System.Drawing.Point(541, 137);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(100, 49);
+            this.btnSave.TabIndex = 87;
+            this.btnSave.Text = "Lưu";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // FrmAllowanceDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -679,5 +699,6 @@
         private System.Windows.Forms.PictureBox pbStaffPicture;
         private System.Windows.Forms.Label lblFontSỉze;
         private System.Windows.Forms.NumericUpDown nudFontSize;
+        private System.Windows.Forms.Button btnSave;
     }
 }
