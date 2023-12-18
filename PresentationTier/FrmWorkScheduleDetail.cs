@@ -236,12 +236,15 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvWorkScheduleDetail.Rows[rowAdd].Cells[10].Value = s.AbsenceUse;
                 UpdateList(s.WS_ID, s.StaffID, s.Shift, s.ShiftType, s.AbsenceUse);
             }
-            if (updateList.Count > 0)
-                btnSave.Enabled = true;
-            else
-                btnSave.Enabled = false;
-            if(checkOperate)
+            if (checkOperate)
+            {
+                if (updateList.Count > 0)
+                    btnSave.Enabled = true;
+                else
+                    btnSave.Enabled = false;
+
                 LoadShift(cmbStaffID.SelectedValue.ToString());
+            }
             Enabled = true;
         }
         private void LoadWorkScheduleDetailSearch(string search)
@@ -268,12 +271,15 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvWorkScheduleDetail.Rows[rowAdd].Cells[10].Value = s.AbsenceUse;
                 UpdateList(s.WS_ID, s.StaffID, s.Shift, s.ShiftType, s.AbsenceUse);
             }
-            if (updateList.Count > 0)
-                btnSave.Enabled = true;
-            else
-                btnSave.Enabled = false;
-            if(checkOperate)
+            if (checkOperate)
+            {
+                if (updateList.Count > 0)
+                    btnSave.Enabled = true;
+                else
+                    btnSave.Enabled = false;
+
                 LoadShift(cmbStaffID.SelectedValue.ToString());
+            }
             Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////////////
