@@ -190,7 +190,7 @@ namespace QuanLyNhanSu.PresentationTier
                     return;
                 }
                 CustomMessage.YesNoCustom("Có", "Không");
-                DialogResult ketQua = MessageBox.Show($"Xác nhận phụ cấp {alName} của nhân viên {txtStaffID.Text}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult ketQua = MessageBox.Show($"Xác nhận xoá phụ cấp {alName} của nhân viên {txtStaffID.Text}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (ketQua == DialogResult.Yes)
                 {
                     AllowanceDetail allowanceDetail = new AllowanceDetail
