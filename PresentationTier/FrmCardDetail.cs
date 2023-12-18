@@ -519,6 +519,11 @@ namespace QuanLyNhanSu.PresentationTier
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            if (!checkExist.CheckCard(txtCardID.Text))
+            {
+                btnBack.PerformClick();
+                return;
+            }
             Reload();
         }
 

@@ -152,14 +152,5 @@ namespace QuanLyNhanSu.Functions
             }
             return true;
         }
-        public bool CheckAllowanceDetailInserted(string alID, string staffID)
-        {
-            if (allowanceDetailBUS.GetAllowanceDetail().FirstOrDefault(al => al.AL_ID == alID && al.StaffID == staffID) != null)
-            {
-                MessageBox.Show("Phụ cấp đã được thêm cho nhân viên trên cơ sở dữ liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            return true;
-        }
     }
 }

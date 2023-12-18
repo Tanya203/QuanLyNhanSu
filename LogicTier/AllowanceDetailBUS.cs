@@ -24,13 +24,13 @@ namespace QuanLyNhanSu.LogicTier
         {
             return allowanceDetailDAL.GetAllAllowanceDetailSearch(al_ID, search);
         }
-        public bool Save(AllowanceDetail allowanceDetail)
+        public bool Save(List<AllowanceDetail> allowanceDetail)
         {
             return allowanceDetailDAL.Save(allowanceDetail);
         }
-        public bool Delete(AllowanceDetail allowanceDetail)
+        public bool Delete(List<AllowanceDetail> allowanceDetail)
         {
-            return allowanceDetailDAL.Delete(allowanceDetail.StaffID, allowanceDetail.AL_ID);
+            return allowanceDetailDAL.Delete(allowanceDetail);
         }
         public IEnumerable<AllowanceDetail> GetAllowanceDetail()
         {
