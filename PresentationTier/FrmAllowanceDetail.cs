@@ -31,6 +31,7 @@ namespace QuanLyNhanSu.PresentationTier
         private List<AllowanceDetail> removeList;
         private Staff staff;
         private Allowance allowance;
+        private bool checkOperate;
 
         public FrmAllowanceDetail(string staffID, string alID)
         {
@@ -51,6 +52,7 @@ namespace QuanLyNhanSu.PresentationTier
             allowance = allowanceBUS.GetAllowance().FirstOrDefault(al => al.AL_ID == alID);
             authorizations = new Authorizations("Chi tiết phụ cấp", staff);
             nudFontSize.Value = (decimal)dgvAllowanceDetail.RowsDefaultCellStyle.Font.Size;
+            checkOperate = false;
         }
 
         private void FrmChiTietPhuCap_Load(object sender, EventArgs e)
@@ -60,6 +62,7 @@ namespace QuanLyNhanSu.PresentationTier
             LoadAllowanceInfo();
             if (Authorizations())
             {
+                checkOperate = true;
                 LoadDepartment();
                 DeleteButton();
             }            
@@ -218,7 +221,8 @@ namespace QuanLyNhanSu.PresentationTier
             if (updateList.Count > 0)
                 btnSave.Enabled = true;
             else btnSave.Enabled = false;
-            LoadStaffByPosition(cmbPosition.SelectedValue.ToString());
+            if(checkOperate)
+                LoadStaffByPosition(cmbPosition.SelectedValue.ToString());
             Enabled = true;
         }
         private void LoadAllowanceDetailSearch(string search)
@@ -241,7 +245,8 @@ namespace QuanLyNhanSu.PresentationTier
             if (updateList.Count > 0)
                 btnSave.Enabled = true;
             else btnSave.Enabled = false;
-            LoadStaffByPosition(cmbPosition.SelectedValue.ToString());
+            if(checkOperate)
+                LoadStaffByPosition(cmbPosition.SelectedValue.ToString());
             Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
