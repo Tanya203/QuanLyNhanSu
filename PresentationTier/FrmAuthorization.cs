@@ -278,7 +278,6 @@ namespace QuanLyNhanSu.PresentationTier
         {
             try
             {
-
                 foreach (DataTier.Models.Authorization au in listUpdateAuthorize)
                 {
                     if (!checkExist.CheckPosition(au.PS_ID))
@@ -304,7 +303,6 @@ namespace QuanLyNhanSu.PresentationTier
                             if (listUpdateAuthorize.FirstOrDefault(au => au.PS_ID == staff.PS_ID) == null)
                                 Reload();
                         }
-
                     }
                 }
             }

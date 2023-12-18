@@ -80,8 +80,8 @@ namespace QuanLyNhanSu.Functions
                         backgroundTask.Wait();
                     }
                 }
-                Thread.Sleep(1000);
             }
+            Thread.Sleep(1000);
         }
         private void RedirectForm(string form)
         {
