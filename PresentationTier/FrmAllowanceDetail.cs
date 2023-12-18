@@ -218,11 +218,13 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvAllowanceDetail.Rows[row].Cells[4].Value = s.Position;
                 UpdateList(s.AL_ID, s.StaffID);
             };
-            if (updateList.Count > 0)
-                btnSave.Enabled = true;
-            else btnSave.Enabled = false;
-            if(checkOperate)
+            if (checkOperate)
+            {
+                if (updateList.Count > 0)
+                    btnSave.Enabled = true;
+                else btnSave.Enabled = false;
                 LoadStaffByPosition(cmbPosition.SelectedValue.ToString());
+            }
             Enabled = true;
         }
         private void LoadAllowanceDetailSearch(string search)
@@ -242,11 +244,13 @@ namespace QuanLyNhanSu.PresentationTier
                 dgvAllowanceDetail.Rows[row].Cells[4].Value = s.Position;
                 UpdateList(s.AL_ID, s.StaffID);
             };
-            if (updateList.Count > 0)
-                btnSave.Enabled = true;
-            else btnSave.Enabled = false;
-            if(checkOperate)
+            if (checkOperate) 
+            {
+                if (updateList.Count > 0)
+                    btnSave.Enabled = true;
+                else btnSave.Enabled = false;
                 LoadStaffByPosition(cmbPosition.SelectedValue.ToString());
+            }
             Enabled = true;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
