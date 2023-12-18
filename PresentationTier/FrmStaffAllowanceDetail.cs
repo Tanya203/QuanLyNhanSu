@@ -189,19 +189,25 @@ namespace QuanLyNhanSu.PresentationTier
                     Reload();
                     return;
                 }
-                AllowanceDetail allowanceDetail = new AllowanceDetail
+                CustomMessage.YesNoCustom("Có", "Không");
+                DialogResult ketQua = MessageBox.Show($"Xác nhận phụ cấp {alName} của nhân viên {txtStaffID.Text}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (ketQua == DialogResult.Yes)
                 {
-                    StaffID = staffID_AL,
-                    AL_ID = alID,
-                };
-                List<AllowanceDetail> allowanceDetails = new List<AllowanceDetail>() { allowanceDetail };
-                if (allowanceDetailBUS.Delete(allowanceDetails))
-                {
-                    string operate = "Xoá";
-                    string operationDetail = $"Xoá phụ cấp {alName} của nhân viên {staffID_AL}";
-                    history.Save(staff.StaffID, operate, operationDetail);
-                    salary.UpdateStaffMonthSalary(allowanceDetail.StaffID);
-                    Reload();
+                    AllowanceDetail allowanceDetail = new AllowanceDetail
+                    {
+                        StaffID = staffID_AL,
+                        AL_ID = alID,
+                    };
+                    List<AllowanceDetail> allowanceDetails = new List<AllowanceDetail>() { allowanceDetail };
+                    if (allowanceDetailBUS.Delete(allowanceDetails))
+                    {
+                        string operate = "Xoá";
+                        string operationDetail = $"Xoá phụ cấp {alName} của nhân viên {staffID_AL}";
+                        history.Save(staff.StaffID, operate, operationDetail);
+                        salary.UpdateStaffMonthSalary(allowanceDetail.StaffID);
+                        MessageBox.Show("Đã lưu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Reload();
+                    }
                 }
             }
             catch(Exception ex)
