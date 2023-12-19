@@ -62,7 +62,7 @@
             // 
             this.txtStaffID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStaffID.Location = new System.Drawing.Point(30, 75);
-            this.txtStaffID.MaxLength = 12;
+            this.txtStaffID.MaxLength = 11;
             this.txtStaffID.Name = "txtStaffID";
             this.txtStaffID.Size = new System.Drawing.Size(280, 30);
             this.txtStaffID.TabIndex = 2;

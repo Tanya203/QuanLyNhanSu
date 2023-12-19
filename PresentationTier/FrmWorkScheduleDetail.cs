@@ -137,15 +137,24 @@ namespace QuanLyNhanSu.PresentationTier
             cmbStaffID.ValueMember = "StaffID";
             int maxShift = shiftBUS.GetShift().Count();
             int countShift = 0;
-            string check = null;
+            string check = "";
             List<Staff> staffList = staffBUS.GetStaff().Where(s => s.Position.Department.DP_ID == staff.Position.DP_ID).ToList();
-            foreach (TimeKeeping s in updateList)
+            foreach (TimeKeeping s in updateList.OrderBy(s => s.StaffID))
             {
-                if (check == null || check != s.StaffID)
+                if (string.IsNullOrEmpty(check))
+                {
                     countShift = 1;
-                else
-                    countShift++;
-                if (countShift == maxShift)
+                    check = s.StaffID;
+                    continue;
+                }
+                if(check == s.StaffID)
+                    countShift ++;
+                if (check != s.StaffID)
+                {
+                    check = s.StaffID;
+                    countShift = 1;
+                }
+                if (countShift == maxShift) 
                     staffList.RemoveAll(staff => staff.StaffID == s.StaffID);                
             }
             cmbStaffID.DataSource = staffList;
@@ -158,8 +167,8 @@ namespace QuanLyNhanSu.PresentationTier
             }
             else
                 cmbStaffID.Enabled = true;
+
             cmbStaffID.Text = staffID;
-            
             AutoAdjustComboBox.Adjust(cmbStaffID);
         }
         private void LoadShift(string staffID)
@@ -292,11 +301,14 @@ namespace QuanLyNhanSu.PresentationTier
                 txtFullName.Text = StringAdjust.AddSpacesBetweenUppercaseLetters($"{staff.LastName}{staff.MiddleName}{staff.FirstName}");
                 txtPosition.Text = staff.Position.PositionName;
                 btnAdd.Enabled = true;
+                cmbShift.Enabled = true;
                 ImageHandle.LoadImage(pbStaffPicture, staff.Picture);
                 LoadShift(cmbStaffID.SelectedValue.ToString());
             }
             else
             {
+                cmbShift.DataSource = null;
+                cmbShift.Enabled = false;
                 txtFullName.Text = string.Empty;
                 txtPosition.Text = string.Empty;
                 btnAdd.Enabled = false;
@@ -509,8 +521,8 @@ namespace QuanLyNhanSu.PresentationTier
                 }
                 foreach(TimeKeeping staff in updateList)
                 {
-                    if (!checkExist.CheckShift(staff.ShiftID) || !checkExist.CheckShiftType(cmbShiftType.SelectedValue.ToString()) 
-                        || !checkExist.CheckStaff(cmbStaffID.SelectedValue.ToString()))
+                    if (!checkExist.CheckShift(staff.ShiftID) || !checkExist.CheckShiftType(staff.ST_ID) 
+                        || !checkExist.CheckStaff(staff.StaffID))
                     {
                         Reload();
                         return;
@@ -567,7 +579,6 @@ namespace QuanLyNhanSu.PresentationTier
                 }
                 if (workScheduleDetailBUS.Save(updateList))
                 {
-                    //MonthSalaryDetail monthSalary = salary.GetStaffMonthSalary(timeKeeping.StaffID);
                     string operate = $"Cập nhật";
                     string operationDetail = $"Cập nhật lịch làm việc ngày {dtpWorkDate.Text} - phòng ban {staff.Position.Department.DepartmentName}";
                     if (!string.IsNullOrEmpty(editDetail))
@@ -581,7 +592,5 @@ namespace QuanLyNhanSu.PresentationTier
                 CustomMessage.ExecptionCustom(ex);
             }
         }
-
-        
     }
 }
