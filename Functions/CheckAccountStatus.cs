@@ -92,7 +92,6 @@ namespace QuanLyNhanSu.Functions
                 }
                 Thread.Sleep(1000);
             }
-            
         }
         private void RedirectForm(string form)
         {

@@ -80,47 +80,47 @@ namespace QuanLyNhanSu.PresentationTier
             List<TimeKeeping> timeKeepings = new List<TimeKeeping>();
             int maxShift = workSchedule.Count;
             int countShift = 0;
-            foreach (TimeKeeping staff in workSchedule)
+            for (int i = 0; i < workSchedule.Count; i++)
             {
                 countShift++;
-                string shift = staff.Shift.ShiftName;
-                if (staff.CheckInTime != null && staff.CheckOutTime == null && timeNow < staff.Shift.BeginTime)
+                string shift = workSchedule[i].Shift.ShiftName;
+                if (workSchedule[i].CheckInTime != null && workSchedule[i].CheckOutTime == null && timeNow < workSchedule[i].Shift.BeginTime)
                 {
-                    MessageBox.Show($"Vẫn chưa vào ca {shift}!\n({staff.Shift.BeginTime} - {staff.Shift.EndTime})", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Vẫn chưa vào ca {shift}!\n({workSchedule[i].Shift.BeginTime} - {workSchedule[i].Shift.EndTime})", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtStaffID.Text = string.Empty;
                     return;
                 }
                 string operate = "Chấm công";
-                string operationDetail = $"Nhân viên {staff.StaffID} chấm công lúc {timeNow} ngày {dateNow} cho:\n";
-                if (staff.CheckInTime == null)
+                string operationDetail = $"Nhân viên {workSchedule[i].StaffID} chấm công lúc {timeNow} ngày {dateNow} cho:\n";
+                if (workSchedule[i].CheckInTime == null)
                 {
-                    if(timeNow < staff.Shift.EndTime || staff.Shift.BeginTime > staff.Shift.EndTime)
+                    if (timeNow < workSchedule[i].Shift.EndTime || workSchedule[i].Shift.BeginTime > workSchedule[i].Shift.EndTime)
                     {
-                        staff.CheckInTime = timeNow;
+                        workSchedule[i].CheckInTime = timeNow;
                         operationDetail += $"- Giờ vào ca {shift}";
-                        timeKeepings.Add(staff);
+                        timeKeepings.Add(workSchedule[i]);
                         if (timeKeepingBUS.TimeKeeping(timeKeepings, operationDetail))
                         {
-                            history.Save(staff.StaffID, operate, operationDetail);
+                            history.Save(workSchedule[i].StaffID, operate, operationDetail);
                             txtStaffID.Text = string.Empty;
                             return;
                         }
                     }
                 }
-                if (staff.CheckInTime != null && staff.CheckOutTime == null)
+                if (workSchedule[i].CheckInTime != null && workSchedule[i].CheckOutTime == null)
                 {
-                    if (timeNow < staff.Shift.BeginTime || timeNow < staff.Shift.EndTime)
+                    if (i == workSchedule.Count - 1 || (i +1 < workSchedule.Count && timeNow < workSchedule[i + 1].Shift.BeginTime))
                     {
-                        staff.CheckOutTime = timeNow;
+                        workSchedule[i].CheckOutTime = timeNow;
                         operationDetail += $"- Giờ ra ca {shift}";
-                        timeKeepings.Add(staff);
+                        timeKeepings.Add(workSchedule[i]);
                         if (timeKeepingBUS.TimeKeeping(timeKeepings, operationDetail))
                         {
-                            history.Save(staff.StaffID, operate, operationDetail);
+                            history.Save(workSchedule[i].StaffID, operate, operationDetail);
                             txtStaffID.Text = string.Empty;
                             return;
                         }
-                    }
+                    }  
                 }           
                 if(countShift == maxShift)
                 {
@@ -228,8 +228,8 @@ namespace QuanLyNhanSu.PresentationTier
             else
             {
                 string dateNow = DateTime.Now.ToString(formatDate);
-                List<TimeKeeping> nightShift = timeKeepingBUS.GetWorkScheduleByDate(DateTime.Now.AddDays(-1).ToString(formatDate)).Where(s => s.Shift.EndTime < firstShift.BeginTime).ToList(); 
-                List <TimeKeeping> workSchedule = timeKeepingBUS.GetWorkScheduleByDate(DateTime.Now.ToString(formatDate)).OrderBy(ws => ws.Shift.ShiftName).ToList();
+                List<TimeKeeping> nightShift = timeKeepingBUS.GetWorkScheduleByDate(DateTime.Now.AddDays(-1).ToString(formatDate)).Where(s => s.Shift.EndTime < firstShift.BeginTime && s.StaffID == txtStaffID.Text).ToList(); 
+                List <TimeKeeping> workSchedule = timeKeepingBUS.GetWorkScheduleByDate(DateTime.Now.ToString(formatDate)).Where(s => s.StaffID == txtStaffID.Text).OrderBy(ws => ws.Shift.ShiftName).ToList();
                 if (TimeKeepingNightShift(nightShift))
                     return;
                 if (workSchedule.Count == 0)

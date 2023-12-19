@@ -43,12 +43,11 @@
             this.lblStaffIDLogin = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.pnlFunction = new System.Windows.Forms.Panel();
+            this.btnSave = new System.Windows.Forms.Button();
             this.pbStaffPicture = new System.Windows.Forms.PictureBox();
             this.cmbPosition = new System.Windows.Forms.ComboBox();
             this.lblPosition = new System.Windows.Forms.Label();
             this.cmbDepartment = new System.Windows.Forms.ComboBox();
-            this.txtFullName = new System.Windows.Forms.TextBox();
-            this.lblFullName = new System.Windows.Forms.Label();
             this.cmbStaffID = new System.Windows.Forms.ComboBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.lblStaffID = new System.Windows.Forms.Label();
@@ -76,7 +75,8 @@
             this.lblSearch = new System.Windows.Forms.Label();
             this.lblFontSỉze = new System.Windows.Forms.Label();
             this.nudFontSize = new System.Windows.Forms.NumericUpDown();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.lblFullName = new System.Windows.Forms.Label();
+            this.txtFullName = new System.Windows.Forms.TextBox();
             this.pnlHeader.SuspendLayout();
             this.pnlFunction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbStaffPicture)).BeginInit();
@@ -244,6 +244,24 @@
             this.pnlFunction.Size = new System.Drawing.Size(1197, 204);
             this.pnlFunction.TabIndex = 66;
             // 
+            // btnSave
+            // 
+            this.btnSave.AutoSize = true;
+            this.btnSave.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Image = global::QuanLyNhanSu.Properties.Resources.save;
+            this.btnSave.Location = new System.Drawing.Point(541, 137);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(100, 49);
+            this.btnSave.TabIndex = 87;
+            this.btnSave.Text = "Lưu";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // pbStaffPicture
             // 
             this.pbStaffPicture.Image = global::QuanLyNhanSu.Properties.Resources.image;
@@ -285,24 +303,6 @@
             this.cmbDepartment.Size = new System.Drawing.Size(263, 33);
             this.cmbDepartment.TabIndex = 11;
             this.cmbDepartment.SelectedIndexChanged += new System.EventHandler(this.cmbDepartment_SelectedIndexChanged);
-            // 
-            // txtFullName
-            // 
-            this.txtFullName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFullName.Location = new System.Drawing.Point(648, 76);
-            this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(268, 30);
-            this.txtFullName.TabIndex = 14;
-            // 
-            // lblFullName
-            // 
-            this.lblFullName.AutoSize = true;
-            this.lblFullName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFullName.Location = new System.Drawing.Point(459, 79);
-            this.lblFullName.Name = "lblFullName";
-            this.lblFullName.Size = new System.Drawing.Size(182, 25);
-            this.lblFullName.TabIndex = 63;
-            this.lblFullName.Text = "Họ tên nhân viên:";
             // 
             // cmbStaffID
             // 
@@ -598,23 +598,23 @@
             0});
             this.nudFontSize.ValueChanged += new System.EventHandler(this.nudFontSize_ValueChanged);
             // 
-            // btnSave
+            // lblFullName
             // 
-            this.btnSave.AutoSize = true;
-            this.btnSave.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Image = global::QuanLyNhanSu.Properties.Resources.save;
-            this.btnSave.Location = new System.Drawing.Point(541, 137);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 49);
-            this.btnSave.TabIndex = 87;
-            this.btnSave.Text = "Lưu";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.lblFullName.AutoSize = true;
+            this.lblFullName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullName.Location = new System.Drawing.Point(459, 79);
+            this.lblFullName.Name = "lblFullName";
+            this.lblFullName.Size = new System.Drawing.Size(182, 25);
+            this.lblFullName.TabIndex = 63;
+            this.lblFullName.Text = "Họ tên nhân viên:";
+            // 
+            // txtFullName
+            // 
+            this.txtFullName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFullName.Location = new System.Drawing.Point(648, 76);
+            this.txtFullName.Name = "txtFullName";
+            this.txtFullName.Size = new System.Drawing.Size(268, 30);
+            this.txtFullName.TabIndex = 14;
             // 
             // FrmAllowanceDetail
             // 
@@ -668,8 +668,6 @@
         private System.Windows.Forms.ComboBox cmbPosition;
         private System.Windows.Forms.Label lblPosition;
         private System.Windows.Forms.ComboBox cmbDepartment;
-        private System.Windows.Forms.TextBox txtFullName;
-        private System.Windows.Forms.Label lblFullName;
         private System.Windows.Forms.ComboBox cmbStaffID;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label lblStaffID;
@@ -700,5 +698,7 @@
         private System.Windows.Forms.Label lblFontSỉze;
         private System.Windows.Forms.NumericUpDown nudFontSize;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.TextBox txtFullName;
+        private System.Windows.Forms.Label lblFullName;
     }
 }

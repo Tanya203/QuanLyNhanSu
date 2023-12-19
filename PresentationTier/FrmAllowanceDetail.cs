@@ -138,7 +138,7 @@ namespace QuanLyNhanSu.PresentationTier
             {
                 cmbStaffID.Enabled = true;
                 btnAdd.Enabled = true;
-            }           
+            }         
             AutoAdjustComboBox.Adjust(cmbStaffID);
         }
         private void cmbPositionSelectedIndexChanged(object sender, EventArgs e)
